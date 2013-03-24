@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
 
-namespace SeedSimple.Controllers
+namespace BCWeb.Controllers
 {
     [Authorize]
     public class AccountController : Controller
