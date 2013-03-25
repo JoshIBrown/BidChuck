@@ -109,13 +109,13 @@ namespace BCWeb.Controllers
                 // Insert a new user into the database
                 using (UsersContext db = new UsersContext())
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.UserName.ToLower());
 
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.UserProfiles.Add(new UserProfile { Email = model.UserName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
@@ -238,11 +238,10 @@ namespace BCWeb.Controllers
                 try
                 {
                     string confirmationToken = WebSecurity.CreateUserAndAccount(
-                        model.UserName,
+                        model.Email,
                         model.Password,
                         new
                         {
-                            Email = model.Email,
                             FirstName = model.FirstName,
                             LastName = model.LastName,
                             CompanyName = model.CompanyName,
@@ -251,7 +250,7 @@ namespace BCWeb.Controllers
 
                     dynamic email = new Email("RegEmail");
                     email.To = model.Email;
-                    email.UserName = model.UserName;
+                    email.UserName = model.FirstName;
                     email.ConfirmationToken = System.Web.HttpUtility.UrlEncode(confirmationToken);
                     email.Send();
 
@@ -316,7 +315,7 @@ namespace BCWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SignIn(SignInModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && WebSecurity.Login(model.Email, model.Password, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }

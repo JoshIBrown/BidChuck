@@ -10,7 +10,7 @@ namespace BCWeb
     {
         protected override void Seed(UsersContext context)
         {
-            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserID", "UserName", autoCreateTables: true);
+            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserID", "Email", autoCreateTables: true);
 
             if (!Roles.Provider.RoleExists("Administrator"))
             {

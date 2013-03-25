@@ -79,11 +79,11 @@ namespace BCWeb.Models
         [Phone]
         public string Phone { get; set; }
 
-        [Required]
-        [Display(Name = "Pick a Username")]
-        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
-        [RegularExpression("^[a-zA-Z0-9_]*")]
-        public string UserName { get; set; }
+        //[Required]
+        //[Display(Name = "Pick a Username")]
+        //[StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
+        //[RegularExpression("^[a-zA-Z0-9_]*")]
+        //public string UserName { get; set; }
     }
 
     public class SignInModel
@@ -97,8 +97,8 @@ namespace BCWeb.Models
         public bool RememberMe { get; set; }
 
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "Email Address")]
+        public string Email { get; set; }
     }
 
     [Table("UserProfile")]
@@ -107,8 +107,6 @@ namespace BCWeb.Models
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
-
-        public string UserName { get; set; }
 
         public string CompanyName { get; set; }
 
