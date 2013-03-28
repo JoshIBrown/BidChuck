@@ -19,7 +19,7 @@ namespace BCWeb
 
             if (Membership.Provider.GetUser("admin", false) == null)
             {
-                ((SimpleMembershipProvider)Membership.Provider).CreateUserAndAccount("admin", "bidchuck");
+                ((SimpleMembershipProvider)Membership.Provider).CreateUserAndAccount("admin", "bidchuck", false);
             }
 
             if (!Roles.Provider.GetRolesForUser("admin").Contains("Administrator"))

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System;
 
 namespace BCWeb.Models
 {
@@ -39,6 +40,13 @@ namespace BCWeb.Models
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
+    }
+
+    public class ResendConfirmationEmailModel
+    {
+        [Required]
+        [Display(Name = "Email Address")]
+        public string Email { get; set; }
     }
 
     public class RegisterModel
@@ -119,6 +127,23 @@ namespace BCWeb.Models
         public string Phone { get; set; }
     }
 
+    //[Table("webpages_Membership")]
+    //public class webpages_Membership
+    //{
+    //    [Key]
+    //    public int UserId { get; set; }
+    //    public Nullable<DateTime> CreateDate { get; set; }
+    //    public string ConfirmationToken { get; set; }
+    //    public Nullable<bool> IsConfirmed { get; set; }
+    //    public Nullable<DateTime> LastPasswordFailureDate { get; set; }
+    //    public int PasswordFailuresSinceLastSuccess { get; set; }
+    //    public string Password { get; set; }
+    //    public Nullable<DateTime> PasswordChangedDate { get; set; }
+    //    public string PasswordSalt { get; set; }
+    //    public string PasswordVerificationToken { get; set; }
+    //    public Nullable<DateTime> PasswordVerificationTokenExpirationDate { get; set; }
+    //}
+
     public class UsersContext : DbContext
     {
         public UsersContext()
@@ -127,5 +152,6 @@ namespace BCWeb.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+        //public DbSet<webpages_Membership> webpages_Membership { get; set; }
     }
 }

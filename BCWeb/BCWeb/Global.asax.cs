@@ -19,6 +19,7 @@ namespace BCWeb
     {
         protected void Application_Start()
         {
+            System.IO.Directory.CreateDirectory(@"C:\email\");
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

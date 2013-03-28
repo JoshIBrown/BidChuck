@@ -9,6 +9,7 @@ using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
+using WebMatrix.Data;
 
 namespace BCWeb.Controllers
 {
@@ -267,6 +268,65 @@ namespace BCWeb.Controllers
         }
 
         [AllowAnonymous]
+        public ActionResult ResendConfirmationEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResendConfirmationEmail(ResendConfirmationEmailModel model)
+        {
+            string confirmationToken = String.Empty;
+
+            if (ModelState.IsValid)
+            {
+                // Look up the user's confirmation token
+                using (UsersContext uc = new UsersContext())
+                {
+                    UserProfile user = uc.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
+                    if (user != null)
+                    {
+                        try
+                        {
+                            //webpages_Membership membership = db.webpages_Membership.FirstOrDefault(u => u.UserId == user.UserId);
+                            //confirmationToken = membership.ConfirmationToken;
+
+                            using (Database db = Database.Open("DefaultConnection"))
+                            {
+                                var sql = "SELECT ConfirmationToken FROM webpages_Membership WHERE UserId =" + user.UserId;
+                                confirmationToken = db.Query(sql).First()["ConfirmationToken"];
+                            }
+
+                            dynamic email = new Email("RegEmail");
+                            email.To = model.Email;
+                            email.UserName = user.FirstName;
+                            email.ConfirmationToken = System.Web.HttpUtility.UrlEncode(confirmationToken);
+                            email.Send();
+
+                            return RedirectToAction("RegisterStepTwo", "Account");
+                        }
+                        catch (MembershipCreateUserException e)
+                        {
+                            ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Email", "Unknown email address. Please <a href=\"/Account/Register\">register</>.");
+                    }
+                }
+
+
+
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
         public ActionResult RegisterConfirmation(string ID)
         {
             if (WebSecurity.ConfirmAccount(ID))
@@ -349,7 +409,7 @@ namespace BCWeb.Controllers
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
+                    return "Email address already registered.";
 
                 case MembershipCreateStatus.DuplicateEmail:
                     return "A user name for that e-mail address already exists. Please enter a different e-mail address.";

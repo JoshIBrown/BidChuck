@@ -11,18 +11,19 @@
 <body>
     <header>
         <div class="content-wrapper">
-            <div class="float-left">
+@*            <div class="float-left">
                 <p class="site-title">@Html.ActionLink("Logo", "Index", "Home")</p>
-            </div>
+            </div>*@
             <div class="float-right">
                 <section id="SignIn">
                     @Html.Partial("_SignInPartial")
                 </section>
                 <nav>
                     <ul id="menu">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+        <li>@Html.ActionLink("Sign In", "SignIn", "Account")</li>
+        <li>@Html.ActionLink("Register", "Register", "Account")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     </ul>
                 </nav>
             </div>

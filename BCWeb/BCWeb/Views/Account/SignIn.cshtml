@@ -9,7 +9,6 @@
 </hgroup>
 
 <section id="SignInForm">
-    <h2>Use a local account to Sign in.</h2>
     @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
     {
         @Html.AntiForgeryToken()
@@ -17,7 +16,7 @@
 
         <fieldset>
             <legend>Sign in Form</legend>
-            <ol>
+            <ul>
                 <li>
                     @Html.LabelFor(m => m.Email)
                     @Html.TextBoxFor(m => m.Email)
@@ -32,12 +31,9 @@
                     @Html.CheckBoxFor(m => m.RememberMe)
                     @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
                 </li>
-            </ol>
+            </ul>
             <input type="submit" value="Sign in" />
         </fieldset>
-        <p>
-            @Html.ActionLink("Register", "Register") if you don't have an account.
-        </p>
     }
 </section>
 
@@ -45,6 +41,11 @@
     <h2>Use another service to Sign in.</h2>
     @Html.Action("ExternalSignInsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>*@
+
+<section class="resendconfirmationemail">
+    @Html.ActionLink("Re-Send Confirmation Email", "ResendConfirmationEmail")
+
+</section>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
