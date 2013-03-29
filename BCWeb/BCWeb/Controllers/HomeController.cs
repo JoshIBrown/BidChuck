@@ -18,7 +18,6 @@ namespace BCWeb.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Administrator")]
         public ActionResult Contact()
         {
             //ViewBag.Message = "Contact BidChuck...";

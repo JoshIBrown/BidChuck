@@ -1,5 +1,4 @@
 ﻿using BCWeb.Models;
-using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using Postal;
 using System;
@@ -16,6 +15,12 @@ namespace BCWeb.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Administer()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public ActionResult ConfirmationFailure()
         {
@@ -28,126 +33,54 @@ namespace BCWeb.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Disassociate(string provider, string providerUserId)
-        {
-            string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
-            ManageMessageId? message = null;
-
-            // Only disassociate the account if the currently logged in user is the owner
-            if (ownerAccount == User.Identity.Name)
-            {
-                // Use a transaction to prevent the user from deleting their last SignIn credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
-                {
-                    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-                    if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
-                    {
-                        OAuthWebSecurity.DeleteAccount(provider, providerUserId);
-                        scope.Complete();
-                        message = ManageMessageId.RemoveSignInSuccess;
-                    }
-                }
-            }
-
-            return RedirectToAction("Manage", new { Message = message });
-        }
-
-        [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalSignIn(string provider, string returnUrl)
-        {
-            return new ExternalSignInResult(provider, Url.Action("ExternalSignInCallback", new { ReturnUrl = returnUrl }));
-        }
-
-        [AllowAnonymous]
-        public ActionResult ExternalSignInCallback(string returnUrl)
-        {
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalSignInCallback", new { ReturnUrl = returnUrl }));
-            if (!result.IsSuccessful)
-            {
-                return RedirectToAction("ExternalSignInFailure");
-            }
-
-            if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
-            {
-                return RedirectToLocal(returnUrl);
-            }
-
-            if (User.Identity.IsAuthenticated)
-            {
-                // If the current user is logged in add the new account
-                OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
-                return RedirectToLocal(returnUrl);
-            }
-            else
-            {
-                // User is new, ask for their desired membership name
-                string SignInData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
-                ViewBag.ReturnUrl = returnUrl;
-                return View("ExternalSignInConfirmation", new RegisterExternalSignInModel { UserName = result.UserName, ExternalSignInData = SignInData });
-            }
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalSignInConfirmation(RegisterExternalSignInModel model, string returnUrl)
-        {
-            string provider = null;
-            string providerUserId = null;
-
-            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalSignInData, out provider, out providerUserId))
-            {
-                return RedirectToAction("Manage");
-            }
-
-            if (ModelState.IsValid)
-            {
-                // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
-                {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.UserName.ToLower());
-
-                    // Check if user already exists
-                    if (user == null)
-                    {
-                        // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { Email = model.UserName });
-                        db.SaveChanges();
-
-                        OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
-                        OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
-
-                        return RedirectToLocal(returnUrl);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
-                    }
-                }
-            }
-
-            ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
-        }
-
-        [AllowAnonymous]
-        public ActionResult ExternalSignInFailure()
+        public ActionResult ForgotPassword()
         {
             return View();
         }
 
+        [HttpPost]
         [AllowAnonymous]
-        [ChildActionOnly]
-        public ActionResult ExternalSignInsList(string returnUrl)
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword(ForgotPasswordModel model)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return PartialView("_ExternalSignInsListPartial", OAuthWebSecurity.RegisteredClientData);
+            string passwordResetToken = String.Empty;
+
+            if (ModelState.IsValid)
+            {
+                // Look up the user's confirmation token
+                using (UsersContext uc = new UsersContext())
+                {
+                    UserProfile user = uc.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
+
+                    if (user != null)
+                    {
+                        try
+                        {
+                            passwordResetToken = WebSecurity.GeneratePasswordResetToken(model.Email);
+
+                            dynamic email = new Email("PasswordResetEmail");
+                            email.To = model.Email;
+                            email.UserName = user.FirstName;
+                            email.PasswordResetToken = System.Web.HttpUtility.UrlEncode(passwordResetToken);
+                            email.Send();
+
+                            return RedirectToAction("ForgotPasswordStepTwo", "Account");
+                        }
+                        catch (MembershipCreateUserException e)
+                        {
+                            ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Email", "Unknown email address.");
+                    }
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         public ActionResult Manage(ManageMessageId? message)
@@ -165,6 +98,71 @@ namespace BCWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
+        {
+            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.HasLocalPassword = hasLocalAccount;
+            ViewBag.ReturnUrl = Url.Action("Manage");
+            if (hasLocalAccount)
+            {
+                if (ModelState.IsValid)
+                {
+                    // ChangePassword will throw an exception rather than return false in certain failure scenarios.
+                    bool changePasswordSucceeded;
+                    try
+                    {
+                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                    }
+                    catch (Exception)
+                    {
+                        changePasswordSucceeded = false;
+                    }
+
+                    if (changePasswordSucceeded)
+                    {
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                    }
+                }
+            }
+            else
+            {
+                // User does not have a local password so remove any validation errors caused by a missing
+                // OldPassword field
+                ModelState state = ModelState["OldPassword"];
+                if (state != null)
+                {
+                    state.Errors.Clear();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+                    }
+                    catch (Exception e)
+                    {
+                        ModelState.AddModelError("", e);
+                    }
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        public ActionResult ResetPassword(string User, string Token)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(LocalPasswordModel model)
         {
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
@@ -314,7 +312,7 @@ namespace BCWeb.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("Email", "Unknown email address. Please <a href=\"/Account/Register\">register</>.");
+                        ModelState.AddModelError("Email", "Unknown email address.");
                     }
                 }
 
@@ -342,25 +340,10 @@ namespace BCWeb.Controllers
             return View();
         }
 
-        [ChildActionOnly]
-        public ActionResult RemoveExternalSignIns()
+        [AllowAnonymous]
+        public ActionResult ForgotPasswordStepTwo()
         {
-            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
-            List<ExternalSignIn> externalSignIns = new List<ExternalSignIn>();
-            foreach (OAuthAccount account in accounts)
-            {
-                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
-
-                externalSignIns.Add(new ExternalSignIn
-                {
-                    Provider = account.Provider,
-                    ProviderDisplayName = clientData.DisplayName,
-                    ProviderUserId = account.ProviderUserId,
-                });
-            }
-
-            ViewBag.ShowRemoveButton = externalSignIns.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            return PartialView("_RemoveExternalSignInsPartial", externalSignIns);
+            return View();
         }
 
         [AllowAnonymous]
@@ -448,26 +431,10 @@ namespace BCWeb.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Sign In", "Account");
             }
         }
-        internal class ExternalSignInResult : ActionResult
-        {
-            public ExternalSignInResult(string provider, string returnUrl)
-            {
-                Provider = provider;
-                ReturnUrl = returnUrl;
-            }
 
-            public string Provider { get; private set; }
-
-            public string ReturnUrl { get; private set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
-            }
-        }
         #endregion Helpers
     }
 }

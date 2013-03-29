@@ -37,14 +37,12 @@
     }
 </section>
 
-@*<section class="social" id="socialSignInForm">
-    <h2>Use another service to Sign in.</h2>
-    @Html.Action("ExternalSignInsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>*@
-
 <section class="resendconfirmationemail">
     @Html.ActionLink("Re-Send Confirmation Email", "ResendConfirmationEmail")
+</section>
 
+<section class="forgotpassword">
+    @Html.ActionLink("Forgot Password", "ForgotPassword")
 </section>
 
 @section Scripts {

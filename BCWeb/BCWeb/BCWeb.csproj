@@ -433,14 +433,10 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Views\Account\ExternalSignInConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalSignInFailure.cshtml" />
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalSignInsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveExternalSignInsPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -455,6 +451,10 @@
     <Content Include="Views\Account\ConfirmationSuccess.cshtml" />
     <Content Include="Views\Account\RegisterStepTwo.cshtml" />
     <Content Include="Views\Account\ResendConfirmationEmail.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Emails\PasswordResetEmail.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordStepTwo.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

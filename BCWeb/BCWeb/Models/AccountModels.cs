@@ -33,16 +33,28 @@ namespace BCWeb.Models
         public string OldPassword { get; set; }
     }
 
-    public class RegisterExternalSignInModel
+    public class   ResetPasswordModel
     {
-        public string ExternalSignInData { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "New password")]
+        public string NewPassword { get; set; }
     }
 
     public class ResendConfirmationEmailModel
+    {
+        [Required]
+        [Display(Name = "Email Address")]
+        public string Email { get; set; }
+    }
+    
+    public class ForgotPasswordModel
     {
         [Required]
         [Display(Name = "Email Address")]
@@ -127,23 +139,6 @@ namespace BCWeb.Models
         public string Phone { get; set; }
     }
 
-    //[Table("webpages_Membership")]
-    //public class webpages_Membership
-    //{
-    //    [Key]
-    //    public int UserId { get; set; }
-    //    public Nullable<DateTime> CreateDate { get; set; }
-    //    public string ConfirmationToken { get; set; }
-    //    public Nullable<bool> IsConfirmed { get; set; }
-    //    public Nullable<DateTime> LastPasswordFailureDate { get; set; }
-    //    public int PasswordFailuresSinceLastSuccess { get; set; }
-    //    public string Password { get; set; }
-    //    public Nullable<DateTime> PasswordChangedDate { get; set; }
-    //    public string PasswordSalt { get; set; }
-    //    public string PasswordVerificationToken { get; set; }
-    //    public Nullable<DateTime> PasswordVerificationTokenExpirationDate { get; set; }
-    //}
-
     public class UsersContext : DbContext
     {
         public UsersContext()
@@ -152,6 +147,5 @@ namespace BCWeb.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
-        //public DbSet<webpages_Membership> webpages_Membership { get; set; }
     }
 }
