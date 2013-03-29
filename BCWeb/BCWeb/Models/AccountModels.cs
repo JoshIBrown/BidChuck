@@ -5,15 +5,6 @@ using System;
 
 namespace BCWeb.Models
 {
-    public class ExternalSignIn
-    {
-        public string Provider { get; set; }
-
-        public string ProviderDisplayName { get; set; }
-
-        public string ProviderUserId { get; set; }
-    }
-
     public class LocalPasswordModel
     {
         [DataType(DataType.Password)]
@@ -33,8 +24,11 @@ namespace BCWeb.Models
         public string OldPassword { get; set; }
     }
 
-    public class   ResetPasswordModel
+    public class  ResetPasswordModel
     {
+        public string Email { get; set; }
+        public string PasswordResetToken { get; set; }
+
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]

@@ -95,6 +95,12 @@ namespace BCWeb.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult ResetPasswordSuccess()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
@@ -155,63 +161,53 @@ namespace BCWeb.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public ActionResult ResetPassword(string User, string Token)
         {
-            return View();
+            ResetPasswordModel rpm = new ResetPasswordModel();
+            rpm.Email = User;
+            rpm.PasswordResetToken = Token;
+
+            return View(rpm);
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword(LocalPasswordModel model)
+        public ActionResult ResetPassword(ResetPasswordModel model)
         {
-            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            ViewBag.HasLocalPassword = hasLocalAccount;
-            ViewBag.ReturnUrl = Url.Action("Manage");
-            if (hasLocalAccount)
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                // Look up the user
+                using (UsersContext uc = new UsersContext())
                 {
-                    // ChangePassword will throw an exception rather than return false in certain failure scenarios.
-                    bool changePasswordSucceeded;
-                    try
-                    {
-                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
-                    }
-                    catch (Exception)
-                    {
-                        changePasswordSucceeded = false;
-                    }
+                    UserProfile user = uc.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
 
-                    if (changePasswordSucceeded)
+                    if (user != null)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        // ResetPassword may throw an exception rather than return false in certain failure scenarios.
+                        bool resetPasswordSucceeded;
+                        try
+                        {
+                            resetPasswordSucceeded = WebSecurity.ResetPassword(model.PasswordResetToken, model.NewPassword);
+                        }
+                        catch (Exception)
+                        {
+                            resetPasswordSucceeded = false;
+                        }
+
+                        if (resetPasswordSucceeded)
+                        {
+                            return RedirectToAction("ResetPasswordSuccess");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "An error has occured. Please try again or contact the administrator.");
+                        }
                     }
                     else
                     {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                    }
-                }
-            }
-            else
-            {
-                // User does not have a local password so remove any validation errors caused by a missing
-                // OldPassword field
-                ModelState state = ModelState["OldPassword"];
-                if (state != null)
-                {
-                    state.Errors.Clear();
-                }
-
-                if (ModelState.IsValid)
-                {
-                    try
-                    {
-                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e);
+                        ModelState.AddModelError("Email", "Unknown email address.");
                     }
                 }
             }
@@ -383,6 +379,7 @@ namespace BCWeb.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveSignInSuccess,
+            ResetPasswordSuccess
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
@@ -431,7 +428,7 @@ namespace BCWeb.Controllers
             }
             else
             {
-                return RedirectToAction("Sign In", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
         }
 

@@ -455,6 +455,7 @@
     <Content Include="Views\Emails\PasswordResetEmail.cshtml" />
     <Content Include="Views\Account\ForgotPasswordStepTwo.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
