@@ -9,7 +9,7 @@ namespace BCWeb.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(BCWeb.Models.UsersContext context)

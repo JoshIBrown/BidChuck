@@ -168,10 +168,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MembershipDatabaseInitializer.cs" />
-    <Compile Include="Migrations\201303301758146_3_20_2013_10_57_am.cs" />
-    <Compile Include="Migrations\201303301758146_3_20_2013_10_57_am.Designer.cs">
-      <DependentUpon>201303301758146_3_20_2013_10_57_am.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -244,9 +240,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
-    <None Include="Properties\PublishProfiles\bcdev - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\bcdev - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\bcdev - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\bcdev - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.js" />
@@ -474,11 +468,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201303301758146_3_20_2013_10_57_am.resx">
-      <DependentUpon>201303301758146_3_20_2013_10_57_am.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
