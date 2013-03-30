@@ -1,6 +1,5 @@
 ﻿using BCWeb.Models;
 using Microsoft.Web.WebPages.OAuth;
-using Postal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,11 +58,7 @@ namespace BCWeb.Controllers
                         {
                             passwordResetToken = WebSecurity.GeneratePasswordResetToken(model.Email);
 
-                            dynamic email = new Email("PasswordResetEmail");
-                            email.To = model.Email;
-                            email.UserName = user.FirstName;
-                            email.PasswordResetToken = System.Web.HttpUtility.UrlEncode(passwordResetToken);
-                            email.Send();
+                            EmailSender.SendPasswordResetMail(user.FirstName, user.Email, passwordResetToken);
 
                             return RedirectToAction("ForgotPasswordStepTwo", "Account");
                         }
@@ -243,11 +238,7 @@ namespace BCWeb.Controllers
                             Phone = model.Phone
                         }, true);
 
-                    dynamic email = new Email("RegEmail");
-                    email.To = model.Email;
-                    email.UserName = model.FirstName;
-                    email.ConfirmationToken = System.Web.HttpUtility.UrlEncode(confirmationToken);
-                    email.Send();
+                    EmailSender.SendConfirmationMail(model.FirstName, model.Email, confirmationToken);
 
                     return RedirectToAction("RegisterStepTwo", "Account");
                 }
@@ -284,20 +275,13 @@ namespace BCWeb.Controllers
                     {
                         try
                         {
-                            //webpages_Membership membership = db.webpages_Membership.FirstOrDefault(u => u.UserId == user.UserId);
-                            //confirmationToken = membership.ConfirmationToken;
-
                             using (Database db = Database.Open("DefaultConnection"))
                             {
                                 var sql = "SELECT ConfirmationToken FROM webpages_Membership WHERE UserId =" + user.UserId;
                                 confirmationToken = db.Query(sql).First()["ConfirmationToken"];
                             }
 
-                            dynamic email = new Email("RegEmail");
-                            email.To = model.Email;
-                            email.UserName = user.FirstName;
-                            email.ConfirmationToken = System.Web.HttpUtility.UrlEncode(confirmationToken);
-                            email.Send();
+                            EmailSender.SendConfirmationMail(user.FirstName, user.Email, confirmationToken);
 
                             return RedirectToAction("RegisterStepTwo", "Account");
                         }
