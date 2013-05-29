@@ -9,7 +9,7 @@ using System.Data.OleDb;
 
 namespace BCWeb
 {
-    public class MembershipDatabaseInitializer : DropCreateDatabaseIfModelChanges<UsersContext>
+    public class MembershipDatabaseInitializer : CreateDatabaseIfNotExists<UsersContext>
     {
         protected override void Seed(UsersContext context)
         {
@@ -30,36 +30,36 @@ namespace BCWeb
                 Roles.Provider.AddUsersToRoles(new[] { "admin" }, new[] { "Administrator" });
             }
 
-            //load scopes
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            string connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties='text;HDR=Yes';", path);
-            string commandText = "select distinct [GroupNumber], [GroupDescription], [2ndTierSortNumber], [2ndTierSortDescription], [3rdTierSortNumber], [3rdTierSortDescription] from tblCSI2004.csv";
-            using (OleDbConnection conn = new OleDbConnection(connectionString))
-            {
-                using (OleDbDataAdapter adap = new OleDbDataAdapter(commandText, conn))
-                {
-                    conn.Open();
-                    using (DataSet ds = new DataSet())
-                    {
-                        adap.Fill(ds);
-                        foreach (DataTable table in ds.Tables)
-                        {
-                            foreach (DataRow row in table.Rows)
-                            {
-                                Scope s = new Scope();
-                                s.FirstTierSortNumber = (string)row["GroupNumber"];
-                                s.FirstTierSortDescription = (string)row["GroupDescription"];                                
-                                s.SecondTierSortNumber = (string)row["2ndTierSortNumber"];
-                                s.SecondTierSortDescription = (string)row["2ndTierSortDescription"];
-                                s.ThirdTierSortNumber = (string)row["3rdTierSortNumber"];
-                                s.ThirdTierSortDescription = (string)row["3rdTierSortDescription"];
-                                context.Scopes.Add(s);
-                            }
-                        }
-                        context.SaveChanges();
-                    }
-                }
-            }
+            ////load scopes
+            //string path = AppDomain.CurrentDomain.BaseDirectory;
+            //string connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties='text;HDR=Yes';", path);
+            //string commandText = "select distinct [GroupNumber], [GroupDescription], [2ndTierSortNumber], [2ndTierSortDescription], [3rdTierSortNumber], [3rdTierSortDescription] from tblCSI2004.csv";
+            //using (OleDbConnection conn = new OleDbConnection(connectionString))
+            //{
+            //    using (OleDbDataAdapter adap = new OleDbDataAdapter(commandText, conn))
+            //    {
+            //        conn.Open();
+            //        using (DataSet ds = new DataSet())
+            //        {
+            //            adap.Fill(ds);
+            //            foreach (DataTable table in ds.Tables)
+            //            {
+            //                foreach (DataRow row in table.Rows)
+            //                {
+            //                    Scope s = new Scope();
+            //                    s.FirstTierSortNumber = (string)row["GroupNumber"];
+            //                    s.FirstTierSortDescription = (string)row["GroupDescription"];                                
+            //                    s.SecondTierSortNumber = (string)row["2ndTierSortNumber"];
+            //                    s.SecondTierSortDescription = (string)row["2ndTierSortDescription"];
+            //                    s.ThirdTierSortNumber = (string)row["3rdTierSortNumber"];
+            //                    s.ThirdTierSortDescription = (string)row["3rdTierSortDescription"];
+            //                    context.Scopes.Add(s);
+            //                }
+            //            }
+            //            context.SaveChanges();
+            //        }
+            //    }
+            //}
         }
     }
 }
