@@ -90,10 +90,18 @@ namespace BCWeb.Controllers
             return View();
         }
 
-        [AllowAnonymous]
-        public ActionResult ResetPasswordSuccess()
+        [HttpGet]
+        public ActionResult ManageScopes()
         {
-            return View();
+            using (UsersContext uc = new UsersContext())
+            {
+                return View(uc.Scopes.ToList());
+            }
+        }
+
+        public ActionResult ManageScopes(List<Scope> model)
+        {
+            return View(model);
         }
 
         [HttpPost]

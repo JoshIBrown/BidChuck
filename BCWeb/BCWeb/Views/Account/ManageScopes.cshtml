@@ -1,0 +1,48 @@
+﻿@model List<BCWeb.Models.Scope>
+
+<h3>Edit Scopes</h3>
+
+@using (Html.BeginForm("Manage", "Account"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Edit Skills</legend>
+
+        <div id="t1" style="width: 900px;">
+
+        @if (Model.Count() > 0)
+        {
+            <ul id="scopes" style="display: none">
+            @foreach (BCWeb.Models.Scope scope in Model.Where(s => s.FirstTierSortNumber == s.SecondTierSortNumber && s.FirstTierSortNumber == s.ThirdTierSortNumber).Distinct().OrderBy(s => s.FirstTierSortNumber))
+            {
+                @:<li itemValue="@scope.FirstTierSortNumber">@scope.FirstTierSortDescription
+                if (Model.Where(s => s.FirstTierSortNumber == scope.FirstTierSortNumber && s.SecondTierSortNumber != scope.FirstTierSortNumber).Count() > 0)
+                {
+                    <ul>
+                        @foreach (BCWeb.Models.Scope subscope in Model.Where(s => s.FirstTierSortNumber == scope.FirstTierSortNumber && s.SecondTierSortNumber != scope.FirstTierSortNumber).GroupBy(s => s.SecondTierSortDescription).Select(grp => grp.First()).OrderBy(s => s.SecondTierSortNumber))
+                        {
+                            @:<li itemValue="@subscope.SecondTierSortNumber">@subscope.SecondTierSortDescription
+                            if (Model.Where(s => s.FirstTierSortNumber == subscope.FirstTierSortNumber && s.ThirdTierSortNumber != scope.SecondTierSortNumber).Count() > 0)
+                            {
+                                <ul>
+                                @foreach (BCWeb.Models.Scope subsubscope in Model.Where(s => s.FirstTierSortNumber == scope.FirstTierSortNumber && s.SecondTierSortNumber == subscope.SecondTierSortNumber && s.ThirdTierSortNumber != subscope.SecondTierSortNumber).GroupBy(s => s.ThirdTierSortDescription).Select(grp => grp.First()).OrderBy(s => s.ThirdTierSortNumber))
+                                {
+                                    @:<li itemValue="@subsubscope.ThirdTierSortNumber">@subsubscope.ThirdTierSortDescription
+                                }
+                                </ul>
+                            }
+                            @:</li>
+                        }
+                    </ul>
+                }
+                @:</li>
+            }
+            </ul>
+        }
+        </div>
+                
+        <input type="submit" value="Save Scopes" />
+    </fieldset>
+}

@@ -9,7 +9,9 @@
 
 <p class="message-success">@ViewBag.StatusMessage</p>
 
-<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+<p>You're signed in as <strong>@User.Identity.Name</strong>.</p>
+
+@Html.ActionLink("Manage Scopes", "ManageScopes");
 
 @if (ViewBag.HasLocalPassword)
 {

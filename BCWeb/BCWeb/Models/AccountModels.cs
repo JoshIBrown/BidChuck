@@ -133,6 +133,21 @@ namespace BCWeb.Models
         public string Phone { get; set; }
     }
 
+    [Table("Scope")]
+    public class Scope
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int ScopeID { get; set; }
+
+        public string FirstTierSortNumber { get; set; }
+        public string FirstTierSortDescription { get; set; }
+        public string SecondTierSortNumber { get; set; }
+        public string SecondTierSortDescription { get; set; }
+        public string ThirdTierSortNumber { get; set; }
+        public string ThirdTierSortDescription { get; set; }
+    }
+
     public class UsersContext : DbContext
     {
         public UsersContext()
@@ -141,5 +156,6 @@ namespace BCWeb.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Scope> Scopes { get; set; }
     }
 }

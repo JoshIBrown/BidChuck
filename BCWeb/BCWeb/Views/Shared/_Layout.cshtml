@@ -6,7 +6,33 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/cvlcss")
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/cvl")
+    <script type="text/javascript">
+    	var cl;
+	jQuery(document).ready(function () {
+		cl = jQuery.fn.jColumnListView({
+			id:               'cl1',
+			width:            900,
+			columnWidth:      300,
+			columnHeight:     300,
+			columnMargin:     8,
+			paramName:        'columnview',
+			columnNum:        3,
+			appendToId:       't1',
+			elementId:        'scopes',
+			removeAfter:      false,
+			columnMinWidth:   120,
+			columnMaxWidth:   300,
+			childIndicator:   true,
+			leafMode: true,
+			onItemChecked: function (ci) { console.log(ci); },
+			onItemUnchecked: function (ci) { console.log(ci); }
+		});
+	});
+        </script>
 </head>
 <body>
     <header>
@@ -43,7 +69,7 @@
         </div>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery")
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>
