@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System;
+using System.Collections.Generic;
 
 namespace BCWeb.Models
 {
@@ -100,6 +101,18 @@ namespace BCWeb.Models
         //public string UserName { get; set; }
     }
 
+    public class ScopesModel
+    {
+        private List<Scope> list;
+
+        public ScopesModel(List<Scope> list)
+        {
+            // TODO: Complete member initialization
+            this.Scopes = list;
+        }
+        public List<Scope> Scopes { get; set; }
+    }
+
     public class SignInModel
     {
         [Required]
@@ -146,6 +159,17 @@ namespace BCWeb.Models
         public string SecondTierSortDescription { get; set; }
         public string ThirdTierSortNumber { get; set; }
         public string ThirdTierSortDescription { get; set; }
+    }
+
+    [Table("UserXScope")]
+    public class UserXScope
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int UserXScopeID { get; set; }
+
+        public int UserID { get; set; }
+        public int ScopeID { get; set; }
     }
 
     public class UsersContext : DbContext

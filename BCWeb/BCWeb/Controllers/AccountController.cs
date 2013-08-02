@@ -95,11 +95,11 @@ namespace BCWeb.Controllers
         {
             using (UsersContext uc = new UsersContext())
             {
-                return View(uc.Scopes.ToList());
+                return View(new ScopesModel(uc.Scopes.ToList()));
             }
         }
 
-        public ActionResult ManageScopes(List<Scope> model)
+        public ActionResult ManageScopes(ScopesModel model)
         {
             return View(model);
         }
