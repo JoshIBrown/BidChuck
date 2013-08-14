@@ -11,7 +11,7 @@
 
 <p>You're signed in as <strong>@User.Identity.Name</strong>.</p>
 
-@Html.ActionLink("Manage Scopes", "ManageScopes");
+@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage" });
 
 @if (ViewBag.HasLocalPassword)
 {
@@ -23,5 +23,6 @@ else
 }
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 }

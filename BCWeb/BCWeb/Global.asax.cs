@@ -1,4 +1,5 @@
-﻿using BCWeb.Models;
+﻿using BCModel;
+using BCWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -29,13 +30,43 @@ namespace BCWeb
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-            Database.SetInitializer<UsersContext>(new MembershipDatabaseInitializer());
-            UsersContext context = new UsersContext();
+            Bootstrapper.Initialise();
+
+            Database.SetInitializer<BidChuckContext>(new MembershipDatabaseInitializer());
+            BidChuckContext context = new BidChuckContext();
             context.Database.Initialize(true);
+
+
             if (!WebSecurity.Initialized)
             {
-                WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "Email", autoCreateTables: true);
+                WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserID", "Email", autoCreateTables: true);
             }
+
+
+            // Application specific
+            if (!Roles.Provider.RoleExists("Administrator"))
+            {
+                Roles.Provider.CreateRole("Administrator");
+            }
+
+            if (Membership.Provider.GetUser("admin", false) == null)
+            {
+                ((SimpleMembershipProvider)Membership.Provider).CreateUserAndAccount("admin",
+                    "bidchuck",
+                    false,
+                    new Dictionary<string, object> { 
+                    { "Published", false },
+                    {"Phone",""},
+                    {"CompanyName","bidchuck"} 
+                    });
+            }
+
+            if (!Roles.Provider.GetRolesForUser("admin").Contains("Administrator"))
+            {
+                Roles.Provider.AddUsersToRoles(new[] { "admin" }, new[] { "Administrator" });
+            }
+
+
         }
     }
 }

@@ -1,18 +1,21 @@
 ﻿@if (Request.IsAuthenticated)
 {
-    <text>
-    Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
-        @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "SignOutForm" }))
-        {
-            @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('SignOutForm').submit()">Sign Out</a>
-        }
+ <text>
+    Hello, @Html.RouteLink(User.Identity.Name, "Default", new { controller = "Account", action = "Manage" }, htmlAttributes: new { @class = "username", title = "Manage" })!
+       
+    @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "SignOutForm" }))
+    {
+ @Html.AntiForgeryToken()
+
+        <a href="javascript:document.getElementById('SignOutForm').submit()">Sign Out</a>
+    }
     </text>
 }
 else
 {
-    @*<ul>
+
+    <ul>
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "RegisterLink" })</li>
         <li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "SignInLink" })</li>
-    </ul>*@
+    </ul>
 }

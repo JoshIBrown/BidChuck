@@ -8,12 +8,22 @@ using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
 using WebMatrix.Data;
+using BCModel;
+using BCWeb.Models.Account.ServiceLayer;
 
 namespace BCWeb.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+
+        private IGenericServiceLayer<UserProfile> _serviceLayer;
+
+        public AccountController(IGenericServiceLayer<UserProfile> serviceLayer)
+        {
+            _serviceLayer = serviceLayer;
+        }
+
         [Authorize(Roles = "Administrator")]
         public ActionResult Administer()
         {
@@ -48,30 +58,31 @@ namespace BCWeb.Controllers
             if (ModelState.IsValid)
             {
                 // Look up the user's confirmation token
-                using (UsersContext uc = new UsersContext())
+                //using (UsersContext uc = new UsersContext())
+                //{
+                //UserProfile user = uc.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
+                UserProfile user = _serviceLayer.GetEnumerable(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
+
+                if (user != null)
                 {
-                    UserProfile user = uc.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
-
-                    if (user != null)
+                    try
                     {
-                        try
-                        {
-                            passwordResetToken = WebSecurity.GeneratePasswordResetToken(model.Email);
+                        passwordResetToken = WebSecurity.GeneratePasswordResetToken(model.Email);
 
-                            EmailSender.SendPasswordResetMail(user.FirstName, user.Email, passwordResetToken);
+                        EmailSender.SendPasswordResetMail(user.FirstName, user.Email, passwordResetToken);
 
-                            return RedirectToAction("ForgotPasswordStepTwo", "Account");
-                        }
-                        catch (MembershipCreateUserException e)
-                        {
-                            ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                        }
+                        return RedirectToAction("ForgotPasswordStepTwo", "Account");
                     }
-                    else
+                    catch (MembershipCreateUserException e)
                     {
-                        ModelState.AddModelError("Email", "Unknown email address.");
+                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                     }
                 }
+                else
+                {
+                    ModelState.AddModelError("Email", "Unknown email address.");
+                }
+                //}
             }
 
             // If we got this far, something failed, redisplay form
@@ -90,19 +101,19 @@ namespace BCWeb.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult ManageScopes()
-        {
-            using (UsersContext uc = new UsersContext())
-            {
-                return View(new ScopesModel(uc.Scopes.ToList()));
-            }
-        }
+        //[HttpGet]
+        //public ActionResult ManageScopes()
+        //{
+        //    using (UsersContext uc = new UsersContext())
+        //    {
+        //        return View(new ScopesModel(uc.Scopes.ToList()));
+        //    }
+        //}
 
-        public ActionResult ManageScopes(ScopesModel model)
-        {
-            return View(model);
-        }
+        //public ActionResult ManageScopes(ScopesModel model)
+        //{
+        //    return View(model);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -182,37 +193,37 @@ namespace BCWeb.Controllers
             if (ModelState.IsValid)
             {
                 // Look up the user
-                using (UsersContext uc = new UsersContext())
+                //using (UsersContext uc = new UsersContext())
+                //{
+                UserProfile user = _serviceLayer.GetEnumerable(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
+
+                if (user != null)
                 {
-                    UserProfile user = uc.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
-
-                    if (user != null)
+                    // ResetPassword may throw an exception rather than return false in certain failure scenarios.
+                    bool resetPasswordSucceeded;
+                    try
                     {
-                        // ResetPassword may throw an exception rather than return false in certain failure scenarios.
-                        bool resetPasswordSucceeded;
-                        try
-                        {
-                            resetPasswordSucceeded = WebSecurity.ResetPassword(model.PasswordResetToken, model.NewPassword);
-                        }
-                        catch (Exception)
-                        {
-                            resetPasswordSucceeded = false;
-                        }
+                        resetPasswordSucceeded = WebSecurity.ResetPassword(model.PasswordResetToken, model.NewPassword);
+                    }
+                    catch (Exception)
+                    {
+                        resetPasswordSucceeded = false;
+                    }
 
-                        if (resetPasswordSucceeded)
-                        {
-                            return RedirectToAction("ResetPasswordSuccess");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "An error has occured. Please try again or contact the administrator.");
-                        }
+                    if (resetPasswordSucceeded)
+                    {
+                        return RedirectToAction("ResetPasswordSuccess");
                     }
                     else
                     {
-                        ModelState.AddModelError("Email", "Unknown email address.");
+                        ModelState.AddModelError("", "An error has occured. Please try again or contact the administrator.");
                     }
                 }
+                else
+                {
+                    ModelState.AddModelError("Email", "Unknown email address.");
+                }
+                //}
             }
 
             // If we got this far, something failed, redisplay form
@@ -222,6 +233,10 @@ namespace BCWeb.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (WebSecurity.IsAuthenticated)
+            {
+                return RedirectToRoute("Default", new { controller = "Accout", action = "Manage" });
+            }
             return View();
         }
 
@@ -243,7 +258,8 @@ namespace BCWeb.Controllers
                             FirstName = model.FirstName,
                             LastName = model.LastName,
                             CompanyName = model.CompanyName,
-                            Phone = model.Phone
+                            Phone = model.Phone,
+                            Published = false
                         }, true);
 
                     EmailSender.SendConfirmationMail(model.FirstName, model.Email, confirmationToken);
@@ -276,36 +292,33 @@ namespace BCWeb.Controllers
             if (ModelState.IsValid)
             {
                 // Look up the user's confirmation token
-                using (UsersContext uc = new UsersContext())
+                //using (UsersContext uc = new UsersContext())
+                //{
+                UserProfile user = _serviceLayer.GetEnumerable(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
+                if (user != null)
                 {
-                    UserProfile user = uc.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
-                    if (user != null)
+                    try
                     {
-                        try
+                        using (Database db = Database.Open("DefaultConnection"))
                         {
-                            using (Database db = Database.Open("DefaultConnection"))
-                            {
-                                var sql = "SELECT ConfirmationToken FROM webpages_Membership WHERE UserId =" + user.UserId;
-                                confirmationToken = db.Query(sql).First()["ConfirmationToken"];
-                            }
-
-                            EmailSender.SendConfirmationMail(user.FirstName, user.Email, confirmationToken);
-
-                            return RedirectToAction("RegisterStepTwo", "Account");
+                            var sql = "SELECT ConfirmationToken FROM webpages_Membership WHERE UserId =" + user.UserId;
+                            confirmationToken = db.Query(sql).First()["ConfirmationToken"];
                         }
-                        catch (MembershipCreateUserException e)
-                        {
-                            ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                        }
+
+                        EmailSender.SendConfirmationMail(user.FirstName, user.Email, confirmationToken);
+
+                        return RedirectToAction("RegisterStepTwo", "Account");
                     }
-                    else
+                    catch (MembershipCreateUserException e)
                     {
-                        ModelState.AddModelError("Email", "Unknown email address.");
+                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                     }
                 }
-
-
-
+                else
+                {
+                    ModelState.AddModelError("Email", "Unknown email address.");
+                }
+                //}
             }
 
             // If we got this far, something failed, redisplay form
@@ -337,6 +350,10 @@ namespace BCWeb.Controllers
         [AllowAnonymous]
         public ActionResult SignIn(string returnUrl)
         {
+            if (WebSecurity.IsAuthenticated)
+            {
+                return RedirectToRoute(new { route = "Default", controller = "Home", action = "Index" });
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

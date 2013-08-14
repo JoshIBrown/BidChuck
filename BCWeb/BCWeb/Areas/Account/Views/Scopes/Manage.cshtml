@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Manage Scopes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage Scopes</h2>
+
+
+@Html.Partial("_ScopePicker")
+
+@section scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/Areas/Account/ScopesList.js")
+}
