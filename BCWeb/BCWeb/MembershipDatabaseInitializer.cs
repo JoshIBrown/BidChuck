@@ -42,7 +42,6 @@ namespace BCWeb
                             foreach (DataRow row in table.Rows)
                             {
                                 //Scope s = new Scope();
-                                // FIXME: change to logic in /Views/ManageScopes/
                                 // is root when 1st,2nd and third descriptorare equal 
                                 // and when not already in temp scope list
                                 if (row["GroupNumber"].ToString().Trim() == row["2ndTierSortNumber"].ToString().Trim()

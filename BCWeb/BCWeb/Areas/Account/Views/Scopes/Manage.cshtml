@@ -4,18 +4,47 @@
 }
 
 <h2>Manage Scopes</h2>
-<div ng-app>
-    <div ng-controller="ScopesCtrl">
+<div class="row" ng-app="scopePicker">
+    <div class="large-10 columns" ng-controller="ScopesCtrl">
+        <fieldset>
+            <legend>Scopes</legend>
+            <div class="row">
+                <div class="large-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+                    <ul id="t1" style="list-style-type: none !important;">
+                        <li ng-repeat="x in Scopes | filter: {ParentId :'!'} | orderBy:'Number'"
+                            item-value="{{x.Id}}" title="{{x.Description}}">
+                            <input type="checkbox" value="{{x.Id}}" />
+                            {{x.Description | truncate: 20}}
+                            <span style="display: inline-block !important;" class="ui-icon ui-icon-circle-arrow-e" ng-click="t1Expand(x.Id)"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="large-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+                    <ul id="t2" style="list-style-type: none !important;">
+                        <li ng-repeat="y in Scopes | parentIdEqual: t1Parent | orderBy:'Number'"
+                            item-value="{{y.Id}}" title="{{y.Description}}">
+                            <input type="checkbox" value="{{y.Id}}" />
+                            {{y.Description | truncate: 20}}
+                            <span style="display: inline-block !important;" class="ui-icon ui-icon-circle-arrow-e" ng-click="t2Expand(y.Id)"></span>
+                        </li>
+                    </ul>
+                </div>
 
-        <div id="t1">
-            <ul id="scopes" ui-selectable>
-                <li class="ui-state-default" ng-repeat="x in Scopes | filter: {ParentId :'!'}" item-value="{{x.Id}}">{{x.Description}}</li>
-            </ul>
-        </div>
-
-
+                <div class="large-4 columns">
+                    <ul id="t3" style="list-style-type: none !important;">
+                        <li ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'Number'"
+                            item-value="{{z.Id}}" title="{{z.Description}}">
+                            <input type="checkbox" value="{{z.Id}}" />
+                            {{z.Description | truncate: 20}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </fieldset>
     </div>
 </div>
+
+
 @section scripts{
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
@@ -25,37 +54,4 @@
 }
 @section head{
     @Styles.Render("~/Content/themes/base/jquery-ui.css")
-    <style>
-        /* app css stylesheet */
-        .ui-selectable .ui-selectee {
-            background: #FF0;
-        }
-
-        .ui-selectable .ui-unselecting {
-            background: #F00;
-        }
-
-        .ui-selectable .ui-selecting {
-            background: #FECA40;
-        }
-
-        .ui-selectable .ui-selected {
-            background: #F39814;
-        }
-
-        .ui-selectable {
-            margin: 0px;
-            padding: 0px;
-            width: 100%;
-        }
-
-            .ui-selectable li {
-                border: 1px solid black;
-                margin: 0px;
-                padding: 0px;
-                width: 360px;
-                font-size: 1em;
-                text-align: center;
-            }
-    </style>
 }
