@@ -1,21 +1,30 @@
 ﻿@if (Request.IsAuthenticated)
 {
- <text>
-    Hello, @Html.RouteLink(User.Identity.Name, "Default", new { controller = "Account", action = "Manage" }, htmlAttributes: new { @class = "username", title = "Manage" })!
-       
-    @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "SignOutForm" }))
-    {
- @Html.AntiForgeryToken()
+    <li class="has-dropdown">@Html.RouteLink(User.Identity.Name, "Default", new { controller = "Account", action = "Manage" }, htmlAttributes: new { @class = "username", title = "Manage" })
+        <ul class="dropdown">
+            <li>@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage" })</li>
+            <li>@Html.RouteLink("Change Password", "Default", new { controller = "Account", action = "ChangePassword" })</li>
 
-        <a href="javascript:document.getElementById('SignOutForm').submit()">Sign Out</a>
-    }
-    </text>
+        </ul>
+    </li>
+    <li class="divider hide-for-small"></li>
+    <li class="has-form">
+        @using (Html.BeginRouteForm("Default", new { controller = "Account", action = "SignOut" }, FormMethod.Post, new { id = "SignOutForm" }))
+        {
+            <div class="row collapse">
+                @Html.AntiForgeryToken()
+
+                <a class="button" href="javascript:document.getElementById('SignOutForm').submit()">Sign Out</a>
+            </div>
+        }
+    </li>
 }
 else
 {
 
-    <ul>
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "RegisterLink" })</li>
-        <li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "SignInLink" })</li>
-    </ul>
+    
+    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "RegisterLink" })</li>
+    <li class="divider hide-for-small"></li>
+    <li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "SignInLink" })</li>
+    
 }

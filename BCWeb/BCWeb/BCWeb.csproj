@@ -214,7 +214,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\columnwaiter.gif" />
     <Content Include="Content\cvl.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\foundation\app.css" />
+    <Content Include="Content\foundation\foundation.css" />
+    <Content Include="Content\foundation\foundation.mvc.css" />
+    <Content Include="Content\foundation\normalize.css" />
+    <None Include="Content\Site.css.exclude" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -277,6 +281,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Foundation_readme.txt" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Account\Views\Web.config" />
     <Content Include="Areas\Account\Views\Scopes\Manage.cshtml" />
@@ -302,6 +307,22 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\Areas\Account\ScopesList.js" />
     <Content Include="Scripts\cvl.js" />
+    <Content Include="Scripts\foundation\foundation.abide.js" />
+    <Content Include="Scripts\foundation\foundation.alerts.js" />
+    <Content Include="Scripts\foundation\foundation.clearing.js" />
+    <Content Include="Scripts\foundation\foundation.cookie.js" />
+    <Content Include="Scripts\foundation\foundation.dropdown.js" />
+    <Content Include="Scripts\foundation\foundation.forms.js" />
+    <Content Include="Scripts\foundation\foundation.interchange.js" />
+    <Content Include="Scripts\foundation\foundation.joyride.js" />
+    <Content Include="Scripts\foundation\foundation.js" />
+    <Content Include="Scripts\foundation\foundation.magellan.js" />
+    <Content Include="Scripts\foundation\foundation.orbit.js" />
+    <Content Include="Scripts\foundation\foundation.placeholder.js" />
+    <Content Include="Scripts\foundation\foundation.reveal.js" />
+    <Content Include="Scripts\foundation\foundation.section.js" />
+    <Content Include="Scripts\foundation\foundation.tooltips.js" />
+    <Content Include="Scripts\foundation\foundation.topbar.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />
@@ -591,12 +612,9 @@
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <None Include="Scripts\jquery-2.0.3.intellisense.js" />
-    <Content Include="Scripts\jquery-2.0.3.js" />
-    <Content Include="Scripts\jquery-2.0.3.min.js" />
-    <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -607,6 +625,7 @@
     <Content Include="Scripts\jstd-scenario-adapter-config.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\ScopesCVL.js" />
+    <Content Include="Scripts\zepto.js" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -621,8 +640,6 @@
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -640,6 +657,9 @@
     <Content Include="Views\Account\ResetPasswordSuccess.cshtml" />
     <None Include="tblCSI2004.csv" />
     <Content Include="Views\Account\ManageScopes.cshtml" />
+    <Content Include="Views\Shared\_Foundation.cshtml" />
+    <Content Include="Views\Home\Foundation_Index.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,6 @@
 ﻿@*Requires angular*@
 
-<div ng-controller="ScopesCtrl">
+
     <form>
         <select id="FirstTier" 
             ng-model="selectedFirstT" 
@@ -21,4 +21,4 @@
             ng-options="z.Id as z.Description for z in Scopes | filter: parentIdEqual(selectedSecondT)">
         </select>
     </form>
-</div>
+

@@ -1,15 +1,61 @@
 ﻿@{
     ViewBag.Title = "Manage Scopes";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
 <h2>Manage Scopes</h2>
+<div ng-app>
+    <div ng-controller="ScopesCtrl">
+
+        <div id="t1">
+            <ul id="scopes" ui-selectable>
+                <li class="ui-state-default" ng-repeat="x in Scopes | filter: {ParentId :'!'}" item-value="{{x.Id}}">{{x.Description}}</li>
+            </ul>
+        </div>
 
 
-@Html.Partial("_ScopePicker")
-
+    </div>
+</div>
 @section scripts{
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/Scripts/cvl.js")
     @Scripts.Render("~/Scripts/angular.js")
     @Scripts.Render("~/Scripts/Areas/Account/ScopesList.js")
+}
+@section head{
+    @Styles.Render("~/Content/themes/base/jquery-ui.css")
+    <style>
+        /* app css stylesheet */
+        .ui-selectable .ui-selectee {
+            background: #FF0;
+        }
+
+        .ui-selectable .ui-unselecting {
+            background: #F00;
+        }
+
+        .ui-selectable .ui-selecting {
+            background: #FECA40;
+        }
+
+        .ui-selectable .ui-selected {
+            background: #F39814;
+        }
+
+        .ui-selectable {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+        }
+
+            .ui-selectable li {
+                border: 1px solid black;
+                margin: 0px;
+                padding: 0px;
+                width: 360px;
+                font-size: 1em;
+                text-align: center;
+            }
+    </style>
 }

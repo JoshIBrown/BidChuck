@@ -4,47 +4,58 @@
     ViewBag.Title = "Sign in";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
 
-<section id="SignInForm">
-    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
 
-        <fieldset>
-            <legend>Sign in Form</legend>
-            <ul>
-                <li>
+
+<div class="row">
+    <div class="large-4 large-centered columns">
+        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+        {
+            <div class="row">
+                <div class="large-12 large-centered columns">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="large-12 large-centered columns">
                     @Html.LabelFor(m => m.Email)
                     @Html.TextBoxFor(m => m.Email)
                     @Html.ValidationMessageFor(m => m.Email)
-                </li>
-                <li>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 large-centered columns">
                     @Html.LabelFor(m => m.Password)
                     @Html.PasswordFor(m => m.Password)
                     @Html.ValidationMessageFor(m => m.Password)
-                </li>
-                <li>
-                    @Html.CheckBoxFor(m => m.RememberMe)
-                    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-                </li>
-            </ul>
-            <input type="submit" value="Sign in" />
-        </fieldset>
-    }
-</section>
-
-<section class="resendconfirmationemail">
-    @Html.ActionLink("Re-Send Confirmation Email", "ResendConfirmationEmail")
-</section>
-
-<section class="forgotpassword">
-    @Html.ActionLink("Forgot Password", "ForgotPassword")
-</section>
-
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 large-centered columns">
+                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "left inline" })
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "left inline" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 large-centered columns">
+                    <input type="submit" value="Sign in" class="medium button" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="large-4 large-centered columns">
+        @Html.ActionLink("Re-Send Confirmation Email", "ResendConfirmationEmail")
+    </div>
+</div>
+<div class="row">
+    <div class="large-4 large-centered columns">
+        @Html.ActionLink("Forgot Password", "ForgotPassword")
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")

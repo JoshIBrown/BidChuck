@@ -3,24 +3,18 @@
     ViewBag.Title = "Manage Account";
 }
 
+
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
 </hgroup>
 
 <p class="message-success">@ViewBag.StatusMessage</p>
 
-<p>You're signed in as <strong>@User.Identity.Name</strong>.</p>
+<ul class="side-nav">
+    <li>@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage" })</li>
+    <li>@Html.RouteLink("Change Password", "Default", new { controller = "Account", action = "ChangePassword" })</li>
+</ul>
 
-@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage" });
-
-@if (ViewBag.HasLocalPassword)
-{
-    @Html.Partial("_ChangePasswordPartial")
-}
-else
-{
-    @Html.Partial("_SetPasswordPartial")
-}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jquery")

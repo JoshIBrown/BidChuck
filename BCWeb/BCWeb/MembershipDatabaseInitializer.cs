@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace BCWeb
 {
-    public class MembershipDatabaseInitializer : DropCreateDatabaseIfModelChanges<BidChuckContext>
+    public class MembershipDatabaseInitializer : CreateDatabaseIfNotExists<BidChuckContext>
     {
         protected override void Seed(BidChuckContext context)
         {

@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+
+    @*Set the viewport width to device width for mobile *@
+    <meta name="viewport" content="width=device-width" />
+
+    <title>@ViewBag.Title - Welcome to Foundation</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    @Styles.Render("~/Content/foundation/css")
+
+    @RenderSection("head", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="top-bar">
+        <ul class="title-area">
+            <!-- Title Area -->
+            <li class="name">
+                <h1><a href="/">BidChuck</a></h1>
+            </li>
+            <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+
+        <section class="top-bar-section">
+            <!-- Left Nav Section -->
+            
+
+            <!-- Right Nav Section -->
+            <ul class="right">
+                <li class="divider hide-for-small"></li>
+                @Html.Partial("_SignInPartial")
+            </ul>
+        </section>
+    </nav>
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/foundation")
+    <script>
+        $(document).foundation();
+    </script>
+    @*Use the Scripts section to define page specific scripts*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

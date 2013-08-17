@@ -27,6 +27,21 @@ namespace BCWeb
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/cvlcss").Include("~/Content/cvl.css"));
+
+
+            #region Foundation Bundles
+            //If your project requires jQuery, you may remove the zepto bundle
+
+            bundles.Add(new StyleBundle("~/Content/foundation/css").Include(
+                       "~/Content/foundation/foundation.css",
+                       "~/Content/foundation/foundation.mvc.css",
+                       "~/Content/foundation/app.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/foundation").Include(
+                      "~/Scripts/foundation/foundation.js",
+                      "~/Scripts/foundation/foundation.*",
+                      "~/Scripts/foundation/app.js"));
+            #endregion
         }
     }
 }
