@@ -13,7 +13,8 @@
                     <ul id="t1" style="list-style-type: none !important;">
                         <li ng-repeat="x in Scopes | filter: {ParentId :'!'} | orderBy:'Number'"
                             value="{{x.Id}}"
-                            title="{{x.Description}}">
+                            title="{{x.Description}}"
+                            class="has-tip tip-right">
                             <input id="check{{x.Id}}"
                                 name="check{{x.Id}}"
                                 type="checkbox"
@@ -30,7 +31,8 @@
                     <ul id="t2" style="list-style-type: none !important;">
                         <li ng-repeat="y in Scopes | parentIdEqual: t1Parent | orderBy:'Number'"
                             value="{{y.Id}}"
-                            title="{{y.Description}}">
+                            title="{{y.Description}}"
+                            class="has-tip tip-right">
                             <input id="{{y.id}}"
                                 type="checkbox"
                                 ng-model="y.checked"
@@ -47,7 +49,8 @@
                     <ul id="t3" style="list-style-type: none !important;">
                         <li ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'Number'"
                             value="{{z.Id}}"
-                            title="{{z.Description}}">
+                            title="{{z.Description}}"
+                            class="has-tip tip-right">
                             <input id="{{z.Id}}"
                                 type="checkbox"
                                 ng-model="z.checked"
@@ -69,9 +72,6 @@
 
 
 @section scripts{
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/Scripts/cvl.js")
     @Scripts.Render("~/Scripts/angular.js")
     @Scripts.Render("~/Scripts/Areas/Account/ScopesList.js")
 }

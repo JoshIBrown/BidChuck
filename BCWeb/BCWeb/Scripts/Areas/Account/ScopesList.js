@@ -1,8 +1,4 @@
-﻿$(function () {
-    $(document).tooltip({ position: { my: "left+15 center", at: "right center", collision: "none" } });
-});
-
-var app = angular.module('scopePicker', ['filters']).controller('ScopesCtrl', function ($scope, $http) {
+﻿var app = angular.module('scopePicker', ['filters']).controller('ScopesCtrl', function ($scope, $http) {
     $scope.t1Parent = 0;
     $scope.t2Parent = 0;
     $scope.selectedScopes = [];
