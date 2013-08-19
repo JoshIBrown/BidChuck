@@ -219,6 +219,9 @@
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
     <None Include="Content\Site.css.exclude" />
+    <Content Include="Content\logos\BidChuck_135x45_white.png" />
+    <Content Include="Content\logos\BidChuck_150x50_white.png" />
+    <Content Include="Content\logos\BidChuck_66x22_white.png" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

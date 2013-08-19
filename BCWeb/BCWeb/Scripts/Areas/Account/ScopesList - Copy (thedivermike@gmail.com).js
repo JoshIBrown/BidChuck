@@ -4,8 +4,6 @@
 
 var app = angular.module('scopePicker', ['filters']).controller('ScopesCtrl', function ($scope, $http) {
     $scope.t1Parent = 0;
-    $scope.t2Parent = 0;
-    $scope.selectedScopes = [];
 
     $http.get('/api/Scopes/GetList')
          .success(function (data) {
@@ -13,41 +11,35 @@ var app = angular.module('scopePicker', ['filters']).controller('ScopesCtrl', fu
 
          });
 
+    //$scope.parentIdEqual = function (parentId) {
+    //    return function (scope) {
+    //        var test = parseInt(parentId);
+    //        return scope.ParentId === test;
+    //    }
+    //}
+
+    $scope.secondChanged = function () {
+        var x = $scope.selectedSecondT;
+        var foo = $scope.Scopes;
+        var selected = $.grep(foo, function (n, i) {
+            return n.ParentId === x;
+        });
+        $scope.selectedThirdT = $.map(selected, function (item) {
+            return item.Id;
+        });
+    };
+
     $scope.t1Expand = function (value) {
         $scope.t1Parent = value;
-        console.log('t1 choice: ' + value);
     };
 
     $scope.t2Expand = function (value) {
         $scope.t2Parent = value;
-        console.log('t2 choice: ' + value);
     };
 
-    $scope.foo = function (value) {
-        console.log('foo : ' + value);
+    $scope.foo = function () {
+        alert('ooo');
     };
-
-    $scope.thing = function (data) {
-        var found = false;
-        angular.forEach($scope.selectedScopes, function (v, k) {
-            if (v.Id === data.Id) {
-                found = true;
-                v.checked = data.checked;
-                return;
-            }
-        });
-
-        if ($scope.selectedScopes.length === 0 || !found) {
-            $scope.selectedScopes.push({
-                Id: data.Id,
-                Desc: data.Description,
-                checked: data.checked
-            });
-        }
-
-        console.log(data);
-    };
-
 });
 
 // usage: ng-repeat="foo in bar | parentIdEqual: {{thing}}

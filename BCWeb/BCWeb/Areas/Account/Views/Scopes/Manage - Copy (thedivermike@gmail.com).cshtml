@@ -12,33 +12,20 @@
                 <div class="large-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
                     <ul id="t1" style="list-style-type: none !important;">
                         <li ng-repeat="x in Scopes | filter: {ParentId :'!'} | orderBy:'Number'"
-                            value="{{x.Id}}"
-                            title="{{x.Description}}">
-                            <input id="check{{x.Id}}"
-                                name="check{{x.Id}}"
-                                type="checkbox"
-                                ng-model="x.checked"
-                                ng-change="thing(x)" />
+                            value="{{x.Id}}" title="{{x.Description}}">
+                            <input type="checkbox" value="{{x.Id}}" ng-change="foo()" />
                             {{x.Description | truncate: 20}}
-                            <span style="display: inline-block !important;"
-                                class="ui-icon ui-icon-circle-arrow-e"
-                                ng-click="t1Expand(x.Id)"></span>
+                            <span style="display: inline-block !important;" class="ui-icon ui-icon-circle-arrow-e" ng-click="t1Expand(x.Id)"></span>
                         </li>
                     </ul>
                 </div>
                 <div class="large-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
                     <ul id="t2" style="list-style-type: none !important;">
                         <li ng-repeat="y in Scopes | parentIdEqual: t1Parent | orderBy:'Number'"
-                            value="{{y.Id}}"
-                            title="{{y.Description}}">
-                            <input id="{{y.id}}"
-                                type="checkbox"
-                                ng-model="y.checked"
-                                ng-change="thing(y)" />
+                            value="{{y.Id}}" title="{{y.Description}}">
+                            <input type="checkbox" value="{{y.Id}}" />
                             {{y.Description | truncate: 20}}
-                            <span style="display: inline-block !important;"
-                                class="ui-icon ui-icon-circle-arrow-e"
-                                ng-click="t2Expand(y.Id)"></span>
+                            <span style="display: inline-block !important;" class="ui-icon ui-icon-circle-arrow-e" ng-click="t2Expand(y.Id)"></span>
                         </li>
                     </ul>
                 </div>
@@ -46,25 +33,15 @@
                 <div class="large-4 columns">
                     <ul id="t3" style="list-style-type: none !important;">
                         <li ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'Number'"
-                            value="{{z.Id}}"
-                            title="{{z.Description}}">
-                            <input id="{{z.Id}}"
-                                type="checkbox"
-                                ng-model="z.checked"
-                                ng-change="thing(z)" />
+                            value="{{z.Id}}" title="{{z.Description}}">
+                            <input type="checkbox" value="{{z.Id}}" />
                             {{z.Description | truncate: 20}}
                         </li>
                     </ul>
                 </div>
             </div>
         </fieldset>
-        <div>
-            <ul>
-                <li ng-repeat="s in selectedScopes | filter : { checked : true }">{{s.Desc}}</li>
-            </ul>
-        </div>
     </div>
-
 </div>
 
 
