@@ -16,7 +16,7 @@ namespace BCWeb
             List<MailAddress> recipients = new List<MailAddress>();
 
             message.To.Add(new MailAddress(Email, FirstName));
-            message.From = new MailAddress("admin@bidchuck", "BidChuck Admin");
+            message.From = new MailAddress("admin@bidchuck.com", "BidChuck Admin");
             message.Subject = "BidChuck New Account Confirmation";
             
             string text = @"
@@ -55,7 +55,7 @@ namespace BCWeb
             List<MailAddress> recipients = new List<MailAddress>();
 
             message.To.Add(new MailAddress(Email, FirstName));
-            message.From = new MailAddress("admin@bidchuck", "BidChuck Admin");
+            message.From = new MailAddress("admin@bidchuck.com", "BidChuck Admin");
             message.Subject = "BidChuck Password Reset";
 
             string text = @"

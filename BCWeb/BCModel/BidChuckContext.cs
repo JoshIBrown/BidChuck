@@ -133,6 +133,8 @@ namespace BCModel
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Scope> Scopes { get; set; }
         public DbSet<DBAudit> DBAudits { get; set; }
+        public DbSet<State> State { get; set; }
+        public DbSet<County> Counties { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

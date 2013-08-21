@@ -17,21 +17,31 @@ namespace BCModel
 
         [Required]
         public string CompanyName { get; set; }
-        
+
         [Required]
         public string Email { get; set; }
 
-        [Required]
+   
         public string FirstName { get; set; }
 
-        [Required]
+    
         public string LastName { get; set; }
 
-        [Required]
-        public string State { get; set; }
 
-        [Required]
-        public string County { get; set; }
+        // you need to track the id of the entities you want to be associated with
+        // as well as have a reference to the entity itself
+        // you set the foreign key to point at the id, the entity reference uses this
+        // leaving out required at the moment.  it break db update because we don't have a default value for it.
+        public int StateId { get; set; }
+        [ForeignKey("StateId")]
+        [IgnoreDataMember]
+        public virtual State State { get; set; }
+
+
+        public int CountyId { get; set; }
+        [ForeignKey("CountyId")]
+        [IgnoreDataMember]
+        public virtual County County { get; set; }
 
         [Required]
         public string Phone { get; set; }
