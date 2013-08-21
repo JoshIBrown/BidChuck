@@ -293,6 +293,7 @@
     <Content Include="Areas\Account\Views\Web.config" />
     <Content Include="Areas\Account\Views\Scopes\Manage.cshtml" />
     <Content Include="Areas\Account\Views\Shared\_ScopePicker.cshtml" />
+    <Content Include="county.csv" />
     <None Include="Properties\PublishProfiles\bcdev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bcdev - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
@@ -663,13 +664,13 @@
     <Content Include="Views\Account\ForgotPasswordStepTwo.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordSuccess.cshtml" />
+    <Content Include="state.csv" />
     <None Include="tblCSI2004.csv" />
     <Content Include="Views\Account\ManageScopes.cshtml" />
     <Content Include="Views\Shared\_Foundation.cshtml" />
     <Content Include="Views\Home\Foundation_Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Home\_NewestMembers.cshtml" />
-    <Content Include="zipcodes.zip" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
