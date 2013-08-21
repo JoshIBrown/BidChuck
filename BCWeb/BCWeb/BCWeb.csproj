@@ -669,6 +669,7 @@
     <Content Include="Views\Home\Foundation_Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Home\_NewestMembers.cshtml" />
+    <Content Include="zipcodes.zip" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
