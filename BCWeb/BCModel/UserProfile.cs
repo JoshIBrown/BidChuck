@@ -32,5 +32,9 @@ namespace BCModel
 
         [IgnoreDataMember]
         public virtual ICollection<Scope> Scopes { get; set; }
+
+        [IgnoreDataMember]
+        public virtual ICollection<UserProfile> Delegates { get; set; }
+
     }
 }
