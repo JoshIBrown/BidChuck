@@ -21,9 +21,17 @@ namespace BCModel
         [Required]
         public string Email { get; set; }
 
+        [Required]
         public string FirstName { get; set; }
 
+        [Required]
         public string LastName { get; set; }
+
+        [Required]
+        public string State { get; set; }
+
+        [Required]
+        public string County { get; set; }
 
         [Required]
         public string Phone { get; set; }

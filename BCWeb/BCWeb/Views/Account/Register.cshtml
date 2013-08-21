@@ -32,6 +32,14 @@
                 @Html.TextBoxFor(m => m.CompanyName)
             </li>
             <li>
+                @Html.LabelFor(m => m.State)
+                @*@Html.DropDownListFor(m => m.State, new StateList(?))*@
+            </li>
+            <li>
+                @Html.LabelFor(m => m.County)
+                @*@Html.DropDownListFor(m => m.County?)*@
+            </li>
+            <li>
                 @Html.LabelFor(m => m.Phone)
                 @Html.TextBoxFor(m => m.Phone)
             </li>

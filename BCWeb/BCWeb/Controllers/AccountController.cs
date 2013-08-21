@@ -178,6 +178,8 @@ namespace BCWeb.Controllers
                         {
                             FirstName = model.FirstName,
                             LastName = model.LastName,
+                            State = model.State,
+                            County = model.County,
                             CompanyName = model.CompanyName,
                             Phone = model.Phone,
                             Published = false
