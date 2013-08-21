@@ -1,27 +1,25 @@
 ﻿@{
     ViewBag.Title = "Welcome to bidCHUCK!";
 }
-@*@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-        </div>
-    </section>
-}*@
-
-<div class="row">
-    <div class="large-8 columns large-centered">
-        <h1>@ViewBag.Title</h1>
-    </div>
-</div>
 
 <div ng-app="myApp">
-    <ng-controller="HomeCtrl">
-        @Html.Partial("_NewestMembers")
-    </ng-controller>
+    <div ng-controller="HomeCtrl">
+        <div class="row">
+            <div class="large-8 columns large-centered">
+                <h1>@ViewBag.Title</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-10 columns">
+
+                <div class="small-4 columns">
+                    @Html.Partial("_NewestMembers")
+            
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </div>
 @section scripts{
     @Scripts.Render("~/Scripts/angular.js")

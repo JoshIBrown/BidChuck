@@ -11,19 +11,21 @@ namespace BCWeb.Controllers.Api
 {
     public class UsersController : ApiController
     {
-        private IGenericServiceLayer<UserProfile> _serviceLayer;
-
-        public UsersController(IGenericServiceLayer<UserProfile> serviceLayer)
-        {
-            _serviceLayer = serviceLayer;
-        }
 
         public IEnumerable<object> GetNewestCompanies()
         {
-            // get 10 most recently registered and published companies
-            var companies = _serviceLayer.GetEnumerable(x => x.Published).OrderByDescending(x => x.UserId).Take(10).ToArray();
 
-            return companies;
+            using (BidChuckContext context = new BidChuckContext())
+            {
+                // get 10 most recently registered and published companies
+                var companies = context.UserProfiles.Where(x => x.Published && x.Email != "admin")
+                                                    .OrderByDescending(x => x.UserId)
+                                                    .Take(10)
+                                                    .Select(x => new { Id = x.UserId, Company = x.CompanyName })
+                                                    .ToArray();
+
+                return companies;
+            }
         }
     }
 }
