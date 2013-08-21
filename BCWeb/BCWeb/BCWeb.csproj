@@ -187,8 +187,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
     <Compile Include="Areas\Account\Controllers\ScopesController.cs" />
-    <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeHierarchyViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeViewModel.cs" />
+    <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeHierarchyViewModel.cs" />
+    <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeMgmtViewModel.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Models\Account\ServiceLayer\UserProfileServiceLayer.cs" />
     <Compile Include="Models\Account\ViewModel\AccountModels.cs" />
     <Compile Include="Models\GenericRepository.cs" />
+    <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
     <Compile Include="Models\IGenericServiceLayer.cs" />
     <Compile Include="Models\RepositoryBase.cs" />

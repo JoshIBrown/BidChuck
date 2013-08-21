@@ -18,7 +18,7 @@
                             <input id="check{{x.Id}}"
                                 name="check{{x.Id}}"
                                 type="checkbox"
-                                ng-model="x.checked"
+                                ng-model="x.Checked"
                                 ng-change="changeScopeSelection(x)" />
                             {{x.Description | truncate: 20}}
                             <span style="display: inline-block !important;"
@@ -35,7 +35,7 @@
                             class="has-tip tip-right">
                             <input id="{{y.id}}"
                                 type="checkbox"
-                                ng-model="y.checked"
+                                ng-model="y.Checked"
                                 ng-change="changeScopeSelection(y)" />
                             {{y.Description | truncate: 20}}
                             <span style="display: inline-block !important;"
@@ -53,7 +53,7 @@
                             class="has-tip tip-right">
                             <input id="{{z.Id}}"
                                 type="checkbox"
-                                ng-model="z.checked"
+                                ng-model="z.Checked"
                                 ng-change="changeScopeSelection(z)" />
                             {{z.Description | truncate: 20}}
                         </li>
@@ -62,8 +62,11 @@
             </div>
         </fieldset>
         <div>
+            <button class="medium button" ng-click="saveChanges()">Save</button>
+        </div>
+        <div>
             <ul>
-                <li ng-repeat="s in selectedScopes | filter:{checked: true}">{{s}}</li>
+                <li ng-repeat="s in selectedScopes | filter:{Checked: true}">{{s}}</li>
             </ul>
         </div>
     </div>

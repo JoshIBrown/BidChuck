@@ -3,10 +3,18 @@
     $scope.t2Parent = 0;
     $scope.selectedScopes = [];
 
-    $http.get('/api/Scopes/GetList')
+    $http.get('/api/Scopes/GetScopesToManage')
          .success(function (data) {
              $scope.Scopes = data;
-
+             $scope.selectedScopes = $.map($scope.Scopes, function (data) {
+                 if (data.Checked) {
+                     return {
+                         Id: data.Id,
+                         Desc: data.Description,
+                         Checked: data.Checked
+                     };
+                 }
+             });
          });
 
     $scope.t1Expand = function (value) {
@@ -20,14 +28,14 @@
 
     $scope.changeScopeSelection = function (data) {
         var found = $scope.updateScopeIfInSelection(data);
-    
+
         // if first selection or if a match was not found, 
         // add a new selection to the array
         if ($scope.selectedScopes.length === 0 || !found) {
             $scope.selectedScopes.push({
                 Id: data.Id,
                 Desc: data.Description,
-                checked: data.checked
+                Checked: data.Checked
             });
         }
 
@@ -41,9 +49,9 @@
     // recursive function that goes through the lineage until epoch
     $scope.updateParent = function (aScope) {
         angular.forEach($scope.Scopes, function (v, k) {
-            // if found parent and this is checked, update parent
-            if (v.Id === aScope.ParentId && aScope.checked) {
-                v.checked = true;
+            // if found parent and this is Checked, update parent
+            if (v.Id === aScope.ParentId && aScope.Checked) {
+                v.Checked = true;
                 // recurse through lineage until epoch;
                 $scope.updateParent(v);
                 // if parent was selected before, then update, else push onto array
@@ -51,7 +59,7 @@
                     $scope.selectedScopes.push({
                         Id: v.Id,
                         Desc: v.Description,
-                        checked: v.checked
+                        Checked: v.Checked
                     });
                 }
             }
@@ -63,7 +71,7 @@
         angular.forEach($scope.Scopes, function (v, k) {
             // if found child update children, check or uncheck
             if (v.ParentId === aScope.Id) {
-                v.checked = aScope.checked;
+                v.Checked = aScope.Checked;
                 // recurse through children
                 $scope.updateChildren(v);
                 // if child has been selected before, then update, else push onto array
@@ -71,7 +79,7 @@
                     $scope.selectedScopes.push({
                         Id: v.Id,
                         Desc: v.Description,
-                        checked: v.checked
+                        Checked: v.Checked
                     });
                 }
             }
@@ -86,11 +94,28 @@
             // if match found for data
             if (v.Id === aScope.Id) {
                 found = true;
-                v.checked = aScope.checked;
+                v.Checked = aScope.Checked;
                 return;
             }
         });
         return found;
+    };
+
+    // save selection to server
+    $scope.saveChanges = function () {
+        // create a new array containing only the id's of the selected scopes
+        var toPut = angular.toJson($.map($scope.selectedScopes, function (data) {
+            // if selected scopes
+            if (data.Checked) {
+                return data.Id;
+            }
+        }));
+
+        // put the new list to the server
+        $http({ url: '/api/Scopes/PutSelectedScopes', method: 'PUT', data: toPut })
+            .success(function (result) {
+                alert(result.message);
+            });
     };
 });
 
