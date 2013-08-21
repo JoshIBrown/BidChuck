@@ -1,1087 +1,1087 @@
 ID,StateID,Name
-1,1,Autauga County
-2,1,Baldwin County
-3,1,Barbour County
-4,1,Bibb County
-5,1,Blount County
-6,1,Bullock County
-7,1,Butler County
-8,1,Calhoun County
-9,1,Chambers County
-10,1,Cherokee County
-11,1,Chilton County
-12,1,Choctaw County
-13,1,Clarke County
-14,1,Clay County
-15,1,Cleburne County
-16,1,Coffee County
-17,1,Colbert County
-18,1,Conecuh County
-19,1,Coosa County
-20,1,Covington County
-21,1,Crenshaw County
-22,1,Cullman County
-23,1,Dale County
-24,1,Dallas County
-25,1,DeKalb County
-26,1,Elmore County
-27,1,Escambia County
-28,1,Etowah County
-29,1,Fayette County
-30,1,Franklin County
-31,1,Geneva County
-32,1,Greene County
-33,1,Hale County
-34,1,Henry County
-35,1,Houston County
-36,1,Jackson County
-37,1,Jefferson County
-38,1,Lamar County
-39,1,Lauderdale County
-40,1,Lawrence County
-41,1,Lee County
-42,1,Limestone County
-43,1,Lowndes County
-44,1,Macon County
-45,1,Madison County
-46,1,Marengo County
-47,1,Marion County
-48,1,Marshall County
-49,1,Mobile County
-50,1,Monroe County
-51,1,Montgomery County
-52,1,Morgan County
-53,1,Perry County
-54,1,Pickens County
-55,1,Pike County
-56,1,Randolph County
-57,1,Russell County
-58,1,St. Clair County
-59,1,Shelby County
-60,1,Sumter County
-61,1,Talladega County
-62,1,Tallapoosa County
-63,1,Tuscaloosa County
-64,1,Walker County
-65,1,Washington County
-66,1,Wilcox County
-67,1,Winston County
-68,3,Apache County
-69,3,Cochise County
-70,3,Coconino County
-71,3,Gila County
-72,3,Graham County
-73,3,Greenlee County
-74,3,La Paz County
-75,3,Maricopa County
-76,3,Mohave County
-77,3,Navajo County
-78,3,Pima County
-79,3,Pinal County
-80,3,Santa Cruz County
-81,3,Yavapai County
-82,3,Yuma County
-83,4,Arkansas County
-84,4,Ashley County
-85,4,Baxter County
-86,4,Benton County
-87,4,Boone County
-88,4,Bradley County
-89,4,Calhoun County
-90,4,Carroll County
-91,4,Chicot County
-92,4,Clark County
-93,4,Clay County
-94,4,Cleburne County
-95,4,Cleveland County
-96,4,Columbia County
-97,4,Conway County
-98,4,Craighead County
-99,4,Crawford County
-100,4,Crittenden County
-101,4,Cross County
-102,4,Dallas County
-103,4,Desha County
-104,4,Drew County
-105,4,Faulkner County
-106,4,Franklin County
-107,4,Fulton County
-108,4,Garland County
-109,4,Grant County
-110,4,Greene County
-111,4,Hempstead County
-112,4,Hot Spring County
-113,4,Howard County
-114,4,Independence County
-115,4,Izard County
-116,4,Jackson County
-117,4,Jefferson County
-118,4,Johnson County
-119,4,Lafayette County
-120,4,Lawrence County
-121,4,Lee County
-122,4,Lincoln County
-123,4,Little River County
-124,4,Logan County
-125,4,Lonoke County
-126,4,Madison County
-127,4,Marion County
-128,4,Miller County
-129,4,Mississippi County
-130,4,Monroe County
-131,4,Montgomery County
-132,4,Nevada County
-133,4,Newton County
-134,4,Ouachita County
-135,4,Perry County
-136,4,Phillips County
-137,4,Pike County
-138,4,Poinsett County
-139,4,Polk County
-140,4,Pope County
-141,4,Prairie County
-142,4,Pulaski County
-143,4,Randolph County
-144,4,St. Francis County
-145,4,Saline County
-146,4,Scott County
-147,4,Searcy County
-148,4,Sebastian County
-149,4,Sevier County
-150,4,Sharp County
-151,4,Stone County
-152,4,Union County
-153,4,Van Buren County
-154,4,Washington County
-155,4,White County
-156,4,Woodruff County
-157,4,Yell County
-158,5,Alameda County
-159,5,Alpine County
-160,5,Amador County
-161,5,Butte County
-162,5,Calaveras County
-163,5,Colusa County
-164,5,Contra Costa County
-165,5,Del Norte County
-166,5,El Dorado County
-167,5,Fresno County
-168,5,Glenn County
-169,5,Humboldt County
-170,5,Imperial County
-171,5,Inyo County
-172,5,Kern County
-173,5,Kings County
-174,5,Lake County
-175,5,Lassen County
-176,5,Los Angeles County
-177,5,Madera County
-178,5,Marin County
-179,5,Mariposa County
-180,5,Mendocino County
-181,5,Merced County
-182,5,Modoc County
-183,5,Mono County
-184,5,Monterey County
-185,5,Napa County
-186,5,Nevada County
-187,5,Orange County
-188,5,Placer County
-189,5,Plumas County
-190,5,Riverside County
-191,5,Sacramento County
-192,5,San Benito County
-193,5,San Bernardino County
-194,5,San Diego County
-195,5,San Francisco County
-196,5,San Joaquin County
-197,5,San Luis Obispo County
-198,5,San Mateo County
-199,5,Santa Barbara County
-200,5,Santa Clara County
-201,5,Santa Cruz County
-202,5,Shasta County
-203,5,Sierra County
-204,5,Siskiyou County
-205,5,Solano County
-206,5,Sonoma County
-207,5,Stanislaus County
-208,5,Sutter County
-209,5,Tehama County
-210,5,Trinity County
-211,5,Tulare County
-212,5,Tuolumne County
-213,5,Ventura County
-214,5,Yolo County
-215,5,Yuba County
-216,6,Adams County
-217,6,Alamosa County
-218,6,Arapahoe County
-219,6,Archuleta County
-220,6,Baca County
-221,6,Bent County
-222,6,Boulder County
-223,6,Broomfield County
-224,6,Chaffee County
-225,6,Cheyenne County
-226,6,Clear Creek County
-227,6,Conejos County
-228,6,Costilla County
-229,6,Crowley County
-230,6,Custer County
-231,6,Delta County
-232,6,Denver County
-233,6,Dolores County
-234,6,Douglas County
-235,6,Eagle County
-236,6,Elbert County
-237,6,El Paso County
-238,6,Fremont County
-239,6,Garfield County
-240,6,Gilpin County
-241,6,Grand County
-242,6,Gunnison County
-243,6,Hinsdale County
-244,6,Huerfano County
-245,6,Jackson County
-246,6,Jefferson County
-247,6,Kiowa County
-248,6,Kit Carson County
-249,6,Lake County
-250,6,La Plata County
-251,6,Larimer County
-252,6,Las Animas County
-253,6,Lincoln County
-254,6,Logan County
-255,6,Mesa County
-256,6,Mineral County
-257,6,Moffat County
-258,6,Montezuma County
-259,6,Montrose County
-260,6,Morgan County
-261,6,Otero County
-262,6,Ouray County
-263,6,Park County
-264,6,Phillips County
-265,6,Pitkin County
-266,6,Prowers County
-267,6,Pueblo County
-268,6,Rio Blanco County
-269,6,Rio Grande County
-270,6,Routt County
-271,6,Saguache County
-272,6,San Juan County
-273,6,San Miguel County
-274,6,Sedgwick County
-275,6,Summit County
-276,6,Teller County
-277,6,Washington County
-278,6,Weld County
-279,6,Yuma County
-280,7,Fairfield County
-281,7,Hartford County
-282,7,Litchfield County
-283,7,Middlesex County
-284,7,New Haven County
-285,7,New London County
-286,7,Tolland County
-287,7,Windham County
-288,8,Kent County
-289,8,New Castle County
-290,8,Sussex County
-291,10,Alachua County
-292,10,Baker County
-293,10,Bay County
-294,10,Bradford County
-295,10,Brevard County
-296,10,Broward County
-297,10,Calhoun County
-298,10,Charlotte County
-299,10,Citrus County
-300,10,Clay County
-301,10,Collier County
-302,10,Columbia County
-303,10,DeSoto County
-304,10,Dixie County
-305,10,Duval County
-306,10,Escambia County
-307,10,Flagler County
-308,10,Franklin County
-309,10,Gadsden County
-310,10,Gilchrist County
-311,10,Glades County
-312,10,Gulf County
-313,10,Hamilton County
-314,10,Hardee County
-315,10,Hendry County
-316,10,Hernando County
-317,10,Highlands County
-318,10,Hillsborough County
-319,10,Holmes County
-320,10,Indian River County
-321,10,Jackson County
-322,10,Jefferson County
-323,10,Lafayette County
-324,10,Lake County
-325,10,Lee County
-326,10,Leon County
-327,10,Levy County
-328,10,Liberty County
-329,10,Madison County
-330,10,Manatee County
-331,10,Marion County
-332,10,Martin County
-333,10,Miami-Dade County
-334,10,Monroe County
-335,10,Nassau County
-336,10,Okaloosa County
-337,10,Okeechobee County
-338,10,Orange County
-339,10,Osceola County
-340,10,Palm Beach County
-341,10,Pasco County
-342,10,Pinellas County
-343,10,Polk County
-344,10,Putnam County
-345,10,Saint Johns County
-346,10,Saint Lucie County
-347,10,Santa Rosa County
-348,10,Sarasota County
-349,10,Seminole County
-350,10,Sumter County
-351,10,Suwannee County
-352,10,Taylor County
-353,10,Union County
-354,10,Volusia County
-355,10,Wakulla County
-356,10,Walton County
-357,10,Washington County
-358,11,Appling County
-359,11,Atkinson County
-360,11,Bacon County
-361,11,Baker County
-362,11,Baldwin County
-363,11,Banks County
-364,11,Barrow County
-365,11,Bartow County
-366,11,Ben Hill County
-367,11,Berrien County
-368,11,Bibb County
-369,11,Bleckley County
-370,11,Brantley County
-371,11,Brooks County
-372,11,Bryan County
-373,11,Bulloch County
-374,11,Burke County
-375,11,Butts County
-376,11,Calhoun County
-377,11,Camden County
-378,11,Candler County
-379,11,Carroll County
-380,11,Catoosa County
-381,11,Charlton County
-382,11,Chatham County
-383,11,Chattahoochee County
-384,11,Chattooga County
-385,11,Cherokee County
-386,11,Clarke County
-387,11,Clay County
-388,11,Clayton County
-389,11,Clinch County
-390,11,Cobb County
-391,11,Coffee County
-392,11,Colquitt County
-393,11,Columbia County
-394,11,Cook County
-395,11,Coweta County
-396,11,Crawford County
-397,11,Crisp County
-398,11,Dade County
-399,11,Dawson County
-400,11,Decatur County
-401,11,DeKalb County
-402,11,Dodge County
-403,11,Dooly County
-404,11,Dougherty County
-405,11,Douglas County
-406,11,Early County
-407,11,Echols County
-408,11,Effingham County
-409,11,Elbert County
-410,11,Emanuel County
-411,11,Evans County
-412,11,Fannin County
-413,11,Fayette County
-414,11,Floyd County
-415,11,Forsyth County
-416,11,Franklin County
-417,11,Fulton County
-418,11,Gilmer County
-419,11,Glascock County
-420,11,Glynn County
-421,11,Gordon County
-422,11,Grady County
-423,11,Greene County
-424,11,Gwinnett County
-425,11,Habersham County
-426,11,Hall County
-427,11,Hancock County
-428,11,Haralson County
-429,11,Harris County
-430,11,Hart County
-431,11,Heard County
-432,11,Henry County
-433,11,Houston County
-434,11,Irwin County
-435,11,Jackson County
-436,11,Jasper County
-437,11,Jeff Davis County
-438,11,Jefferson County
-439,11,Jenkins County
-440,11,Johnson County
-441,11,Jones County
-442,11,Lamar County
-443,11,Lanier County
-444,11,Laurens County
-445,11,Lee County
-446,11,Liberty County
-447,11,Lincoln County
-448,11,Long County
-449,11,Lowndes County
-450,11,Lumpkin County
-451,11,Macon County
-452,11,Madison County
-453,11,Marion County
-454,11,McDuffie County
-455,11,McIntosh County
-456,11,Meriwether County
-457,11,Miller County
-458,11,Mitchell County
-459,11,Monroe County
-460,11,Montgomery County
-461,11,Morgan County
-462,11,Murray County
-463,11,Muscogee County
-464,11,Newton County
-465,11,Oconee County
-466,11,Oglethorpe County
-467,11,Paulding County
-468,11,Peach County
-469,11,Pickens County
-470,11,Pierce County
-471,11,Pike County
-472,11,Polk County
-473,11,Pulaski County
-474,11,Putnam County
-475,11,Quitman County
-476,11,Rabun County
-477,11,Randolph County
-478,11,Richmond County
-479,11,Rockdale County
-480,11,Schley County
-481,11,Screven County
-482,11,Seminole County
-483,11,Spalding County
-484,11,Stephens County
-485,11,Stewart County
-486,11,Sumter County
-487,11,Talbot County
-488,11,Taliaferro County
-489,11,Tattnall County
-490,11,Taylor County
-491,11,Telfair County
-492,11,Terrell County
-493,11,Thomas County
-494,11,Tift County
-495,11,Toombs County
-496,11,Towns County
-497,11,Treutlen County
-498,11,Troup County
-499,11,Turner County
-500,11,Twiggs County
-501,11,Union County
-502,11,Upson County
-503,11,Walker County
-504,11,Walton County
-505,11,Ware County
-506,11,Warren County
-507,11,Washington County
-508,11,Wayne County
-509,11,Webster County
-510,11,Wheeler County
-511,11,White County
-512,11,Whitfield County
-513,11,Wilcox County
-514,11,Wilkes County
-515,11,Wilkinson County
-516,11,Worth County
-517,12,Hawaii County
-518,12,City and County of Honolulu
-519,12,Kalawao County
-520,12,Kauai County
-521,12,Maui County
-522,13,Ada County
-523,13,Adams County
-524,13,Bannock County
-525,13,Bear Lake County
-526,13,Benewah County
-527,13,Bingham County
-528,13,Blaine County
-529,13,Boise County
-530,13,Bonner County
-531,13,Bonneville County
-532,13,Boundary County
-533,13,Butte County
-534,13,Camas County
-535,13,Canyon County
-536,13,Caribou County
-537,13,Cassia County
-538,13,Clark County
-539,13,Clearwater County
-540,13,Custer County
-541,13,Elmore County
-542,13,Franklin County
-543,13,Fremont County
-544,13,Gem County
-545,13,Gooding County
-546,13,Idaho County
-547,13,Jefferson County
-548,13,Jerome County
-549,13,Kootenai County
-550,13,Latah County
-551,13,Lemhi County
-552,13,Lewis County
-553,13,Lincoln County
-554,13,Madison County
-555,13,Minidoka County
-556,13,Nez Perce County
-557,13,Oneida County
-558,13,Owyhee County
-559,13,Payette County
-560,13,Power County
-561,13,Shoshone County
-562,13,Teton County
-563,13,Twin Falls County
-564,13,Valley County
-565,13,Washington County
-566,14,Adams County
-567,14,Alexander County
-568,14,Bond County
-569,14,Boone County
-570,14,Brown County
-571,14,Bureau County
-572,14,Calhoun County
-573,14,Carroll County
-574,14,Cass County
-575,14,Champaign County
-576,14,Christian County
-577,14,Clark County
-578,14,Clay County
-579,14,Clinton County
-580,14,Coles County
-581,14,Cook County
-582,14,Crawford County
-583,14,Cumberland County
-584,14,De Witt County
-585,14,DeKalb County
-586,14,Douglas County
-587,14,DuPage County
-588,14,Edgar County
-589,14,Edwards County
-590,14,Effingham County
-591,14,Fayette County
-592,14,Ford County
-593,14,Franklin County
-594,14,Fulton County
-595,14,Gallatin County
-596,14,Greene County
-597,14,Grundy County
-598,14,Hamilton County
-599,14,Hancock County
-600,14,Hardin County
-601,14,Henderson County
-602,14,Henry County
-603,14,Iroquois County
-604,14,Jackson County
-605,14,Jasper County
-606,14,Jefferson County
-607,14,Jersey County
-608,14,Jo Daviess County
-609,14,Johnson County
-610,14,Kane County
-611,14,Kankakee County
-612,14,Kendall County
-613,14,Knox County
-614,14,Lake County
-615,14,LaSalle County
-616,14,Lawrence County
-617,14,Lee County
-618,14,Livingston County
-619,14,Logan County
-620,14,Macon County
-621,14,Macoupin County
-622,14,Madison County
-623,14,Marion County
-624,14,Marshall County
-625,14,Mason County
-626,14,Massac County
-627,14,McDonough County
-628,14,McHenry County
-629,14,McLean County
-630,14,Menard County
-631,14,Mercer County
-632,14,Monroe County
-633,14,Montgomery County
-634,14,Morgan County
-635,14,Moultrie County
-636,14,Ogle County
-637,14,Peoria County
-638,14,Perry County
-639,14,Piatt County
-640,14,Pike County
-641,14,Pope County
-642,14,Pulaski County
-643,14,Putnam County
-644,14,Randolph County
-645,14,Richland County
-646,14,Rock Island County
-647,14,Saline County
-648,14,Sangamon County
-649,14,Schuyler County
-650,14,Scott County
-651,14,Shelby County
-652,14,St. Clair County
-653,14,Stark County
-654,14,Stephenson County
-655,14,Tazewell County
-656,14,Union County
-657,14,Vermilion County
-658,14,Wabash County
-659,14,Warren County
-660,14,Washington County
-661,14,Wayne County
-662,14,White County
-663,14,Whiteside County
-664,14,Will County
-665,14,Williamson County
-666,14,Winnebago County
-667,14,Woodford County
-668,15,Adams County
-669,15,Allen County
-670,15,Bartholomew County
-671,15,Benton County
-672,15,Blackford County
-673,15,Boone County
-674,15,Brown County
-675,15,Carroll County
-676,15,Cass County
-677,15,Clark County
-678,15,Clay County
-679,15,Clinton County
-680,15,Crawford County
-681,15,Daviess County
-682,15,Dearborn County
-683,15,Decatur County
-684,15,DeKalb County
-685,15,Delaware County
-686,15,Dubois County
-687,15,Elkhart County
-688,15,Fayette County
-689,15,Floyd County
-690,15,Fountain County
-691,15,Franklin County
-692,15,Fulton County
-693,15,Gibson County
-694,15,Grant County
-695,15,Greene County
-696,15,Hamilton County
-697,15,Hancock County
-698,15,Harrison County
-699,15,Hendricks County
-700,15,Henry County
-701,15,Howard County
-702,15,Huntington County
-703,15,Jackson County
-704,15,Jasper County
-705,15,Jay County
-706,15,Jefferson County
-707,15,Jennings County
-708,15,Johnson County
-709,15,Knox County
-710,15,Kosciusko County
-711,15,LaGrange County
-712,15,Lake County
-713,15,LaPorte County
-714,15,Lawrence County
-715,15,Madison County
-716,15,Marion County
-717,15,Marshall County
-718,15,Martin County
-719,15,Miami County
-720,15,Monroe County
-721,15,Montgomery County
-722,15,Morgan County
-723,15,Newton County
-724,15,Noble County
-725,15,Ohio County
-726,15,Orange County
-727,15,Owen County
-728,15,Parke County
-729,15,Perry County
-730,15,Pike County
-731,15,Porter County
-732,15,Posey County
-733,15,Pulaski County
-734,15,Putnam County
-735,15,Randolph County
-736,15,Ripley County
-737,15,Rush County
-738,15,St. Joseph County
-739,15,Scott County
-740,15,Shelby County
-741,15,Spencer County
-742,15,Starke County
-743,15,Steuben County
-744,15,Sullivan County
-745,15,Switzerland County
-746,15,Tippecanoe County
-747,15,Tipton County
-748,15,Union County
-749,15,Vanderburgh County
-750,15,Vermillion County
-751,15,Vigo County
-752,15,Wabash County
-753,15,Warren County
-754,15,Warrick County
-755,15,Washington County
-756,15,Wayne County
-757,15,Wells County
-758,15,White County
-759,15,Whitley County
-760,16,Adair County
-761,16,Adams County
-762,16,Allamakee County
-763,16,Appanoose County
-764,16,Audubon County
-765,16,Benton County
-766,16,Black Hawk County
-767,16,Boone County
-768,16,Bremer County
-769,16,Buchanan County
-770,16,Buena Vista County
-771,16,Butler County
-772,16,Calhoun County
-773,16,Carroll County
-774,16,Cass County
-775,16,Cedar County
-776,16,Cerro Gordo County
-777,16,Cherokee County
-778,16,Chickasaw County
-779,16,Clarke County
-780,16,Clay County
-781,16,Clayton County
-782,16,Clinton County
-783,16,Crawford County
-784,16,Dallas County
-785,16,Davis County
-786,16,Decatur County
-787,16,Delaware County
-788,16,Des Moines County
-789,16,Dickinson County
-790,16,Dubuque County
-791,16,Emmet County
-792,16,Fayette County
-793,16,Floyd County
-794,16,Franklin County
-795,16,Fremont County
-796,16,Greene County
-797,16,Grundy County
-798,16,Guthrie County
-799,16,Hamilton County
-800,16,Hancock County
-801,16,Hardin County
-802,16,Harrison County
-803,16,Henry County
-804,16,Howard County
-805,16,Humboldt County
-806,16,Ida County
-807,16,Iowa County
-808,16,Jackson County
-809,16,Jasper County
-810,16,Jefferson County
-811,16,Johnson County
-812,16,Jones County
-813,16,Keokuk County
-814,16,Kossuth County
-815,16,Lee County
-816,16,Linn County
-817,16,Louisa County
-818,16,Lucas County
-819,16,Lyon County
-820,16,Madison County
-821,16,Mahaska County
-822,16,Marion County
-823,16,Marshall County
-824,16,Mills County
-825,16,Mitchell County
-826,16,Monona County
-827,16,Monroe County
-828,16,Montgomery County
-829,16,Muscatine County
-830,16,OBrien County
-831,16,Osceola County
-832,16,Page County
-833,16,Palo Alto County
-834,16,Plymouth County
-835,16,Pocahontas County
-836,16,Polk County
-837,16,Pottawattamie County
-838,16,Poweshiek County
-839,16,Ringgold County
-840,16,Sac County
-841,16,Scott County
-842,16,Shelby County
-843,16,Sioux County
-844,16,Story County
-845,16,Tama County
-846,16,Taylor County
-847,16,Union County
-848,16,Van Buren County
-849,16,Wapello County
-850,16,Warren County
-851,16,Washington County
-852,16,Wayne County
-853,16,Webster County
-854,16,Winnebago County
-855,16,Winneshiek County
-856,16,Woodbury County
-857,16,Worth County
-858,16,Wright County
-859,17,Allen County
-860,17,Anderson County
-861,17,Atchison County
-862,17,Barber County
-863,17,Barton County
-864,17,Bourbon County
-865,17,Brown County
-866,17,Butler County
-867,17,Chase County
-868,17,Chautauqua County
-869,17,Cherokee County
-870,17,Cheyenne County
-871,17,Clark County
-872,17,Clay County
-873,17,Cloud County
-874,17,Coffey County
-875,17,Comanche County
-876,17,Cowley County
-877,17,Crawford County
-878,17,Decatur County
-879,17,Dickinson County
-880,17,Doniphan County
-881,17,Douglas County
-882,17,Edwards County
-883,17,Elk County
-884,17,Ellis County
-885,17,Ellsworth County
-886,17,Finney County
-887,17,Ford County
-888,17,Franklin County
-889,17,Geary County
-890,17,Gove County
-891,17,Graham County
-892,17,Grant County
-893,17,Gray County
-894,17,Greeley County
-895,17,Greenwood County
-896,17,Hamilton County
-897,17,Harper County
-898,17,Harvey County
-899,17,Haskell County
-900,17,Hodgeman County
-901,17,Jackson County
-902,17,Jefferson County
-903,17,Jewell County
-904,17,Johnson County
-905,17,Kearny County
-906,17,Kingman County
-907,17,Kiowa County
-908,17,Labette County
-909,17,Lane County
-910,17,Leavenworth County
-911,17,Lincoln County
-912,17,Linn County
-913,17,Logan County
-914,17,Lyon County
-915,17,Marion County
-916,17,Marshall County
-917,17,McPherson County
-918,17,Meade County
-919,17,Miami County
-920,17,Mitchell County
-921,17,Montgomery County
-922,17,Morris County
-923,17,Morton County
-924,17,Nemaha County
-925,17,Neosho County
-926,17,Ness County
-927,17,Norton County
-928,17,Osage County
-929,17,Osborne County
-930,17,Ottawa County
-931,17,Pawnee County
-932,17,Phillips County
-933,17,Pottawatomie County
-934,17,Pratt County
-935,17,Rawlins County
-936,17,Reno County
-937,17,Republic County
-938,17,Rice County
-939,17,Riley County
-940,17,Rooks County
-941,17,Rush County
-942,17,Russell County
-943,17,Saline County
-944,17,Scott County
-945,17,Sedgwick County
-946,17,Seward County
-947,17,Shawnee County
-948,17,Sheridan County
-949,17,Sherman County
-950,17,Smith County
-951,17,Stafford County
-952,17,Stanton County
-953,17,Stevens County
-954,17,Sumner County
-955,17,Thomas County
-956,17,Trego County
-957,17,Wabaunsee County
-958,17,Wallace County
-959,17,Washington County
-960,17,Wichita County
-961,17,Wilson County
-962,17,Woodson County
-963,17,Wyandotte County
-964,18,Adair County
-965,18,Allen County
-966,18,Anderson County
-967,18,Ballard County
-968,18,Barren County
-969,18,Bath County
-970,18,Bell County
-971,18,Boone County
-972,18,Bourbon County
-973,18,Boyd County
-974,18,Boyle County
-975,18,Bracken County
-976,18,Breathitt County
-977,18,Breckinridge County
-978,18,Bullitt County
-979,18,Butler County
-980,18,Caldwell County
-981,18,Calloway County
-982,18,Campbell County
-983,18,Carlisle County
-984,18,Carroll County
-985,18,Carter County
-986,18,Casey County
-987,18,Christian County
-988,18,Clark County
-989,18,Clay County
-990,18,Clinton County
-991,18,Crittenden County
-992,18,Cumberland County
-993,18,Daviess County
-994,18,Edmonson County
-995,18,Elliott County
-996,18,Estill County
-997,18,Fayette County
-998,18,Fleming County
-999,18,Floyd County
-1000,18,Franklin County
-1001,18,Fulton County
-1002,18,Gallatin County
-1003,18,Garrard County
-1004,18,Grant County
-1005,18,Graves County
-1006,18,Grayson County
-1007,18,Green County
-1008,18,Greenup County
-1009,18,Hancock County
-1010,18,Hardin County
-1011,18,Harlan County
-1012,18,Harrison County
-1013,18,Hart County
-1014,18,Henderson County
-1015,18,Henry County
-1016,18,Hickman County
-1017,18,Hopkins County
-1018,18,Jackson County
-1019,18,Jefferson County
-1020,18,Jessamine County
-1021,18,Johnson County
-1022,18,Kenton County
-1023,18,Knott County
-1024,18,Knox County
-1025,18,Larue County
-1026,18,Laurel County
-1027,18,Lawrence County
-1028,18,Lee County
-1029,18,Leslie County
-1030,18,Letcher County
-1031,18,Lewis County
-1032,18,Lincoln County
-1033,18,Livingston County
-1034,18,Logan County
-1035,18,Lyon County
-1036,18,McCracken County
-1037,18,McCreary County
-1038,18,McLean County
-1039,18,Madison County
-1040,18,Magoffin County
-1041,18,Marion County
-1042,18,Marshall County
-1043,18,Martin County
-1044,18,Mason County
-1045,18,Meade County
-1046,18,Menifee County
-1047,18,Mercer County
-1048,18,Metcalfe County
-1049,18,Monroe County
-1050,18,Montgomery County
-1051,18,Morgan County
-1052,18,Muhlenberg County
-1053,18,Nelson County
-1054,18,Nicholas County
-1055,18,Ohio County
-1056,18,Oldham County
-1057,18,Owen County
-1058,18,Owsley County
-1059,18,Pendleton County
-1060,18,Perry County
-1061,18,Pike County
-1062,18,Powell County
-1063,18,Pulaski County
-1064,18,Robertson County
-1065,18,Rockcastle County
-1066,18,Rowan County
-1067,18,Russell County
-1068,18,Scott County
-1069,18,Shelby County
-1070,18,Simpson County
-1071,18,Spencer County
-1072,18,Taylor County
-1073,18,Todd County
-1074,18,Trigg County
-1075,18,Trimble County
-1076,18,Union County
-1077,18,Warren County
-1078,18,Washington County
-1079,18,Wayne County
-1080,18,Webster County
-1081,18,Whitley County
-1082,18,Wolfe County
-1083,18,Woodford County
+1,1,Autauga
+2,1,Baldwin
+3,1,Barbour
+4,1,Bibb
+5,1,Blount
+6,1,Bullock
+7,1,Butler
+8,1,Calhoun
+9,1,Chambers
+10,1,Cherokee
+11,1,Chilton
+12,1,Choctaw
+13,1,Clarke
+14,1,Clay
+15,1,Cleburne
+16,1,Coffee
+17,1,Colbert
+18,1,Conecuh
+19,1,Coosa
+20,1,Covington
+21,1,Crenshaw
+22,1,Cullman
+23,1,Dale
+24,1,Dallas
+25,1,DeKalb
+26,1,Elmore
+27,1,Escambia
+28,1,Etowah
+29,1,Fayette
+30,1,Franklin
+31,1,Geneva
+32,1,Greene
+33,1,Hale
+34,1,Henry
+35,1,Houston
+36,1,Jackson
+37,1,Jefferson
+38,1,Lamar
+39,1,Lauderdale
+40,1,Lawrence
+41,1,Lee
+42,1,Limestone
+43,1,Lowndes
+44,1,Macon
+45,1,Madison
+46,1,Marengo
+47,1,Marion
+48,1,Marshall
+49,1,Mobile
+50,1,Monroe
+51,1,Montgomery
+52,1,Morgan
+53,1,Perry
+54,1,Pickens
+55,1,Pike
+56,1,Randolph
+57,1,Russell
+58,1,St. Clair
+59,1,Shelby
+60,1,Sumter
+61,1,Talladega
+62,1,Tallapoosa
+63,1,Tuscaloosa
+64,1,Walker
+65,1,Washington
+66,1,Wilcox
+67,1,Winston
+68,3,Apache
+69,3,Cochise
+70,3,Coconino
+71,3,Gila
+72,3,Graham
+73,3,Greenlee
+74,3,La Paz
+75,3,Maricopa
+76,3,Mohave
+77,3,Navajo
+78,3,Pima
+79,3,Pinal
+80,3,Santa Cruz
+81,3,Yavapai
+82,3,Yuma
+83,4,Arkansas
+84,4,Ashley
+85,4,Baxter
+86,4,Benton
+87,4,Boone
+88,4,Bradley
+89,4,Calhoun
+90,4,Carroll
+91,4,Chicot
+92,4,Clark
+93,4,Clay
+94,4,Cleburne
+95,4,Cleveland
+96,4,Columbia
+97,4,Conway
+98,4,Craighead
+99,4,Crawford
+100,4,Crittenden
+101,4,Cross
+102,4,Dallas
+103,4,Desha
+104,4,Drew
+105,4,Faulkner
+106,4,Franklin
+107,4,Fulton
+108,4,Garland
+109,4,Grant
+110,4,Greene
+111,4,Hempstead
+112,4,Hot Spring
+113,4,Howard
+114,4,Independence
+115,4,Izard
+116,4,Jackson
+117,4,Jefferson
+118,4,Johnson
+119,4,Lafayette
+120,4,Lawrence
+121,4,Lee
+122,4,Lincoln
+123,4,Little River
+124,4,Logan
+125,4,Lonoke
+126,4,Madison
+127,4,Marion
+128,4,Miller
+129,4,Mississippi
+130,4,Monroe
+131,4,Montgomery
+132,4,Nevada
+133,4,Newton
+134,4,Ouachita
+135,4,Perry
+136,4,Phillips
+137,4,Pike
+138,4,Poinsett
+139,4,Polk
+140,4,Pope
+141,4,Prairie
+142,4,Pulaski
+143,4,Randolph
+144,4,St. Francis
+145,4,Saline
+146,4,Scott
+147,4,Searcy
+148,4,Sebastian
+149,4,Sevier
+150,4,Sharp
+151,4,Stone
+152,4,Union
+153,4,Van Buren
+154,4,Washington
+155,4,White
+156,4,Woodruff
+157,4,Yell
+158,5,Alameda
+159,5,Alpine
+160,5,Amador
+161,5,Butte
+162,5,Calaveras
+163,5,Colusa
+164,5,Contra Costa
+165,5,Del Norte
+166,5,El Dorado
+167,5,Fresno
+168,5,Glenn
+169,5,Humboldt
+170,5,Imperial
+171,5,Inyo
+172,5,Kern
+173,5,Kings
+174,5,Lake
+175,5,Lassen
+176,5,Los Angeles
+177,5,Madera
+178,5,Marin
+179,5,Mariposa
+180,5,Mendocino
+181,5,Merced
+182,5,Modoc
+183,5,Mono
+184,5,Monterey
+185,5,Napa
+186,5,Nevada
+187,5,Orange
+188,5,Placer
+189,5,Plumas
+190,5,Riverside
+191,5,Sacramento
+192,5,San Benito
+193,5,San Bernardino
+194,5,San Diego
+195,5,San Francisco
+196,5,San Joaquin
+197,5,San Luis Obispo
+198,5,San Mateo
+199,5,Santa Barbara
+200,5,Santa Clara
+201,5,Santa Cruz
+202,5,Shasta
+203,5,Sierra
+204,5,Siskiyou
+205,5,Solano
+206,5,Sonoma
+207,5,Stanislaus
+208,5,Sutter
+209,5,Tehama
+210,5,Trinity
+211,5,Tulare
+212,5,Tuolumne
+213,5,Ventura
+214,5,Yolo
+215,5,Yuba
+216,6,Adams
+217,6,Alamosa
+218,6,Arapahoe
+219,6,Archuleta
+220,6,Baca
+221,6,Bent
+222,6,Boulder
+223,6,Broomfield
+224,6,Chaffee
+225,6,Cheyenne
+226,6,Clear Creek
+227,6,Conejos
+228,6,Costilla
+229,6,Crowley
+230,6,Custer
+231,6,Delta
+232,6,Denver
+233,6,Dolores
+234,6,Douglas
+235,6,Eagle
+236,6,Elbert
+237,6,El Paso
+238,6,Fremont
+239,6,Garfield
+240,6,Gilpin
+241,6,Grand
+242,6,Gunnison
+243,6,Hinsdale
+244,6,Huerfano
+245,6,Jackson
+246,6,Jefferson
+247,6,Kiowa
+248,6,Kit Carson
+249,6,Lake
+250,6,La Plata
+251,6,Larimer
+252,6,Las Animas
+253,6,Lincoln
+254,6,Logan
+255,6,Mesa
+256,6,Mineral
+257,6,Moffat
+258,6,Montezuma
+259,6,Montrose
+260,6,Morgan
+261,6,Otero
+262,6,Ouray
+263,6,Park
+264,6,Phillips
+265,6,Pitkin
+266,6,Prowers
+267,6,Pueblo
+268,6,Rio Blanco
+269,6,Rio Grande
+270,6,Routt
+271,6,Saguache
+272,6,San Juan
+273,6,San Miguel
+274,6,Sedgwick
+275,6,Summit
+276,6,Teller
+277,6,Washington
+278,6,Weld
+279,6,Yuma
+280,7,Fairfield
+281,7,Hartford
+282,7,Litchfield
+283,7,Middlesex
+284,7,New Haven
+285,7,New London
+286,7,Tolland
+287,7,Windham
+288,8,Kent
+289,8,New Castle
+290,8,Sussex
+291,10,Alachua
+292,10,Baker
+293,10,Bay
+294,10,Bradford
+295,10,Brevard
+296,10,Broward
+297,10,Calhoun
+298,10,Charlotte
+299,10,Citrus
+300,10,Clay
+301,10,Collier
+302,10,Columbia
+303,10,DeSoto
+304,10,Dixie
+305,10,Duval
+306,10,Escambia
+307,10,Flagler
+308,10,Franklin
+309,10,Gadsden
+310,10,Gilchrist
+311,10,Glades
+312,10,Gulf
+313,10,Hamilton
+314,10,Hardee
+315,10,Hendry
+316,10,Hernando
+317,10,Highlands
+318,10,Hillsborough
+319,10,Holmes
+320,10,Indian River
+321,10,Jackson
+322,10,Jefferson
+323,10,Lafayette
+324,10,Lake
+325,10,Lee
+326,10,Leon
+327,10,Levy
+328,10,Liberty
+329,10,Madison
+330,10,Manatee
+331,10,Marion
+332,10,Martin
+333,10,Miami-Dade
+334,10,Monroe
+335,10,Nassau
+336,10,Okaloosa
+337,10,Okeechobee
+338,10,Orange
+339,10,Osceola
+340,10,Palm Beach
+341,10,Pasco
+342,10,Pinellas
+343,10,Polk
+344,10,Putnam
+345,10,Saint Johns
+346,10,Saint Lucie
+347,10,Santa Rosa
+348,10,Sarasota
+349,10,Seminole
+350,10,Sumter
+351,10,Suwannee
+352,10,Taylor
+353,10,Union
+354,10,Volusia
+355,10,Wakulla
+356,10,Walton
+357,10,Washington
+358,11,Appling
+359,11,Atkinson
+360,11,Bacon
+361,11,Baker
+362,11,Baldwin
+363,11,Banks
+364,11,Barrow
+365,11,Bartow
+366,11,Ben Hill
+367,11,Berrien
+368,11,Bibb
+369,11,Bleckley
+370,11,Brantley
+371,11,Brooks
+372,11,Bryan
+373,11,Bulloch
+374,11,Burke
+375,11,Butts
+376,11,Calhoun
+377,11,Camden
+378,11,Candler
+379,11,Carroll
+380,11,Catoosa
+381,11,Charlton
+382,11,Chatham
+383,11,Chattahoochee
+384,11,Chattooga
+385,11,Cherokee
+386,11,Clarke
+387,11,Clay
+388,11,Clayton
+389,11,Clinch
+390,11,Cobb
+391,11,Coffee
+392,11,Colquitt
+393,11,Columbia
+394,11,Cook
+395,11,Coweta
+396,11,Crawford
+397,11,Crisp
+398,11,Dade
+399,11,Dawson
+400,11,Decatur
+401,11,DeKalb
+402,11,Dodge
+403,11,Dooly
+404,11,Dougherty
+405,11,Douglas
+406,11,Early
+407,11,Echols
+408,11,Effingham
+409,11,Elbert
+410,11,Emanuel
+411,11,Evans
+412,11,Fannin
+413,11,Fayette
+414,11,Floyd
+415,11,Forsyth
+416,11,Franklin
+417,11,Fulton
+418,11,Gilmer
+419,11,Glascock
+420,11,Glynn
+421,11,Gordon
+422,11,Grady
+423,11,Greene
+424,11,Gwinnett
+425,11,Habersham
+426,11,Hall
+427,11,Hancock
+428,11,Haralson
+429,11,Harris
+430,11,Hart
+431,11,Heard
+432,11,Henry
+433,11,Houston
+434,11,Irwin
+435,11,Jackson
+436,11,Jasper
+437,11,Jeff Davis
+438,11,Jefferson
+439,11,Jenkins
+440,11,Johnson
+441,11,Jones
+442,11,Lamar
+443,11,Lanier
+444,11,Laurens
+445,11,Lee
+446,11,Liberty
+447,11,Lincoln
+448,11,Long
+449,11,Lowndes
+450,11,Lumpkin
+451,11,Macon
+452,11,Madison
+453,11,Marion
+454,11,McDuffie
+455,11,McIntosh
+456,11,Meriwether
+457,11,Miller
+458,11,Mitchell
+459,11,Monroe
+460,11,Montgomery
+461,11,Morgan
+462,11,Murray
+463,11,Muscogee
+464,11,Newton
+465,11,Oconee
+466,11,Oglethorpe
+467,11,Paulding
+468,11,Peach
+469,11,Pickens
+470,11,Pierce
+471,11,Pike
+472,11,Polk
+473,11,Pulaski
+474,11,Putnam
+475,11,Quitman
+476,11,Rabun
+477,11,Randolph
+478,11,Richmond
+479,11,Rockdale
+480,11,Schley
+481,11,Screven
+482,11,Seminole
+483,11,Spalding
+484,11,Stephens
+485,11,Stewart
+486,11,Sumter
+487,11,Talbot
+488,11,Taliaferro
+489,11,Tattnall
+490,11,Taylor
+491,11,Telfair
+492,11,Terrell
+493,11,Thomas
+494,11,Tift
+495,11,Toombs
+496,11,Towns
+497,11,Treutlen
+498,11,Troup
+499,11,Turner
+500,11,Twiggs
+501,11,Union
+502,11,Upson
+503,11,Walker
+504,11,Walton
+505,11,Ware
+506,11,Warren
+507,11,Washington
+508,11,Wayne
+509,11,Webster
+510,11,Wheeler
+511,11,White
+512,11,Whitfield
+513,11,Wilcox
+514,11,Wilkes
+515,11,Wilkinson
+516,11,Worth
+517,12,Hawaii
+518,12,City and of Honolulu
+519,12,Kalawao
+520,12,Kauai
+521,12,Maui
+522,13,Ada
+523,13,Adams
+524,13,Bannock
+525,13,Bear Lake
+526,13,Benewah
+527,13,Bingham
+528,13,Blaine
+529,13,Boise
+530,13,Bonner
+531,13,Bonneville
+532,13,Boundary
+533,13,Butte
+534,13,Camas
+535,13,Canyon
+536,13,Caribou
+537,13,Cassia
+538,13,Clark
+539,13,Clearwater
+540,13,Custer
+541,13,Elmore
+542,13,Franklin
+543,13,Fremont
+544,13,Gem
+545,13,Gooding
+546,13,Idaho
+547,13,Jefferson
+548,13,Jerome
+549,13,Kootenai
+550,13,Latah
+551,13,Lemhi
+552,13,Lewis
+553,13,Lincoln
+554,13,Madison
+555,13,Minidoka
+556,13,Nez Perce
+557,13,Oneida
+558,13,Owyhee
+559,13,Payette
+560,13,Power
+561,13,Shoshone
+562,13,Teton
+563,13,Twin Falls
+564,13,Valley
+565,13,Washington
+566,14,Adams
+567,14,Alexander
+568,14,Bond
+569,14,Boone
+570,14,Brown
+571,14,Bureau
+572,14,Calhoun
+573,14,Carroll
+574,14,Cass
+575,14,Champaign
+576,14,Christian
+577,14,Clark
+578,14,Clay
+579,14,Clinton
+580,14,Coles
+581,14,Cook
+582,14,Crawford
+583,14,Cumberland
+584,14,De Witt
+585,14,DeKalb
+586,14,Douglas
+587,14,DuPage
+588,14,Edgar
+589,14,Edwards
+590,14,Effingham
+591,14,Fayette
+592,14,Ford
+593,14,Franklin
+594,14,Fulton
+595,14,Gallatin
+596,14,Greene
+597,14,Grundy
+598,14,Hamilton
+599,14,Hancock
+600,14,Hardin
+601,14,Henderson
+602,14,Henry
+603,14,Iroquois
+604,14,Jackson
+605,14,Jasper
+606,14,Jefferson
+607,14,Jersey
+608,14,Jo Daviess
+609,14,Johnson
+610,14,Kane
+611,14,Kankakee
+612,14,Kendall
+613,14,Knox
+614,14,Lake
+615,14,LaSalle
+616,14,Lawrence
+617,14,Lee
+618,14,Livingston
+619,14,Logan
+620,14,Macon
+621,14,Macoupin
+622,14,Madison
+623,14,Marion
+624,14,Marshall
+625,14,Mason
+626,14,Massac
+627,14,McDonough
+628,14,McHenry
+629,14,McLean
+630,14,Menard
+631,14,Mercer
+632,14,Monroe
+633,14,Montgomery
+634,14,Morgan
+635,14,Moultrie
+636,14,Ogle
+637,14,Peoria
+638,14,Perry
+639,14,Piatt
+640,14,Pike
+641,14,Pope
+642,14,Pulaski
+643,14,Putnam
+644,14,Randolph
+645,14,Richland
+646,14,Rock Island
+647,14,Saline
+648,14,Sangamon
+649,14,Schuyler
+650,14,Scott
+651,14,Shelby
+652,14,St. Clair
+653,14,Stark
+654,14,Stephenson
+655,14,Tazewell
+656,14,Union
+657,14,Vermilion
+658,14,Wabash
+659,14,Warren
+660,14,Washington
+661,14,Wayne
+662,14,White
+663,14,Whiteside
+664,14,Will
+665,14,Williamson
+666,14,Winnebago
+667,14,Woodford
+668,15,Adams
+669,15,Allen
+670,15,Bartholomew
+671,15,Benton
+672,15,Blackford
+673,15,Boone
+674,15,Brown
+675,15,Carroll
+676,15,Cass
+677,15,Clark
+678,15,Clay
+679,15,Clinton
+680,15,Crawford
+681,15,Daviess
+682,15,Dearborn
+683,15,Decatur
+684,15,DeKalb
+685,15,Delaware
+686,15,Dubois
+687,15,Elkhart
+688,15,Fayette
+689,15,Floyd
+690,15,Fountain
+691,15,Franklin
+692,15,Fulton
+693,15,Gibson
+694,15,Grant
+695,15,Greene
+696,15,Hamilton
+697,15,Hancock
+698,15,Harrison
+699,15,Hendricks
+700,15,Henry
+701,15,Howard
+702,15,Huntington
+703,15,Jackson
+704,15,Jasper
+705,15,Jay
+706,15,Jefferson
+707,15,Jennings
+708,15,Johnson
+709,15,Knox
+710,15,Kosciusko
+711,15,LaGrange
+712,15,Lake
+713,15,LaPorte
+714,15,Lawrence
+715,15,Madison
+716,15,Marion
+717,15,Marshall
+718,15,Martin
+719,15,Miami
+720,15,Monroe
+721,15,Montgomery
+722,15,Morgan
+723,15,Newton
+724,15,Noble
+725,15,Ohio
+726,15,Orange
+727,15,Owen
+728,15,Parke
+729,15,Perry
+730,15,Pike
+731,15,Porter
+732,15,Posey
+733,15,Pulaski
+734,15,Putnam
+735,15,Randolph
+736,15,Ripley
+737,15,Rush
+738,15,St. Joseph
+739,15,Scott
+740,15,Shelby
+741,15,Spencer
+742,15,Starke
+743,15,Steuben
+744,15,Sullivan
+745,15,Switzerland
+746,15,Tippecanoe
+747,15,Tipton
+748,15,Union
+749,15,Vanderburgh
+750,15,Vermillion
+751,15,Vigo
+752,15,Wabash
+753,15,Warren
+754,15,Warrick
+755,15,Washington
+756,15,Wayne
+757,15,Wells
+758,15,White
+759,15,Whitley
+760,16,Adair
+761,16,Adams
+762,16,Allamakee
+763,16,Appanoose
+764,16,Audubon
+765,16,Benton
+766,16,Black Hawk
+767,16,Boone
+768,16,Bremer
+769,16,Buchanan
+770,16,Buena Vista
+771,16,Butler
+772,16,Calhoun
+773,16,Carroll
+774,16,Cass
+775,16,Cedar
+776,16,Cerro Gordo
+777,16,Cherokee
+778,16,Chickasaw
+779,16,Clarke
+780,16,Clay
+781,16,Clayton
+782,16,Clinton
+783,16,Crawford
+784,16,Dallas
+785,16,Davis
+786,16,Decatur
+787,16,Delaware
+788,16,Des Moines
+789,16,Dickinson
+790,16,Dubuque
+791,16,Emmet
+792,16,Fayette
+793,16,Floyd
+794,16,Franklin
+795,16,Fremont
+796,16,Greene
+797,16,Grundy
+798,16,Guthrie
+799,16,Hamilton
+800,16,Hancock
+801,16,Hardin
+802,16,Harrison
+803,16,Henry
+804,16,Howard
+805,16,Humboldt
+806,16,Ida
+807,16,Iowa
+808,16,Jackson
+809,16,Jasper
+810,16,Jefferson
+811,16,Johnson
+812,16,Jones
+813,16,Keokuk
+814,16,Kossuth
+815,16,Lee
+816,16,Linn
+817,16,Louisa
+818,16,Lucas
+819,16,Lyon
+820,16,Madison
+821,16,Mahaska
+822,16,Marion
+823,16,Marshall
+824,16,Mills
+825,16,Mitchell
+826,16,Monona
+827,16,Monroe
+828,16,Montgomery
+829,16,Muscatine
+830,16,OBrien
+831,16,Osceola
+832,16,Page
+833,16,Palo Alto
+834,16,Plymouth
+835,16,Pocahontas
+836,16,Polk
+837,16,Pottawattamie
+838,16,Poweshiek
+839,16,Ringgold
+840,16,Sac
+841,16,Scott
+842,16,Shelby
+843,16,Sioux
+844,16,Story
+845,16,Tama
+846,16,Taylor
+847,16,Union
+848,16,Van Buren
+849,16,Wapello
+850,16,Warren
+851,16,Washington
+852,16,Wayne
+853,16,Webster
+854,16,Winnebago
+855,16,Winneshiek
+856,16,Woodbury
+857,16,Worth
+858,16,Wright
+859,17,Allen
+860,17,Anderson
+861,17,Atchison
+862,17,Barber
+863,17,Barton
+864,17,Bourbon
+865,17,Brown
+866,17,Butler
+867,17,Chase
+868,17,Chautauqua
+869,17,Cherokee
+870,17,Cheyenne
+871,17,Clark
+872,17,Clay
+873,17,Cloud
+874,17,Coffey
+875,17,Comanche
+876,17,Cowley
+877,17,Crawford
+878,17,Decatur
+879,17,Dickinson
+880,17,Doniphan
+881,17,Douglas
+882,17,Edwards
+883,17,Elk
+884,17,Ellis
+885,17,Ellsworth
+886,17,Finney
+887,17,Ford
+888,17,Franklin
+889,17,Geary
+890,17,Gove
+891,17,Graham
+892,17,Grant
+893,17,Gray
+894,17,Greeley
+895,17,Greenwood
+896,17,Hamilton
+897,17,Harper
+898,17,Harvey
+899,17,Haskell
+900,17,Hodgeman
+901,17,Jackson
+902,17,Jefferson
+903,17,Jewell
+904,17,Johnson
+905,17,Kearny
+906,17,Kingman
+907,17,Kiowa
+908,17,Labette
+909,17,Lane
+910,17,Leavenworth
+911,17,Lincoln
+912,17,Linn
+913,17,Logan
+914,17,Lyon
+915,17,Marion
+916,17,Marshall
+917,17,McPherson
+918,17,Meade
+919,17,Miami
+920,17,Mitchell
+921,17,Montgomery
+922,17,Morris
+923,17,Morton
+924,17,Nemaha
+925,17,Neosho
+926,17,Ness
+927,17,Norton
+928,17,Osage
+929,17,Osborne
+930,17,Ottawa
+931,17,Pawnee
+932,17,Phillips
+933,17,Pottawatomie
+934,17,Pratt
+935,17,Rawlins
+936,17,Reno
+937,17,Republic
+938,17,Rice
+939,17,Riley
+940,17,Rooks
+941,17,Rush
+942,17,Russell
+943,17,Saline
+944,17,Scott
+945,17,Sedgwick
+946,17,Seward
+947,17,Shawnee
+948,17,Sheridan
+949,17,Sherman
+950,17,Smith
+951,17,Stafford
+952,17,Stanton
+953,17,Stevens
+954,17,Sumner
+955,17,Thomas
+956,17,Trego
+957,17,Wabaunsee
+958,17,Wallace
+959,17,Washington
+960,17,Wichita
+961,17,Wilson
+962,17,Woodson
+963,17,Wyandotte
+964,18,Adair
+965,18,Allen
+966,18,Anderson
+967,18,Ballard
+968,18,Barren
+969,18,Bath
+970,18,Bell
+971,18,Boone
+972,18,Bourbon
+973,18,Boyd
+974,18,Boyle
+975,18,Bracken
+976,18,Breathitt
+977,18,Breckinridge
+978,18,Bullitt
+979,18,Butler
+980,18,Caldwell
+981,18,Calloway
+982,18,Campbell
+983,18,Carlisle
+984,18,Carroll
+985,18,Carter
+986,18,Casey
+987,18,Christian
+988,18,Clark
+989,18,Clay
+990,18,Clinton
+991,18,Crittenden
+992,18,Cumberland
+993,18,Daviess
+994,18,Edmonson
+995,18,Elliott
+996,18,Estill
+997,18,Fayette
+998,18,Fleming
+999,18,Floyd
+1000,18,Franklin
+1001,18,Fulton
+1002,18,Gallatin
+1003,18,Garrard
+1004,18,Grant
+1005,18,Graves
+1006,18,Grayson
+1007,18,Green
+1008,18,Greenup
+1009,18,Hancock
+1010,18,Hardin
+1011,18,Harlan
+1012,18,Harrison
+1013,18,Hart
+1014,18,Henderson
+1015,18,Henry
+1016,18,Hickman
+1017,18,Hopkins
+1018,18,Jackson
+1019,18,Jefferson
+1020,18,Jessamine
+1021,18,Johnson
+1022,18,Kenton
+1023,18,Knott
+1024,18,Knox
+1025,18,Larue
+1026,18,Laurel
+1027,18,Lawrence
+1028,18,Lee
+1029,18,Leslie
+1030,18,Letcher
+1031,18,Lewis
+1032,18,Lincoln
+1033,18,Livingston
+1034,18,Logan
+1035,18,Lyon
+1036,18,McCracken
+1037,18,McCreary
+1038,18,McLean
+1039,18,Madison
+1040,18,Magoffin
+1041,18,Marion
+1042,18,Marshall
+1043,18,Martin
+1044,18,Mason
+1045,18,Meade
+1046,18,Menifee
+1047,18,Mercer
+1048,18,Metcalfe
+1049,18,Monroe
+1050,18,Montgomery
+1051,18,Morgan
+1052,18,Muhlenberg
+1053,18,Nelson
+1054,18,Nicholas
+1055,18,Ohio
+1056,18,Oldham
+1057,18,Owen
+1058,18,Owsley
+1059,18,Pendleton
+1060,18,Perry
+1061,18,Pike
+1062,18,Powell
+1063,18,Pulaski
+1064,18,Robertson
+1065,18,Rockcastle
+1066,18,Rowan
+1067,18,Russell
+1068,18,Scott
+1069,18,Shelby
+1070,18,Simpson
+1071,18,Spencer
+1072,18,Taylor
+1073,18,Todd
+1074,18,Trigg
+1075,18,Trimble
+1076,18,Union
+1077,18,Warren
+1078,18,Washington
+1079,18,Wayne
+1080,18,Webster
+1081,18,Whitley
+1082,18,Wolfe
+1083,18,Woodford
 1084,19,Acadia Parish
 1085,19,Allen Parish
 1086,19,Ascension Parish
@@ -1146,1744 +1146,1744 @@ ID,StateID,Name
 1145,19,West Carroll Parish
 1146,19,West Feliciana Parish
 1147,19,Winn Parish
-1148,20,Androscoggin County
-1149,20,Aroostook County
-1150,20,Cumberland County
-1151,20,Franklin County
-1152,20,Hancock County
-1153,20,Kennebec County
-1154,20,Knox County
-1155,20,Lincoln County
-1156,20,Oxford County
-1157,20,Penobscot County
-1158,20,Piscataquis County
-1159,20,Sagadahoc County
-1160,20,Somerset County
-1161,20,Waldo County
-1162,20,Washington County
-1163,20,York County
-1164,21,Allegany County
-1165,21,Anne Arundel County
-1166,21,Baltimore County
+1148,20,Androscoggin
+1149,20,Aroostook
+1150,20,Cumberland
+1151,20,Franklin
+1152,20,Hancock
+1153,20,Kennebec
+1154,20,Knox
+1155,20,Lincoln
+1156,20,Oxford
+1157,20,Penobscot
+1158,20,Piscataquis
+1159,20,Sagadahoc
+1160,20,Somerset
+1161,20,Waldo
+1162,20,Washington
+1163,20,York
+1164,21,Allegany
+1165,21,Anne Arundel
+1166,21,Baltimore
 1167,21,Baltimore City
-1168,21,Calvert County
-1169,21,Caroline County
-1170,21,Carroll County
-1171,21,Cecil County
-1172,21,Charles County
-1173,21,Dorchester County
-1174,21,Frederick County
-1175,21,Garrett County
-1176,21,Harford County
-1177,21,Howard County
-1178,21,Kent County
-1179,21,Montgomery County
-1180,21,Prince Georges County
-1181,21,Queen Annes County
-1182,21,Saint Marys County
-1183,21,Somerset County
-1184,21,Talbot County
-1185,21,Washington County
-1186,21,Wicomico County
-1187,21,Worcester County
-1188,22,Barnstable County
-1189,22,Berkshire County
-1190,22,Bristol County
-1191,22,Dukes County
-1192,22,Essex County
-1193,22,Franklin County
-1194,22,Hampden County
-1195,22,Hampshire County
-1196,22,Middlesex County
-1197,22,Nantucket County
-1198,22,Norfolk County
-1199,22,Plymouth County
-1200,22,Suffolk County
-1201,22,Worcester County
-1202,23,Alcona County
-1203,23,Alger County
-1204,23,Allegan County
-1205,23,Alpena County
-1206,23,Antrim County
-1207,23,Arenac County
-1208,23,Baraga County
-1209,23,Barry County
-1210,23,Bay County
-1211,23,Benzie County
-1212,23,Berrien County
-1213,23,Branch County
-1214,23,Calhoun County
-1215,23,Cass County
-1216,23,Charlevoix County
-1217,23,Cheboygan County
-1218,23,Chippewa County
-1219,23,Clare County
-1220,23,Clinton County
-1221,23,Crawford County
-1222,23,Delta County
-1223,23,Dickinson County
-1224,23,Eaton County
-1225,23,Emmet County
-1226,23,Genesee County
-1227,23,Gladwin County
-1228,23,Gogebic County
-1229,23,Grand Traverse County
-1230,23,Gratiot County
-1231,23,Hillsdale County
-1232,23,Houghton County
-1233,23,Huron County
-1234,23,Ingham County
-1235,23,Ionia County
-1236,23,Iosco County
-1237,23,Iron County
-1238,23,Isabella County
-1239,23,Jackson County
-1240,23,Kalamazoo County
-1241,23,Kalkaska County
-1242,23,Kent County
-1243,23,Keweenaw County
-1244,23,Lake County
-1245,23,Lapeer County
-1246,23,Leelanau County
-1247,23,Lenawee County
-1248,23,Livingston County
-1249,23,Luce County
-1250,23,Mackinac County
-1251,23,Macomb County
-1252,23,Manistee County
-1253,23,Marquette County
-1254,23,Mason County
-1255,23,Mecosta County
-1256,23,Menominee County
-1257,23,Midland County
-1258,23,Missaukee County
-1259,23,Monroe County
-1260,23,Montcalm County
-1261,23,Montmorency County
-1262,23,Muskegon County
-1263,23,Newaygo County
-1264,23,Oakland County
-1265,23,Oceana County
-1266,23,Ogemaw County
-1267,23,Ontonagon County
-1268,23,Osceola County
-1269,23,Oscoda County
-1270,23,Otsego County
-1271,23,Ottawa County
-1272,23,Presque Isle County
-1273,23,Roscommon County
-1274,23,Saginaw County
-1275,23,St. Clair County
-1276,23,St. Joseph County
-1277,23,Sanilac County
-1278,23,Schoolcraft County
-1279,23,Shiawassee County
-1280,23,Tuscola County
-1281,23,Van Buren County
-1282,23,Washtenaw County
-1283,23,Wayne County
-1284,23,Wexford County
-1285,24,Aitkin County
-1286,24,Anoka County
-1287,24,Becker County
-1288,24,Beltrami County
-1289,24,Benton County
-1290,24,Big Stone County
-1291,24,Blue Earth County
-1292,24,Brown County
-1293,24,Carlton County
-1294,24,Carver County
-1295,24,Cass County
-1296,24,Chippewa County
-1297,24,Chisago County
-1298,24,Clay County
-1299,24,Clearwater County
-1300,24,Cook County
-1301,24,Cottonwood County
-1302,24,Crow Wing County
-1303,24,Dakota County
-1304,24,Dodge County
-1305,24,Douglas County
-1306,24,Faribault County
-1307,24,Fillmore County
-1308,24,Freeborn County
-1309,24,Goodhue County
-1310,24,Grant County
-1311,24,Hennepin County
-1312,24,Houston County
-1313,24,Hubbard County
-1314,24,Isanti County
-1315,24,Itasca County
-1316,24,Jackson County
-1317,24,Kanabec County
-1318,24,Kandiyohi County
-1319,24,Kittson County
-1320,24,Koochiching County
-1321,24,Lac qui Parle County
-1322,24,Lake County
-1323,24,Lake of the Woods County
-1324,24,Le Sueur County
-1325,24,Lincoln County
-1326,24,Lyon County
-1327,24,McLeod County
-1328,24,Mahnomen County
-1329,24,Marshall County
-1330,24,Martin County
-1331,24,Meeker County
-1332,24,Mille Lacs County
-1333,24,Morrison County
-1334,24,Mower County
-1335,24,Murray County
-1336,24,Nicollet County
-1337,24,Nobles County
-1338,24,Norman County
-1339,24,Olmsted County
-1340,24,Otter Tail County
-1341,24,Pennington County
-1342,24,Pine County
-1343,24,Pipestone County
-1344,24,Polk County
-1345,24,Pope County
-1346,24,Ramsey County
-1347,24,Red Lake County
-1348,24,Redwood County
-1349,24,Renville County
-1350,24,Rice County
-1351,24,Rock County
-1352,24,Roseau County
-1353,24,Scott County
-1354,24,Sherburne County
-1355,24,Sibley County
-1356,24,St. Louis County
-1357,24,Stearns County
-1358,24,Steele County
-1359,24,Stevens County
-1360,24,Swift County
-1361,24,Todd County
-1362,24,Traverse County
-1363,24,Wabasha County
-1364,24,Wadena County
-1365,24,Waseca County
-1366,24,Washington County
-1367,24,Watonwan County
-1368,24,Wilkin County
-1369,24,Winona County
-1370,24,Wright County
-1371,24,Yellow Medicine County
-1372,25,Adams County
-1373,25,Alcorn County
-1374,25,Amite County
-1375,25,Attala County
-1376,25,Benton County
-1377,25,Bolivar County
-1378,25,Calhoun County
-1379,25,Carroll County
-1380,25,Chickasaw County
-1381,25,Choctaw County
-1382,25,Claiborne County
-1383,25,Clarke County
-1384,25,Clay County
-1385,25,Coahoma County
-1386,25,Copiah County
-1387,25,Covington County
-1388,25,DeSoto County
-1389,25,Forrest County
-1390,25,Franklin County
-1391,25,George County
-1392,25,Greene County
-1393,25,Grenada County
-1394,25,Hancock County
-1395,25,Harrison County
-1396,25,Hinds County
-1397,25,Holmes County
-1398,25,Humphreys County
-1399,25,Issaquena County
-1400,25,Itawamba County
-1401,25,Jackson County
-1402,25,Jasper County
-1403,25,Jefferson County
-1404,25,Jefferson Davis County
-1405,25,Jones County
-1406,25,Kemper County
-1407,25,Lafayette County
-1408,25,Lamar County
-1409,25,Lauderdale County
-1410,25,Lawrence County
-1411,25,Leake County
-1412,25,Lee County
-1413,25,Leflore County
-1414,25,Lincoln County
-1415,25,Lowndes County
-1416,25,Madison County
-1417,25,Marion County
-1418,25,Marshall County
-1419,25,Monroe County
-1420,25,Montgomery County
-1421,25,Neshoba County
-1422,25,Newton County
-1423,25,Noxubee County
-1424,25,Oktibbeha County
-1425,25,Panola County
-1426,25,Pearl River County
-1427,25,Perry County
-1428,25,Pike County
-1429,25,Pontotoc County
-1430,25,Prentiss County
-1431,25,Quitman County
-1432,25,Rankin County
-1433,25,Scott County
-1434,25,Sharkey County
-1435,25,Simpson County
-1436,25,Smith County
-1437,25,Stone County
-1438,25,Sunflower County
-1439,25,Tallahatchie County
-1440,25,Tate County
-1441,25,Tippah County
-1442,25,Tishomingo County
-1443,25,Tunica County
-1444,25,Union County
-1445,25,Walthall County
-1446,25,Warren County
-1447,25,Washington County
-1448,25,Wayne County
-1449,25,Webster County
-1450,25,Wilkinson County
-1451,25,Winston County
-1452,25,Yalobusha County
-1453,25,Yazoo County
-1454,26,Adair County
-1455,26,Andrew County
-1456,26,Atchison County
-1457,26,Audrain County
-1458,26,Barry County
-1459,26,Barton County
-1460,26,Bates County
-1461,26,Benton County
-1462,26,Bollinger County
-1463,26,Boone County
-1464,26,Buchanan County
-1465,26,Butler County
-1466,26,Caldwell County
-1467,26,Callaway County
-1468,26,Camden County
-1469,26,Cape Girardeau County
-1470,26,Carroll County
-1471,26,Carter County
-1472,26,Cass County
-1473,26,Cedar County
-1474,26,Chariton County
-1475,26,Christian County
-1476,26,Clark County
-1477,26,Clay County
-1478,26,Clinton County
-1479,26,Cole County
-1480,26,Cooper County
-1481,26,Crawford County
-1482,26,Dade County
-1483,26,Dallas County
-1484,26,Daviess County
-1485,26,DeKalb County
-1486,26,Dent County
-1487,26,Douglas County
-1488,26,Dunklin County
-1489,26,Franklin County
-1490,26,Gasconade County
-1491,26,Gentry County
-1492,26,Greene County
-1493,26,Grundy County
-1494,26,Harrison County
-1495,26,Henry County
-1496,26,Hickory County
-1497,26,Holt County
-1498,26,Howard County
-1499,26,Howell County
-1500,26,Iron County
-1501,26,Jackson County
-1502,26,Jasper County
-1503,26,Jefferson County
-1504,26,Johnson County
-1505,26,Knox County
-1506,26,Laclede County
-1507,26,Lafayette County
-1508,26,Lawrence County
-1509,26,Lewis County
-1510,26,Lincoln County
-1511,26,Linn County
-1512,26,Livingston County
-1513,26,Macon County
-1514,26,Madison County
-1515,26,Maries County
-1516,26,Marion County
-1517,26,McDonald County
-1518,26,Mercer County
-1519,26,Miller County
-1520,26,Mississippi County
-1521,26,Moniteau County
-1522,26,Monroe County
-1523,26,Montgomery County
-1524,26,Morgan County
-1525,26,New Madrid County
-1526,26,Newton County
-1527,26,Nodaway County
-1528,26,Oregon County
-1529,26,Osage County
-1530,26,Ozark County
-1531,26,Pemiscot County
-1532,26,Perry County
-1533,26,Pettis County
-1534,26,Phelps County
-1535,26,Pike County
-1536,26,Platte County
-1537,26,Polk County
-1538,26,Pulaski County
-1539,26,Putnam County
-1540,26,Ralls County
-1541,26,Randolph County
-1542,26,Ray County
-1543,26,Reynolds County
-1544,26,Ripley County
-1545,26,Saint Charles County
-1546,26,Saint Clair County
-1547,26,Saint Francois County
-1548,26,Saint Louis County
+1168,21,Calvert
+1169,21,Caroline
+1170,21,Carroll
+1171,21,Cecil
+1172,21,Charles
+1173,21,Dorchester
+1174,21,Frederick
+1175,21,Garrett
+1176,21,Harford
+1177,21,Howard
+1178,21,Kent
+1179,21,Montgomery
+1180,21,Prince Georges
+1181,21,Queen Annes
+1182,21,Saint Marys
+1183,21,Somerset
+1184,21,Talbot
+1185,21,Washington
+1186,21,Wicomico
+1187,21,Worcester
+1188,22,Barnstable
+1189,22,Berkshire
+1190,22,Bristol
+1191,22,Dukes
+1192,22,Essex
+1193,22,Franklin
+1194,22,Hampden
+1195,22,Hampshire
+1196,22,Middlesex
+1197,22,Nantucket
+1198,22,Norfolk
+1199,22,Plymouth
+1200,22,Suffolk
+1201,22,Worcester
+1202,23,Alcona
+1203,23,Alger
+1204,23,Allegan
+1205,23,Alpena
+1206,23,Antrim
+1207,23,Arenac
+1208,23,Baraga
+1209,23,Barry
+1210,23,Bay
+1211,23,Benzie
+1212,23,Berrien
+1213,23,Branch
+1214,23,Calhoun
+1215,23,Cass
+1216,23,Charlevoix
+1217,23,Cheboygan
+1218,23,Chippewa
+1219,23,Clare
+1220,23,Clinton
+1221,23,Crawford
+1222,23,Delta
+1223,23,Dickinson
+1224,23,Eaton
+1225,23,Emmet
+1226,23,Genesee
+1227,23,Gladwin
+1228,23,Gogebic
+1229,23,Grand Traverse
+1230,23,Gratiot
+1231,23,Hillsdale
+1232,23,Houghton
+1233,23,Huron
+1234,23,Ingham
+1235,23,Ionia
+1236,23,Iosco
+1237,23,Iron
+1238,23,Isabella
+1239,23,Jackson
+1240,23,Kalamazoo
+1241,23,Kalkaska
+1242,23,Kent
+1243,23,Keweenaw
+1244,23,Lake
+1245,23,Lapeer
+1246,23,Leelanau
+1247,23,Lenawee
+1248,23,Livingston
+1249,23,Luce
+1250,23,Mackinac
+1251,23,Macomb
+1252,23,Manistee
+1253,23,Marquette
+1254,23,Mason
+1255,23,Mecosta
+1256,23,Menominee
+1257,23,Midland
+1258,23,Missaukee
+1259,23,Monroe
+1260,23,Montcalm
+1261,23,Montmorency
+1262,23,Muskegon
+1263,23,Newaygo
+1264,23,Oakland
+1265,23,Oceana
+1266,23,Ogemaw
+1267,23,Ontonagon
+1268,23,Osceola
+1269,23,Oscoda
+1270,23,Otsego
+1271,23,Ottawa
+1272,23,Presque Isle
+1273,23,Roscommon
+1274,23,Saginaw
+1275,23,St. Clair
+1276,23,St. Joseph
+1277,23,Sanilac
+1278,23,Schoolcraft
+1279,23,Shiawassee
+1280,23,Tuscola
+1281,23,Van Buren
+1282,23,Washtenaw
+1283,23,Wayne
+1284,23,Wexford
+1285,24,Aitkin
+1286,24,Anoka
+1287,24,Becker
+1288,24,Beltrami
+1289,24,Benton
+1290,24,Big Stone
+1291,24,Blue Earth
+1292,24,Brown
+1293,24,Carlton
+1294,24,Carver
+1295,24,Cass
+1296,24,Chippewa
+1297,24,Chisago
+1298,24,Clay
+1299,24,Clearwater
+1300,24,Cook
+1301,24,Cottonwood
+1302,24,Crow Wing
+1303,24,Dakota
+1304,24,Dodge
+1305,24,Douglas
+1306,24,Faribault
+1307,24,Fillmore
+1308,24,Freeborn
+1309,24,Goodhue
+1310,24,Grant
+1311,24,Hennepin
+1312,24,Houston
+1313,24,Hubbard
+1314,24,Isanti
+1315,24,Itasca
+1316,24,Jackson
+1317,24,Kanabec
+1318,24,Kandiyohi
+1319,24,Kittson
+1320,24,Koochiching
+1321,24,Lac qui Parle
+1322,24,Lake
+1323,24,Lake of the Woods
+1324,24,Le Sueur
+1325,24,Lincoln
+1326,24,Lyon
+1327,24,McLeod
+1328,24,Mahnomen
+1329,24,Marshall
+1330,24,Martin
+1331,24,Meeker
+1332,24,Mille Lacs
+1333,24,Morrison
+1334,24,Mower
+1335,24,Murray
+1336,24,Nicollet
+1337,24,Nobles
+1338,24,Norman
+1339,24,Olmsted
+1340,24,Otter Tail
+1341,24,Pennington
+1342,24,Pine
+1343,24,Pipestone
+1344,24,Polk
+1345,24,Pope
+1346,24,Ramsey
+1347,24,Red Lake
+1348,24,Redwood
+1349,24,Renville
+1350,24,Rice
+1351,24,Rock
+1352,24,Roseau
+1353,24,Scott
+1354,24,Sherburne
+1355,24,Sibley
+1356,24,St. Louis
+1357,24,Stearns
+1358,24,Steele
+1359,24,Stevens
+1360,24,Swift
+1361,24,Todd
+1362,24,Traverse
+1363,24,Wabasha
+1364,24,Wadena
+1365,24,Waseca
+1366,24,Washington
+1367,24,Watonwan
+1368,24,Wilkin
+1369,24,Winona
+1370,24,Wright
+1371,24,Yellow Medicine
+1372,25,Adams
+1373,25,Alcorn
+1374,25,Amite
+1375,25,Attala
+1376,25,Benton
+1377,25,Bolivar
+1378,25,Calhoun
+1379,25,Carroll
+1380,25,Chickasaw
+1381,25,Choctaw
+1382,25,Claiborne
+1383,25,Clarke
+1384,25,Clay
+1385,25,Coahoma
+1386,25,Copiah
+1387,25,Covington
+1388,25,DeSoto
+1389,25,Forrest
+1390,25,Franklin
+1391,25,George
+1392,25,Greene
+1393,25,Grenada
+1394,25,Hancock
+1395,25,Harrison
+1396,25,Hinds
+1397,25,Holmes
+1398,25,Humphreys
+1399,25,Issaquena
+1400,25,Itawamba
+1401,25,Jackson
+1402,25,Jasper
+1403,25,Jefferson
+1404,25,Jefferson Davis
+1405,25,Jones
+1406,25,Kemper
+1407,25,Lafayette
+1408,25,Lamar
+1409,25,Lauderdale
+1410,25,Lawrence
+1411,25,Leake
+1412,25,Lee
+1413,25,Leflore
+1414,25,Lincoln
+1415,25,Lowndes
+1416,25,Madison
+1417,25,Marion
+1418,25,Marshall
+1419,25,Monroe
+1420,25,Montgomery
+1421,25,Neshoba
+1422,25,Newton
+1423,25,Noxubee
+1424,25,Oktibbeha
+1425,25,Panola
+1426,25,Pearl River
+1427,25,Perry
+1428,25,Pike
+1429,25,Pontotoc
+1430,25,Prentiss
+1431,25,Quitman
+1432,25,Rankin
+1433,25,Scott
+1434,25,Sharkey
+1435,25,Simpson
+1436,25,Smith
+1437,25,Stone
+1438,25,Sunflower
+1439,25,Tallahatchie
+1440,25,Tate
+1441,25,Tippah
+1442,25,Tishomingo
+1443,25,Tunica
+1444,25,Union
+1445,25,Walthall
+1446,25,Warren
+1447,25,Washington
+1448,25,Wayne
+1449,25,Webster
+1450,25,Wilkinson
+1451,25,Winston
+1452,25,Yalobusha
+1453,25,Yazoo
+1454,26,Adair
+1455,26,Andrew
+1456,26,Atchison
+1457,26,Audrain
+1458,26,Barry
+1459,26,Barton
+1460,26,Bates
+1461,26,Benton
+1462,26,Bollinger
+1463,26,Boone
+1464,26,Buchanan
+1465,26,Butler
+1466,26,Caldwell
+1467,26,Callaway
+1468,26,Camden
+1469,26,Cape Girardeau
+1470,26,Carroll
+1471,26,Carter
+1472,26,Cass
+1473,26,Cedar
+1474,26,Chariton
+1475,26,Christian
+1476,26,Clark
+1477,26,Clay
+1478,26,Clinton
+1479,26,Cole
+1480,26,Cooper
+1481,26,Crawford
+1482,26,Dade
+1483,26,Dallas
+1484,26,Daviess
+1485,26,DeKalb
+1486,26,Dent
+1487,26,Douglas
+1488,26,Dunklin
+1489,26,Franklin
+1490,26,Gasconade
+1491,26,Gentry
+1492,26,Greene
+1493,26,Grundy
+1494,26,Harrison
+1495,26,Henry
+1496,26,Hickory
+1497,26,Holt
+1498,26,Howard
+1499,26,Howell
+1500,26,Iron
+1501,26,Jackson
+1502,26,Jasper
+1503,26,Jefferson
+1504,26,Johnson
+1505,26,Knox
+1506,26,Laclede
+1507,26,Lafayette
+1508,26,Lawrence
+1509,26,Lewis
+1510,26,Lincoln
+1511,26,Linn
+1512,26,Livingston
+1513,26,Macon
+1514,26,Madison
+1515,26,Maries
+1516,26,Marion
+1517,26,McDonald
+1518,26,Mercer
+1519,26,Miller
+1520,26,Mississippi
+1521,26,Moniteau
+1522,26,Monroe
+1523,26,Montgomery
+1524,26,Morgan
+1525,26,New Madrid
+1526,26,Newton
+1527,26,Nodaway
+1528,26,Oregon
+1529,26,Osage
+1530,26,Ozark
+1531,26,Pemiscot
+1532,26,Perry
+1533,26,Pettis
+1534,26,Phelps
+1535,26,Pike
+1536,26,Platte
+1537,26,Polk
+1538,26,Pulaski
+1539,26,Putnam
+1540,26,Ralls
+1541,26,Randolph
+1542,26,Ray
+1543,26,Reynolds
+1544,26,Ripley
+1545,26,Saint Charles
+1546,26,Saint Clair
+1547,26,Saint Francois
+1548,26,Saint Louis
 1549,26,Saint Louis City
-1550,26,Sainte Genevieve County
-1551,26,Saline County
-1552,26,Schuyler County
-1553,26,Scotland County
-1554,26,Scott County
-1555,26,Shannon County
-1556,26,Shelby County
-1557,26,Stoddard County
-1558,26,Stone County
-1559,26,Sullivan County
-1560,26,Taney County
-1561,26,Texas County
-1562,26,Vernon County
-1563,26,Warren County
-1564,26,Washington County
-1565,26,Wayne County
-1566,26,Webster County
-1567,26,Worth County
-1568,26,Wright County
-1569,27,Beaverhead County
-1570,27,Big Horn County
-1571,27,Blaine County
-1572,27,Broadwater County
-1573,27,Carbon County
-1574,27,Carter County
-1575,27,Cascade County
-1576,27,Chouteau County
-1577,27,Custer County
-1578,27,Daniels County
-1579,27,Dawson County
-1580,27,Deer Lodge County
-1581,27,Fallon County
-1582,27,Fergus County
-1583,27,Flathead County
-1584,27,Gallatin County
-1585,27,Garfield County
-1586,27,Glacier County
-1587,27,Golden Valley County
-1588,27,Granite County
-1589,27,Hill County
-1590,27,Jefferson County
-1591,27,Judith Basin County
-1592,27,Lake County
-1593,27,Lewis and Clark County
-1594,27,Liberty County
-1595,27,Lincoln County
-1596,27,Madison County
-1597,27,McCone County
-1598,27,Meagher County
-1599,27,Mineral County
-1600,27,Missoula County
-1601,27,Musselshell County
-1602,27,Park County
-1603,27,Petroleum County
-1604,27,Phillips County
-1605,27,Pondera County
-1606,27,Powder River County
-1607,27,Powell County
-1608,27,Prairie County
-1609,27,Ravalli County
-1610,27,Richland County
-1611,27,Roosevelt County
-1612,27,Rosebud County
-1613,27,Sanders County
-1614,27,Sheridan County
-1615,27,Silver Bow County
-1616,27,Stillwater County
-1617,27,Sweet Grass County
-1618,27,Teton County
-1619,27,Toole County
-1620,27,Treasure County
-1621,27,Valley County
-1622,27,Wheatland County
-1623,27,Wibaux County
-1624,27,Yellowstone County
-1625,28,Adams County
-1626,28,Antelope County
-1627,28,Arthur County
-1628,28,Banner County
-1629,28,Blaine County
-1630,28,Boone County
-1631,28,Box Butte County
-1632,28,Boyd County
-1633,28,Brown County
-1634,28,Buffalo County
-1635,28,Burt County
-1636,28,Butler County
-1637,28,Cass County
-1638,28,Cedar County
-1639,28,Chase County
-1640,28,Cherry County
-1641,28,Cheyenne County
-1642,28,Clay County
-1643,28,Colfax County
-1644,28,Cuming County
-1645,28,Custer County
-1646,28,Dakota County
-1647,28,Dawes County
-1648,28,Dawson County
-1649,28,Deuel County
-1650,28,Dixon County
-1651,28,Dodge County
-1652,28,Douglas County
-1653,28,Dundy County
-1654,28,Fillmore County
-1655,28,Franklin County
-1656,28,Frontier County
-1657,28,Furnas County
-1658,28,Gage County
-1659,28,Garden County
-1660,28,Garfield County
-1661,28,Gosper County
-1662,28,Grant County
-1663,28,Greeley County
-1664,28,Hall County
-1665,28,Hamilton County
-1666,28,Harlan County
-1667,28,Hayes County
-1668,28,Hitchcock County
-1669,28,Holt County
-1670,28,Hooker County
-1671,28,Howard County
-1672,28,Jefferson County
-1673,28,Johnson County
-1674,28,Kearney County
-1675,28,Keith County
-1676,28,Keya Paha County
-1677,28,Kimball County
-1678,28,Knox County
-1679,28,Lancaster County
-1680,28,Lincoln County
-1681,28,Logan County
-1682,28,Loup County
-1683,28,Madison County
-1684,28,McPherson County
-1685,28,Merrick County
-1686,28,Morrill County
-1687,28,Nance County
-1688,28,Nemaha County
-1689,28,Nuckolls County
-1690,28,Otoe County
-1691,28,Pawnee County
-1692,28,Perkins County
-1693,28,Phelps County
-1694,28,Pierce County
-1695,28,Platte County
-1696,28,Polk County
-1697,28,Red Willow County
-1698,28,Richardson County
-1699,28,Rock County
-1700,28,Saline County
-1701,28,Sarpy County
-1702,28,Saunders County
-1703,28,Scotts Bluff County
-1704,28,Seward County
-1705,28,Sheridan County
-1706,28,Sherman County
-1707,28,Sioux County
-1708,28,Stanton County
-1709,28,Thayer County
-1710,28,Thomas County
-1711,28,Thurston County
-1712,28,Valley County
-1713,28,Washington County
-1714,28,Wayne County
-1715,28,Webster County
-1716,28,Wheeler County
-1717,28,York County
+1550,26,Sainte Genevieve
+1551,26,Saline
+1552,26,Schuyler
+1553,26,Scotland
+1554,26,Scott
+1555,26,Shannon
+1556,26,Shelby
+1557,26,Stoddard
+1558,26,Stone
+1559,26,Sullivan
+1560,26,Taney
+1561,26,Texas
+1562,26,Vernon
+1563,26,Warren
+1564,26,Washington
+1565,26,Wayne
+1566,26,Webster
+1567,26,Worth
+1568,26,Wright
+1569,27,Beaverhead
+1570,27,Big Horn
+1571,27,Blaine
+1572,27,Broadwater
+1573,27,Carbon
+1574,27,Carter
+1575,27,Cascade
+1576,27,Chouteau
+1577,27,Custer
+1578,27,Daniels
+1579,27,Dawson
+1580,27,Deer Lodge
+1581,27,Fallon
+1582,27,Fergus
+1583,27,Flathead
+1584,27,Gallatin
+1585,27,Garfield
+1586,27,Glacier
+1587,27,Golden Valley
+1588,27,Granite
+1589,27,Hill
+1590,27,Jefferson
+1591,27,Judith Basin
+1592,27,Lake
+1593,27,Lewis and Clark
+1594,27,Liberty
+1595,27,Lincoln
+1596,27,Madison
+1597,27,McCone
+1598,27,Meagher
+1599,27,Mineral
+1600,27,Missoula
+1601,27,Musselshell
+1602,27,Park
+1603,27,Petroleum
+1604,27,Phillips
+1605,27,Pondera
+1606,27,Powder River
+1607,27,Powell
+1608,27,Prairie
+1609,27,Ravalli
+1610,27,Richland
+1611,27,Roosevelt
+1612,27,Rosebud
+1613,27,Sanders
+1614,27,Sheridan
+1615,27,Silver Bow
+1616,27,Stillwater
+1617,27,Sweet Grass
+1618,27,Teton
+1619,27,Toole
+1620,27,Treasure
+1621,27,Valley
+1622,27,Wheatland
+1623,27,Wibaux
+1624,27,Yellowstone
+1625,28,Adams
+1626,28,Antelope
+1627,28,Arthur
+1628,28,Banner
+1629,28,Blaine
+1630,28,Boone
+1631,28,Box Butte
+1632,28,Boyd
+1633,28,Brown
+1634,28,Buffalo
+1635,28,Burt
+1636,28,Butler
+1637,28,Cass
+1638,28,Cedar
+1639,28,Chase
+1640,28,Cherry
+1641,28,Cheyenne
+1642,28,Clay
+1643,28,Colfax
+1644,28,Cuming
+1645,28,Custer
+1646,28,Dakota
+1647,28,Dawes
+1648,28,Dawson
+1649,28,Deuel
+1650,28,Dixon
+1651,28,Dodge
+1652,28,Douglas
+1653,28,Dundy
+1654,28,Fillmore
+1655,28,Franklin
+1656,28,Frontier
+1657,28,Furnas
+1658,28,Gage
+1659,28,Garden
+1660,28,Garfield
+1661,28,Gosper
+1662,28,Grant
+1663,28,Greeley
+1664,28,Hall
+1665,28,Hamilton
+1666,28,Harlan
+1667,28,Hayes
+1668,28,Hitchcock
+1669,28,Holt
+1670,28,Hooker
+1671,28,Howard
+1672,28,Jefferson
+1673,28,Johnson
+1674,28,Kearney
+1675,28,Keith
+1676,28,Keya Paha
+1677,28,Kimball
+1678,28,Knox
+1679,28,Lancaster
+1680,28,Lincoln
+1681,28,Logan
+1682,28,Loup
+1683,28,Madison
+1684,28,McPherson
+1685,28,Merrick
+1686,28,Morrill
+1687,28,Nance
+1688,28,Nemaha
+1689,28,Nuckolls
+1690,28,Otoe
+1691,28,Pawnee
+1692,28,Perkins
+1693,28,Phelps
+1694,28,Pierce
+1695,28,Platte
+1696,28,Polk
+1697,28,Red Willow
+1698,28,Richardson
+1699,28,Rock
+1700,28,Saline
+1701,28,Sarpy
+1702,28,Saunders
+1703,28,Scotts Bluff
+1704,28,Seward
+1705,28,Sheridan
+1706,28,Sherman
+1707,28,Sioux
+1708,28,Stanton
+1709,28,Thayer
+1710,28,Thomas
+1711,28,Thurston
+1712,28,Valley
+1713,28,Washington
+1714,28,Wayne
+1715,28,Webster
+1716,28,Wheeler
+1717,28,York
 1718,29,Carson City
-1719,29,Churchill County
-1720,29,Clark County
-1721,29,Douglas County
-1722,29,Elko County
-1723,29,Esmeralda County
-1724,29,Eureka County
-1725,29,Humboldt County
-1726,29,Lander County
-1727,29,Lincoln County
-1728,29,Lyon County
-1729,29,Mineral County
-1730,29,Nye County
-1731,29,Pershing County
-1732,29,Storey County
-1733,29,Washoe County
-1734,29,White Pine County
-1735,30,Belknap County
-1736,30,Carroll County
-1737,30,Cheshire County
-1738,30,Coos County
-1739,30,Grafton County
-1740,30,Hillsborough County
-1741,30,Merrimack County
-1742,30,Rockingham County
-1743,30,Strafford County
-1744,30,Sullivan County
-1745,31,Atlantic County
-1746,31,Bergen County
-1747,31,Burlington County
-1748,31,Camden County
-1749,31,Cape May County
-1750,31,Cumberland County
-1751,31,Essex County
-1752,31,Gloucester County
-1753,31,Hudson County
-1754,31,Hunterdon County
-1755,31,Mercer County
-1756,31,Middlesex County
-1757,31,Monmouth County
-1758,31,Morris County
-1759,31,Ocean County
-1760,31,Passaic County
-1761,31,Salem County
-1762,31,Somerset County
-1763,31,Sussex County
-1764,31,Union County
-1765,31,Warren County
-1766,32,Bernalillo County
-1767,32,Catron County
-1768,32,Chaves County
-1769,32,Cibola County
-1770,32,Colfax County
-1771,32,Curry County
-1772,32,De Baca County
-1773,32,DoÃ±a Ana County
-1774,32,Eddy County
-1775,32,Grant County
-1776,32,Guadalupe County
-1777,32,Harding County
-1778,32,Hidalgo County
-1779,32,Lea County
-1780,32,Lincoln County
-1781,32,Los Alamos County
-1782,32,Luna County
-1783,32,McKinley County
-1784,32,Mora County
-1785,32,Otero County
-1786,32,Quay County
-1787,32,Rio Arriba County
-1788,32,Roosevelt County
-1789,32,Sandoval County
-1790,32,San Juan County
-1791,32,San Miguel County
-1792,32,Santa Fe County
-1793,32,Sierra County
-1794,32,Socorro County
-1795,32,Taos County
-1796,32,Torrance County
-1797,32,Union County
-1798,32,Valencia County
-1799,33,Albany County
-1800,33,Allegany County
-1801,33,Bronx County
-1802,33,Broome County
-1803,33,Cattaraugus County
-1804,33,Cayuga County
-1805,33,Chautauqua County
-1806,33,Chemung County
-1807,33,Chenango County
-1808,33,Clinton County
-1809,33,Columbia County
-1810,33,Cortland County
-1811,33,Delaware County
-1812,33,Dutchess County
-1813,33,Erie County
-1814,33,Essex County
-1815,33,Franklin County
-1816,33,Fulton County
-1817,33,Genesee County
-1818,33,Greene County
-1819,33,Hamilton County
-1820,33,Herkimer County
-1821,33,Jefferson County
-1822,33,Kings County
-1823,33,Lewis County
-1824,33,Livingston County
-1825,33,Madison County
-1826,33,Monroe County
-1827,33,Montgomery County
-1828,33,Nassau County
-1829,33,New York County
-1830,33,Niagara County
-1831,33,Oneida County
-1832,33,Onondaga County
-1833,33,Ontario County
-1834,33,Orange County
-1835,33,Orleans County
-1836,33,Oswego County
-1837,33,Otsego County
-1838,33,Putnam County
-1839,33,Queens County
-1840,33,Rensselaer County
-1841,33,Richmond County
-1842,33,Rockland County
-1843,33,St. Lawrence County
-1844,33,Saratoga County
-1845,33,Schenectady County
-1846,33,Schoharie County
-1847,33,Schuyler County
-1848,33,Seneca County
-1849,33,Steuben County
-1850,33,Suffolk County
-1851,33,Sullivan County
-1852,33,Tioga County
-1853,33,Tompkins County
-1854,33,Ulster County
-1855,33,Warren County
-1856,33,Washington County
-1857,33,Wayne County
-1858,33,Westchester County
-1859,33,Wyoming County
-1860,33,Yates County
-1861,34,Alamance County
-1862,34,Alexander County
-1863,34,Alleghany County
-1864,34,Anson County
-1865,34,Ashe County
-1866,34,Avery County
-1867,34,Beaufort County
-1868,34,Bertie County
-1869,34,Bladen County
-1870,34,Brunswick County
-1871,34,Buncombe County
-1872,34,Burke County
-1873,34,Cabarrus County
-1874,34,Caldwell County
-1875,34,Camden County
-1876,34,Carteret County
-1877,34,Caswell County
-1878,34,Catawba County
-1879,34,Chatham County
-1880,34,Cherokee County
-1881,34,Chowan County
-1882,34,Clay County
-1883,34,Cleveland County
-1884,34,Columbus County
-1885,34,Craven County
-1886,34,Cumberland County
-1887,34,Currituck County
-1888,34,Dare County
-1889,34,Davidson County
-1890,34,Davie County
-1891,34,Duplin County
-1892,34,Durham County
-1893,34,Edgecombe County
-1894,34,Forsyth County
-1895,34,Franklin County
-1896,34,Gaston County
-1897,34,Gates County
-1898,34,Graham County
-1899,34,Granville County
-1900,34,Greene County
-1901,34,Guilford County
-1902,34,Halifax County
-1903,34,Harnett County
-1904,34,Haywood County
-1905,34,Henderson County
-1906,34,Hertford County
-1907,34,Hoke County
-1908,34,Hyde County
-1909,34,Iredell County
-1910,34,Jackson County
-1911,34,Johnston County
-1912,34,Jones County
-1913,34,Lee County
-1914,34,Lenoir County
-1915,34,Lincoln County
-1916,34,McDowell County
-1917,34,Macon County
-1918,34,Madison County
-1919,34,Martin County
-1920,34,Mecklenburg County
-1921,34,Mitchell County
-1922,34,Montgomery County
-1923,34,Moore County
-1924,34,Nash County
-1925,34,New Hanover County
-1926,34,Northampton County
-1927,34,Onslow County
-1928,34,Orange County
-1929,34,Pamlico County
-1930,34,Pasquotank County
-1931,34,Pender County
-1932,34,Perquimans County
-1933,34,Person County
-1934,34,Pitt County
-1935,34,Polk County
-1936,34,Randolph County
-1937,34,Richmond County
-1938,34,Robeson County
-1939,34,Rockingham County
-1940,34,Rowan County
-1941,34,Rutherford County
-1942,34,Sampson County
-1943,34,Scotland County
-1944,34,Stanly County
-1945,34,Stokes County
-1946,34,Surry County
-1947,34,Swain County
-1948,34,Transylvania County
-1949,34,Tyrrell County
-1950,34,Union County
-1951,34,Vance County
-1952,34,Wake County
-1953,34,Warren County
-1954,34,Washington County
-1955,34,Watauga County
-1956,34,Wayne County
-1957,34,Wilkes County
-1958,34,Wilson County
-1959,34,Yadkin County
-1960,34,Yancey County
-1961,35,Adams County
-1962,35,Barnes County
-1963,35,Benson County
-1964,35,Billings County
-1965,35,Bottineau County
-1966,35,Bowman County
-1967,35,Burke County
-1968,35,Burleigh County
-1969,35,Cass County
-1970,35,Cavalier County
-1971,35,Dickey County
-1972,35,Divide County
-1973,35,Dunn County
-1974,35,Eddy County
-1975,35,Emmons County
-1976,35,Foster County
-1977,35,Golden Valley County
-1978,35,Grand Forks County
-1979,35,Grant County
-1980,35,Griggs County
-1981,35,Hettinger County
-1982,35,Kidder County
-1983,35,LaMoure County
-1984,35,Logan County
-1985,35,McHenry County
-1986,35,McIntosh County
-1987,35,McKenzie County
-1988,35,McLean County
-1989,35,Mercer County
-1990,35,Morton County
-1991,35,Mountrail County
-1992,35,Nelson County
-1993,35,Oliver County
-1994,35,Pembina County
-1995,35,Pierce County
-1996,35,Ramsey County
-1997,35,Ransom County
-1998,35,Renville County
-1999,35,Richland County
-2000,35,Rolette County
-2001,35,Sargent County
-2002,35,Sheridan County
-2003,35,Sioux County
-2004,35,Slope County
-2005,35,Stark County
-2006,35,Steele County
-2007,35,Stutsman County
-2008,35,Towner County
-2009,35,Traill County
-2010,35,Walsh County
-2011,35,Ward County
-2012,35,Wells County
-2013,35,Williams County
-2014,36,Adams County
-2015,36,Allen County
-2016,36,Ashland County
-2017,36,Ashtabula County
-2018,36,Athens County
-2019,36,Auglaize County
-2020,36,Belmont County
-2021,36,Brown County
-2022,36,Butler County
-2023,36,Carroll County
-2024,36,Champaign County
-2025,36,Clark County
-2026,36,Clermont County
-2027,36,Clinton County
-2028,36,Columbiana County
-2029,36,Coshocton County
-2030,36,Crawford County
-2031,36,Cuyahoga County
-2032,36,Darke County
-2033,36,Defiance County
-2034,36,Delaware County
-2035,36,Erie County
-2036,36,Fairfield County
-2037,36,Fayette County
-2038,36,Franklin County
-2039,36,Fulton County
-2040,36,Gallia County
-2041,36,Geauga County
-2042,36,Greene County
-2043,36,Guernsey County
-2044,36,Hamilton County
-2045,36,Hancock County
-2046,36,Hardin County
-2047,36,Harrison County
-2048,36,Henry County
-2049,36,Highland County
-2050,36,Hocking County
-2051,36,Holmes County
-2052,36,Huron County
-2053,36,Jackson County
-2054,36,Jefferson County
-2055,36,Knox County
-2056,36,Lake County
-2057,36,Lawrence County
-2058,36,Licking County
-2059,36,Logan County
-2060,36,Lorain County
-2061,36,Lucas County
-2062,36,Madison County
-2063,36,Mahoning County
-2064,36,Marion County
-2065,36,Medina County
-2066,36,Meigs County
-2067,36,Mercer County
-2068,36,Miami County
-2069,36,Monroe County
-2070,36,Montgomery County
-2071,36,Morgan County
-2072,36,Morrow County
-2073,36,Muskingum County
-2074,36,Noble County
-2075,36,Ottawa County
-2076,36,Paulding County
-2077,36,Perry County
-2078,36,Pickaway County
-2079,36,Pike County
-2080,36,Portage County
-2081,36,Preble County
-2082,36,Putnam County
-2083,36,Richland County
-2084,36,Ross County
-2085,36,Sandusky County
-2086,36,Scioto County
-2087,36,Seneca County
-2088,36,Shelby County
-2089,36,Stark County
-2090,36,Summit County
-2091,36,Trumbull County
-2092,36,Tuscarawas County
-2093,36,Union County
-2094,36,Van Wert County
-2095,36,Vinton County
-2096,36,Warren County
-2097,36,Washington County
-2098,36,Wayne County
-2099,36,Williams County
-2100,36,Wood County
-2101,36,Wyandot County
-2102,37,Adair County
-2103,37,Alfalfa County
-2104,37,Atoka County
-2105,37,Beaver County
-2106,37,Beckham County
-2107,37,Blaine County
-2108,37,Bryan County
-2109,37,Caddo County
-2110,37,Canadian County
-2111,37,Carter County
-2112,37,Cherokee County
-2113,37,Choctaw County
-2114,37,Cimarron County
-2115,37,Cleveland County
-2116,37,Coal County
-2117,37,Comanche County
-2118,37,Cotton County
-2119,37,Craig County
-2120,37,Creek County
-2121,37,Custer County
-2122,37,Delaware County
-2123,37,Dewey County
-2124,37,Ellis County
-2125,37,Garfield County
-2126,37,Garvin County
-2127,37,Grady County
-2128,37,Grant County
-2129,37,Greer County
-2130,37,Harmon County
-2131,37,Harper County
-2132,37,Haskell County
-2133,37,Hughes County
-2134,37,Jackson County
-2135,37,Jefferson County
-2136,37,Johnston County
-2137,37,Kay County
-2138,37,Kingfisher County
-2139,37,Kiowa County
-2140,37,Latimer County
-2141,37,Le Flore County
-2142,37,Lincoln County
-2143,37,Logan County
-2144,37,Love County
-2145,37,Major County
-2146,37,Marshall County
-2147,37,Mayes County
-2148,37,McClain County
-2149,37,McCurtain County
-2150,37,McIntosh County
-2151,37,Murray County
-2152,37,Muskogee County
-2153,37,Noble County
-2154,37,Nowata County
-2155,37,Okfuskee County
-2156,37,Oklahoma County
-2157,37,Okmulgee County
-2158,37,Osage County
-2159,37,Ottawa County
-2160,37,Pawnee County
-2161,37,Payne County
-2162,37,Pittsburg County
-2163,37,Pontotoc County
-2164,37,Pottawatomie County
-2165,37,Pushmataha County
-2166,37,Roger Mills County
-2167,37,Rogers County
-2168,37,Seminole County
-2169,37,Sequoyah County
-2170,37,Stephens County
-2171,37,Texas County
-2172,37,Tillman County
-2173,37,Tulsa County
-2174,37,Wagoner County
-2175,37,Washington County
-2176,37,Washita County
-2177,37,Woods County
-2178,37,Woodward County
-2179,38,Baker County
-2180,38,Benton County
-2181,38,Clackamas County
-2182,38,Clatsop County
-2183,38,Columbia County
-2184,38,Coos County
-2185,38,Crook County
-2186,38,Curry County
-2187,38,Deschutes County
-2188,38,Douglas County
-2189,38,Gilliam County
-2190,38,Grant County
-2191,38,Harney County
-2192,38,Hood River County
-2193,38,Jackson County
-2194,38,Jefferson County
-2195,38,Josephine County
-2196,38,Klamath County
-2197,38,Lake County
-2198,38,Lane County
-2199,38,Lincoln County
-2200,38,Linn County
-2201,38,Malheur County
-2202,38,Marion County
-2203,38,Morrow County
-2204,38,Multnomah County
-2205,38,Polk County
-2206,38,Sherman County
-2207,38,Tillamook County
-2208,38,Umatilla County
-2209,38,Union County
-2210,38,Wallowa County
-2211,38,Wasco County
-2212,38,Washington County
-2213,38,Wheeler County
-2214,38,Yamhill County
-2215,39,Adams County
-2216,39,Allegheny County
-2217,39,Armstrong County
-2218,39,Beaver County
-2219,39,Bedford County
-2220,39,Berks County
-2221,39,Blair County
-2222,39,Bradford County
-2223,39,Bucks County
-2224,39,Butler County
-2225,39,Cambria County
-2226,39,Cameron County
-2227,39,Carbon County
-2228,39,Centre County
-2229,39,Chester County
-2230,39,Clarion County
-2231,39,Clearfield County
-2232,39,Clinton County
-2233,39,Columbia County
-2234,39,Crawford County
-2235,39,Cumberland County
-2236,39,Dauphin County
-2237,39,Delaware County
-2238,39,Elk County
-2239,39,Erie County
-2240,39,Fayette County
-2241,39,Forest County
-2242,39,Franklin County
-2243,39,Fulton County
-2244,39,Greene County
-2245,39,Huntingdon County
-2246,39,Indiana County
-2247,39,Jefferson County
-2248,39,Juniata County
-2249,39,Lackawanna County
-2250,39,Lancaster County
-2251,39,Lawrence County
-2252,39,Lebanon County
-2253,39,Lehigh County
-2254,39,Luzerne County
-2255,39,Lycoming County
-2256,39,McKean County
-2257,39,Mercer County
-2258,39,Mifflin County
-2259,39,Monroe County
-2260,39,Montgomery County
-2261,39,Montour County
-2262,39,Northampton County
-2263,39,Northumberland County
-2264,39,Perry County
-2265,39,Philadelphia County
-2266,39,Pike County
-2267,39,Potter County
-2268,39,Schuylkill County
-2269,39,Snyder County
-2270,39,Somerset County
-2271,39,Sullivan County
-2272,39,Susquehanna County
-2273,39,Tioga County
-2274,39,Union County
-2275,39,Venango County
-2276,39,Warren County
-2277,39,Washington County
-2278,39,Wayne County
-2279,39,Westmoreland County
-2280,39,Wyoming County
-2281,39,York County
-2282,40,Bristol County
-2283,40,Kent County
-2284,40,Newport County
-2285,40,Providence County
-2286,40,Washington County
-2287,41,Abbeville County
-2288,41,Aiken County
-2289,41,Allendale County
-2290,41,Anderson County
-2291,41,Bamberg County
-2292,41,Barnwell County
-2293,41,Beaufort County
-2294,41,Berkeley County
-2295,41,Calhoun County
-2296,41,Charleston County
-2297,41,Cherokee County
-2298,41,Chester County
-2299,41,Chesterfield County
-2300,41,Clarendon County
-2301,41,Colleton County
-2302,41,Darlington County
-2303,41,Dillon County
-2304,41,Dorchester County
-2305,41,Edgefield County
-2306,41,Fairfield County
-2307,41,Florence County
-2308,41,Georgetown County
-2309,41,Greenville County
-2310,41,Greenwood County
-2311,41,Hampton County
-2312,41,Horry County
-2313,41,Jasper County
-2314,41,Kershaw County
-2315,41,Lancaster County
-2316,41,Laurens County
-2317,41,Lee County
-2318,41,Lexington County
-2319,41,Marion County
-2320,41,Marlboro County
-2321,41,McCormick County
-2322,41,Newberry County
-2323,41,Oconee County
-2324,41,Orangeburg County
-2325,41,Pickens County
-2326,41,Richland County
-2327,41,Saluda County
-2328,41,Spartanburg County
-2329,41,Sumter County
-2330,41,Union County
-2331,41,Williamsburg County
-2332,41,York County
-2333,42,Aurora County
-2334,42,Beadle County
-2335,42,Bennett County
-2336,42,Bon Homme County
-2337,42,Brookings County
-2338,42,Brown County
-2339,42,Brule County
-2340,42,Buffalo County
-2341,42,Butte County
-2342,42,Campbell County
-2343,42,Charles Mix County
-2344,42,Clark County
-2345,42,Clay County
-2346,42,Codington County
-2347,42,Corson County
-2348,42,Custer County
-2349,42,Davison County
-2350,42,Day County
-2351,42,Deuel County
-2352,42,Dewey County
-2353,42,Douglas County
-2354,42,Edmunds County
-2355,42,Fall River County
-2356,42,Faulk County
-2357,42,Grant County
-2358,42,Gregory County
-2359,42,Haakon County
-2360,42,Hamlin County
-2361,42,Hand County
-2362,42,Hanson County
-2363,42,Harding County
-2364,42,Hughes County
-2365,42,Hutchinson County
-2366,42,Hyde County
-2367,42,Jackson County
-2368,42,Jerauld County
-2369,42,Jones County
-2370,42,Kingsbury County
-2371,42,Lake County
-2372,42,Lawrence County
-2373,42,Lincoln County
-2374,42,Lyman County
-2375,42,Marshall County
-2376,42,McCook County
-2377,42,McPherson County
-2378,42,Meade County
-2379,42,Mellette County
-2380,42,Miner County
-2381,42,Minnehaha County
-2382,42,Moody County
-2383,42,Pennington County
-2384,42,Perkins County
-2385,42,Potter County
-2386,42,Roberts County
-2387,42,Sanborn County
-2388,42,Shannon County
-2389,42,Spink County
-2390,42,Stanley County
-2391,42,Sully County
-2392,42,Todd County
-2393,42,Tripp County
-2394,42,Turner County
-2395,42,Union County
-2396,42,Walworth County
-2397,42,Yankton County
-2398,42,Ziebach County
-2399,43,Anderson County
-2400,43,Bedford County
-2401,43,Benton County
-2402,43,Bledsoe County
-2403,43,Blount County
-2404,43,Bradley County
-2405,43,Campbell County
-2406,43,Cannon County
-2407,43,Carroll County
-2408,43,Carter County
-2409,43,Cheatham County
-2410,43,Chester County
-2411,43,Claiborne County
-2412,43,Clay County
-2413,43,Cocke County
-2414,43,Coffee County
-2415,43,Crockett County
-2416,43,Cumberland County
-2417,43,Davidson County
-2418,43,Decatur County
-2419,43,DeKalb County
-2420,43,Dickson County
-2421,43,Dyer County
-2422,43,Fayette County
-2423,43,Fentress County
-2424,43,Franklin County
-2425,43,Gibson County
-2426,43,Giles County
-2427,43,Grainger County
-2428,43,Greene County
-2429,43,Grundy County
-2430,43,Hamblen County
-2431,43,Hamilton County
-2432,43,Hancock County
-2433,43,Hardeman County
-2434,43,Hardin County
-2435,43,Hawkins County
-2436,43,Haywood County
-2437,43,Henderson County
-2438,43,Henry County
-2439,43,Hickman County
-2440,43,Houston County
-2441,43,Humphreys County
-2442,43,Jackson County
-2443,43,Jefferson County
-2444,43,Johnson County
-2445,43,Knox County
-2446,43,Lake County
-2447,43,Lauderdale County
-2448,43,Lawrence County
-2449,43,Lewis County
-2450,43,Lincoln County
-2451,43,Loudon County
-2452,43,Macon County
-2453,43,Madison County
-2454,43,Marion County
-2455,43,Marshall County
-2456,43,Maury County
-2457,43,McMinn County
-2458,43,McNairy County
-2459,43,Meigs County
-2460,43,Monroe County
-2461,43,Montgomery County
-2462,43,Moore County
-2463,43,Morgan County
-2464,43,Obion County
-2465,43,Overton County
-2466,43,Perry County
-2467,43,Pickett County
-2468,43,Polk County
-2469,43,Putnam County
-2470,43,Rhea County
-2471,43,Roane County
-2472,43,Robertson County
-2473,43,Rutherford County
-2474,43,Scott County
-2475,43,Sequatchie County
-2476,43,Sevier County
-2477,43,Shelby County
-2478,43,Smith County
-2479,43,Stewart County
-2480,43,Sullivan County
-2481,43,Sumner County
-2482,43,Tipton County
-2483,43,Trousdale County
-2484,43,Unicoi County
-2485,43,Union County
-2486,43,Van Buren County
-2487,43,Warren County
-2488,43,Washington County
-2489,43,Wayne County
-2490,43,Weakley County
-2491,43,White County
-2492,43,Williamson County
-2493,43,Wilson County
-2494,44,Anderson County
-2495,44,Andrews County
-2496,44,Angelina County
-2497,44,Aransas County
-2498,44,Archer County
-2499,44,Armstrong County
-2500,44,Atascosa County
-2501,44,Austin County
-2502,44,Bailey County
-2503,44,Bandera County
-2504,44,Bastrop County
-2505,44,Baylor County
-2506,44,Bee County
-2507,44,Bell County
-2508,44,Bexar County
-2509,44,Blanco County
-2510,44,Borden County
-2511,44,Bosque County
-2512,44,Bowie County
-2513,44,Brazoria County
-2514,44,Brazos County
-2515,44,Brewster County
-2516,44,Briscoe County
-2517,44,Brooks County
-2518,44,Brown County
-2519,44,Burleson County
-2520,44,Burnet County
-2521,44,Caldwell County
-2522,44,Calhoun County
-2523,44,Callahan County
-2524,44,Cameron County
-2525,44,Camp County
-2526,44,Carson County
-2527,44,Cass County
-2528,44,Castro County
-2529,44,Chambers County
-2530,44,Cherokee County
-2531,44,Childress County
-2532,44,Clay County
-2533,44,Cochran County
-2534,44,Coke County
-2535,44,Coleman County
-2536,44,Collin County
-2537,44,Collingsworth County
-2538,44,Colorado County
-2539,44,Comal County
-2540,44,Comanche County
-2541,44,Concho County
-2542,44,Cooke County
-2543,44,Coryell County
-2544,44,Cottle County
-2545,44,Crane County
-2546,44,Crockett County
-2547,44,Crosby County
-2548,44,Culberson County
-2549,44,Dallam County
-2550,44,Dallas County
-2551,44,Dawson County
-2552,44,Deaf Smith County
-2553,44,Delta County
-2554,44,Denton County
-2555,44,DeWitt County
-2556,44,Dickens County
-2557,44,Dimmit County
-2558,44,Donley County
-2559,44,Duval County
-2560,44,Eastland County
-2561,44,Ector County
-2562,44,Edwards County
-2563,44,El Paso County
-2564,44,Ellis County
-2565,44,Erath County
-2566,44,Falls County
-2567,44,Fannin County
-2568,44,Fayette County
-2569,44,Fisher County
-2570,44,Floyd County
-2571,44,Foard County
-2572,44,Fort Bend County
-2573,44,Franklin County
-2574,44,Freestone County
-2575,44,Frio County
-2576,44,Gaines County
-2577,44,Galveston County
-2578,44,Garza County
-2579,44,Gillespie County
-2580,44,Glasscock County
-2581,44,Goliad County
-2582,44,Gonzales County
-2583,44,Gray County
-2584,44,Grayson County
-2585,44,Gregg County
-2586,44,Grimes County
-2587,44,Guadalupe County
-2588,44,Hale County
-2589,44,Hall County
-2590,44,Hamilton County
-2591,44,Hansford County
-2592,44,Hardeman County
-2593,44,Hardin County
-2594,44,Harris County
-2595,44,Harrison County
-2596,44,Hartley County
-2597,44,Haskell County
-2598,44,Hays County
-2599,44,Hemphill County
-2600,44,Henderson County
-2601,44,Hidalgo County
-2602,44,Hill County
-2603,44,Hockley County
-2604,44,Hood County
-2605,44,Hopkins County
-2606,44,Houston County
-2607,44,Howard County
-2608,44,Hudspeth County
-2609,44,Hunt County
-2610,44,Hutchinson County
-2611,44,Irion County
-2612,44,Jack County
-2613,44,Jackson County
-2614,44,Jasper County
-2615,44,Jeff Davis County
-2616,44,Jefferson County
-2617,44,Jim Hogg County
-2618,44,Jim Wells County
-2619,44,Johnson County
-2620,44,Jones County
-2621,44,Karnes County
-2622,44,Kaufman County
-2623,44,Kendall County
-2624,44,Kenedy County
-2625,44,Kent County
-2626,44,Kerr County
-2627,44,Kimble County
-2628,44,King County
-2629,44,Kinney County
-2630,44,Kleberg County
-2631,44,Knox County
-2632,44,Lamar County
-2633,44,Lamb County
-2634,44,Lampasas County
-2635,44,La Salle County
-2636,44,Lavaca County
-2637,44,Lee County
-2638,44,Leon County
-2639,44,Liberty County
-2640,44,Limestone County
-2641,44,Lipscomb County
-2642,44,Live Oak County
-2643,44,Llano County
-2644,44,Loving County
-2645,44,Lubbock County
-2646,44,Lynn County
-2647,44,McCulloch County
-2648,44,McLennan County
-2649,44,McMullen County
-2650,44,Madison County
-2651,44,Marion County
-2652,44,Martin County
-2653,44,Mason County
-2654,44,Matagorda County
-2655,44,Maverick County
-2656,44,Medina County
-2657,44,Menard County
-2658,44,Midland County
-2659,44,Milam County
-2660,44,Mills County
-2661,44,Mitchell County
-2662,44,Montague County
-2663,44,Montgomery County
-2664,44,Moore County
-2665,44,Morris County
-2666,44,Motley County
-2667,44,Nacogdoches County
-2668,44,Navarro County
-2669,44,Newton County
-2670,44,Nolan County
-2671,44,Nueces County
-2672,44,Ochiltree County
-2673,44,Oldham County
-2674,44,Orange County
-2675,44,Palo Pinto County
-2676,44,Panola County
-2677,44,Parker County
-2678,44,Parmer County
-2679,44,Pecos County
-2680,44,Polk County
-2681,44,Potter County
-2682,44,Presidio County
-2683,44,Rains County
-2684,44,Randall County
-2685,44,Reagan County
-2686,44,Real County
-2687,44,Red River County
-2688,44,Reeves County
-2689,44,Refugio County
-2690,44,Roberts County
-2691,44,Robertson County
-2692,44,Rockwall County
-2693,44,Runnels County
-2694,44,Rusk County
-2695,44,Sabine County
-2696,44,San Augustine County
-2697,44,San Jacinto County
-2698,44,San Patricio County
-2699,44,San Saba County
-2700,44,Schleicher County
-2701,44,Scurry County
-2702,44,Shackelford County
-2703,44,Shelby County
-2704,44,Sherman County
-2705,44,Smith County
-2706,44,Somervell County
-2707,44,Starr County
-2708,44,Stephens County
-2709,44,Sterling County
-2710,44,Stonewall County
-2711,44,Sutton County
-2712,44,Swisher County
-2713,44,Tarrant County
-2714,44,Taylor County
-2715,44,Terrell County
-2716,44,Terry County
-2717,44,Throckmorton County
-2718,44,Titus County
-2719,44,Tom Green County
-2720,44,Travis County
-2721,44,Trinity County
-2722,44,Tyler County
-2723,44,Upshur County
-2724,44,Upton County
-2725,44,Uvalde County
-2726,44,Val Verde County
-2727,44,Van Zandt County
-2728,44,Victoria County
-2729,44,Walker County
-2730,44,Waller County
-2731,44,Ward County
-2732,44,Washington County
-2733,44,Webb County
-2734,44,Wharton County
-2735,44,Wheeler County
-2736,44,Wichita County
-2737,44,Wilbarger County
-2738,44,Willacy County
-2739,44,Williamson County
-2740,44,Wilson County
-2741,44,Winkler County
-2742,44,Wise County
-2743,44,Wood County
-2744,44,Yoakum County
-2745,44,Young County
-2746,44,Zapata County
-2747,44,Zavala County
-2748,45,Beaver County
-2749,45,Box Elder County
-2750,45,Cache County
-2751,45,Carbon County
-2752,45,Daggett County
-2753,45,Davis County
-2754,45,Duchesne County
-2755,45,Emery County
-2756,45,Garfield County
-2757,45,Grand County
-2758,45,Iron County
-2759,45,Juab County
-2760,45,Kane County
-2761,45,Millard County
-2762,45,Morgan County
-2763,45,Piute County
-2764,45,Rich County
-2765,45,Salt Lake County
-2766,45,San Juan County
-2767,45,Sanpete County
-2768,45,Sevier County
-2769,45,Summit County
-2770,45,Tooele County
-2771,45,Uintah County
-2772,45,Utah County
-2773,45,Wasatch County
-2774,45,Washington County
-2775,45,Wayne County
-2776,45,Weber County
-2777,46,Addison County
-2778,46,Bennington County
-2779,46,Caledonia County
-2780,46,Chittenden County
-2781,46,Essex County
-2782,46,Franklin County
-2783,46,Grand Isle County
-2784,46,Lamoille County
-2785,46,Orange County
-2786,46,Orleans County
-2787,46,Rutland County
-2788,46,Washington County
-2789,46,Windham County
-2790,46,Windsor County
-2791,47,Accomack County
-2792,47,Albemarle County
-2793,47,Alleghany County
-2794,47,Amelia County
-2795,47,Amherst County
-2796,47,Appomattox County
-2797,47,Arlington County
-2798,47,Augusta County
-2799,47,Bath County
-2800,47,Bedford County
-2801,47,Bland County
-2802,47,Botetourt County
-2803,47,Brunswick County
-2804,47,Buchanan County
-2805,47,Buckingham County
-2806,47,Campbell County
-2807,47,Caroline County
-2808,47,Carroll County
-2809,47,Charles City County
-2810,47,Charlotte County
-2811,47,Chesterfield County
-2812,47,Clarke County
-2813,47,Craig County
-2814,47,Culpeper County
-2815,47,Cumberland County
-2816,47,Dickenson County
-2817,47,Dinwiddie County
-2818,47,Essex County
-2819,47,Fairfax County
-2820,47,Fauquier County
-2821,47,Floyd County
-2822,47,Fluvanna County
-2823,47,Franklin County
-2824,47,Frederick County
-2825,47,Giles County
-2826,47,Gloucester County
-2827,47,Goochland County
-2828,47,Grayson County
-2829,47,Greene County
-2830,47,Greensville County
-2831,47,Halifax County
-2832,47,Hanover County
-2833,47,Henrico County
-2834,47,Henry County
-2835,47,Highland County
-2836,47,Isle of Wight County
-2837,47,James City County
-2838,47,King and Queen County
-2839,47,King George County
-2840,47,King William County
-2841,47,Lancaster County
-2842,47,Lee County
-2843,47,Loudoun County
-2844,47,Louisa County
-2845,47,Lunenburg County
-2846,47,Madison County
-2847,47,Mathews County
-2848,47,Mecklenburg County
-2849,47,Middlesex County
-2850,47,Montgomery County
-2851,47,Nelson County
-2852,47,New Kent County
-2853,47,Northampton County
-2854,47,Northumberland County
-2855,47,Nottoway County
-2856,47,Orange County
-2857,47,Page County
-2858,47,Patrick County
-2859,47,Pittsylvania County
-2860,47,Powhatan County
-2861,47,Prince Edward County
-2862,47,Prince George County
-2863,47,Prince William County
-2864,47,Pulaski County
-2865,47,Rappahannock County
-2866,47,Richmond County
-2867,47,Roanoke County
-2868,47,Rockbridge County
-2869,47,Rockingham County
-2870,47,Russell County
-2871,47,Scott County
-2872,47,Shenandoah County
-2873,47,Smyth County
-2874,47,Southampton County
-2875,47,Spotsylvania County
-2876,47,Stafford County
-2877,47,Surry County
-2878,47,Sussex County
-2879,47,Tazewell County
-2880,47,Warren County
-2881,47,Washington County
-2882,47,Westmoreland County
-2883,47,Wise County
-2884,47,Wythe County
-2885,47,York County
+1719,29,Churchill
+1720,29,Clark
+1721,29,Douglas
+1722,29,Elko
+1723,29,Esmeralda
+1724,29,Eureka
+1725,29,Humboldt
+1726,29,Lander
+1727,29,Lincoln
+1728,29,Lyon
+1729,29,Mineral
+1730,29,Nye
+1731,29,Pershing
+1732,29,Storey
+1733,29,Washoe
+1734,29,White Pine
+1735,30,Belknap
+1736,30,Carroll
+1737,30,Cheshire
+1738,30,Coos
+1739,30,Grafton
+1740,30,Hillsborough
+1741,30,Merrimack
+1742,30,Rockingham
+1743,30,Strafford
+1744,30,Sullivan
+1745,31,Atlantic
+1746,31,Bergen
+1747,31,Burlington
+1748,31,Camden
+1749,31,Cape May
+1750,31,Cumberland
+1751,31,Essex
+1752,31,Gloucester
+1753,31,Hudson
+1754,31,Hunterdon
+1755,31,Mercer
+1756,31,Middlesex
+1757,31,Monmouth
+1758,31,Morris
+1759,31,Ocean
+1760,31,Passaic
+1761,31,Salem
+1762,31,Somerset
+1763,31,Sussex
+1764,31,Union
+1765,31,Warren
+1766,32,Bernalillo
+1767,32,Catron
+1768,32,Chaves
+1769,32,Cibola
+1770,32,Colfax
+1771,32,Curry
+1772,32,De Baca
+1773,32,DoÃ±a Ana
+1774,32,Eddy
+1775,32,Grant
+1776,32,Guadalupe
+1777,32,Harding
+1778,32,Hidalgo
+1779,32,Lea
+1780,32,Lincoln
+1781,32,Los Alamos
+1782,32,Luna
+1783,32,McKinley
+1784,32,Mora
+1785,32,Otero
+1786,32,Quay
+1787,32,Rio Arriba
+1788,32,Roosevelt
+1789,32,Sandoval
+1790,32,San Juan
+1791,32,San Miguel
+1792,32,Santa Fe
+1793,32,Sierra
+1794,32,Socorro
+1795,32,Taos
+1796,32,Torrance
+1797,32,Union
+1798,32,Valencia
+1799,33,Albany
+1800,33,Allegany
+1801,33,Bronx
+1802,33,Broome
+1803,33,Cattaraugus
+1804,33,Cayuga
+1805,33,Chautauqua
+1806,33,Chemung
+1807,33,Chenango
+1808,33,Clinton
+1809,33,Columbia
+1810,33,Cortland
+1811,33,Delaware
+1812,33,Dutchess
+1813,33,Erie
+1814,33,Essex
+1815,33,Franklin
+1816,33,Fulton
+1817,33,Genesee
+1818,33,Greene
+1819,33,Hamilton
+1820,33,Herkimer
+1821,33,Jefferson
+1822,33,Kings
+1823,33,Lewis
+1824,33,Livingston
+1825,33,Madison
+1826,33,Monroe
+1827,33,Montgomery
+1828,33,Nassau
+1829,33,New York
+1830,33,Niagara
+1831,33,Oneida
+1832,33,Onondaga
+1833,33,Ontario
+1834,33,Orange
+1835,33,Orleans
+1836,33,Oswego
+1837,33,Otsego
+1838,33,Putnam
+1839,33,Queens
+1840,33,Rensselaer
+1841,33,Richmond
+1842,33,Rockland
+1843,33,St. Lawrence
+1844,33,Saratoga
+1845,33,Schenectady
+1846,33,Schoharie
+1847,33,Schuyler
+1848,33,Seneca
+1849,33,Steuben
+1850,33,Suffolk
+1851,33,Sullivan
+1852,33,Tioga
+1853,33,Tompkins
+1854,33,Ulster
+1855,33,Warren
+1856,33,Washington
+1857,33,Wayne
+1858,33,Westchester
+1859,33,Wyoming
+1860,33,Yates
+1861,34,Alamance
+1862,34,Alexander
+1863,34,Alleghany
+1864,34,Anson
+1865,34,Ashe
+1866,34,Avery
+1867,34,Beaufort
+1868,34,Bertie
+1869,34,Bladen
+1870,34,Brunswick
+1871,34,Buncombe
+1872,34,Burke
+1873,34,Cabarrus
+1874,34,Caldwell
+1875,34,Camden
+1876,34,Carteret
+1877,34,Caswell
+1878,34,Catawba
+1879,34,Chatham
+1880,34,Cherokee
+1881,34,Chowan
+1882,34,Clay
+1883,34,Cleveland
+1884,34,Columbus
+1885,34,Craven
+1886,34,Cumberland
+1887,34,Currituck
+1888,34,Dare
+1889,34,Davidson
+1890,34,Davie
+1891,34,Duplin
+1892,34,Durham
+1893,34,Edgecombe
+1894,34,Forsyth
+1895,34,Franklin
+1896,34,Gaston
+1897,34,Gates
+1898,34,Graham
+1899,34,Granville
+1900,34,Greene
+1901,34,Guilford
+1902,34,Halifax
+1903,34,Harnett
+1904,34,Haywood
+1905,34,Henderson
+1906,34,Hertford
+1907,34,Hoke
+1908,34,Hyde
+1909,34,Iredell
+1910,34,Jackson
+1911,34,Johnston
+1912,34,Jones
+1913,34,Lee
+1914,34,Lenoir
+1915,34,Lincoln
+1916,34,McDowell
+1917,34,Macon
+1918,34,Madison
+1919,34,Martin
+1920,34,Mecklenburg
+1921,34,Mitchell
+1922,34,Montgomery
+1923,34,Moore
+1924,34,Nash
+1925,34,New Hanover
+1926,34,Northampton
+1927,34,Onslow
+1928,34,Orange
+1929,34,Pamlico
+1930,34,Pasquotank
+1931,34,Pender
+1932,34,Perquimans
+1933,34,Person
+1934,34,Pitt
+1935,34,Polk
+1936,34,Randolph
+1937,34,Richmond
+1938,34,Robeson
+1939,34,Rockingham
+1940,34,Rowan
+1941,34,Rutherford
+1942,34,Sampson
+1943,34,Scotland
+1944,34,Stanly
+1945,34,Stokes
+1946,34,Surry
+1947,34,Swain
+1948,34,Transylvania
+1949,34,Tyrrell
+1950,34,Union
+1951,34,Vance
+1952,34,Wake
+1953,34,Warren
+1954,34,Washington
+1955,34,Watauga
+1956,34,Wayne
+1957,34,Wilkes
+1958,34,Wilson
+1959,34,Yadkin
+1960,34,Yancey
+1961,35,Adams
+1962,35,Barnes
+1963,35,Benson
+1964,35,Billings
+1965,35,Bottineau
+1966,35,Bowman
+1967,35,Burke
+1968,35,Burleigh
+1969,35,Cass
+1970,35,Cavalier
+1971,35,Dickey
+1972,35,Divide
+1973,35,Dunn
+1974,35,Eddy
+1975,35,Emmons
+1976,35,Foster
+1977,35,Golden Valley
+1978,35,Grand Forks
+1979,35,Grant
+1980,35,Griggs
+1981,35,Hettinger
+1982,35,Kidder
+1983,35,LaMoure
+1984,35,Logan
+1985,35,McHenry
+1986,35,McIntosh
+1987,35,McKenzie
+1988,35,McLean
+1989,35,Mercer
+1990,35,Morton
+1991,35,Mountrail
+1992,35,Nelson
+1993,35,Oliver
+1994,35,Pembina
+1995,35,Pierce
+1996,35,Ramsey
+1997,35,Ransom
+1998,35,Renville
+1999,35,Richland
+2000,35,Rolette
+2001,35,Sargent
+2002,35,Sheridan
+2003,35,Sioux
+2004,35,Slope
+2005,35,Stark
+2006,35,Steele
+2007,35,Stutsman
+2008,35,Towner
+2009,35,Traill
+2010,35,Walsh
+2011,35,Ward
+2012,35,Wells
+2013,35,Williams
+2014,36,Adams
+2015,36,Allen
+2016,36,Ashland
+2017,36,Ashtabula
+2018,36,Athens
+2019,36,Auglaize
+2020,36,Belmont
+2021,36,Brown
+2022,36,Butler
+2023,36,Carroll
+2024,36,Champaign
+2025,36,Clark
+2026,36,Clermont
+2027,36,Clinton
+2028,36,Columbiana
+2029,36,Coshocton
+2030,36,Crawford
+2031,36,Cuyahoga
+2032,36,Darke
+2033,36,Defiance
+2034,36,Delaware
+2035,36,Erie
+2036,36,Fairfield
+2037,36,Fayette
+2038,36,Franklin
+2039,36,Fulton
+2040,36,Gallia
+2041,36,Geauga
+2042,36,Greene
+2043,36,Guernsey
+2044,36,Hamilton
+2045,36,Hancock
+2046,36,Hardin
+2047,36,Harrison
+2048,36,Henry
+2049,36,Highland
+2050,36,Hocking
+2051,36,Holmes
+2052,36,Huron
+2053,36,Jackson
+2054,36,Jefferson
+2055,36,Knox
+2056,36,Lake
+2057,36,Lawrence
+2058,36,Licking
+2059,36,Logan
+2060,36,Lorain
+2061,36,Lucas
+2062,36,Madison
+2063,36,Mahoning
+2064,36,Marion
+2065,36,Medina
+2066,36,Meigs
+2067,36,Mercer
+2068,36,Miami
+2069,36,Monroe
+2070,36,Montgomery
+2071,36,Morgan
+2072,36,Morrow
+2073,36,Muskingum
+2074,36,Noble
+2075,36,Ottawa
+2076,36,Paulding
+2077,36,Perry
+2078,36,Pickaway
+2079,36,Pike
+2080,36,Portage
+2081,36,Preble
+2082,36,Putnam
+2083,36,Richland
+2084,36,Ross
+2085,36,Sandusky
+2086,36,Scioto
+2087,36,Seneca
+2088,36,Shelby
+2089,36,Stark
+2090,36,Summit
+2091,36,Trumbull
+2092,36,Tuscarawas
+2093,36,Union
+2094,36,Van Wert
+2095,36,Vinton
+2096,36,Warren
+2097,36,Washington
+2098,36,Wayne
+2099,36,Williams
+2100,36,Wood
+2101,36,Wyandot
+2102,37,Adair
+2103,37,Alfalfa
+2104,37,Atoka
+2105,37,Beaver
+2106,37,Beckham
+2107,37,Blaine
+2108,37,Bryan
+2109,37,Caddo
+2110,37,Canadian
+2111,37,Carter
+2112,37,Cherokee
+2113,37,Choctaw
+2114,37,Cimarron
+2115,37,Cleveland
+2116,37,Coal
+2117,37,Comanche
+2118,37,Cotton
+2119,37,Craig
+2120,37,Creek
+2121,37,Custer
+2122,37,Delaware
+2123,37,Dewey
+2124,37,Ellis
+2125,37,Garfield
+2126,37,Garvin
+2127,37,Grady
+2128,37,Grant
+2129,37,Greer
+2130,37,Harmon
+2131,37,Harper
+2132,37,Haskell
+2133,37,Hughes
+2134,37,Jackson
+2135,37,Jefferson
+2136,37,Johnston
+2137,37,Kay
+2138,37,Kingfisher
+2139,37,Kiowa
+2140,37,Latimer
+2141,37,Le Flore
+2142,37,Lincoln
+2143,37,Logan
+2144,37,Love
+2145,37,Major
+2146,37,Marshall
+2147,37,Mayes
+2148,37,McClain
+2149,37,McCurtain
+2150,37,McIntosh
+2151,37,Murray
+2152,37,Muskogee
+2153,37,Noble
+2154,37,Nowata
+2155,37,Okfuskee
+2156,37,Oklahoma
+2157,37,Okmulgee
+2158,37,Osage
+2159,37,Ottawa
+2160,37,Pawnee
+2161,37,Payne
+2162,37,Pittsburg
+2163,37,Pontotoc
+2164,37,Pottawatomie
+2165,37,Pushmataha
+2166,37,Roger Mills
+2167,37,Rogers
+2168,37,Seminole
+2169,37,Sequoyah
+2170,37,Stephens
+2171,37,Texas
+2172,37,Tillman
+2173,37,Tulsa
+2174,37,Wagoner
+2175,37,Washington
+2176,37,Washita
+2177,37,Woods
+2178,37,Woodward
+2179,38,Baker
+2180,38,Benton
+2181,38,Clackamas
+2182,38,Clatsop
+2183,38,Columbia
+2184,38,Coos
+2185,38,Crook
+2186,38,Curry
+2187,38,Deschutes
+2188,38,Douglas
+2189,38,Gilliam
+2190,38,Grant
+2191,38,Harney
+2192,38,Hood River
+2193,38,Jackson
+2194,38,Jefferson
+2195,38,Josephine
+2196,38,Klamath
+2197,38,Lake
+2198,38,Lane
+2199,38,Lincoln
+2200,38,Linn
+2201,38,Malheur
+2202,38,Marion
+2203,38,Morrow
+2204,38,Multnomah
+2205,38,Polk
+2206,38,Sherman
+2207,38,Tillamook
+2208,38,Umatilla
+2209,38,Union
+2210,38,Wallowa
+2211,38,Wasco
+2212,38,Washington
+2213,38,Wheeler
+2214,38,Yamhill
+2215,39,Adams
+2216,39,Allegheny
+2217,39,Armstrong
+2218,39,Beaver
+2219,39,Bedford
+2220,39,Berks
+2221,39,Blair
+2222,39,Bradford
+2223,39,Bucks
+2224,39,Butler
+2225,39,Cambria
+2226,39,Cameron
+2227,39,Carbon
+2228,39,Centre
+2229,39,Chester
+2230,39,Clarion
+2231,39,Clearfield
+2232,39,Clinton
+2233,39,Columbia
+2234,39,Crawford
+2235,39,Cumberland
+2236,39,Dauphin
+2237,39,Delaware
+2238,39,Elk
+2239,39,Erie
+2240,39,Fayette
+2241,39,Forest
+2242,39,Franklin
+2243,39,Fulton
+2244,39,Greene
+2245,39,Huntingdon
+2246,39,Indiana
+2247,39,Jefferson
+2248,39,Juniata
+2249,39,Lackawanna
+2250,39,Lancaster
+2251,39,Lawrence
+2252,39,Lebanon
+2253,39,Lehigh
+2254,39,Luzerne
+2255,39,Lycoming
+2256,39,McKean
+2257,39,Mercer
+2258,39,Mifflin
+2259,39,Monroe
+2260,39,Montgomery
+2261,39,Montour
+2262,39,Northampton
+2263,39,Northumberland
+2264,39,Perry
+2265,39,Philadelphia
+2266,39,Pike
+2267,39,Potter
+2268,39,Schuylkill
+2269,39,Snyder
+2270,39,Somerset
+2271,39,Sullivan
+2272,39,Susquehanna
+2273,39,Tioga
+2274,39,Union
+2275,39,Venango
+2276,39,Warren
+2277,39,Washington
+2278,39,Wayne
+2279,39,Westmoreland
+2280,39,Wyoming
+2281,39,York
+2282,40,Bristol
+2283,40,Kent
+2284,40,Newport
+2285,40,Providence
+2286,40,Washington
+2287,41,Abbeville
+2288,41,Aiken
+2289,41,Allendale
+2290,41,Anderson
+2291,41,Bamberg
+2292,41,Barnwell
+2293,41,Beaufort
+2294,41,Berkeley
+2295,41,Calhoun
+2296,41,Charleston
+2297,41,Cherokee
+2298,41,Chester
+2299,41,Chesterfield
+2300,41,Clarendon
+2301,41,Colleton
+2302,41,Darlington
+2303,41,Dillon
+2304,41,Dorchester
+2305,41,Edgefield
+2306,41,Fairfield
+2307,41,Florence
+2308,41,Georgetown
+2309,41,Greenville
+2310,41,Greenwood
+2311,41,Hampton
+2312,41,Horry
+2313,41,Jasper
+2314,41,Kershaw
+2315,41,Lancaster
+2316,41,Laurens
+2317,41,Lee
+2318,41,Lexington
+2319,41,Marion
+2320,41,Marlboro
+2321,41,McCormick
+2322,41,Newberry
+2323,41,Oconee
+2324,41,Orangeburg
+2325,41,Pickens
+2326,41,Richland
+2327,41,Saluda
+2328,41,Spartanburg
+2329,41,Sumter
+2330,41,Union
+2331,41,Williamsburg
+2332,41,York
+2333,42,Aurora
+2334,42,Beadle
+2335,42,Bennett
+2336,42,Bon Homme
+2337,42,Brookings
+2338,42,Brown
+2339,42,Brule
+2340,42,Buffalo
+2341,42,Butte
+2342,42,Campbell
+2343,42,Charles Mix
+2344,42,Clark
+2345,42,Clay
+2346,42,Codington
+2347,42,Corson
+2348,42,Custer
+2349,42,Davison
+2350,42,Day
+2351,42,Deuel
+2352,42,Dewey
+2353,42,Douglas
+2354,42,Edmunds
+2355,42,Fall River
+2356,42,Faulk
+2357,42,Grant
+2358,42,Gregory
+2359,42,Haakon
+2360,42,Hamlin
+2361,42,Hand
+2362,42,Hanson
+2363,42,Harding
+2364,42,Hughes
+2365,42,Hutchinson
+2366,42,Hyde
+2367,42,Jackson
+2368,42,Jerauld
+2369,42,Jones
+2370,42,Kingsbury
+2371,42,Lake
+2372,42,Lawrence
+2373,42,Lincoln
+2374,42,Lyman
+2375,42,Marshall
+2376,42,McCook
+2377,42,McPherson
+2378,42,Meade
+2379,42,Mellette
+2380,42,Miner
+2381,42,Minnehaha
+2382,42,Moody
+2383,42,Pennington
+2384,42,Perkins
+2385,42,Potter
+2386,42,Roberts
+2387,42,Sanborn
+2388,42,Shannon
+2389,42,Spink
+2390,42,Stanley
+2391,42,Sully
+2392,42,Todd
+2393,42,Tripp
+2394,42,Turner
+2395,42,Union
+2396,42,Walworth
+2397,42,Yankton
+2398,42,Ziebach
+2399,43,Anderson
+2400,43,Bedford
+2401,43,Benton
+2402,43,Bledsoe
+2403,43,Blount
+2404,43,Bradley
+2405,43,Campbell
+2406,43,Cannon
+2407,43,Carroll
+2408,43,Carter
+2409,43,Cheatham
+2410,43,Chester
+2411,43,Claiborne
+2412,43,Clay
+2413,43,Cocke
+2414,43,Coffee
+2415,43,Crockett
+2416,43,Cumberland
+2417,43,Davidson
+2418,43,Decatur
+2419,43,DeKalb
+2420,43,Dickson
+2421,43,Dyer
+2422,43,Fayette
+2423,43,Fentress
+2424,43,Franklin
+2425,43,Gibson
+2426,43,Giles
+2427,43,Grainger
+2428,43,Greene
+2429,43,Grundy
+2430,43,Hamblen
+2431,43,Hamilton
+2432,43,Hancock
+2433,43,Hardeman
+2434,43,Hardin
+2435,43,Hawkins
+2436,43,Haywood
+2437,43,Henderson
+2438,43,Henry
+2439,43,Hickman
+2440,43,Houston
+2441,43,Humphreys
+2442,43,Jackson
+2443,43,Jefferson
+2444,43,Johnson
+2445,43,Knox
+2446,43,Lake
+2447,43,Lauderdale
+2448,43,Lawrence
+2449,43,Lewis
+2450,43,Lincoln
+2451,43,Loudon
+2452,43,Macon
+2453,43,Madison
+2454,43,Marion
+2455,43,Marshall
+2456,43,Maury
+2457,43,McMinn
+2458,43,McNairy
+2459,43,Meigs
+2460,43,Monroe
+2461,43,Montgomery
+2462,43,Moore
+2463,43,Morgan
+2464,43,Obion
+2465,43,Overton
+2466,43,Perry
+2467,43,Pickett
+2468,43,Polk
+2469,43,Putnam
+2470,43,Rhea
+2471,43,Roane
+2472,43,Robertson
+2473,43,Rutherford
+2474,43,Scott
+2475,43,Sequatchie
+2476,43,Sevier
+2477,43,Shelby
+2478,43,Smith
+2479,43,Stewart
+2480,43,Sullivan
+2481,43,Sumner
+2482,43,Tipton
+2483,43,Trousdale
+2484,43,Unicoi
+2485,43,Union
+2486,43,Van Buren
+2487,43,Warren
+2488,43,Washington
+2489,43,Wayne
+2490,43,Weakley
+2491,43,White
+2492,43,Williamson
+2493,43,Wilson
+2494,44,Anderson
+2495,44,Andrews
+2496,44,Angelina
+2497,44,Aransas
+2498,44,Archer
+2499,44,Armstrong
+2500,44,Atascosa
+2501,44,Austin
+2502,44,Bailey
+2503,44,Bandera
+2504,44,Bastrop
+2505,44,Baylor
+2506,44,Bee
+2507,44,Bell
+2508,44,Bexar
+2509,44,Blanco
+2510,44,Borden
+2511,44,Bosque
+2512,44,Bowie
+2513,44,Brazoria
+2514,44,Brazos
+2515,44,Brewster
+2516,44,Briscoe
+2517,44,Brooks
+2518,44,Brown
+2519,44,Burleson
+2520,44,Burnet
+2521,44,Caldwell
+2522,44,Calhoun
+2523,44,Callahan
+2524,44,Cameron
+2525,44,Camp
+2526,44,Carson
+2527,44,Cass
+2528,44,Castro
+2529,44,Chambers
+2530,44,Cherokee
+2531,44,Childress
+2532,44,Clay
+2533,44,Cochran
+2534,44,Coke
+2535,44,Coleman
+2536,44,Collin
+2537,44,Collingsworth
+2538,44,Colorado
+2539,44,Comal
+2540,44,Comanche
+2541,44,Concho
+2542,44,Cooke
+2543,44,Coryell
+2544,44,Cottle
+2545,44,Crane
+2546,44,Crockett
+2547,44,Crosby
+2548,44,Culberson
+2549,44,Dallam
+2550,44,Dallas
+2551,44,Dawson
+2552,44,Deaf Smith
+2553,44,Delta
+2554,44,Denton
+2555,44,DeWitt
+2556,44,Dickens
+2557,44,Dimmit
+2558,44,Donley
+2559,44,Duval
+2560,44,Eastland
+2561,44,Ector
+2562,44,Edwards
+2563,44,El Paso
+2564,44,Ellis
+2565,44,Erath
+2566,44,Falls
+2567,44,Fannin
+2568,44,Fayette
+2569,44,Fisher
+2570,44,Floyd
+2571,44,Foard
+2572,44,Fort Bend
+2573,44,Franklin
+2574,44,Freestone
+2575,44,Frio
+2576,44,Gaines
+2577,44,Galveston
+2578,44,Garza
+2579,44,Gillespie
+2580,44,Glasscock
+2581,44,Goliad
+2582,44,Gonzales
+2583,44,Gray
+2584,44,Grayson
+2585,44,Gregg
+2586,44,Grimes
+2587,44,Guadalupe
+2588,44,Hale
+2589,44,Hall
+2590,44,Hamilton
+2591,44,Hansford
+2592,44,Hardeman
+2593,44,Hardin
+2594,44,Harris
+2595,44,Harrison
+2596,44,Hartley
+2597,44,Haskell
+2598,44,Hays
+2599,44,Hemphill
+2600,44,Henderson
+2601,44,Hidalgo
+2602,44,Hill
+2603,44,Hockley
+2604,44,Hood
+2605,44,Hopkins
+2606,44,Houston
+2607,44,Howard
+2608,44,Hudspeth
+2609,44,Hunt
+2610,44,Hutchinson
+2611,44,Irion
+2612,44,Jack
+2613,44,Jackson
+2614,44,Jasper
+2615,44,Jeff Davis
+2616,44,Jefferson
+2617,44,Jim Hogg
+2618,44,Jim Wells
+2619,44,Johnson
+2620,44,Jones
+2621,44,Karnes
+2622,44,Kaufman
+2623,44,Kendall
+2624,44,Kenedy
+2625,44,Kent
+2626,44,Kerr
+2627,44,Kimble
+2628,44,King
+2629,44,Kinney
+2630,44,Kleberg
+2631,44,Knox
+2632,44,Lamar
+2633,44,Lamb
+2634,44,Lampasas
+2635,44,La Salle
+2636,44,Lavaca
+2637,44,Lee
+2638,44,Leon
+2639,44,Liberty
+2640,44,Limestone
+2641,44,Lipscomb
+2642,44,Live Oak
+2643,44,Llano
+2644,44,Loving
+2645,44,Lubbock
+2646,44,Lynn
+2647,44,McCulloch
+2648,44,McLennan
+2649,44,McMullen
+2650,44,Madison
+2651,44,Marion
+2652,44,Martin
+2653,44,Mason
+2654,44,Matagorda
+2655,44,Maverick
+2656,44,Medina
+2657,44,Menard
+2658,44,Midland
+2659,44,Milam
+2660,44,Mills
+2661,44,Mitchell
+2662,44,Montague
+2663,44,Montgomery
+2664,44,Moore
+2665,44,Morris
+2666,44,Motley
+2667,44,Nacogdoches
+2668,44,Navarro
+2669,44,Newton
+2670,44,Nolan
+2671,44,Nueces
+2672,44,Ochiltree
+2673,44,Oldham
+2674,44,Orange
+2675,44,Palo Pinto
+2676,44,Panola
+2677,44,Parker
+2678,44,Parmer
+2679,44,Pecos
+2680,44,Polk
+2681,44,Potter
+2682,44,Presidio
+2683,44,Rains
+2684,44,Randall
+2685,44,Reagan
+2686,44,Real
+2687,44,Red River
+2688,44,Reeves
+2689,44,Refugio
+2690,44,Roberts
+2691,44,Robertson
+2692,44,Rockwall
+2693,44,Runnels
+2694,44,Rusk
+2695,44,Sabine
+2696,44,San Augustine
+2697,44,San Jacinto
+2698,44,San Patricio
+2699,44,San Saba
+2700,44,Schleicher
+2701,44,Scurry
+2702,44,Shackelford
+2703,44,Shelby
+2704,44,Sherman
+2705,44,Smith
+2706,44,Somervell
+2707,44,Starr
+2708,44,Stephens
+2709,44,Sterling
+2710,44,Stonewall
+2711,44,Sutton
+2712,44,Swisher
+2713,44,Tarrant
+2714,44,Taylor
+2715,44,Terrell
+2716,44,Terry
+2717,44,Throckmorton
+2718,44,Titus
+2719,44,Tom Green
+2720,44,Travis
+2721,44,Trinity
+2722,44,Tyler
+2723,44,Upshur
+2724,44,Upton
+2725,44,Uvalde
+2726,44,Val Verde
+2727,44,Van Zandt
+2728,44,Victoria
+2729,44,Walker
+2730,44,Waller
+2731,44,Ward
+2732,44,Washington
+2733,44,Webb
+2734,44,Wharton
+2735,44,Wheeler
+2736,44,Wichita
+2737,44,Wilbarger
+2738,44,Willacy
+2739,44,Williamson
+2740,44,Wilson
+2741,44,Winkler
+2742,44,Wise
+2743,44,Wood
+2744,44,Yoakum
+2745,44,Young
+2746,44,Zapata
+2747,44,Zavala
+2748,45,Beaver
+2749,45,Box Elder
+2750,45,Cache
+2751,45,Carbon
+2752,45,Daggett
+2753,45,Davis
+2754,45,Duchesne
+2755,45,Emery
+2756,45,Garfield
+2757,45,Grand
+2758,45,Iron
+2759,45,Juab
+2760,45,Kane
+2761,45,Millard
+2762,45,Morgan
+2763,45,Piute
+2764,45,Rich
+2765,45,Salt Lake
+2766,45,San Juan
+2767,45,Sanpete
+2768,45,Sevier
+2769,45,Summit
+2770,45,Tooele
+2771,45,Uintah
+2772,45,Utah
+2773,45,Wasatch
+2774,45,Washington
+2775,45,Wayne
+2776,45,Weber
+2777,46,Addison
+2778,46,Bennington
+2779,46,Caledonia
+2780,46,Chittenden
+2781,46,Essex
+2782,46,Franklin
+2783,46,Grand Isle
+2784,46,Lamoille
+2785,46,Orange
+2786,46,Orleans
+2787,46,Rutland
+2788,46,Washington
+2789,46,Windham
+2790,46,Windsor
+2791,47,Accomack
+2792,47,Albemarle
+2793,47,Alleghany
+2794,47,Amelia
+2795,47,Amherst
+2796,47,Appomattox
+2797,47,Arlington
+2798,47,Augusta
+2799,47,Bath
+2800,47,Bedford
+2801,47,Bland
+2802,47,Botetourt
+2803,47,Brunswick
+2804,47,Buchanan
+2805,47,Buckingham
+2806,47,Campbell
+2807,47,Caroline
+2808,47,Carroll
+2809,47,Charles City
+2810,47,Charlotte
+2811,47,Chesterfield
+2812,47,Clarke
+2813,47,Craig
+2814,47,Culpeper
+2815,47,Cumberland
+2816,47,Dickenson
+2817,47,Dinwiddie
+2818,47,Essex
+2819,47,Fairfax
+2820,47,Fauquier
+2821,47,Floyd
+2822,47,Fluvanna
+2823,47,Franklin
+2824,47,Frederick
+2825,47,Giles
+2826,47,Gloucester
+2827,47,Goochland
+2828,47,Grayson
+2829,47,Greene
+2830,47,Greensville
+2831,47,Halifax
+2832,47,Hanover
+2833,47,Henrico
+2834,47,Henry
+2835,47,Highland
+2836,47,Isle of Wight
+2837,47,James City
+2838,47,King and Queen
+2839,47,King George
+2840,47,King William
+2841,47,Lancaster
+2842,47,Lee
+2843,47,Loudoun
+2844,47,Louisa
+2845,47,Lunenburg
+2846,47,Madison
+2847,47,Mathews
+2848,47,Mecklenburg
+2849,47,Middlesex
+2850,47,Montgomery
+2851,47,Nelson
+2852,47,New Kent
+2853,47,Northampton
+2854,47,Northumberland
+2855,47,Nottoway
+2856,47,Orange
+2857,47,Page
+2858,47,Patrick
+2859,47,Pittsylvania
+2860,47,Powhatan
+2861,47,Prince Edward
+2862,47,Prince George
+2863,47,Prince William
+2864,47,Pulaski
+2865,47,Rappahannock
+2866,47,Richmond
+2867,47,Roanoke
+2868,47,Rockbridge
+2869,47,Rockingham
+2870,47,Russell
+2871,47,Scott
+2872,47,Shenandoah
+2873,47,Smyth
+2874,47,Southampton
+2875,47,Spotsylvania
+2876,47,Stafford
+2877,47,Surry
+2878,47,Sussex
+2879,47,Tazewell
+2880,47,Warren
+2881,47,Washington
+2882,47,Westmoreland
+2883,47,Wise
+2884,47,Wythe
+2885,47,York
 2886,47,City of Alexandria
 2887,47,City of Bedford
 2888,47,City of Bristol
@@ -2923,192 +2923,192 @@ ID,StateID,Name
 2922,47,City of Waynesboro
 2923,47,City of Williamsburg
 2924,47,City of Winchester
-2925,48,Adams County
-2926,48,Asotin County
-2927,48,Benton County
-2928,48,Chelan County
-2929,48,Clallam County
-2930,48,Clark County
-2931,48,Columbia County
-2932,48,Cowlitz County
-2933,48,Douglas County
-2934,48,Ferry County
-2935,48,Franklin County
-2936,48,Garfield County
-2937,48,Grant County
-2938,48,Grays Harbor County
-2939,48,Island County
-2940,48,Jefferson County
-2941,48,King County
-2942,48,Kitsap County
-2943,48,Kittitas County
-2944,48,Klickitat County
-2945,48,Lewis County
-2946,48,Lincoln County
-2947,48,Mason County
-2948,48,Okanogan County
-2949,48,Pacific County
-2950,48,Pend Oreille County
-2951,48,Pierce County
-2952,48,San Juan County
-2953,48,Skagit County
-2954,48,Skamania County
-2955,48,Snohomish County
-2956,48,Spokane County
-2957,48,Stevens County
-2958,48,Thurston County
-2959,48,Wahkiakum County
-2960,48,Walla Walla County
-2961,48,Whatcom County
-2962,48,Whitman County
-2963,48,Yakima County
-2964,49,Barbour County
-2965,49,Berkeley County
-2966,49,Boone County
-2967,49,Braxton County
-2968,49,Brooke County
-2969,49,Cabell County
-2970,49,Calhoun County
-2971,49,Clay County
-2972,49,Doddridge County
-2973,49,Fayette County
-2974,49,Gilmer County
-2975,49,Grant County
-2976,49,Greenbrier County
-2977,49,Hampshire County
-2978,49,Hancock County
-2979,49,Hardy County
-2980,49,Harrison County
-2981,49,Jackson County
-2982,49,Jefferson County
-2983,49,Kanawha County
-2984,49,Lewis County
-2985,49,Lincoln County
-2986,49,Logan County
-2987,49,Marion County
-2988,49,Marshall County
-2989,49,Mason County
-2990,49,McDowell County
-2991,49,Mercer County
-2992,49,Mineral County
-2993,49,Mingo County
-2994,49,Monongalia County
-2995,49,Monroe County
-2996,49,Morgan County
-2997,49,Nicholas County
-2998,49,Ohio County
-2999,49,Pendleton County
-3000,49,Pleasants County
-3001,49,Pocahontas County
-3002,49,Preston County
-3003,49,Putnam County
-3004,49,Raleigh County
-3005,49,Randolph County
-3006,49,Ritchie County
-3007,49,Roane County
-3008,49,Summers County
-3009,49,Taylor County
-3010,49,Tucker County
-3011,49,Tyler County
-3012,49,Upshur County
-3013,49,Wayne County
-3014,49,Webster County
-3015,49,Wetzel County
-3016,49,Wirt County
-3017,49,Wood County
-3018,49,Wyoming County
-3019,50,Adams County
-3020,50,Ashland County
-3021,50,Barron County
-3022,50,Bayfield County
-3023,50,Brown County
-3024,50,Buffalo County
-3025,50,Burnett County
-3026,50,Calumet County
-3027,50,Chippewa County
-3028,50,Clark County
-3029,50,Columbia County
-3030,50,Crawford County
-3031,50,Dane County
-3032,50,Dodge County
-3033,50,Door County
-3034,50,Douglas County
-3035,50,Dunn County
-3036,50,Eau Claire County
-3037,50,Florence County
-3038,50,Fond du Lac County
-3039,50,Forest County
-3040,50,Grant County
-3041,50,Green County
-3042,50,Green Lake County
-3043,50,Iowa County
-3044,50,Iron County
-3045,50,Jackson County
-3046,50,Jefferson County
-3047,50,Juneau County
-3048,50,Kenosha County
-3049,50,Kewaunee County
-3050,50,La Crosse County
-3051,50,Lafayette County
-3052,50,Langlade County
-3053,50,Lincoln County
-3054,50,Manitowoc County
-3055,50,Marathon County
-3056,50,Marinette County
-3057,50,Marquette County
-3058,50,Menominee County
-3059,50,Milwaukee County
-3060,50,Monroe County
-3061,50,Oconto County
-3062,50,Oneida County
-3063,50,Outagamie County
-3064,50,Ozaukee County
-3065,50,Pepin County
-3066,50,Pierce County
-3067,50,Polk County
-3068,50,Portage County
-3069,50,Price County
-3070,50,Racine County
-3071,50,Richland County
-3072,50,Rock County
-3073,50,Rusk County
-3074,50,Sauk County
-3075,50,Sawyer County
-3076,50,Shawano County
-3077,50,Sheboygan County
-3078,50,Saint Croix County
-3079,50,Taylor County
-3080,50,Trempealeau County
-3081,50,Vernon County
-3082,50,Vilas County
-3083,50,Walworth County
-3084,50,Washburn County
-3085,50,Washington County
-3086,50,Waukesha County
-3087,50,Waupaca County
-3088,50,Waushara County
-3089,50,Winnebago County
-3090,50,Wood County
-3091,51,Albany County
-3092,51,Big Horn County
-3093,51,Campbell County
-3094,51,Carbon County
-3095,51,Converse County
-3096,51,Crook County
-3097,51,Fremont County
-3098,51,Goshen County
-3099,51,Hot Springs County
-3100,51,Johnson County
-3101,51,Laramie County
-3102,51,Lincoln County
-3103,51,Natrona County
-3104,51,Niobrara County
-3105,51,Park County
-3106,51,Platte County
-3107,51,Sheridan County
-3108,51,Sublette County
-3109,51,Sweetwater County
-3110,51,Teton County
-3111,51,Uinta County
-3112,51,Washakie County
-3113,51,Weston County
+2925,48,Adams
+2926,48,Asotin
+2927,48,Benton
+2928,48,Chelan
+2929,48,Clallam
+2930,48,Clark
+2931,48,Columbia
+2932,48,Cowlitz
+2933,48,Douglas
+2934,48,Ferry
+2935,48,Franklin
+2936,48,Garfield
+2937,48,Grant
+2938,48,Grays Harbor
+2939,48,Island
+2940,48,Jefferson
+2941,48,King
+2942,48,Kitsap
+2943,48,Kittitas
+2944,48,Klickitat
+2945,48,Lewis
+2946,48,Lincoln
+2947,48,Mason
+2948,48,Okanogan
+2949,48,Pacific
+2950,48,Pend Oreille
+2951,48,Pierce
+2952,48,San Juan
+2953,48,Skagit
+2954,48,Skamania
+2955,48,Snohomish
+2956,48,Spokane
+2957,48,Stevens
+2958,48,Thurston
+2959,48,Wahkiakum
+2960,48,Walla Walla
+2961,48,Whatcom
+2962,48,Whitman
+2963,48,Yakima
+2964,49,Barbour
+2965,49,Berkeley
+2966,49,Boone
+2967,49,Braxton
+2968,49,Brooke
+2969,49,Cabell
+2970,49,Calhoun
+2971,49,Clay
+2972,49,Doddridge
+2973,49,Fayette
+2974,49,Gilmer
+2975,49,Grant
+2976,49,Greenbrier
+2977,49,Hampshire
+2978,49,Hancock
+2979,49,Hardy
+2980,49,Harrison
+2981,49,Jackson
+2982,49,Jefferson
+2983,49,Kanawha
+2984,49,Lewis
+2985,49,Lincoln
+2986,49,Logan
+2987,49,Marion
+2988,49,Marshall
+2989,49,Mason
+2990,49,McDowell
+2991,49,Mercer
+2992,49,Mineral
+2993,49,Mingo
+2994,49,Monongalia
+2995,49,Monroe
+2996,49,Morgan
+2997,49,Nicholas
+2998,49,Ohio
+2999,49,Pendleton
+3000,49,Pleasants
+3001,49,Pocahontas
+3002,49,Preston
+3003,49,Putnam
+3004,49,Raleigh
+3005,49,Randolph
+3006,49,Ritchie
+3007,49,Roane
+3008,49,Summers
+3009,49,Taylor
+3010,49,Tucker
+3011,49,Tyler
+3012,49,Upshur
+3013,49,Wayne
+3014,49,Webster
+3015,49,Wetzel
+3016,49,Wirt
+3017,49,Wood
+3018,49,Wyoming
+3019,50,Adams
+3020,50,Ashland
+3021,50,Barron
+3022,50,Bayfield
+3023,50,Brown
+3024,50,Buffalo
+3025,50,Burnett
+3026,50,Calumet
+3027,50,Chippewa
+3028,50,Clark
+3029,50,Columbia
+3030,50,Crawford
+3031,50,Dane
+3032,50,Dodge
+3033,50,Door
+3034,50,Douglas
+3035,50,Dunn
+3036,50,Eau Claire
+3037,50,Florence
+3038,50,Fond du Lac
+3039,50,Forest
+3040,50,Grant
+3041,50,Green
+3042,50,Green Lake
+3043,50,Iowa
+3044,50,Iron
+3045,50,Jackson
+3046,50,Jefferson
+3047,50,Juneau
+3048,50,Kenosha
+3049,50,Kewaunee
+3050,50,La Crosse
+3051,50,Lafayette
+3052,50,Langlade
+3053,50,Lincoln
+3054,50,Manitowoc
+3055,50,Marathon
+3056,50,Marinette
+3057,50,Marquette
+3058,50,Menominee
+3059,50,Milwaukee
+3060,50,Monroe
+3061,50,Oconto
+3062,50,Oneida
+3063,50,Outagamie
+3064,50,Ozaukee
+3065,50,Pepin
+3066,50,Pierce
+3067,50,Polk
+3068,50,Portage
+3069,50,Price
+3070,50,Racine
+3071,50,Richland
+3072,50,Rock
+3073,50,Rusk
+3074,50,Sauk
+3075,50,Sawyer
+3076,50,Shawano
+3077,50,Sheboygan
+3078,50,Saint Croix
+3079,50,Taylor
+3080,50,Trempealeau
+3081,50,Vernon
+3082,50,Vilas
+3083,50,Walworth
+3084,50,Washburn
+3085,50,Washington
+3086,50,Waukesha
+3087,50,Waupaca
+3088,50,Waushara
+3089,50,Winnebago
+3090,50,Wood
+3091,51,Albany
+3092,51,Big Horn
+3093,51,Campbell
+3094,51,Carbon
+3095,51,Converse
+3096,51,Crook
+3097,51,Fremont
+3098,51,Goshen
+3099,51,Hot Springs
+3100,51,Johnson
+3101,51,Laramie
+3102,51,Lincoln
+3103,51,Natrona
+3104,51,Niobrara
+3105,51,Park
+3106,51,Platte
+3107,51,Sheridan
+3108,51,Sublette
+3109,51,Sweetwater
+3110,51,Teton
+3111,51,Uinta
+3112,51,Washakie
+3113,51,Weston
