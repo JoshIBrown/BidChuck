@@ -85,13 +85,11 @@ namespace BCWeb.Models
 
         [Required]
         [Display(Name = "State")]
-        [RegularExpression("^[a-zA-Z][a-zA-Z]$")]
-        public string State { get; set; }
+        public int StateId { get; set; }
 
         [Required]
         [Display(Name = "County")]
-        [RegularExpression("^[a-zA-Z ]*")]
-        public string County { get; set; }
+        public int CountyId { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -103,12 +101,6 @@ namespace BCWeb.Models
         [Display(Name = "Phone Number")]
         [Phone]
         public string Phone { get; set; }
-
-        //[Required]
-        //[Display(Name = "Pick a Username")]
-        //[StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
-        //[RegularExpression("^[a-zA-Z0-9_]*")]
-        //public string UserName { get; set; }
     }
 
     public class SignInModel
@@ -125,59 +117,4 @@ namespace BCWeb.Models
         [Display(Name = "Email Address")]
         public string Email { get; set; }
     }
-
-    //[Table("UserProfile")]
-    //public class UserProfile
-    //{
-    //    [Key]
-    //    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-    //    public int UserId { get; set; }
-
-    //    public string CompanyName { get; set; }
-
-    //    public string Email { get; set; }
-
-    //    public string FirstName { get; set; }
-
-    //    public string LastName { get; set; }
-
-    //    public string Phone { get; set; }
-    //}
-
-    //[Table("Scope")]
-    //public class Scope
-    //{
-    //    [Key]
-    //    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-    //    public int ScopeID { get; set; }
-
-    //    public string FirstTierSortNumber { get; set; }
-    //    public string FirstTierSortDescription { get; set; }
-    //    public string SecondTierSortNumber { get; set; }
-    //    public string SecondTierSortDescription { get; set; }
-    //    public string ThirdTierSortNumber { get; set; }
-    //    public string ThirdTierSortDescription { get; set; }
-    //}
-
-    //[Table("UserXScope")]
-    //public class UserXScope
-    //{
-    //    [Key]
-    //    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-    //    public int UserXScopeID { get; set; }
-
-    //    public int UserID { get; set; }
-    //    public int ScopeID { get; set; }
-    //}
-
-    //public class UsersContext : DbContext
-    //{
-    //    public UsersContext()
-    //        : base("DefaultConnection")
-    //    {
-    //    }
-
-    //    public DbSet<UserProfile> UserProfiles { get; set; }
-    //    public DbSet<Scope> Scopes { get; set; }
-    //}
 }

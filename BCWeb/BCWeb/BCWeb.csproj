@@ -184,6 +184,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\AccountController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
@@ -194,8 +195,8 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\Api\UsersController.cs" />
-    <Compile Include="Controllers\Api\ScopesController.cs" />
+    <Compile Include="Api\UsersController.cs" />
+    <Compile Include="Api\ScopesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EmailSender.cs" />
     <Compile Include="Global.asax.cs">
@@ -216,6 +217,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="App_Data\aspnet-BCWeb-20130810.mdf" />
+    <Content Include="App_Data\aspnet-BCWeb-20130810_log.ldf">
+      <DependentUpon>aspnet-BCWeb-20130810.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\columnwaiter.gif" />
     <Content Include="Content\cvl.css" />
     <Content Include="Content\foundation\app.css" />
@@ -293,6 +298,7 @@
     <Content Include="Areas\Account\Views\Web.config" />
     <Content Include="Areas\Account\Views\Scopes\Manage.cshtml" />
     <Content Include="Areas\Account\Views\Shared\_ScopePicker.cshtml" />
+    <Content Include="county.csv" />
     <None Include="Properties\PublishProfiles\bcdev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bcdev - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
@@ -312,6 +318,7 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\Areas\Account\RegCtrl.js" />
     <Content Include="Scripts\Areas\Account\ScopesList.js" />
     <Content Include="Scripts\Areas\Home\HomeCtrl.js" />
     <Content Include="Scripts\cvl.js" />
@@ -663,6 +670,7 @@
     <Content Include="Views\Account\ForgotPasswordStepTwo.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordSuccess.cshtml" />
+    <Content Include="state.csv" />
     <None Include="tblCSI2004.csv" />
     <Content Include="Views\Account\ManageScopes.cshtml" />
     <Content Include="Views\Shared\_Foundation.cshtml" />
@@ -671,7 +679,6 @@
     <Content Include="Views\Home\_NewestMembers.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Account\Models\Scopes\Repository\" />
     <Folder Include="Areas\Account\Models\Scopes\ServiceLayer\" />
     <Folder Include="Views\Admin\" />

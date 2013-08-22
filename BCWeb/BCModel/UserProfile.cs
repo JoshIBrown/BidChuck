@@ -32,13 +32,13 @@ namespace BCModel
         // as well as have a reference to the entity itself
         // you set the foreign key to point at the id, the entity reference uses this
         // leaving out required at the moment.  it break db update because we don't have a default value for it.
-        public int StateId { get; set; }
+        public int? StateId { get; set; }
         [ForeignKey("StateId")]
         [IgnoreDataMember]
         public virtual State State { get; set; }
 
 
-        public int CountyId { get; set; }
+        public int? CountyId { get; set; }
         [ForeignKey("CountyId")]
         [IgnoreDataMember]
         public virtual County County { get; set; }

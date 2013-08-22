@@ -17,7 +17,65 @@ namespace BCWeb
         {
 
             LoadScopes(context);
+            LoadStatesAndCounties(context);
         }
+
+
+        public void LoadStatesAndCounties(BidChuckContext context)
+        {
+            DbSet<State> states = context.State;
+            DbSet<County> counties = context.Counties;
+
+
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            string connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties='text;HDR=Yes';", path);
+            string commandText = "select [ID],[Code],[Name] from state.csv";
+
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            {
+                using (OleDbDataAdapter adap = new OleDbDataAdapter(commandText, conn))
+                {
+                    conn.Open();
+                    using (DataSet ds = new DataSet())
+                    {
+                        adap.Fill(ds);
+                        foreach (DataTable table in ds.Tables)
+                        {
+                            foreach (DataRow row in table.Rows)
+                            {
+                                State toAdd = new State { Id = int.Parse(row["ID"].ToString()), Abbr = row["Code"].ToString(), Name = row["Name"].ToString() };
+                                states.Add(toAdd);
+                            }
+                        }
+                    }
+                }
+            }
+            context.SaveChanges();
+
+            commandText = "select [ID],[StateID],[Name] from county.csv";
+
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            {
+                using (OleDbDataAdapter adap = new OleDbDataAdapter(commandText, conn))
+                {
+                    conn.Open();
+                    using (DataSet ds = new DataSet())
+                    {
+                        adap.Fill(ds);
+                        foreach (DataTable table in ds.Tables)
+                        {
+                            foreach (DataRow row in table.Rows)
+                            {
+                                County toAdd = new County { Id = int.Parse(row["ID"].ToString()), StateId = int.Parse(row["StateID"].ToString()), Name = row["Name"].ToString() };
+                                counties.Add(toAdd);
+                            }
+                        }
+                    }
+                }
+            }
+            context.SaveChanges();
+        }
+
 
         public void LoadScopes(BidChuckContext context)
         {

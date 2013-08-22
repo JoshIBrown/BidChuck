@@ -7,64 +7,73 @@
     <h1>@ViewBag.Title</h1>
 </hgroup>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+<div ng-app="regApp" class="small-6 column small-centered">
+    <div ng-controller="RegCtrl">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
 
-    <fieldset>
-        <legend>Registration Form</legend>
-        <ul>
-            <li>
-                @Html.LabelFor(m => m.Email)
-                @Html.TextBoxFor(m => m.Email)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.FirstName)
-                @Html.TextBoxFor(m => m.FirstName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.LastName)
-                @Html.TextBoxFor(m => m.LastName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.CompanyName)
-                @Html.TextBoxFor(m => m.CompanyName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.State)
-                @*@Html.DropDownListFor(m => m.State, new StateList(?))*@
-            </li>
-            <li>
-                @Html.LabelFor(m => m.County)
-                @*@Html.DropDownListFor(m => m.County?)*@
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Phone)
-                @Html.TextBoxFor(m => m.Phone)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>
-        </ul>
-        <input type="submit" value="Register" />
-    </fieldset>
-    
-    <section class="resendconfirmationemail">
-    @Html.ActionLink("Re-Send Confirmation Email", "ResendConfirmationEmail")
-    </section>
-    
-    <section class="forgotpassword">
-    @Html.ActionLink("Forgot Password", "ForgotPassword")
-    </section>
-}
+            <fieldset>
+                <legend>Registration Form</legend>
+                <ul class="no-bullets">
+                    <li>
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email)
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.FirstName)
+                        @Html.TextBoxFor(m => m.FirstName)
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.LastName)
+                        @Html.TextBoxFor(m => m.LastName)
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.CompanyName)
+                        @Html.TextBoxFor(m => m.CompanyName)
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.StateId)
+                        <select id="StateId" name="StateId" ng-options="s.Id as s.Value for s in states" ng-model="selectedState" ng-change="updateCounties()">
+                            <option value="">select..</option>
+                        </select>
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.CountyId)
+                        <select id="CountyId" name="CountyId" ng-options="c.Id as c.Value for c in counties" ng-model="selectedCounty">
+                            <option value="">select..</option>
+                        </select>
 
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.Phone)
+                        @Html.TextBoxFor(m => m.Phone)
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password)
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword)
+                    </li>
+                </ul>
+                <input type="submit" value="Register" />
+            </fieldset>
+    
+            <section class="resendconfirmationemail">
+                @Html.ActionLink("Re-Send Confirmation Email", "ResendConfirmationEmail")
+            </section>
+    
+            <section class="forgotpassword">
+                @Html.ActionLink("Forgot Password", "ForgotPassword")
+            </section>
+        }
+    </div>
+</div>
 @section Scripts {
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/Areas/Account/RegCtrl.js")
 }

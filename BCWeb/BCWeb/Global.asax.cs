@@ -57,9 +57,7 @@ namespace BCWeb
                     new Dictionary<string, object> { 
                     { "Published", false },
                     {"Phone",""},
-                    {"CompanyName","bidchuck"},
-                    {"State","bidchuck"},
-                    {"County","bidchuck"} 
+                    {"CompanyName","bidchuck"}
                     });
             }
 
