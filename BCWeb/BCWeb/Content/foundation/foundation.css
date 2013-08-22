@@ -4518,12 +4518,12 @@ a.th {
 
 /* Tooltips */
 .has-tip {
-  border-bottom: dotted 1px #cccccc;
+  /*border-bottom: dotted 1px #cccccc;*/
   cursor: help;
   font-weight: bold;
   color: #333333; }
   .has-tip:hover, .has-tip:focus {
-    border-bottom: dotted 1px #196177;
+    /*border-bottom: dotted 1px #196177;*/
     color: #2ba6cb; }
   .has-tip.tip-left, .has-tip.tip-right {
     float: none !important; }

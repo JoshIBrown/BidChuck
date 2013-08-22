@@ -34,8 +34,7 @@
             </div>
             <div class="row">
                 <div class="large-12 large-centered columns">
-                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "left inline" })
-                    @Html.LabelFor(m => m.RememberMe, new { @class = "left inline" })
+                    <label for="RememberMe" >@Html.CheckBoxFor(m => m.RememberMe) Remember Me</label>
                 </div>
             </div>
             <div class="row">

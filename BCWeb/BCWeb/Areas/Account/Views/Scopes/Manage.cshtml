@@ -5,59 +5,69 @@
 
 <h2>Manage Scopes</h2>
 <div class="row" ng-app="scopePicker">
-    <div class="large-10 columns" ng-controller="ScopesCtrl">
+    <div class="large-12 columns" ng-controller="ScopesCtrl">
         <fieldset>
             <legend>Scopes</legend>
             <div class="row">
                 <div class="large-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
-                    <ul id="t1" style="list-style-type: none !important;">
-                        <li ng-repeat="x in Scopes | filter: {ParentId :'!'} | orderBy:'Number'"
-                            value="{{x.Id}}"
-                            title="{{x.Description}}"
-                            class="has-tip tip-right">
-                            <input id="check{{x.Id}}"
-                                name="check{{x.Id}}"
-                                type="checkbox"
-                                ng-model="x.Checked"
-                                ng-change="changeScopeSelection(x)" />
-                            {{x.Description | truncate: 20}}
-                            <span style="display: inline-block !important;"
-                                class="ui-icon ui-icon-circle-arrow-e"
-                                ng-click="t1Expand(x.Id)"></span>
-                        </li>
-                    </ul>
+                    <table id="t1" style="width: 100%;" class="scope-picker">
+                        <tbody>
+                            <tr ng-repeat="x in Scopes | filter: {ParentId :'!'} | orderBy:'Number'"
+                                ng-class="{'selected-scope': x.Id == t1Parent }"
+                                style="height: 20px !important;">
+                                <td title="{{x.Description}}"
+                                    class="has-tip tip-right">
+                                    <input id="check{{x.Id}}"
+                                        name="check{{x.Id}}"
+                                        type="checkbox"
+                                        ng-model="x.Checked"
+                                        ng-change="changeScopeSelection(x)" />
+                                    {{x.Description | truncate: 26}}</td>
+                                <td><span style="display: inline-block !important;"
+                                    class="ui-icon ui-icon-circle-arrow-e"
+                                    ng-click="t1Expand(x.Id)"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="large-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
-                    <ul id="t2" style="list-style-type: none !important;">
-                        <li ng-repeat="y in Scopes | parentIdEqual: t1Parent | orderBy:'Number'"
-                            value="{{y.Id}}"
-                            title="{{y.Description}}"
-                            class="has-tip tip-right">
-                            <input id="{{y.id}}"
-                                type="checkbox"
-                                ng-model="y.Checked"
-                                ng-change="changeScopeSelection(y)" />
-                            {{y.Description | truncate: 20}}
-                            <span style="display: inline-block !important;"
-                                class="ui-icon ui-icon-circle-arrow-e"
-                                ng-click="t2Expand(y.Id)"></span>
-                        </li>
-                    </ul>
+                    <table id="t2" style="width: 100%;" class="scope-picker">
+                        <tbody>
+                            <tr ng-repeat="y in Scopes | parentIdEqual: t1Parent | orderBy:'Number'"
+                                ng-class="{'selected-scope': y.Id == t2Parent }"
+                                style="height: 20px !important;">
+                                <td title="{{y.Description}}"
+                                    class="has-tip tip-right">
+                                    <input id="check{{y.Id}}"
+                                        name="check{{y.Id}}"
+                                        type="checkbox"
+                                        ng-model="y.Checked"
+                                        ng-change="changeScopeSelection(x)" />
+                                    {{y.Description | truncate: 26}}</td>
+                                <td><span style="display: inline-block !important;"
+                                    class="ui-icon ui-icon-circle-arrow-e"
+                                    ng-click="t2Expand(y.Id)"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-
                 <div class="large-4 columns">
-                    <ul id="t3" style="list-style-type: none !important;">
-                        <li ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'Number'"
-                            value="{{z.Id}}"
-                            title="{{z.Description}}"
-                            class="has-tip tip-right">
-                            <input id="{{z.Id}}"
-                                type="checkbox"
-                                ng-model="z.Checked"
-                                ng-change="changeScopeSelection(z)" />
-                            {{z.Description | truncate: 20}}
-                        </li>
-                    </ul>
+                    <table id="t2" style="width: 100%;" class="scope-picker">
+                        <tbody>
+                            <tr ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'Number'"
+                                style="height: 20px !important;">
+                                <td title="{{z.Description}}"
+                                    class="has-tip tip-right">
+                                    <input id="check{{z.Id}}"
+                                        name="check{{z.Id}}"
+                                        type="checkbox"
+                                        ng-model="z.Checked"
+                                        ng-change="changeScopeSelection(x)" />
+                                    {{z.Description | truncate: 31}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </fieldset>

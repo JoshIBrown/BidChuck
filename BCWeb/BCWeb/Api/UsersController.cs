@@ -18,7 +18,7 @@ namespace BCWeb.Controllers.Api
             using (BidChuckContext context = new BidChuckContext())
             {
                 // get 10 most recently registered and published companies
-                var companies = context.UserProfiles.Where(x => x.Published && x.Email != "admin")
+                var companies = context.UserProfiles.Where(x => x.Email != "admin@bidchuck.com")
                                                     .OrderByDescending(x => x.UserId)
                                                     .Take(10)
                                                     .Select(x => new { Id = x.UserId, Company = x.CompanyName })

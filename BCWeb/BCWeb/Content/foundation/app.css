@@ -1,0 +1,38 @@
+
+ul.scope-picker {
+    height: 25px;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+table.scope-picker {
+    border-collapse: collapse;
+}
+
+    table.scope-picker tr {
+        margin: 0px !important;
+        padding: 0px !important;
+        line-height: 1em;
+    }
+
+        table.scope-picker tr td {
+            line-height: 1em;
+            margin: 0px !important;
+            padding: .4em 0px 0px .3em !important;
+        }
+
+.scope-picker label {
+    font-size: 1em;
+}
+
+.selected-scope,
+table.scope-picker tr.even.selected-scope,
+table.scope-picker tr.alt.selected-scope,
+table.scope-picker tr.selected-scope:nth-of-type(2n) {
+    background-color: #2ba6cb;
+    color: #fff !important;
+}
+
+    .selected-scope .has-tip {
+        color: #fff !important;
+    }
