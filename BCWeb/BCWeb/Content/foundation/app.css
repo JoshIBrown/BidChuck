@@ -19,6 +19,8 @@ table.scope-picker {
             line-height: 1em;
             margin: 0px !important;
             padding: .4em 0px 0px .3em !important;
+            font-size: .9em;
+            font-weight:normal;
         }
 
 .scope-picker label {
