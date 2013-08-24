@@ -48,6 +48,10 @@
     <Compile Include="BidChuckContext.cs" />
     <Compile Include="County.cs" />
     <Compile Include="DBAudit.cs" />
+    <Compile Include="Migrations\201308241727578_changeNumberToCsiNumber.cs" />
+    <Compile Include="Migrations\201308241727578_changeNumberToCsiNumber.Designer.cs">
+      <DependentUpon>201308241727578_changeNumberToCsiNumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
@@ -55,10 +59,17 @@
     <Compile Include="UserProfile.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Migrations\county.csv" />
     <None Include="Migrations\state.csv" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201308241727578_changeNumberToCsiNumber.resx">
+      <DependentUpon>201308241727578_changeNumberToCsiNumber.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

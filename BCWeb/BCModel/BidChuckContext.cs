@@ -49,7 +49,7 @@ namespace BCModel
             List<ObjectStateEntry> entries = oc.ObjectContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Deleted | System.Data.EntityState.Modified).ToList();
             foreach (ObjectStateEntry entry in entries)
             {
-                if (!entry.IsRelationship && entry.Entity != null && !(entry.Entity is Audit.DBAudit))
+                if (/*!entry.IsRelationship && */entry.Entity != null && !(entry.Entity is Audit.DBAudit))
                 {
                     string userName = _currentUser;
                     Audit.DBAudit audit = this.AuditTrailFactory(entry, userName);

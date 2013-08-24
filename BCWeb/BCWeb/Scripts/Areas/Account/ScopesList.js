@@ -2,6 +2,9 @@
     $scope.t1Parent = 0;
     $scope.t2Parent = 0;
     $scope.selectedScopes = [];
+    $scope.saved = false;
+    $scope.saving = false;
+    $scope.cantsave = false;
 
     $http.get('/api/Scopes/GetScopesToManage')
          .success(function (data) {
@@ -11,7 +14,8 @@
                      return {
                          Id: data.Id,
                          Desc: data.Description,
-                         Checked: data.Checked
+                         Checked: data.Checked,
+                         Csi: data.CsiNumber
                      };
                  }
              });
@@ -35,16 +39,33 @@
             $scope.selectedScopes.push({
                 Id: data.Id,
                 Desc: data.Description,
-                Checked: data.Checked
+                Checked: data.Checked,
+                Csi: data.CsiNumber
             });
         }
 
-
+        // update parents
         $scope.updateParent(data);
 
+        // update children
         $scope.updateChildren(data);
     };
 
+    // update scope selection if x is clicked on tag in basket
+    $scope.removeTag = function (data) {
+        var scope = '';
+        // find the scope i the list
+        angular.forEach($scope.Scopes, function (v, k) {
+            if (v.Id === data.Id) {
+                scope = v;
+            }
+        });
+        // uncheck the scope
+        scope.Checked = false;
+
+        // cascade 
+        $scope.changeScopeSelection(scope);
+    };
 
     // recursive function that goes through the lineage until epoch
     $scope.updateParent = function (aScope) {
@@ -59,7 +80,8 @@
                     $scope.selectedScopes.push({
                         Id: v.Id,
                         Desc: v.Description,
-                        Checked: v.Checked
+                        Checked: v.Checked,
+                        Csi: v.CsiNumber
                     });
                 }
             }
@@ -79,7 +101,8 @@
                     $scope.selectedScopes.push({
                         Id: v.Id,
                         Desc: v.Description,
-                        Checked: v.Checked
+                        Checked: v.Checked,
+                        Csi: v.CsiNumber
                     });
                 }
             }
@@ -103,6 +126,9 @@
 
     // save selection to server
     $scope.saveChanges = function () {
+        $scope.saving = true;
+        $scope.saved = false;
+        $scope.cantsave = false;
         // create a new array containing only the id's of the selected scopes
         var toPut = angular.toJson($.map($scope.selectedScopes, function (data) {
             // if selected scopes
@@ -114,8 +140,13 @@
         // put the new list to the server
         $http({ url: '/api/Scopes/PutSelectedScopes', method: 'PUT', data: toPut })
             .success(function (result) {
-                alert(result.message);
+                if (result.success) {
+                    $scope.saved = true;
+                } else {
+                    $scope.cantsave = true;
+                }
             });
+        $scope.saving = false;
     };
 });
 

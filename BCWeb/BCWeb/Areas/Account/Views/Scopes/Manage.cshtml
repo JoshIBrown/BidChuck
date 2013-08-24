@@ -5,11 +5,11 @@
 
 <h2>Manage Scopes</h2>
 <div class="row" ng-app="scopePicker">
-    <div class="large-12 columns" ng-controller="ScopesCtrl">
+    <div class="small-12 columns" ng-controller="ScopesCtrl">
         <fieldset>
             <legend>Scopes</legend>
             <div class="row">
-                <div class="large-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+                <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
                     <table id="t1" style="width: 100%;" class="scope-picker">
                         <tbody>
                             <tr ng-repeat="x in Scopes | filter: {ParentId :'!'} | orderBy:'Number'"
@@ -22,6 +22,7 @@
                                         type="checkbox"
                                         ng-model="x.Checked"
                                         ng-change="changeScopeSelection(x)" />
+                                    {{x.CsiNumber | truncate: 2: ""}}
                                     {{x.Description | truncate: 26}}</td>
                                 <td><span style="display: inline-block !important;"
                                     class="ui-icon ui-icon-circle-arrow-e"
@@ -30,7 +31,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="large-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+                <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
                     <table id="t2" style="width: 100%;" class="scope-picker">
                         <tbody>
                             <tr ng-repeat="y in Scopes | parentIdEqual: t1Parent | orderBy:'Number'"
@@ -42,7 +43,8 @@
                                         name="check{{y.Id}}"
                                         type="checkbox"
                                         ng-model="y.Checked"
-                                        ng-change="changeScopeSelection(x)" />
+                                        ng-change="changeScopeSelection(y)" />
+                                    {{y.CsiNumber}} 
                                     {{y.Description | truncate: 26}}</td>
                                 <td><span style="display: inline-block !important;"
                                     class="ui-icon ui-icon-circle-arrow-e"
@@ -51,8 +53,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="large-4 columns">
-                    <table id="t2" style="width: 100%;" class="scope-picker">
+                <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+                    <table id="t3" style="width: 100%;" class="scope-picker">
                         <tbody>
                             <tr ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'Number'"
                                 style="height: 20px !important;">
@@ -62,7 +64,8 @@
                                         name="check{{z.Id}}"
                                         type="checkbox"
                                         ng-model="z.Checked"
-                                        ng-change="changeScopeSelection(x)" />
+                                        ng-change="changeScopeSelection(z)" />
+                                    {{z.CsiNumber}}
                                     {{z.Description | truncate: 31}}</td>
                             </tr>
                         </tbody>
@@ -71,13 +74,30 @@
                 </div>
             </div>
         </fieldset>
-        <div>
-            <button class="medium button" ng-click="saveChanges()">Save</button>
+        <div class="row">
+            <div class="small-1 columns">
+                <button class="medium button" ng-click="saveChanges()" ng-disabled="saving">Save</button>
+            </div>
+            <div class="small-2 columns left">
+                <div ng-show="saving" style="text-align: center;">
+                    <img src="~/Content/images/saving.gif" alt="saving gif" />
+                </div>
+                <span ng-show="saved">Succefully Saved
+                    <img src="~/Content/images/small_green_check.png" alt="green checkmark" /></span>
+                <span ng-show="cantsave">There was a problem saving.  Please try again.</span>
+            </div>
         </div>
-        <div>
-            <ul>
-                <li ng-repeat="s in selectedScopes | filter:{Checked: true}">{{s}}</li>
-            </ul>
+        <div class="row">
+            <div class="small-12 columns ">
+                <fieldset class="panel">
+                    <legend>Selected Scopes</legend>
+                    <ul class="inline-list">
+                        <li ng-repeat="s in selectedScopes | filter:{Checked: true}">
+                            <div class="alert-box radius" style="padding: 2px 25px 2px 7px;">{{s.Csi}} {{s.Desc}} <a href="#" class="close" ng-click="removeTag(s)">&times;</a></div>
+                        </li>
+                    </ul>
+                </fieldset>
+            </div>
         </div>
     </div>
 

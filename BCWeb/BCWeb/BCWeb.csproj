@@ -228,6 +228,8 @@
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
     <None Include="Content\Site.css.exclude" />
+    <Content Include="Content\images\saving.gif" />
+    <Content Include="Content\images\small_green_check.png" />
     <Content Include="Content\logos\BidChuck_135x45_white.png" />
     <Content Include="Content\logos\BidChuck_150x50_white.png" />
     <Content Include="Content\logos\BidChuck_66x22_white.png" />

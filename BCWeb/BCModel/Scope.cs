@@ -16,7 +16,7 @@ namespace BCModel
         public int Id { get; set; }
 
         [Required]
-        public string Number { get; set; }
+        public string CsiNumber { get; set; }
 
         [Required]
         public string Description { get; set; }

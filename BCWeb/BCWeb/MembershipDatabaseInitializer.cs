@@ -11,14 +11,13 @@ using System.Collections.Generic;
 
 namespace BCWeb
 {
-    public class MembershipDatabaseInitializer : CreateDatabaseIfNotExists<BidChuckContext>
+    public class MembershipDatabaseInitializer : MigrateDatabaseToLatestVersion<BidChuckContext, BCModel.Migrations.Configuration>
     {
-        protected override void Seed(BidChuckContext context)
-        {
-
-            LoadScopes(context);
-            LoadStatesAndCounties(context);
-        }
+        //protected override void Seed(BidChuckContext context)
+        //{
+        //    LoadScopes(context);
+        //    LoadStatesAndCounties(context);
+        //}
 
 
         public void LoadStatesAndCounties(BidChuckContext context)
@@ -104,24 +103,24 @@ namespace BCWeb
                                 // and when not already in temp scope list
                                 if (row["GroupNumber"].ToString().Trim() == row["2ndTierSortNumber"].ToString().Trim()
                                     && row["GroupNumber"].ToString().Trim() == row["3rdTierSortNumber"].ToString().Trim()
-                                    && scopes.Where(x => x.Number == row["GroupNumber"].ToString().Trim()).Count() == 0)
+                                    && scopes.Where(x => x.CsiNumber == row["GroupNumber"].ToString().Trim()).Count() == 0)
                                 {
                                     scopes.Add(new Scope
                                     {
                                         Description = row["GroupDescription"].ToString().Trim(),
-                                        Number = row["GroupNumber"].ToString().Trim()
+                                        CsiNumber = row["GroupNumber"].ToString().Trim()
                                     });
                                 }
                                 // is child when 1st and 2nd are not equal
                                 // and when not already in temp scope list
                                 if (row["GroupNumber"].ToString().Trim() != row["2ndTierSortNumber"].ToString().Trim()
-                                    && scopes.Where(x => x.Number == row["2ndTierSortNumber"].ToString().Trim()).Count() == 0)
+                                    && scopes.Where(x => x.CsiNumber == row["2ndTierSortNumber"].ToString().Trim()).Count() == 0)
                                 {
-                                    parent = scopes.Where(x => x.Number == row["GroupNumber"].ToString().Trim()).FirstOrDefault();
+                                    parent = scopes.Where(x => x.CsiNumber == row["GroupNumber"].ToString().Trim()).FirstOrDefault();
                                     scopes.Add(new Scope
                                     {
                                         Description = row["2ndTierSortDescription"].ToString().Trim(),
-                                        Number = row["2ndTierSortNumber"].ToString().Trim(),
+                                        CsiNumber = row["2ndTierSortNumber"].ToString().Trim(),
                                         Parent = parent
                                     });
                                 }
@@ -129,13 +128,13 @@ namespace BCWeb
                                 // and when not already in temp scope list
                                 if (/*row["GroupNumber"].ToString().Trim() == row["2ndTierSortNumber"].ToString().Trim()
                                     &&*/ row["2ndTierSortNumber"].ToString().Trim() != row["3rdTierSortNumber"].ToString().Trim()
-                                    && scopes.Where(x => row["3rdTierSortNumber"].ToString().Trim().Contains(x.Number)).Count() == 0)
+                                    && scopes.Where(x => row["3rdTierSortNumber"].ToString().Trim().Contains(x.CsiNumber)).Count() == 0)
                                 {
-                                    parent = scopes.Where(x => x.Number == row["2ndTierSortNumber"].ToString().Trim()).FirstOrDefault();
+                                    parent = scopes.Where(x => x.CsiNumber == row["2ndTierSortNumber"].ToString().Trim()).FirstOrDefault();
                                     scopes.Add(new Scope
                                     {
                                         Description = row["3rdTierSortDescription"].ToString().Trim(),
-                                        Number = row["3rdTierSortNumber"].ToString().Trim(),
+                                        CsiNumber = row["3rdTierSortNumber"].ToString().Trim(),
                                         Parent = parent
                                     });
                                 }

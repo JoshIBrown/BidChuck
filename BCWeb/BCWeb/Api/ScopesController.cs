@@ -65,7 +65,7 @@ namespace BCWeb.Controllers.Api
             using (BidChuckContext context = new BidChuckContext())
             {
                 viewModel = context.Scopes.OrderBy(s => s.Id)
-                    .Select(s => new ScopeViewModel { Description = s.Description, Id = s.Id, ParentId = s.ParentId }).ToArray();
+                    .Select(s => new ScopeViewModel { CsiNumber = s.CsiNumber, Description = s.Description, Id = s.Id, ParentId = s.ParentId }).ToArray();
             }
 
             return viewModel;
@@ -91,7 +91,8 @@ namespace BCWeb.Controllers.Api
                         Checked = chosenScopes.Contains(s),
                         Description = s.Description,
                         Id = s.Id,
-                        ParentId = s.ParentId
+                        ParentId = s.ParentId,
+                        CsiNumber = s.CsiNumber
                     }).ToArray();
             }
 
