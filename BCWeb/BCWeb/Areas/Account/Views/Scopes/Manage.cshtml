@@ -22,12 +22,11 @@
                                         type="checkbox"
                                         ng-model="x.Checked"
                                         ng-change="changeScopeSelection(x)" />
-                                    <span ng-click="t1Expand(x.Id)">
-                                    {{x.CsiNumber | truncate: 2: ""}}
+                                    <span ng-click="t1Expand(x.Id)">{{x.CsiNumber | truncate: 2: ""}}
                                     {{x.Description | truncate: 30}}</span></td>
                                 <td><span style="display: inline-block !important;"
                                     class="ui-icon ui-icon-circle-arrow-e"
-                                    ></span></td>
+                                    ng-click="t1Expand(x.Id)"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -45,8 +44,7 @@
                                         type="checkbox"
                                         ng-model="y.Checked"
                                         ng-change="changeScopeSelection(y)" />
-                                    <span ng-click="t2Expand(y.Id)">
-                                    {{y.CsiNumber}} 
+                                    <span ng-click="t2Expand(y.Id)">{{y.CsiNumber}} 
                                     {{y.Description | truncate: 26}}</span></td>
                                 <td><span style="display: inline-block !important;"
                                     class="ui-icon ui-icon-circle-arrow-e"
@@ -61,7 +59,7 @@
                             <tr ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'Number'"
                                 style="height: 20px !important;">
                                 <td title="{{z.Description}}"
-                                    class="has-tip tip-right" style="overflow-x:hidden;">
+                                    class="has-tip tip-right" style="overflow-x: hidden;">
                                     <input id="check{{z.Id}}"
                                         name="check{{z.Id}}"
                                         type="checkbox"
