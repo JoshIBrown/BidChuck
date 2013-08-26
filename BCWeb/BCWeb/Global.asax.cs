@@ -35,8 +35,11 @@ namespace BCWeb
             Database.SetInitializer<BidChuckContext>(new MembershipDatabaseInitializer());
             BidChuckContext context = new BidChuckContext();
             context.Database.Initialize(true);
+            InitializeMembership();
+        }
 
-
+        private void InitializeMembership()
+        {
             if (!WebSecurity.Initialized)
             {
                 WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserID", "Email", autoCreateTables: true);
@@ -48,6 +51,57 @@ namespace BCWeb
             {
                 Roles.Provider.CreateRole("Administrator");
             }
+
+            if (!Roles.Provider.RoleExists("Manager"))
+            {
+                Roles.Provider.CreateRole("Manager");
+            }
+
+            if (!Roles.Provider.RoleExists("Employee"))
+            {
+                Roles.Provider.CreateRole("Employee");
+            }
+
+            if (!Roles.Provider.RoleExists("general_contractor"))
+            {
+                Roles.Provider.CreateRole("general_contractor");
+            }
+
+            if (!Roles.Provider.RoleExists("subcontractor"))
+            {
+                Roles.Provider.CreateRole("subcontractor");
+            }
+
+            if (!Roles.Provider.RoleExists("architect"))
+            {
+                Roles.Provider.CreateRole("architect");
+            }
+
+            if (!Roles.Provider.RoleExists("engineer"))
+            {
+                Roles.Provider.CreateRole("engineer");
+            }
+
+            if (!Roles.Provider.RoleExists("owner_client"))
+            {
+                Roles.Provider.CreateRole("owner_client");
+            }
+
+            if (!Roles.Provider.RoleExists("materials_vendor"))
+            {
+                Roles.Provider.CreateRole("materials_vendor");
+            }
+
+            if (!Roles.Provider.RoleExists("materials_manufacturer"))
+            {
+                Roles.Provider.CreateRole("materials_manufacturer");
+            }
+
+            if (!Roles.Provider.RoleExists("consultant"))
+            {
+                Roles.Provider.CreateRole("consultant");
+            }
+
 
             if (Membership.Provider.GetUser("admin", false) == null)
             {
@@ -65,8 +119,6 @@ namespace BCWeb
             {
                 Roles.Provider.AddUsersToRoles(new[] { "admin" }, new[] { "Administrator" });
             }
-
-
         }
     }
 }

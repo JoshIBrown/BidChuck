@@ -10,6 +10,8 @@ using WebMatrix.WebData;
 using WebMatrix.Data;
 using BCModel;
 using BCWeb.Models.Account.ServiceLayer;
+using BCWeb.Models.Account.ViewModel;
+using BCWeb.Helpers;
 
 namespace BCWeb.Controllers
 {
@@ -17,9 +19,9 @@ namespace BCWeb.Controllers
     public class AccountController : Controller
     {
 
-        private IGenericServiceLayer<UserProfile> _serviceLayer;
+        private IUserProfileServiceLayer _serviceLayer;
 
-        public AccountController(IGenericServiceLayer<UserProfile> serviceLayer)
+        public AccountController(IUserProfileServiceLayer serviceLayer)
         {
             _serviceLayer = serviceLayer;
         }
@@ -61,7 +63,7 @@ namespace BCWeb.Controllers
                 //using (UsersContext uc = new UsersContext())
                 //{
                 //UserProfile user = uc.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
-                UserProfile user = _serviceLayer.GetEnumerable(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
+                UserProfile user = _serviceLayer.GetProfiles(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
 
                 if (user != null)
                 {
@@ -89,12 +91,18 @@ namespace BCWeb.Controllers
             return View(model);
         }
 
-        public ActionResult Manage()
+        public ActionResult Manage(ManageMessageId? message)
         {
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                : message == ManageMessageId.RemoveSignInSuccess ? "The external SignIn was removed."
+                : message == ManageMessageId.ChangeCompanyInfoSuccess ? "Compnay Info successfully updated."
+                : "";
             return View();
         }
 
-        
+
 
         [AllowAnonymous]
         public ActionResult ResetPassword(string User, string Token)
@@ -116,7 +124,7 @@ namespace BCWeb.Controllers
                 // Look up the user
                 //using (UsersContext uc = new UsersContext())
                 //{
-                UserProfile user = _serviceLayer.GetEnumerable(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
+                UserProfile user = _serviceLayer.GetProfiles(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
 
                 if (user != null)
                 {
@@ -158,7 +166,12 @@ namespace BCWeb.Controllers
             {
                 return RedirectToRoute("Default", new { controller = "Accout", action = "Manage" });
             }
-            return View();
+
+            RegisterModel viewModel = new RegisterModel();
+            viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString() });
+            viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -179,9 +192,9 @@ namespace BCWeb.Controllers
                             FirstName = model.FirstName,
                             LastName = model.LastName,
                             StateId = model.StateId,
-                            CountyId = model.CountyId,
+                            //CountyId = model.CountyId, // pulled for now
                             CompanyName = model.CompanyName,
-                            Phone = model.Phone,
+                            Phone = Util.ConvertPhoneForStorage(model.Phone),
                             Published = false
                         }, true);
 
@@ -217,7 +230,7 @@ namespace BCWeb.Controllers
                 // Look up the user's confirmation token
                 //using (UsersContext uc = new UsersContext())
                 //{
-                UserProfile user = _serviceLayer.GetEnumerable(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
+                UserProfile user = _serviceLayer.GetProfiles(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
                 if (user != null)
                 {
                     try
@@ -378,6 +391,109 @@ namespace BCWeb.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult EditCompany()
+        {
+            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            if (hasLocalAccount)
+            {
+                var raw = _serviceLayer.GetProfile(WebSecurity.GetUserId(User.Identity.Name));
+                EditCompanyViewModel viewModel = new EditCompanyViewModel
+                {
+                    Address1 = raw.Address1,
+                    Address2 = raw.Address2,
+                    BusinessTypeId = raw.BusinessTypeId.HasValue ? raw.BusinessTypeId.Value : 0,
+                    City = raw.City,
+                    CompanyName = raw.CompanyName,
+                    Id = raw.UserId,
+                    OperatingDistance = raw.OperatingDistance,
+                    Phone = raw.Phone == "" ? "" : Util.ConvertPhoneForDisplay(raw.Phone),
+                    PostalCode = raw.PostalCode,
+                    StateId = raw.StateId.HasValue ? raw.StateId.Value : 0
+                };
+                viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
+                viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("SignIn", new { returnUrl = Url.Action("SignIn").ToString() });
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCompany(EditCompanyViewModel viewModel)
+        {
+            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            if (hasLocalAccount)
+            {
+                if (ModelState.IsValid)
+                {
+                    var profile = _serviceLayer.GetProfile(WebSecurity.GetUserId(User.Identity.Name));
+
+                    if (viewModel.Address1 != null && profile.Address1 != viewModel.Address1.Trim())
+                        profile.Address1 = viewModel.Address1.Trim();
+
+                    if (viewModel.Address2 != null && profile.Address2 != viewModel.Address2.Trim())
+                        profile.Address2 = viewModel.Address2.Trim();
+
+                    if (viewModel.BusinessTypeId != null && profile.BusinessTypeId != viewModel.BusinessTypeId)
+                        profile.BusinessTypeId = viewModel.BusinessTypeId;
+
+                    if (viewModel.City != null && profile.City != viewModel.City)
+                        profile.City = viewModel.City;
+
+                    if (viewModel.CompanyName != null && profile.CompanyName != viewModel.CompanyName.Trim())
+                        profile.CompanyName = viewModel.CompanyName.Trim();
+
+                    if (viewModel.OperatingDistance != null && profile.OperatingDistance != viewModel.OperatingDistance)
+                        profile.OperatingDistance = viewModel.OperatingDistance;
+
+                    if (viewModel.Phone != null && profile.Phone != viewModel.Phone.Trim())
+                        profile.Phone = Util.ConvertPhoneForStorage(viewModel.Phone.Trim());
+
+                    if (viewModel.PostalCode != null && profile.PostalCode != viewModel.PostalCode.Trim())
+                        profile.PostalCode = viewModel.PostalCode.Trim();
+
+                    if (viewModel.StateId != null && profile.StateId != viewModel.StateId)
+                        profile.StateId = viewModel.StateId;
+
+
+                    if (_serviceLayer.UpdateProfile(profile))
+                    {
+                        return RedirectToAction("Manage", new { message = ManageMessageId.ChangeCompanyInfoSuccess });
+                    }
+                    else
+                    {
+                        Util.MapValidationErrors(_serviceLayer.ValidationDic, this.ModelState);
+                        viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
+                        viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
+                        return View(viewModel);
+                    }
+                }
+                else
+                {
+                    viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
+                    viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
+                    return View(viewModel);
+                }
+            }
+            else
+            {
+                // no local account
+                return RedirectToAction("SignIn", new { returnUrl = Url.Action("EditInfo").ToString() });
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ChangeEmail()
+        {
+            return View();
+        }
+
         #region Helpers
 
         public enum ManageMessageId
@@ -385,7 +501,8 @@ namespace BCWeb.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveSignInSuccess,
-            ResetPasswordSuccess
+            ResetPasswordSuccess,
+            ChangeCompanyInfoSuccess
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)

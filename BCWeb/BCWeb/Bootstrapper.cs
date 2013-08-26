@@ -28,8 +28,8 @@ namespace BCWeb
 
             // e.g. container.RegisterType<ITestService, TestService>();    
 
-            container.RegisterType<IGenericServiceLayer<UserProfile>, UserProfileServiceLayer>();
-            container.RegisterType<IGenericRepository<UserProfile>, UserProfileRepository>();
+            container.RegisterType<IUserProfileServiceLayer, UserProfileServiceLayer>();
+            container.RegisterType<IUserProfileRepository, UserProfileRepository>();
             RegisterTypes(container);
 
             return container;

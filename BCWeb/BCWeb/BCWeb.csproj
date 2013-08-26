@@ -202,15 +202,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ParameterRebinder.cs" />
+    <Compile Include="Helpers\Util.cs" />
     <Compile Include="MembershipDatabaseInitializer.cs" />
+    <Compile Include="Models\Account\Repository\IUserProfileRepository.cs" />
     <Compile Include="Models\Account\Repository\UserProfileRepository.cs" />
+    <Compile Include="Models\Account\ServiceLayer\IUserProfileServiceLayer.cs" />
     <Compile Include="Models\Account\ServiceLayer\UserProfileServiceLayer.cs" />
     <Compile Include="Models\Account\ViewModel\AccountModels.cs" />
+    <Compile Include="Models\Account\ViewModel\EditCompanyViewModel.cs" />
     <Compile Include="Models\GenericRepository.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
     <Compile Include="Models\IGenericServiceLayer.cs" />
     <Compile Include="Models\RepositoryBase.cs" />
+    <Compile Include="Models\ServiceLayerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -306,7 +312,6 @@
     <None Include="Properties\PublishProfiles\bcdev - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\bcdev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bcdev - Web Deploy.pubxml" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.min.js" />
     <Content Include="Scripts\angular-bootstrap.js" />
@@ -630,13 +635,15 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -682,6 +689,8 @@
     <Content Include="Views\Home\Foundation_Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Home\_NewestMembers.cshtml" />
+    <Content Include="Views\Account\EditCompany.cshtml" />
+    <Content Include="Views\Account\ChangeEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Models\Scopes\Repository\" />
@@ -728,7 +737,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.8\tools\Microsoft.Bcl.Build.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace BCWeb.Models
 {
@@ -10,7 +11,7 @@ namespace BCWeb.Models
     {
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -25,14 +26,14 @@ namespace BCWeb.Models
         public string OldPassword { get; set; }
     }
 
-    public class  ResetPasswordModel
+    public class ResetPasswordModel
     {
         public string Email { get; set; }
         public string PasswordResetToken { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -48,7 +49,7 @@ namespace BCWeb.Models
         [Display(Name = "Email Address")]
         public string Email { get; set; }
     }
-    
+
     public class ForgotPasswordModel
     {
         [Required]
@@ -58,14 +59,21 @@ namespace BCWeb.Models
 
     public class RegisterModel
     {
+        public IEnumerable<SelectListItem> States { get; set; }
+        public IEnumerable<SelectListItem> BusinessTypes { get; set; }
+
         [Required]
         [Display(Name = "Company Name")]
         [RegularExpression("^[a-zA-Z0-9 _-]*")]
         public string CompanyName { get; set; }
 
+        [Required]
+        [Display(Name = "Business Type")]
+        public int BusinessTypeId { get; set; }
+
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.Web.Mvc.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -80,16 +88,29 @@ namespace BCWeb.Models
 
         [Required]
         [Display(Name = "Last Name")]
-        [RegularExpression("^[a-zA-Z]*")]
+        [RegularExpression("^[a-zA-Z -]*")]
         public string LastName { get; set; }
+
+
+        [Display(Name = "Address (optional)")]
+        [RegularExpression(@"^[a-zA-Z\d\s]+$")]
+        public string Address1 { get; set; }
+        [Display(Name = "Address 2 (optional)")]
+        [RegularExpression(@"^[a-zA-Z\d\s#]*$")]
+        public string Address2 { get; set; }
+
+        [Display(Name = "City (optional)")]
+        [RegularExpression("^[a-zA-Z -]*")]
+        public string City { get; set; }
+
+        [Required]
+        [RegularExpression(@"^\d{5}(-\d{4})?$")]
+        public string PostalCode { get; set; }
 
         [Required]
         [Display(Name = "State")]
         public int StateId { get; set; }
 
-        [Required]
-        [Display(Name = "County")]
-        public int CountyId { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -101,6 +122,10 @@ namespace BCWeb.Models
         [Display(Name = "Phone Number")]
         [Phone]
         public string Phone { get; set; }
+
+        [Required]
+        [Display(Name = "Operating Distance")]
+        public int OperatingDistance { get; set; }
     }
 
     public class SignInModel

@@ -1,14 +1,16 @@
-﻿@model BCWeb.Models.RegisterModel
+﻿@model BCWeb.Models.Account.ViewModel.EditCompanyViewModel
 @{
-    ViewBag.Title = "Create a new account.";
+    ViewBag.Title = "Edit Info";
 }
 
-<div style="width: 301px; margin-left: auto; margin-right: auto;">
-    <img src="~/Content/logos/logo_color_301x100.png" alt="bidCHUCK logo" />
+<div class="row">
+    <div class="large-4 column large-centered">
+        <h3>Edit Company Information</h3>
+    </div>
+
 </div>
 
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "" }))
+@using (Html.BeginForm())
 {
     <div class="row">
         <div class="large-8 columns large-centered">
@@ -69,72 +71,30 @@
                     <div class="large-4 columns">
                         @Html.LabelFor(m => m.OperatingDistance)
                         <select class="pretty" name="OperatingDistance">
-                            <option selected>select...</option>
-                            <option value="25">25 Miles</option>
-                            <option value="50">50 Miles</option>
-                            <option value="100">100 Miles</option>
-                            <option value="150">150 Miles</option>
-                            <option value="200">200 Miles</option>
-                            <option value="300">300 Miles</option>
-                            <option value="400">400 Miles</option>
-                            <option value="500">500 Miles</option>
-                            <option value="0">USA</option>
+                            <option>select...</option>
+                            <option value="25" @if (Model.OperatingDistance == 25) { @Html.Raw("selected"); }>25 Miles</option>
+                            <option value="50" @if (Model.OperatingDistance == 50) { @Html.Raw("selected"); }>50 Miles</option>
+                            <option value="100" @if (Model.OperatingDistance == 100) { @Html.Raw("selected"); }>100 Miles</option>
+                            <option value="150" @if (Model.OperatingDistance == 150) { @Html.Raw("selected"); }>150 Miles</option>
+                            <option value="200" @if (Model.OperatingDistance == 200) { @Html.Raw("selected"); }>200 Miles</option>
+                            <option value="300" @if (Model.OperatingDistance == 300) { @Html.Raw("selected"); }>300 Miles</option>
+                            <option value="400" @if (Model.OperatingDistance == 400) { @Html.Raw("selected"); }>400 Miles</option>
+                            <option value="500" @if (Model.OperatingDistance == 500) { @Html.Raw("selected"); }>500 Miles</option>
+                            <option value="0" @if (Model.OperatingDistance == 0) { @Html.Raw("selected"); }>USA</option>
                         </select>
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset class="large-8">
-                <legend>Personal Info</legend>
-                <div class="row">
-                    <div class="large-6 columns left">
-                        @Html.LabelFor(m => m.FirstName)
-                        @Html.TextBoxFor(m => m.FirstName)
-                    </div>
-                    <div class="large-6 columns left">
-                        @Html.LabelFor(m => m.LastName)
-                        @Html.TextBoxFor(m => m.LastName)
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="large-10 columns left">
-                        @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email)
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-6 columns left">
-                        @Html.LabelFor(m => m.Password)
-                        @Html.PasswordFor(m => m.Password)
-                    </div>
-                    <div class="large-6 columns left">
-                        @Html.LabelFor(m => m.ConfirmPassword)
-                        @Html.PasswordFor(m => m.ConfirmPassword)
                     </div>
                 </div>
             </fieldset>
             <div class="row">
                 <div class="large-3 columns left">
-                    <input type="submit" value="Register" class="medium button" />
-                </div>
-                <div class="large-6 columns left">
-                    <section class="resendconfirmationemail">
-                        @Html.ActionLink("Re-Send Confirmation Email", "ResendConfirmationEmail")
-                    </section>
-
-                    <section class="forgotpassword">
-                        @Html.ActionLink("Forgot Password", "ForgotPassword")
-                    </section>
+                    <input type="submit" value="Save Changes" class="medium button" />
                 </div>
             </div>
-
-
-
         </div>
     </div>
+    
 }
 
-@section Scripts {
+@section scripts{
     @Scripts.Render("~/bundles/jqueryval")
-
 }

@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCWeb.Models.Account.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,34 +7,21 @@ using System.Web;
 
 namespace BCWeb.Models.Account.ServiceLayer
 {
-    public class UserProfileServiceLayer : IGenericServiceLayer<UserProfile>
+    public class UserProfileServiceLayer : IUserProfileServiceLayer
     {
-        private IGenericRepository<UserProfile> _repo;
+        private IUserProfileRepository _repo;
 
-        public UserProfileServiceLayer(IGenericRepository<UserProfile> repo)
+        public UserProfileServiceLayer(IUserProfileRepository repo)
         {
             _repo = repo;
-            ValidationDic = new Dictionary<string, string>();
         }
 
-        public Dictionary<string, string> ValidationDic
+        public bool CreateProfile(UserProfile profile)
         {
-            get;
-            private set;
-        }
-
-        public bool Create(UserProfile entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(UserProfile entity)
-        {
+            // TODO: validate before create
             try
             {
-                // TODO: validate before update
-                _repo.Update(entity);
-                _repo.Save();
+                _repo.CreateProfile(profile);
                 return true;
             }
             catch (Exception ex)
@@ -44,34 +32,88 @@ namespace BCWeb.Models.Account.ServiceLayer
             }
         }
 
-        public bool Delete(UserProfile entity)
+        public bool UpdateProfile(UserProfile profile)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // TODO: validate before update
+                _repo.UpdateProfile(profile);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
         }
 
-        public bool Delete(int id)
+        public bool DeleteProfile(UserProfile profile)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _repo.DeleteProfile(profile);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
         }
 
-        public IEnumerable<UserProfile> GetEnumerable()
+        public bool DeleteProfile(int id)
         {
-            return _repo.Query().AsEnumerable();
+            try
+            {
+                _repo.DeleteProfile(id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
         }
 
-        public IEnumerable<UserProfile> GetEnumerable(System.Linq.Expressions.Expression<Func<UserProfile, bool>> predicate)
+        public IEnumerable<UserProfile> GetProfiles()
         {
-            return _repo.Query().Where(predicate).AsEnumerable();
+            return _repo.QueryProfiles().AsEnumerable();
         }
 
-        public UserProfile Get(int id)
+        public IEnumerable<UserProfile> GetProfiles(System.Linq.Expressions.Expression<Func<UserProfile, bool>> predicate)
         {
-            return _repo.Get(id);
+            return _repo.QueryProfiles().Where(predicate).AsEnumerable();
+        }
+
+        public IEnumerable<State> GetStates()
+        {
+            return _repo.QueryStates().AsEnumerable();
+        }
+
+
+        public UserProfile GetProfile(int id)
+        {
+            return _repo.GetProfile(id);
         }
 
         public bool Exists(int id)
         {
-            return _repo.Exists(id);
+            return _repo.QueryProfiles().Where(x => x.UserId == id).Count() == 1;
+        }
+
+        public IEnumerable<BusinessType> GetBusinessTypes()
+        {
+            return _repo.QueryBusinessTypes().AsEnumerable();
+        }
+
+        public Dictionary<string, string> ValidationDic
+        {
+            get;
+            private set;
         }
     }
 }

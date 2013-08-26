@@ -135,6 +135,7 @@ namespace BCModel
         public DbSet<DBAudit> DBAudits { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<County> Counties { get; set; }
+        public DbSet<BusinessType> BusinessTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

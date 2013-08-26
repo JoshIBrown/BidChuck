@@ -21,10 +21,10 @@ namespace BCModel
         [Required]
         public string Email { get; set; }
 
-   
+
         public string FirstName { get; set; }
 
-    
+
         public string LastName { get; set; }
 
 
@@ -32,6 +32,13 @@ namespace BCModel
         // as well as have a reference to the entity itself
         // you set the foreign key to point at the id, the entity reference uses this
         // leaving out required at the moment.  it break db update because we don't have a default value for it.
+
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string City { get; set; }
+        [Required]
+        public string PostalCode { get; set; }
+
         public int? StateId { get; set; }
         [ForeignKey("StateId")]
         [IgnoreDataMember]
@@ -47,6 +54,13 @@ namespace BCModel
         public string Phone { get; set; }
 
         public bool Published { get; set; }
+
+        public int OperatingDistance { get; set; }
+
+        public int? BusinessTypeId { get; set; }
+        [ForeignKey("BusinessTypeId")]
+        [IgnoreDataMember]
+        public virtual BusinessType BusinessType { get; set; }
 
         [IgnoreDataMember]
         public virtual ICollection<Scope> Scopes { get; set; }

@@ -20,7 +20,7 @@ table.scope-picker {
             margin: 0px !important;
             padding: .4em 0px 0px .3em !important;
             font-size: .9em;
-            font-weight:normal;
+            font-weight: normal;
         }
 
 .scope-picker label {
@@ -38,3 +38,19 @@ table.scope-picker tr.selected-scope:nth-of-type(2n) {
     .selected-scope .has-tip {
         color: #fff !important;
     }
+
+select.pretty {
+    display: block;
+    position: relative;
+    top: 0px;
+    height: 2.3125em;
+    margin-bottom: 1.25em;
+    margin-top: 0px;
+    padding: 0px;
+    width: 100%;
+    background: linear-gradient(to bottom, white 0%, rgb(243, 243, 243) 100%) repeat scroll 0% 0% transparent;
+    box-shadow: none;
+    font-size: 0.875em;
+    vertical-align: top;
+    border: 1px solid rgb(204, 204, 204);
+}
