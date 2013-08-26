@@ -16,6 +16,7 @@
         <div class="large-8 columns large-centered">
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
+            @Html.HiddenFor(m => m.Id)
         </div>
     </div>
     <div class="row">

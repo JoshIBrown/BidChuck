@@ -218,6 +218,7 @@
     <Compile Include="Models\Account\ServiceLayer\UserProfileServiceLayer.cs" />
     <Compile Include="Models\Account\ViewModel\AccountModels.cs" />
     <Compile Include="Models\Account\ViewModel\EditCompanyViewModel.cs" />
+    <Compile Include="Models\Account\ViewModel\EditEmailViewModel.cs" />
     <Compile Include="Models\GenericRepository.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
@@ -335,6 +336,7 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\Areas\Account\ManageView.js" />
     <Content Include="Scripts\Areas\Account\RegCtrl.js" />
     <Content Include="Scripts\Areas\Account\ScopesList.js" />
     <Content Include="Scripts\Areas\Home\HomeCtrl.js" />

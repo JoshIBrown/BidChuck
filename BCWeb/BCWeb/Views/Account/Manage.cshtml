@@ -3,25 +3,43 @@
 
 
 
-<div clas="row">
-    <div class="large-4 columns large-centered">
-        <div class="alert-box success">@ViewBag.StatusMessage<a href="#" class="close">&times;</a></div>
+@if (@ViewBag.StatusMessage != "")
+{
+    <div clas="row">
+        <div class="large-4 columns large-centered">
+            <div class="alert-box success">@ViewBag.StatusMessage<a href="#" class="close">&times;</a></div>
+        </div>
     </div>
-</div>
+}
 <div class="row">
     <div class="large-3 columns left">
         <ul class="side-nav">
             <li class="divider"></li>
             <li>@Html.RouteLink("Update Company Information", "Default", new { controller = "Account", action = "EditCompany" })</li>
+            <li>@Html.RouteLink("Update Personal Information", "Default", new { controller = "Account", action = "EditProfile" })</li>
             <li>@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage" })</li>
             <li>@Html.RouteLink("Change Email Address", "Default", new { controller = "Account", action = "ChangeEmail" })</li>
             <li>@Html.RouteLink("Change Password", "Default", new { controller = "Account", action = "ChangePassword" })</li>
             <li class="divider"></li>
         </ul>
     </div>
-    <div class="large-6 columns left panel"></div>
+    <div class="large-6 columns left panel">
+        <fieldset>
+            <legend>Company Info</legend>
+        </fieldset>
+        <fieldset>
+            <legend>Profile Info</legend>
+        </fieldset>
+        <fieldset>
+            <legend>Delegates</legend>
+        </fieldset>
+        <fieldset>
+            <legend>Work Scopes</legend>
+        </fieldset>
+    </div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/Areas/Account/ManageView.js")
 }

@@ -98,6 +98,8 @@ namespace BCWeb.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveSignInSuccess ? "The external SignIn was removed."
                 : message == ManageMessageId.ChangeCompanyInfoSuccess ? "Compnay Info successfully updated."
+                : message == ManageMessageId.ChangeEmailSuccess ? "Email successfully updated."
+                : message == ManageMessageId.ChangeProfileSuccess ? "Profile Information succefully updated."
                 : "";
             return View();
         }
@@ -491,7 +493,55 @@ namespace BCWeb.Controllers
         [HttpGet]
         public ActionResult ChangeEmail()
         {
-            return View();
+            // get user profile
+            var raw = _serviceLayer.GetProfile(WebSecurity.GetUserId(User.Identity.Name));
+            // create view model
+            EditEmailViewModel viewModel = new EditEmailViewModel();
+            viewModel.UserId = raw.UserId;
+            viewModel.CurrentEmail = raw.Email;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeEmail(EditEmailViewModel viewModel)
+        {
+            // model state checks out
+            if (ModelState.IsValid)
+            {
+                // username and password check out
+                if (Membership.ValidateUser(viewModel.CurrentEmail, viewModel.Password))
+                {
+
+                    var toUpdate = _serviceLayer.GetProfile(viewModel.UserId);
+                    toUpdate.Email = viewModel.NewEmail;
+
+                    // if update successfull
+                    if (_serviceLayer.UpdateProfile(toUpdate))
+                    {
+                        // logout and back in unobtrusively to refresh context
+                        WebSecurity.Logout();
+                        WebSecurity.Login(viewModel.NewEmail, viewModel.Password);
+                        return RedirectToAction("Manage", new { message = ManageMessageId.ChangeEmailSuccess });
+                    }
+                    else
+                    {
+                        Util.MapValidationErrors(_serviceLayer.ValidationDic, this.ModelState);
+                        return View(viewModel);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Password", "Incorrect Password");
+                    return View(viewModel);
+                }
+            }
+            else
+            {
+                return View(viewModel);
+            }
+
         }
 
         #region Helpers
@@ -502,7 +552,9 @@ namespace BCWeb.Controllers
             SetPasswordSuccess,
             RemoveSignInSuccess,
             ResetPasswordSuccess,
-            ChangeCompanyInfoSuccess
+            ChangeCompanyInfoSuccess,
+            ChangeEmailSuccess,
+            ChangeProfileSuccess
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
