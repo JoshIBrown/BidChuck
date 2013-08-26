@@ -18,7 +18,7 @@ namespace BCWeb
             message.To.Add(new MailAddress(Email, FirstName));
             message.From = new MailAddress("admin@bidchuck.com", "BidChuck Admin");
             message.Subject = "BidChuck New Account Confirmation";
-            
+
             string text = @"
                 Hello " + FirstName + @",
 
@@ -77,6 +77,45 @@ namespace BCWeb
                     <p>To reset your password visit:</p>
                     <p></p>
                     <p><a href=""http://bcdev.azurewebsites.net/Account/ResetPassword?user=" + Email + @"&token=" + PasswordResetToken + @""">http://bcdev.azurewebsites.net/Account/ResetPassword?user=" + Email + @"&token=" + PasswordResetToken + @"</a></p>
+                    <p></p>
+                    <p>Thanks!</p>
+                    <p></p>
+                    <p>-The BidChuck Team</p>
+                  </body>
+                </html>
+            ";
+
+            SendMail(message, text, html);
+        }
+
+        public static void SendNewDelegateEmail(string Inviter, string FirstName, string Email, string ConfirmAccoutToken)
+        {
+            MailMessage message = new MailMessage();
+            List<MailAddress> recipients = new List<MailAddress>();
+
+            message.To.Add(new MailAddress(Email, FirstName));
+            message.From = new MailAddress("admin@bidchuck.com", "BidChuck Admin");
+            message.Subject = "BidChuck Invitation from " + Inviter;
+
+            string text = @"
+                Hello " + FirstName + @"," +
+
+                Inviter + @"has added you to their bidCHUCK account.  To complete the process please go to: 
+                
+                http://bcdev.azurewebsites.net/Account/AcceptInvitation?user=" + Email + @"&token=" + ConfirmAccoutToken + @"
+
+                Thanks!
+
+                -The BidChuck Team
+            ";
+
+            string html = @"
+                <html>
+                  <body>
+                    <p>Hello " + FirstName + @",</p>
+                    <p>" + Inviter + @"has added you to their bidCHUCK account.  To complete the process please go to: </p>
+                    <p></p>
+                    <p><a href=""http://bcdev.azurewebsites.net/Account/AcceptInvitation?user=" + Email + @"&token=" + ConfirmAccoutToken + @""">http://bcdev.azurewebsites.net/Account/AcceptInvitation?user=" + Email + @"&token=" + ConfirmAccoutToken + @"</a></p>
                     <p></p>
                     <p>Thanks!</p>
                     <p></p>

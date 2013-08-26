@@ -192,6 +192,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
     <Compile Include="Areas\Account\Controllers\ScopesController.cs" />
+    <Compile Include="Areas\Account\Controllers\UsersController.cs" />
     <Compile Include="Areas\Account\Models\Scopes\Repository\IScopeRepository.cs" />
     <Compile Include="Areas\Account\Models\Scopes\Repository\ScopeRepository.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ServiceLayer\IScopeServiceLayer.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeHierarchyViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeMgmtViewModel.cs" />
+    <Compile Include="Areas\Account\Models\Users\ViewModel\NewUserViewModel.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -219,6 +221,9 @@
     <Compile Include="Models\Account\ViewModel\AccountModels.cs" />
     <Compile Include="Models\Account\ViewModel\EditCompanyViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\EditEmailViewModel.cs" />
+    <Compile Include="Models\Account\ViewModel\EditProfileViewModel.cs" />
+    <Compile Include="Models\Account\ViewModel\InvitationViewModel.cs" />
+    <Compile Include="Models\Account\ViewModel\ManageDashboardViewModel.cs" />
     <Compile Include="Models\GenericRepository.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
@@ -241,6 +246,7 @@
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
+    <Content Include="Areas\Account\Views\Users\Add.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\logos\logo_color_301x100.png" />
     <Content Include="Content\images\saving.gif" />
@@ -701,8 +707,13 @@
     <Content Include="Views\Home\_NewestMembers.cshtml" />
     <Content Include="Views\Account\EditCompany.cshtml" />
     <Content Include="Views\Account\ChangeEmail.cshtml" />
+    <Content Include="Views\Account\EditProfile.cshtml" />
+    <Content Include="Views\Account\AcceptInvitation.cshtml" />
+    <Content Include="Views\Account\AcceptInvitationSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Account\Models\Users\Repository\" />
+    <Folder Include="Areas\Account\Models\Users\ServiceLayer\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>

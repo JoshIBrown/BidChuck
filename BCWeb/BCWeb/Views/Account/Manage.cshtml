@@ -30,9 +30,13 @@
         <fieldset>
             <legend>Profile Info</legend>
         </fieldset>
-        <fieldset>
-            <legend>Delegates</legend>
-        </fieldset>
+        @if (Roles.IsUserInRole("Manager") || Roles.IsUserInRole("Administrator"))
+        {
+            <fieldset>
+                <legend>Delegates</legend>
+                @Html.RouteLink("Add new delegate", "Account_default", new { controller = "Users", action = "Add" })
+            </fieldset>
+        }
         <fieldset>
             <legend>Work Scopes</legend>
         </fieldset>

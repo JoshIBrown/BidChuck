@@ -1,0 +1,46 @@
+﻿@model BCWeb.Models.Account.ViewModel.InvitationViewModel
+@{
+    ViewBag.Title = "AcceptInvitation";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<div class="row">
+    <div class="large-4 columns large-centered">
+        <h3>Welcome! Please set your password</h3>
+    </div>
+</div>
+
+@using (Html.BeginForm("AcceptInvitation", "Account"))
+{
+<div class="row">
+    <div class="large-4 columns large-centered">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+    </div>
+</div>
+<div class="row">
+    <div class="large-4 columns large-centered">
+        @Html.HiddenFor(m => m.Email)
+        @Html.HiddenFor(m => m.PasswordResetToken)
+    
+        @Html.LabelFor(m => m.NewPassword)
+        @Html.PasswordFor(m => m.NewPassword)
+    </div>
+</div>
+<div class="row">
+    <div class="large-4 columns large-centered">
+        @Html.LabelFor(m => m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword)
+    </div>
+</div>
+<div class="row">
+    <div class="large-4 columns large-centered">
+        <input type="submit" value="Reset Password" class="medium button" />
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

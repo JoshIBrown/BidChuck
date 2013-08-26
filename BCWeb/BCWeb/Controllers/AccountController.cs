@@ -124,8 +124,7 @@ namespace BCWeb.Controllers
             if (ModelState.IsValid)
             {
                 // Look up the user
-                //using (UsersContext uc = new UsersContext())
-                //{
+
                 UserProfile user = _serviceLayer.GetProfiles(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
 
                 if (user != null)
@@ -154,7 +153,6 @@ namespace BCWeb.Controllers
                 {
                     ModelState.AddModelError("Email", "Unknown email address.");
                 }
-                //}
             }
 
             // If we got this far, something failed, redisplay form
@@ -197,8 +195,18 @@ namespace BCWeb.Controllers
                             //CountyId = model.CountyId, // pulled for now
                             CompanyName = model.CompanyName,
                             Phone = Util.ConvertPhoneForStorage(model.Phone),
+                            Address1 = model.Address1,
+                            Address2 = model.Address2,
+                            City = model.City,
+                            PostalCode = model.PostalCode,
+                            OperatingDistance = model.OperatingDistance,
+                            BusinessTypeId = model.BusinessTypeId,
                             Published = false
                         }, true);
+
+                    Roles.AddUserToRole(model.Email, "Manager");
+
+                    // todo: add user to role for business type
 
                     EmailSender.SendConfirmationMail(model.FirstName, model.Email, confirmationToken);
 
@@ -303,7 +311,10 @@ namespace BCWeb.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.Email, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToLocal(returnUrl);
+                if (returnUrl == null || returnUrl == "")
+                    return RedirectToRoute("Default", new { controller = "Home", action = "Index" });
+                else
+                    return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
@@ -544,6 +555,78 @@ namespace BCWeb.Controllers
 
         }
 
+
+        [HttpGet]
+        public ActionResult EditProfile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile(EditProfileViewModel viewModel)
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult AcceptInvitation(string user, string token)
+        {
+            // confirm account to unlock it
+            if (WebSecurity.ConfirmAccount(user, token))
+            {
+                // force user to reset their passowrd
+                string passwordToken = WebSecurity.GeneratePasswordResetToken(user);
+                InvitationViewModel viewModel = new InvitationViewModel
+                {
+                    PasswordResetToken = passwordToken,
+                    Email = user
+                };
+                return View(viewModel);
+            }
+            // change this to invation failure
+            return RedirectToAction("ConfirmationFailure");
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AcceptInvitation(InvitationViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // if user exists
+                if (WebSecurity.UserExists(viewModel.Email))
+                {
+                    // ResetPassword may throw an exception rather than return false in certain failure scenarios.
+                    bool resetPasswordSucceeded;
+                    try
+                    {
+                        resetPasswordSucceeded = WebSecurity.ResetPassword(viewModel.PasswordResetToken, viewModel.NewPassword);
+                    }
+                    catch (Exception)
+                    {
+                        resetPasswordSucceeded = false;
+                    }
+
+                    if (resetPasswordSucceeded)
+                    {
+                        return View("AcceptInvitationSuccess");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "An error has occured. Please try again or contact the administrator.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Email", "Unknown email address.");
+                }
+            }
+            return View(viewModel);
+
+        }
         #region Helpers
 
         public enum ManageMessageId

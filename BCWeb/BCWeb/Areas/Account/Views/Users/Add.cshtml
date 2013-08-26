@@ -1,0 +1,55 @@
+﻿@model BCWeb.Areas.Account.Models.Users.ViewModel.NewUserViewModel
+@{
+    ViewBag.Title = "Add new user";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="large-3 columns large-centered">
+            <h3>Add new user</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-4 columns large-centered panel">
+            <div class="row">
+                <div class="large-12 columns">
+                    @Html.LabelFor(m => m.FirstName)
+                    @Html.TextBoxFor(m => m.FirstName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    @Html.LabelFor(m => m.LastName)
+                    @Html.TextBoxFor(m => m.LastName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email)
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    @Html.LabelFor(m => m.EmailConfirm)
+                    @Html.TextBoxFor(m => m.EmailConfirm)
+                    @Html.ValidationMessageFor(m => m.EmailConfirm)
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <input type="submit" value="Add" class="medium button" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
