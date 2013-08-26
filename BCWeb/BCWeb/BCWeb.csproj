@@ -170,6 +170,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.Mvc4.1.2.0.0\lib\net40\Unity.Mvc4.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.WebApi">
+      <HintPath>..\packages\Unity.WebAPI.0.10\lib\net40\Unity.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -189,6 +192,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
     <Compile Include="Areas\Account\Controllers\ScopesController.cs" />
+    <Compile Include="Areas\Account\Models\Scopes\Repository\IScopeRepository.cs" />
+    <Compile Include="Areas\Account\Models\Scopes\Repository\ScopeRepository.cs" />
+    <Compile Include="Areas\Account\Models\Scopes\ServiceLayer\IScopeServiceLayer.cs" />
+    <Compile Include="Areas\Account\Models\Scopes\ServiceLayer\ScopeServiceLayer.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeHierarchyViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeMgmtViewModel.cs" />
@@ -654,6 +661,7 @@
     <Content Include="Scripts\ScopesCVL.js" />
     <Content Include="Scripts\zepto.js" />
     <Content Include="Unity.Mvc4.README.txt" />
+    <Content Include="Unity.WebAPI.README.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -693,8 +701,6 @@
     <Content Include="Views\Account\ChangeEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Account\Models\Scopes\Repository\" />
-    <Folder Include="Areas\Account\Models\Scopes\ServiceLayer\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>

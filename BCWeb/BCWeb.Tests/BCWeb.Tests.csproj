@@ -118,6 +118,9 @@
     <Reference Include="Unity.Mvc4">
       <HintPath>..\packages\Unity.Mvc4.1.2.0.0\lib\net40\Unity.Mvc4.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.WebApi">
+      <HintPath>..\packages\Unity.WebAPI.0.10\lib\net40\Unity.WebApi.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Account\Account\ScopesControllerTest.cs" />
@@ -128,6 +131,7 @@
   <ItemGroup>
     <Content Include="App.config" />
     <Content Include="Unity.Mvc4.README.txt" />
+    <Content Include="Unity.WebAPI.README.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

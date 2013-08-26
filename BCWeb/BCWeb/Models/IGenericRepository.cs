@@ -14,6 +14,5 @@ namespace BCWeb.Models
         T Get(int id);
         IQueryable<T> Query();
         void Save();
-        bool Exists(int id);
     }
 }

@@ -5,6 +5,9 @@ using BCModel;
 using BCWeb.Models;
 using BCWeb.Models.Account.ServiceLayer;
 using BCWeb.Models.Account.Repository;
+using System.Web.Http;
+using BCWeb.Areas.Account.Models.Scopes.Repository;
+using BCWeb.Areas.Account.Models.Scopes.ServiceLayer;
 
 namespace BCWeb
 {
@@ -14,8 +17,10 @@ namespace BCWeb
         {
             var container = BuildUnityContainer();
 
+            // for mvc
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-
+            // for web api
+            GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
             return container;
         }
 
@@ -30,6 +35,8 @@ namespace BCWeb
 
             container.RegisterType<IUserProfileServiceLayer, UserProfileServiceLayer>();
             container.RegisterType<IUserProfileRepository, UserProfileRepository>();
+            container.RegisterType<IScopeRepository, ScopeRepository>();
+            container.RegisterType<IScopeServiceLayer, ScopeServiceLayer>();
             RegisterTypes(container);
 
             return container;

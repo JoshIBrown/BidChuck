@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCWeb.Areas.Account.Models.Scopes.ServiceLayer;
 using BCWeb.Areas.Account.Models.Scopes.ViewModel;
 using BCWeb.Models.GenericViewModel;
 using Microsoft.Web.WebPages.OAuth;
@@ -12,61 +13,31 @@ using WebMatrix.WebData;
 
 namespace BCWeb.Controllers.Api
 {
+    [Authorize]
     public class ScopesController : ApiController
     {
-        public IEnumerable<ScopeHierarchyViewModel> GetHierarchyList()
+
+        private IScopeServiceLayer _service;
+
+        public ScopesController(IScopeServiceLayer service)
         {
-            IEnumerable<ScopeHierarchyViewModel> viewModel;
-            using (BidChuckContext context = new BidChuckContext())
-            {
-                viewModel = context.Scopes
-                    .Where(s => s.ParentId == null)
-                    .OrderBy(s => s.Id)
-                    .Select(s => new ScopeHierarchyViewModel
-                    {
-                        Description = s.Description,
-                        Id = s.Id,
-                        Parent = s.ParentId
-                    }).ToArray();
-
-                foreach (var i in viewModel)
-                {
-                    i.Children = context.Scopes
-                        .Where(s => s.ParentId.HasValue && s.ParentId.Value == i.Id)
-                        .OrderBy(s => s.Id)
-                        .Select(s => new ScopeHierarchyViewModel
-                        {
-                            Description = s.Description,
-                            Id = s.Id,
-                            Parent = s.ParentId
-                        }).ToArray();
-
-                    foreach (var j in i.Children)
-                    {
-                        j.Children = context.Scopes
-                        .Where(s => s.ParentId.HasValue && s.ParentId.Value == j.Id)
-                        .OrderBy(s => s.Id)
-                        .Select(s => new ScopeHierarchyViewModel
-                        {
-                            Description = s.Description,
-                            Id = s.Id,
-                            Parent = s.ParentId
-                        }).ToArray();
-                    }
-                }
-            }
-
-            return viewModel;
+            _service = service;
         }
+
 
         public IEnumerable<ScopeViewModel> GetList()
         {
             IEnumerable<ScopeViewModel> viewModel;
-            using (BidChuckContext context = new BidChuckContext())
-            {
-                viewModel = context.Scopes.OrderBy(s => s.Id)
-                    .Select(s => new ScopeViewModel { CsiNumber = s.CsiNumber, Description = s.Description, Id = s.Id, ParentId = s.ParentId }).ToArray();
-            }
+
+            viewModel = _service.GetEnumerable()
+                .OrderBy(s => s.Id)
+                .Select(s => new ScopeViewModel
+                {
+                    CsiNumber = s.CsiNumber,
+                    Description = s.Description,
+                    Id = s.Id,
+                    ParentId = s.ParentId
+                }).ToArray();
 
             return viewModel;
         }
@@ -79,22 +50,21 @@ namespace BCWeb.Controllers.Api
 
 
             IEnumerable<ScopeMgmtViewModel> viewModel;
-            using (BidChuckContext context = new BidChuckContext())
-            {
-                var user = context.UserProfiles.Find(uId);
-                var chosenScopes = user.Scopes.ToList();
 
-                viewModel = context.Scopes.OrderBy(s => s.Id)
-                    .AsEnumerable()
-                    .Select(s => new ScopeMgmtViewModel
-                    {
-                        Checked = chosenScopes.Contains(s),
-                        Description = s.Description,
-                        Id = s.Id,
-                        ParentId = s.ParentId,
-                        CsiNumber = s.CsiNumber
-                    }).ToArray();
-            }
+            var user = _service.GetUser(uId);
+            var chosenScopes = user.Scopes.ToList();
+
+            viewModel = _service.GetEnumerable()
+                .OrderBy(s => s.Id)
+                .Select(s => new ScopeMgmtViewModel
+                {
+                    Checked = chosenScopes.Contains(s),
+                    Description = s.Description,
+                    Id = s.Id,
+                    ParentId = s.ParentId,
+                    CsiNumber = s.CsiNumber
+                }).ToArray();
+
 
             return viewModel;
         }
@@ -110,35 +80,45 @@ namespace BCWeb.Controllers.Api
                 try
                 {
                     var userId = WebSecurity.GetUserId(User.Identity.Name);
-                    using (BidChuckContext context = new BidChuckContext())
+
+                    // get scope objects matching the id's of the selected
+                    var selectedScopes = _service.GetEnumerable(x => selected.Contains(x.Id)).ToList();
+
+                    // get scope objects user had chosen previously
+                    var user = _service.GetUser(userId);
+                    var existingSelection = user.Scopes.ToList();
+
+                    // add selections not in existing collection
+                    var toAdd = selectedScopes.Where(x => !existingSelection.Contains(x));
+                    foreach (var a in toAdd)
                     {
-                        // get scope objects matching the id's of the selected
-                        var selectedScopes = context.Scopes.Where(x => selected.Contains(x.Id)).ToList();
-
-                        // get scope objects user had chosen previously
-                        var user = context.UserProfiles.Find(userId);
-                        var existingSelection = user.Scopes.ToList();
-
-                        // add selections not in existing collection
-                        var toAdd = selectedScopes.Where(x => !existingSelection.Contains(x));
-                        foreach (var a in toAdd)
+                        //user.Scopes.Add(a);
+                        a.Users.Add(user);
+                        if (!_service.Update(a))
                         {
-                            user.Scopes.Add(a);
+                            throw new Exception(_service.ValidationDic.First().Value);
                         }
-
-                        // remove scopes not in selected that are in existing
-                        var toRemove = existingSelection.Where(y => !selectedScopes.Contains(y));
-                        foreach (var r in toRemove)
-                        {
-                            user.Scopes.Remove(r);
-                        }
-
-                        // save changes and report our glorious save
-                        context.SaveChanges();
-                        result.message = "changes saved";
-                        result.success = true;
                     }
+
+                    // remove scopes not in selected that are in existing
+                    var toRemove = existingSelection.Where(y => !selectedScopes.Contains(y));
+                    foreach (var r in toRemove)
+                    {
+                        r.Users.Remove(user);
+                        _service.Update(r);
+                        if (!_service.Update(r))
+                        {
+                            throw new Exception(_service.ValidationDic.First().Value);
+                        }
+                        //user.Scopes.Remove(r);
+                    }
+
+                    // save changes and report our glorious save
+
+                    result.message = "changes saved";
+                    result.success = true;
                 }
+
                 catch (Exception ex)
                 {
                     // report the exception to the user for now.  quick'n'dirty
