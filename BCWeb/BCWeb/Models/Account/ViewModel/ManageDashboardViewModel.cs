@@ -17,6 +17,7 @@ namespace BCWeb.Models.Account.ViewModel
         public string Phone { get; set; }
         public string BusinessType { get; set; }
         public string OperatingRadius { get; set; }
+        public bool Published { get; set; }
 
         public IEnumerable<string> Scopes { get; set; }
         public IEnumerable<string> Minions { get; set; }

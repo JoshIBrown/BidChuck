@@ -100,7 +100,34 @@ namespace BCWeb.Controllers
                 : message == ManageMessageId.ChangeCompanyInfoSuccess ? "Compnay Info successfully updated."
                 : message == ManageMessageId.ChangeEmailSuccess ? "Email successfully updated."
                 : message == ManageMessageId.ChangeProfileSuccess ? "Profile Information succefully updated."
+                : message == ManageMessageId.NewDelegateSuccess ? "New delegate successfully added."
                 : "";
+
+            var raw = _serviceLayer.GetProfile(WebSecurity.GetUserId(User.Identity.Name));
+
+            ManageDashboardViewModel viewModel = new ManageDashboardViewModel
+            {
+                Address1 = raw.Address1,
+                Address2 = raw.Address2,
+                BusinessType = raw.BusinessType.Name,
+                City = raw.City,
+                CompanyName = raw.CompanyName,
+                Email = raw.Email,
+                OperatingRadius = raw.OperatingDistance.ToString(),
+                Phone = raw.Phone,
+                PostalCode = raw.PostalCode,
+                State = raw.State.Abbr
+            };
+
+            viewModel.Scopes = raw.Scopes
+                .Where(x => !x.ParentId.HasValue)
+                .OrderBy(x => x.CsiNumber)
+                .Select(x => x.CsiNumber.Substring(0, 2) + x.Description);
+
+            viewModel.Minions = raw.Delegates
+                .OrderBy(x => x.LastName)
+                .Select(x => x.LastName + ", " + x.FirstName);
+
             return View();
         }
 
@@ -573,20 +600,31 @@ namespace BCWeb.Controllers
         [HttpGet]
         public ActionResult AcceptInvitation(string user, string token)
         {
-            // confirm account to unlock it
-            if (WebSecurity.ConfirmAccount(user, token))
+            if (!User.Identity.IsAuthenticated)
             {
-                // force user to reset their passowrd
-                string passwordToken = WebSecurity.GeneratePasswordResetToken(user);
-                InvitationViewModel viewModel = new InvitationViewModel
+                // confirm account to unlock it
+                if (WebSecurity.ConfirmAccount(user, token))
                 {
-                    PasswordResetToken = passwordToken,
-                    Email = user
-                };
-                return View(viewModel);
+                    // force user to reset their passowrd
+                    string passwordToken = WebSecurity.GeneratePasswordResetToken(user);
+                    InvitationViewModel viewModel = new InvitationViewModel
+                    {
+                        PasswordResetToken = passwordToken,
+                        Email = user
+                    };
+                    return View(viewModel);
+                }
+                else
+                {
+                    // add view to show unable to accept invite
+                    return RedirectToAction("ConfirmationFailure");
+                }
             }
-            // change this to invation failure
-            return RedirectToAction("ConfirmationFailure");
+            else
+            {
+                // change this to "you must sign out first"
+                return RedirectToAction("ConfirmationFailure");
+            }
         }
 
         [AllowAnonymous]
@@ -637,7 +675,8 @@ namespace BCWeb.Controllers
             ResetPasswordSuccess,
             ChangeCompanyInfoSuccess,
             ChangeEmailSuccess,
-            ChangeProfileSuccess
+            ChangeProfileSuccess,
+            NewDelegateSuccess
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)

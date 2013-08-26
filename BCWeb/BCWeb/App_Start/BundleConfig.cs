@@ -7,6 +7,11 @@ namespace BCWeb
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
+
+            bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
+                "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -28,6 +33,7 @@ namespace BCWeb
             //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/cvlcss").Include("~/Content/cvl.css"));
 
+            
 
             #region Foundation Bundles
             //If your project requires jQuery, you may remove the zepto bundle

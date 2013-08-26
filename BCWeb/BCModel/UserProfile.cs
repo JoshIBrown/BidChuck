@@ -62,11 +62,16 @@ namespace BCModel
         [IgnoreDataMember]
         public virtual BusinessType BusinessType { get; set; }
 
+        public int? ManagerId { get; set; }
+        [ForeignKey("ManagerId")]
         [IgnoreDataMember]
-        public virtual ICollection<Scope> Scopes { get; set; }
+        public virtual UserProfile Manager { get; set; }
 
         [IgnoreDataMember]
         public virtual ICollection<UserProfile> Delegates { get; set; }
+
+        [IgnoreDataMember]
+        public virtual ICollection<Scope> Scopes { get; set; }
 
     }
 }

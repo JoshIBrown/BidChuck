@@ -1,5 +1,21 @@
-﻿<h6>Newest Members
-</h6>
-<ul class="no-bullet">
-    <li ng-repeat="x in newCompanies">{{x.Company}}</li>
-</ul>
+﻿<div class="row">
+    <div class="large-12 columns large-centered">
+        <fieldset>
+            <legend>Newest Members</legend>
+
+            <ul class="inline-list">
+                <li ng-repeat="x in newCompanies">
+                    <ul class="vcard newCmpny">
+                        <li class="fn" title="{{x.CompanyName}}" class="has-tip tip-right">{{x.CompanyName | truncate : 22}}</li>
+                        <li>{{x.BusinessType}}</li>
+                        <li>
+                            <ul class="no-bullet">
+                                <li ng-repeat="y in x.Scopes | limitTo:3" title="{{y}}" class="has-tip tip-right">{{y | truncate : 16 }}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </fieldset>
+    </div>
+</div>

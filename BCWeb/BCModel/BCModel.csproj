@@ -57,6 +57,10 @@
     <Compile Include="Migrations\201308251834026_addBusinessTypeAndAddressToUserProfile.Designer.cs">
       <DependentUpon>201308251834026_addBusinessTypeAndAddressToUserProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308261940575_addManagerToUser.cs" />
+    <Compile Include="Migrations\201308261940575_addManagerToUser.Designer.cs">
+      <DependentUpon>201308261940575_addManagerToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
@@ -77,6 +81,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308251834026_addBusinessTypeAndAddressToUserProfile.resx">
       <DependentUpon>201308251834026_addBusinessTypeAndAddressToUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308261940575_addManagerToUser.resx">
+      <DependentUpon>201308261940575_addManagerToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
