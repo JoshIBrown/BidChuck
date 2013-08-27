@@ -13,7 +13,7 @@ using WebMatrix.WebData;
 
 namespace BCWeb.Controllers.Api
 {
-    [Authorize]
+    [Authorize(Roles = "Manager,Administrator")]
     public class ScopesController : ApiController
     {
 
@@ -67,6 +67,42 @@ namespace BCWeb.Controllers.Api
 
 
             return viewModel;
+        }
+
+        public IEnumerable<ScopeMgmtViewModel> GetScopesToManage(string user)
+        {
+
+
+            int uId = WebSecurity.GetUserId(user);
+            var profile = _service.GetUser(uId);
+            if (_service.GetUser(WebSecurity.GetUserId(User.Identity.Name)).Delegates.Contains(profile))
+            {
+
+                IEnumerable<ScopeMgmtViewModel> viewModel;
+
+
+                var chosenScopes = profile.Scopes.ToList();
+                var manager = profile.Manager;
+
+
+                viewModel = manager.Scopes
+                    .OrderBy(s => s.Id)
+                    .Select(s => new ScopeMgmtViewModel
+                    {
+                        Checked = chosenScopes.Contains(s),
+                        Description = s.Description,
+                        Id = s.Id,
+                        ParentId = s.ParentId,
+                        CsiNumber = s.CsiNumber
+                    }).ToArray();
+
+
+                return viewModel;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public JQueryPostResult PutSelectedScopes([FromBody]IEnumerable<int> selected)

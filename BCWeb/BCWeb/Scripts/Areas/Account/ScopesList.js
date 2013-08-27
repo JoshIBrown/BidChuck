@@ -1,10 +1,13 @@
-﻿var app = angular.module('scopePicker', ['filters']).controller('ScopesCtrl', function ($scope, $http) {
+﻿var app = angular.module('scopePicker', ['filters']).controller('ScopesCtrl', function ($scope, $http, $location) {
     $scope.t1Parent = 0;
     $scope.t2Parent = 0;
     $scope.selectedScopes = [];
     $scope.saved = false;
     $scope.saving = false;
     $scope.cantsave = false;
+    
+    
+
 
     $http.get('/api/Scopes/GetScopesToManage')
          .success(function (data) {

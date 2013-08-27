@@ -21,9 +21,8 @@ namespace BCWeb.Areas.Account.Controllers
             // display chosen scopes
             return View();
         }
-
-
-        public ActionResult Manage()
+     
+        public ActionResult Manage(string user)
         {
             return View();
         }

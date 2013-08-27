@@ -116,19 +116,24 @@ namespace BCWeb.Controllers
                 OperatingRadius = raw.OperatingDistance.ToString(),
                 Phone = raw.Phone,
                 PostalCode = raw.PostalCode,
-                State = raw.State.Abbr
+                State = raw.State.Abbr,
+                Name = raw.FirstName + " " + raw.LastName
             };
 
             viewModel.Scopes = raw.Scopes
                 .Where(x => !x.ParentId.HasValue)
                 .OrderBy(x => x.CsiNumber)
-                .Select(x => x.CsiNumber.Substring(0, 2) + x.Description);
+                .Select(x => x.CsiNumber.Substring(0, 2) + " " + x.Description);
 
             viewModel.Minions = raw.Delegates
                 .OrderBy(x => x.LastName)
-                .Select(x => x.LastName + ", " + x.FirstName);
-
-            return View();
+                .Select(x => new MinionOverviewViewModel
+                {
+                    Name = x.LastName + ", " + x.FirstName,
+                    Email = x.Email,
+                    Confirmed = WebSecurity.IsConfirmed(x.Email) ? "Active" : "Invited"
+                });
+            return View(viewModel);
         }
 
 
@@ -431,6 +436,7 @@ namespace BCWeb.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Manager,Administrator")]
         [HttpGet]
         public ActionResult EditCompany()
         {
@@ -463,59 +469,127 @@ namespace BCWeb.Controllers
 
         }
 
+        [Authorize(Roles = "Manager,Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditCompany(EditCompanyViewModel viewModel)
         {
-            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            if (hasLocalAccount)
+
+
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var profile = _serviceLayer.GetProfile(WebSecurity.GetUserId(User.Identity.Name));
+
+                if (viewModel.Address1 != null && profile.Address1 != viewModel.Address1.Trim())
+                    profile.Address1 = viewModel.Address1.Trim();
+
+                if (viewModel.Address2 != null && profile.Address2 != viewModel.Address2.Trim())
+                    profile.Address2 = viewModel.Address2.Trim();
+
+                if (viewModel.BusinessTypeId != null && profile.BusinessTypeId != viewModel.BusinessTypeId)
                 {
-                    var profile = _serviceLayer.GetProfile(WebSecurity.GetUserId(User.Identity.Name));
 
-                    if (viewModel.Address1 != null && profile.Address1 != viewModel.Address1.Trim())
-                        profile.Address1 = viewModel.Address1.Trim();
+                    var businesstypes = _serviceLayer.GetBusinessTypes();
 
-                    if (viewModel.Address2 != null && profile.Address2 != viewModel.Address2.Trim())
-                        profile.Address2 = viewModel.Address2.Trim();
-
-                    if (viewModel.BusinessTypeId != null && profile.BusinessTypeId != viewModel.BusinessTypeId)
-                        profile.BusinessTypeId = viewModel.BusinessTypeId;
-
-                    if (viewModel.City != null && profile.City != viewModel.City)
-                        profile.City = viewModel.City;
-
-                    if (viewModel.CompanyName != null && profile.CompanyName != viewModel.CompanyName.Trim())
-                        profile.CompanyName = viewModel.CompanyName.Trim();
-
-                    if (viewModel.OperatingDistance != null && profile.OperatingDistance != viewModel.OperatingDistance)
-                        profile.OperatingDistance = viewModel.OperatingDistance;
-
-                    if (viewModel.Phone != null && profile.Phone != viewModel.Phone.Trim())
-                        profile.Phone = Util.ConvertPhoneForStorage(viewModel.Phone.Trim());
-
-                    if (viewModel.PostalCode != null && profile.PostalCode != viewModel.PostalCode.Trim())
-                        profile.PostalCode = viewModel.PostalCode.Trim();
-
-                    if (viewModel.StateId != null && profile.StateId != viewModel.StateId)
-                        profile.StateId = viewModel.StateId;
-
-
-                    if (_serviceLayer.UpdateProfile(profile))
+                    // add new role
+                    string newTypeName = businesstypes.FirstOrDefault(x => x.Id == viewModel.BusinessTypeId).Name;
+                    switch (newTypeName)
                     {
-                        return RedirectToAction("Manage", new { message = ManageMessageId.ChangeCompanyInfoSuccess });
-                    }
-                    else
+                        case "General Contractor":
+                            Roles.AddUserToRole(User.Identity.Name, "general_contractor");
+                            break;
+                        case "Sub-Contractor":
+                            Roles.AddUserToRole(User.Identity.Name, "subcontractor");
+                            break;
+                        case "Architect":
+                            Roles.AddUserToRole(User.Identity.Name, "architect");
+                            break;
+                        case "Engineer":
+                            Roles.AddUserToRole(User.Identity.Name, "engineer");
+                            break;
+                        case "@Owner/Client":
+                            Roles.AddUserToRole(User.Identity.Name, "owner_client");
+                            break;
+                        case "Materials Vendor":
+                            Roles.AddUserToRole(User.Identity.Name, "materials_vendor");
+                            break;
+                        case "Materials Manufacturer":
+                            Roles.AddUserToRole(User.Identity.Name, "materials_manufacturer");
+                            break;
+                        case "Consultant":
+                            Roles.AddUserToRole(User.Identity.Name, "consultant");
+                            break;
+                    };
+
+                    // remove old role
+                    if (profile.BusinessTypeId.HasValue)
                     {
-                        Util.MapValidationErrors(_serviceLayer.ValidationDic, this.ModelState);
-                        viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-                        viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
-                        return View(viewModel);
+                        string existingTypeName = businesstypes.FirstOrDefault(x => x.Id == profile.BusinessTypeId).Name;
+                        switch (existingTypeName)
+                        {
+                            case "General Contractor":
+                                if (Roles.IsUserInRole("general_contractor"))
+                                    Roles.RemoveUserFromRole(User.Identity.Name, "general_contractor");
+                                break;
+                            case "Sub-Contractor":
+                                if (Roles.IsUserInRole("subcontractor"))
+                                    Roles.RemoveUserFromRole(User.Identity.Name, "subcontractor");
+                                break;
+                            case "Architect":
+                                if (Roles.IsUserInRole("architect"))
+                                    Roles.RemoveUserFromRole(User.Identity.Name, "architect");
+                                break;
+                            case "Engineer":
+                                if (Roles.IsUserInRole("engineer"))
+                                    Roles.RemoveUserFromRole(User.Identity.Name, "engineer");
+                                break;
+                            case "@Owner/Client":
+                                if (Roles.IsUserInRole("owner_client"))
+                                    Roles.RemoveUserFromRole(User.Identity.Name, "owner_client");
+                                break;
+                            case "Materials Vendor":
+                                if (Roles.IsUserInRole("materials_vendor"))
+                                    Roles.RemoveUserFromRole(User.Identity.Name, "materials_vendor");
+                                break;
+                            case "Materials Manufacturer":
+                                if (Roles.IsUserInRole("materials_manufacturer"))
+                                    Roles.RemoveUserFromRole(User.Identity.Name, "materials_manufacturer");
+                                break;
+                            case "Consultant":
+                                if (Roles.IsUserInRole("consultant"))
+                                    Roles.RemoveUserFromRole(User.Identity.Name, "consultant");
+                                break;
+                        };
                     }
+                    profile.BusinessTypeId = viewModel.BusinessTypeId;
+                }
+
+                if (viewModel.City != null && profile.City != viewModel.City)
+                    profile.City = viewModel.City;
+
+                if (viewModel.CompanyName != null && profile.CompanyName != viewModel.CompanyName.Trim())
+                    profile.CompanyName = viewModel.CompanyName.Trim();
+
+                if (viewModel.OperatingDistance != null && profile.OperatingDistance != viewModel.OperatingDistance)
+                    profile.OperatingDistance = viewModel.OperatingDistance;
+
+                if (viewModel.Phone != null && profile.Phone != viewModel.Phone.Trim())
+                    profile.Phone = Util.ConvertPhoneForStorage(viewModel.Phone.Trim());
+
+                if (viewModel.PostalCode != null && profile.PostalCode != viewModel.PostalCode.Trim())
+                    profile.PostalCode = viewModel.PostalCode.Trim();
+
+                if (viewModel.StateId != null && profile.StateId != viewModel.StateId)
+                    profile.StateId = viewModel.StateId;
+
+
+                if (_serviceLayer.UpdateProfile(profile))
+                {
+                    return RedirectToAction("Manage", new { message = ManageMessageId.ChangeCompanyInfoSuccess });
                 }
                 else
                 {
+                    Util.MapValidationErrors(_serviceLayer.ValidationDic, this.ModelState);
                     viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
                     viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
                     return View(viewModel);
@@ -523,8 +597,9 @@ namespace BCWeb.Controllers
             }
             else
             {
-                // no local account
-                return RedirectToAction("SignIn", new { returnUrl = Url.Action("EditInfo").ToString() });
+                viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
+                viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
+                return View(viewModel);
             }
         }
 

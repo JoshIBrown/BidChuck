@@ -248,6 +248,7 @@
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Areas\Account\Views\Users\Add.cshtml" />
+    <Content Include="Areas\Account\Views\Scopes\_ScopePicker.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\logos\logo_color_301x100.png" />
     <Content Include="Content\images\saving.gif" />

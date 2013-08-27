@@ -7,6 +7,7 @@ namespace BCWeb.Models.Account.ViewModel
 {
     public class ManageDashboardViewModel
     {
+        public string Name { get; set; }
         public string Email { get; set; }
         public string CompanyName { get; set; }
         public string Address1 { get; set; }
@@ -20,6 +21,13 @@ namespace BCWeb.Models.Account.ViewModel
         public bool Published { get; set; }
 
         public IEnumerable<string> Scopes { get; set; }
-        public IEnumerable<string> Minions { get; set; }
+        public IEnumerable<MinionOverviewViewModel> Minions { get; set; }
+    }
+
+    public class MinionOverviewViewModel
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Confirmed { get; set; }
     }
 }

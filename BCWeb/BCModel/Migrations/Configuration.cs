@@ -84,7 +84,7 @@ namespace BCModel.Migrations
                 context.BusinessTypes.Add(new BusinessType { Name = "Engineer" });
                 context.BusinessTypes.Add(new BusinessType { Name = "Owner/Client" });
                 context.BusinessTypes.Add(new BusinessType { Name = "Materials Vendor" });
-                context.BusinessTypes.Add(new BusinessType { Name = "Materials Manugacturer" });
+                context.BusinessTypes.Add(new BusinessType { Name = "Materials Manufacturer" });
                 context.BusinessTypes.Add(new BusinessType { Name = "Consultant" });
                 context.SaveChanges();
             }

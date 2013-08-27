@@ -1,4 +1,4 @@
-﻿@model BCWeb.Models.LocalPasswordModel
+﻿@model BCWeb.Models.Account.ViewModel.ManageDashboardViewModel
 
 
 
@@ -15,33 +15,85 @@
     <div class="large-3 columns left">
         <ul class="side-nav">
             <li class="divider"></li>
-            <li>@Html.RouteLink("Update Company Information", "Default", new { controller = "Account", action = "EditCompany" })</li>
+            @if (Roles.IsUserInRole("Manager") || Roles.IsUserInRole("Administrator"))
+            {
+                <li>@Html.RouteLink("Update Company Information", "Default", new { controller = "Account", action = "EditCompany" })</li>
+            }
             <li>@Html.RouteLink("Update Personal Information", "Default", new { controller = "Account", action = "EditProfile" })</li>
-            <li>@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage" })</li>
+            @if (Roles.IsUserInRole("subcontractor") || Roles.IsUserInRole("materials_vendor"))
+            {
+                <li>@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage" })</li>
+            }
             <li>@Html.RouteLink("Change Email Address", "Default", new { controller = "Account", action = "ChangeEmail" })</li>
             <li>@Html.RouteLink("Change Password", "Default", new { controller = "Account", action = "ChangePassword" })</li>
             <li class="divider"></li>
         </ul>
     </div>
-    <div class="large-6 columns left panel">
-        <fieldset>
-            <legend>Company Info</legend>
-        </fieldset>
-        <fieldset>
-            <legend>Profile Info</legend>
-        </fieldset>
+    <div class="large-8 columns left">
+        <div class="row">
+            <div class="large-6 columns">
+                <label>Company Info</label>
+                <ul class="vcard large-12">
+                    <li class="fn">@Html.DisplayFor(m => m.CompanyName)</li>
+                    <li class="street-address">@Html.DisplayFor(m => m.Address1)</li>
+                    <li class="street-address">@Html.DisplayFor(m => m.Address2)</li>
+                    <li class="locality">@Html.DisplayFor(m => m.City)</li>
+                    <li><span class="state">@Html.DisplayFor(m => m.State)</span>, <span class="zip">@Html.DisplayFor(m => m.PostalCode)</span></li>
+                </ul>
+            </div>
+            <div class="large-6 columns">
+                <label>Personal Info</label>
+                <ul class="vcard large-12">
+                    <li class="fn">@Html.DisplayFor(m => m.Name)</li>
+                    <li>@Html.DisplayFor(m => m.Email)</li>
+                </ul>
+            </div>
+        </div>
         @if (Roles.IsUserInRole("Manager") || Roles.IsUserInRole("Administrator"))
         {
-            <fieldset>
-                <legend>Delegates</legend>
-                @Html.RouteLink("Add new delegate", "Account_default", new { controller = "Users", action = "Add" })
-            </fieldset>
+            
+            
+            
+            <label>Delegated Users @Html.RouteLink("Add...", "Account_default", new { controller = "Users", action = "Add" })</label>
+            <table style="border-collapse:collapse;">
+                <thead>
+                    <tr>
+                        <th width="200">Name</th>
+                        <th width="200">Email</th>
+                        <th width="100">Status</th>
+                        <th width="150"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in Model.Minions)
+                    {
+                        <tr>
+                            <td>@d.Name</td>
+                            <td>@d.Email</td>
+                            <td>@d.Confirmed</td>
+                            <td><a href="#">Manage Scopes</a> @*@Html.RouteLink("Manage Scopes","Account_default",new{ controller="Scopes",action="Manage",user=d.Email})*@</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            
         }
-        <fieldset>
-            <legend>Work Scopes</legend>
-        </fieldset>
+        @if (Roles.IsUserInRole("subcontractor") || Roles.IsUserInRole("materials_vendor"))
+        {
+            <fieldset>
+                <legend>CSI Scopes</legend>
+                <ul class="no-bullet">
+                    @foreach (var x in Model.Scopes)
+                    {
+                        <li>
+                            @x
+                        </li>
+                    }
+                </ul>
+            </fieldset>}
     </div>
 </div>
+@Html.AntiForgeryToken()
 @section Scripts {
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")

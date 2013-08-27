@@ -1,0 +1,93 @@
+﻿<fieldset>
+    <legend>Scopes</legend>
+    <div class="row">
+        <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+            <table id="t1" style="width: 100%;" class="scope-picker">
+                <tbody>
+                    <tr ng-repeat="x in Scopes | filter: {ParentId :'!'} | orderBy:'Number'"
+                        ng-class="{'selected-scope': x.Id == t1Parent }"
+                        style="height: 20px !important;">
+                        <td title="{{x.Description}}"
+                            class="has-tip tip-right">
+                            <input id="check{{x.Id}}"
+                                name="check{{x.Id}}"
+                                type="checkbox"
+                                ng-model="x.Checked"
+                                ng-change="changeScopeSelection(x)" />
+                            <span ng-click="t1Expand(x.Id)">{{x.CsiNumber | truncate: 2: ""}}
+                                    {{x.Description | truncate: 30}}</span></td>
+                        <td><span style="display: inline-block !important;"
+                            class="ui-icon ui-icon-circle-arrow-e"
+                            ng-click="t1Expand(x.Id)"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+            <table id="t2" style="width: 100%;" class="scope-picker">
+                <tbody>
+                    <tr ng-repeat="y in Scopes | parentIdEqual: t1Parent | orderBy:'Number'"
+                        ng-class="{'selected-scope': y.Id == t2Parent }"
+                        style="height: 20px !important;">
+                        <td title="{{y.Description}}"
+                            class="has-tip tip-right">
+                            <input id="check{{y.Id}}"
+                                name="check{{y.Id}}"
+                                type="checkbox"
+                                ng-model="y.Checked"
+                                ng-change="changeScopeSelection(y)" />
+                            <span ng-click="t2Expand(y.Id)">{{y.CsiNumber}} 
+                                    {{y.Description | truncate: 26}}</span></td>
+                        <td><span style="display: inline-block !important;"
+                            class="ui-icon ui-icon-circle-arrow-e"
+                            ng-click="t2Expand(y.Id)"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+            <table id="t3" style="width: 100%;" class="scope-picker">
+                <tbody>
+                    <tr ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'Number'"
+                        style="height: 20px !important;">
+                        <td title="{{z.Description}}"
+                            class="has-tip tip-right" style="overflow-x: hidden;">
+                            <input id="check{{z.Id}}"
+                                name="check{{z.Id}}"
+                                type="checkbox"
+                                ng-model="z.Checked"
+                                ng-change="changeScopeSelection(z)" />
+                            {{z.CsiNumber}}
+                                    {{z.Description | truncate: 31}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</fieldset>
+<div class="row">
+    <div class="small-1 columns">
+        <button class="medium button" ng-click="saveChanges()" ng-disabled="saving">Save</button>
+    </div>
+    <div class="small-2 columns left">
+        <div ng-show="saving" style="text-align: center;">
+            <img src="~/Content/images/saving.gif" alt="saving gif" />
+        </div>
+        <span ng-show="saved">Succefully Saved
+                    <img src="~/Content/images/small_green_check.png" alt="green checkmark" /></span>
+        <span ng-show="cantsave">There was a problem saving.  Please try again.</span>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 columns ">
+        <fieldset class="panel">
+            <legend>Selected Scopes</legend>
+            <ul class="inline-list">
+                <li ng-repeat="s in selectedScopes | filter:{Checked: true}">
+                    <div class="alert-box radius" style="padding: 2px 25px 2px 7px;">{{s.Csi}} {{s.Desc}} <a href="#" class="close" ng-click="removeTag(s)">&times;</a></div>
+                </li>
+            </ul>
+        </fieldset>
+    </div>
+</div>

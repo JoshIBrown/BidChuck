@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using WebMatrix.Data;
 using WebMatrix.WebData;
 
 namespace BCWeb.Areas.Account.Controllers
@@ -87,7 +88,22 @@ namespace BCWeb.Areas.Account.Controllers
             {
                 return View(viewModel);
             }
-            
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Manager,Administrator")]
+        [ValidateAntiForgeryToken]
+        public void ResendInvitation(string email)
+        {
+            var user = _service.GetProfile(WebSecurity.GetUserId(email));
+            string confirmationToken = "";
+            using (Database db = Database.Open("DefaultConnection"))
+            {
+                var sql = "SELECT ConfirmationToken FROM webpages_Membership WHERE UserId =" + user.UserId;
+                confirmationToken = db.Query(sql).First()["ConfirmationToken"];
+            }
+            EmailSender.SendNewDelegateEmail(user.FirstName + " " + user.LastName, user.FirstName, user.Email, confirmationToken);
         }
 
     }
