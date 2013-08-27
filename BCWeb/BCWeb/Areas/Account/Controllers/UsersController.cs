@@ -82,7 +82,7 @@ namespace BCWeb.Areas.Account.Controllers
                 //string passwordToken = WebSecurity.GeneratePasswordResetToken(viewModel.Email); // change password to something impossibru
                 //WebSecurity.ChangePassword(viewModel.Email, "password", passwordToken);
                 EmailSender.SendNewDelegateEmail(user.FirstName + " " + user.LastName, viewModel.FirstName, viewModel.Email, confirmToken);
-                return RedirectToAction("Manage");
+                return RedirectToRoute("Default", new { controller = "Account", action = "Manage" });
             }
             else
             {
