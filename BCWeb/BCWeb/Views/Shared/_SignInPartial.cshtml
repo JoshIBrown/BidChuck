@@ -1,23 +1,20 @@
 ﻿@if (Request.IsAuthenticated)
 {
-    <li class="has-dropdown"><a href="">@User.Identity.Name</a>
+    <li class="has-dropdown"><a href="#">@User.Identity.Name</a>
         <ul class="dropdown">
             <li>@Html.RouteLink("Manage Account", "Default", new { controller = "Account", action = "Manage" })</li>
             <li>@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage" })</li>
             <li>@Html.RouteLink("Change Password", "Default", new { controller = "Account", action = "ChangePassword" })</li>
+            <li class="has-form">
+                @using (Html.BeginRouteForm("Default", new { controller = "Account", action = "SignOut" }, FormMethod.Post, new { id = "SignOutForm" , @class=""}))
+                {
+                    
+                        @Html.AntiForgeryToken()
 
+                        <a  href="javascript:document.getElementById('SignOutForm').submit()">Sign Out</a>
+                }
+            </li>
         </ul>
-    </li>
-    <li class="divider hide-for-small"></li>
-    <li class="has-form">
-        @using (Html.BeginRouteForm("Default", new { controller = "Account", action = "SignOut" }, FormMethod.Post, new { id = "SignOutForm" }))
-        {
-            <div class="row collapse">
-                @Html.AntiForgeryToken()
-
-                <a class="button" href="javascript:document.getElementById('SignOutForm').submit()">Sign Out</a>
-            </div>
-        }
     </li>
 }
 else

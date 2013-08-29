@@ -3836,6 +3836,7 @@ label.error {
 .fixed.contain-to-grid {
     max-height:45px;
 }
+
 .fixed {
     width: 100%;
     left: 0;
@@ -4094,6 +4095,10 @@ label.error {
                 padding: 8px 15px;
             }
 
+        .top-bar-section .dropdown .has-form a {
+            font-size:0.8125em;
+            padding: 0px;
+        }
                 .top-bar-section .dropdown li a.parent-link {
                     font-weight: bold;
                 }
