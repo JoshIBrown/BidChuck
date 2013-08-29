@@ -22,6 +22,8 @@
                      };
                  }
              });
+             angular.element('#ScopePickerWrapper').show();
+             angular.element('#LoadingWrapper').hide();
          });
 
     $scope.t1Expand = function (value) {

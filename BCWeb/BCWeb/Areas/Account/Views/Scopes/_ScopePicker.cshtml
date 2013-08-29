@@ -1,6 +1,11 @@
 ﻿<fieldset>
     <legend>Scopes</legend>
-    <div class="row">
+    <div class="row" id="LoadingWrapper">
+        <div class="small-4 columns small-centered">
+            <img src="~/Content/images/loading.gif" alt="loading" />
+        </div>
+    </div>
+    <div class="row" style="display: none;" id="ScopePickerWrapper">
         <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
             <table id="t1" style="width: 100%;" class="scope-picker">
                 <tbody>
@@ -91,3 +96,4 @@
         </fieldset>
     </div>
 </div>
+
