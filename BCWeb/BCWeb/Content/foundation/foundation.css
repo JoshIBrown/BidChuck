@@ -3834,7 +3834,7 @@ label.error {
     }
 
 .fixed.contain-to-grid {
-    max-height:45px;
+    max-height: 45px;
 }
 
 .fixed {
@@ -4095,13 +4095,21 @@ label.error {
                 padding: 8px 15px;
             }
 
-        .top-bar-section .dropdown .has-form a {
-            font-size:0.8125em;
-            padding: 0px;
-        }
-                .top-bar-section .dropdown li a.parent-link {
-                    font-weight: bold;
+            /*this is to correct styling problems with having a form link inside a drop down*/
+            .top-bar-section .dropdown li.has-form {
+                font-weight: normal;
+                font-size: 0.8125em;
+                padding: 0px;
+            }
+                /*this is to correct styling problems with having a form link inside a drop down*/
+                .top-bar-section .dropdown li.has-form a {
+                    width: 100%;
+                    display: block;
                 }
+
+            .top-bar-section .dropdown li a.parent-link {
+                font-weight: bold;
+            }
 
             .top-bar-section .dropdown li.title h5 {
                 margin-bottom: 0;
