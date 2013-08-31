@@ -9,7 +9,7 @@
         <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
             <table id="t1" style="width: 100%;" class="scope-picker">
                 <tbody>
-                    <tr ng-repeat="x in Scopes | filter: {ParentId :'!'} | orderBy:'Number'"
+                    <tr ng-repeat="x in Scopes | filter: {ParentId :'!'} | orderBy:'CsiNumber'"
                         ng-class="{'selected-scope': x.Id == t1Parent }"
                         style="height: 20px !important;">
                         <td title="{{x.Description}}"
@@ -31,7 +31,7 @@
         <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
             <table id="t2" style="width: 100%;" class="scope-picker">
                 <tbody>
-                    <tr ng-repeat="y in Scopes | parentIdEqual: t1Parent | orderBy:'Number'"
+                    <tr ng-repeat="y in Scopes | parentIdEqual: t1Parent | orderBy:'CsiNumber'"
                         ng-class="{'selected-scope': y.Id == t2Parent }"
                         style="height: 20px !important;">
                         <td title="{{y.Description}}"
@@ -53,7 +53,7 @@
         <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
             <table id="t3" style="width: 100%;" class="scope-picker">
                 <tbody>
-                    <tr ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'Number'"
+                    <tr ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'CsiNumber'"
                         style="height: 20px !important;">
                         <td title="{{z.Description}}"
                             class="has-tip tip-right" style="overflow-x: hidden;">
@@ -89,7 +89,7 @@
         <fieldset class="panel">
             <legend>Selected Scopes</legend>
             <ul class="inline-list">
-                <li ng-repeat="s in selectedScopes | filter:{Checked: true}">
+                <li ng-repeat="s in selectedScopes | filter:{Checked: true} | orderBy: 'Csi'">
                     <div class="alert-box radius" style="padding: 2px 25px 2px 7px;">{{s.Csi}} {{s.Desc}} <a href="#" class="close" ng-click="removeTag(s)">&times;</a></div>
                 </li>
             </ul>

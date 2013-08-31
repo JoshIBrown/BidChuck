@@ -326,8 +326,6 @@
     <Content Include="Areas\Account\Views\Scopes\Manage.cshtml" />
     <Content Include="Areas\Account\Views\Shared\_ScopePicker.cshtml" />
     <Content Include="county.csv" />
-    <None Include="Properties\PublishProfiles\bcdev - FTP %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\bcdev - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\bcdev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bcdev - Web Deploy.pubxml" />
     <Content Include="Scripts\angular\angular-bootstrap-prettify.js" />
