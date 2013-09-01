@@ -253,6 +253,7 @@
     <Content Include="Areas\Account\Views\Scopes\_ScopePicker.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\logos\logo_color_240x45.png" />
     <Content Include="Content\logos\logo_color_301x100.png" />
     <Content Include="Content\images\saving.gif" />
     <Content Include="Content\images\small_green_check.png" />

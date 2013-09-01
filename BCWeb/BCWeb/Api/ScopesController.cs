@@ -45,6 +45,7 @@ namespace BCWeb.Controllers.Api
 
 
 
+        // /api/Scopes/GetScopesToManage
         public IEnumerable<ScopeMgmtViewModel> GetScopesToManage()
         {
             int uId = WebSecurity.GetUserId(User.Identity.Name);

@@ -70,4 +70,6 @@ ul.vcard .has-tip {
 ul.vcard.newCmpny {
     width:200px;
     height: 150px;
+    border:none !important;
+    background-color:#ddd;
 }

@@ -97,9 +97,9 @@ namespace BCWeb.Controllers
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveSignInSuccess ? "The external SignIn was removed."
-                : message == ManageMessageId.ChangeCompanyInfoSuccess ? "Compnay Info successfully updated."
+                : message == ManageMessageId.ChangeCompanyInfoSuccess ? "Company Info successfully updated."
                 : message == ManageMessageId.ChangeEmailSuccess ? "Email successfully updated."
-                : message == ManageMessageId.ChangeProfileSuccess ? "Profile Information succefully updated."
+                : message == ManageMessageId.ChangeProfileSuccess ? "Profile Information successfully updated."
                 : message == ManageMessageId.NewDelegateSuccess ? "New delegate successfully added."
                 : "";
 
@@ -582,7 +582,7 @@ namespace BCWeb.Controllers
                 if (viewModel.StateId != null && profile.StateId != viewModel.StateId)
                     profile.StateId = viewModel.StateId;
 
-
+                // update changes in the database
                 if (_serviceLayer.UpdateProfile(profile))
                 {
                     return RedirectToAction("Manage", new { message = ManageMessageId.ChangeCompanyInfoSuccess });

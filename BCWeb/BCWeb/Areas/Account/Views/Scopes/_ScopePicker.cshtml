@@ -98,7 +98,8 @@
             <legend>Selected Scopes</legend>
             <ul class="inline-list">
                 <li ng-repeat="s in selectedScopes | filter:{Checked: true} | orderBy: 'Csi'">
-                    <div class="alert-box radius" style="padding: 2px 25px 2px 7px;">{{s.Csi}} {{s.Desc}} <a href="#" class="close" ng-click="removeTag(s)">&times;</a></div>
+                    <div class="alert-box radius" style="padding: 2px 25px 2px 7px;">{{s.Csi}} {{s.Desc}} 
+                        <a href="#" class="close" ng-click="removeTag(s)">&times;</a></div>
                 </li>
             </ul>
         </fieldset>

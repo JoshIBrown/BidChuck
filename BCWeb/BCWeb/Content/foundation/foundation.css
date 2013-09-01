@@ -1601,6 +1601,12 @@ blockquote {
         display: block;
     }
 
+    .vcard.radius {
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+    }
+
     .vcard .fn {
         font-weight: bold;
         font-size: 0.9375em;

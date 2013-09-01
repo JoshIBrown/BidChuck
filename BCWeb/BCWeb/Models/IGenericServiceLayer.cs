@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 
 namespace BCWeb.Models
 {
+    // T has to be a database entity
     public interface IGenericServiceLayer<T> where T : class
     {
         Dictionary<string, string> ValidationDic { get; }
