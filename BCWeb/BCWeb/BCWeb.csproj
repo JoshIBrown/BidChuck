@@ -200,6 +200,7 @@
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeHierarchyViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeMgmtViewModel.cs" />
+    <Compile Include="Areas\Account\Models\Scopes\ViewModel\SelectedScopesViewModel.cs" />
     <Compile Include="Areas\Account\Models\Users\ViewModel\NewUserViewModel.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -213,6 +214,7 @@
     </Compile>
     <Compile Include="Helpers\ParameterRebinder.cs" />
     <Compile Include="Helpers\Util.cs" />
+    <Compile Include="Helpers\ValidateHttpAntiForgery.cs" />
     <Compile Include="MembershipDatabaseInitializer.cs" />
     <Compile Include="Models\Account\Repository\IUserProfileRepository.cs" />
     <Compile Include="Models\Account\Repository\UserProfileRepository.cs" />

@@ -1,4 +1,5 @@
-﻿<fieldset>
+﻿
+<fieldset>
     <legend>Scopes</legend>
     <div class="row" id="LoadingWrapper">
         <div class="small-4 columns small-centered">
@@ -6,14 +7,16 @@
         </div>
     </div>
     <div class="row" style="display: none;" id="ScopePickerWrapper">
-        <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+        <div class="large-4 columns" style="height: 300px; overflow-y: scroll;">
             <table id="t1" style="width: 100%;" class="scope-picker">
+                <caption>first tier</caption>
                 <tbody>
                     <tr ng-repeat="x in Scopes | filter: {ParentId :'!'} | orderBy:'CsiNumber'"
                         ng-class="{'selected-scope': x.Id == t1Parent }"
                         style="height: 20px !important;">
                         <td title="{{x.Description}}"
-                            class="has-tip tip-right">
+                            class="has-tip tip-right"
+                            style="overflow-x:hidden; white-space:nowrap;">
                             <input id="check{{x.Id}}"
                                 name="check{{x.Id}}"
                                 type="checkbox"
@@ -21,21 +24,23 @@
                                 ng-change="changeScopeSelection(x)" />
                             <span ng-click="t1Expand(x.Id)">{{x.CsiNumber | truncate: 2: ""}}
                                     {{x.Description | truncate: 30}}</span></td>
-                        <td><span style="display: inline-block !important;"
+                        <td class="width:30px;"><span style="display: inline-block !important;"
                             class="ui-icon ui-icon-circle-arrow-e"
                             ng-click="t1Expand(x.Id)"></span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+        <div class="large-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
             <table id="t2" style="width: 100%;" class="scope-picker">
+                <caption>second tier</caption>
                 <tbody>
                     <tr ng-repeat="y in Scopes | parentIdEqual: t1Parent | orderBy:'CsiNumber'"
                         ng-class="{'selected-scope': y.Id == t2Parent }"
                         style="height: 20px !important;">
                         <td title="{{y.Description}}"
-                            class="has-tip tip-right">
+                            class="has-tip tip-right"
+                            style="overflow-x:hidden; white-space:nowrap;">
                             <input id="check{{y.Id}}"
                                 name="check{{y.Id}}"
                                 type="checkbox"
@@ -50,13 +55,15 @@
                 </tbody>
             </table>
         </div>
-        <div class="small-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
+        <div class="large-4 columns" style="height: 300px; overflow-x: hidden; overflow-y: scroll;">
             <table id="t3" style="width: 100%;" class="scope-picker">
+                <caption>third tier</caption>
                 <tbody>
                     <tr ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'CsiNumber'"
                         style="height: 20px !important;">
                         <td title="{{z.Description}}"
-                            class="has-tip tip-right" style="overflow-x: hidden;">
+                            class="has-tip tip-right" 
+                            style="overflow-x:hidden; white-space:nowrap;">
                             <input id="check{{z.Id}}"
                                 name="check{{z.Id}}"
                                 type="checkbox"
@@ -84,6 +91,7 @@
         <span ng-show="cantsave">There was a problem saving.  Please try again.</span>
     </div>
 </div>
+
 <div class="row">
     <div class="small-12 columns ">
         <fieldset class="panel">

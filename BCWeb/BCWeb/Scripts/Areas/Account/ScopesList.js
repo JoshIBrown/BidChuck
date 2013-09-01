@@ -1,15 +1,24 @@
-﻿var app = angular.module('scopePicker', ['filters']).controller('ScopesCtrl', function ($scope, $http, $location) {
+﻿var app = angular.module('scopePicker', ['filters']).controller('ScopesCtrl', function ($scope, $http, $window) {
     $scope.t1Parent = 0;
     $scope.t2Parent = 0;
     $scope.selectedScopes = [];
     $scope.saved = false;
     $scope.saving = false;
     $scope.cantsave = false;
-    
-    
+
+    // may have to change this later, but for now it works
+    $scope.queryString = $window.location.search;
 
 
-    $http.get('/api/Scopes/GetScopesToManage')
+    if ($scope.queryString)
+        $scope.getUri = '/api/Scopes/GetScopesToManage' + $scope.queryString;
+    else
+        $scope.getUri = '/api/Scopes/GetScopesToManage';
+
+
+    var userREGEX = new RegExp('[\\?&amp;]user=(.*)');
+
+    $http.get($scope.getUri)
          .success(function (data) {
              $scope.Scopes = data;
              $scope.selectedScopes = $.map($scope.Scopes, function (data) {
@@ -135,15 +144,23 @@
         $scope.saved = false;
         $scope.cantsave = false;
         // create a new array containing only the id's of the selected scopes
-        var toPut = angular.toJson($.map($scope.selectedScopes, function (data) {
+        var selected = $.map($scope.selectedScopes, function (data) {
             // if selected scopes
             if (data.Checked) {
                 return data.Id;
             }
-        }));
+        });
+
+        // get user
+        var user = userREGEX.exec($scope.queryString);
+
+
+        var toPut = { "Selected": selected, "User": user[1].replace('%40','@') };
+        // get anti forgery token
+        var token = angular.element("input[name='__RequestVerificationToken']").val();
 
         // put the new list to the server
-        $http({ url: '/api/Scopes/PutSelectedScopes', method: 'PUT', data: toPut })
+        $http.put('/api/Scopes/PutSelectedScopes', angular.toJson(toPut), { headers: { "X-XSRF-Token": token }, xsrfCookieName: '__RequestVerificationToken' })
             .success(function (result) {
                 if (result.success) {
                     $scope.saved = true;
@@ -165,10 +182,3 @@ app.filter('parentIdEqual', ['$filter', function ($filter) {
     };
 }]);
 
-
-//flt.filter('parentIdEquals', function () {
-//    return function (scope, parentId) {
-//        var test = parseInt(parentId);
-//        return scope.ParentId === test;
-//    }
-//});

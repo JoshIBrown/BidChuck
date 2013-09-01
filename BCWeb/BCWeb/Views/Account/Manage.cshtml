@@ -71,7 +71,7 @@
                             <td>@d.Name</td>
                             <td>@d.Email</td>
                             <td>@d.Confirmed</td>
-                            <td><a href="#">Manage Scopes</a> @*@Html.RouteLink("Manage Scopes","Account_default",new{ controller="Scopes",action="Manage",user=d.Email})*@</td>
+                            <td>@Html.RouteLink("Manage Scopes","Account_default",new{ controller="Scopes",action="Manage",user=d.Email})</td>
                         </tr>
                     }
                 </tbody>

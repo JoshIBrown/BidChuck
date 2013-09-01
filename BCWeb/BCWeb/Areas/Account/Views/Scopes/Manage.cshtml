@@ -7,7 +7,8 @@
 
 
 <div class="row" ng-app="scopePicker">
-    <div class="small-12 columns" ng-controller="ScopesCtrl">
+    <div class="large-12 columns" ng-controller="ScopesCtrl">
+        @Html.AntiForgeryToken()
        @Html.Partial("_ScopePicker")
 
     </div>
