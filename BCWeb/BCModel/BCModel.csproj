@@ -61,9 +61,14 @@
     <Compile Include="Migrations\201308261940575_addManagerToUser.Designer.cs">
       <DependentUpon>201308261940575_addManagerToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309020310473_addProjectsAndBids.cs" />
+    <Compile Include="Migrations\201309020310473_addProjectsAndBids.Designer.cs">
+      <DependentUpon>201309020310473_addProjectsAndBids.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
+    <Compile Include="Projects\BidPackageXScope.cs" />
     <Compile Include="Projects\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
@@ -87,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308261940575_addManagerToUser.resx">
       <DependentUpon>201308261940575_addManagerToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309020310473_addProjectsAndBids.resx">
+      <DependentUpon>201309020310473_addProjectsAndBids.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

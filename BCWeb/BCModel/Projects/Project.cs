@@ -15,10 +15,20 @@ namespace BCModel.Projects
         [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public int CreatorId { get; set; }
+        [ForeignKey("CreatorId")]
+        [IgnoreDataMember]
+        public virtual UserProfile Creator { get; set; }
 
+        [Required]
+        public string Title { get; set; }
 
+        [Required]
+        public string Description { get; set; }
 
         [IgnoreDataMember]
         public virtual ICollection<BidPackage> BidPackages { get; set; }
+
+        // more metadata
     }
 }

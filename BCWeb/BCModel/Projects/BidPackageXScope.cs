@@ -9,22 +9,18 @@ using System.Threading.Tasks;
 
 namespace BCModel.Projects
 {
-    public class Bid
+    public class BidPackageXScope
     {
-        [Key]
-        [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
+        [Key, Column(Order = 0)]
         public int BidPackageId { get; set; }
         [ForeignKey("BidPackageId")]
         [IgnoreDataMember]
         public virtual BidPackage BidPackage { get; set; }
 
-        public int UserId { get; set; }
-        [ForeignKey("UserId")]
+        [Key, Column(Order = 1)]
+        public int ScopeId { get; set; }
+        [ForeignKey("ScopeId")]
         [IgnoreDataMember]
-        public virtual UserProfile User { get; set; }
-
-        // more meta data
+        public virtual Scope Scope { get; set; }
     }
 }

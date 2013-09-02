@@ -1,4 +1,5 @@
 ﻿using BCModel.Audit;
+using BCModel.Projects;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -21,7 +22,7 @@ namespace BCModel
         public BidChuckContext()
             : base("DefaultConnection")
         {
-            
+
             var oc = this as IObjectContextAdapter;
             oc.ObjectContext.SavingChanges += new EventHandler(ObjectContext_SavingChanges);
         }
@@ -34,7 +35,7 @@ namespace BCModel
             oc.ObjectContext.SavingChanges += new EventHandler(ObjectContext_SavingChanges);
         }
 
-        public BidChuckContext(string currentUser,string connection)
+        public BidChuckContext(string currentUser, string connection)
             : base(connection)
         {
             _currentUser = currentUser;
@@ -136,6 +137,12 @@ namespace BCModel
         public DbSet<State> State { get; set; }
         public DbSet<County> Counties { get; set; }
         public DbSet<BusinessType> BusinessTypes { get; set; }
+
+        // projects
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Bid> Bids { get; set; }
+        public DbSet<BidPackage> BidPackages { get; set; }
+        public DbSet<BidPackageXScope> BidPackageXScopes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
