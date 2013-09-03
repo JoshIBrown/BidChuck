@@ -231,8 +231,10 @@
     <Compile Include="Models\Home\ViewModels\NewCompanyViewModel.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
     <Compile Include="Models\IGenericServiceLayer.cs" />
+    <Compile Include="Models\IWebSecurityWrapper.cs" />
     <Compile Include="Models\RepositoryBase.cs" />
     <Compile Include="Models\ServiceLayerBase.cs" />
+    <Compile Include="Models\WebSecurityWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

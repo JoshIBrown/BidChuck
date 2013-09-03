@@ -20,10 +20,12 @@ namespace BCWeb.Controllers
     {
 
         private IUserProfileServiceLayer _serviceLayer;
+        private IWebSecurityWrapper _security;
 
-        public AccountController(IUserProfileServiceLayer serviceLayer)
+        public AccountController(IUserProfileServiceLayer serviceLayer, IWebSecurityWrapper security)
         {
             _serviceLayer = serviceLayer;
+            _security = security;
         }
 
         [Authorize(Roles = "Administrator")]
@@ -69,7 +71,7 @@ namespace BCWeb.Controllers
                 {
                     try
                     {
-                        passwordResetToken = WebSecurity.GeneratePasswordResetToken(model.Email);
+                        passwordResetToken = _security.GeneratePasswordResetToken(model.Email);
 
                         EmailSender.SendPasswordResetMail(user.FirstName, user.Email, passwordResetToken);
 
@@ -103,7 +105,7 @@ namespace BCWeb.Controllers
                 : message == ManageMessageId.NewDelegateSuccess ? "New delegate successfully added."
                 : "";
 
-            var raw = _serviceLayer.GetProfile(WebSecurity.GetUserId(User.Identity.Name));
+            var raw = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name));
 
             ManageDashboardViewModel viewModel = new ManageDashboardViewModel
             {
@@ -131,7 +133,7 @@ namespace BCWeb.Controllers
                 {
                     Name = x.LastName + ", " + x.FirstName,
                     Email = x.Email,
-                    Confirmed = WebSecurity.IsConfirmed(x.Email) ? "Active" : "Invited"
+                    Confirmed = _security.IsConfirmed(x.Email) ? "Active" : "Invited"
                 });
             return View(viewModel);
         }
@@ -165,7 +167,7 @@ namespace BCWeb.Controllers
                     bool resetPasswordSucceeded;
                     try
                     {
-                        resetPasswordSucceeded = WebSecurity.ResetPassword(model.PasswordResetToken, model.NewPassword);
+                        resetPasswordSucceeded = _security.ResetPassword(model.PasswordResetToken, model.NewPassword);
                     }
                     catch (Exception)
                     {
@@ -194,7 +196,7 @@ namespace BCWeb.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            if (WebSecurity.IsAuthenticated)
+            if (_security.IsAuthenticated)
             {
                 return RedirectToRoute("Default", new { controller = "Accout", action = "Manage" });
             }
@@ -216,7 +218,7 @@ namespace BCWeb.Controllers
                 // Attempt to register the user
                 try
                 {
-                    string confirmationToken = WebSecurity.CreateUserAndAccount(
+                    string confirmationToken = _security.CreateUserAndAccount(
                         model.Email,
                         model.Password,
                         new
@@ -306,7 +308,7 @@ namespace BCWeb.Controllers
         [AllowAnonymous]
         public ActionResult RegisterConfirmation(string ID)
         {
-            if (WebSecurity.ConfirmAccount(ID))
+            if (_security.ConfirmAccount(ID))
             {
                 return RedirectToAction("ConfirmationSuccess");
             }
@@ -328,7 +330,7 @@ namespace BCWeb.Controllers
         [AllowAnonymous]
         public ActionResult SignIn(string returnUrl)
         {
-            if (WebSecurity.IsAuthenticated)
+            if (_security.IsAuthenticated)
             {
                 return RedirectToRoute(new { route = "Default", controller = "Home", action = "Index" });
             }
@@ -341,7 +343,7 @@ namespace BCWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SignIn(SignInModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.Email, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && _security.Login(model.Email, model.Password, persistCookie: model.RememberMe))
             {
                 if (returnUrl == null || returnUrl == "")
                     return RedirectToRoute("Default", new { controller = "Home", action = "Index" });
@@ -358,7 +360,7 @@ namespace BCWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SignOut()
         {
-            WebSecurity.Logout();
+            _security.Logout();
 
             return RedirectToAction("Index", "Home");
         }
@@ -371,7 +373,8 @@ namespace BCWeb.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveSignInSuccess ? "The external SignIn was removed."
                 : "";
-            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            // not used
+            //ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(_security.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("ChangePassword");
             return View("ChangePassword");
         }
@@ -380,57 +383,57 @@ namespace BCWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(LocalPasswordModel model)
         {
-            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            ViewBag.HasLocalPassword = hasLocalAccount;
+            //bool hasLocalAccount = OAuth_security.HasLocalAccount(_security.GetUserId(User.Identity.Name));
+            //ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("ChangePassword");
-            if (hasLocalAccount)
+            //if (hasLocalAccount)
+            //{
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                // ChangePassword will throw an exception rather than return false in certain failure scenarios.
+                bool changePasswordSucceeded;
+                try
                 {
-                    // ChangePassword will throw an exception rather than return false in certain failure scenarios.
-                    bool changePasswordSucceeded;
-                    try
-                    {
-                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
-                    }
-                    catch (Exception)
-                    {
-                        changePasswordSucceeded = false;
-                    }
-
-                    if (changePasswordSucceeded)
-                    {
-                        return RedirectToAction("ChangePassword", new { Message = ManageMessageId.ChangePasswordSuccess });
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                    }
+                    changePasswordSucceeded = _security.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
                 }
-            }
-            else
-            {
-                // User does not have a local password so remove any validation errors caused by a missing
-                // OldPassword field
-                ModelState state = ModelState["OldPassword"];
-                if (state != null)
+                catch (Exception)
                 {
-                    state.Errors.Clear();
+                    changePasswordSucceeded = false;
                 }
 
-                if (ModelState.IsValid)
+                if (changePasswordSucceeded)
                 {
-                    try
-                    {
-                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("ChangePassword", new { Message = ManageMessageId.SetPasswordSuccess });
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e);
-                    }
+                    return RedirectToAction("ChangePassword", new { Message = ManageMessageId.ChangePasswordSuccess });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
                 }
             }
+            //}
+            //else
+            //{
+            //    // User does not have a local password so remove any validation errors caused by a missing
+            //    // OldPassword field
+            //    ModelState state = ModelState["OldPassword"];
+            //    if (state != null)
+            //    {
+            //        state.Errors.Clear();
+            //    }
+
+            //    if (ModelState.IsValid)
+            //    {
+            //        try
+            //        {
+            //            _security.CreateAccount(User.Identity.Name, model.NewPassword);
+            //            return RedirectToAction("ChangePassword", new { Message = ManageMessageId.SetPasswordSuccess });
+            //        }
+            //        catch (Exception e)
+            //        {
+            //            ModelState.AddModelError("", e);
+            //        }
+            //    }
+            //}
 
             // If we got this far, something failed, redisplay form
             return View(model);
@@ -440,33 +443,25 @@ namespace BCWeb.Controllers
         [HttpGet]
         public ActionResult EditCompany()
         {
-            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            if (hasLocalAccount)
-            {
-                var raw = _serviceLayer.GetProfile(WebSecurity.GetUserId(User.Identity.Name));
-                EditCompanyViewModel viewModel = new EditCompanyViewModel
-                {
-                    Address1 = raw.Address1,
-                    Address2 = raw.Address2,
-                    BusinessTypeId = raw.BusinessTypeId.HasValue ? raw.BusinessTypeId.Value : 0,
-                    City = raw.City,
-                    CompanyName = raw.CompanyName,
-                    Id = raw.UserId,
-                    OperatingDistance = raw.OperatingDistance,
-                    Phone = raw.Phone == "" ? "" : Util.ConvertPhoneForDisplay(raw.Phone),
-                    PostalCode = raw.PostalCode,
-                    StateId = raw.StateId.HasValue ? raw.StateId.Value : 0
-                };
-                viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-                viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
 
-                return View(viewModel);
-            }
-            else
+            var raw = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name));
+            EditCompanyViewModel viewModel = new EditCompanyViewModel
             {
-                return RedirectToAction("SignIn", new { returnUrl = Url.Action("SignIn").ToString() });
-            }
+                Address1 = raw.Address1,
+                Address2 = raw.Address2,
+                BusinessTypeId = raw.BusinessTypeId.HasValue ? raw.BusinessTypeId.Value : 0,
+                City = raw.City,
+                CompanyName = raw.CompanyName,
+                Id = raw.UserId,
+                OperatingDistance = raw.OperatingDistance,
+                Phone = raw.Phone == "" ? "" : Util.ConvertPhoneForDisplay(raw.Phone),
+                PostalCode = raw.PostalCode,
+                StateId = raw.StateId.HasValue ? raw.StateId.Value : 0
+            };
+            viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
+            viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
 
+            return View(viewModel);
         }
 
         [Authorize(Roles = "Manager,Administrator")]
@@ -478,7 +473,7 @@ namespace BCWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                var profile = _serviceLayer.GetProfile(WebSecurity.GetUserId(User.Identity.Name));
+                var profile = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name));
 
                 if (viewModel.Address1 != null && profile.Address1 != viewModel.Address1.Trim())
                     profile.Address1 = viewModel.Address1.Trim();
@@ -607,7 +602,7 @@ namespace BCWeb.Controllers
         public ActionResult ChangeEmail()
         {
             // get user profile
-            var raw = _serviceLayer.GetProfile(WebSecurity.GetUserId(User.Identity.Name));
+            var raw = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name));
             // create view model
             EditEmailViewModel viewModel = new EditEmailViewModel();
             viewModel.UserId = raw.UserId;
@@ -634,8 +629,8 @@ namespace BCWeb.Controllers
                     if (_serviceLayer.UpdateProfile(toUpdate))
                     {
                         // logout and back in unobtrusively to refresh context
-                        WebSecurity.Logout();
-                        WebSecurity.Login(viewModel.NewEmail, viewModel.Password);
+                        _security.Logout();
+                        _security.Login(viewModel.NewEmail, viewModel.Password);
                         return RedirectToAction("Manage", new { message = ManageMessageId.ChangeEmailSuccess });
                     }
                     else
@@ -678,10 +673,10 @@ namespace BCWeb.Controllers
             if (!User.Identity.IsAuthenticated)
             {
                 // confirm account to unlock it
-                if (WebSecurity.ConfirmAccount(user, token))
+                if (_security.ConfirmAccount(user, token))
                 {
                     // force user to reset their passowrd
-                    string passwordToken = WebSecurity.GeneratePasswordResetToken(user);
+                    string passwordToken = _security.GeneratePasswordResetToken(user);
                     InvitationViewModel viewModel = new InvitationViewModel
                     {
                         PasswordResetToken = passwordToken,
@@ -710,13 +705,13 @@ namespace BCWeb.Controllers
             if (ModelState.IsValid)
             {
                 // if user exists
-                if (WebSecurity.UserExists(viewModel.Email))
+                if (_security.UserExists(viewModel.Email))
                 {
                     // ResetPassword may throw an exception rather than return false in certain failure scenarios.
                     bool resetPasswordSucceeded;
                     try
                     {
-                        resetPasswordSucceeded = WebSecurity.ResetPassword(viewModel.PasswordResetToken, viewModel.NewPassword);
+                        resetPasswordSucceeded = _security.ResetPassword(viewModel.PasswordResetToken, viewModel.NewPassword);
                     }
                     catch (Exception)
                     {

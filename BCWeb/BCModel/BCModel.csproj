@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201309030213004_addConstructionBuildingAndProjectType.Designer.cs">
       <DependentUpon>201309030213004_addConstructionBuildingAndProjectType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309030310319_addMetaDataToProject.cs" />
+    <Compile Include="Migrations\201309030310319_addMetaDataToProject.Designer.cs">
+      <DependentUpon>201309030310319_addMetaDataToProject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -105,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309030213004_addConstructionBuildingAndProjectType.resx">
       <DependentUpon>201309030213004_addConstructionBuildingAndProjectType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309030310319_addMetaDataToProject.resx">
+      <DependentUpon>201309030310319_addMetaDataToProject.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

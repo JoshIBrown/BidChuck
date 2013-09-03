@@ -8,42 +8,42 @@
 
 
 <div class="row">
-    <div class="small-4 small-centered columns">
+    <div class="large-4 large-centered columns">
         <div class="row">
-            <div class="small-12 columns small-centered">
+            <div class="large-12 columns large-centered">
                 <img src="~/Content/logos/logo_color_301x100.png" alt="bidCHUCK logo" />
             </div>
         </div>
         @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
         {
             <div class="row">
-                <div class="small-12 small-centered columns">
+                <div class="large-12 large-centered columns">
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                 </div>
             </div>
         
             <div class="row">
-                <div class="small-12 small-centered columns">
+                <div class="large-12 large-centered columns">
                     @Html.LabelFor(m => m.Email)
                     @Html.TextBoxFor(m => m.Email)
                     @Html.ValidationMessageFor(m => m.Email)
                 </div>
             </div>
             <div class="row">
-                <div class="small-12 small-centered columns">
+                <div class="large-12 large-centered columns">
                     @Html.LabelFor(m => m.Password)
                     @Html.PasswordFor(m => m.Password)
                     @Html.ValidationMessageFor(m => m.Password)
                 </div>
             </div>
             <div class="row">
-                <div class="small-12 small-centered columns">
+                <div class="large-12 large-centered columns">
                     <label for="RememberMe">@Html.CheckBoxFor(m => m.RememberMe) Remember Me</label>
                 </div>
             </div>
             <div class="row">
-                <div class="small-12 small-centered columns">
+                <div class="large-12 large-centered columns">
                     <input type="submit" value="Sign in" class="medium button" />
                 </div>
             </div>
@@ -51,12 +51,12 @@
     </div>
 </div>
 <div class="row">
-    <div class="small-4 small-centered columns">
+    <div class="large-4 large-centered columns">
         @Html.ActionLink("Re-Send Confirmation Email", "ResendConfirmationEmail")
     </div>
 </div>
 <div class="row">
-    <div class="small-4 small-centered columns">
+    <div class="large-4 large-centered columns">
         @Html.ActionLink("Forgot Password", "ForgotPassword")
     </div>
 </div>

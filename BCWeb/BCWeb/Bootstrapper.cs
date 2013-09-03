@@ -37,6 +37,7 @@ namespace BCWeb
             container.RegisterType<IUserProfileRepository, UserProfileRepository>();
             container.RegisterType<IScopeRepository, ScopeRepository>();
             container.RegisterType<IScopeServiceLayer, ScopeServiceLayer>();
+            container.RegisterType<IWebSecurityWrapper, WebSecurityWrapper>();
             RegisterTypes(container);
 
             return container;

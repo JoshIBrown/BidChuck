@@ -25,7 +25,7 @@ namespace BCModel.Projects
 
         [IgnoreDataMember]
         public virtual ICollection<Scope> Scopes { get; set; }
-        
+
         // more meta data
     }
 }
