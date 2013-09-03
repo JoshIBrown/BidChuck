@@ -16,7 +16,6 @@ body {
     color: #222222;
     padding: 0;
     margin: 0;
-    margin-top: 1.875em;
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-style: normal;
@@ -3839,7 +3838,7 @@ label.error {
         margin-bottom: 1.875em;
     }
 
-.fixed.contain-to-grid {
+.fixed.contain-to-grid{
     max-height: 45px;
 }
 
