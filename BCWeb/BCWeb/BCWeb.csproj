@@ -187,7 +187,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\AccountController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
@@ -208,13 +207,14 @@
     <Compile Include="Api\UsersController.cs" />
     <Compile Include="Api\ScopesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="EmailSender.cs" />
+    <Compile Include="Helpers\EmailSender.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ParameterRebinder.cs" />
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="Helpers\ValidateHttpAntiForgery.cs" />
+    <Compile Include="Helpers\IEmailSender.cs" />
     <Compile Include="MembershipDatabaseInitializer.cs" />
     <Compile Include="Models\Account\Repository\IUserProfileRepository.cs" />
     <Compile Include="Models\Account\Repository\UserProfileRepository.cs" />

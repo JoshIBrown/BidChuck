@@ -112,6 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AccountControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScopeFileTest.cs" />
   </ItemGroup>
@@ -133,6 +134,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Api\" />
     <Folder Include="Areas\Account\Account\" />
     <Folder Include="Areas\Account\Scopes\" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using BCModel;
 using BCWeb.Areas.Account.Models.Scopes.ServiceLayer;
 using BCWeb.Areas.Account.Models.Scopes.ViewModel;
+using BCWeb.Models;
 using BCWeb.Models.GenericViewModel;
 using Microsoft.Web.WebPages.OAuth;
 using System;
@@ -19,10 +20,12 @@ namespace BCWeb.Controllers.Api
     {
 
         private IScopeServiceLayer _service;
+        private IWebSecurityWrapper _security;
 
-        public ScopesController(IScopeServiceLayer service)
+        public ScopesController(IScopeServiceLayer service,IWebSecurityWrapper security)
         {
             _service = service;
+            _security = security;
         }
 
 
@@ -48,7 +51,7 @@ namespace BCWeb.Controllers.Api
         // /api/Scopes/GetScopesToManage
         public IEnumerable<ScopeMgmtViewModel> GetScopesToManage()
         {
-            int uId = WebSecurity.GetUserId(User.Identity.Name);
+            int uId = _security.GetUserId(User.Identity.Name);
 
 
             IEnumerable<ScopeMgmtViewModel> viewModel;
@@ -75,9 +78,9 @@ namespace BCWeb.Controllers.Api
         {
 
 
-            int uId = WebSecurity.GetUserId(user);
+            int uId = _security.GetUserId(user);
             var profile = _service.GetUser(uId);
-            if (_service.GetUser(WebSecurity.GetUserId(User.Identity.Name)).Delegates.Contains(profile))
+            if (_service.GetUser(_security.GetUserId(User.Identity.Name)).Delegates.Contains(profile))
             {
 
                 IEnumerable<ScopeMgmtViewModel> viewModel;
@@ -122,16 +125,16 @@ namespace BCWeb.Controllers.Api
 
 
                 if (viewModel.User == "" || viewModel.User == null)
-                    profile = _service.GetUser(WebSecurity.GetUserId(User.Identity.Name));
+                    profile = _service.GetUser(_security.GetUserId(User.Identity.Name));
                 else
                 {
 
-                    profile = _service.GetUser(WebSecurity.GetUserId(viewModel.User));
+                    profile = _service.GetUser(_security.GetUserId(viewModel.User));
 
                     // check to make sure the manager is the one editing these permissions.
                     // prevent script injection
                     // will probably need to change if we have more than 1 level deep of managers
-                    if (profile.ManagerId != WebSecurity.GetUserId(User.Identity.Name))
+                    if (profile.ManagerId != _security.GetUserId(User.Identity.Name))
                         throw new Exception("you are trying to edit a user you are not the manager for");
                 }
 

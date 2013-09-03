@@ -8,9 +8,9 @@ using System.Net.Mime;
 
 namespace BCWeb
 {
-    public static class EmailSender
+    public  class EmailSender : BCWeb.IEmailSender
     {
-        public static void SendConfirmationMail(string FirstName, string Email, string ConfirmationToken)
+        public  void SendConfirmationMail(string FirstName, string Email, string ConfirmationToken)
         {
             MailMessage message = new MailMessage();
             List<MailAddress> recipients = new List<MailAddress>();
@@ -49,7 +49,7 @@ namespace BCWeb
             SendMail(message, text, html);
         }
 
-        public static void SendPasswordResetMail(string FirstName, string Email, string PasswordResetToken)
+        public  void SendPasswordResetMail(string FirstName, string Email, string PasswordResetToken)
         {
             MailMessage message = new MailMessage();
             List<MailAddress> recipients = new List<MailAddress>();
@@ -88,7 +88,7 @@ namespace BCWeb
             SendMail(message, text, html);
         }
 
-        public static void SendNewDelegateEmail(string Inviter, string FirstName, string Email, string ConfirmAccoutToken)
+        public  void SendNewDelegateEmail(string Inviter, string FirstName, string Email, string ConfirmAccoutToken)
         {
             MailMessage message = new MailMessage();
             List<MailAddress> recipients = new List<MailAddress>();
@@ -127,13 +127,15 @@ namespace BCWeb
             SendMail(message, text, html);
         }
 
-        private static void SendMail(MailMessage message, string text, string html)
+        private void SendMail(MailMessage message, string text, string html)
         {
             message.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
             message.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
 
-            SmtpClient smtpClient = new SmtpClient();
-            smtpClient.Send(message);
+            using (SmtpClient smtpClient = new SmtpClient())
+            {
+                smtpClient.Send(message);
+            }
         }
     }
 }

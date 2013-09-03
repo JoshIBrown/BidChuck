@@ -21,11 +21,13 @@ namespace BCWeb.Controllers
 
         private IUserProfileServiceLayer _serviceLayer;
         private IWebSecurityWrapper _security;
+        private IEmailSender _emailer;
 
-        public AccountController(IUserProfileServiceLayer serviceLayer, IWebSecurityWrapper security)
+        public AccountController(IUserProfileServiceLayer serviceLayer, IWebSecurityWrapper security, IEmailSender emailer)
         {
             _serviceLayer = serviceLayer;
             _security = security;
+            _emailer = emailer;
         }
 
         [Authorize(Roles = "Administrator")]
@@ -73,7 +75,7 @@ namespace BCWeb.Controllers
                     {
                         passwordResetToken = _security.GeneratePasswordResetToken(model.Email);
 
-                        EmailSender.SendPasswordResetMail(user.FirstName, user.Email, passwordResetToken);
+                        _emailer.SendPasswordResetMail(user.FirstName, user.Email, passwordResetToken);
 
                         return RedirectToAction("ForgotPasswordStepTwo", "Account");
                     }
@@ -205,7 +207,7 @@ namespace BCWeb.Controllers
             viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString() });
             viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
-            return View(viewModel);
+            return View("Register", viewModel);
         }
 
         [HttpPost]
@@ -238,11 +240,43 @@ namespace BCWeb.Controllers
                             Published = false
                         }, true);
 
-                    Roles.AddUserToRole(model.Email, "Manager");
+                    _security.AddUserToRole(model.Email, "Manager");
+
+                    var businesstypes = _serviceLayer.GetBusinessTypes();
+
+                    string newTypeName = businesstypes.FirstOrDefault(x => x.Id == model.BusinessTypeId).Name;
+                    switch (newTypeName)
+                    {
+                        case "General Contractor":
+                            _security.AddUserToRole(User.Identity.Name, "general_contractor");
+                            break;
+                        case "Sub-Contractor":
+                            _security.AddUserToRole(User.Identity.Name, "subcontractor");
+                            break;
+                        case "Architect":
+                            _security.AddUserToRole(User.Identity.Name, "architect");
+                            break;
+                        case "Engineer":
+                            _security.AddUserToRole(User.Identity.Name, "engineer");
+                            break;
+                        case "@Owner/Client":
+                            _security.AddUserToRole(User.Identity.Name, "owner_client");
+                            break;
+                        case "Materials Vendor":
+                            _security.AddUserToRole(User.Identity.Name, "materials_vendor");
+                            break;
+                        case "Materials Manufacturer":
+                            _security.AddUserToRole(User.Identity.Name, "materials_manufacturer");
+                            break;
+                        case "Consultant":
+                            _security.AddUserToRole(User.Identity.Name, "consultant");
+                            break;
+                    };
+
 
                     // todo: add user to role for business type
 
-                    EmailSender.SendConfirmationMail(model.FirstName, model.Email, confirmationToken);
+                    _emailer.SendConfirmationMail(model.FirstName, model.Email, confirmationToken);
 
                     return RedirectToAction("RegisterStepTwo", "Account");
                 }
@@ -285,7 +319,7 @@ namespace BCWeb.Controllers
                             confirmationToken = db.Query(sql).First()["ConfirmationToken"];
                         }
 
-                        EmailSender.SendConfirmationMail(user.FirstName, user.Email, confirmationToken);
+                        _emailer.SendConfirmationMail(user.FirstName, user.Email, confirmationToken);
 
                         return RedirectToAction("RegisterStepTwo", "Account");
                     }
@@ -565,7 +599,7 @@ namespace BCWeb.Controllers
                 if (viewModel.CompanyName != null && profile.CompanyName != viewModel.CompanyName.Trim())
                     profile.CompanyName = viewModel.CompanyName.Trim();
 
-                if (viewModel.OperatingDistance != null && profile.OperatingDistance != viewModel.OperatingDistance)
+                if (viewModel.OperatingDistance == 0 && profile.OperatingDistance != viewModel.OperatingDistance)
                     profile.OperatingDistance = viewModel.OperatingDistance;
 
                 if (viewModel.Phone != null && profile.Phone != viewModel.Phone.Trim())
@@ -574,7 +608,7 @@ namespace BCWeb.Controllers
                 if (viewModel.PostalCode != null && profile.PostalCode != viewModel.PostalCode.Trim())
                     profile.PostalCode = viewModel.PostalCode.Trim();
 
-                if (viewModel.StateId != null && profile.StateId != viewModel.StateId)
+                if (viewModel.StateId == 0 && profile.StateId != viewModel.StateId)
                     profile.StateId = viewModel.StateId;
 
                 // update changes in the database

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Web.Security;
 namespace BCWeb.Models
 {
     public interface IWebSecurityWrapper
     {
+        // web security
         bool ChangePassword(string userName, string currentPassword, string newPassword);
         bool ConfirmAccount(string accountConfirmationToken);
         bool ConfirmAccount(string userName, string accountConfirmationToken);
@@ -34,5 +36,42 @@ namespace BCWeb.Models
         void RequireUser(string userName);
         bool ResetPassword(string passwordResetToken, string newPassword);
         bool UserExists(string userName);
+
+
+        // role provider
+        string ApplicationName { get; set; }
+        bool CacheRolesInCookie { get; }
+        string CookieName { get; }
+        string CookiePath { get; }
+        CookieProtection CookieProtectionValue { get; }
+        bool CookieRequireSSL { get; }
+        bool CookieSlidingExpiration { get; }
+        int CookieTimeout { get; }
+        bool CreatePersistentCookie { get; }
+        string Domain { get; }
+        bool Enabled { get; set; }
+        int MaxCachedResults { get; }
+        RoleProvider Provider { get; }
+        RoleProviderCollection Providers { get; }
+        void AddUsersToRole(string[] usernames, string roleName);
+        void AddUsersToRoles(string[] usernames, string[] roleNames);
+        void AddUserToRole(string username, string roleName);
+        void AddUserToRoles(string username, string[] roleNames);
+        void CreateRole(string roleName);
+        void DeleteCookie();
+        bool DeleteRole(string roleName);
+        bool DeleteRole(string roleName, bool throwOnPopulatedRole);
+        string[] FindUsersInRole(string roleName, string usernameToMatch);
+        string[] GetAllRoles();
+        string[] GetRolesForUser();
+        string[] GetRolesForUser(string username);
+        string[] GetUsersInRole(string roleName);
+        bool IsUserInRole(string roleName);
+        bool IsUserInRole(string username, string roleName);
+        void RemoveUserFromRole(string username, string roleName);
+        void RemoveUserFromRoles(string username, string[] roleNames);
+        void RemoveUsersFromRole(string[] usernames, string roleName);
+        void RemoveUsersFromRoles(string[] usernames, string[] roleNames);
+        bool RoleExists(string roleName);
     }
 }

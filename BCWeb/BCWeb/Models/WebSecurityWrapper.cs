@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using WebMatrix.WebData;
 
 namespace BCWeb.Models
@@ -39,5 +40,41 @@ namespace BCWeb.Models
         public void RequireUser(string userName) { WebSecurity.RequireUser(userName); }
         public bool ResetPassword(string passwordResetToken, string newPassword) { return WebSecurity.ResetPassword(passwordResetToken, newPassword); }
         public bool UserExists(string userName) { return WebSecurity.UserExists(userName); }
+
+        // role provider
+        public string ApplicationName { get { return Roles.ApplicationName; } set { Roles.ApplicationName = value; } }
+        public bool CacheRolesInCookie { get { return Roles.CacheRolesInCookie; } }
+        public string CookieName { get { return Roles.CookieName; } }
+        public string CookiePath { get { return Roles.CookiePath; } }
+        public System.Web.Security.CookieProtection CookieProtectionValue { get { return Roles.CookieProtectionValue; } }
+        public bool CookieRequireSSL { get { return Roles.CookieRequireSSL; } }
+        public bool CookieSlidingExpiration { get { return Roles.CookieSlidingExpiration; } }
+        public int CookieTimeout { get { return Roles.CookieTimeout; } }
+        public bool CreatePersistentCookie { get { return Roles.CreatePersistentCookie; } }
+        public string Domain { get { return Roles.Domain; } }
+        public bool Enabled { get { return Roles.Enabled; } set { Roles.Enabled = value; } }
+        public int MaxCachedResults { get { return Roles.MaxCachedResults; } }
+        public System.Web.Security.RoleProvider Provider { get { return Roles.Provider; } }
+        public System.Web.Security.RoleProviderCollection Providers { get { return Roles.Providers; } }
+        public void AddUsersToRole(string[] usernames, string roleName) { Roles.AddUsersToRole(usernames, roleName); }
+        public void AddUsersToRoles(string[] usernames, string[] roleNames) { Roles.AddUsersToRoles(usernames, roleNames); }
+        public void AddUserToRole(string username, string roleName) { Roles.AddUserToRole(username, roleName); }
+        public void AddUserToRoles(string username, string[] roleNames) { Roles.AddUserToRoles(username, roleNames); }
+        public void CreateRole(string roleName) { Roles.CreateRole(roleName); }
+        public void DeleteCookie() { Roles.DeleteCookie(); }
+        public bool DeleteRole(string roleName) { return Roles.DeleteRole(roleName); }
+        public bool DeleteRole(string roleName, bool throwOnPopulatedRole) { return Roles.DeleteRole(roleName, throwOnPopulatedRole); }
+        public string[] FindUsersInRole(string roleName, string usernameToMatch) { return Roles.FindUsersInRole(roleName, usernameToMatch); }
+        public string[] GetAllRoles() { return Roles.GetAllRoles(); }
+        public string[] GetRolesForUser() { return GetRolesForUser(); }
+        public string[] GetRolesForUser(string username) { return Roles.GetRolesForUser(username); }
+        public string[] GetUsersInRole(string roleName) { return Roles.GetUsersInRole(roleName); }
+        public bool IsUserInRole(string roleName) { return Roles.IsUserInRole(roleName); }
+        public bool IsUserInRole(string username, string roleName) { return Roles.IsUserInRole(username, roleName); }
+        public void RemoveUserFromRole(string username, string roleName) { Roles.RemoveUserFromRole(username, roleName); }
+        public void RemoveUserFromRoles(string username, string[] roleNames) { Roles.RemoveUserFromRoles(username, roleNames); }
+        public void RemoveUsersFromRole(string[] usernames, string roleName) { Roles.RemoveUsersFromRole(usernames, roleName); }
+        public void RemoveUsersFromRoles(string[] usernames, string[] roleNames) { Roles.RemoveUsersFromRoles(usernames, roleNames); }
+        public bool RoleExists(string roleName) { return Roles.RoleExists(roleName); }
     }
 }

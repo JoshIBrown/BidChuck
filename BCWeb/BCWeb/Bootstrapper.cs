@@ -38,6 +38,7 @@ namespace BCWeb
             container.RegisterType<IScopeRepository, ScopeRepository>();
             container.RegisterType<IScopeServiceLayer, ScopeServiceLayer>();
             container.RegisterType<IWebSecurityWrapper, WebSecurityWrapper>();
+            container.RegisterType<IEmailSender, EmailSender>();
             RegisterTypes(container);
 
             return container;

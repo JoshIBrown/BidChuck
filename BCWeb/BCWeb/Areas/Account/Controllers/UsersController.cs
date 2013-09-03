@@ -1,6 +1,7 @@
 ﻿using BCModel;
 using BCWeb.Areas.Account.Models.Users.ViewModel;
 using BCWeb.Helpers;
+using BCWeb.Models;
 using BCWeb.Models.Account.ServiceLayer;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,14 @@ namespace BCWeb.Areas.Account.Controllers
     public class UsersController : Controller
     {
         private IUserProfileServiceLayer _service;
-        public UsersController(IUserProfileServiceLayer service)
+        private IWebSecurityWrapper _security;
+        private IEmailSender _emailer;
+
+        public UsersController(IUserProfileServiceLayer service,IWebSecurityWrapper security, IEmailSender emailer)
         {
             _service = service;
+            _security = security;
+            _emailer = emailer;
         }
 
         //
@@ -44,11 +50,11 @@ namespace BCWeb.Areas.Account.Controllers
         {
             if (ModelState.IsValid)
             {
-                int currentUserId = WebSecurity.GetUserId(User.Identity.Name);
+                int currentUserId = _security.GetUserId(User.Identity.Name);
                 UserProfile user = _service.GetProfile(currentUserId);
 
                 // use security context to create user
-                string confirmToken = WebSecurity.CreateUserAndAccount(viewModel.Email,
+                string confirmToken = _security.CreateUserAndAccount(viewModel.Email,
                     "password",
                     new
                     {
@@ -68,10 +74,10 @@ namespace BCWeb.Areas.Account.Controllers
                     }, true);
 
                 // give them a minion role
-                Roles.AddUserToRole(viewModel.Email, "Employee");
+                _security.AddUserToRole(viewModel.Email, "Employee");
 
                 // add user to minions
-                int newUserId = WebSecurity.GetUserId(viewModel.Email);
+                int newUserId = _security.GetUserId(viewModel.Email);
 
 
 
@@ -79,9 +85,9 @@ namespace BCWeb.Areas.Account.Controllers
                 _service.UpdateProfile(user);
 
                 // email minion a "password reset" email
-                //string passwordToken = WebSecurity.GeneratePasswordResetToken(viewModel.Email); // change password to something impossibru
-                //WebSecurity.ChangePassword(viewModel.Email, "password", passwordToken);
-                EmailSender.SendNewDelegateEmail(user.FirstName + " " + user.LastName, viewModel.FirstName, viewModel.Email, confirmToken);
+                //string passwordToken = _security.GeneratePasswordResetToken(viewModel.Email); // change password to something impossibru
+                //_security.ChangePassword(viewModel.Email, "password", passwordToken);
+                _emailer.SendNewDelegateEmail(user.FirstName + " " + user.LastName, viewModel.FirstName, viewModel.Email, confirmToken);
                 return RedirectToRoute("Default", new { controller = "Account", action = "Manage" });
             }
             else
@@ -96,14 +102,14 @@ namespace BCWeb.Areas.Account.Controllers
         [ValidateAntiForgeryToken]
         public void ResendInvitation(string email)
         {
-            var user = _service.GetProfile(WebSecurity.GetUserId(email));
+            var user = _service.GetProfile(_security.GetUserId(email));
             string confirmationToken = "";
             using (Database db = Database.Open("DefaultConnection"))
             {
                 var sql = "SELECT ConfirmationToken FROM webpages_Membership WHERE UserId =" + user.UserId;
                 confirmationToken = db.Query(sql).First()["ConfirmationToken"];
             }
-            EmailSender.SendNewDelegateEmail(user.FirstName + " " + user.LastName, user.FirstName, user.Email, confirmationToken);
+            _emailer.SendNewDelegateEmail(user.FirstName + " " + user.LastName, user.FirstName, user.Email, confirmationToken);
         }
 
     }
