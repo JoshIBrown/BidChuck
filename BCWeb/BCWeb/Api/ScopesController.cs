@@ -74,112 +74,116 @@ namespace BCWeb.Controllers.Api
             return viewModel;
         }
 
-        public IEnumerable<ScopeMgmtViewModel> GetScopesToManage(string user)
-        {
+
+        // FIXME
+        //public IEnumerable<ScopeMgmtViewModel> GetScopesToManage(string user)
+        //{
 
 
-            int uId = _security.GetUserId(user);
-            var profile = _service.GetUser(uId);
-            if (_service.GetUser(_security.GetUserId(User.Identity.Name)).Delegates.Contains(profile))
-            {
+        //    int uId = _security.GetUserId(user);
+        //    var profile = _service.GetUser(uId);
+        //    if (_service.GetUser(_security.GetUserId(User.Identity.Name)).Delegates.Contains(profile))
+        //    {
 
-                IEnumerable<ScopeMgmtViewModel> viewModel;
-
-
-                var chosenScopes = profile.Scopes.ToList();
-                var manager = profile.Manager;
+        //        IEnumerable<ScopeMgmtViewModel> viewModel;
 
 
-                viewModel = manager.Scopes
-                    .OrderBy(s => s.Id)
-                    .Select(s => new ScopeMgmtViewModel
-                    {
-                        Checked = chosenScopes.Contains(s),
-                        Description = s.Description,
-                        Id = s.Id,
-                        ParentId = s.ParentId,
-                        CsiNumber = s.CsiNumber
-                    }).ToArray();
+        //        var chosenScopes = profile.Scopes.ToList();
+        //        var manager = profile.Manager;
 
 
-                return viewModel;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        [ValidateHttpAntiForgeryTokenAttribute]
-        public JQueryPostResult PutSelectedScopes([FromBody] SelectedScopesViewModel viewModel)
-        {
-            JQueryPostResult result = new JQueryPostResult();
-
-            try
-            {
-                // get scope objects matching the id's of the selected
-                var selectedScopes = _service.GetEnumerable(x => viewModel.Selected.Contains(x.Id)).ToList();
-
-                // get scope objects user had chosen previously
-                UserProfile profile;
+        //        viewModel = manager.Scopes
+        //            .OrderBy(s => s.Id)
+        //            .Select(s => new ScopeMgmtViewModel
+        //            {
+        //                Checked = chosenScopes.Contains(s),
+        //                Description = s.Description,
+        //                Id = s.Id,
+        //                ParentId = s.ParentId,
+        //                CsiNumber = s.CsiNumber
+        //            }).ToArray();
 
 
-                if (viewModel.User == "" || viewModel.User == null)
-                    profile = _service.GetUser(_security.GetUserId(User.Identity.Name));
-                else
-                {
+        //        return viewModel;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
-                    profile = _service.GetUser(_security.GetUserId(viewModel.User));
 
-                    // check to make sure the manager is the one editing these permissions.
-                    // prevent script injection
-                    // will probably need to change if we have more than 1 level deep of managers
-                    if (profile.ManagerId != _security.GetUserId(User.Identity.Name))
-                        throw new Exception("you are trying to edit a user you are not the manager for");
-                }
+        // FIXME
+        //[ValidateHttpAntiForgeryTokenAttribute]
+        //public JQueryPostResult PutSelectedScopes([FromBody] SelectedScopesViewModel viewModel)
+        //{
+        //    JQueryPostResult result = new JQueryPostResult();
 
-                var existingSelection = profile.Scopes.ToList();
+        //    try
+        //    {
+        //        // get scope objects matching the id's of the selected
+        //        var selectedScopes = _service.GetEnumerable(x => viewModel.Selected.Contains(x.Id)).ToList();
 
-                // add selections not in existing collection
-                var toAdd = selectedScopes.Where(x => !existingSelection.Contains(x));
-                foreach (var a in toAdd)
-                {
-                    //user.Scopes.Add(a);
-                    a.Users.Add(profile);
-                    if (!_service.Update(a))
-                    {
-                        throw new Exception(_service.ValidationDic.First().Value);
-                    }
-                }
+        //        // get scope objects user had chosen previously
+        //        UserProfile profile;
 
-                // remove scopes not in selected that are in existing
-                var toRemove = existingSelection.Where(y => !selectedScopes.Contains(y));
-                foreach (var r in toRemove)
-                {
-                    r.Users.Remove(profile);
-                    _service.Update(r);
-                    if (!_service.Update(r))
-                    {
-                        throw new Exception(_service.ValidationDic.First().Value);
-                    }
-                    //user.Scopes.Remove(r);
-                }
 
-                // save changes and report our glorious save
+        //        if (viewModel.User == "" || viewModel.User == null)
+        //            profile = _service.GetUser(_security.GetUserId(User.Identity.Name));
+        //        else
+        //        {
 
-                result.message = "changes saved";
-                result.success = true;
-            }
+        //            profile = _service.GetUser(_security.GetUserId(viewModel.User));
 
-            catch (Exception ex)
-            {
-                // report the exception to the user for now.  quick'n'dirty
-                result.message = ex.Message;
-                result.success = false;
-            }
+        //            // check to make sure the manager is the one editing these permissions.
+        //            // prevent script injection
+        //            // will probably need to change if we have more than 1 level deep of managers
+        //            if (profile.ManagerId != _security.GetUserId(User.Identity.Name))
+        //                throw new Exception("you are trying to edit a user you are not the manager for");
+        //        }
 
-            return result;
+        //        var existingSelection = profile.Scopes.ToList();
 
-        }
+        //        // add selections not in existing collection
+        //        var toAdd = selectedScopes.Where(x => !existingSelection.Contains(x));
+        //        foreach (var a in toAdd)
+        //        {
+        //            //user.Scopes.Add(a);
+        //            a.Users.Add(profile);
+        //            if (!_service.Update(a))
+        //            {
+        //                throw new Exception(_service.ValidationDic.First().Value);
+        //            }
+        //        }
+
+        //        // remove scopes not in selected that are in existing
+        //        var toRemove = existingSelection.Where(y => !selectedScopes.Contains(y));
+        //        foreach (var r in toRemove)
+        //        {
+        //            r.Users.Remove(profile);
+        //            _service.Update(r);
+        //            if (!_service.Update(r))
+        //            {
+        //                throw new Exception(_service.ValidationDic.First().Value);
+        //            }
+        //            //user.Scopes.Remove(r);
+        //        }
+
+        //        // save changes and report our glorious save
+
+        //        result.message = "changes saved";
+        //        result.success = true;
+        //    }
+
+        //    catch (Exception ex)
+        //    {
+        //        // report the exception to the user for now.  quick'n'dirty
+        //        result.message = ex.Message;
+        //        result.success = false;
+        //    }
+
+        //    return result;
+
+        //}
     }
 }

@@ -88,6 +88,18 @@ namespace BCModel.Migrations
                 context.BusinessTypes.Add(new BusinessType { Name = "Consultant" });
                 context.SaveChanges();
             }
+
+            if (context.ProjectTypes.Count() == 0)
+            {
+            }
+
+            if (context.ConstructionTypes.Count() == 0)
+            {
+            }
+
+            if (context.BuildingTypes.Count() == 0)
+            {
+            }
         }
     }
 }

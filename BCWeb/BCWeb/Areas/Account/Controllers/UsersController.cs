@@ -43,6 +43,9 @@ namespace BCWeb.Areas.Account.Controllers
             return View();
         }
 
+
+
+        // FIXME
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Manager,Administrator")]
@@ -59,18 +62,18 @@ namespace BCWeb.Areas.Account.Controllers
                     new
                     {
                         FirstName = viewModel.FirstName,
-                        LastName = viewModel.LastName,
-                        StateId = user.StateId,
-                        //CountyId = user.CountyId, // pulled for now
-                        CompanyName = user.CompanyName,
-                        Phone = Util.ConvertPhoneForStorage(user.Phone),
-                        Address1 = user.Address1,
-                        Address2 = user.Address2,
-                        City = user.City,
-                        PostalCode = user.PostalCode,
-                        OperatingDistance = user.OperatingDistance,
-                        BusinessTypeId = user.BusinessTypeId,
-                        Published = false
+                        LastName = viewModel.LastName
+                        //StateId = user.StateId,
+                        ////CountyId = user.CountyId, // pulled for now
+                        //CompanyName = user.CompanyName,
+                        //Phone = Util.ConvertPhoneForStorage(user.Phone),
+                        //Address1 = user.Address1,
+                        //Address2 = user.Address2,
+                        //City = user.City,
+                        //PostalCode = user.PostalCode,
+                        //OperatingDistance = user.OperatingDistance,
+                        //BusinessTypeId = user.BusinessTypeId,
+                        //Published = false
                     }, true);
 
                 // give them a minion role
@@ -81,8 +84,8 @@ namespace BCWeb.Areas.Account.Controllers
 
 
 
-                user.Delegates.Add(_service.GetProfile(newUserId));
-                _service.UpdateProfile(user);
+                //user.Delegates.Add(_service.GetProfile(newUserId));
+                //_service.UpdateProfile(user);
 
                 // email minion a "password reset" email
                 //string passwordToken = _security.GeneratePasswordResetToken(viewModel.Email); // change password to something impossibru

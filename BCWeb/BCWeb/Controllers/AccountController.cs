@@ -95,6 +95,8 @@ namespace BCWeb.Controllers
             return View(model);
         }
 
+
+        // FIXME
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -111,16 +113,16 @@ namespace BCWeb.Controllers
 
             ManageDashboardViewModel viewModel = new ManageDashboardViewModel
             {
-                Address1 = raw.Address1,
-                Address2 = raw.Address2,
-                BusinessType = raw.BusinessType.Name,
-                City = raw.City,
-                CompanyName = raw.CompanyName,
+                //Address1 = raw.Address1,
+                //Address2 = raw.Address2,
+                //BusinessType = raw.BusinessType.Name,
+                //City = raw.City,
+                //CompanyName = raw.CompanyName,
                 Email = raw.Email,
-                OperatingRadius = raw.OperatingDistance.ToString(),
-                Phone = raw.Phone,
-                PostalCode = raw.PostalCode,
-                State = raw.State.Abbr,
+                //OperatingRadius = raw.OperatingDistance.ToString(),
+                //Phone = raw.Phone,
+                //PostalCode = raw.PostalCode,
+                //State = raw.State.Abbr,
                 Name = raw.FirstName + " " + raw.LastName
             };
 
@@ -129,14 +131,14 @@ namespace BCWeb.Controllers
                 .OrderBy(x => x.CsiNumber)
                 .Select(x => x.CsiNumber.Substring(0, 2) + " " + x.Description);
 
-            viewModel.Minions = raw.Delegates
-                .OrderBy(x => x.LastName)
-                .Select(x => new MinionOverviewViewModel
-                {
-                    Name = x.LastName + ", " + x.FirstName,
-                    Email = x.Email,
-                    Confirmed = _security.IsConfirmed(x.Email) ? "Active" : "Invited"
-                });
+            //viewModel.Minions = raw.Delegates
+            //    .OrderBy(x => x.LastName)
+            //    .Select(x => new MinionOverviewViewModel
+            //    {
+            //        Name = x.LastName + ", " + x.FirstName,
+            //        Email = x.Email,
+            //        Confirmed = _security.IsConfirmed(x.Email) ? "Active" : "Invited"
+            //    });
             return View(viewModel);
         }
 
@@ -161,7 +163,7 @@ namespace BCWeb.Controllers
             {
                 // Look up the user
 
-                UserProfile user = _serviceLayer.GetProfiles(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
+                UserProfile user = _serviceLayer.GetProfile(_security.GetUserId(model.Email));
 
                 if (user != null)
                 {
@@ -226,18 +228,18 @@ namespace BCWeb.Controllers
                         new
                         {
                             FirstName = model.FirstName,
-                            LastName = model.LastName,
-                            StateId = model.StateId,
-                            //CountyId = model.CountyId, // pulled for now
-                            CompanyName = model.CompanyName,
-                            Phone = Util.ConvertPhoneForStorage(model.Phone),
-                            Address1 = model.Address1,
-                            Address2 = model.Address2,
-                            City = model.City,
-                            PostalCode = model.PostalCode,
-                            OperatingDistance = model.OperatingDistance,
-                            BusinessTypeId = model.BusinessTypeId,
-                            Published = false
+                            LastName = model.LastName
+                            //StateId = model.StateId,
+                            ////CountyId = model.CountyId, // pulled for now
+                            //CompanyName = model.CompanyName,
+                            //Phone = Util.ConvertPhoneForStorage(model.Phone),
+                            //Address1 = model.Address1,
+                            //Address2 = model.Address2,
+                            //City = model.City,
+                            //PostalCode = model.PostalCode,
+                            //OperatingDistance = model.OperatingDistance,
+                            //BusinessTypeId = model.BusinessTypeId,
+                            //Published = false
                         }, true);
 
                     _security.AddUserToRole(model.Email, "Manager");
@@ -478,7 +480,7 @@ namespace BCWeb.Controllers
         public ActionResult EditCompany()
         {
 
-            var raw = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name));
+            var raw = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name)).Company;
             EditCompanyViewModel viewModel = new EditCompanyViewModel
             {
                 Address1 = raw.Address1,
@@ -486,7 +488,7 @@ namespace BCWeb.Controllers
                 BusinessTypeId = raw.BusinessTypeId.HasValue ? raw.BusinessTypeId.Value : 0,
                 City = raw.City,
                 CompanyName = raw.CompanyName,
-                Id = raw.UserId,
+                Id = raw.Id,
                 OperatingDistance = raw.OperatingDistance,
                 Phone = raw.Phone == "" ? "" : Util.ConvertPhoneForDisplay(raw.Phone),
                 PostalCode = raw.PostalCode,
@@ -507,7 +509,7 @@ namespace BCWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                var profile = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name));
+                var profile = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name)).Company;
 
                 if (viewModel.Address1 != null && profile.Address1 != viewModel.Address1.Trim())
                     profile.Address1 = viewModel.Address1.Trim();
@@ -515,6 +517,8 @@ namespace BCWeb.Controllers
                 if (viewModel.Address2 != null && profile.Address2 != viewModel.Address2.Trim())
                     profile.Address2 = viewModel.Address2.Trim();
 
+
+                // FIXME: CASCADE TO ALL USERS FOR COMPANY
                 if (viewModel.BusinessTypeId != null && profile.BusinessTypeId != viewModel.BusinessTypeId)
                 {
 
@@ -550,6 +554,8 @@ namespace BCWeb.Controllers
                             break;
                     };
 
+
+                    // FIXME: CASCADE TO ALL USERS FOR COMPANY
                     // remove old role
                     if (profile.BusinessTypeId.HasValue)
                     {
@@ -611,8 +617,9 @@ namespace BCWeb.Controllers
                 if (viewModel.StateId == 0 && profile.StateId != viewModel.StateId)
                     profile.StateId = viewModel.StateId;
 
+                // FIXME
                 // update changes in the database
-                if (_serviceLayer.UpdateProfile(profile))
+                if (true)
                 {
                     return RedirectToAction("Manage", new { message = ManageMessageId.ChangeCompanyInfoSuccess });
                 }

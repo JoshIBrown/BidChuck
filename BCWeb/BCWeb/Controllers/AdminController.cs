@@ -12,16 +12,9 @@ namespace BCWeb.Controllers
     [Authorize(Users = "admin")]
     public class AdminController : Controller
     {
-        //
-        // GET: /Admin/
-
         public ActionResult Index()
         {
             return View();
         }
-
-
-
-
     }
 }

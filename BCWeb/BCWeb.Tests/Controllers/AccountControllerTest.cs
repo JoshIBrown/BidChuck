@@ -106,5 +106,79 @@ namespace BCWeb.Tests.Controllers
             Assert.AreEqual("Index", ((RedirectToRouteResult)result).RouteValues["action"]);
             Assert.AreEqual("Home", ((RedirectToRouteResult)result).RouteValues["controller"]);
         }
+
+
+        [TestMethod]
+        public void ConfirmRegistrationCodeRedirectsToSuuccess()
+        {
+
+            // arrange
+            Mock<IUserProfileServiceLayer> mockService = new Mock<IUserProfileServiceLayer>();
+            Mock<IWebSecurityWrapper> mockSecurity = new Mock<IWebSecurityWrapper>();
+            Mock<IEmailSender> mockEmail = new Mock<IEmailSender>();
+
+            mockSecurity.Setup(m => m.ConfirmAccount("abcdef")).Returns(true);
+
+            AccountController controller = new AccountController(mockService.Object, mockSecurity.Object, mockEmail.Object);
+
+            // act
+            var result = controller.RegisterConfirmation("abcdef");
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.AreEqual("ConfirmationSuccess", ((RedirectToRouteResult)result).RouteValues["action"]);
+
+        }
+
+        [TestMethod]
+        public void ConfirmRegistrationCodeRedirectsToFailure()
+        {
+
+            // arrange
+            Mock<IUserProfileServiceLayer> mockService = new Mock<IUserProfileServiceLayer>();
+            Mock<IWebSecurityWrapper> mockSecurity = new Mock<IWebSecurityWrapper>();
+            Mock<IEmailSender> mockEmail = new Mock<IEmailSender>();
+
+            mockSecurity.Setup(m => m.ConfirmAccount("abcdef")).Returns(false);
+
+            AccountController controller = new AccountController(mockService.Object, mockSecurity.Object, mockEmail.Object);
+
+            // act
+            var result = controller.RegisterConfirmation("abcdef");
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.AreEqual("ConfirmationFailure", ((RedirectToRouteResult)result).RouteValues["action"]);
+
+        }
+
+
+        [TestMethod]
+        public void ResetPasswordWithUnknownEmailFails()
+        {
+
+            // arrange
+            Mock<IUserProfileServiceLayer> mockService = new Mock<IUserProfileServiceLayer>();
+            Mock<IWebSecurityWrapper> mockSecurity = new Mock<IWebSecurityWrapper>();
+            Mock<IEmailSender> mockEmail = new Mock<IEmailSender>();
+
+            mockSecurity.Setup(m => m.GetUserId("qwer@qwer.com")).Returns(-1);
+
+            AccountController controller = new AccountController(mockService.Object, mockSecurity.Object, mockEmail.Object);
+
+            // act
+            var result = controller.ResetPassword(new ResetPasswordModel { ConfirmPassword = "newpassword", NewPassword = "newpassword", Email = "asdf@asfd.com", PasswordResetToken = "abc123" });
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.IsInstanceOfType(((ViewResult)result).Model, typeof(ResetPasswordModel));
+            Assert.IsFalse(((ViewResult)result).ViewData.ModelState.IsValid);
+            Assert.AreEqual("Unknown email address.", ((ViewResult)result).ViewData.ModelState["Email"].Errors[0].ErrorMessage);
+        }
+
+
     }
 }

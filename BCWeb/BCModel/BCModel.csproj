@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BidChuckContext.cs" />
     <Compile Include="BusinessType.cs" />
+    <Compile Include="CompanyProfile.cs" />
     <Compile Include="County.cs" />
     <Compile Include="DBAudit.cs" />
     <Compile Include="Migrations\201308241727578_changeNumberToCsiNumber.cs" />
@@ -72,6 +73,10 @@
     <Compile Include="Migrations\201309030310319_addMetaDataToProject.cs" />
     <Compile Include="Migrations\201309030310319_addMetaDataToProject.Designer.cs">
       <DependentUpon>201309030310319_addMetaDataToProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309071746271_SeperateUserFromCompany.cs" />
+    <Compile Include="Migrations\201309071746271_SeperateUserFromCompany.Designer.cs">
+      <DependentUpon>201309071746271_SeperateUserFromCompany.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
@@ -112,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309030310319_addMetaDataToProject.resx">
       <DependentUpon>201309030310319_addMetaDataToProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309071746271_SeperateUserFromCompany.resx">
+      <DependentUpon>201309071746271_SeperateUserFromCompany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
