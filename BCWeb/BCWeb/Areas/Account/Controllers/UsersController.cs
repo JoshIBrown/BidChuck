@@ -1,8 +1,8 @@
 ﻿using BCModel;
+using BCWeb.Areas.Account.Models.Users.ServiceLayer;
 using BCWeb.Areas.Account.Models.Users.ViewModel;
 using BCWeb.Helpers;
 using BCWeb.Models;
-using BCWeb.Models.Account.ServiceLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +45,6 @@ namespace BCWeb.Areas.Account.Controllers
 
 
 
-        // FIXME
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Manager,Administrator")]
@@ -54,7 +53,7 @@ namespace BCWeb.Areas.Account.Controllers
             if (ModelState.IsValid)
             {
                 int currentUserId = _security.GetUserId(User.Identity.Name);
-                UserProfile user = _service.GetProfile(currentUserId);
+                UserProfile user = _service.Get(currentUserId);
 
                 // use security context to create user
                 string confirmToken = _security.CreateUserAndAccount(viewModel.Email,
@@ -62,34 +61,13 @@ namespace BCWeb.Areas.Account.Controllers
                     new
                     {
                         FirstName = viewModel.FirstName,
-                        LastName = viewModel.LastName
-                        //StateId = user.StateId,
-                        ////CountyId = user.CountyId, // pulled for now
-                        //CompanyName = user.CompanyName,
-                        //Phone = Util.ConvertPhoneForStorage(user.Phone),
-                        //Address1 = user.Address1,
-                        //Address2 = user.Address2,
-                        //City = user.City,
-                        //PostalCode = user.PostalCode,
-                        //OperatingDistance = user.OperatingDistance,
-                        //BusinessTypeId = user.BusinessTypeId,
-                        //Published = false
+                        LastName = viewModel.LastName,
+                        CompanyId = user.CompanyId
                     }, true);
 
                 // give them a minion role
                 _security.AddUserToRole(viewModel.Email, "Employee");
-
-                // add user to minions
-                int newUserId = _security.GetUserId(viewModel.Email);
-
-
-
-                //user.Delegates.Add(_service.GetProfile(newUserId));
-                //_service.UpdateProfile(user);
-
-                // email minion a "password reset" email
-                //string passwordToken = _security.GeneratePasswordResetToken(viewModel.Email); // change password to something impossibru
-                //_security.ChangePassword(viewModel.Email, "password", passwordToken);
+                                
                 _emailer.SendNewDelegateEmail(user.FirstName + " " + user.LastName, viewModel.FirstName, viewModel.Email, confirmToken);
                 return RedirectToRoute("Default", new { controller = "Account", action = "Manage" });
             }
@@ -105,7 +83,7 @@ namespace BCWeb.Areas.Account.Controllers
         [ValidateAntiForgeryToken]
         public void ResendInvitation(string email)
         {
-            var user = _service.GetProfile(_security.GetUserId(email));
+            var user = _service.Get(_security.GetUserId(email));
             string confirmationToken = "";
             using (Database db = Database.Open("DefaultConnection"))
             {

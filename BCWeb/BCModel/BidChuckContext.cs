@@ -132,17 +132,26 @@ namespace BCModel
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<UserXScope> UserScopes { get; set; }
+
         public DbSet<Scope> Scopes { get; set; }
+        
         public DbSet<DBAudit> DBAudits { get; set; }
-        public DbSet<State> State { get; set; }
+        public DbSet<State> States { get; set; }
         public DbSet<County> Counties { get; set; }
         public DbSet<BusinessType> BusinessTypes { get; set; }
 
+        public DbSet<CompanyProfile> Companies { get; set; }
+        public DbSet<CompanyXScope> CompanyScopes { get; set; }
+
         // projects
         public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectXScope> ProjectScopes { get; set; }
         public DbSet<Bid> Bids { get; set; }
+        
         public DbSet<BidPackage> BidPackages { get; set; }
-        public DbSet<BidPackageXScope> BidPackageXScopes { get; set; }
+        public DbSet<BidPackageXScope> BidPackageScopes { get; set; }
+        
         public DbSet<ProjectType> ProjectTypes { get; set; }
         public DbSet<ConstructionType> ConstructionTypes { get; set; }
         public DbSet<BuildingType> BuildingTypes { get; set; }

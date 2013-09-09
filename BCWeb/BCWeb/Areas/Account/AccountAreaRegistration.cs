@@ -18,7 +18,7 @@ namespace BCWeb.Areas.Account
                 "Account_default",
                 "Account/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new { controller = @"Scopes|Users" },
+                new { controller = @"Scopes|Users|Company" },
                 new[]{"BCWeb.Areas.Account.Controllers"}
             );
         }

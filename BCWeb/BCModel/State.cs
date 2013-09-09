@@ -21,7 +21,5 @@ namespace BCModel
         [IgnoreDataMember]
         public virtual ICollection<County> Counties { get; set; }
 
-        [IgnoreDataMember]
-        public virtual ICollection<UserProfile> Users { get; set; }
     }
 }

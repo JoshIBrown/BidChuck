@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using BCWeb.Models.Account.ServiceLayer;
 using BCWeb.Models;
 using BCWeb.Controllers;
 using System.Web.Mvc;
 using System.Collections;
 using BCModel;
 using System.Collections.Generic;
+using BCWeb.Models.Account.ServiceLayer;
 
 namespace BCWeb.Tests.Controllers
 {
@@ -20,7 +20,7 @@ namespace BCWeb.Tests.Controllers
         public void CanGetToRegister()
         {
             // arrange
-            Mock<IUserProfileServiceLayer> mockService = new Mock<IUserProfileServiceLayer>();
+            Mock<IAccountServiceLayer> mockService = new Mock<IAccountServiceLayer>();
             Mock<IWebSecurityWrapper> mockSecurity = new Mock<IWebSecurityWrapper>();
             Mock<IEmailSender> mockEmail = new Mock<IEmailSender>();
 
@@ -41,7 +41,7 @@ namespace BCWeb.Tests.Controllers
         public void CanRegisterAsNewUser()
         {
             // arrange
-            Mock<IUserProfileServiceLayer> mockService = new Mock<IUserProfileServiceLayer>();
+            Mock<IAccountServiceLayer> mockService = new Mock<IAccountServiceLayer>();
             Mock<IWebSecurityWrapper> mockSecurity = new Mock<IWebSecurityWrapper>();
             Mock<IEmailSender> mockEmail = new Mock<IEmailSender>();
 
@@ -87,7 +87,7 @@ namespace BCWeb.Tests.Controllers
         public void CanSignIn()
         {
             // arrange
-            Mock<IUserProfileServiceLayer> mockService = new Mock<IUserProfileServiceLayer>();
+            Mock<IAccountServiceLayer> mockService = new Mock<IAccountServiceLayer>();
             Mock<IWebSecurityWrapper> mockSecurity = new Mock<IWebSecurityWrapper>();
             Mock<IEmailSender> mockEmail = new Mock<IEmailSender>();
 
@@ -113,7 +113,7 @@ namespace BCWeb.Tests.Controllers
         {
 
             // arrange
-            Mock<IUserProfileServiceLayer> mockService = new Mock<IUserProfileServiceLayer>();
+            Mock<IAccountServiceLayer> mockService = new Mock<IAccountServiceLayer>();
             Mock<IWebSecurityWrapper> mockSecurity = new Mock<IWebSecurityWrapper>();
             Mock<IEmailSender> mockEmail = new Mock<IEmailSender>();
 
@@ -136,7 +136,7 @@ namespace BCWeb.Tests.Controllers
         {
 
             // arrange
-            Mock<IUserProfileServiceLayer> mockService = new Mock<IUserProfileServiceLayer>();
+            Mock<IAccountServiceLayer> mockService = new Mock<IAccountServiceLayer>();
             Mock<IWebSecurityWrapper> mockSecurity = new Mock<IWebSecurityWrapper>();
             Mock<IEmailSender> mockEmail = new Mock<IEmailSender>();
 
@@ -160,7 +160,7 @@ namespace BCWeb.Tests.Controllers
         {
 
             // arrange
-            Mock<IUserProfileServiceLayer> mockService = new Mock<IUserProfileServiceLayer>();
+            Mock<IAccountServiceLayer> mockService = new Mock<IAccountServiceLayer>();
             Mock<IWebSecurityWrapper> mockSecurity = new Mock<IWebSecurityWrapper>();
             Mock<IEmailSender> mockEmail = new Mock<IEmailSender>();
 

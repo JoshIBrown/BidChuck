@@ -83,4 +83,16 @@ namespace BCWeb.Helpers
             }
         }
     }
+
+    public enum ManageMessageId
+    {
+        ChangePasswordSuccess,
+        SetPasswordSuccess,
+        RemoveSignInSuccess,
+        ResetPasswordSuccess,
+        ChangeCompanyInfoSuccess,
+        ChangeEmailSuccess,
+        ChangeProfileSuccess,
+        NewDelegateSuccess
+    }
 }

@@ -8,6 +8,10 @@ using BCWeb.Models.Account.Repository;
 using System.Web.Http;
 using BCWeb.Areas.Account.Models.Scopes.Repository;
 using BCWeb.Areas.Account.Models.Scopes.ServiceLayer;
+using BCWeb.Areas.Account.Models.Users.ServiceLayer;
+using BCWeb.Areas.Account.Models.Users.Repository;
+using BCWeb.Areas.Account.Models.Company.Repository;
+using BCWeb.Areas.Account.Models.Company.ServiceLayer;
 
 namespace BCWeb
 {
@@ -33,12 +37,18 @@ namespace BCWeb
 
             // e.g. container.RegisterType<ITestService, TestService>();    
 
+            
+            container.RegisterType<IAccountRepository, AccountRepository>();
+            container.RegisterType<IAccountServiceLayer, AccountServiceLayer>();
             container.RegisterType<IUserProfileServiceLayer, UserProfileServiceLayer>();
             container.RegisterType<IUserProfileRepository, UserProfileRepository>();
             container.RegisterType<IScopeRepository, ScopeRepository>();
             container.RegisterType<IScopeServiceLayer, ScopeServiceLayer>();
             container.RegisterType<IWebSecurityWrapper, WebSecurityWrapper>();
             container.RegisterType<IEmailSender, EmailSender>();
+            container.RegisterType<ICompanyProfileRepository, CompanyProfileRepository>();
+            container.RegisterType<ICompanyProfileServiceLayer, CompanyProfileServiceLayer>();
+
             RegisterTypes(container);
 
             return container;

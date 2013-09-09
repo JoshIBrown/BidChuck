@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Models.Home.ViewModels
+namespace BCWeb.Models.Company.ViewModels
 {
     public class NewCompanyViewModel
     {

@@ -11,5 +11,6 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
     public interface IScopeRepository : IGenericRepository<Scope>
     {
         UserProfile GetUser(int id);
+        CompanyProfile GetCompany(int id);
     }
 }

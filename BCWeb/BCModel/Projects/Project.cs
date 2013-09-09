@@ -29,6 +29,9 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual ICollection<BidPackage> BidPackages { get; set; }
 
+        [IgnoreDataMember]
+        public virtual ICollection<ProjectXScope> Scopes { get; set; }
+
         // more metadata
         public int BuildingTypeId { get; set; }
         [ForeignKey("BuildingTypeId")]

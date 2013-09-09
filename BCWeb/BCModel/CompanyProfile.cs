@@ -25,7 +25,7 @@ namespace BCModel
         [Required]
         public string PostalCode { get; set; }
 
-        public int? StateId { get; set; }
+        public int StateId { get; set; }
         [ForeignKey("StateId")]
         [IgnoreDataMember]
         public virtual State State { get; set; }
@@ -47,7 +47,7 @@ namespace BCModel
         [Required]
         public int OperatingDistance { get; set; }
 
-        public int? BusinessTypeId { get; set; }
+        public int BusinessTypeId { get; set; }
         [ForeignKey("BusinessTypeId")]
         [IgnoreDataMember]
         public virtual BusinessType BusinessType { get; set; }
@@ -63,6 +63,6 @@ namespace BCModel
 
 
         [IgnoreDataMember]
-        public virtual ICollection<Scope> Scopes { get; set; }
+        public virtual ICollection<CompanyXScope> Scopes { get; set; }
     }
 }

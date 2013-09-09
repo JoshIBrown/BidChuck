@@ -48,6 +48,7 @@
     <Compile Include="BidChuckContext.cs" />
     <Compile Include="BusinessType.cs" />
     <Compile Include="CompanyProfile.cs" />
+    <Compile Include="CompanyXScope.cs" />
     <Compile Include="County.cs" />
     <Compile Include="DBAudit.cs" />
     <Compile Include="Migrations\201308241727578_changeNumberToCsiNumber.cs" />
@@ -78,6 +79,18 @@
     <Compile Include="Migrations\201309071746271_SeperateUserFromCompany.Designer.cs">
       <DependentUpon>201309071746271_SeperateUserFromCompany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309082109356_changeBusinessAndStateToNotNullable.cs" />
+    <Compile Include="Migrations\201309082109356_changeBusinessAndStateToNotNullable.Designer.cs">
+      <DependentUpon>201309082109356_changeBusinessAndStateToNotNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309090613507_createManyToManyScopeXCompany.cs" />
+    <Compile Include="Migrations\201309090613507_createManyToManyScopeXCompany.Designer.cs">
+      <DependentUpon>201309090613507_createManyToManyScopeXCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309092223365_createMtoMTablesForScopeRelationships.cs" />
+    <Compile Include="Migrations\201309092223365_createMtoMTablesForScopeRelationships.Designer.cs">
+      <DependentUpon>201309092223365_createMtoMTablesForScopeRelationships.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -86,10 +99,12 @@
     <Compile Include="Projects\ConstructionType.cs" />
     <Compile Include="Projects\Project.cs" />
     <Compile Include="Projects\ProjectType.cs" />
+    <Compile Include="Projects\ProjectXScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="State.cs" />
     <Compile Include="UserProfile.cs" />
+    <Compile Include="UserXScope.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -120,6 +135,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309071746271_SeperateUserFromCompany.resx">
       <DependentUpon>201309071746271_SeperateUserFromCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309082109356_changeBusinessAndStateToNotNullable.resx">
+      <DependentUpon>201309082109356_changeBusinessAndStateToNotNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309090613507_createManyToManyScopeXCompany.resx">
+      <DependentUpon>201309090613507_createManyToManyScopeXCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309092223365_createMtoMTablesForScopeRelationships.resx">
+      <DependentUpon>201309092223365_createMtoMTablesForScopeRelationships.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BCWeb.Models.Account.ViewModel
+namespace BCWeb.Areas.Account.Models.Company.ViewModel
 {
     public class EditCompanyViewModel
     {

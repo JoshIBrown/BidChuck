@@ -19,11 +19,11 @@ namespace BCWeb.Controllers
     public class AccountController : Controller
     {
 
-        private IUserProfileServiceLayer _serviceLayer;
+        private IAccountServiceLayer _serviceLayer;
         private IWebSecurityWrapper _security;
         private IEmailSender _emailer;
 
-        public AccountController(IUserProfileServiceLayer serviceLayer, IWebSecurityWrapper security, IEmailSender emailer)
+        public AccountController(IAccountServiceLayer serviceLayer, IWebSecurityWrapper security, IEmailSender emailer)
         {
             _serviceLayer = serviceLayer;
             _security = security;
@@ -63,11 +63,8 @@ namespace BCWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                // Look up the user's confirmation token
-                //using (UsersContext uc = new UsersContext())
-                //{
-                //UserProfile user = uc.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
-                UserProfile user = _serviceLayer.GetProfiles(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
+                
+                UserProfile user = _serviceLayer.GetUserProfiles(u => u.Email.ToLower() == model.Email.Trim().ToLower()).FirstOrDefault();
 
                 if (user != null)
                 {
@@ -88,7 +85,6 @@ namespace BCWeb.Controllers
                 {
                     ModelState.AddModelError("Email", "Unknown email address.");
                 }
-                //}
             }
 
             // If we got this far, something failed, redisplay form
@@ -96,7 +92,6 @@ namespace BCWeb.Controllers
         }
 
 
-        // FIXME
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -109,36 +104,38 @@ namespace BCWeb.Controllers
                 : message == ManageMessageId.NewDelegateSuccess ? "New delegate successfully added."
                 : "";
 
-            var raw = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name));
+            var raw = _serviceLayer.GetUserProfile(_security.GetUserId(User.Identity.Name));
 
             ManageDashboardViewModel viewModel = new ManageDashboardViewModel
             {
-                //Address1 = raw.Address1,
-                //Address2 = raw.Address2,
-                //BusinessType = raw.BusinessType.Name,
-                //City = raw.City,
-                //CompanyName = raw.CompanyName,
+                Address1 = raw.Company.Address1,
+                Address2 = raw.Company.Address2,
+                BusinessType = raw.Company.BusinessType.Name,
+                City = raw.Company.City,
+                CompanyName = raw.Company.CompanyName,
                 Email = raw.Email,
-                //OperatingRadius = raw.OperatingDistance.ToString(),
-                //Phone = raw.Phone,
-                //PostalCode = raw.PostalCode,
-                //State = raw.State.Abbr,
+                OperatingRadius = raw.Company.OperatingDistance.ToString(),
+                Phone = raw.Company.Phone,
+                PostalCode = raw.Company.PostalCode,
+                State = raw.Company.State.Abbr,
                 Name = raw.FirstName + " " + raw.LastName
             };
 
             viewModel.Scopes = raw.Scopes
-                .Where(x => !x.ParentId.HasValue)
-                .OrderBy(x => x.CsiNumber)
-                .Select(x => x.CsiNumber.Substring(0, 2) + " " + x.Description);
+                .Where(x => !x.Scope.ParentId.HasValue)
+                .OrderBy(x => x.Scope.CsiNumber)
+                .Select(x => x.Scope.CsiNumber.Substring(0, 2) + " " + x.Scope.Description);
 
-            //viewModel.Minions = raw.Delegates
-            //    .OrderBy(x => x.LastName)
-            //    .Select(x => new MinionOverviewViewModel
-            //    {
-            //        Name = x.LastName + ", " + x.FirstName,
-            //        Email = x.Email,
-            //        Confirmed = _security.IsConfirmed(x.Email) ? "Active" : "Invited"
-            //    });
+            var delegates = _security.GetUsersInRole("Employee");
+
+            viewModel.Minions = raw.Company.Users.Where(x => delegates.Contains(x.Email))
+                .OrderBy(x => x.LastName)
+                .Select(x => new MinionOverviewViewModel
+                {
+                    Name = x.LastName + ", " + x.FirstName,
+                    Email = x.Email,
+                    Confirmed = _security.IsConfirmed(x.Email) ? "Active" : "Invited"
+                });
             return View(viewModel);
         }
 
@@ -163,7 +160,7 @@ namespace BCWeb.Controllers
             {
                 // Look up the user
 
-                UserProfile user = _serviceLayer.GetProfile(_security.GetUserId(model.Email));
+                UserProfile user = _serviceLayer.GetUserProfile(_security.GetUserId(model.Email));
 
                 if (user != null)
                 {
@@ -229,20 +226,10 @@ namespace BCWeb.Controllers
                         {
                             FirstName = model.FirstName,
                             LastName = model.LastName
-                            //StateId = model.StateId,
-                            ////CountyId = model.CountyId, // pulled for now
-                            //CompanyName = model.CompanyName,
-                            //Phone = Util.ConvertPhoneForStorage(model.Phone),
-                            //Address1 = model.Address1,
-                            //Address2 = model.Address2,
-                            //City = model.City,
-                            //PostalCode = model.PostalCode,
-                            //OperatingDistance = model.OperatingDistance,
-                            //BusinessTypeId = model.BusinessTypeId,
-                            //Published = false
                         }, true);
 
                     _security.AddUserToRole(model.Email, "Manager");
+
 
                     var businesstypes = _serviceLayer.GetBusinessTypes();
 
@@ -310,7 +297,7 @@ namespace BCWeb.Controllers
                 // Look up the user's confirmation token
                 //using (UsersContext uc = new UsersContext())
                 //{
-                UserProfile user = _serviceLayer.GetProfiles(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
+                UserProfile user = _serviceLayer.GetUserProfiles(u => u.Email.ToLower() == model.Email.ToLower()).FirstOrDefault();
                 if (user != null)
                 {
                     try
@@ -379,7 +366,8 @@ namespace BCWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SignIn(SignInModel model, string returnUrl)
         {
-            if (ModelState.IsValid && _security.Login(model.Email, model.Password, persistCookie: model.RememberMe))
+            // if valid model state, user is confirmed, and sign in successful
+            if (ModelState.IsValid && _security.IsConfirmed(model.Email) && _security.Login(model.Email, model.Password, persistCookie: model.RememberMe))
             {
                 if (returnUrl == null || returnUrl == "")
                     return RedirectToRoute("Default", new { controller = "Home", action = "Index" });
@@ -387,6 +375,7 @@ namespace BCWeb.Controllers
                     return RedirectToLocal(returnUrl);
             }
 
+            // TODO: add model error ofr account not confirmed
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
@@ -475,175 +464,13 @@ namespace BCWeb.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Manager,Administrator")]
-        [HttpGet]
-        public ActionResult EditCompany()
-        {
-
-            var raw = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name)).Company;
-            EditCompanyViewModel viewModel = new EditCompanyViewModel
-            {
-                Address1 = raw.Address1,
-                Address2 = raw.Address2,
-                BusinessTypeId = raw.BusinessTypeId.HasValue ? raw.BusinessTypeId.Value : 0,
-                City = raw.City,
-                CompanyName = raw.CompanyName,
-                Id = raw.Id,
-                OperatingDistance = raw.OperatingDistance,
-                Phone = raw.Phone == "" ? "" : Util.ConvertPhoneForDisplay(raw.Phone),
-                PostalCode = raw.PostalCode,
-                StateId = raw.StateId.HasValue ? raw.StateId.Value : 0
-            };
-            viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-            viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
-
-            return View(viewModel);
-        }
-
-        [Authorize(Roles = "Manager,Administrator")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditCompany(EditCompanyViewModel viewModel)
-        {
-
-
-            if (ModelState.IsValid)
-            {
-                var profile = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name)).Company;
-
-                if (viewModel.Address1 != null && profile.Address1 != viewModel.Address1.Trim())
-                    profile.Address1 = viewModel.Address1.Trim();
-
-                if (viewModel.Address2 != null && profile.Address2 != viewModel.Address2.Trim())
-                    profile.Address2 = viewModel.Address2.Trim();
-
-
-                // FIXME: CASCADE TO ALL USERS FOR COMPANY
-                if (viewModel.BusinessTypeId != null && profile.BusinessTypeId != viewModel.BusinessTypeId)
-                {
-
-                    var businesstypes = _serviceLayer.GetBusinessTypes();
-
-                    // add new role
-                    string newTypeName = businesstypes.FirstOrDefault(x => x.Id == viewModel.BusinessTypeId).Name;
-                    switch (newTypeName)
-                    {
-                        case "General Contractor":
-                            Roles.AddUserToRole(User.Identity.Name, "general_contractor");
-                            break;
-                        case "Sub-Contractor":
-                            Roles.AddUserToRole(User.Identity.Name, "subcontractor");
-                            break;
-                        case "Architect":
-                            Roles.AddUserToRole(User.Identity.Name, "architect");
-                            break;
-                        case "Engineer":
-                            Roles.AddUserToRole(User.Identity.Name, "engineer");
-                            break;
-                        case "@Owner/Client":
-                            Roles.AddUserToRole(User.Identity.Name, "owner_client");
-                            break;
-                        case "Materials Vendor":
-                            Roles.AddUserToRole(User.Identity.Name, "materials_vendor");
-                            break;
-                        case "Materials Manufacturer":
-                            Roles.AddUserToRole(User.Identity.Name, "materials_manufacturer");
-                            break;
-                        case "Consultant":
-                            Roles.AddUserToRole(User.Identity.Name, "consultant");
-                            break;
-                    };
-
-
-                    // FIXME: CASCADE TO ALL USERS FOR COMPANY
-                    // remove old role
-                    if (profile.BusinessTypeId.HasValue)
-                    {
-                        string existingTypeName = businesstypes.FirstOrDefault(x => x.Id == profile.BusinessTypeId).Name;
-                        switch (existingTypeName)
-                        {
-                            case "General Contractor":
-                                if (Roles.IsUserInRole("general_contractor"))
-                                    Roles.RemoveUserFromRole(User.Identity.Name, "general_contractor");
-                                break;
-                            case "Sub-Contractor":
-                                if (Roles.IsUserInRole("subcontractor"))
-                                    Roles.RemoveUserFromRole(User.Identity.Name, "subcontractor");
-                                break;
-                            case "Architect":
-                                if (Roles.IsUserInRole("architect"))
-                                    Roles.RemoveUserFromRole(User.Identity.Name, "architect");
-                                break;
-                            case "Engineer":
-                                if (Roles.IsUserInRole("engineer"))
-                                    Roles.RemoveUserFromRole(User.Identity.Name, "engineer");
-                                break;
-                            case "@Owner/Client":
-                                if (Roles.IsUserInRole("owner_client"))
-                                    Roles.RemoveUserFromRole(User.Identity.Name, "owner_client");
-                                break;
-                            case "Materials Vendor":
-                                if (Roles.IsUserInRole("materials_vendor"))
-                                    Roles.RemoveUserFromRole(User.Identity.Name, "materials_vendor");
-                                break;
-                            case "Materials Manufacturer":
-                                if (Roles.IsUserInRole("materials_manufacturer"))
-                                    Roles.RemoveUserFromRole(User.Identity.Name, "materials_manufacturer");
-                                break;
-                            case "Consultant":
-                                if (Roles.IsUserInRole("consultant"))
-                                    Roles.RemoveUserFromRole(User.Identity.Name, "consultant");
-                                break;
-                        };
-                    }
-                    profile.BusinessTypeId = viewModel.BusinessTypeId;
-                }
-
-                if (viewModel.City != null && profile.City != viewModel.City)
-                    profile.City = viewModel.City;
-
-                if (viewModel.CompanyName != null && profile.CompanyName != viewModel.CompanyName.Trim())
-                    profile.CompanyName = viewModel.CompanyName.Trim();
-
-                if (viewModel.OperatingDistance == 0 && profile.OperatingDistance != viewModel.OperatingDistance)
-                    profile.OperatingDistance = viewModel.OperatingDistance;
-
-                if (viewModel.Phone != null && profile.Phone != viewModel.Phone.Trim())
-                    profile.Phone = Util.ConvertPhoneForStorage(viewModel.Phone.Trim());
-
-                if (viewModel.PostalCode != null && profile.PostalCode != viewModel.PostalCode.Trim())
-                    profile.PostalCode = viewModel.PostalCode.Trim();
-
-                if (viewModel.StateId == 0 && profile.StateId != viewModel.StateId)
-                    profile.StateId = viewModel.StateId;
-
-                // FIXME
-                // update changes in the database
-                if (true)
-                {
-                    return RedirectToAction("Manage", new { message = ManageMessageId.ChangeCompanyInfoSuccess });
-                }
-                else
-                {
-                    Util.MapValidationErrors(_serviceLayer.ValidationDic, this.ModelState);
-                    viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-                    viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
-                    return View(viewModel);
-                }
-            }
-            else
-            {
-                viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-                viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
-                return View(viewModel);
-            }
-        }
+        
 
         [HttpGet]
         public ActionResult ChangeEmail()
         {
             // get user profile
-            var raw = _serviceLayer.GetProfile(_security.GetUserId(User.Identity.Name));
+            var raw = _serviceLayer.GetUserProfile(_security.GetUserId(User.Identity.Name));
             // create view model
             EditEmailViewModel viewModel = new EditEmailViewModel();
             viewModel.UserId = raw.UserId;
@@ -663,11 +490,11 @@ namespace BCWeb.Controllers
                 if (Membership.ValidateUser(viewModel.CurrentEmail, viewModel.Password))
                 {
 
-                    var toUpdate = _serviceLayer.GetProfile(viewModel.UserId);
+                    var toUpdate = _serviceLayer.GetUserProfile(viewModel.UserId);
                     toUpdate.Email = viewModel.NewEmail;
 
                     // if update successfull
-                    if (_serviceLayer.UpdateProfile(toUpdate))
+                    if (_serviceLayer.UpdateUserProfile(toUpdate))
                     {
                         // logout and back in unobtrusively to refresh context
                         _security.Logout();
@@ -711,6 +538,7 @@ namespace BCWeb.Controllers
         [HttpGet]
         public ActionResult AcceptInvitation(string user, string token)
         {
+            // make sure no one is logged in
             if (!User.Identity.IsAuthenticated)
             {
                 // confirm account to unlock it
@@ -777,18 +605,6 @@ namespace BCWeb.Controllers
 
         }
         #region Helpers
-
-        public enum ManageMessageId
-        {
-            ChangePasswordSuccess,
-            SetPasswordSuccess,
-            RemoveSignInSuccess,
-            ResetPasswordSuccess,
-            ChangeCompanyInfoSuccess,
-            ChangeEmailSuccess,
-            ChangeProfileSuccess,
-            NewDelegateSuccess
-        }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {

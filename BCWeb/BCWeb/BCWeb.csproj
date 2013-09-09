@@ -187,11 +187,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\CompanyController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
+    <Compile Include="Areas\Account\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Account\Controllers\ScopesController.cs" />
     <Compile Include="Areas\Account\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Account\Models\Company\Repository\CompanyProfileRepository.cs" />
+    <Compile Include="Areas\Account\Models\Company\Repository\ICompanyProfileRepository.cs" />
+    <Compile Include="Areas\Account\Models\Company\ServiceLayer\CompanyProfileServiceLayer.cs" />
+    <Compile Include="Areas\Account\Models\Company\ServiceLayer\ICompanyProfileServiceLayer.cs" />
     <Compile Include="Areas\Account\Models\Scopes\Repository\IScopeRepository.cs" />
     <Compile Include="Areas\Account\Models\Scopes\Repository\ScopeRepository.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ServiceLayer\IScopeServiceLayer.cs" />
@@ -207,6 +213,7 @@
     <Compile Include="Api\UsersController.cs" />
     <Compile Include="Api\ScopesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Helpers\EmailSender.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -216,19 +223,23 @@
     <Compile Include="Helpers\ValidateHttpAntiForgery.cs" />
     <Compile Include="Helpers\IEmailSender.cs" />
     <Compile Include="MembershipDatabaseInitializer.cs" />
-    <Compile Include="Models\Account\Repository\IUserProfileRepository.cs" />
-    <Compile Include="Models\Account\Repository\UserProfileRepository.cs" />
-    <Compile Include="Models\Account\ServiceLayer\IUserProfileServiceLayer.cs" />
-    <Compile Include="Models\Account\ServiceLayer\UserProfileServiceLayer.cs" />
+    <Compile Include="Areas\Account\Models\Users\Repository\IUserProfileRepository.cs" />
+    <Compile Include="Areas\Account\Models\Users\Repository\UserProfileRepository.cs" />
+    <Compile Include="Areas\Account\Models\Users\ServiceLayer\IUserProfileServiceLayer.cs" />
+    <Compile Include="Areas\Account\Models\Users\ServiceLayer\UserProfileServiceLayer.cs" />
+    <Compile Include="Models\Account\Repository\AccountRepository.cs" />
+    <Compile Include="Models\Account\Repository\IAccountRepository.cs" />
+    <Compile Include="Models\Account\ServiceLayer\AccountServiceLayer.cs" />
+    <Compile Include="Models\Account\ServiceLayer\IAccountServiceLayer.cs" />
     <Compile Include="Models\Account\ViewModel\AccountModels.cs" />
-    <Compile Include="Models\Account\ViewModel\EditCompanyViewModel.cs" />
+    <Compile Include="Areas\Account\Models\Company\ViewModel\EditCompanyViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\EditEmailViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\EditProfileViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\InvitationViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\ManageDashboardViewModel.cs" />
     <Compile Include="Models\GenericRepository.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
-    <Compile Include="Models\Home\ViewModels\NewCompanyViewModel.cs" />
+    <Compile Include="Models\Company\ViewModel\NewCompanyViewModel.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
     <Compile Include="Models\IGenericServiceLayer.cs" />
     <Compile Include="Models\IWebSecurityWrapper.cs" />
@@ -720,8 +731,7 @@
     <Content Include="Views\Account\AcceptInvitationSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Account\Models\Users\Repository\" />
-    <Folder Include="Areas\Account\Models\Users\ServiceLayer\" />
+    <Folder Include="Models\Home\ViewModels\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>

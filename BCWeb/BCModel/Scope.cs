@@ -30,6 +30,9 @@ namespace BCModel
         public ICollection<Scope> Children { get; set; }
 
         [IgnoreDataMember]
-        public virtual ICollection<UserProfile> Users { get; set; }
+        public virtual ICollection<UserXScope> Users { get; set; }
+
+        [IgnoreDataMember]
+        public virtual ICollection<CompanyXScope> Companies { get; set; }
     }
 }

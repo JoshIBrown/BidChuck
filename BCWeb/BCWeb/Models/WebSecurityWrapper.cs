@@ -10,7 +10,7 @@ namespace BCWeb.Models
     public class WebSecurityWrapper : IWebSecurityWrapper
     {
         public int CurrentUserId { get { return WebSecurity.CurrentUserId; } }
-        public string CurrentUserName { get { return "admin_user"; } } // WebSecurity.CurrentUserName;
+        public string CurrentUserName { get { return WebSecurity.CurrentUserName; } } //
         public bool HasUserId { get { return WebSecurity.HasUserId; } }
         public bool Initialized { get { return WebSecurity.Initialized; } }
         public bool IsAuthenticated { get { return WebSecurity.IsAuthenticated; } }

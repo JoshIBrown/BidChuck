@@ -22,9 +22,5 @@ namespace BCModel
         [IgnoreDataMember]
         public virtual State State { get; set; }
 
-
-        // ignore datamember to avoid serialzing whole collection in the db audit
-        [IgnoreDataMember]
-        public virtual ICollection<UserProfile> Users { get; set; }
     }
 }

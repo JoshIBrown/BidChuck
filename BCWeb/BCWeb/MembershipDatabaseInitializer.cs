@@ -22,7 +22,7 @@ namespace BCWeb
 
         public void LoadStatesAndCounties(BidChuckContext context)
         {
-            DbSet<State> states = context.State;
+            DbSet<State> states = context.States;
             DbSet<County> counties = context.Counties;
 
 

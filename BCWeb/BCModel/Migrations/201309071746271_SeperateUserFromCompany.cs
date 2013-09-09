@@ -51,7 +51,6 @@ namespace BCModel.Migrations
 
                     @"select @exists = 1 from CompanyProfile where CompanyName = @CompanyName and Phone = @Phone and BusinessTypeId = @BusinessTypeId" + System.Environment.NewLine +
                     
-                // FIXME: NEED TO BE CONDITIONAL ABOUT IN SERTS.  SHOULD INSERT FROM MANAGER RECORD.  NEED TO UPDATE EMPLOYEE RECORDS WITH OUT INSERTING ANOTHER BUSINESS
                     @"if (@exists is not null and @exists = 1)" + System.Environment.NewLine +
                     @"begin" + System.Environment.NewLine +
                         @"print 'exists'" + System.Environment.NewLine +

@@ -9,29 +9,18 @@ using System.Threading.Tasks;
 
 namespace BCModel
 {
-    public class UserProfile
+    public class CompanyXScope
     {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
-
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
-        public string JobTitle { get; set; }
-
+        [Key, Column(Order = 0)]
         public int CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         [IgnoreDataMember]
         public virtual CompanyProfile Company { get; set; }
 
-
+        [Key, Column(Order = 1)]
+        public int ScopeId { get; set; }
+        [ForeignKey("ScopeId")]
         [IgnoreDataMember]
-        public virtual ICollection<UserXScope> Scopes { get; set; }
-
+        public virtual Scope Scope { get; set; }
     }
 }

@@ -12,12 +12,14 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
     {
         private DbSet<Scope> _scopes;
         private DbSet<UserProfile> _users;
+        private DbSet<CompanyProfile> _companies;
 
         public ScopeRepository()
             : base()
         {
             _scopes = _context.Scopes;
             _users = _context.UserProfiles;
+            _companies = _context.Companies;
         }
 
 
@@ -61,6 +63,12 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+
+        public CompanyProfile GetCompany(int id)
+        {
+            return _companies.Find(id);
         }
     }
 }

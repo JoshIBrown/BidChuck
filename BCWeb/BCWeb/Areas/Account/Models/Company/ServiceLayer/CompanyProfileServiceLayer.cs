@@ -1,22 +1,18 @@
-﻿using BCWeb.Areas.Account.Models.Scopes.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
-namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
+using BCWeb.Areas.Account.Models.Company.Repository;
+using BCWeb.Helpers;
+namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
 {
-    public class ScopeServiceLayer : IScopeServiceLayer
+    public class CompanyProfileServiceLayer: ICompanyProfileServiceLayer
     {
-        private IScopeRepository _repo;
+        private ICompanyProfileRepository _repo;
 
-        public ScopeServiceLayer(IScopeRepository repo)
+        public CompanyProfileServiceLayer(ICompanyProfileRepository repo)
         {
             _repo = repo;
-        }
-        public BCModel.UserProfile GetUser(int id)
-        {
-            return _repo.GetUser(id);
         }
 
         public Dictionary<string, string> ValidationDic
@@ -25,7 +21,7 @@ namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
             private set;
         }
 
-        public bool Create(BCModel.Scope entity)
+        public bool Create(BCModel.CompanyProfile entity)
         {
             try
             {
@@ -41,7 +37,7 @@ namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
             }
         }
 
-        public bool Update(BCModel.Scope entity)
+        public bool Update(BCModel.CompanyProfile entity)
         {
             try
             {
@@ -57,7 +53,7 @@ namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
             }
         }
 
-        public bool Delete(BCModel.Scope entity)
+        public bool Delete(BCModel.CompanyProfile entity)
         {
             try
             {
@@ -89,30 +85,46 @@ namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
             }
         }
 
-        public IEnumerable<BCModel.Scope> GetEnumerable()
+        public IEnumerable<BCModel.CompanyProfile> GetEnumerable()
         {
             return _repo.Query().AsEnumerable();
         }
 
-        public IEnumerable<BCModel.Scope> GetEnumerable(System.Linq.Expressions.Expression<Func<BCModel.Scope, bool>> predicate)
+        public IEnumerable<BCModel.CompanyProfile> GetEnumerable(System.Linq.Expressions.Expression<Func<BCModel.CompanyProfile, bool>> predicate)
         {
             return _repo.Query().Where(predicate).AsEnumerable();
         }
 
-        public BCModel.Scope Get(int id)
+        public BCModel.CompanyProfile Get(int id)
         {
             return _repo.Get(id);
         }
 
         public bool Exists(int id)
         {
-            return _repo.Query().Where(x => x.Id == id).Count() == 1;
+            return _repo.Get(id) == null;
+        }
+
+        public IEnumerable<BCModel.State> GetStates()
+        {
+            return _repo.QueryStates().AsEnumerable();
         }
 
 
-        public BCModel.CompanyProfile GetCompany(int id)
+        public IEnumerable<BCModel.BusinessType> GetBusinessTypes()
         {
-            return _repo.GetCompany(id);
+            return _repo.QueryBusinessTypes().AsEnumerable();
+        }
+
+
+        public IEnumerable<BCModel.UserProfile> GetUserProfiles()
+        {
+            return _repo.QueryUserProfiles().AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.UserProfile> GetUserProfiles(System.Linq.Expressions.Expression<Func<BCModel.UserProfile, bool>> predicate)
+        {
+            return _repo.QueryUserProfiles().Where(predicate).AsEnumerable();
         }
     }
 }

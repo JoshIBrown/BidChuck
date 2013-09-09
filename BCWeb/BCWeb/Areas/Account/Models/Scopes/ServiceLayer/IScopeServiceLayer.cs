@@ -11,5 +11,6 @@ namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
     public interface IScopeServiceLayer : IGenericServiceLayer<Scope>
     {
         UserProfile GetUser(int id);
+        CompanyProfile GetCompany(int id);
     }
 }
