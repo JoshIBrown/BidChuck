@@ -12,6 +12,11 @@ namespace BCWeb.Areas.Account.Models.Users.Repository
     {
         private DbSet<UserProfile> _profiles;
 
+        public UserProfileRepository()
+        {
+            _profiles = _context.UserProfiles;
+        }
+
         public void Create(UserProfile entity)
         {
             throw new NotImplementedException();

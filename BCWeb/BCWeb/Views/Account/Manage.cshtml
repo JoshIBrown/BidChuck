@@ -2,15 +2,14 @@
 
 
 
-
-@if (@ViewBag.StatusMessage != "")
-{
-    <div clas="row">
-        <div class="large-4 columns large-centered">
+<div clas="row">
+    <div class="large-4 columns large-centered" id="alerts">
+        @if (@ViewBag.StatusMessage != "")
+        {
             <div class="alert-box success">@ViewBag.StatusMessage<a href="#" class="close">&times;</a></div>
-        </div>
+        }
     </div>
-}
+</div>
 <div class="row">
     <div class="large-3 columns left">
         <ul class="side-nav">
@@ -70,10 +69,19 @@
                     @foreach (var d in Model.Minions)
                     {
                         <tr>
-                            <td>@d.Name</td>
-                            <td>@d.Email</td>
-                            <td>@d.Confirmed</td>
-                            <td>@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage", type = "user", ident = d.Email })</td>
+                            <td class="name">@d.Name</td>
+                            <td class="email">@d.Email</td>
+                            <td class="status">@d.Confirmed</td>
+                            <td class="action">
+                                @if (d.Confirmed == "Active")
+                                {
+                                    @Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage", type = "user", ident = d.Email })
+                                }
+                                else
+                                {
+                                    <a href="#" class="resendInviteLink">Resend Invite</a>
+                                }
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -97,7 +105,6 @@
 </div>
 @Html.AntiForgeryToken()
 @section Scripts {
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/Areas/Account/ManageView.js")
 }
