@@ -724,7 +724,7 @@
     <Content Include="Views\Home\Foundation_Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Home\_NewestMembers.cshtml" />
-    <Content Include="Views\Account\EditCompany.cshtml" />
+    <Content Include="Areas\Account\Views\Company\Edit.cshtml" />
     <Content Include="Views\Account\ChangeEmail.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
     <Content Include="Views\Account\AcceptInvitation.cshtml" />

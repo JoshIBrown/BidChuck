@@ -17,14 +17,14 @@
             <li class="divider"></li>
             @if (Roles.IsUserInRole("Manager") || Roles.IsUserInRole("Administrator"))
             {
-                <li>@Html.RouteLink("Update Company Information", "Default", new { controller = "Account", action = "EditCompany" })</li>
+                <li>@Html.RouteLink("Update Company Information", "Account_default", new { controller = "Company", action = "Edit" })</li>
             }
             <li>@Html.RouteLink("Update Personal Information", "Default", new { controller = "Account", action = "EditProfile" })</li>
             @*only show scopes for a sub or vendor who is the company manager*@
             @if ((Roles.IsUserInRole("subcontractor") || Roles.IsUserInRole("materials_vendor")) && Roles.IsUserInRole("Manager"))
             {
-                <li>@Html.RouteLink("Manage Company Scopes", "Account_default", new { controller = "Scopes", action = "Manage", type = "company",ident="" })</li>
-                <li>@Html.RouteLink("Manage My Scopes", "Account_default", new { controller = "Scopes", action = "Manage", type = "self",ident="" })</li>
+                <li>@Html.RouteLink("Manage Company Scopes", "Account_default", new { controller = "Scopes", action = "Manage", type = "company", ident = "" })</li>
+                <li>@Html.RouteLink("Manage My Scopes", "Account_default", new { controller = "Scopes", action = "Manage", type = "self", ident = "" })</li>
             }
             <li>@Html.RouteLink("Change Email Address", "Default", new { controller = "Account", action = "ChangeEmail" })</li>
             <li>@Html.RouteLink("Change Password", "Default", new { controller = "Account", action = "ChangePassword" })</li>
@@ -73,7 +73,7 @@
                             <td>@d.Name</td>
                             <td>@d.Email</td>
                             <td>@d.Confirmed</td>
-                            <td>@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage",type="user", ident = d.Email })</td>
+                            <td>@Html.RouteLink("Manage Scopes", "Account_default", new { controller = "Scopes", action = "Manage", type = "user", ident = d.Email })</td>
                         </tr>
                     }
                 </tbody>

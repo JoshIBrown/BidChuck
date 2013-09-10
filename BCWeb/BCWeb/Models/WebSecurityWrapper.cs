@@ -17,8 +17,8 @@ namespace BCWeb.Models
         public bool ChangePassword(string userName, string currentPassword, string newPassword) { return WebSecurity.ChangePassword(userName, currentPassword, newPassword); }
         public bool ConfirmAccount(string accountConfirmationToken) { return WebSecurity.ConfirmAccount(accountConfirmationToken); }
         public bool ConfirmAccount(string userName, string accountConfirmationToken) { return WebSecurity.ConfirmAccount(userName, accountConfirmationToken); }
-        public string CreateAccount(string userName, string password, bool requireConfirmationToken = false) { return WebSecurity.CreateAccount(userName, password, requireConfirmationToken = false); }
-        public string CreateUserAndAccount(string userName, string password, object propertyValues = null, bool requireConfirmationToken = false) { return WebSecurity.CreateUserAndAccount(userName, password, propertyValues = null, requireConfirmationToken = false); }
+        public string CreateAccount(string userName, string password, bool requireConfirmationToken = false) { return WebSecurity.CreateAccount(userName, password, requireConfirmationToken); }
+        public string CreateUserAndAccount(string userName, string password, object propertyValues = null, bool requireConfirmationToken = false) { return WebSecurity.CreateUserAndAccount(userName, password, propertyValues, requireConfirmationToken); }
         public string GeneratePasswordResetToken(string userName, int tokenExpirationInMinutesFromNow = 1440) { return WebSecurity.GeneratePasswordResetToken(userName, tokenExpirationInMinutesFromNow = 1440); }
         public DateTime GetCreateDate(string userName) { return WebSecurity.GetCreateDate(userName); }
         public DateTime GetLastPasswordFailureDate(string userName) { return WebSecurity.GetLastPasswordFailureDate(userName); }
@@ -32,7 +32,7 @@ namespace BCWeb.Models
         public bool IsAccountLockedOut(string userName, int allowedPasswordAttempts, TimeSpan interval) { return WebSecurity.IsAccountLockedOut(userName, allowedPasswordAttempts, interval); }
         public bool IsConfirmed(string userName) { return WebSecurity.IsConfirmed(userName); }
         public bool IsCurrentUser(string userName) { return WebSecurity.IsCurrentUser(userName); }
-        public bool Login(string userName, string password, bool persistCookie = false) { return WebSecurity.Login(userName, password, persistCookie = false); }
+        public bool Login(string userName, string password, bool persistCookie = false) { return WebSecurity.Login(userName, password, persistCookie); }
         public void Logout() { WebSecurity.Logout(); }
         public void RequireAuthenticatedUser() { WebSecurity.RequireAuthenticatedUser(); }
         public void RequireRoles(params string[] roles) { WebSecurity.RequireRoles(roles); }

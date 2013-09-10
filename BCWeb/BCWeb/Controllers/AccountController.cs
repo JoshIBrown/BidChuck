@@ -63,7 +63,7 @@ namespace BCWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                
+
                 UserProfile user = _serviceLayer.GetUserProfiles(u => u.Email.ToLower() == model.Email.Trim().ToLower()).FirstOrDefault();
 
                 if (user != null)
@@ -214,60 +214,82 @@ namespace BCWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
+            int cpId;
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
                 try
                 {
-                    string confirmationToken = _security.CreateUserAndAccount(
-                        model.Email,
-                        model.Password,
-                        new
-                        {
-                            FirstName = model.FirstName,
-                            LastName = model.LastName
-                        }, true);
 
-                    _security.AddUserToRole(model.Email, "Manager");
-
-
-                    var businesstypes = _serviceLayer.GetBusinessTypes();
-
-                    string newTypeName = businesstypes.FirstOrDefault(x => x.Id == model.BusinessTypeId).Name;
-                    switch (newTypeName)
+                    CompanyProfile cp = new CompanyProfile
                     {
-                        case "General Contractor":
-                            _security.AddUserToRole(User.Identity.Name, "general_contractor");
-                            break;
-                        case "Sub-Contractor":
-                            _security.AddUserToRole(User.Identity.Name, "subcontractor");
-                            break;
-                        case "Architect":
-                            _security.AddUserToRole(User.Identity.Name, "architect");
-                            break;
-                        case "Engineer":
-                            _security.AddUserToRole(User.Identity.Name, "engineer");
-                            break;
-                        case "@Owner/Client":
-                            _security.AddUserToRole(User.Identity.Name, "owner_client");
-                            break;
-                        case "Materials Vendor":
-                            _security.AddUserToRole(User.Identity.Name, "materials_vendor");
-                            break;
-                        case "Materials Manufacturer":
-                            _security.AddUserToRole(User.Identity.Name, "materials_manufacturer");
-                            break;
-                        case "Consultant":
-                            _security.AddUserToRole(User.Identity.Name, "consultant");
-                            break;
+                        Address1 = model.Address1,
+                        Address2 = model.Address2,
+                        BusinessTypeId = model.BusinessTypeId,
+                        City = model.City,
+                        CompanyName = model.CompanyName,
+                        OperatingDistance = model.OperatingDistance,
+                        Phone = Util.ConvertPhoneForStorage(model.Phone),
+                        PostalCode = model.PostalCode,
+                        Published = false,
+                        StateId = model.StateId
                     };
 
+                    // if we can create the company, create the user
+                    if (_serviceLayer.CreateCompany(cp))
+                    {
+                        cpId = cp.Id;
+                        string confirmationToken = _security.CreateUserAndAccount(
+                            model.Email,
+                            model.Password,
+                            new
+                            {
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                CompanyId = cp.Id
+                            }, true);
+                         
+                        _security.AddUserToRole(model.Email, "Manager");
 
-                    // todo: add user to role for business type
 
-                    _emailer.SendConfirmationMail(model.FirstName, model.Email, confirmationToken);
+                        var businesstypes = _serviceLayer.GetBusinessTypes();
 
-                    return RedirectToAction("RegisterStepTwo", "Account");
+                        string newTypeName = businesstypes.FirstOrDefault(x => x.Id == model.BusinessTypeId).Name;
+                        switch (newTypeName)
+                        {
+                            case "General Contractor":
+                                _security.AddUserToRole(model.Email, "general_contractor");
+                                break;
+                            case "Sub-Contractor":
+                                _security.AddUserToRole(model.Email, "subcontractor");
+                                break;
+                            case "Architect":
+                                _security.AddUserToRole(model.Email, "architect");
+                                break;
+                            case "Engineer":
+                                _security.AddUserToRole(model.Email, "engineer");
+                                break;
+                            case "@Owner/Client":
+                                _security.AddUserToRole(model.Email, "owner_client");
+                                break;
+                            case "Materials Vendor":
+                                _security.AddUserToRole(model.Email, "materials_vendor");
+                                break;
+                            case "Materials Manufacturer":
+                                _security.AddUserToRole(model.Email, "materials_manufacturer");
+                                break;
+                            case "Consultant":
+                                _security.AddUserToRole(model.Email, "consultant");
+                                break;
+                        };
+
+
+
+
+                        _emailer.SendConfirmationMail(model.FirstName, model.Email, confirmationToken);
+
+                        return RedirectToAction("RegisterStepTwo", "Account");
+                    }
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -391,13 +413,9 @@ namespace BCWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult ChangePassword(ManageMessageId? message)
+        public ActionResult ChangePassword()
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveSignInSuccess ? "The external SignIn was removed."
-                : "";
+            
             // not used
             //ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(_security.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("ChangePassword");
@@ -428,7 +446,7 @@ namespace BCWeb.Controllers
 
                 if (changePasswordSucceeded)
                 {
-                    return RedirectToAction("ChangePassword", new { Message = ManageMessageId.ChangePasswordSuccess });
+                    return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                 }
                 else
                 {
@@ -464,7 +482,7 @@ namespace BCWeb.Controllers
             return View(model);
         }
 
-        
+
 
         [HttpGet]
         public ActionResult ChangeEmail()

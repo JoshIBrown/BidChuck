@@ -29,7 +29,8 @@ namespace BCWeb.Areas.Account.Controllers
         {
 
             // get users company
-            var raw = _serviceLayer.GetUserProfiles(u=> u.UserId == _security.GetUserId(User.Identity.Name)).FirstOrDefault().Company;
+            int userId = _security.GetUserId(User.Identity.Name);
+            var raw = _serviceLayer.GetUserProfiles(u=> u.UserId == userId).FirstOrDefault().Company;
 
             // transpose into viewmodel
             EditCompanyViewModel viewModel = new EditCompanyViewModel
@@ -61,7 +62,8 @@ namespace BCWeb.Areas.Account.Controllers
             if (ModelState.IsValid)
             {
                 // get company
-                var company = _serviceLayer.GetUserProfiles(u=> u.UserId == _security.GetUserId(User.Identity.Name)).FirstOrDefault().Company;
+                int userId = _security.GetUserId(User.Identity.Name);
+                var company = _serviceLayer.GetUserProfiles(u => u.UserId == userId).FirstOrDefault().Company;
 
                 if (viewModel.Address1 != null && company.Address1 != viewModel.Address1.Trim())
                     company.Address1 = viewModel.Address1.Trim();

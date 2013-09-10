@@ -16,6 +16,7 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         public CompanyProfileRepository()
         {
             _companies = _context.Companies;
+            _users = _context.UserProfiles;
         }
 
         public void Create(BCModel.CompanyProfile entity)
