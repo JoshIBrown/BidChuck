@@ -76,7 +76,7 @@ namespace BCModel.Migrations
                 .PrimaryKey(t => new { t.Scope_Id, t.CompanyProfile_Id });
 
             Sql(@"insert dbo.ScopeCompanyProfile(Scope_Id,CompanyProfile_Id)" + System.Environment.NewLine + 
-                @"select ScopeId,CompanyId, from CompanyXScope");
+                @"select ScopeId,CompanyId from CompanyXScope");
 
             CreateTable(
                 "dbo.ScopeUserProfile",

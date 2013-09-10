@@ -21,7 +21,17 @@ namespace BCModel.Migrations
                 .ForeignKey("dbo.CompanyProfile", t => t.CompanyProfile_Id, cascadeDelete: true)
                 .Index(t => t.Scope_Id)
                 .Index(t => t.CompanyProfile_Id);
-            
+            Sql(@" insert dbo.ScopeCompanyProfile(CompanyProfile_Id,Scope_Id)
+                    select up.CompanyId,us.Scope_Id
+                    from userprofile up
+                    join ScopeUserProfile us
+                    on us.userprofile_UserId = up.UserId
+                    join webpages_UsersInRoles ur
+                    on ur.UserId = up.UserId
+                    join webpages_Roles r
+                    on r.RoleId = ur.RoleId
+                    where r.RoleName='Manager'");
+
             DropColumn("dbo.Scope", "CompanyProfile_Id");
         }
         

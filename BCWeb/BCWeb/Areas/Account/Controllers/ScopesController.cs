@@ -22,7 +22,7 @@ namespace BCWeb.Areas.Account.Controllers
             return View();
         }
      
-        public ActionResult Manage(string user)
+        public ActionResult Manage(string type,string ident)
         {
             return View();
         }

@@ -10,14 +10,9 @@
         // may have to change this later, but for now it works
         $scope.queryString = $window.location.search;
 
+        $scope.getUri = '/api/Scopes/GetScopesToManage' + $scope.queryString;
 
-        if ($scope.queryString)
-            $scope.getUri = '/api/Scopes/GetScopesToManage' + $scope.queryString;
-        else
-            $scope.getUri = '/api/Scopes/GetScopesToManage';
-
-
-        var userREGEX = new RegExp('[\\?&amp;]user=(.*)');
+        var userREGEX = new RegExp('[\\?&amp;]type=(.*)');
 
         $http.get($scope.getUri)
              .success(function (data) {

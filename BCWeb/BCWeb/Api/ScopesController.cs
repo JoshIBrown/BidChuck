@@ -22,7 +22,7 @@ namespace BCWeb.Controllers.Api
         private IScopeServiceLayer _service;
         private IWebSecurityWrapper _security;
 
-        public ScopesController(IScopeServiceLayer service,IWebSecurityWrapper security)
+        public ScopesController(IScopeServiceLayer service, IWebSecurityWrapper security)
         {
             _service = service;
             _security = security;
@@ -47,72 +47,70 @@ namespace BCWeb.Controllers.Api
         }
 
 
-        // FIXME logic needs work.  company scopes are not being touched yet.  shoud probably be dealt with here?
-        // /api/Scopes/GetScopesToManage
-        public IEnumerable<ScopeMgmtViewModel> GetScopesToManage()
+        // /api/Scopes/GetScopesToManage?user=soandso@ladeeda.com
+        public IEnumerable<ScopeMgmtViewModel> GetScopesToManage([FromUri]string type, [FromUri]string ident)
         {
-            int uId = _security.GetUserId(User.Identity.Name);
-
-
-            IEnumerable<ScopeMgmtViewModel> viewModel;
-
-            var user = _service.GetUser(uId);
-            var chosenScopes = user.Scopes.Select(s => s.Scope).ToList<Scope>();
-
-            viewModel = _service.GetEnumerable()
-                .OrderBy(s => s.Id)
-                .Select(s => new ScopeMgmtViewModel
-                {
-                    Checked = chosenScopes.Contains(s),
-                    Description = s.Description,
-                    Id = s.Id,
-                    ParentId = s.ParentId,
-                    CsiNumber = s.CsiNumber
-                }).ToArray();
-
-
-            return viewModel;
+            return getScopesToManage(type, ident);
         }
 
         // /api/Scopes/GetScopesToManage?user=soandso@ladeeda.com
-        public IEnumerable<ScopeMgmtViewModel> GetScopesToManage(string user)
+        public IEnumerable<ScopeMgmtViewModel> GetScopesToManage([FromUri]string type)
         {
-            // get logged in user and company
-            int currentUid = _security.GetUserId(User.Identity.Name);
-            var company = _service.GetCompany(_service.GetUser(currentUid).CompanyId);
+            return getScopesToManage(type, "");
+        }
+
+        private IEnumerable<ScopeMgmtViewModel> getScopesToManage(string type, string ident)
+        {
+            IEnumerable<ScopeMgmtViewModel> viewModel;
+            IEnumerable<Scope> selectedScopes;
+            IEnumerable<Scope> availableScopes;
+            UserProfile theUser;
+            CompanyProfile theCompany;
 
 
-            // get current user id for passed in user
-            int uId = _security.GetUserId(user);
-            var profile = _service.GetUser(uId);
-
-            // if company of logged in user contains username passed in
-            if (company.Users.Contains(profile))
+            // the company dictates the scopes available for management
+            // if editing the company, display all scopes
+            // figure out request type
+            switch (type)
             {
-                IEnumerable<ScopeMgmtViewModel> viewModel;
+                case "self":
+                    theUser = _service.GetUser(_security.GetUserId(User.Identity.Name));
+                    theCompany = _service.GetCompany(theUser.CompanyId);
+                    selectedScopes = theUser.Scopes.Select(s => s.Scope).ToList();
+                    availableScopes = theCompany.Scopes.Select(s => s.Scope).ToList();
+                    break;
+                case "company":
+                    theUser = _service.GetUser(_security.GetUserId(User.Identity.Name));
+                    theCompany = _service.GetCompany(theUser.CompanyId);
+                    selectedScopes = theCompany.Scopes.Select(s => s.Scope).ToList();
+                    availableScopes = _service.GetEnumerable();
+                    break;
+                case "user":
+                    var userid = _security.GetUserId(ident);
+                    theUser = _service.GetUser(userid);
+                    theCompany = _service.GetCompany(theUser.CompanyId);
+                    // make sure user is part of logged in users company
+                    if (_service.GetUser(_security.GetUserId(User.Identity.Name)).Company != theCompany)
+                        throw new Exception("you are not allowed to edit users in other companies");
+                    selectedScopes = theUser.Scopes.Select(s => s.Scope).ToList();
+                    availableScopes = theCompany.Scopes.Select(s => s.Scope).ToList();
+                    break;
+                default:
+                    throw new ArgumentException("invalid arguments");
+            };
 
-                // get scopes assigned to user
-                var chosenScopes = profile.Scopes.Select(s=>s.Scope).ToList<Scope>();
-
-                // get company scopes
-                viewModel = company.Scopes
-                    .OrderBy(s => s.Scope.Id)
-                    .Select(s => new ScopeMgmtViewModel
-                    {
-                        Checked = chosenScopes.Contains(s.Scope), // represented in the scope picker
-                        Description = s.Scope.Description,
-                        Id = s.Scope.Id,
-                        ParentId = s.Scope.ParentId,
-                        CsiNumber = s.Scope.CsiNumber
-                    }).ToArray();
 
 
-                return viewModel;
-            }
-            else
+            viewModel = availableScopes.Select(s => new ScopeMgmtViewModel
             {
-                return null;
-            }
+                Checked = selectedScopes.Contains(s),
+                Description = s.Description,
+                Id = s.Id,
+                ParentId = s.ParentId,
+                CsiNumber = s.CsiNumber
+            }).ToArray();
+
+            return viewModel;
         }
 
 
@@ -149,10 +147,10 @@ namespace BCWeb.Controllers.Api
                 var existingSelection = profile.Scopes.ToList();
 
                 // add selections not in existing collection
-                var toAdd = selectedScopes.Where(x => !existingSelection.Select(s=>s.Scope).Contains(x));
+                var toAdd = selectedScopes.Where(x => !existingSelection.Select(s => s.Scope).Contains(x));
                 foreach (var a in toAdd)
                 {
-                    a.Users.Add(new UserXScope { User=profile, Scope = a });
+                    a.Users.Add(new UserXScope { User = profile, Scope = a });
                     if (!_service.Update(a))
                     {
                         throw new Exception(_service.ValidationDic.First().Value);
@@ -160,7 +158,7 @@ namespace BCWeb.Controllers.Api
                 }
 
                 // remove scopes not in selected that are in existing
-                var toRemove = existingSelection.Where(y => !selectedScopes.Contains(y.Scope)).Select(s=>s.Scope);
+                var toRemove = existingSelection.Where(y => !selectedScopes.Contains(y.Scope)).Select(s => s.Scope);
                 foreach (var r in toRemove)
                 {
                     r.Users.Remove(existingSelection.Find(x => x.Scope == r && x.User == profile));
