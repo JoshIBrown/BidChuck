@@ -126,47 +126,79 @@ namespace BCWeb.Controllers.Api
                 var selectedScopes = _service.GetEnumerable(x => viewModel.Selected.Contains(x.Id)).ToList();
 
                 // get scope objects user had chosen previously
-                UserProfile profile;
-
-
-                if (viewModel.User == "" || viewModel.User == null)
-                    profile = _service.GetUser(_security.GetUserId(User.Identity.Name));
-                else
+                UserProfile user;
+                CompanyProfile company;
+                switch (viewModel.Type)
                 {
-
-                    profile = _service.GetUser(_security.GetUserId(viewModel.User));
-
-                    // check to make sure the manager is the one editing these permissions.
-                    // prevent script injection
-                    // will probably need to change if we have more than 1 level deep of managers
-
-                    if (profile.Company.Users.Contains(_service.GetUser(_security.GetUserId(User.Identity.Name))))
-                        throw new Exception("you are trying to edit a user you are not the manager for");
+                    case "user":
+                        user = _service.GetUser(_security.GetUserId(viewModel.Ident));
+                        company = _service.GetCompany(user.CompanyId);
+                        break;
+                    case "company":
+                        user = _service.GetUser(_security.GetUserId(User.Identity.Name));
+                        company = _service.GetCompany(user.CompanyId);
+                        break;
+                    case "self":
+                        user = _service.GetUser(_security.GetUserId(User.Identity.Name));
+                        company = _service.GetCompany(user.CompanyId);
+                        break;
+                    default:
+                        result.message = "invalid operation";
+                        result.success = false;
+                        return result;
                 }
 
-                var existingSelection = profile.Scopes.ToList();
-
-                // add selections not in existing collection
-                var toAdd = selectedScopes.Where(x => !existingSelection.Select(s => s.Scope).Contains(x));
-                foreach (var a in toAdd)
+                if (viewModel.Type == "user" || viewModel.Type == "self")
                 {
-                    a.Users.Add(new UserXScope { User = profile, Scope = a });
-                    if (!_service.Update(a))
+                    var existing = user.Scopes.ToList();
+
+                    // add selections not in existing collection
+                    var toAdd = selectedScopes.Where(x => !existing.Select(s => s.Scope).Contains(x));
+                    foreach (var a in toAdd)
                     {
-                        throw new Exception(_service.ValidationDic.First().Value);
+                        a.Users.Add(new UserXScope { User = user, Scope = a });
+                        if (!_service.Update(a))
+                        {
+                            throw new Exception(_service.ValidationDic.First().Value);
+                        }
+                    }
+
+                    // remove scopes not in selected that are in existing
+                    var toRemove = existing.Where(y => !selectedScopes.Contains(y.Scope)).Select(s => s.Scope);
+                    foreach (var r in toRemove)
+                    {
+                        r.Users.Remove(existing.Find(x => x.Scope == r && x.User == user));
+                        if (!_service.Update(r))
+                        {
+                            throw new Exception(_service.ValidationDic.First().Value);
+                        }
                     }
                 }
-
-                // remove scopes not in selected that are in existing
-                var toRemove = existingSelection.Where(y => !selectedScopes.Contains(y.Scope)).Select(s => s.Scope);
-                foreach (var r in toRemove)
+                else if (viewModel.Type == "company")
                 {
-                    r.Users.Remove(existingSelection.Find(x => x.Scope == r && x.User == profile));
-                    if (!_service.Update(r))
+                    var existing = company.Scopes.ToList();
+
+                    // add selections not in existing collection
+                    var toAdd = selectedScopes.Where(x => !existing.Select(s => s.Scope).Contains(x));
+                    foreach (var a in toAdd)
                     {
-                        throw new Exception(_service.ValidationDic.First().Value);
+                        a.Companies.Add(new CompanyXScope { Company = company, Scope = a });
+                        if (!_service.Update(a))
+                        {
+                            throw new Exception(_service.ValidationDic.First().Value);
+                        }
                     }
-                    //user.Scopes.Remove(r);
+
+                    // remove scopes not in selected that are in existing
+                    var toRemove = existing.Where(y => !selectedScopes.Contains(y.Scope)).Select(s => s.Scope);
+                    foreach (var r in toRemove)
+                    {
+                        r.Companies.Remove(existing.Find(x => x.Scope == r && x.Company == company));
+                        if (!_service.Update(r))
+                        {
+                            throw new Exception(_service.ValidationDic.First().Value);
+                        }
+                    }
                 }
 
                 // save changes and report our glorious save

@@ -10,9 +10,30 @@
         // may have to change this later, but for now it works
         $scope.queryString = $window.location.search;
 
+        // this will allow pulling parameters from query string
+        $scope.getParams = function(str) {
+            var queryString = str || $scope.queryString || '';
+            var keyValPairs = [];
+            var params = {};
+            queryString = queryString.replace(/.*?\?/, "");
+
+            if (queryString.length) {
+                keyValPairs = queryString.split('&');
+                for (pairNum in keyValPairs) {
+                    var key = keyValPairs[pairNum].split('=')[0];
+                    if (!key.length) continue;
+                    if (typeof params[key] === 'undefined')
+                        params[key] = [];
+                    params[key].push(keyValPairs[pairNum].split('=')[1]);
+                }
+            }
+            return params;
+        }
+
         $scope.getUri = '/api/Scopes/GetScopesToManage' + $scope.queryString;
 
-        var userREGEX = new RegExp('[\\?&amp;]type=(.*)');
+        var identREGEX = new RegExp('(type|ident)=(.*)');
+        var typeREGEX = new RegExp('[\\?\\&]type=(.*)[\\&]?');
 
         $http.get($scope.getUri)
              .success(function (data) {
@@ -134,6 +155,7 @@
             return found;
         };
 
+        
         // save selection to server
         $scope.saveChanges = function () {
             $scope.saving = true;
@@ -147,11 +169,11 @@
                 }
             });
 
-            // get user
-            var user = userREGEX.exec($scope.queryString);
+            // get type and ident
+            var params = $scope.getParams();
 
 
-            var toPut = { "Selected": selected, "User": user ? user[1].replace('%40', '@') : "" };
+            var toPut = { "Selected": selected, "Ident": params['ident'] ? params['ident'][0].replace('%40', '@') : "", "Type": params['type'] ? params['type'][0] : "" };
             // get anti forgery token
             var token = angular.element("input[name='__RequestVerificationToken']").val();
 
