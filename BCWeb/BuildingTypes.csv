@@ -1,0 +1,149 @@
+Agricultural,Barn
+Agricultural,Chicken coop or chickenhouse
+Agricultural,Greenhouse
+Agricultural,Silo
+Agricultural,Stable
+Agricultural,Storm cellar
+Agricultural,Tide mill
+Agricultural,Root cellar
+Agricultural,Hayloft
+Agricultural,Farmhouse
+Agricultural,Well house
+Agricultural,Shed
+Agricultural,Granary
+Agricultural,Watermill
+Agricultural,Wind mill
+Agricultural,Horse mill
+Agricultural,Pigpen or sty
+Commercial,Bank
+Commercial,Bar
+Commercial,Pub
+Commercial,Coffee house
+Commercial,Convention center
+Commercial,Forum
+Commercial,Gas station
+Commercial,Hotel
+Commercial,Market
+Commercial,Market house
+Commercial,Nightclub
+Commercial,Skyscraper
+Commercial,Shop
+Commercial,Shopping mall
+Commercial,Stock exchange
+Commercial,Supermarket
+Commercial,Warehouse
+Residential,Apartment block
+Residential,Asylum
+Residential,Condominium
+Residential,Dormitory
+Residential,Duplex
+Residential,House
+Residential,Nursing home
+Residential,Townhouse
+Residential,Villa
+Educational,College
+Educational,Classroom Building
+Educational,Gymnasium
+Educational,Students' union
+Educational,School
+Educational,Library
+Educational,Museum
+Educational,Art gallery
+Educational,Theater
+Educational,Amphitheater
+Educational,Concert hall
+Educational,Cinema
+Educational,Opera house
+Government,Capitol
+Government,City hall
+Government,Consulate
+Government,Courthouse
+Government,Embassy
+Government,Fire station
+Government,Meeting house
+Government,Moot hall
+Government,Palace
+Government,Parliament
+Government,Police station
+Government,Post office
+Government,Prison
+Industrial,Brewery
+Industrial,Factory
+Industrial,Foundry
+Industrial,Mining
+Industrial,Power plant
+Industrial,Refinery
+Industrial,Mill
+Industrial,Oil Rig
+Military,Barracks
+Military,Bunker
+Military,Blockhouse
+Military,Castle
+Military,Citadel
+Military,City gate
+Military,Defensive wall
+Military,Fort
+Military,Fortification
+Military,Tower
+Parking and storage,Boathouse
+Parking and storage,Carport
+Parking and storage,Garage
+Parking and storage,"Hangar, of aircraft or spacecraft"
+Parking and storage,Storage silo
+Religious,Church
+Religious,Basilica
+Religious,Cathedral
+Religious,Duomo
+Religious,Chapel
+Religious,Oratory
+Religious,Martyrium
+Religious,Mosque
+Religious,Mihrab
+Religious,Surau
+Religious,Imambargah
+Religious,Monastery
+Religious,Mithraeum
+Religious,Fire Temple
+Religious,Pyramid
+Religious,Shrine
+Religious,Synagogue
+Religious,Temple
+Religious,Pagoda
+Religious,Gurdwara
+Transport,Airport terminal
+Transport,Bus station
+Transport,Ferry slip
+Transport,"Metro (subway, underground) station"
+Transport,Taxi station
+Transport,Train station
+Transport,Signal box
+Transport,Lighthouse
+Other,Aqueduct
+Other,Bakery
+Other,Bookstore or bookshop
+Other,Community hall
+Other,Cow-shed
+Other,Department store
+Other,Eatery
+Other,Fast-food restaurant
+Other,Floristry
+Other,Folly
+Other,Food Court
+Other,Bathhouse
+Other,Hospital
+Other,apartment
+Other,Clinic
+Other,Hut
+Other,Hypermarket
+Other,Low-energy buildings
+Other,Plant nursery
+Other,Stadium
+Other,Arena
+Other,Stall
+Other,Marina
+Other,Mini market
+Other,Triumphal arch
+Other,Sport Club
+Other,Wet market
+Other,Workshop
+Other,World trade centre

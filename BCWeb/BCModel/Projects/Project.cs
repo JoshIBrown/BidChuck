@@ -26,13 +26,27 @@ namespace BCModel.Projects
         [Required]
         public string Description { get; set; }
 
+        [Required]
+        public DateTime BidDateTime { get; set; }
+
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string PostalCode { get; set; }
+        public int StateId { get; set; }
+        [ForeignKey("StateId")]
+        [IgnoreDataMember]
+        public virtual State State { get; set; }
+
+        public string Architect { get; set; }
+
+
         [IgnoreDataMember]
         public virtual ICollection<BidPackage> BidPackages { get; set; }
 
         [IgnoreDataMember]
         public virtual ICollection<ProjectXScope> Scopes { get; set; }
 
-        // more metadata
+
         public int BuildingTypeId { get; set; }
         [ForeignKey("BuildingTypeId")]
         [IgnoreDataMember]
@@ -47,5 +61,7 @@ namespace BCModel.Projects
         [ForeignKey("ConstructionTypeId")]
         [IgnoreDataMember]
         public virtual ConstructionType ConstructionType { get; set; }
+
+        
     }
 }

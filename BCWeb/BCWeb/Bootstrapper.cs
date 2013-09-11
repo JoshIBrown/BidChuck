@@ -12,6 +12,8 @@ using BCWeb.Areas.Account.Models.Users.ServiceLayer;
 using BCWeb.Areas.Account.Models.Users.Repository;
 using BCWeb.Areas.Account.Models.Company.Repository;
 using BCWeb.Areas.Account.Models.Company.ServiceLayer;
+using BCWeb.Models.Project.Repository;
+using BCWeb.Models.Project.ServiceLayer;
 
 namespace BCWeb
 {
@@ -48,7 +50,8 @@ namespace BCWeb
             container.RegisterType<IEmailSender, EmailSender>();
             container.RegisterType<ICompanyProfileRepository, CompanyProfileRepository>();
             container.RegisterType<ICompanyProfileServiceLayer, CompanyProfileServiceLayer>();
-
+            container.RegisterType<IProjectRepository, ProjectRepository>();
+            container.RegisterType<IProjectServiceLayer, ProjectServiceLayer>();
             RegisterTypes(container);
 
             return container;

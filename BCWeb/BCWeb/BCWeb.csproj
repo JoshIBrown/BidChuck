@@ -243,6 +243,11 @@
     <Compile Include="Models\IGenericRepository.cs" />
     <Compile Include="Models\IGenericServiceLayer.cs" />
     <Compile Include="Models\IWebSecurityWrapper.cs" />
+    <Compile Include="Models\Project\Repository\IProjectRepository.cs" />
+    <Compile Include="Models\Project\Repository\ProjectRepository.cs" />
+    <Compile Include="Models\Project\ServiceLayer\IProjectServiceLayer.cs" />
+    <Compile Include="Models\Project\ServiceLayer\ProjectServiceLayer.cs" />
+    <Compile Include="Models\Project\ViewModel\EditProjectViewModel.cs" />
     <Compile Include="Models\RepositoryBase.cs" />
     <Compile Include="Models\ServiceLayerBase.cs" />
     <Compile Include="Models\WebSecurityWrapper.cs" />
@@ -264,6 +269,7 @@
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Areas\Account\Views\Users\Add.cshtml" />
     <Content Include="Areas\Account\Views\Scopes\_ScopePicker.cshtml" />
+    <Content Include="BuildingTypes.csv" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
@@ -729,6 +735,8 @@
     <Content Include="Views\Account\EditProfile.cshtml" />
     <Content Include="Views\Account\AcceptInvitation.cshtml" />
     <Content Include="Views\Account\AcceptInvitationSuccess.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Home\ViewModels\" />

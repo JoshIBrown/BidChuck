@@ -91,6 +91,18 @@
     <Compile Include="Migrations\201309092223365_createMtoMTablesForScopeRelationships.Designer.cs">
       <DependentUpon>201309092223365_createMtoMTablesForScopeRelationships.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309110018431_buildingTypesMutliTier.cs" />
+    <Compile Include="Migrations\201309110018431_buildingTypesMutliTier.Designer.cs">
+      <DependentUpon>201309110018431_buildingTypesMutliTier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309110239164_moreMetadataForProjects.cs" />
+    <Compile Include="Migrations\201309110239164_moreMetadataForProjects.Designer.cs">
+      <DependentUpon>201309110239164_moreMetadataForProjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309110540286_combineAddress1and2.cs" />
+    <Compile Include="Migrations\201309110540286_combineAddress1and2.Designer.cs">
+      <DependentUpon>201309110540286_combineAddress1and2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -110,6 +122,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Migrations\BuildingTypes.csv" />
     <None Include="Migrations\county.csv" />
     <None Include="Migrations\state.csv" />
     <None Include="packages.config" />
@@ -144,6 +157,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309092223365_createMtoMTablesForScopeRelationships.resx">
       <DependentUpon>201309092223365_createMtoMTablesForScopeRelationships.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309110018431_buildingTypesMutliTier.resx">
+      <DependentUpon>201309110018431_buildingTypesMutliTier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309110239164_moreMetadataForProjects.resx">
+      <DependentUpon>201309110239164_moreMetadataForProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309110540286_combineAddress1and2.resx">
+      <DependentUpon>201309110540286_combineAddress1and2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
