@@ -217,6 +217,8 @@ namespace BCWeb.Controllers
         public ActionResult Register(RegisterModel model)
         {
             RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
+            model.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString() });
+            model.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
             if (String.IsNullOrEmpty(recaptchaHelper.Response))
             {

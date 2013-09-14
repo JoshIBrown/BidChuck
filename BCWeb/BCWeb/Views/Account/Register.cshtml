@@ -73,16 +73,17 @@
                             <div class="large-4 columns">
                                 @Html.LabelFor(m => m.OperatingDistance)
                                 <select class="pretty" name="OperatingDistance">
-                                    <option selected>select...</option>
-                                    <option value="25">25 Miles</option>
-                                    <option value="50">50 Miles</option>
-                                    <option value="100">100 Miles</option>
-                                    <option value="150">150 Miles</option>
-                                    <option value="200">200 Miles</option>
-                                    <option value="300">300 Miles</option>
-                                    <option value="400">400 Miles</option>
-                                    <option value="500">500 Miles</option>
-                                    <option value="0">USA</option>
+                                    <option value="" @Model.OperatingDistance==0 ? @Html.Raw("selected"):@Html.Raw("")>select...</option>
+                                    <option value="25" @Model.OperatingDistance==25 ? @Html.Raw("selected"):@Html.Raw("")>25 Miles</option>
+                                    <option value="50" @Model.OperatingDistance==50 ? @Html.Raw("selected"):@Html.Raw("")>50 Miles</option>
+                                    <option value="100" @Model.OperatingDistance==100 ? @Html.Raw("selected"):@Html.Raw("")>100 Miles</option>
+                                    <option value="150" @Model.OperatingDistance==150 ? @Html.Raw("selected"):@Html.Raw("")>150 Miles</option>
+                                    <option value="200" @Model.OperatingDistance==200 ? @Html.Raw("selected"):@Html.Raw("")>200 Miles</option>
+                                    <option value="300" @Model.OperatingDistance==300 ? @Html.Raw("selected"):@Html.Raw("")>300 Miles</option>
+                                    <option value="400" @Model.OperatingDistance==400 ? @Html.Raw("selected"):@Html.Raw("")>400 Miles</option>
+                                    <option value="500" @Model.OperatingDistance==500 ? @Html.Raw("selected"):@Html.Raw("")>500 Miles</option>
+                                    <option value="9000" @Model.OperatingDistance==9000 ? @Html.Raw("selected"):@Html.Raw("")>USA</option>
+
                                 </select>
                             </div>
                         </div>
