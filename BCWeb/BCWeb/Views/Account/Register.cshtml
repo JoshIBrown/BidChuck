@@ -1,4 +1,6 @@
 ﻿@model BCWeb.Models.RegisterModel
+@using Recaptcha.Web.Mvc
+
 @{
     ViewBag.Title = "Create a new account.";
 }
@@ -18,101 +20,117 @@
     </div>
     <div class="row">
         <div class="large-6 columns large-centered panel">
-            <fieldset>
-                <legend>Company Info</legend>
-                <div class="row">
-                </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                        @Html.LabelFor(m => m.CompanyName)
-                        @Html.TextBoxFor(m => m.CompanyName)
-                    </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <fieldset>
+                        <legend>Company Info</legend>
+                        <div class="row">
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(m => m.CompanyName)
+                                @Html.TextBoxFor(m => m.CompanyName)
+                            </div>
 
-                </div>
-                <div class="row">
-                    <div class="large-6 columns">
-                        @Html.LabelFor(m => m.Address1)
-                        @Html.TextBoxFor(m => m.Address1)
-                    </div>
-                    <div class="large-6 columns">
-                        @Html.LabelFor(m => m.Address2)
-                        @Html.TextBoxFor(m => m.Address2)
-                    </div>
-                </div>
-                <div class="row">
-                </div>
-                <div class="row">
-                    <div class="large-6 columns">
-                        @Html.LabelFor(m => m.City)
-                        @Html.TextBoxFor(m => m.City)
-                    </div>
-                    <div class="large-2 columns left">
-                        @Html.LabelFor(m => m.StateId)
-                        @Html.DropDownListFor(m => m.StateId, Model.States, "...", new { @class = "pretty" })
-                    </div>
-                    <div class="large-3 columns left">
-                        @Html.LabelFor(m => m.PostalCode)
-                        @Html.TextBoxFor(m => m.PostalCode)
-                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns">
+                                @Html.LabelFor(m => m.Address1)
+                                @Html.TextBoxFor(m => m.Address1)
+                            </div>
+                            <div class="large-6 columns">
+                                @Html.LabelFor(m => m.Address2)
+                                @Html.TextBoxFor(m => m.Address2)
+                            </div>
+                        </div>
+                        <div class="row">
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns">
+                                @Html.LabelFor(m => m.City)
+                                @Html.TextBoxFor(m => m.City)
+                            </div>
+                            <div class="large-2 columns left">
+                                @Html.LabelFor(m => m.StateId)
+                                @Html.DropDownListFor(m => m.StateId, Model.States, "...", new { @class = "pretty" })
+                            </div>
+                            <div class="large-3 columns left">
+                                @Html.LabelFor(m => m.PostalCode)
+                                @Html.TextBoxFor(m => m.PostalCode)
+                            </div>
 
-                </div>
-                <div class="row">
+                        </div>
+                        <div class="row">
 
-                    <div class="large-4 columns left">
-                        @Html.LabelFor(m => m.Phone)
-                        @Html.TextBoxFor(m => m.Phone)
-                    </div>
-                    <div class="large-4 columns">
-                        @Html.LabelFor(m => m.BusinessTypeId)
-                        @Html.DropDownListFor(m => m.BusinessTypeId, Model.BusinessTypes, "select...", new { @class = "pretty" })
-                    </div>
-                    <div class="large-4 columns">
-                        @Html.LabelFor(m => m.OperatingDistance)
-                        <select class="pretty" name="OperatingDistance">
-                            <option selected>select...</option>
-                            <option value="25">25 Miles</option>
-                            <option value="50">50 Miles</option>
-                            <option value="100">100 Miles</option>
-                            <option value="150">150 Miles</option>
-                            <option value="200">200 Miles</option>
-                            <option value="300">300 Miles</option>
-                            <option value="400">400 Miles</option>
-                            <option value="500">500 Miles</option>
-                            <option value="0">USA</option>
-                        </select>
-                    </div>
+                            <div class="large-4 columns left">
+                                @Html.LabelFor(m => m.Phone)
+                                @Html.TextBoxFor(m => m.Phone)
+                            </div>
+                            <div class="large-4 columns">
+                                @Html.LabelFor(m => m.BusinessTypeId)
+                                @Html.DropDownListFor(m => m.BusinessTypeId, Model.BusinessTypes, "select...", new { @class = "pretty" })
+                            </div>
+                            <div class="large-4 columns">
+                                @Html.LabelFor(m => m.OperatingDistance)
+                                <select class="pretty" name="OperatingDistance">
+                                    <option selected>select...</option>
+                                    <option value="25">25 Miles</option>
+                                    <option value="50">50 Miles</option>
+                                    <option value="100">100 Miles</option>
+                                    <option value="150">150 Miles</option>
+                                    <option value="200">200 Miles</option>
+                                    <option value="300">300 Miles</option>
+                                    <option value="400">400 Miles</option>
+                                    <option value="500">500 Miles</option>
+                                    <option value="0">USA</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
-            </fieldset>
-            <fieldset class="large-8">
-                <legend>Personal Info</legend>
-                <div class="row">
-                    <div class="large-6 columns left">
-                        @Html.LabelFor(m => m.FirstName)
-                        @Html.TextBoxFor(m => m.FirstName)
-                    </div>
-                    <div class="large-6 columns left">
-                        @Html.LabelFor(m => m.LastName)
-                        @Html.TextBoxFor(m => m.LastName)
-                    </div>
-                </div>
+            </div>
+            <div class="row">
+                <div class="large-8 columns left">
+                    <fieldset>
+                        <legend>Personal Info</legend>
+                        <div class="row">
+                            <div class="large-6 columns left">
+                                @Html.LabelFor(m => m.FirstName)
+                                @Html.TextBoxFor(m => m.FirstName)
+                            </div>
+                            <div class="large-6 columns left">
+                                @Html.LabelFor(m => m.LastName)
+                                @Html.TextBoxFor(m => m.LastName)
+                            </div>
+                        </div>
 
-                <div class="row">
-                    <div class="large-10 columns left">
-                        @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email)
-                    </div>
+                        <div class="row">
+                            <div class="large-10 columns left">
+                                @Html.LabelFor(m => m.Email)
+                                @Html.TextBoxFor(m => m.Email)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns left">
+                                @Html.LabelFor(m => m.Password)
+                                @Html.PasswordFor(m => m.Password)
+                            </div>
+                            <div class="large-6 columns left">
+                                @Html.LabelFor(m => m.ConfirmPassword)
+                                @Html.PasswordFor(m => m.ConfirmPassword)
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
-                <div class="row">
-                    <div class="large-6 columns left">
-                        @Html.LabelFor(m => m.Password)
-                        @Html.PasswordFor(m => m.Password)
-                    </div>
-                    <div class="large-6 columns left">
-                        @Html.LabelFor(m => m.ConfirmPassword)
-                        @Html.PasswordFor(m => m.ConfirmPassword)
-                    </div>
+            </div>
+            <div class="row">
+                <div class="large-8 left">
+                    <fieldset>
+                        <legend>Human Check</legend>
+                        @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.Clean)
+                    </fieldset>
                 </div>
-            </fieldset>
+            </div>
             <div class="row">
                 <div class="large-3 columns left">
                     <input type="submit" value="Register" class="medium button" />

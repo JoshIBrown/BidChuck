@@ -12,6 +12,8 @@ using BCModel;
 using BCWeb.Models.Account.ServiceLayer;
 using BCWeb.Models.Account.ViewModel;
 using BCWeb.Helpers;
+using Recaptcha.Web;
+using Recaptcha.Web.Mvc;
 
 namespace BCWeb.Controllers
 {
@@ -214,6 +216,21 @@ namespace BCWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
+            RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
+
+            if (String.IsNullOrEmpty(recaptchaHelper.Response))
+            {
+                ModelState.AddModelError("", "Captcha answer cannot be empty.");
+                return View(model);
+            }
+
+            RecaptchaVerificationResult recaptchaResult = recaptchaHelper.VerifyRecaptchaResponse();
+
+            if (recaptchaResult != RecaptchaVerificationResult.Success)
+            {
+                ModelState.AddModelError("", "Incorrect captcha answer.");
+            }
+
             int cpId;
             if (ModelState.IsValid)
             {

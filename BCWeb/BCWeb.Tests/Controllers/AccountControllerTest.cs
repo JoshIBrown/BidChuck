@@ -8,6 +8,7 @@ using System.Collections;
 using BCModel;
 using System.Collections.Generic;
 using BCWeb.Models.Account.ServiceLayer;
+using Recaptcha.Web.Mvc;
 
 namespace BCWeb.Tests.Controllers
 {
