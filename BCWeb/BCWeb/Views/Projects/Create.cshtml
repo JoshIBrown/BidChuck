@@ -13,7 +13,12 @@
 
         @using (Html.BeginForm())
         {
-    
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="large-6 columns large-centered">
+                    @Html.ValidationSummary()
+                </div>
+            </div>
             <div class="row">
                 <div class="large-6 columns">
                     @Html.LabelFor(m => m.Title)

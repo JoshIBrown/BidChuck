@@ -1,4 +1,5 @@
-﻿using BCWeb.Models;
+﻿using BCWeb.Helpers;
+using BCWeb.Models;
 using BCWeb.Models.Project.ServiceLayer;
 using BCWeb.Models.Project.ViewModel;
 using System;
@@ -28,23 +29,77 @@ namespace BCWeb.Controllers
             return View("Index");
         }
 
+        [Authorize(Roles = "general_contractor,architect,Administrator")]
         [HttpGet]
         public ActionResult Create()
         {
             EditProjectViewModel viewModel = new EditProjectViewModel();
 
-            viewModel.ConstructionTypes = _service.GetConstructionTypes().OrderBy(c => c.Name).Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() }); ;
-            viewModel.ProjectTypes = _service.GetProjectTypes().OrderBy(p => p.Name).Select(p => new SelectListItem { Text = p.Name, Value = p.Id.ToString() });
-            viewModel.States = _service.GetStates().OrderBy(s => s.Abbr).Select(s => new SelectListItem { Text = s.Abbr, Value = s.Id.ToString() }); ;
-            viewModel.BuildingTypes = _service.GetBuildingTypes();
+            rePopViewModel(viewModel);
             return View("Create", viewModel);
         }
 
+        [Authorize(Roles = "general_contractor,architect,Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(EditProjectViewModel viewModel)
         {
-            return View("Create");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    BCModel.Projects.Project toCreate = new BCModel.Projects.Project
+                    {
+                        Address = viewModel.Address,
+                        Architect = viewModel.Architect,
+                        BidDateTime = viewModel.BidDateTime,
+                        BuildingTypeId = viewModel.BuildingTypeId,
+                        City = viewModel.City,
+                        ConstructionTypeId = viewModel.ConstructionTypeId,
+                        CreatorId = _security.GetUserId(User.Identity.Name),
+                        Description = viewModel.Description,
+                        PostalCode = viewModel.PostalCode,
+                        ProjectTypeId = viewModel.ProjectTypeId,
+                        StateId = viewModel.StateId,
+                        Title = viewModel.Title
+                    };
+                    if (_service.Create(toCreate))
+                    {
+                        return RedirectToAction("Details", toCreate.Id);
+                    }
+                    else
+                    {
+                        Util.MapValidationErrors(_service.ValidationDic, this.ModelState);
+                        rePopViewModel(viewModel);
+                        return View("Create", viewModel);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    ModelState.AddModelError("Exception", ex.Message);
+                    rePopViewModel(viewModel);
+                    return View("Create", viewModel);
+                }
+            }
+
+            // modelstate is not valid
+            rePopViewModel(viewModel);
+            return View("Create", viewModel);
+        }
+
+        private void rePopViewModel(EditProjectViewModel viewModel)
+        {
+            viewModel.ConstructionTypes = _service.GetConstructionTypes().OrderBy(c => c.Name).Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString(), Selected = c.Id == viewModel.ConstructionTypeId }); ;
+            viewModel.ProjectTypes = _service.GetProjectTypes().OrderBy(p => p.Name).Select(p => new SelectListItem { Text = p.Name, Value = p.Id.ToString(), Selected = p.Id == viewModel.ProjectTypeId });
+            viewModel.States = _service.GetStates().OrderBy(s => s.Abbr).Select(s => new SelectListItem { Text = s.Abbr, Value = s.Id.ToString(), Selected = s.Id == viewModel.StateId }); ;
+            viewModel.BuildingTypes = _service.GetBuildingTypes();
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            return View();
         }
     }
 }

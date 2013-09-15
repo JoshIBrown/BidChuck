@@ -1,6 +1,7 @@
 ﻿using BCModel;
 using BCWeb.Areas.Account.Models.Users.ServiceLayer;
 using BCWeb.Models;
+using BCWeb.Models.GenericViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

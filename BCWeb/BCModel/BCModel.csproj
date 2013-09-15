@@ -103,6 +103,10 @@
     <Compile Include="Migrations\201309110540286_combineAddress1and2.Designer.cs">
       <DependentUpon>201309110540286_combineAddress1and2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309150439254_changeUserToCompanyInBid.cs" />
+    <Compile Include="Migrations\201309150439254_changeUserToCompanyInBid.Designer.cs">
+      <DependentUpon>201309150439254_changeUserToCompanyInBid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -166,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309110540286_combineAddress1and2.resx">
       <DependentUpon>201309110540286_combineAddress1and2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309150439254_changeUserToCompanyInBid.resx">
+      <DependentUpon>201309150439254_changeUserToCompanyInBid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

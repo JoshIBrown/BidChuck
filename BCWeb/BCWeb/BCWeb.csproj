@@ -191,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\CompanyController.cs" />
+    <Compile Include="Api\ProjectsController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeMgmtViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\SelectedScopesViewModel.cs" />
     <Compile Include="Areas\Account\Models\Users\ViewModel\NewUserViewModel.cs" />
+    <Compile Include="Areas\Projects\ProjectsAreaRegistration.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="Models\Project\ServiceLayer\IProjectServiceLayer.cs" />
     <Compile Include="Models\Project\ServiceLayer\ProjectServiceLayer.cs" />
     <Compile Include="Models\Project\ViewModel\EditProjectViewModel.cs" />
+    <Compile Include="Models\Project\ViewModel\ProjectListViewModel.cs" />
     <Compile Include="Models\RepositoryBase.cs" />
     <Compile Include="Models\ServiceLayerBase.cs" />
     <Compile Include="Models\WebSecurityWrapper.cs" />
@@ -273,6 +276,7 @@
     <Content Include="Areas\Account\Views\Users\Add.cshtml" />
     <Content Include="Areas\Account\Views\Scopes\_ScopePicker.cshtml" />
     <Content Include="BuildingTypes.csv" />
+    <Content Include="Areas\Projects\Views\Web.config" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
@@ -741,8 +745,12 @@
     <Content Include="Views\Account\AcceptInvitationSuccess.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Projects\Controllers\" />
+    <Folder Include="Areas\Projects\Models\" />
+    <Folder Include="Areas\Projects\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
