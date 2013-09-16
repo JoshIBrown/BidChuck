@@ -24,10 +24,10 @@ namespace BCWeb.Models.Project.Repository
             return _context.BuildingTypes;
         }
 
-        public IQueryable<BCModel.Projects.ProjectType> QueryProjectType()
-        {
-            return _context.ProjectTypes;
-        }
+        //public IQueryable<BCModel.Projects.ProjectType> QueryProjectType()
+        //{
+        //    return _context.ProjectTypes;
+        //}
 
         public void Create(BCModel.Projects.Project entity)
         {

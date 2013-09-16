@@ -12,7 +12,7 @@ namespace BCWeb.Models.Project.ServiceLayer
     {
         IEnumerable<BuildingType> GetBuildingTypes();
         IEnumerable<ConstructionType> GetConstructionTypes();
-        IEnumerable<ProjectType> GetProjectTypes();
+        //IEnumerable<ProjectType> GetProjectTypes();
         IEnumerable<State> GetStates();
     }
 }

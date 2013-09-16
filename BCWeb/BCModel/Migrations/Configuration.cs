@@ -90,15 +90,15 @@ namespace BCModel.Migrations
                 context.SaveChanges();
             }
 
-            if (context.ProjectTypes.Count() == 0)
-            {
-                context.ProjectTypes.Add(new Projects.ProjectType { Name = "Federal Government" });
-                context.ProjectTypes.Add(new Projects.ProjectType { Name = "State Government" });
-                context.ProjectTypes.Add(new Projects.ProjectType { Name = "Local Government" });
-                context.ProjectTypes.Add(new Projects.ProjectType { Name = "Private" });
-                context.ProjectTypes.Add(new Projects.ProjectType { Name = "Private - Non-Profit" });
-                context.SaveChanges();
-            }
+            //if (context.ProjectTypes.Count() == 0)
+            //{
+            //    context.ProjectTypes.Add(new Projects.ProjectType { Name = "Federal Government" });
+            //    context.ProjectTypes.Add(new Projects.ProjectType { Name = "State Government" });
+            //    context.ProjectTypes.Add(new Projects.ProjectType { Name = "Local Government" });
+            //    context.ProjectTypes.Add(new Projects.ProjectType { Name = "Private" });
+            //    context.ProjectTypes.Add(new Projects.ProjectType { Name = "Private - Non-Profit" });
+            //    context.SaveChanges();
+            //}
 
             if (context.ConstructionTypes.Count() == 0)
             {

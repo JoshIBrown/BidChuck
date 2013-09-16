@@ -223,6 +223,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\ParameterRebinder.cs" />
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="Helpers\ValidateHttpAntiForgery.cs" />

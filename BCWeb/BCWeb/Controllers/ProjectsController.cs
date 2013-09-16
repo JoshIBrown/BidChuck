@@ -1,4 +1,5 @@
-﻿using BCWeb.Helpers;
+﻿using BCModel.Projects;
+using BCWeb.Helpers;
 using BCWeb.Models;
 using BCWeb.Models.Project.ServiceLayer;
 using BCWeb.Models.Project.ViewModel;
@@ -51,15 +52,15 @@ namespace BCWeb.Controllers
                     BCModel.Projects.Project toCreate = new BCModel.Projects.Project
                     {
                         Address = viewModel.Address,
-                        Architect = viewModel.Architect,
+                        //Architect = viewModel.Architect, // fixme
                         BidDateTime = viewModel.BidDateTime,
                         BuildingTypeId = viewModel.BuildingTypeId,
                         City = viewModel.City,
                         ConstructionTypeId = viewModel.ConstructionTypeId,
-                        CreatorId = _security.GetUserId(User.Identity.Name),
+                        CreatedById = _security.GetUserId(User.Identity.Name),
                         Description = viewModel.Description,
                         PostalCode = viewModel.PostalCode,
-                        ProjectTypeId = viewModel.ProjectTypeId,
+                        //ProjectTypeId = viewModel.ProjectTypeId,
                         StateId = viewModel.StateId,
                         Title = viewModel.Title
                     };
@@ -90,8 +91,10 @@ namespace BCWeb.Controllers
 
         private void rePopViewModel(EditProjectViewModel viewModel)
         {
+
+            var foo = from ProjectType p in Enum.GetValues(typeof(ProjectType)) select new { Name = p.ToString(), Id = p };
             viewModel.ConstructionTypes = _service.GetConstructionTypes().OrderBy(c => c.Name).Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString(), Selected = c.Id == viewModel.ConstructionTypeId }); ;
-            viewModel.ProjectTypes = _service.GetProjectTypes().OrderBy(p => p.Name).Select(p => new SelectListItem { Text = p.Name, Value = p.Id.ToString(), Selected = p.Id == viewModel.ProjectTypeId });
+            viewModel.ProjectTypes = new SelectList(foo, "Id", "Name", null);
             viewModel.States = _service.GetStates().OrderBy(s => s.Abbr).Select(s => new SelectListItem { Text = s.Abbr, Value = s.Id.ToString(), Selected = s.Id == viewModel.StateId }); ;
             viewModel.BuildingTypes = _service.GetBuildingTypes();
         }

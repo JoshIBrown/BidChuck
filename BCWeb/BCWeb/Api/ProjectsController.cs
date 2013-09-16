@@ -25,10 +25,25 @@ namespace BCWeb.Api
         {
             int userId = _security.GetUserId(User.Identity.Name);
 
-            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(s => s.CreatorId == userId)
+            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(s => s.CreatedById == userId)
                 .Select(s => new ProjectListViewModel
                 {
-                    Architect = s.Architect,
+                    Architect = s.Architect.CompanyName,
+                    Id = s.Id,
+                    Title = s.Title
+                });
+
+            return list;
+        }
+
+        public IEnumerable<ProjectListViewModel> GetPublic()
+        {
+            int userId = _security.GetUserId(User.Identity.Name);
+
+            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable()
+                .Select(s => new ProjectListViewModel
+                {
+                    Architect = s.Architect.CompanyName,
                     Id = s.Id,
                     Title = s.Title
                 });

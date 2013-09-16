@@ -26,10 +26,10 @@ namespace BCWeb.Models.Project.ServiceLayer
             return _repo.QueryConstructionType().AsEnumerable();
         }
 
-        public IEnumerable<BCModel.Projects.ProjectType> GetProjectTypes()
-        {
-            return _repo.QueryProjectType().AsEnumerable();
-        }
+        //public IEnumerable<BCModel.Projects.ProjectType> GetProjectTypes()
+        //{
+        //    return _repo.QueryProjectType().AsEnumerable();
+        //}
 
         public IEnumerable<BCModel.State> GetStates()
         {
@@ -51,7 +51,7 @@ namespace BCWeb.Models.Project.ServiceLayer
             // if architect, address and city, title combo already exists
             if (_repo.Query().Where(r => r.Address.ToLower().Trim() == entity.Address.ToLower().Trim() 
                 && r.City.ToLower().Trim() == entity.City.ToLower().Trim() 
-                && r.Architect.Trim().ToLower() == entity.Architect.Trim().ToLower()
+                //&& r.Architect.Trim().ToLower() == entity.Architect.Trim().ToLower()
                 && r.Title.ToLower().Trim() == entity.Title.ToLower().Trim()).Count() > 0)
             {
                 valid = false;

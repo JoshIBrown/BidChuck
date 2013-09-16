@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCModel.Projects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -33,5 +34,7 @@ namespace BCModel
         [IgnoreDataMember]
         public virtual ICollection<UserXScope> Scopes { get; set; }
 
+        [IgnoreDataMember]
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

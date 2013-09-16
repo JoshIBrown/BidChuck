@@ -15,6 +15,11 @@ namespace BCModel.Projects
         [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public int CreatorId { get; set; }
+        [ForeignKey("CreatorId")]
+        [IgnoreDataMember]
+        public virtual CompanyProfile Creator { get; set; }
+
         public int ProjectId { get; set; }
         [ForeignKey("ProjectId")]
         [IgnoreDataMember]
@@ -25,6 +30,9 @@ namespace BCModel.Projects
 
         [IgnoreDataMember]
         public virtual ICollection<Scope> Scopes { get; set; }
+
+        [IgnoreDataMember]
+        public IEnumerable<BidPackageXInvitee> Invitees { get; set; }
 
         // more meta data
     }

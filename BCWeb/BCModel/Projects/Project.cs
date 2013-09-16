@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,16 +10,35 @@ using System.Threading.Tasks;
 
 namespace BCModel.Projects
 {
+    public enum ProjectType
+    {
+        [Description("Federal Government")]
+        Federal,
+        [Description("State Government")]
+        State,
+        [Description("Local Government")]
+        Local,
+        [Description("Private")]
+        Private,
+        [Description("Private - Non-Profit")]
+        PrivateNP
+    }
+
     public class Project
     {
         [Key]
         [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public int CreatorId { get; set; }
-        [ForeignKey("CreatorId")]
+        public int CreatedById { get; set; }
+        [ForeignKey("CreatedById")]
         [IgnoreDataMember]
-        public virtual UserProfile Creator { get; set; }
+        public virtual UserProfile CreatedBy { get; set; }
+
+        public int? ArchitectId { get; set; }
+        [ForeignKey("ArchitectId")]
+        [IgnoreDataMember]
+        public virtual CompanyProfile Architect { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -37,8 +57,6 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual State State { get; set; }
 
-        public string Architect { get; set; }
-
 
         [IgnoreDataMember]
         public virtual ICollection<BidPackage> BidPackages { get; set; }
@@ -52,16 +70,20 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual BuildingType BuildingType { get; set; }
 
-        public int ProjectTypeId { get; set; }
-        [ForeignKey("ProjectTypeId")]
-        [IgnoreDataMember]
-        public virtual ProjectType ProjectType { get; set; }
+
+        public ProjectType ProjectType { get; set; }
+        //public int ProjectTypeId { get; set; }
+        //[ForeignKey("ProjectTypeId")]
+        //[IgnoreDataMember]
+        //public virtual ProjectType ProjectType { get; set; }
+
+
 
         public int ConstructionTypeId { get; set; }
         [ForeignKey("ConstructionTypeId")]
         [IgnoreDataMember]
         public virtual ConstructionType ConstructionType { get; set; }
 
-        
+
     }
 }

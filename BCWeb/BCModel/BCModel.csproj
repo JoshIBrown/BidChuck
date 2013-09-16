@@ -107,14 +107,22 @@
     <Compile Include="Migrations\201309150439254_changeUserToCompanyInBid.Designer.cs">
       <DependentUpon>201309150439254_changeUserToCompanyInBid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309160108588_turnProjectTypeIntoEnum.cs" />
+    <Compile Include="Migrations\201309160108588_turnProjectTypeIntoEnum.Designer.cs">
+      <DependentUpon>201309160108588_turnProjectTypeIntoEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309160156252_createMtoMforBPInvites.cs" />
+    <Compile Include="Migrations\201309160156252_createMtoMforBPInvites.Designer.cs">
+      <DependentUpon>201309160156252_createMtoMforBPInvites.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
     <Compile Include="Projects\BidPackageXScope.cs" />
     <Compile Include="Projects\BuildingType.cs" />
+    <Compile Include="Projects\BidPackageXInvitee.cs" />
     <Compile Include="Projects\ConstructionType.cs" />
     <Compile Include="Projects\Project.cs" />
-    <Compile Include="Projects\ProjectType.cs" />
     <Compile Include="Projects\ProjectXScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
@@ -173,6 +181,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309150439254_changeUserToCompanyInBid.resx">
       <DependentUpon>201309150439254_changeUserToCompanyInBid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309160108588_turnProjectTypeIntoEnum.resx">
+      <DependentUpon>201309160108588_turnProjectTypeIntoEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309160156252_createMtoMforBPInvites.resx">
+      <DependentUpon>201309160156252_createMtoMforBPInvites.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

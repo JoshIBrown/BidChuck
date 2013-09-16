@@ -12,7 +12,7 @@ namespace BCWeb.Models.Project.Repository
     {
         IQueryable<ConstructionType> QueryConstructionType();
         IQueryable<BuildingType> QueryBuildingType();
-        IQueryable<ProjectType> QueryProjectType();
+        //IQueryable<ProjectType> QueryProjectType();
         IQueryable<State> QueryStates();
     }
 }
