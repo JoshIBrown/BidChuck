@@ -158,5 +158,26 @@ namespace BCWeb.Models.Project.ServiceLayer
         {
             return _repo.Get(id) == null;
         }
+
+
+        public BCModel.CompanyProfile GetCompanyProfile(int id)
+        {
+            return _repo.GetCompanyProfile(id);
+        }
+
+        public BCModel.UserProfile GetUserProfile(int id)
+        {
+            return _repo.GetUserProfile(id);
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> GetCompanyProfiles()
+        {
+            return _repo.GetCompanyProfiles();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> GetCompanyProfiles(System.Linq.Expressions.Expression<Func<BCModel.CompanyProfile, bool>> predicate)
+        {
+            return _repo.GetCompanyProfiles().Where(predicate);
+        }
     }
 }

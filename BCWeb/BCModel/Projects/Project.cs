@@ -72,12 +72,6 @@ namespace BCModel.Projects
 
 
         public ProjectType ProjectType { get; set; }
-        //public int ProjectTypeId { get; set; }
-        //[ForeignKey("ProjectTypeId")]
-        //[IgnoreDataMember]
-        //public virtual ProjectType ProjectType { get; set; }
-
-
 
         public int ConstructionTypeId { get; set; }
         [ForeignKey("ConstructionTypeId")]

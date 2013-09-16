@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BCModel;
 using BCModel.Projects;
+using System.Linq.Expressions;
 
 namespace BCWeb.Models.Project.ServiceLayer
 {
@@ -14,5 +15,10 @@ namespace BCWeb.Models.Project.ServiceLayer
         IEnumerable<ConstructionType> GetConstructionTypes();
         //IEnumerable<ProjectType> GetProjectTypes();
         IEnumerable<State> GetStates();
+
+        CompanyProfile GetCompanyProfile(int id);
+        UserProfile GetUserProfile(int id);
+        IEnumerable<CompanyProfile> GetCompanyProfiles();
+        IEnumerable<CompanyProfile> GetCompanyProfiles(Expression<Func<CompanyProfile, bool>> predicate);
     }
 }

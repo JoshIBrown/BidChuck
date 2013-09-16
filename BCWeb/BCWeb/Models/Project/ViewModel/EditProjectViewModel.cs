@@ -34,12 +34,13 @@ namespace BCWeb.Models.Project.ViewModel
         [Required]
         public int BuildingTypeId { get; set; }
         [Required]
-        public int ProjectTypeId { get; set; }
+        //public int ProjectTypeId { get; set; }
+        public ProjectType ProjectType { get; set; }
         [Required]
         public int ConstructionTypeId { get; set; }
 
         public IEnumerable<SelectListItem> States { get; set; }
-        public IEnumerable<SelectListItem> ProjectTypes { get; set; }
+        //public IEnumerable<SelectListItem> ProjectTypes { get; set; }
         public IEnumerable<SelectListItem> ConstructionTypes { get; set; }
         public IEnumerable<BuildingType> BuildingTypes { get; set; }
     }

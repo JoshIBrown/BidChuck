@@ -52,7 +52,7 @@ namespace BCWeb.Controllers
                     BCModel.Projects.Project toCreate = new BCModel.Projects.Project
                     {
                         Address = viewModel.Address,
-                        //Architect = viewModel.Architect, // fixme
+                        ArchitectId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId,
                         BidDateTime = viewModel.BidDateTime,
                         BuildingTypeId = viewModel.BuildingTypeId,
                         City = viewModel.City,
@@ -92,9 +92,9 @@ namespace BCWeb.Controllers
         private void rePopViewModel(EditProjectViewModel viewModel)
         {
 
-            var foo = from ProjectType p in Enum.GetValues(typeof(ProjectType)) select new { Name = p.ToString(), Id = p };
+            
             viewModel.ConstructionTypes = _service.GetConstructionTypes().OrderBy(c => c.Name).Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString(), Selected = c.Id == viewModel.ConstructionTypeId }); ;
-            viewModel.ProjectTypes = new SelectList(foo, "Id", "Name", null);
+            //viewModel.ProjectTypes = 
             viewModel.States = _service.GetStates().OrderBy(s => s.Abbr).Select(s => new SelectListItem { Text = s.Abbr, Value = s.Id.ToString(), Selected = s.Id == viewModel.StateId }); ;
             viewModel.BuildingTypes = _service.GetBuildingTypes();
         }

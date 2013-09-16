@@ -1,4 +1,5 @@
-﻿using BCWeb.Models;
+﻿using BCModel.Projects;
+using BCWeb.Models;
 using BCWeb.Models.Project.ServiceLayer;
 using BCWeb.Models.Project.ViewModel;
 using System;
@@ -28,7 +29,7 @@ namespace BCWeb.Api
             IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(s => s.CreatedById == userId)
                 .Select(s => new ProjectListViewModel
                 {
-                    Architect = s.Architect.CompanyName,
+                    Architect = s.ArchitectId.HasValue ? s.Architect.CompanyName : "",
                     Id = s.Id,
                     Title = s.Title
                 });
@@ -40,10 +41,10 @@ namespace BCWeb.Api
         {
             int userId = _security.GetUserId(User.Identity.Name);
 
-            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable()
+            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(x => x.ProjectType == ProjectType.Federal || x.ProjectType == ProjectType.Local || x.ProjectType == ProjectType.State)
                 .Select(s => new ProjectListViewModel
                 {
-                    Architect = s.Architect.CompanyName,
+                    Architect = s.ArchitectId.HasValue ? s.Architect.CompanyName : "",
                     Id = s.Id,
                     Title = s.Title
                 });

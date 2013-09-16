@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCModel;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace BCWeb.Models.Project.Repository
     public class ProjectRepository : RepositoryBase, IProjectRepository
     {
         private DbSet<BCModel.Projects.Project> _projects;
+        private DbSet<UserProfile> _users;
+        private DbSet<CompanyProfile> _companies;
 
         public ProjectRepository()
         {
@@ -69,6 +72,22 @@ namespace BCWeb.Models.Project.Repository
         public IQueryable<BCModel.State> QueryStates()
         {
             return _context.States;
+        }
+
+
+        public BCModel.UserProfile GetUserProfile(int id)
+        {
+            return _users.Find(id);
+        }
+
+        public BCModel.CompanyProfile GetCompanyProfile(int id)
+        {
+            return _companies.Find(id);
+        }
+
+        public IQueryable<BCModel.CompanyProfile> GetCompanyProfiles()
+        {
+            return _companies;
         }
     }
 }

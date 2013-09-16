@@ -14,5 +14,10 @@ namespace BCWeb.Models.Project.Repository
         IQueryable<BuildingType> QueryBuildingType();
         //IQueryable<ProjectType> QueryProjectType();
         IQueryable<State> QueryStates();
+
+        UserProfile GetUserProfile(int id);
+
+        CompanyProfile GetCompanyProfile(int id);
+        IQueryable<CompanyProfile> GetCompanyProfiles();
     }
 }
