@@ -33,7 +33,13 @@ namespace BCWeb
             //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/cvlcss").Include("~/Content/cvl.css"));
 
-            
+            bundles.Add(new ScriptBundle("~/bundles/angulerjs").Include("~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/projectindex").Include("~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/controllers/ProjectIndexCtrl.js"));
 
             #region Foundation Bundles
             //If your project requires jQuery, you may remove the zepto bundle

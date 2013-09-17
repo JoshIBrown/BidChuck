@@ -376,6 +376,7 @@
     <Content Include="Scripts\angular\angular-scenario.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\controllers\ProjectIndexCtrl.js" />
     <Content Include="Scripts\Areas\Account\ManageView.js" />
     <Content Include="Scripts\Areas\Account\RegCtrl.js" />
     <Content Include="Scripts\Areas\Account\ScopesList.js" />

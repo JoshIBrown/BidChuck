@@ -35,7 +35,7 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual UserProfile CreatedBy { get; set; }
 
-        public int? ArchitectId { get; set; }
+        public int ArchitectId { get; set; }
         [ForeignKey("ArchitectId")]
         [IgnoreDataMember]
         public virtual CompanyProfile Architect { get; set; }

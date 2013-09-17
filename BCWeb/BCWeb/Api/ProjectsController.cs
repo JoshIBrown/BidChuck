@@ -1,4 +1,5 @@
-﻿using BCModel.Projects;
+﻿using BCModel;
+using BCModel.Projects;
 using BCWeb.Models;
 using BCWeb.Models.Project.ServiceLayer;
 using BCWeb.Models.Project.ViewModel;
@@ -20,6 +21,7 @@ namespace BCWeb.Api
         public ProjectsController(IProjectServiceLayer service, IWebSecurityWrapper security)
         {
             _service = service;
+            _security = security;
         }
 
         public IEnumerable<ProjectListViewModel> GetMyCreated()
@@ -29,7 +31,22 @@ namespace BCWeb.Api
             IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(s => s.CreatedById == userId)
                 .Select(s => new ProjectListViewModel
                 {
-                    Architect = s.ArchitectId.HasValue ? s.Architect.CompanyName : "",
+                    Architect = s.Architect.CompanyName,
+                    Id = s.Id,
+                    Title = s.Title
+                });
+
+            return list;
+        }
+
+        public IEnumerable<ProjectListViewModel> GetByMyCompany()
+        {
+            int userId = _security.GetUserId(User.Identity.Name);
+            UserProfile theUser = _service.GetUserProfile(userId);
+            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(s => s.ArchitectId == theUser.CompanyId)
+                .Select(s => new ProjectListViewModel
+                {
+                    Architect = s.Architect.CompanyName,
                     Id = s.Id,
                     Title = s.Title
                 });
@@ -44,7 +61,7 @@ namespace BCWeb.Api
             IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(x => x.ProjectType == ProjectType.Federal || x.ProjectType == ProjectType.Local || x.ProjectType == ProjectType.State)
                 .Select(s => new ProjectListViewModel
                 {
-                    Architect = s.ArchitectId.HasValue ? s.Architect.CompanyName : "",
+                    Architect = s.Architect.CompanyName,
                     Id = s.Id,
                     Title = s.Title
                 });
