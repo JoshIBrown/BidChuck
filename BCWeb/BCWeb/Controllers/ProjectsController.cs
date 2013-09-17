@@ -60,13 +60,13 @@ namespace BCWeb.Controllers
                         CreatedById = _security.GetUserId(User.Identity.Name),
                         Description = viewModel.Description,
                         PostalCode = viewModel.PostalCode,
-                        //ProjectTypeId = viewModel.ProjectTypeId,
+                        ProjectType = viewModel.ProjectType,
                         StateId = viewModel.StateId,
                         Title = viewModel.Title
                     };
                     if (_service.Create(toCreate))
                     {
-                        return RedirectToAction("Details", toCreate.Id);
+                        return RedirectToRoute("Default", new { controller = "Projects", action = "Details", id = toCreate.Id });
                     }
                     else
                     {
@@ -92,7 +92,7 @@ namespace BCWeb.Controllers
         private void rePopViewModel(EditProjectViewModel viewModel)
         {
 
-            
+
             viewModel.ConstructionTypes = _service.GetConstructionTypes().OrderBy(c => c.Name).Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString(), Selected = c.Id == viewModel.ConstructionTypeId }); ;
             //viewModel.ProjectTypes = 
             viewModel.States = _service.GetStates().OrderBy(s => s.Abbr).Select(s => new SelectListItem { Text = s.Abbr, Value = s.Id.ToString(), Selected = s.Id == viewModel.StateId }); ;

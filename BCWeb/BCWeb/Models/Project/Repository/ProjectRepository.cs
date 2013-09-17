@@ -16,6 +16,8 @@ namespace BCWeb.Models.Project.Repository
         public ProjectRepository()
         {
             _projects = _context.Projects;
+            _users = _context.UserProfiles;
+            _companies = _context.Companies;
         }
         public IQueryable<BCModel.Projects.ConstructionType> QueryConstructionType()
         {

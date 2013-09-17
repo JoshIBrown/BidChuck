@@ -29,9 +29,6 @@ namespace BCWeb.Models.Project.ViewModel
         public int StateId { get; set; }
 
         [Required]
-        public string Architect { get; set; }
-
-        [Required]
         public int BuildingTypeId { get; set; }
         [Required]
         //public int ProjectTypeId { get; set; }
