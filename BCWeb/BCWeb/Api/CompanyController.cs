@@ -1,8 +1,11 @@
-﻿using BCWeb.Areas.Account.Models.Company.ServiceLayer;
+﻿using BCModel;
+using BCWeb.Areas.Account.Models.Company.ServiceLayer;
+using BCWeb.Helpers;
 using BCWeb.Models;
 using BCWeb.Models.Company.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,12 +19,12 @@ namespace BCWeb.Api
         private ICompanyProfileServiceLayer _serviceLayer;
         private IWebSecurityWrapper _security;
 
-        public CompanyController(ICompanyProfileServiceLayer serviceLayer,IWebSecurityWrapper security)
+        public CompanyController(ICompanyProfileServiceLayer serviceLayer, IWebSecurityWrapper security)
         {
             _serviceLayer = serviceLayer;
             _security = security;
         }
-        
+
         // /api/Company/GetNewest
         [AllowAnonymous]
         public IEnumerable<NewCompanyViewModel> GetNewest()
@@ -34,7 +37,7 @@ namespace BCWeb.Api
                                                 {
                                                     Id = x.Id,
                                                     CompanyName = x.CompanyName,
-                                                    BusinessType = x.BusinessType.Name,
+                                                    BusinessType = Util.GetEnumDescription(x.BusinessType),
                                                     Scopes = x.Scopes
                                                         .Where(s => !s.Scope.ParentId.HasValue).Select(s => s.Scope.CsiNumber.Substring(0, 2) + " " + s.Scope.Description)
                                                         .ToArray()

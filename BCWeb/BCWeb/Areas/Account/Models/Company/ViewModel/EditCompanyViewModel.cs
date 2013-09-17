@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace BCWeb.Areas.Account.Models.Company.ViewModel
     public class EditCompanyViewModel
     {
         public IEnumerable<SelectListItem> States { get; set; }
-        public IEnumerable<SelectListItem> BusinessTypes { get; set; }
+        //public IEnumerable<SelectListItem> BusinessTypes { get; set; }
 
         [Required]
         public int Id { get; set; }
@@ -22,7 +23,8 @@ namespace BCWeb.Areas.Account.Models.Company.ViewModel
 
         [Required]
         [Display(Name = "Business Type")]
-        public int BusinessTypeId { get; set; }
+        //public int BusinessTypeId { get; set; }
+        public BusinessType BusinessType { get; set; }
 
         [Display(Name = "Address (optional)")]
         [RegularExpression(@"^[a-zA-Z\d\s]*$")]

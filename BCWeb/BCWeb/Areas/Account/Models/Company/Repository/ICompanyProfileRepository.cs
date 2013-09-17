@@ -11,7 +11,7 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
     public interface ICompanyProfileRepository : IGenericRepository<CompanyProfile>
     {
         IQueryable<State> QueryStates();
-        IQueryable<BusinessType> QueryBusinessTypes();
+        //IQueryable<BusinessType> QueryBusinessTypes();
         IQueryable<UserProfile> QueryUserProfiles();
     }
 }

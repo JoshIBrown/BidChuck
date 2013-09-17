@@ -61,10 +61,10 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         }
 
 
-        public IQueryable<BusinessType> QueryBusinessTypes()
-        {
-            return _context.BusinessTypes;
-        }
+        //public IQueryable<BusinessType> QueryBusinessTypes()
+        //{
+        //    return _context.BusinessTypes;
+        //}
 
 
         public IQueryable<UserProfile> QueryUserProfiles()

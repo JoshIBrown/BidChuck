@@ -54,6 +54,7 @@ namespace BCWeb.Areas.Account.Controllers
             {
                 int currentUserId = _security.GetUserId(User.Identity.Name);
                 UserProfile user = _service.Get(currentUserId);
+                CompanyProfile company = _service.GetCompany(user.CompanyId);
 
                 // use security context to create user
                 string confirmToken = _security.CreateUserAndAccount(viewModel.Email,
@@ -67,7 +68,35 @@ namespace BCWeb.Areas.Account.Controllers
 
                 // give them a minion role
                 _security.AddUserToRole(viewModel.Email, "Employee");
-                                
+
+                switch (company.BusinessType)
+                {
+                    case BusinessType.GeneralContractor:
+                        _security.AddUserToRole(viewModel.Email, "general_contractor");
+                        break;
+                    case BusinessType.SubContractor:
+                        _security.AddUserToRole(viewModel.Email, "subcontractor");
+                        break;
+                    case BusinessType.Architect:
+                        _security.AddUserToRole(viewModel.Email, "architect");
+                        break;
+                    case BusinessType.Engineer:
+                        _security.AddUserToRole(viewModel.Email, "engineer");
+                        break;
+                    case BusinessType.Owner:
+                        _security.AddUserToRole(viewModel.Email, "owner_client");
+                        break;
+                    case BusinessType.MaterialsVendor:
+                        _security.AddUserToRole(viewModel.Email, "materials_vendor");
+                        break;
+                    case BusinessType.MaterialsMfg:
+                        _security.AddUserToRole(viewModel.Email, "materials_manufacturer");
+                        break;
+                    case BusinessType.Consultant:
+                        _security.AddUserToRole(viewModel.Email, "consultant");
+                        break;
+                };
+
                 _emailer.SendNewDelegateEmail(user.FirstName + " " + user.LastName, viewModel.FirstName, viewModel.Email, confirmToken);
                 return RedirectToRoute("Default", new { controller = "Account", action = "Manage" });
             }

@@ -1,4 +1,5 @@
 ﻿@model BCWeb.Areas.Account.Models.Company.ViewModel.EditCompanyViewModel
+@using BCWeb.Helpers
 @{
     ViewBag.Title = "Edit Company";
     Layout = "~/Views/Shared/_Foundation.cshtml";
@@ -67,22 +68,40 @@
                         @Html.TextBoxFor(m => m.Phone)
                     </div>
                     <div class="large-4 columns">
-                        @Html.LabelFor(m => m.BusinessTypeId)
-                        @Html.DropDownListFor(m => m.BusinessTypeId, Model.BusinessTypes, "select...", new { @class = "pretty" })
+                        @Html.LabelFor(m => m.BusinessType)
+                        @Html.DropDownListFor(m => m.BusinessType, new { @class = "pretty" })
                     </div>
                     <div class="large-4 columns">
                         @Html.LabelFor(m => m.OperatingDistance)
                         <select class="pretty" name="OperatingDistance">
                             <option>select...</option>
-                            <option value="25" @if (Model.OperatingDistance == 25) { @Html.Raw("selected"); }>25 Miles</option>
-                            <option value="50" @if (Model.OperatingDistance == 50) { @Html.Raw("selected"); }>50 Miles</option>
-                            <option value="100" @if (Model.OperatingDistance == 100) { @Html.Raw("selected"); }>100 Miles</option>
-                            <option value="150" @if (Model.OperatingDistance == 150) { @Html.Raw("selected"); }>150 Miles</option>
-                            <option value="200" @if (Model.OperatingDistance == 200) { @Html.Raw("selected"); }>200 Miles</option>
-                            <option value="300" @if (Model.OperatingDistance == 300) { @Html.Raw("selected"); }>300 Miles</option>
-                            <option value="400" @if (Model.OperatingDistance == 400) { @Html.Raw("selected"); }>400 Miles</option>
-                            <option value="500" @if (Model.OperatingDistance == 500) { @Html.Raw("selected"); }>500 Miles</option>
-                            <option value="0" @if (Model.OperatingDistance == 0) { @Html.Raw("selected"); }>USA</option>
+                            <option value="25" @if (Model.OperatingDistance == 25)
+                                               { @Html.Raw("selected");
+                                               }>25 Miles</option>
+                            <option value="50" @if (Model.OperatingDistance == 50)
+                                               { @Html.Raw("selected");
+                                               }>50 Miles</option>
+                            <option value="100" @if (Model.OperatingDistance == 100)
+                                                { @Html.Raw("selected");
+                                                }>100 Miles</option>
+                            <option value="150" @if (Model.OperatingDistance == 150)
+                                                { @Html.Raw("selected");
+                                                }>150 Miles</option>
+                            <option value="200" @if (Model.OperatingDistance == 200)
+                                                { @Html.Raw("selected");
+                                                }>200 Miles</option>
+                            <option value="300" @if (Model.OperatingDistance == 300)
+                                                { @Html.Raw("selected");
+                                                }>300 Miles</option>
+                            <option value="400" @if (Model.OperatingDistance == 400)
+                                                { @Html.Raw("selected");
+                                                }>400 Miles</option>
+                            <option value="500" @if (Model.OperatingDistance == 500)
+                                                { @Html.Raw("selected");
+                                                }>500 Miles</option>
+                            <option value="0" @if (Model.OperatingDistance == 0)
+                                              { @Html.Raw("selected");
+                                              }>USA</option>
                         </select>
                     </div>
                 </div>

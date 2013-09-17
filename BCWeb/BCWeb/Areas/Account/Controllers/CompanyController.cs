@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BCModel;
 
 namespace BCWeb.Areas.Account.Controllers
 {
@@ -37,7 +38,7 @@ namespace BCWeb.Areas.Account.Controllers
             {
                 Address1 = raw.Address1,
                 Address2 = raw.Address2,
-                BusinessTypeId = raw.BusinessTypeId,
+                BusinessType = raw.BusinessType,
                 City = raw.City,
                 CompanyName = raw.CompanyName,
                 Id = raw.Id,
@@ -49,7 +50,7 @@ namespace BCWeb.Areas.Account.Controllers
 
             // fill states and business types
             viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-            viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
+            //viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
 
             return View(viewModel);
         }
@@ -65,106 +66,105 @@ namespace BCWeb.Areas.Account.Controllers
                 int userId = _security.GetUserId(User.Identity.Name);
                 var company = _serviceLayer.GetUserProfiles(u => u.UserId == userId).FirstOrDefault().Company;
 
+                // did address change?
                 if (viewModel.Address1 != null && company.Address1 != viewModel.Address1.Trim())
                     company.Address1 = viewModel.Address1.Trim();
-
                 if (viewModel.Address2 != null && company.Address2 != viewModel.Address2.Trim())
                     company.Address2 = viewModel.Address2.Trim();
 
+                // did city change?
+                if (viewModel.City != null && company.City != viewModel.City)
+                    company.City = viewModel.City;
 
-                if (viewModel.BusinessTypeId != null && company.BusinessTypeId != viewModel.BusinessTypeId)
+                // did company name change?
+                if (viewModel.CompanyName != null && company.CompanyName != viewModel.CompanyName.Trim())
+                    company.CompanyName = viewModel.CompanyName.Trim();
+
+                // did operating distance change?
+                if (viewModel.OperatingDistance == 0 && company.OperatingDistance != viewModel.OperatingDistance)
+                    company.OperatingDistance = viewModel.OperatingDistance;
+
+                // did phone change?
+                if (viewModel.Phone != null && company.Phone != viewModel.Phone.Trim())
+                    company.Phone = Util.ConvertPhoneForStorage(viewModel.Phone.Trim());
+
+                // did postal code change?
+                if (viewModel.PostalCode != null && company.PostalCode != viewModel.PostalCode.Trim())
+                    company.PostalCode = viewModel.PostalCode.Trim();
+
+                // did state change?
+                if (viewModel.StateId == 0 && company.StateId != viewModel.StateId)
+                    company.StateId = viewModel.StateId;
+
+                // did business type change?
+                if (company.BusinessType != viewModel.BusinessType)
                 {
 
-                    var businesstypes = _serviceLayer.GetBusinessTypes();
 
                     // add new role for all users in company
-                    string newTypeName = businesstypes.FirstOrDefault(x => x.Id == viewModel.BusinessTypeId).Name;
-                    switch (newTypeName)
+                    switch (viewModel.BusinessType)
                     {
-                        case "General Contractor":
+                        case BusinessType.GeneralContractor:
                             _security.AddUsersToRole(company.Users.Select(x => x.Email).ToArray(), "general_contractor");
                             break;
-                        case "Sub-Contractor":
+                        case BusinessType.SubContractor:
                             _security.AddUsersToRole(company.Users.Select(x => x.Email).ToArray(), "subcontractor");
                             break;
-                        case "Architect":
+                        case BusinessType.Architect:
                             _security.AddUsersToRole(company.Users.Select(x => x.Email).ToArray(), "architect");
                             break;
-                        case "Engineer":
+                        case BusinessType.Engineer:
                             _security.AddUsersToRole(company.Users.Select(x => x.Email).ToArray(), "engineer");
                             break;
-                        case "@Owner/Client":
+                        case BusinessType.Owner:
                             _security.AddUsersToRole(company.Users.Select(x => x.Email).ToArray(), "owner_client");
                             break;
-                        case "Materials Vendor":
+                        case BusinessType.MaterialsVendor:
                             _security.AddUsersToRole(company.Users.Select(x => x.Email).ToArray(), "materials_vendor");
                             break;
-                        case "Materials Manufacturer":
+                        case BusinessType.MaterialsMfg:
                             _security.AddUsersToRole(company.Users.Select(x => x.Email).ToArray(), "materials_manufacturer");
                             break;
-                        case "Consultant":
+                        case BusinessType.Consultant:
                             _security.AddUsersToRole(company.Users.Select(x => x.Email).ToArray(), "consultant");
                             break;
                     };
 
 
                     // remove old role for all users in company
-                    string existingTypeName = businesstypes.FirstOrDefault(x => x.Id == company.BusinessTypeId).Name;
-                    switch (existingTypeName)
+                    switch (company.BusinessType)
                     {
-                        case "General Contractor":
+                        case BusinessType.GeneralContractor:
                             _security.RemoveUsersFromRole(company.Users.Select(x => x.Email).ToArray(), "general_contractor");
                             break;
-                        case "Sub-Contractor":
-
+                        case BusinessType.SubContractor:
                             _security.RemoveUsersFromRole(company.Users.Select(x => x.Email).ToArray(), "subcontractor");
                             break;
-                        case "Architect":
-
+                        case BusinessType.Architect:
                             _security.RemoveUsersFromRole(company.Users.Select(x => x.Email).ToArray(), "architect");
                             break;
-                        case "Engineer":
-
+                        case BusinessType.Engineer:
                             _security.RemoveUsersFromRole(company.Users.Select(x => x.Email).ToArray(), "engineer");
                             break;
-                        case "@Owner/Client":
-
+                        case BusinessType.Owner:
                             _security.RemoveUsersFromRole(company.Users.Select(x => x.Email).ToArray(), "owner_client");
                             break;
-                        case "Materials Vendor":
-
+                        case BusinessType.MaterialsVendor:
                             _security.RemoveUsersFromRole(company.Users.Select(x => x.Email).ToArray(), "materials_vendor");
                             break;
-                        case "Materials Manufacturer":
-
+                        case BusinessType.MaterialsMfg:
                             _security.RemoveUsersFromRole(company.Users.Select(x => x.Email).ToArray(), "materials_manufacturer");
                             break;
-                        case "Consultant":
-
+                        case BusinessType.Consultant:
                             _security.RemoveUsersFromRole(company.Users.Select(x => x.Email).ToArray(), "consultant");
                             break;
                     };
 
-                    company.BusinessTypeId = viewModel.BusinessTypeId;
+                    // update company business type
+                    company.BusinessType = viewModel.BusinessType;
                 }
 
-                if (viewModel.City != null && company.City != viewModel.City)
-                    company.City = viewModel.City;
-
-                if (viewModel.CompanyName != null && company.CompanyName != viewModel.CompanyName.Trim())
-                    company.CompanyName = viewModel.CompanyName.Trim();
-
-                if (viewModel.OperatingDistance == 0 && company.OperatingDistance != viewModel.OperatingDistance)
-                    company.OperatingDistance = viewModel.OperatingDistance;
-
-                if (viewModel.Phone != null && company.Phone != viewModel.Phone.Trim())
-                    company.Phone = Util.ConvertPhoneForStorage(viewModel.Phone.Trim());
-
-                if (viewModel.PostalCode != null && company.PostalCode != viewModel.PostalCode.Trim())
-                    company.PostalCode = viewModel.PostalCode.Trim();
-
-                if (viewModel.StateId == 0 && company.StateId != viewModel.StateId)
-                    company.StateId = viewModel.StateId;
+                
 
                 // update changes in the database
                 if (_serviceLayer.Update(company))
@@ -175,14 +175,14 @@ namespace BCWeb.Areas.Account.Controllers
                 {
                     Util.MapValidationErrors(_serviceLayer.ValidationDic, this.ModelState);
                     viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-                    viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
+                    //viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
                     return View(viewModel);
                 }
             }
             else
             {
                 viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-                viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
+                //viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
                 return View(viewModel);
             }
         }

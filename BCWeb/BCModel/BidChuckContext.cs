@@ -139,7 +139,7 @@ namespace BCModel
         public DbSet<DBAudit> DBAudits { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<County> Counties { get; set; }
-        public DbSet<BusinessType> BusinessTypes { get; set; }
+        //public DbSet<BusinessType> BusinessTypes { get; set; }
 
         public DbSet<CompanyProfile> Companies { get; set; }
         public DbSet<CompanyXScope> CompanyScopes { get; set; }

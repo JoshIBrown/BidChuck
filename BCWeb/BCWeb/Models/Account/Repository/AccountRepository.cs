@@ -32,10 +32,10 @@ namespace BCWeb.Models.Account.Repository
             return _context.States;
         }
 
-        public IQueryable<BCModel.BusinessType> QueryBusinessTypes()
-        {
-            return _context.BusinessTypes;
-        }
+        //public IQueryable<BCModel.BusinessType> QueryBusinessTypes()
+        //{
+        //    return _context.BusinessTypes;
+        //}
 
         public void UpdateUserProfile(BCModel.UserProfile profile)
         {

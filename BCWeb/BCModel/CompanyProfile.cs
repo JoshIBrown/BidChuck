@@ -1,6 +1,7 @@
 ﻿using BCModel.Projects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,6 +11,26 @@ using System.Threading.Tasks;
 
 namespace BCModel
 {
+
+    public enum BusinessType
+    {
+        [Description("General Contractor")]
+        GeneralContractor = 0,
+        [Description("Sub-Contractor")]
+        SubContractor = 1,
+        [Description("Architect")]
+        Architect = 2,
+        [Description("Materials Vendor")]
+        MaterialsVendor = 3,
+        [Description("Materials Manufacturer")]
+        MaterialsMfg = 4,
+        [Description("Consultant")]
+        Consultant = 5,
+        [Description("Engineer")]
+        Engineer = 6,
+        [Description("Owner/Client")]
+        Owner = 7
+    }
     public class CompanyProfile
     {
         [Key]
@@ -48,11 +69,11 @@ namespace BCModel
         [Required]
         public int OperatingDistance { get; set; }
 
-        public int BusinessTypeId { get; set; }
-        [ForeignKey("BusinessTypeId")]
-        [IgnoreDataMember]
-        public virtual BusinessType BusinessType { get; set; }
-
+        //public int BusinessTypeId { get; set; }
+        //[ForeignKey("BusinessTypeId")]
+        //[IgnoreDataMember]
+        //public virtual BusinessType BusinessType { get; set; }
+        public BusinessType BusinessType { get; set; }
 
         //public int? ManagerId { get; set; }
         //[ForeignKey("ManagerId")]

@@ -95,5 +95,10 @@ namespace BCWeb.Areas.Account.Models.Users.ServiceLayer
         {
             return _repo.Get(id) == null;
         }
+
+        public CompanyProfile GetCompany(int id)
+        {
+            return _repo.GetCompany(id);
+        }
     }
 }

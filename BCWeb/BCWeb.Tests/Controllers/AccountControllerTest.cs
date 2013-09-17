@@ -46,7 +46,7 @@ namespace BCWeb.Tests.Controllers
             Mock<IWebSecurityWrapper> mockSecurity = new Mock<IWebSecurityWrapper>();
             Mock<IEmailSender> mockEmail = new Mock<IEmailSender>();
 
-            mockService.Setup(m => m.GetBusinessTypes()).Returns(new List<BusinessType> { new BusinessType { Id = 1, Name = "GC" }, new BusinessType { Id = 2, Name = "Vendor" } });
+            //mockService.Setup(m => m.GetBusinessTypes()).Returns(new List<BusinessType> { new BusinessType { Id = 1, Name = "GC" }, new BusinessType { Id = 2, Name = "Vendor" } });
 
             mockSecurity.Setup(m => m.CreateUserAndAccount("asdf@asdf.com", "password", new
             {
@@ -67,7 +67,7 @@ namespace BCWeb.Tests.Controllers
                 Email = "asdf@asdf.com",
                 Password = "password",
                 ConfirmPassword = "password",
-                BusinessTypeId = 1,
+                BusinessType = BusinessType.GeneralContractor,
                 FirstName = "john",
                 LastName = "smith",
                 CompanyName = "asdf",
@@ -179,7 +179,5 @@ namespace BCWeb.Tests.Controllers
             Assert.IsFalse(((ViewResult)result).ViewData.ModelState.IsValid);
             Assert.AreEqual("Unknown email address.", ((ViewResult)result).ViewData.ModelState["Email"].Errors[0].ErrorMessage);
         }
-
-
     }
 }

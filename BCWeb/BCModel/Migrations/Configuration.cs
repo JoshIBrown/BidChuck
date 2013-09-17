@@ -77,18 +77,18 @@ namespace BCModel.Migrations
             //    }
             //}
             //context.SaveChanges();
-            if (context.BusinessTypes.Count() == 0)
-            {
-                context.BusinessTypes.Add(new BusinessType { Name = "General Contractor" });
-                context.BusinessTypes.Add(new BusinessType { Name = "Sub-Contractor" });
-                context.BusinessTypes.Add(new BusinessType { Name = "Architect" });
-                context.BusinessTypes.Add(new BusinessType { Name = "Engineer" });
-                context.BusinessTypes.Add(new BusinessType { Name = "Owner/Client" });
-                context.BusinessTypes.Add(new BusinessType { Name = "Materials Vendor" });
-                context.BusinessTypes.Add(new BusinessType { Name = "Materials Manufacturer" });
-                context.BusinessTypes.Add(new BusinessType { Name = "Consultant" });
-                context.SaveChanges();
-            }
+            //if (context.BusinessTypes.Count() == 0)
+            //{
+            //    context.BusinessTypes.Add(new BusinessType { Name = "General Contractor" });
+            //    context.BusinessTypes.Add(new BusinessType { Name = "Sub-Contractor" });
+            //    context.BusinessTypes.Add(new BusinessType { Name = "Architect" });
+            //    context.BusinessTypes.Add(new BusinessType { Name = "Engineer" });
+            //    context.BusinessTypes.Add(new BusinessType { Name = "Owner/Client" });
+            //    context.BusinessTypes.Add(new BusinessType { Name = "Materials Vendor" });
+            //    context.BusinessTypes.Add(new BusinessType { Name = "Materials Manufacturer" });
+            //    context.BusinessTypes.Add(new BusinessType { Name = "Consultant" });
+            //    context.SaveChanges();
+            //}
 
             //if (context.ProjectTypes.Count() == 0)
             //{

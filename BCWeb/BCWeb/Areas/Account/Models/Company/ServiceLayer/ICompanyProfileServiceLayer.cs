@@ -12,7 +12,7 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
     public interface ICompanyProfileServiceLayer : IGenericServiceLayer<CompanyProfile>
     {
         IEnumerable<State> GetStates();
-        IEnumerable<BusinessType> GetBusinessTypes();
+        //IEnumerable<BusinessType> GetBusinessTypes();
         IEnumerable<UserProfile> GetUserProfiles();
         IEnumerable<UserProfile> GetUserProfiles(Expression<Func<UserProfile, bool>> predicate);
     }

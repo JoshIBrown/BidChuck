@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using BCModel;
 
 namespace BCWeb.Models
 {
@@ -60,7 +61,7 @@ namespace BCWeb.Models
     public class RegisterModel
     {
         public IEnumerable<SelectListItem> States { get; set; }
-        public IEnumerable<SelectListItem> BusinessTypes { get; set; }
+        //public IEnumerable<SelectListItem> BusinessTypes { get; set; }
 
         [Required]
         [Display(Name = "Company Name")]
@@ -69,7 +70,8 @@ namespace BCWeb.Models
 
         [Required]
         [Display(Name = "Business Type")]
-        public int BusinessTypeId { get; set; }
+        //public int BusinessTypeId { get; set; }
+        public BusinessType BusinessType { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]

@@ -41,10 +41,10 @@ namespace BCWeb.Models.Account.ServiceLayer
             return _repo.QueryStates().AsEnumerable();
         }
 
-        public IEnumerable<BCModel.BusinessType> GetBusinessTypes()
-        {
-            return _repo.QueryBusinessTypes().AsEnumerable();
-        }
+        //public IEnumerable<BCModel.BusinessType> GetBusinessTypes()
+        //{
+        //    return _repo.QueryBusinessTypes().AsEnumerable();
+        //}
 
         public BCModel.UserProfile GetUserProfile(int id)
         {

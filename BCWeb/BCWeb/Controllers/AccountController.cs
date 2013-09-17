@@ -112,7 +112,7 @@ namespace BCWeb.Controllers
             {
                 Address1 = raw.Company.Address1,
                 Address2 = raw.Company.Address2,
-                BusinessType = raw.Company.BusinessType.Name,
+                BusinessType = Util.GetEnumDescription(raw.Company.BusinessType),
                 City = raw.Company.City,
                 CompanyName = raw.Company.CompanyName,
                 Email = raw.Email,
@@ -206,7 +206,7 @@ namespace BCWeb.Controllers
 
             RegisterModel viewModel = new RegisterModel();
             viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString() });
-            viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+            //viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
             return View("Register", viewModel);
         }
@@ -218,7 +218,7 @@ namespace BCWeb.Controllers
         {
             RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
             model.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString() });
-            model.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+            //model.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
             if (String.IsNullOrEmpty(recaptchaHelper.Response))
             {
@@ -244,7 +244,7 @@ namespace BCWeb.Controllers
                     {
                         Address1 = model.Address1,
                         Address2 = model.Address2,
-                        BusinessTypeId = model.BusinessTypeId,
+                        BusinessType = model.BusinessType,
                         City = model.City,
                         CompanyName = model.CompanyName,
                         OperatingDistance = model.OperatingDistance,
@@ -271,33 +271,32 @@ namespace BCWeb.Controllers
                         _security.AddUserToRole(model.Email, "Manager");
 
 
-                        var businesstypes = _serviceLayer.GetBusinessTypes();
+                        //var businesstypes = _serviceLayer.GetBusinessTypes();
 
-                        string newTypeName = businesstypes.FirstOrDefault(x => x.Id == model.BusinessTypeId).Name;
-                        switch (newTypeName)
+                        switch (model.BusinessType)
                         {
-                            case "General Contractor":
+                            case BusinessType.GeneralContractor:
                                 _security.AddUserToRole(model.Email, "general_contractor");
                                 break;
-                            case "Sub-Contractor":
+                            case BusinessType.SubContractor:
                                 _security.AddUserToRole(model.Email, "subcontractor");
                                 break;
-                            case "Architect":
+                            case BusinessType.Architect:
                                 _security.AddUserToRole(model.Email, "architect");
                                 break;
-                            case "Engineer":
+                            case BusinessType.Engineer:
                                 _security.AddUserToRole(model.Email, "engineer");
                                 break;
-                            case "@Owner/Client":
+                            case BusinessType.Owner:
                                 _security.AddUserToRole(model.Email, "owner_client");
                                 break;
-                            case "Materials Vendor":
+                            case BusinessType.MaterialsVendor:
                                 _security.AddUserToRole(model.Email, "materials_vendor");
                                 break;
-                            case "Materials Manufacturer":
+                            case BusinessType.MaterialsMfg:
                                 _security.AddUserToRole(model.Email, "materials_manufacturer");
                                 break;
-                            case "Consultant":
+                            case BusinessType.Consultant:
                                 _security.AddUserToRole(model.Email, "consultant");
                                 break;
                         };

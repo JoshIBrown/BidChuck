@@ -13,15 +13,15 @@ namespace BCModel.Projects
     public enum ProjectType
     {
         [Description("Federal Government")]
-        Federal,
+        Federal = 0,
         [Description("State Government")]
-        State,
+        State = 1,
         [Description("Local Government")]
-        Local,
+        Local = 2,
         [Description("Private")]
-        Private,
+        Private = 3,
         [Description("Private - Non-Profit")]
-        PrivateNP
+        PrivateNP = 4
     }
 
     public class Project

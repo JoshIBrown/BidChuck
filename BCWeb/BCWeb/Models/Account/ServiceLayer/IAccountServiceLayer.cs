@@ -15,7 +15,7 @@ namespace BCWeb.Models.Account.ServiceLayer
         IEnumerable<CompanyProfile> GetCompanyProfiles(Expression<Func<CompanyProfile, bool>> predicate);
 
         IEnumerable<State> GetStates();
-        IEnumerable<BusinessType> GetBusinessTypes();
+        //IEnumerable<BusinessType> GetBusinessTypes();
 
         UserProfile GetUserProfile(int id);
         CompanyProfile GetCompanyProfile(int id);

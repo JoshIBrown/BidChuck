@@ -111,10 +111,10 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
         }
 
 
-        public IEnumerable<BCModel.BusinessType> GetBusinessTypes()
-        {
-            return _repo.QueryBusinessTypes().AsEnumerable();
-        }
+        //public IEnumerable<BCModel.BusinessType> GetBusinessTypes()
+        //{
+        //    return _repo.QueryBusinessTypes().AsEnumerable();
+        //}
 
 
         public IEnumerable<BCModel.UserProfile> GetUserProfiles()

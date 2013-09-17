@@ -10,5 +10,6 @@ namespace BCWeb.Areas.Account.Models.Users.Repository
 {
     public interface IUserProfileRepository : IGenericRepository<UserProfile>
     {
+        CompanyProfile GetCompany(int id);
     }
 }

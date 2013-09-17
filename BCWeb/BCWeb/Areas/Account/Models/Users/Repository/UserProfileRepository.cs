@@ -11,10 +11,12 @@ namespace BCWeb.Areas.Account.Models.Users.Repository
     public class UserProfileRepository : RepositoryBase, IUserProfileRepository
     {
         private DbSet<UserProfile> _profiles;
+        private DbSet<CompanyProfile> _companies;
 
         public UserProfileRepository()
         {
             _profiles = _context.UserProfiles;
+            _companies = _context.Companies;
         }
 
         public void Create(UserProfile entity)
@@ -51,6 +53,11 @@ namespace BCWeb.Areas.Account.Models.Users.Repository
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        public CompanyProfile GetCompany(int id)
+        {
+            return _companies.Find(id);
         }
     }
 }

@@ -30,7 +30,8 @@ namespace BCWeb.Helpers
                 ? default(TProperty)
                 : expression.Compile()(htmlHelper.ViewData.Model);
             string selected = value == null ? String.Empty : value.ToString();
-            return htmlHelper.DropDownListFor(expression, createSelectList(expression.ReturnType, selected));
+            IEnumerable<SelectListItem> selectList = createSelectList(expression.ReturnType, selected);
+            return htmlHelper.DropDownListFor(expression, selectList);
         }
 
         public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,
@@ -41,7 +42,20 @@ namespace BCWeb.Helpers
                 ? default(TProperty)
                 : expression.Compile()(htmlHelper.ViewData.Model);
             string selected = value == null ? String.Empty : value.ToString();
-            return htmlHelper.DropDownListFor(expression, createSelectList(expression.ReturnType, selected), htmlAttributes);
+            IEnumerable<SelectListItem> selectList = createSelectList(expression.ReturnType, selected);
+            return htmlHelper.DropDownListFor(expression, selectList,  htmlAttributes);
+        }
+
+        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression, string optionLabel, object htmlAttributes)
+            where TModel : class
+        {
+            TProperty value = htmlHelper.ViewData.Model == null
+                ? default(TProperty)
+                : expression.Compile()(htmlHelper.ViewData.Model);
+            string selected = value == null ? String.Empty : value.ToString();
+            IEnumerable<SelectListItem> selectList = createSelectList(expression.ReturnType, selected);
+            return htmlHelper.DropDownListFor(expression, selectList, optionLabel, htmlAttributes);
         }
 
         /// <summary>

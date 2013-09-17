@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BidChuckContext.cs" />
-    <Compile Include="BusinessType.cs" />
     <Compile Include="CompanyProfile.cs" />
     <Compile Include="CompanyXScope.cs" />
     <Compile Include="County.cs" />
@@ -114,6 +113,10 @@
     <Compile Include="Migrations\201309160156252_createMtoMforBPInvites.cs" />
     <Compile Include="Migrations\201309160156252_createMtoMforBPInvites.Designer.cs">
       <DependentUpon>201309160156252_createMtoMforBPInvites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309170150322_convertBusinessTypeToEnum.cs" />
+    <Compile Include="Migrations\201309170150322_convertBusinessTypeToEnum.Designer.cs">
+      <DependentUpon>201309170150322_convertBusinessTypeToEnum.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
@@ -187,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309160156252_createMtoMforBPInvites.resx">
       <DependentUpon>201309160156252_createMtoMforBPInvites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309170150322_convertBusinessTypeToEnum.resx">
+      <DependentUpon>201309170150322_convertBusinessTypeToEnum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
