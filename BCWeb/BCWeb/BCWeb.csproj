@@ -276,7 +276,7 @@
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Areas\Account\Views\Users\Add.cshtml" />
-    <Content Include="Areas\Account\Views\Scopes\_ScopePicker.cshtml" />
+    <Content Include="Views\Shared\_ScopePicker.cshtml" />
     <Content Include="BuildingTypes.csv" />
     <Content Include="Areas\Projects\Views\Web.config" />
     <None Include="Content\Site.css.exclude" />
@@ -355,7 +355,6 @@
     <Content Include="Global.asax" />
     <Content Include="Areas\Account\Views\Web.config" />
     <Content Include="Areas\Account\Views\Scopes\Manage.cshtml" />
-    <Content Include="Areas\Account\Views\Shared\_ScopePicker.cshtml" />
     <Content Include="county.csv" />
     <None Include="Properties\PublishProfiles\bcdev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bcdev - Web Deploy.pubxml" />
@@ -376,6 +375,7 @@
     <Content Include="Scripts\angular\angular-scenario.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\controllers\CreateProjectCtrl.js" />
     <Content Include="Scripts\angular\controllers\ProjectIndexCtrl.js" />
     <Content Include="Scripts\Areas\Account\ManageView.js" />
     <Content Include="Scripts\Areas\Account\RegCtrl.js" />
@@ -751,6 +751,7 @@
     <Content Include="Views\Projects\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Account\Views\Shared\" />
     <Folder Include="Areas\Projects\Controllers\" />
     <Folder Include="Areas\Projects\Models\" />
     <Folder Include="Areas\Projects\Views\Shared\" />

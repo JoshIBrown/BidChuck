@@ -47,6 +47,20 @@ namespace BCWeb.Controllers.Api
         }
 
 
+        public IEnumerable<ScopeMgmtViewModel> GetAllScopesForPicker()
+        {
+            var viewModel = _service.GetEnumerable().Select(s => new ScopeMgmtViewModel
+            {
+                Checked = false,
+                Description = s.Description,
+                Id = s.Id,
+                ParentId = s.ParentId,
+                CsiNumber = s.CsiNumber
+            }).ToArray();
+
+            return viewModel;
+        }
+
         // /api/Scopes/GetScopesToManage?user=soandso@ladeeda.com
         public IEnumerable<ScopeMgmtViewModel> GetScopesToManage([FromUri]string type, [FromUri]string ident)
         {
@@ -58,6 +72,8 @@ namespace BCWeb.Controllers.Api
         {
             return getScopesToManage(type, "");
         }
+
+
 
         private IEnumerable<ScopeMgmtViewModel> getScopesToManage(string type, string ident)
         {
@@ -95,6 +111,9 @@ namespace BCWeb.Controllers.Api
                     selectedScopes = theUser.Scopes.Select(s => s.Scope).ToList();
                     availableScopes = theCompany.Scopes.Select(s => s.Scope).ToList();
                     break;
+                //case "project":
+
+                //    break;
                 default:
                     throw new ArgumentException("invalid arguments");
             };
