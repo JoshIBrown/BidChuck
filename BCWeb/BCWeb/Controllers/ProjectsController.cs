@@ -109,6 +109,27 @@ namespace BCWeb.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
+            var raw = _service.Get(id);
+            ProjectDetailsViewModel viewModel = new ProjectDetailsViewModel
+            {
+                Address = raw.Address,
+                BidDateTime = raw.BidDateTime,
+                BuildingType = raw.BuildingType.Name,
+                City = raw.City,
+                ConstructionType = raw.ConstructionType.Name,
+                Description = raw.Description,
+                Id = raw.Id,
+                PostalCode = raw.PostalCode,
+                ProjectType = raw.ProjectType.ToDescription(),
+                SelectedScope = raw.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description).OrderBy(s => s),
+                State = raw.State.Abbr,
+                Title = raw.Title
+            };
+            return View("Details", viewModel);
+        }
+
+        public ActionResult Edit(int id)
+        {
             return View();
         }
     }

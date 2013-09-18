@@ -255,6 +255,7 @@
     <Compile Include="Models\Project\ServiceLayer\IProjectServiceLayer.cs" />
     <Compile Include="Models\Project\ServiceLayer\ProjectServiceLayer.cs" />
     <Compile Include="Models\Project\ViewModel\EditProjectViewModel.cs" />
+    <Compile Include="Models\Project\ViewModel\ProjectDetailsViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectListViewModel.cs" />
     <Compile Include="Models\RepositoryBase.cs" />
     <Compile Include="Models\ServiceLayerBase.cs" />
@@ -749,6 +750,8 @@
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Projects\Create.cshtml" />
     <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EditProjectViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />

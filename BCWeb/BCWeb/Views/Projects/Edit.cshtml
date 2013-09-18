@@ -1,7 +1,9 @@
 ﻿@model BCWeb.Models.Project.ViewModel.EditProjectViewModel
 @using BCWeb.Helpers
+
 @{
-    ViewBag.Title = "Create Project";
+    ViewBag.Title = "Edit Project";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
 <div class="row">
@@ -15,7 +17,8 @@
         @using (Html.BeginForm())
         {
             @Html.EditorFor(m => m)
-            <input type="submit" value="Create" class="medium button" />
+            <input type="submit" value="Save" class="medium button" />
+            <input type="button" value="Cancel" class="medium button" />
         }
     </div>
 </div>

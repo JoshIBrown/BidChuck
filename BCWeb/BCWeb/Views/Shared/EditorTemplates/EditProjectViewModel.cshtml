@@ -1,0 +1,91 @@
+﻿@model BCWeb.Models.Project.ViewModel.EditProjectViewModel
+@using BCWeb.Helpers
+
+@Html.HiddenFor(m => m.Id)
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="large-6 columns large-centered">
+        @Html.ValidationSummary()
+    </div>
+</div>
+<div class="row">
+    <div class="large-6 columns">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title)
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="large-12 columns">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description)
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-4 columns">
+        @Html.LabelFor(m => m.BidDateTime)
+        @Html.TextBoxFor(m => m.BidDateTime)
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="large-4 columns left">
+        @Html.LabelFor(m => m.ProjectType)
+        @Html.DropDownListFor(m => m.ProjectType, new { @class = "pretty" })
+    </div>
+    <div class="large-4 columns left">
+        @Html.LabelFor(m => m.ConstructionTypeId)
+        @Html.DropDownListFor(m => m.ConstructionTypeId, Model.ConstructionTypes, "Select...", new { @class = "pretty" })
+    </div>
+    <div class="large-4 columns left">
+        @Html.LabelFor(m => m.BuildingTypeId)
+        <select name="BuildingTypeId" class="pretty">
+            <option value="">Select...</option>
+            @foreach (var x in Model.BuildingTypes.Where(b => b.Parent == null).OrderBy(b => b.Name).ToList())
+            {
+                <optgroup label="@x.Name">
+                    @foreach (var y in Model.BuildingTypes.Where(b => b.ParentId == x.Id).OrderBy(b => b.Name).ToList())
+                    {
+                        <option value="@y.Id">@y.Name</option>
+                    }
+                </optgroup>
+            }
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-7 columns">
+        <div class="row">
+            <div class="large-12 columns">
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-5 columns">
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m => m.City)
+            </div>
+            <div class="large-3 columns">
+                @Html.LabelFor(m => m.StateId)
+                @Html.DropDownListFor(m => m.StateId, Model.States, "...", new { @class = "pretty" })
+            </div>
+            <div class="large-4 columns">
+                @Html.LabelFor(m => m.PostalCode)
+                @Html.TextBoxFor(m => m.PostalCode)
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        @Html.Partial("_ScopePicker")
+    </div>
+</div>

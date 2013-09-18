@@ -22,5 +22,8 @@ namespace BCModel.Projects
         [ForeignKey("ParentId")]
         [IgnoreDataMember]
         public virtual BuildingType Parent { get; set; }
+
+        [IgnoreDataMember]
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }
