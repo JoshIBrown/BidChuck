@@ -62,8 +62,15 @@ namespace BCWeb.Controllers
                         PostalCode = viewModel.PostalCode,
                         ProjectType = viewModel.ProjectType,
                         StateId = viewModel.StateId,
-                        Title = viewModel.Title
+                        Title = viewModel.Title,
+                        Scopes = new List<ProjectXScope>()
                     };
+
+                    for (int i = 0; i < viewModel.SelectedScope.Count(); i++)
+                    {
+                        toCreate.Scopes.Add(new ProjectXScope { Project = toCreate, ScopeId = viewModel.SelectedScope.ElementAt(i) });
+                    }
+
                     if (_service.Create(toCreate))
                     {
                         return RedirectToRoute("Default", new { controller = "Projects", action = "Details", id = toCreate.Id });

@@ -1,5 +1,4 @@
-﻿
-<fieldset>
+﻿<fieldset>
     <legend>Scopes</legend>
     <div class="row" id="LoadingWrapper">
         <div class="small-4 columns small-centered">
@@ -16,13 +15,12 @@
                         style="height: 20px !important;">
                         <td title="{{x.Description}}"
                             class="has-tip tip-right"
-                            style="overflow-x:hidden; white-space:nowrap;">
+                            style="overflow-x: hidden; white-space: nowrap;">
                             <input id="check{{x.Id}}"
-                                name="SelectedScope"
                                 type="checkbox"
                                 ng-model="x.Checked"
-                                ng-change="changeScopeSelection(x)" 
-                                value="{{x.Id}}"/>
+                                ng-change="changeScopeSelection(x)"
+                                value="{{x.Id}}" />
                             <span ng-click="t1Expand(x.Id)">{{x.CsiNumber | truncate: 2: ""}}
                                     {{x.Description | truncate: 30}}</span></td>
                         <td class="width:30px;"><span style="display: inline-block !important;"
@@ -41,13 +39,12 @@
                         style="height: 20px !important;">
                         <td title="{{y.Description}}"
                             class="has-tip tip-right"
-                            style="overflow-x:hidden; white-space:nowrap;">
+                            style="overflow-x: hidden; white-space: nowrap;">
                             <input id="check{{y.Id}}"
-                                name="SelectedScope"
                                 type="checkbox"
                                 ng-model="y.Checked"
-                                ng-change="changeScopeSelection(y)" 
-                                value="{{y.Id}}"/>
+                                ng-change="changeScopeSelection(y)"
+                                value="{{y.Id}}" />
                             <span ng-click="t2Expand(y.Id)">{{y.CsiNumber}} 
                                     {{y.Description | truncate: 26}}</span></td>
                         <td><span style="display: inline-block !important;"
@@ -64,14 +61,13 @@
                     <tr ng-repeat="z in Scopes | parentIdEqual: t2Parent | orderBy:'CsiNumber'"
                         style="height: 20px !important;">
                         <td title="{{z.Description}}"
-                            class="has-tip tip-right" 
-                            style="overflow-x:hidden; white-space:nowrap;">
+                            class="has-tip tip-right"
+                            style="overflow-x: hidden; white-space: nowrap;">
                             <input id="check{{z.Id}}"
-                                name="SelectedScope"
                                 type="checkbox"
                                 ng-model="z.Checked"
-                                ng-change="changeScopeSelection(z)" 
-                                value="{{z.Id}}"/>
+                                ng-change="changeScopeSelection(z)"
+                                value="{{z.Id}}" />
                             {{z.CsiNumber}}
                                     {{z.Description | truncate: 31}}</td>
                     </tr>
@@ -89,8 +85,11 @@
             <legend>Selected Scopes</legend>
             <ul class="inline-list">
                 <li ng-repeat="s in selectedScopes | filter:{Checked: true} | orderBy: 'Csi'">
-                    <div class="alert-box radius" style="padding: 2px 25px 2px 7px;">{{s.Csi}} {{s.Desc}} 
-                        <a href="#" class="close" ng-click="removeTag(s)">&times;</a></div>
+                    <div class="alert-box radius" style="padding: 2px 25px 2px 7px;">
+                        {{s.Csi}} {{s.Desc}}
+                        <input type="checkbox" name ="SelectedScope" value="{{s.Id}}" ng-checked="s.Checked" style="display:none;" />
+                        <a href="#" class="close" ng-click="removeTag(s)">&times;</a>
+                    </div>
                 </li>
             </ul>
         </fieldset>
