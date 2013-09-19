@@ -130,6 +130,10 @@ namespace BCWeb.Controllers
 
         public ActionResult Edit(int id)
         {
+            var raw = _service.Get(id);
+            EditProjectViewModel viewModel = new EditProjectViewModel
+            {
+            };
             return View();
         }
     }
