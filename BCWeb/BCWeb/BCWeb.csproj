@@ -211,6 +211,11 @@
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeMgmtViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\SelectedScopesViewModel.cs" />
     <Compile Include="Areas\Account\Models\Users\ViewModel\NewUserViewModel.cs" />
+    <Compile Include="Areas\Projects\Controllers\BidPackageController.cs" />
+    <Compile Include="Areas\Projects\Models\BidPackage\Repository\BidPackageRepository.cs" />
+    <Compile Include="Areas\Projects\Models\BidPackage\Repository\IBidPackageRepository.cs" />
+    <Compile Include="Areas\Projects\Models\BidPackage\ServiceLayer\BidPackageServiceLayer.cs" />
+    <Compile Include="Areas\Projects\Models\BidPackage\ServiceLayer\IBidPackageServiceLayer.cs" />
     <Compile Include="Areas\Projects\ProjectsAreaRegistration.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -277,6 +282,7 @@
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Areas\Account\Views\Users\Add.cshtml" />
+    <Content Include="Scripts\angular\controllers\BidPackageCtrl.js" />
     <Content Include="Views\Shared\_ScopePicker.cshtml" />
     <Content Include="BuildingTypes.csv" />
     <Content Include="Areas\Projects\Views\Web.config" />
@@ -755,8 +761,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
-    <Folder Include="Areas\Projects\Controllers\" />
-    <Folder Include="Areas\Projects\Models\" />
+    <Folder Include="Areas\Projects\Models\BidPackage\ViewModel\" />
     <Folder Include="Areas\Projects\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
     <Folder Include="Views\Admin\" />

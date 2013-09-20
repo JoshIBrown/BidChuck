@@ -42,8 +42,8 @@ namespace BCWeb
                 "~/Scripts/angular/controllers/ProjectIndexCtrl.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/createproject").Include("~/Scripts/angular/angular.js",
-                "~/Scripts/angular/bcweb.filters.angular.js",
-                "~/Scripts/angular/controllers/CreateProjectCtrl.js"));
+                "~/Scripts/angular/bcweb.filters.angular.js"/*,
+                "~/Scripts/angular/controllers/CreateProjectCtrl.js"*/));
 
             #region Foundation Bundles
             //If your project requires jQuery, you may remove the zepto bundle

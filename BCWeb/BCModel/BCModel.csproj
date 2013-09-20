@@ -122,6 +122,10 @@
     <Compile Include="Migrations\201309170522215_architectToNonNullable.Designer.cs">
       <DependentUpon>201309170522215_architectToNonNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309200500513_fixBidPackageScopes.cs" />
+    <Compile Include="Migrations\201309200500513_fixBidPackageScopes.Designer.cs">
+      <DependentUpon>201309200500513_fixBidPackageScopes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -200,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309170522215_architectToNonNullable.resx">
       <DependentUpon>201309170522215_architectToNonNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309200500513_fixBidPackageScopes.resx">
+      <DependentUpon>201309200500513_fixBidPackageScopes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

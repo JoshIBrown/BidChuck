@@ -29,7 +29,7 @@ namespace BCModel.Projects
         public virtual ICollection<Bid> Bids { get; set; }
 
         [IgnoreDataMember]
-        public virtual ICollection<Scope> Scopes { get; set; }
+        public virtual ICollection<BidPackageXScope> Scopes { get; set; }
 
         [IgnoreDataMember]
         public IEnumerable<BidPackageXInvitee> Invitees { get; set; }

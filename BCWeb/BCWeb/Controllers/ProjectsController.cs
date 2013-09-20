@@ -1,4 +1,5 @@
-﻿using BCModel.Projects;
+﻿using BCModel;
+using BCModel.Projects;
 using BCWeb.Helpers;
 using BCWeb.Models;
 using BCWeb.Models.Project.ServiceLayer;
@@ -63,14 +64,24 @@ namespace BCWeb.Controllers
                         ProjectType = viewModel.ProjectType,
                         StateId = viewModel.StateId,
                         Title = viewModel.Title,
-                        Scopes = new List<ProjectXScope>()
+                        Scopes = new List<ProjectXScope>(),
+                        BidPackages = new List<BidPackage>()
                     };
+
 
                     for (int i = 0; i < viewModel.SelectedScope.Count(); i++)
                     {
                         toCreate.Scopes.Add(new ProjectXScope { Project = toCreate, ScopeId = viewModel.SelectedScope.ElementAt(i) });
                     }
 
+                    UserProfile user = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
+
+                    toCreate.BidPackages.Add(new BidPackage
+                    {
+                        Project = toCreate,
+                        CreatorId = user.CompanyId,
+                        Scopes = new List<BidPackageXScope>()
+                    });
                     if (_service.Create(toCreate))
                     {
                         return RedirectToRoute("Default", new { controller = "Projects", action = "Details", id = toCreate.Id });

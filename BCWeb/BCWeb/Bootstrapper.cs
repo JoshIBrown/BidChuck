@@ -14,6 +14,8 @@ using BCWeb.Areas.Account.Models.Company.Repository;
 using BCWeb.Areas.Account.Models.Company.ServiceLayer;
 using BCWeb.Models.Project.Repository;
 using BCWeb.Models.Project.ServiceLayer;
+using BCWeb.Areas.Projects.Models.BidPackage.Repository;
+using BCWeb.Areas.Projects.Models.BidPackage.ServiceLayer;
 
 namespace BCWeb
 {
@@ -52,6 +54,8 @@ namespace BCWeb
             container.RegisterType<ICompanyProfileServiceLayer, CompanyProfileServiceLayer>();
             container.RegisterType<IProjectRepository, ProjectRepository>();
             container.RegisterType<IProjectServiceLayer, ProjectServiceLayer>();
+            container.RegisterType<IBidPackageRepository, BidPackageRepository>();
+            container.RegisterType<IBidPackageServiceLayer, BidPackageServiceLayer>();
             RegisterTypes(container);
 
             return container;
