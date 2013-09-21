@@ -50,7 +50,7 @@
                 <optgroup label="@x.Name">
                     @foreach (var y in Model.BuildingTypes.Where(b => b.ParentId == x.Id).OrderBy(b => b.Name).ToList())
                     {
-                        <option value="@y.Id">@y.Name</option>
+                        <option  value="@y.Id" @( y.Id == Model.BuildingTypeId ? "selected=\"selected\"" : "")>@y.Name</option>
                     }
                 </optgroup>
             }

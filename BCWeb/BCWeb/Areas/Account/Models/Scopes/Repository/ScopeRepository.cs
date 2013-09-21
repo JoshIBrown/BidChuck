@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCModel.Projects;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
         private DbSet<Scope> _scopes;
         private DbSet<UserProfile> _users;
         private DbSet<CompanyProfile> _companies;
+        private DbSet<Project> _projects;
+        private DbSet<BidPackage> _bidPackages;
 
         public ScopeRepository()
             : base()
@@ -20,6 +23,8 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
             _scopes = _context.Scopes;
             _users = _context.UserProfiles;
             _companies = _context.Companies;
+            _projects = _context.Projects;
+            _bidPackages = _context.BidPackages;
         }
 
 
@@ -69,6 +74,17 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
         public CompanyProfile GetCompany(int id)
         {
             return _companies.Find(id);
+        }
+
+
+        public BCModel.Projects.Project GetProject(int id)
+        {
+            return _projects.Find(id);
+        }
+
+        public BCModel.Projects.BidPackage GetBidPackage(int id)
+        {
+            return _bidPackages.Find(id);
         }
     }
 }

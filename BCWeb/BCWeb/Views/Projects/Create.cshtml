@@ -1,7 +1,9 @@
 ﻿@model BCWeb.Models.Project.ViewModel.EditProjectViewModel
 @using BCWeb.Helpers
+
 @{
     ViewBag.Title = "Create Project";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
 <div class="row">
@@ -22,7 +24,4 @@
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/createproject")
-    @*@Scripts.Render("~/Scripts/angular/angular.js")
-    @Scripts.Render("~/Scripts/angular/bcweb.filters.angular.js")*@
-    @Scripts.Render("~/Scripts/angular/controllers/CreateProjectCtrl.js")
 }

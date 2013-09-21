@@ -283,6 +283,7 @@
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Areas\Account\Views\Users\Add.cshtml" />
     <Content Include="Scripts\angular\controllers\BidPackageCtrl.js" />
+    <Content Include="Scripts\angular\controllers\EditProjectCtrl.js" />
     <Content Include="Views\Shared\_ScopePicker.cshtml" />
     <Content Include="BuildingTypes.csv" />
     <Content Include="Areas\Projects\Views\Web.config" />
@@ -385,9 +386,9 @@
     <Content Include="Scripts\angular\controllers\CreateProjectCtrl.js" />
     <Content Include="Scripts\angular\controllers\ProjectIndexCtrl.js" />
     <Content Include="Scripts\Areas\Account\ManageView.js" />
-    <Content Include="Scripts\Areas\Account\RegCtrl.js" />
-    <Content Include="Scripts\Areas\Account\ScopesList.js" />
-    <Content Include="Scripts\Areas\Home\HomeCtrl.js" />
+    <Content Include="Scripts\angular\controllers\RegCtrl.js" />
+    <Content Include="Scripts\angular\controllers\ScopesList.js" />
+    <Content Include="Scripts\angular\controllers\HomeCtrl.js" />
     <Content Include="Scripts\cvl.js" />
     <Content Include="Scripts\foundation\foundation.abide.js" />
     <Content Include="Scripts\foundation\foundation.alerts.js" />
@@ -764,6 +765,7 @@
     <Folder Include="Areas\Projects\Models\BidPackage\ViewModel\" />
     <Folder Include="Areas\Projects\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
+    <Folder Include="Scripts\Areas\Home\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
@@ -796,7 +798,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>37106</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5423/</IISUrl>
+          <IISUrl>http://localhost:54231/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

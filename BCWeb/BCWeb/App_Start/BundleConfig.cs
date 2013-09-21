@@ -37,13 +37,28 @@ namespace BCWeb
                 "~/Scripts/angular/bcweb.filters.angular.js"
                 ));
 
+            #region Projects
             bundles.Add(new ScriptBundle("~/bundles/projectindex").Include("~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/ProjectIndexCtrl.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/createproject").Include("~/Scripts/angular/angular.js",
-                "~/Scripts/angular/bcweb.filters.angular.js"/*,
-                "~/Scripts/angular/controllers/CreateProjectCtrl.js"*/));
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/controllers/CreateProjectCtrl.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/editproject").Include("~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/controllers/EditProjectCtrl.js"));
+            #endregion
+
+
+            bundles.Add(new ScriptBundle("~/bundles/scopepicker").Include("~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/controllers/ScopesList.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/home").Include("~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/controllers/HomeCtrl.js"));
 
             #region Foundation Bundles
             //If your project requires jQuery, you may remove the zepto bundle

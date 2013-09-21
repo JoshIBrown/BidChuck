@@ -114,5 +114,16 @@ namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
         {
             return _repo.GetCompany(id);
         }
+
+
+        public BCModel.Projects.Project GetProject(int id)
+        {
+            return _repo.GetProject(id);
+        }
+
+        public BCModel.Projects.BidPackage GetBidPackage(int id)
+        {
+            return _repo.GetBidPackage(id);
+        }
     }
 }

@@ -126,6 +126,18 @@
     <Compile Include="Migrations\201309200500513_fixBidPackageScopes.Designer.cs">
       <DependentUpon>201309200500513_fixBidPackageScopes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309211810577_changeColumnNameInBidPackage.cs" />
+    <Compile Include="Migrations\201309211810577_changeColumnNameInBidPackage.Designer.cs">
+      <DependentUpon>201309211810577_changeColumnNameInBidPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309212209513_addDateAndFlagToBidPackage.cs" />
+    <Compile Include="Migrations\201309212209513_addDateAndFlagToBidPackage.Designer.cs">
+      <DependentUpon>201309212209513_addDateAndFlagToBidPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309212211008_addDateAndFlagToBidPackage1.cs" />
+    <Compile Include="Migrations\201309212211008_addDateAndFlagToBidPackage1.Designer.cs">
+      <DependentUpon>201309212211008_addDateAndFlagToBidPackage1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -207,6 +219,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309200500513_fixBidPackageScopes.resx">
       <DependentUpon>201309200500513_fixBidPackageScopes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309211810577_changeColumnNameInBidPackage.resx">
+      <DependentUpon>201309211810577_changeColumnNameInBidPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309212209513_addDateAndFlagToBidPackage.resx">
+      <DependentUpon>201309212209513_addDateAndFlagToBidPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309212211008_addDateAndFlagToBidPackage1.resx">
+      <DependentUpon>201309212211008_addDateAndFlagToBidPackage1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

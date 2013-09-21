@@ -1,14 +1,11 @@
 ﻿
 var app = angular.module('createProject', ['filters']);
-app.controller('CreateProjectCtrl', function ($scope, $http) {
+app.controller('CreateProjectCtrl', ['$scope', '$http', function ($scope, $http) {
     'use strict';
 
     $scope.t1Parent = 0;
     $scope.t2Parent = 0;
     $scope.selectedScopes = [];
-    $scope.saved = false;
-    $scope.saving = false;
-    $scope.cantsave = false;
 
     $http.get('/api/Scopes/GetAllScopesForPicker')
          .success(function (data) {
@@ -130,5 +127,5 @@ app.controller('CreateProjectCtrl', function ($scope, $http) {
         return found;
     };
 
-});
+}]);
 

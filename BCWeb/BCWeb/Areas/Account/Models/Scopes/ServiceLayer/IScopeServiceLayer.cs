@@ -13,5 +13,7 @@ namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
     {
         UserProfile GetUser(int id);
         CompanyProfile GetCompany(int id);
+        Project GetProject(int id);
+        BidPackage GetBidPackage(int id);
     }
 }

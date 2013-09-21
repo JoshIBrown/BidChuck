@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="large-4 columns">
-        <h2>@ViewBag.Title @Html.RouteLink("Edit...", new { routename = "Default", controller = "Projects", action = "Edit", id = Model.Id })</h2>
+        <h2>@ViewBag.Title @Html.RouteLink("Edit...", "Default", new { controller = "Projects", action = "Edit", id = Model.Id })</h2>
     </div>
 </div>
 

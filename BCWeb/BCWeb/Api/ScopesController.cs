@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCModel.Projects;
 using BCWeb.Areas.Account.Models.Scopes.ServiceLayer;
 using BCWeb.Areas.Account.Models.Scopes.ViewModel;
 using BCWeb.Models;
@@ -82,7 +83,8 @@ namespace BCWeb.Controllers.Api
             IEnumerable<Scope> availableScopes;
             UserProfile theUser;
             CompanyProfile theCompany;
-
+            Project theProject;
+            BidPackage theBidPackage;
 
             // the company dictates the scopes available for management
             // if editing the company, display all scopes
@@ -111,9 +113,32 @@ namespace BCWeb.Controllers.Api
                     selectedScopes = theUser.Scopes.Select(s => s.Scope).ToList();
                     availableScopes = theCompany.Scopes.Select(s => s.Scope).ToList();
                     break;
-                //case "project":
-
-                //    break;
+                case "project":
+                    int projectId;
+                    if (int.TryParse(ident, out projectId))
+                    {
+                        theProject = _service.GetProject(projectId);
+                        selectedScopes = theProject.Scopes.Select(s => s.Scope).ToList();
+                        availableScopes = _service.GetEnumerable();
+                    }
+                    else
+                    {
+                        throw new ArgumentException("ident for a project must be an int");
+                    }
+                    break;
+                case "bidpackage":
+                    int bpId;
+                    if (int.TryParse(ident, out bpId))
+                    {
+                        theBidPackage = _service.GetBidPackage(bpId);
+                        selectedScopes = theBidPackage.Scopes.Select(s => s.Scope).ToList();
+                        availableScopes = theBidPackage.Project.Scopes.Select(s => s.Scope).ToList();
+                    }
+                    else
+                    {
+                        throw new ArgumentException("ident for a bid package must be an int");
+                    }
+                    break;
                 default:
                     throw new ArgumentException("invalid arguments");
             };

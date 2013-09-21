@@ -196,7 +196,7 @@ namespace BCWeb.Areas.Projects.Models.BidPackage.ServiceLayer
         public IEnumerable<BCModel.Projects.BidPackage> GetByCompany(int id)
         {
             return (from r in _repo.Query()
-                    where r.CreatorId == id
+                    where r.CreatedById == id
                     select r).AsEnumerable();
         }
     }

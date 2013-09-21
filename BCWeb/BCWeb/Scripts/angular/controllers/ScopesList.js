@@ -1,5 +1,5 @@
 ﻿var app = angular.module('scopePicker', ['filters']);
-app.controller('ScopesCtrl', function ($scope, $http, $window) {
+app.controller('ScopesCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
     $scope.t1Parent = 0;
     $scope.t2Parent = 0;
     $scope.selectedScopes = [];
@@ -192,7 +192,7 @@ app.controller('ScopesCtrl', function ($scope, $http, $window) {
             });
         $scope.saving = false;
     };
-});
+}]);
 
 
 

@@ -15,15 +15,21 @@ namespace BCModel.Projects
         [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public int CreatorId { get; set; }
-        [ForeignKey("CreatorId")]
+        public int CreatedById { get; set; }
+        [ForeignKey("CreatedById")]
         [IgnoreDataMember]
-        public virtual CompanyProfile Creator { get; set; }
+        public virtual CompanyProfile CreatedBy { get; set; }
 
         public int ProjectId { get; set; }
         [ForeignKey("ProjectId")]
         [IgnoreDataMember]
         public virtual Project Project { get; set; }
+
+        [Required]
+        public DateTime? BidDateTime { get; set; }
+
+        [Required]
+        public bool IsMaster { get; set; }
 
         [IgnoreDataMember]
         public virtual ICollection<Bid> Bids { get; set; }

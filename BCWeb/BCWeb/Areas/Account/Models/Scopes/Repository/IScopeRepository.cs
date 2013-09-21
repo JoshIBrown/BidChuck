@@ -12,5 +12,9 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
     {
         UserProfile GetUser(int id);
         CompanyProfile GetCompany(int id);
+
+        BCModel.Projects.Project GetProject(int id);
+
+        BCModel.Projects.BidPackage GetBidPackage(int id);
     }
 }
