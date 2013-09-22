@@ -69,6 +69,10 @@ namespace BCModel
         [Required]
         public int OperatingDistance { get; set; }
 
+        public string BusinessLicense { get; set; }
+
+        public string Website { get; set; }
+
         //public int BusinessTypeId { get; set; }
         //[ForeignKey("BusinessTypeId")]
         //[IgnoreDataMember]

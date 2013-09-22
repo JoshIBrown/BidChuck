@@ -138,6 +138,22 @@
     <Compile Include="Migrations\201309212211008_addDateAndFlagToBidPackage1.Designer.cs">
       <DependentUpon>201309212211008_addDateAndFlagToBidPackage1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309220331278_addMetadataToCompany.cs" />
+    <Compile Include="Migrations\201309220331278_addMetadataToCompany.Designer.cs">
+      <DependentUpon>201309220331278_addMetadataToCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309220334353_addNumberToProject.cs" />
+    <Compile Include="Migrations\201309220334353_addNumberToProject.Designer.cs">
+      <DependentUpon>201309220334353_addNumberToProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309220346295_addTemplatingSchemaToBidPackage.cs" />
+    <Compile Include="Migrations\201309220346295_addTemplatingSchemaToBidPackage.Designer.cs">
+      <DependentUpon>201309220346295_addTemplatingSchemaToBidPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309220404555_addOwnerToProject.cs" />
+    <Compile Include="Migrations\201309220404555_addOwnerToProject.Designer.cs">
+      <DependentUpon>201309220404555_addOwnerToProject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -228,6 +244,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309212211008_addDateAndFlagToBidPackage1.resx">
       <DependentUpon>201309212211008_addDateAndFlagToBidPackage1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309220331278_addMetadataToCompany.resx">
+      <DependentUpon>201309220331278_addMetadataToCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309220334353_addNumberToProject.resx">
+      <DependentUpon>201309220334353_addNumberToProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309220346295_addTemplatingSchemaToBidPackage.resx">
+      <DependentUpon>201309220346295_addTemplatingSchemaToBidPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309220404555_addOwnerToProject.resx">
+      <DependentUpon>201309220404555_addOwnerToProject.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

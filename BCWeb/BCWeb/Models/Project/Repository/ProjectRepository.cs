@@ -62,7 +62,8 @@ namespace BCWeb.Models.Project.Repository
 
         public IQueryable<BCModel.Projects.Project> Query()
         {
-            return _projects.Include(s => s.Architect).Include(s => s.State);
+            // eager load architect, state, and client
+            return _projects.Include(s => s.Architect).Include(s => s.State).Include(s => s.Client);
         }
 
         public void Save()

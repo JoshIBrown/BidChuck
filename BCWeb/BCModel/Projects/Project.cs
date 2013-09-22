@@ -40,8 +40,18 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual CompanyProfile Architect { get; set; }
 
+
+        public int? ClientId { get; set; }
+        [ForeignKey("ClientId")]
+        [IgnoreDataMember]
+        public virtual CompanyProfile Client { get; set; }
+
+
         [Required]
         public string Title { get; set; }
+
+        [Required]
+        public string Number { get; set; }
 
         [Required]
         public string Description { get; set; }

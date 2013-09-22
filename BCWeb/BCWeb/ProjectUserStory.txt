@@ -1,0 +1,12 @@
+as a general contractor i want to be able to create a project by proxy for an architect
+
+if the owner or architect are not in the system, the system should create a record of the company that can later be claimed by the company
+
+for the first part of creating a project, i will supply the owner's company name, the architect's company name, and the architects project number
+
+if there is another project(s) that match these three fields, i want to know, so show me matching projects
+
+i want to be able to create duplicate project
+
+i want to be able to self-invite to project result
+

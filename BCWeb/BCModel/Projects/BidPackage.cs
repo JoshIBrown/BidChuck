@@ -25,6 +25,11 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual Project Project { get; set; }
 
+        public int? TemplateBidPackageId { get; set; }
+        [ForeignKey("TemplateBidPackageId")]
+        [IgnoreDataMember]
+        public virtual BidPackage TemplateBidPackage { get; set; }
+
         [Required]
         public DateTime? BidDateTime { get; set; }
 
@@ -38,7 +43,10 @@ namespace BCModel.Projects
         public virtual ICollection<BidPackageXScope> Scopes { get; set; }
 
         [IgnoreDataMember]
-        public IEnumerable<BidPackageXInvitee> Invitees { get; set; }
+        public ICollection<BidPackageXInvitee> Invitees { get; set; }
+
+        [IgnoreDataMember]
+        public ICollection<BidPackage> PatternedBidPackages { get; set; }
 
         // more meta data
     }

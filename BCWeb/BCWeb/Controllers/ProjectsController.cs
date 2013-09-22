@@ -80,6 +80,13 @@ namespace BCWeb.Controllers
                         Project = toCreate,
                         Scopes = new List<BidPackageXScope>()
                     };
+
+                    // if user is a GC, self-invite
+                    if (_security.IsUserInRole("general_contractor"))
+                    {
+                        projectPackage.Invitees.Add(new BidPackageXInvitee { BidPackage = projectPackage, CompanyId = companyId, Sent = DateTime.Now });
+                    }
+
                     // add bp to project
                     toCreate.BidPackages.Add(projectPackage);
 
@@ -133,6 +140,8 @@ namespace BCWeb.Controllers
             ProjectDetailsViewModel viewModel = new ProjectDetailsViewModel
             {
                 Address = raw.Address,
+                Architect = raw.Architect.CompanyName,
+                Owner = raw.ClientId.HasValue ? raw.Client.CompanyName : "",
                 BidDateTime = raw.BidDateTime,
                 BuildingType = raw.BuildingType.Name,
                 City = raw.City,

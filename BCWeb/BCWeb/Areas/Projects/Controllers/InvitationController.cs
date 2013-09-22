@@ -1,4 +1,4 @@
-﻿using BCWeb.Areas.Projects.Models.BidPackage.ServiceLayer;
+﻿using BCWeb.Areas.Projects.Models.Invitation.ServiceLayer;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -8,28 +8,26 @@ using System.Web.Mvc;
 
 namespace BCWeb.Areas.Projects.Controllers
 {
-    public class BidPackageController : Controller
+    public class InvitationController : Controller
     {
-
-        private IBidPackageServiceLayer _service;
+        private IInvitationServiceLayer _service;
         private IWebSecurityWrapper _security;
+        private IEmailSender _email;
 
-        public BidPackageController(IBidPackageServiceLayer service,IWebSecurityWrapper security)
+        public InvitationController(IInvitationServiceLayer service, IWebSecurityWrapper security, IEmailSender email)
         {
             _service = service;
             _security = security;
+            _email = email;
         }
 
-
         //
-        // GET: /Projects/BidPackage/
+        // GET: /Projects/Invitation/
 
         public ActionResult Index()
         {
             return View();
         }
-
-
 
     }
 }
