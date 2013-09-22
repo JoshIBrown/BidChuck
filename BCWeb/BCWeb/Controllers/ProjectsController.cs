@@ -172,6 +172,8 @@ namespace BCWeb.Controllers
             return View("Edit", viewModel);
         }
 
+
+        [Authorize(Roles = "architect,general_contractor")]
         [HttpPost]
         public ActionResult Edit(EditProjectViewModel viewModel)
         {
@@ -218,7 +220,7 @@ namespace BCWeb.Controllers
                         toUpdate.StateId = viewModel.StateId;
 
                     // update primary bid package
-                    BidPackage ProjectPackage = toUpdate.BidPackages.Where(b => b.IsMaster).FirstOrDefault();
+                    var ProjectPackage = toUpdate.BidPackages.Where(b => b.IsMaster).FirstOrDefault();
 
                     // if it doesn't exist for some reason, create it
                     if (ProjectPackage == null)
@@ -239,13 +241,13 @@ namespace BCWeb.Controllers
                     List<BidPackageXScope> bpScopes;
 
                     // error correction
-                    if (ProjectPackage.Scopes == null)
+                    if (ProjectPackage.Scopes == null || ProjectPackage.Scopes.Count() == 0)
                     {
                         var temp = new List<BidPackageXScope>();
-                        ProjectPackage.Scopes = new List<BidPackageXScope>();
+
                         for (int i = 0; i < prjScopes.Count(); i++)
                         {
-                            ProjectPackage.Scopes.Add(new BidPackageXScope { BidPackage = ProjectPackage, BidPackageId = ProjectPackage.Id, ScopeId = prjScopes[i].ScopeId });
+                            temp.Add(new BidPackageXScope { BidPackage = ProjectPackage, BidPackageId = ProjectPackage.Id, ScopeId = prjScopes[i].ScopeId });
                         }
                         ProjectPackage.Scopes = temp;
                         bpScopes = temp;
@@ -266,20 +268,20 @@ namespace BCWeb.Controllers
                     // add new selections
                     for (int i = 0; i < scopesToAdd.Count(); i++)
                     {
-                        prjScopes.Add(new ProjectXScope { Project = toUpdate, ScopeId = scopesToAdd[i] });
-                        bpScopes.Add(new BidPackageXScope { BidPackage = ProjectPackage, ScopeId = scopesToAdd[i] });
+                        toUpdate.Scopes.Add(new ProjectXScope { Project = toUpdate, ProjectId = toUpdate.Id, ScopeId = scopesToAdd[i] });
+                        ProjectPackage.Scopes.Add(new BidPackageXScope { BidPackageId = ProjectPackage.Id, ScopeId = scopesToAdd[i] });
                     }
 
                     // remove scopes from project
                     for (int i = 0; i < prjScopesToRemove.Count(); i++)
                     {
-                        prjScopes.Remove(prjScopesToRemove[i]); ;
+                        toUpdate.Scopes.Remove(prjScopesToRemove[i]);
                     }
 
                     // remove scope from master bid package
                     for (int i = 0; i < bpScopesToRemove.Count(); i++)
                     {
-                        bpScopes.Remove(bpScopesToRemove[i]);
+                        ProjectPackage.Scopes.Remove(bpScopesToRemove[i]);
                     }
 
                     // add project to system
@@ -303,7 +305,6 @@ namespace BCWeb.Controllers
             }
             else
             {
-                //viewModel.SelectedScope = raw.Scopes.Select(x => x.ScopeId).ToList();
                 rePopViewModel(viewModel);
                 return View("Edit", viewModel);
             }
