@@ -1,6 +1,6 @@
 ﻿@if (Request.IsAuthenticated)
 {
-    <li>@Html.RouteLink("Projects", "Default", new { controller = "Projects", action = "Index" })</li>
+    <li>@Html.RouteLink("Projects", "Default", new { controller = "Project", action = "Index" })</li>
     <li class="divider hide-for-small"></li>
     <li class="has-dropdown"><a href="#">@User.Identity.Name</a>
         <ul class="dropdown">

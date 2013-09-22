@@ -15,8 +15,8 @@ namespace BCWeb.Areas.Projects
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Projects_default",
-                "Projects/{controller}/{action}/{id}",
+                "Project_default",
+                "Project/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }, new { controller = @"BidPackage" }
             );
         }

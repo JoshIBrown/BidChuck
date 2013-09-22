@@ -13,14 +13,14 @@ using System.Web.Mvc;
 namespace BCWeb.Controllers
 {
     [Authorize]
-    public class ProjectsController : Controller
+    public class ProjectController : Controller
     {
         //
         // GET: /Projects/
         private IProjectServiceLayer _service;
         private IWebSecurityWrapper _security;
 
-        public ProjectsController(IProjectServiceLayer service, IWebSecurityWrapper security)
+        public ProjectController(IProjectServiceLayer service, IWebSecurityWrapper security)
         {
             _service = service;
             _security = security;
@@ -100,7 +100,7 @@ namespace BCWeb.Controllers
                     // add project to system
                     if (_service.Create(toCreate))
                     {
-                        return RedirectToRoute("Default", new { controller = "Projects", action = "Details", id = toCreate.Id });
+                        return RedirectToRoute("Default", new { controller = "Project", action = "Details", id = toCreate.Id });
                     }
                     else
                     {
@@ -296,7 +296,7 @@ namespace BCWeb.Controllers
                     // add project to system
                     if (_service.Update(toUpdate))
                     {
-                        return RedirectToRoute("Default", new { controller = "Projects", action = "Details", id = toUpdate.Id });
+                        return RedirectToRoute("Default", new { controller = "Project", action = "Details", id = toUpdate.Id });
                     }
                     else
                     {

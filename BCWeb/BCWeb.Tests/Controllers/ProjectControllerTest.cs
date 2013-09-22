@@ -23,7 +23,7 @@ namespace BCWeb.Tests.Controllers
             // arrange
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            ProjectsController controller = new ProjectsController(service.Object, security.Object);
+            ProjectController controller = new ProjectController(service.Object, security.Object);
 
             // act
             var result = controller.Index();
@@ -40,7 +40,7 @@ namespace BCWeb.Tests.Controllers
             // arrange
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            ProjectsController controller = new ProjectsController(service.Object, security.Object);
+            ProjectController controller = new ProjectController(service.Object, security.Object);
 
             // act
             var result = controller.Create();
@@ -65,7 +65,7 @@ namespace BCWeb.Tests.Controllers
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId(It.IsAny<string>())).Returns(1);
 
-            ProjectsController controller = new ProjectsController(service.Object, security.Object);
+            ProjectController controller = new ProjectController(service.Object, security.Object);
 
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
@@ -101,7 +101,7 @@ namespace BCWeb.Tests.Controllers
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId(It.IsAny<string>())).Returns(1);
 
-            ProjectsController controller = new ProjectsController(service.Object, security.Object);
+            ProjectController controller = new ProjectController(service.Object, security.Object);
 
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
@@ -138,7 +138,7 @@ namespace BCWeb.Tests.Controllers
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId(It.IsAny<string>())).Returns(1);
 
-            ProjectsController controller = new ProjectsController(service.Object, security.Object);
+            ProjectController controller = new ProjectController(service.Object, security.Object);
 
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
@@ -185,7 +185,7 @@ namespace BCWeb.Tests.Controllers
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId(It.IsAny<string>())).Returns(1);
 
-            ProjectsController controller = new ProjectsController(service.Object, security.Object);
+            ProjectController controller = new ProjectController(service.Object, security.Object);
 
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();

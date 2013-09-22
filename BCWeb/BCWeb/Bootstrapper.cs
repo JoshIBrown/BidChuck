@@ -59,7 +59,7 @@ namespace BCWeb
             container.RegisterType<IBidPackageRepository, BidPackageRepository>();
             container.RegisterType<IBidPackageServiceLayer, BidPackageServiceLayer>();
             container.RegisterType<IInvitationRepository, InvitationRepository>();
-            container.RegisterType(IInvitationServiceLayer,InvitationServiceLayer>();
+            container.RegisterType<IInvitationServiceLayer,InvitationServiceLayer>();
             RegisterTypes(container);
 
             return container;

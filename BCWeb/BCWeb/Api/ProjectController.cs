@@ -13,12 +13,12 @@ using System.Web.Http;
 namespace BCWeb.Api
 {
     [Authorize]
-    public class ProjectsController : ApiController
+    public class ProjectController : ApiController
     {
         private IProjectServiceLayer _service;
         private IWebSecurityWrapper _security;
 
-        public ProjectsController(IProjectServiceLayer service, IWebSecurityWrapper security)
+        public ProjectController(IProjectServiceLayer service, IWebSecurityWrapper security)
         {
             _service = service;
             _security = security;

@@ -15,6 +15,9 @@ namespace BCModel.Projects
         [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
+        public string Description { get; set; }
+
         public int CreatedById { get; set; }
         [ForeignKey("CreatedById")]
         [IgnoreDataMember]
