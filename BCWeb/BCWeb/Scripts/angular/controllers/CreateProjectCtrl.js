@@ -126,6 +126,6 @@ app.controller('CreateProjectCtrl', ['$scope', '$http', function ($scope, $http)
         });
         return found;
     };
-
+    angular.bootstrap(document, ['createProject']);
 }]);
 

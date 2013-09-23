@@ -1,5 +1,5 @@
 ﻿using BCModel.Projects;
-using BCWeb.Areas.Projects.Models.BidPackage.ServiceLayer;
+using BCWeb.Areas.Project.Models.BidPackage.ServiceLayer;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;

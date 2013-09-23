@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Areas.Projects.Models.Invitation.Repository
+namespace BCWeb.Areas.Project.Models.Invitation.Repository
 {
     public class InvitationRepository : RepositoryBase, IInvitationRepository
     {

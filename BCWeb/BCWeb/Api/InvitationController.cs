@@ -1,4 +1,4 @@
-﻿using BCWeb.Areas.Projects.Models.Invitation.ServiceLayer;
+﻿using BCWeb.Areas.Project.Models.Invitation.ServiceLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

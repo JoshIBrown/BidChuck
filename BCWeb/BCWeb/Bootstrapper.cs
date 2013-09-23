@@ -14,10 +14,10 @@ using BCWeb.Areas.Account.Models.Company.Repository;
 using BCWeb.Areas.Account.Models.Company.ServiceLayer;
 using BCWeb.Models.Project.Repository;
 using BCWeb.Models.Project.ServiceLayer;
-using BCWeb.Areas.Projects.Models.BidPackage.Repository;
-using BCWeb.Areas.Projects.Models.BidPackage.ServiceLayer;
-using BCWeb.Areas.Projects.Models.Invitation.Repository;
-using BCWeb.Areas.Projects.Models.Invitation.ServiceLayer;
+using BCWeb.Areas.Project.Models.BidPackage.Repository;
+using BCWeb.Areas.Project.Models.BidPackage.ServiceLayer;
+using BCWeb.Areas.Project.Models.Invitation.Repository;
+using BCWeb.Areas.Project.Models.Invitation.ServiceLayer;
 
 namespace BCWeb
 {

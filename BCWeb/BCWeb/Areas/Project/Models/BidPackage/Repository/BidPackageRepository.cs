@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Areas.Projects.Models.BidPackage.Repository
+namespace BCWeb.Areas.Project.Models.BidPackage.Repository
 {
     public class BidPackageRepository : RepositoryBase, IBidPackageRepository
     {

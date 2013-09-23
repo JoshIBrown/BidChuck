@@ -1,14 +1,14 @@
 ﻿using System.Web.Mvc;
 
-namespace BCWeb.Areas.Projects
+namespace BCWeb.Areas.Project
 {
-    public class ProjectsAreaRegistration : AreaRegistration
+    public class ProjectAreaRegistration : AreaRegistration
     {
         public override string AreaName
         {
             get
             {
-                return "Projects";
+                return "Project";
             }
         }
 
@@ -17,7 +17,7 @@ namespace BCWeb.Areas.Projects
             context.MapRoute(
                 "Project_default",
                 "Project/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }, new { controller = @"BidPackage" }
+                new { action = "Index", id = UrlParameter.Optional }, new { controller = @"BidPackage|Invitation" }
             );
         }
     }

@@ -2,6 +2,7 @@
 using BCWeb.Areas.Account.Models.Company.ServiceLayer;
 using BCWeb.Helpers;
 using BCWeb.Models;
+using BCWeb.Models.Company.ViewModel;
 using BCWeb.Models.Company.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -47,5 +48,14 @@ namespace BCWeb.Api
         }
 
         // get newest group by scope
+
+        public IEnumerable<CompanySearchResult> GetSearch(string query)
+        {
+            var companies = _serviceLayer.GetEnumerable(x => x.CompanyName.Contains(query))
+                .Select(x => new CompanySearchResult { Id = x.Id, City = x.City, CompanyName = x.CompanyName, State = x.State.Abbr })
+                .ToArray();
+
+            return companies;
+        }
     }
 }

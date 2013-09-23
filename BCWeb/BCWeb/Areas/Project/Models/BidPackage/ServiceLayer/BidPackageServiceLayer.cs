@@ -1,12 +1,12 @@
 ﻿using BCModel.Projects;
-using BCWeb.Areas.Projects.Models.BidPackage.Repository;
+using BCWeb.Areas.Project.Models.BidPackage.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 
-namespace BCWeb.Areas.Projects.Models.BidPackage.ServiceLayer
+namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
 {
     public class BidPackageServiceLayer : IBidPackageServiceLayer
     {

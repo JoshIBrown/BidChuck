@@ -132,7 +132,8 @@ namespace BCWeb.Controllers.Api
                     {
                         theBidPackage = _service.GetBidPackage(bpId);
                         selectedScopes = theBidPackage.Scopes.Select(s => s.Scope).ToList();
-                        availableScopes = theBidPackage.Project.Scopes.Select(s => s.Scope).ToList();
+                        // pull scopes from master template of available scopes
+                        availableScopes = theBidPackage.TemplateBidPackage.Scopes.Select(s => s.Scope).ToList();
                     }
                     else
                     {

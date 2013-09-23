@@ -9,28 +9,31 @@
         <ul class="side-nav">
             @* limit to architect*@
             <li>@Html.RouteLink("Edit...", "Default", new { controller = "Project", action = "Edit", id = Model.Id })</li>
-            <li>
-                @{
-                    if (User.IsInRole("architect"))
-                    {
-                    <a href="#">Invite General Contractors</a>
-                    }
-                    else if (User.IsInRole("general_contractor") || User.IsInRole("sub_contractor"))
-                    {
-                    <a href="#">Invite Sub-Contractor or Vendor</a>
-                    }
 
+            @{
+                if (User.IsInRole("general_contractor"))
+                {
+                    
+                <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.Id })</li>
                 }
-            </li>
-            @* check if user is invited *@
-            <li><a href="#">Create a Bid Package</a></li>
-            <li><a href="#">Submit a Bid</a></li>
+
+                if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))
+                {
+                <li><a href="#">View Bid Packages</a></li>
+                }
+
+                if (User.IsInRole("architect"))
+                {
+                <li><a href="#">Invite General Contractors</a></li>
+                }
+            }
+
         </ul>
     </div>
     <div class="large-8 columns left">
         <div class="row">
             <div class="large-4 columns">
-                <h2>@ViewBag.Title</h2>
+                <h2>@ViewBag.Title</h2>@Html.HiddenFor(m => m.Id)
             </div>
         </div>
 

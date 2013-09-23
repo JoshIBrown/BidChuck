@@ -1,4 +1,4 @@
-﻿using BCWeb.Areas.Projects.Models.Invitation.ServiceLayer;
+﻿using BCWeb.Areas.Project.Models.Invitation.ServiceLayer;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BCWeb.Areas.Projects.Controllers
+namespace BCWeb.Areas.Project.Controllers
 {
     public class InvitationController : Controller
     {
@@ -22,11 +22,17 @@ namespace BCWeb.Areas.Projects.Controllers
         }
 
         //
-        // GET: /Projects/Invitation/
+        // GET: /Project/Invitation/
 
         public ActionResult Index()
         {
             return View();
+        }
+
+        // GET: /Project/Invitation/Send/1
+        public ActionResult Send(int id)
+        {
+            return View("Send");
         }
 
     }

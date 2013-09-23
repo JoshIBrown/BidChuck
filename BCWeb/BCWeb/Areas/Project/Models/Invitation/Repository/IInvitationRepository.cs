@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Areas.Projects.Models.Invitation.Repository
+namespace BCWeb.Areas.Project.Models.Invitation.Repository
 {
     public interface IInvitationRepository : IGenericRepository<BidPackageXInvitee>
     {
@@ -15,6 +15,6 @@ namespace BCWeb.Areas.Projects.Models.Invitation.Repository
         CompanyProfile GetCompanyProfile(int id);
 
         BCModel.Projects.BidPackage GetBidPackage(int id);
-        Project GetProject(int id);
+        BCModel.Projects.Project GetProject(int id);
     }
 }

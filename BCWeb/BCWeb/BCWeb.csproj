@@ -219,6 +219,8 @@
     <Compile Include="Areas\Project\Models\BidPackage\Repository\IBidPackageRepository.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\ServiceLayer\BidPackageServiceLayer.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\ServiceLayer\IBidPackageServiceLayer.cs" />
+    <Compile Include="Areas\Project\Models\BidPackage\ViewModel\BidPackageDetailsViewModel.cs" />
+    <Compile Include="Areas\Project\Models\BidPackage\ViewModel\EditBidPackageViewModel.cs" />
     <Compile Include="Areas\Project\Models\Invitation\Repository\IInvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitation\Repository\InvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitation\ServiceLayer\IInvitationServiceLayer.cs" />
@@ -256,6 +258,7 @@
     <Compile Include="Models\Account\ViewModel\EditProfileViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\InvitationViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\ManageDashboardViewModel.cs" />
+    <Compile Include="Models\Company\ViewModel\CompanySearchResult.cs" />
     <Compile Include="Models\GenericRepository.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
     <Compile Include="Models\Company\ViewModel\NewCompanyViewModel.cs" />
@@ -290,11 +293,15 @@
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Areas\Account\Views\Users\Add.cshtml" />
     <Content Include="Scripts\angular\controllers\BidPackageCtrl.js" />
+    <Content Include="Scripts\angular\controllers\CreateBidPackageCtrl.js" />
     <Content Include="Scripts\angular\controllers\EditProjectCtrl.js" />
+    <Content Include="Scripts\angular\controllers\SendInvitationCtrl.js" />
     <Content Include="Views\Shared\_ScopePicker.cshtml" />
     <Content Include="BuildingTypes.csv" />
     <Content Include="Areas\Project\Views\Web.config" />
     <Content Include="Areas\Project\Views\BidPackage\Index.cshtml" />
+    <Content Include="Areas\Project\Views\BidPackage\Create.cshtml" />
+    <Content Include="Areas\Project\Views\Invitation\Send.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
@@ -770,10 +777,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
-    <Folder Include="Areas\Project\Models\BidPackage\ViewModel\" />
     <Folder Include="Areas\Project\Models\Invitation\ViewModel\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
+    <Folder Include="Scripts\angular\directives\" />
     <Folder Include="Scripts\Areas\Home\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>

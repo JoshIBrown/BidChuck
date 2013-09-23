@@ -182,8 +182,10 @@ namespace BCWeb.Controllers
         }
 
 
+
         [Authorize(Roles = "architect,general_contractor")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(EditProjectViewModel viewModel)
         {
             if (ModelState.IsValid)

@@ -16,6 +16,7 @@
 
         @using (Html.BeginForm())
         {
+            @Html.AntiForgeryToken();
             @Html.EditorFor(m => m)
             <input type="submit" value="Save" class="medium button" />
             <input type="button" value="Cancel" class="medium button" />

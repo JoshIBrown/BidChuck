@@ -9,11 +9,11 @@ using BCModel;
 using Microsoft.Ajax.Utilities;
 using System.Linq.Expressions;
 
-namespace BCWeb.Areas.Projects.Models.BidPackage.Repository
+namespace BCWeb.Areas.Project.Models.BidPackage.Repository
 {
     public interface IBidPackageRepository : IGenericRepository<BCModel.Projects.BidPackage>
     {
-        Project GetProject(int id);
+        BCModel.Projects.Project GetProject(int id);
         CompanyProfile GetCompany(int id);
         BidPackageXInvitee GetInvite(int id);
         IQueryable<Scope> QueryScopes();

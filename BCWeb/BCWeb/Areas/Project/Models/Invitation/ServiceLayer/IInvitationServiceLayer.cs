@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCWeb.Areas.Projects.Models.Invitation.ServiceLayer
+namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
 {
     public interface IInvitationServiceLayer : IGenericServiceLayer<BidPackageXInvitee>
     {
@@ -16,6 +16,6 @@ namespace BCWeb.Areas.Projects.Models.Invitation.ServiceLayer
         CompanyProfile GetCompanyProfile(int id);
 
         BCModel.Projects.BidPackage GetBidPackage(int id);
-        Project GetProject(int id);
+        BCModel.Projects.Project GetProject(int id);
     }
 }

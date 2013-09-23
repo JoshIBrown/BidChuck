@@ -8,11 +8,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCWeb.Areas.Projects.Models.BidPackage.ServiceLayer
+namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
 {
     public interface IBidPackageServiceLayer : IGenericServiceLayer<BCModel.Projects.BidPackage>
     {
-        Project GetProject(int id);
+        BCModel.Projects.Project GetProject(int id);
         CompanyProfile GetCompany(int id);
         BidPackageXInvitee GetInvite(int id);
         IEnumerable<Scope> GetScopes();

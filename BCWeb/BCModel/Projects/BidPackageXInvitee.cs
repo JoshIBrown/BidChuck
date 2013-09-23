@@ -8,6 +8,9 @@ using System.Text;
 
 namespace BCModel.Projects
 {
+    public enum InviteStatus{
+        Sent = 0, Accepted = 1, Rejected =2
+    }
     public class BidPackageXInvitee
     {
         [Key]
@@ -20,11 +23,16 @@ namespace BCModel.Projects
         public virtual BidPackage BidPackage { get; set; }
 
 
-        public int CompanyId { get; set; }
+        public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         [IgnoreDataMember]
         public virtual CompanyProfile Company { get; set; }
 
+        [EmailAddress]
+        public string Email { get; set; }
+
         public DateTime Sent { get; set; }
+
+        public InviteStatus InviteStatus { get; set; }
     }
 }

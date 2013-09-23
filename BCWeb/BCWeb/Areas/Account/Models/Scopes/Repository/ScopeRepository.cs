@@ -14,7 +14,7 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
         private DbSet<Scope> _scopes;
         private DbSet<UserProfile> _users;
         private DbSet<CompanyProfile> _companies;
-        private DbSet<Project> _projects;
+        private DbSet<BCModel.Projects.Project> _projects;
         private DbSet<BidPackage> _bidPackages;
 
         public ScopeRepository()
