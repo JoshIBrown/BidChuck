@@ -1,4 +1,5 @@
-﻿using BCWeb.Models.Project.Repository;
+﻿using BCModel.Projects;
+using BCWeb.Models.Project.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,8 +50,8 @@ namespace BCWeb.Models.Project.ServiceLayer
 
             // TODO: ADD LOGIC
             // if architect, address and city, title combo already exists
-            if (_repo.Query().Where(r => r.Address.ToLower().Trim() == entity.Address.ToLower().Trim() 
-                && r.City.ToLower().Trim() == entity.City.ToLower().Trim() 
+            if (_repo.Query().Where(r => r.Address.ToLower().Trim() == entity.Address.ToLower().Trim()
+                && r.City.ToLower().Trim() == entity.City.ToLower().Trim()
                 //&& r.Architect.Trim().ToLower() == entity.Architect.Trim().ToLower()
                 && r.Title.ToLower().Trim() == entity.Title.ToLower().Trim()).Count() > 0)
             {
@@ -62,7 +63,7 @@ namespace BCWeb.Models.Project.ServiceLayer
                 ValidationDic.Add("unique", "A Project by this architect, with this title at this location already exists");
             }
 
-            
+
 
             return valid;
         }
@@ -178,6 +179,16 @@ namespace BCWeb.Models.Project.ServiceLayer
         public IEnumerable<BCModel.CompanyProfile> GetCompanyProfiles(System.Linq.Expressions.Expression<Func<BCModel.CompanyProfile, bool>> predicate)
         {
             return _repo.GetCompanyProfiles().Where(predicate);
+        }
+
+
+        public IEnumerable<BCModel.Projects.BidPackageXInvitee> GetInvitations(int projectId, int companyId)
+        {
+            IEnumerable<BidPackageXInvitee> Invites = from r in _repo.QueryInvites()
+                                                      where r.BidPackage.ProjectId == projectId
+                                                      && r.CompanyId == companyId
+                                                      select r;
+            return Invites.ToList();
         }
     }
 }

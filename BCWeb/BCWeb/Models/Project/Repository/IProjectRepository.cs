@@ -19,5 +19,7 @@ namespace BCWeb.Models.Project.Repository
 
         CompanyProfile GetCompanyProfile(int id);
         IQueryable<CompanyProfile> GetCompanyProfiles();
+
+        IQueryable<BidPackageXInvitee> QueryInvites();
     }
 }

@@ -118,6 +118,7 @@
     <Compile Include="Api\ScopesControllerTest.cs" />
     <Compile Include="Api\UsersControllerTest.cs" />
     <Compile Include="Areas\Project\Controllers\BidPackageControllerTest.cs" />
+    <Compile Include="Areas\Project\Controllers\InvitationControllerTest.cs" />
     <Compile Include="Controllers\AccountControllerTest.cs" />
     <Compile Include="Controllers\ProjectControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

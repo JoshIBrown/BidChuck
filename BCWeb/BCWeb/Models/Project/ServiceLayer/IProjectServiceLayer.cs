@@ -20,5 +20,7 @@ namespace BCWeb.Models.Project.ServiceLayer
         UserProfile GetUserProfile(int id);
         IEnumerable<CompanyProfile> GetCompanyProfiles();
         IEnumerable<CompanyProfile> GetCompanyProfiles(Expression<Func<CompanyProfile, bool>> predicate);
+
+        IEnumerable<BidPackageXInvitee> GetInvitations(int projectId, int companyId);
     }
 }

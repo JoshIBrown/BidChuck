@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCModel.Projects;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,12 +13,14 @@ namespace BCWeb.Models.Project.Repository
         private DbSet<BCModel.Projects.Project> _projects;
         private DbSet<UserProfile> _users;
         private DbSet<CompanyProfile> _companies;
+        private DbSet<BidPackageXInvitee> _invites;
 
         public ProjectRepository()
         {
             _projects = _context.Projects;
             _users = _context.UserProfiles;
             _companies = _context.Companies;
+            _invites = _context.BidPackageXInvitees;
         }
         public IQueryable<BCModel.Projects.ConstructionType> QueryConstructionType()
         {
@@ -91,6 +94,12 @@ namespace BCWeb.Models.Project.Repository
         public IQueryable<BCModel.CompanyProfile> GetCompanyProfiles()
         {
             return _companies;
+        }
+
+
+        public IQueryable<BCModel.Projects.BidPackageXInvitee> QueryInvites()
+        {
+            return _invites;
         }
     }
 }

@@ -35,9 +35,14 @@ namespace BCWeb.Areas.Project.Controllers
         // GET: /Project/Invitation/Send/1
         public ActionResult Send(int id)
         {
-            return View("Send");
+            BidPackageInvitationViewModel viewModel = new BidPackageInvitationViewModel();
+            viewModel.BidPackageId = id;
+
+            return View("Send",viewModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Send(BidPackageInvitationViewModel viewModel)
         {
             try

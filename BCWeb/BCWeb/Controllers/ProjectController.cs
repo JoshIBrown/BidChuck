@@ -136,25 +136,89 @@ namespace BCWeb.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            var raw = _service.Get(id);
-            ProjectDetailsViewModel viewModel = new ProjectDetailsViewModel
+            Project theProject = _service.Get(id);
+
+            UserProfile user = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
+
+            
+            
+            
+            // if invited sub, show bp invited to
+            if (User.IsInRole("subcontractor") || User.IsInRole("materials_vendor"))
             {
-                Address = raw.Address,
-                Architect = raw.Architect.CompanyName,
-                Owner = raw.ClientId.HasValue ? raw.Client.CompanyName : "",
-                BidDateTime = raw.BidDateTime,
-                BuildingType = raw.BuildingType.Name,
-                City = raw.City,
-                ConstructionType = raw.ConstructionType.Name,
-                Description = raw.Description,
-                Id = raw.Id,
-                PostalCode = raw.PostalCode,
-                ProjectType = raw.ProjectType.ToDescription(),
-                SelectedScope = raw.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description).OrderBy(s => s),
-                State = raw.State.Abbr,
-                Title = raw.Title
+                IEnumerable<BidPackageXInvitee> invites = _service.GetInvitations(theProject.Id, user.CompanyId);
+                IEnumerable<ProjectBPViewModel> bps = invites.Select(b => new ProjectBPViewModel
+                {
+                    Id = b.BidPackageId,
+                    BidDateTime = b.BidPackage.BidDateTime.Value,
+                    Description = b.BidPackage.Description,
+                    SelectedScope = b.BidPackage.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description)
+                });
+
+                SubsAndVendProjectDetailsViewModel sAndVViewModel = new SubsAndVendProjectDetailsViewModel
+                {
+                    Address = theProject.Address,
+                    Architect = theProject.Architect.CompanyName,
+                    Owner = theProject.ClientId.HasValue ? theProject.Client.CompanyName : "",
+                    BuildingType = theProject.BuildingType.Name,
+                    City = theProject.City,
+                    ConstructionType = theProject.ConstructionType.Name,
+                    Description = theProject.Description,
+                    ProjectId = theProject.Id,
+                    PostalCode = theProject.PostalCode,
+                    ProjectType = theProject.ProjectType.ToDescription(),
+                    State = theProject.State.Abbr,
+                    Title = theProject.Title,
+                    BidPackages = bps
+                };
+
+
+                return View("SubAndVendDetails", sAndVViewModel);
+            }
+
+
+            BidPackage masterBP = theProject.BidPackages.Where(b => b.IsMaster).FirstOrDefault();
+
+            BPProjectDetailsViewModel gcViewModel = new BPProjectDetailsViewModel
+            {
+                Address = theProject.Address,
+                Architect = theProject.Architect.CompanyName,
+                Owner = theProject.ClientId.HasValue ? theProject.Client.CompanyName : "",
+                BidDateTime = theProject.BidDateTime,
+                BuildingType = theProject.BuildingType.Name,
+                City = theProject.City,
+                ConstructionType = theProject.ConstructionType.Name,
+                Description = theProject.Description,
+                ProjectId = theProject.Id,
+                BidPackageId = masterBP.Id,
+                PostalCode = theProject.PostalCode,
+                ProjectType = theProject.ProjectType.ToDescription(),
+                SelectedScope = masterBP.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description).OrderBy(s => s),
+                State = theProject.State.Abbr,
+                Title = theProject.Title
             };
-            return View("Details", viewModel);
+            return View("BPDetails", gcViewModel);
+            
+
+            //// if architect, show base level
+            //ProjectDetailsViewModel viewModel = new ProjectDetailsViewModel
+            //{
+            //    Address = theProject.Address,
+            //    Architect = theProject.Architect.CompanyName,
+            //    Owner = theProject.ClientId.HasValue ? theProject.Client.CompanyName : "",
+            //    BidDateTime = theProject.BidDateTime,
+            //    BuildingType = theProject.BuildingType.Name,
+            //    City = theProject.City,
+            //    ConstructionType = theProject.ConstructionType.Name,
+            //    Description = theProject.Description,
+            //    Id = theProject.Id,
+            //    PostalCode = theProject.PostalCode,
+            //    ProjectType = theProject.ProjectType.ToDescription(),
+            //    SelectedScope = theProject.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description).OrderBy(s => s),
+            //    State = theProject.State.Abbr,
+            //    Title = theProject.Title
+            //};
+            //return View("Details", viewModel);
         }
 
         // GET: /Projects/Edit/3

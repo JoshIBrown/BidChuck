@@ -1,0 +1,118 @@
+﻿@model BCWeb.Models.Project.ViewModel.BPProjectDetailsViewModel
+@{
+    ViewBag.Title = "Project Details";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<div class="row">
+    <div class="large-2 columns">
+        <ul class="side-nav">
+            @* limit to architect*@
+            <li>@Html.RouteLink("Edit...", "Default", new { controller = "Project", action = "Edit", id = Model.Id })</li>
+
+            @{
+                if (User.IsInRole("general_contractor"))
+                {
+                    
+                <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.Id })</li>
+                }
+
+                if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))
+                {
+                <li><a href="#">View Bid Packages</a></li>
+                }
+
+                if (User.IsInRole("architect"))
+                {
+                <li><a href="#">Invite General Contractors</a></li>
+                }
+            }
+
+        </ul>
+    </div>
+    <div class="large-8 columns left">
+        <div class="row">
+            <div class="large-4 columns">
+                <h2>@ViewBag.Title</h2>@Html.HiddenFor(m => m.ProjectId)@Html.HiddenFor(m => m.BidPackageId)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-6 columns">
+                @Html.LabelFor(m => m.Title)
+                @Html.DisplayFor(m => m.Title)
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="large-12 columns">
+                @Html.LabelFor(m => m.Description)
+                @Html.DisplayFor(m => m.Description)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-4 columns">
+                @Html.LabelFor(m => m.BidDateTime)
+                @Html.DisplayFor(m => m.BidDateTime)
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="large-4 columns left">
+                @Html.LabelFor(m => m.ProjectType)
+                @Html.DisplayFor(m => m.ProjectType)
+            </div>
+            <div class="large-4 columns left">
+                @Html.LabelFor(m => m.ConstructionType)
+                @Html.DisplayFor(m => m.ConstructionType)
+            </div>
+            <div class="large-4 columns left">
+                @Html.LabelFor(m => m.BuildingType)
+                @Html.DisplayFor(m => m.BuildingType)
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-7 columns">
+                <div class="row">
+                    <div class="large-12 columns">
+                        @Html.LabelFor(m => m.Address)
+                        @Html.DisplayFor(m => m.Address)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="large-5 columns">
+                        @Html.LabelFor(m => m.City)
+                        @Html.DisplayFor(m => m.City)
+                    </div>
+                    <div class="large-3 columns">
+                        @Html.LabelFor(m => m.State)
+                        @Html.DisplayFor(m => m.State)
+                    </div>
+                    <div class="large-4 columns">
+                        @Html.LabelFor(m => m.PostalCode)
+                        @Html.DisplayFor(m => m.PostalCode)
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                @Html.LabelFor(m => m.SelectedScope)
+                <ul>
+                    @foreach (var x in Model.SelectedScope)
+                    {
+                        <li>@x</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+</div>
