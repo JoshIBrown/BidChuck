@@ -12,14 +12,16 @@
     <div class="row">
         <div class="large-8 columns left">
             <form name="searchForm">
-                <input type="text" name="companySearchString" id="companySearchString" ng-model="companySearchString" />
-                <input type="button" value="search" ng-click="searchCompanies()" />
+                <input type="text" name="companySearchString" id="companySearchString" ng-model="companySearchString" ng-change="searchCompanies()" />
+
             </form>
         </div>
     </div>
     <div class="row">
         <div class="large-8 columns left">
-            {{companies}}
+            <ul>
+                <li ng-repeat="sc in companies">{{sc.CompanyName}} -- {{sc.BusinessType}}  -- {{sc.City}} {{sc.State}}</li>
+            </ul>
         </div>
     </div>
 </div>

@@ -52,7 +52,7 @@ namespace BCWeb.Api
         public IEnumerable<CompanySearchResult> GetSearch(string query)
         {
             var companies = _serviceLayer.GetEnumerable(x => x.CompanyName.Contains(query))
-                .Select(x => new CompanySearchResult { Id = x.Id, City = x.City, CompanyName = x.CompanyName, State = x.State.Abbr })
+                .Select(x => new CompanySearchResult { Id = x.Id, BusinessType = x.BusinessType.ToDescription(), City = x.City, CompanyName = x.CompanyName, State = x.State.Abbr })
                 .ToArray();
 
             return companies;
