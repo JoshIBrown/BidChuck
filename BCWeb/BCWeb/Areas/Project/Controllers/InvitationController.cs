@@ -1,4 +1,7 @@
-﻿using BCWeb.Areas.Project.Models.Invitation.ServiceLayer;
+﻿using BCModel.Projects;
+using BCWeb.Areas.Project.Models.Invitation.ServiceLayer;
+using BCWeb.Areas.Project.Models.Invitation.ViewModel;
+using BCWeb.Helpers;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -35,5 +38,33 @@ namespace BCWeb.Areas.Project.Controllers
             return View("Send");
         }
 
+        public ActionResult Send(BidPackageInvitationViewModel viewModel)
+        {
+            try
+            {
+                List<BidPackageXInvitee> invites = new List<BidPackageXInvitee>();
+                foreach (var c in viewModel.CompanyId)
+                {
+                    invites.Add(new BidPackageXInvitee { BidPackageId = viewModel.BidPackageId, CompanyId = c, Sent = DateTime.Now, InviteStatus = InviteStatus.Sent });
+                }
+
+                if (_service.CreateRange(invites))
+                {
+                    int projectId = _service.GetBidPackage(viewModel.BidPackageId).ProjectId;
+                    return RedirectToRoute("Default", new { controller = "Project", action = "Details", id = projectId });
+                }
+                else
+                {
+                    Util.MapValidationErrors(_service.ValidationDic, this.ModelState);
+                    return View("Send", viewModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Exception", ex.Message);
+                return View("Send", viewModel);
+            }
+
+        }
     }
 }

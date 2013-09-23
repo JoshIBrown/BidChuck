@@ -10,18 +10,27 @@
 </div>
 <div ng-controller="SendInvitationCtrl">
     <div class="row">
-        <div class="large-8 columns left">
-            <form name="searchForm">
-                <input type="text" name="companySearchString" id="companySearchString" ng-model="companySearchString" ng-change="searchCompanies()" />
-
-            </form>
+        <div class="large-4 columns left">
+            <input type="text" name="companySearchString" id="companySearchString" ng-model="companySearchString" ng-change="searchCompanies()" placeholder="Search for company" />
         </div>
     </div>
     <div class="row">
-        <div class="large-8 columns left">
+        <div class="large-5 columns left">
+            <h4>Search Results</h4>
             <ul>
-                <li ng-repeat="sc in companies">{{sc.CompanyName}} -- {{sc.BusinessType}}  -- {{sc.City}} {{sc.State}}</li>
+                <li ng-repeat="sc in filteredSearch(companies)">{{sc.CompanyName}} -- {{sc.BusinessType}}  -- {{sc.City}} {{sc.State}}
+                    <input type="button" class="tiny button" value="Invite" ng-click="invite(sc.Id)" /></li>
             </ul>
+        </div>
+        <div class="large-4 columns">
+            @using (Html.BeginForm())
+            {
+                <h4>Selected for invite</h4>
+                <ul>
+                    <li ng-repeat="i in invited">{{i.CompanyName}}
+                        <input type="button" class="tiny button" value="Remove" ng-click="uninvite(i.Id)" /></li>
+                </ul>
+            }
         </div>
     </div>
 </div>

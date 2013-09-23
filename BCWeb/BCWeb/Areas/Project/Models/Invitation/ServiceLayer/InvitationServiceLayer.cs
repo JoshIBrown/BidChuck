@@ -116,5 +116,25 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
         {
             return _repo.Get(id) == null;
         }
+
+
+        public bool CreateRange(IEnumerable<BCModel.Projects.BidPackageXInvitee> invitees)
+        {
+            try
+            {
+                foreach (var i in invitees)
+                {
+                    _repo.Create(i);
+                }
+                _repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
+        }
     }
 }

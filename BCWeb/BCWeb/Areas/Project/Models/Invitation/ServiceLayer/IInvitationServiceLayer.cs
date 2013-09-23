@@ -17,5 +17,6 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
 
         BCModel.Projects.BidPackage GetBidPackage(int id);
         BCModel.Projects.Project GetProject(int id);
+        bool CreateRange(IEnumerable<BidPackageXInvitee> invitees);
     }
 }

@@ -225,6 +225,7 @@
     <Compile Include="Areas\Project\Models\Invitation\Repository\InvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitation\ServiceLayer\IInvitationServiceLayer.cs" />
     <Compile Include="Areas\Project\Models\Invitation\ServiceLayer\InvitationServiceLayer.cs" />
+    <Compile Include="Areas\Project\Models\Invitation\ViewModel\BidPackageInvitationViewModel.cs" />
     <Compile Include="Areas\Project\ProjectsAreaRegistration.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -777,7 +778,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
-    <Folder Include="Areas\Project\Models\Invitation\ViewModel\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
     <Folder Include="Scripts\angular\directives\" />
