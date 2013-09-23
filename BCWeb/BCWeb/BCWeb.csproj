@@ -306,6 +306,7 @@
     <Content Include="Areas\Project\Views\BidPackage\Index.cshtml" />
     <Content Include="Areas\Project\Views\BidPackage\Create.cshtml" />
     <Content Include="Areas\Project\Views\Invitation\Send.cshtml" />
+    <Content Include="Areas\Project\Views\BidPackage\Details.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />

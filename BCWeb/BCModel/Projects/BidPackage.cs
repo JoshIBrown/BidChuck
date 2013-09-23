@@ -39,6 +39,9 @@ namespace BCModel.Projects
         [Required]
         public bool IsMaster { get; set; }
 
+        public string DocLink { get; set; }
+        public string Notes { get; set; }
+
         [IgnoreDataMember]
         public virtual ICollection<Bid> Bids { get; set; }
 

@@ -1,0 +1,32 @@
+﻿@model BCWeb.Areas.Project.Models.BidPackage.ViewModel.BidPackageDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<div class="row">
+    <div class="large-4 columns">
+        <h2>Details</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="large-6 columns">
+        @Html.LabelFor(m => m.Description)
+        @Html.DisplayFor(m => m.Description)
+        @Html.LabelFor(m => m.BidDateTime)
+        @Html.DisplayFor(m => m.BidDateTime)
+        @Html.LabelFor(m => m.WalkThruDateTime)
+        @Html.DisplayFor(m => m.WalkThruDateTime)
+        @Html.LabelFor(m => m.DocLink)
+        @Html.DisplayFor(m => m.DocLink)
+        @Html.LabelFor(m => m.Notes)
+        @Html.DisplayFor(m => m.Notes)
+        @Html.LabelFor(m => m.Scopes)
+        <ul>
+            @foreach (var s in Model.Scopes)
+            {
+                <li>@s</li>
+            }
+        </ul>
+    </div>
+</div>

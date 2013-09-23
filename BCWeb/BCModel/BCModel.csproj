@@ -158,6 +158,10 @@
     <Compile Include="Migrations\201309230347328_addEmailToBidPackageInvitation.Designer.cs">
       <DependentUpon>201309230347328_addEmailToBidPackageInvitation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309232352354_addFieldsToBidPackage.cs" />
+    <Compile Include="Migrations\201309232352354_addFieldsToBidPackage.Designer.cs">
+      <DependentUpon>201309232352354_addFieldsToBidPackage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -263,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309230347328_addEmailToBidPackageInvitation.resx">
       <DependentUpon>201309230347328_addEmailToBidPackageInvitation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309232352354_addFieldsToBidPackage.resx">
+      <DependentUpon>201309232352354_addFieldsToBidPackage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

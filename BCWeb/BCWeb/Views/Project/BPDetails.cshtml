@@ -11,10 +11,10 @@
             <li>@Html.RouteLink("Edit...", "Default", new { controller = "Project", action = "Edit", id = Model.ProjectId })</li>
 
             @{
-                if (User.IsInRole("general_contractor"))
+                if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))
                 {
                     
-                <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId })</li>
+                <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId, templateId = Model.BidPackageId })</li>
                 }
 
                 if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))

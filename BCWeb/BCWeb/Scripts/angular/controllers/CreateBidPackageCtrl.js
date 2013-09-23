@@ -10,7 +10,7 @@
         $scope.templateId = angular.element('#TemplateId').val();
 
 
-        $http.get('/api/Scopes//api/Scopes/GetScopesToManage/?type=bidpackage&ident=' + $scope.templateId)
+        $http.get('/api/Scopes/GetScopesToManage/?type=newbidpackage&ident=' + $scope.templateId)
              .success(function (data) {
                  $scope.Scopes = data;
                  $scope.selectedScopes = $.map($scope.Scopes, function (data) {
@@ -130,4 +130,6 @@
             return found;
         };
     }]);
+
+    angular.bootstrap(document, ['createBidPackage']);
 });

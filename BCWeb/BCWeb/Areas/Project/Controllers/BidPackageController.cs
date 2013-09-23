@@ -33,19 +33,19 @@ namespace BCWeb.Areas.Project.Controllers
         }
 
 
-        // GET: /Projects/BidPackage/Create
-        [Authorize(Roles = "general_contractor")]
-        public ActionResult Create(int projectId)
-        {
-            EditBidPackageViewModel viewModel = new EditBidPackageViewModel();
-            viewModel.ProjectId = projectId;
-            viewModel.TemplateId = _service.GetProject(projectId).BidPackages.Where(b => b.IsMaster).FirstOrDefault().Id;
-            return View("Create", viewModel);
-        }
+        //// GET: /Projects/BidPackage/Create
+        //[Authorize(Roles = "general_contractor")]
+        //public ActionResult Create(int projectId)
+        //{
+        //    EditBidPackageViewModel viewModel = new EditBidPackageViewModel();
+        //    viewModel.ProjectId = projectId;
+        //    viewModel.TemplateId = _service.GetProject(projectId).BidPackages.Where(b => b.IsMaster).FirstOrDefault().Id;
+        //    return View("Create", viewModel);
+        //}
 
         //
         // GET: /Projects/BidPackage/Create
-        [Authorize(Roles = "subcontractor,materials_vendor")]
+        [Authorize(Roles = "general_contractor,subcontractor,materials_vendor")]
         public ActionResult Create(int projectId, int templateId)
         {
             EditBidPackageViewModel viewModel = new EditBidPackageViewModel();
@@ -71,7 +71,9 @@ namespace BCWeb.Areas.Project.Controllers
                                 Description = viewModel.Description,
                                 IsMaster = false,
                                 ProjectId = viewModel.ProjectId,
-                                TemplateBidPackageId = viewModel.TemplateId
+                                TemplateBidPackageId = viewModel.TemplateId,
+                                DocLink = viewModel.DocLink,
+                                Notes = viewModel.Notes
                             };
 
                     toCreate.Scopes = new List<BidPackageXScope>();
@@ -106,7 +108,23 @@ namespace BCWeb.Areas.Project.Controllers
 
         public ActionResult Details(int id)
         {
-            return View("Details");
+            var raw = _service.Get(id);
+            BidPackageDetailsViewModel viewModel = new BidPackageDetailsViewModel
+            {
+                Architect = raw.Project.Architect.CompanyName,
+                BidDateTime = raw.BidDateTime.Value.ToString(),
+                CreatingCompany = raw.CreatedBy.CompanyName,
+                Description = raw.Description,
+                DocLink = raw.DocLink,
+                Id = raw.Id,
+                Notes = raw.Notes,
+                ProjectName = raw.Project.Title,
+                WalkThruDateTime = ""
+            };
+
+            viewModel.Scopes = raw.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description).OrderBy(s => s).ToList();
+
+            return View("Details", viewModel);
         }
     }
 }

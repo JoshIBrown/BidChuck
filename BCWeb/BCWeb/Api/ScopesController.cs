@@ -85,6 +85,7 @@ namespace BCWeb.Controllers.Api
             CompanyProfile theCompany;
             Project theProject;
             BidPackage theBidPackage;
+            int bpId;
 
             // the company dictates the scopes available for management
             // if editing the company, display all scopes
@@ -126,8 +127,20 @@ namespace BCWeb.Controllers.Api
                         throw new ArgumentException("ident for a project must be an int");
                     }
                     break;
-                case "bidpackage":
-                    int bpId;
+                case "newbidpackage":
+                    if (int.TryParse(ident, out bpId))
+                    {
+                        theBidPackage = _service.GetBidPackage(bpId); // bid package to use as template
+                        selectedScopes = new List<Scope>(); // it's a new bp so nothing has been selected
+                        // pull scopes from master template of available scopes
+                        availableScopes = theBidPackage.Scopes.Select(s => s.Scope).ToList();
+                    }
+                    else
+                    {
+                        throw new ArgumentException("ident for a bid package must be an int");
+                    }
+                    break;
+                case "existingbidpackage":
                     if (int.TryParse(ident, out bpId))
                     {
                         theBidPackage = _service.GetBidPackage(bpId);

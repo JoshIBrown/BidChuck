@@ -17,25 +17,6 @@ namespace BCWeb.Tests.Areas.Project.Controllers
     public class BidPackageControllerTest
     {
 
-        [TestMethod]
-        public void GetCreateReturnsViewModelWithProjectId()
-        {
-            // arrange
-            Mock<IBidPackageServiceLayer> service = new Mock<IBidPackageServiceLayer>();
-            Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            service.Setup(s => s.GetProject(1)).Returns(new BCModel.Projects.Project { Id = 1, BidPackages = new List<BidPackage> { new BidPackage { Id = 1, IsMaster = true } } });
-            BidPackageController controller = new BidPackageController(service.Object, security.Object);
-
-            // act
-            var result = controller.Create(1);
-
-            // assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-            Assert.IsInstanceOfType(((ViewResult)result).ViewData.Model, typeof(EditBidPackageViewModel));
-            Assert.AreEqual(1, ((EditBidPackageViewModel)((ViewResult)result).ViewData.Model).ProjectId);
-            Assert.AreEqual(1, ((EditBidPackageViewModel)((ViewResult)result).ViewData.Model).TemplateId);
-        }
 
         [TestMethod]
         public void GetCreateReturnsViewModelWithProjectIdAndTemplateId()
