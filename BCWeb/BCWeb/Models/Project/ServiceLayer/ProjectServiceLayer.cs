@@ -190,5 +190,14 @@ namespace BCWeb.Models.Project.ServiceLayer
                                                       select r;
             return Invites.ToList();
         }
+
+
+        public IEnumerable<BidPackageXInvitee> GetInvitations(int companyId)
+        {
+            IEnumerable<BidPackageXInvitee> Invites = from r in _repo.QueryInvites()
+                                                      where r.CompanyId == companyId
+                                                      select r;
+            return Invites.ToList();
+        }
     }
 }

@@ -99,7 +99,7 @@ namespace BCWeb.Models.Project.Repository
 
         public IQueryable<BCModel.Projects.BidPackageXInvitee> QueryInvites()
         {
-            return _invites;
+            return _invites.Include(i => i.BidPackage).Include(i => i.BidPackage.Project);
         }
     }
 }

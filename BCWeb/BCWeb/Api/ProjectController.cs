@@ -68,5 +68,16 @@ namespace BCWeb.Api
 
             return list;
         }
+
+        public IEnumerable<ProjectListViewModel> GetProjectsInvitedTo()
+        {
+            UserProfile theUser = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
+            IEnumerable<BidPackageXInvitee> invites = _service.GetInvitations(theUser.CompanyId);
+            var projects = invites.Select(i => i.BidPackage.Project).Distinct();
+            var viewModel = projects.Select(p => new ProjectListViewModel { Id = p.Id, Title = p.Title, Architect = p.Architect.CompanyName });
+
+
+            return viewModel;
+        }
     }
 }

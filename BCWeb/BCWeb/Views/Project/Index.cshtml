@@ -14,40 +14,75 @@
 <div class="row" ng-app="projectIndex">
     <div class="large-8 columns" ng-controller="ProjectIndexCtrl">
         <h5>my projects</h5>
-        <div class="row">
-            <div class="large-6 columns">
-                <table>
-                    <caption>Projects I created</caption>
-                    <thead>
-                        <tr>
-                            <th>Id
-                            </th>
-                            <th>Name
-                            </th>
-                            <th>Architect
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="mcp in myCreateProjects">
-                            <td>{{mcp.Id}}
-                            </td>
-                            <td>{{mcp.Title}}
-                            </td>
-                            <td>{{mcp.Architect}}
-                            </td>
-                            <td>
-                                <a href="/Project/Details/{{mcp.Id}}">Details</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        @if (User.IsInRole("architect") || User.IsInRole("general_contractor"))
+        {
+            <div class="row">
+                <div class="large-6 columns">
+                    <table>
+                        <caption>Projects I created</caption>
+                        <thead>
+                            <tr>
+                                <th>Id
+                                </th>
+                                <th>Name
+                                </th>
+                                <th>Architect
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="mcp in myCreateProjects">
+                                <td>{{mcp.Id}}
+                                </td>
+                                <td>{{mcp.Title}}
+                                </td>
+                                <td>{{mcp.Architect}}
+                                </td>
+                                <td>
+                                    <a href="/Project/Details/{{mcp.Id}}">Details</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        Projects Created by my company<br />
-        Projects I have bid on<br />
-        Projects I have been invited to bid on<br />
+        }
+
+        @if (!User.IsInRole("architect"))
+        {
+            <div class="row">
+                <div class="large-6 columns">
+                    <table>
+                        <caption>Projects I have been invited to bid on</caption>
+                        <thead>
+                            <tr>
+                                <th>Id
+                                </th>
+                                <th>Name
+                                </th>
+                                <th>Architect
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ip in invitedProjects">
+                                <td>{{ip.Id}}
+                                </td>
+                                <td>{{ip.Title}}
+                                </td>
+                                <td>{{ip.Architect}}
+                                </td>
+                                <td>
+                                    <a href="/Project/Details/{{ip.Id}}">Details</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
     </div>
 </div>
 @section scripts{
