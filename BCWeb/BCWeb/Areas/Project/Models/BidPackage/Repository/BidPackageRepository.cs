@@ -17,6 +17,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
         private DbSet<BidPackageXScope> _selectedScopes;
         private DbSet<Scope> _scopes;
         private DbSet<UserProfile> _users;
+        private DbSet<BCModel.Projects.Project> _projects;
 
         public BidPackageRepository()
         {
@@ -26,10 +27,11 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
             _selectedScopes = _context.BidPackageScopes;
             _scopes = _context.Scopes;
             _users = _context.UserProfiles;
+            _projects = _context.Projects;
         }
         public BCModel.Projects.Project GetProject(int id)
         {
-            throw new NotImplementedException();
+            return _projects.Find(id);
         }
 
         public BCModel.CompanyProfile GetCompany(int id)

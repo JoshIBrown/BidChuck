@@ -15,6 +15,7 @@
                 {
                     
                 <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId, templateId = Model.BidPackageId })</li>
+                <li>@Html.RouteLink("Manage Bid Packages", "Project_default", new { controller = "BidPackage", action = "Index", projectId = Model.ProjectId })</li>
                 }
 
                 if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))

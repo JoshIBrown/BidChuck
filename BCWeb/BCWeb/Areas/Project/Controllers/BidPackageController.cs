@@ -1,4 +1,5 @@
-﻿using BCModel.Projects;
+﻿using BCModel;
+using BCModel.Projects;
 using BCWeb.Areas.Project.Models.BidPackage.ServiceLayer;
 using BCWeb.Areas.Project.Models.BidPackage.ViewModel;
 using BCWeb.Helpers;
@@ -27,9 +28,23 @@ namespace BCWeb.Areas.Project.Controllers
         //
         // GET: /Projects/BidPackage/
 
-        public ActionResult Index()
+        public ActionResult Index(int projectId)
         {
-            return View();
+            UserProfile user = _service.GetUser(_security.GetUserId(User.Identity.Name));
+
+            IEnumerable<BidPackageListItemViewModel> bps = _service.GetEnumerableByCompanyAndProject(user.CompanyId, projectId)
+                .Select(bp => new BidPackageListItemViewModel
+                {
+                    BidDateTime = bp.BidDateTime.Value.ToString(),
+                    Description = bp.Description,
+                    Id = bp.Id,
+                    Invited = bp.Invitees == null ? 0 : bp.Invitees.Count()
+                });
+
+            BCModel.Projects.Project project = _service.GetProject(projectId);
+            ProjectBidPackagesViewModel viewModel = new ProjectBidPackagesViewModel { ProjectId = projectId, ProjectName = project.Title, BidPackages = bps };
+
+            return View("Index", viewModel);
         }
 
 

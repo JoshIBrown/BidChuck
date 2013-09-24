@@ -199,5 +199,22 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
                     where r.CreatedById == id
                     select r).AsEnumerable();
         }
+
+
+        public IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProject(int projectId)
+        {
+            return (from r in _repo.Query()
+                    where r.ProjectId == projectId
+                    select r).ToList();
+        }
+
+
+        public IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByCompanyAndProject(int companyId, int projectId)
+        {
+            return (from r in _repo.Query()
+                    where r.ProjectId == projectId
+                    && r.CreatedById == companyId
+                    select r).ToList();
+        }
     }
 }

@@ -1,6 +1,35 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model BCWeb.Areas.Project.Models.BidPackage.ViewModel.ProjectBidPackagesViewModel
+@{
+    ViewBag.Title = "Bid Packages";
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="large-12 columns">
+        <h2>@ViewBag.Title for @Html.DisplayFor(m => m.ProjectName)</h2>
+        @Html.HiddenFor(m => m.ProjectId)
+    </div>
+</div>
+
+
+@foreach (var bp in Model.BidPackages)
+{
+    <div class="row">
+        <div class="large-8 columns">
+            <div class="panel">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h5>@bp.Description</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-4 columns">
+                        Bid Date/Time: @bp.BidDateTime
+                    </div>
+                    <div class="large-4 columns">Invited: @bp.Invited</div>
+                    <div class="large-4 columns">@Html.RouteLink("Details...", "Project_default", new { controller = "BidPackage", action = "Details", id = bp.Id })</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

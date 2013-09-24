@@ -27,5 +27,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         IEnumerable<BCModel.Projects.BidPackage> GetByProject(int id);
         IEnumerable<BCModel.Projects.BidPackage> GetByCompany(int id);
         UserProfile GetUser(int id);
+        IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProject(int projectId);
+        IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByCompanyAndProject(int companyId, int projectId);
     }
 }
