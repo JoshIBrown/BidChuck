@@ -58,6 +58,12 @@ namespace BCWeb
                 "~/Scripts/angular/controllers/CreateBidPackageCtrl.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/bidpackageedit").Include(
+                "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/controllers/EditBidPackageCtrl.js"
+                ));
+
             bundles.Add(new ScriptBundle("~/bundles/bidpackageindex").Include(
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",

@@ -16,6 +16,6 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ViewModel
         public string DocLink { get; set; }
         public string Notes { get; set; }
 
-        public int TemplateId { get; set; }
+        public int? TemplateId { get; set; }
     }
 }

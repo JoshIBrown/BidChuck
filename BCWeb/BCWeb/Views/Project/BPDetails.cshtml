@@ -26,6 +26,7 @@
                 if (User.IsInRole("architect"))
                 {
                 <li>@Html.RouteLink("Invite General Contractors", "Project_default", new { controller = "Invitation", action = "Send", id = Model.BidPackageId })</li>
+                <li>View Invited</li>
                 }
             }
 

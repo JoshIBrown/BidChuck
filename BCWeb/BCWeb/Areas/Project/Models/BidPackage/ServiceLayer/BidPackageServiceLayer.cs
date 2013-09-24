@@ -90,6 +90,20 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
             private set;
         }
 
+        public bool validateBidPackage(BCModel.Projects.BidPackage bp)
+        {
+            bool valid = true;
+            //List<BCModel.Projects.BidPackage> bidPackages = (from r in _repo.Query()
+            //                                                where r.ProjectId == bp.ProjectId
+            //                                                && r.CreatedById == bp.CreatedById
+            //                                                && r.Id != bp.Id
+            //                                                select r).ToList();
+            
+
+
+            return true;
+        }
+
         public bool Create(BCModel.Projects.BidPackage entity)
         {
             try

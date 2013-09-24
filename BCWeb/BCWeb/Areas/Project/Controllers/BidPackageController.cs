@@ -133,6 +133,7 @@ namespace BCWeb.Areas.Project.Controllers
                 DocLink = raw.DocLink,
                 Id = raw.Id,
                 Notes = raw.Notes,
+                ProjectId = raw.ProjectId,
                 ProjectName = raw.Project.Title,
                 WalkThruDateTime = ""
             };
@@ -140,6 +141,91 @@ namespace BCWeb.Areas.Project.Controllers
             viewModel.Scopes = raw.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description).OrderBy(s => s).ToList();
 
             return View("Details", viewModel);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var raw = _service.Get(id);
+            EditBidPackageViewModel viewModel = new EditBidPackageViewModel
+            {
+                BidDateTime = raw.BidDateTime.HasValue ? raw.BidDateTime.Value : raw.Project.BidDateTime,
+                Description = raw.Description,
+                DocLink = raw.DocLink,
+                Id = raw.Id,
+                Notes = raw.Notes,
+                ProjectId = raw.ProjectId,
+                TemplateId = raw.TemplateBidPackageId
+            };
+
+            return View("Edit", viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditBidPackageViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                int userId = _security.GetUserId(User.Identity.Name);
+                int companyId = _service.GetUser(userId).CompanyId;
+
+                try
+                {
+                    BidPackage toUpdate = _service.Get(viewModel.Id);
+
+                    if (toUpdate.BidDateTime != viewModel.BidDateTime)
+                        toUpdate.BidDateTime = viewModel.BidDateTime;
+
+                    if (toUpdate.Description != viewModel.Description)
+                        toUpdate.Description = viewModel.Description;
+
+                    if (toUpdate.DocLink != viewModel.DocLink)
+                        toUpdate.DocLink = viewModel.DocLink;
+
+                    if (toUpdate.Notes != viewModel.Notes)
+                        toUpdate.Notes = viewModel.Notes;
+
+                    // get scopes that have been added
+                    IEnumerable<int> toAdd = viewModel.SelectedScope.Where(s => !toUpdate.Scopes.Select(x => x.ScopeId).Contains(s));
+
+                    // get scopes that have been removed
+                    IEnumerable<BidPackageXScope> toRemove = toUpdate.Scopes.Where(s => !viewModel.SelectedScope.Contains(s.ScopeId));
+
+
+                    // add new scopes
+                    for (int i = 0; i < toAdd.Count(); i++)
+                    {
+                        toUpdate.Scopes.Add(new BidPackageXScope { BidPackage = toUpdate, ScopeId = toAdd.ElementAt(i) });
+                    }
+
+                    // remove scopes
+                    for (int i = 0; i < toRemove.Count(); i++)
+                    {
+                        toUpdate.Scopes.Remove(toRemove.ElementAt(i));
+                    }
+
+                    // try to update db record
+                    if (_service.Update(toUpdate))
+                    {
+                        return RedirectToRoute("Project_default", new { controller = "BidPackage", action = "Details", id = toUpdate.Id });
+                    }
+                    else
+                    {
+                        Util.MapValidationErrors(_service.ValidationDic, this.ModelState);
+                        return View("Edit", viewModel);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("Exception", ex.Message);
+                    return View("Edit", viewModel);
+                }
+
+            }
+            else
+            {
+                return View("Edit", viewModel);
+            }
         }
     }
 }

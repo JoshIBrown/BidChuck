@@ -8,6 +8,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ViewModel
     public class BidPackageDetailsViewModel
     {
         public int Id { get; set; }
+        public int ProjectId { get; set; }
         public string Description { get; set; }
         public string ProjectName { get; set; }
         public string Architect { get; set; }

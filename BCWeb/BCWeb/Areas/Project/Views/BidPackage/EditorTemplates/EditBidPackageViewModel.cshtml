@@ -1,0 +1,22 @@
+﻿@model BCWeb.Areas.Project.Models.BidPackage.ViewModel.EditBidPackageViewModel
+<div class="row">
+    <div class="large-4 columns left">
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.ProjectId)
+        @Html.HiddenFor(m => m.TemplateId)
+        @Html.AntiForgeryToken()
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description)
+        @Html.LabelFor(m => m.BidDateTime)
+        @Html.TextBoxFor(m => m.BidDateTime)
+        @Html.LabelFor(m => m.WalkThroughDateTime)
+        @Html.TextBoxFor(m => m.WalkThroughDateTime)
+        @Html.LabelFor(m => m.DocLink)
+        @Html.TextBoxFor(m => m.DocLink)
+        @Html.LabelFor(m => m.Notes)
+        @Html.TextAreaFor(m => m.Notes)
+    </div>
+    <div class="large-8 columns left">
+        @Html.Partial("_ScopePicker")
+    </div>
+</div>

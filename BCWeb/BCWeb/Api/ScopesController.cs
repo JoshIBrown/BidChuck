@@ -140,7 +140,7 @@ namespace BCWeb.Controllers.Api
                         throw new ArgumentException("ident for a bid package must be an int");
                     }
                     break;
-                case "existingbidpackage":
+                case "existingbidpackage": // should be able to reach this as an architect.  updates to master BP are handles when editing the project
                     if (int.TryParse(ident, out bpId))
                     {
                         theBidPackage = _service.GetBidPackage(bpId);

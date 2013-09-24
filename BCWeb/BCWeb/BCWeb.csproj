@@ -299,6 +299,7 @@
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Areas\Account\Views\Users\Add.cshtml" />
     <Content Include="Scripts\angular\controllers\BidPackageIndexCtrl.js" />
+    <Content Include="Scripts\angular\controllers\EditBidPackageCtrl.js" />
     <Content Include="Scripts\angular\controllers\CreateBidPackageCtrl.js" />
     <Content Include="Scripts\angular\controllers\EditProjectCtrl.js" />
     <Content Include="Scripts\angular\controllers\SendInvitationCtrl.js" />
@@ -309,6 +310,8 @@
     <Content Include="Areas\Project\Views\BidPackage\Create.cshtml" />
     <Content Include="Areas\Project\Views\Invitation\Send.cshtml" />
     <Content Include="Areas\Project\Views\BidPackage\Details.cshtml" />
+    <Content Include="Areas\Project\Views\BidPackage\EditorTemplates\EditBidPackageViewModel.cshtml" />
+    <Content Include="Areas\Project\Views\BidPackage\Edit.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
