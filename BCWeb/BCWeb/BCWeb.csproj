@@ -221,6 +221,7 @@
     <Compile Include="Areas\Project\Models\BidPackage\ServiceLayer\IBidPackageServiceLayer.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\ViewModel\BidPackageDetailsViewModel.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\ViewModel\BidPackageListItemViewModel.cs" />
+    <Compile Include="Areas\Project\Models\BidPackage\ViewModel\BidPackageScopeMgmtViewModel.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\ViewModel\EditBidPackageViewModel.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\ViewModel\ProjectBidPackagesViewModel.cs" />
     <Compile Include="Areas\Project\Models\Invitation\Repository\IInvitationRepository.cs" />

@@ -4,13 +4,15 @@
     app.controller('BidPackageCtrl', ['$scope', '$http', function ($scope, $http) {
 
 
+        angular.element('#pickerLegend').text('* Bold text indicate scopes that have been chosen for this project.');
+
         $scope.t1Parent = 0;
         $scope.t2Parent = 0;
         $scope.selectedScopes = [];
         $scope.templateId = angular.element('#TemplateId').val();
 
 
-        $http.get('/api/Scopes/GetScopesToManage/?type=newbidpackage&ident=' + $scope.templateId)
+        $http.get('/api/Scopes/GetScopesForBidPackage/?type=new&ident=' + $scope.templateId)
              .success(function (data) {
                  $scope.Scopes = data;
                  $scope.selectedScopes = $.map($scope.Scopes, function (data) {

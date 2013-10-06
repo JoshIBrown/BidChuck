@@ -1,15 +1,12 @@
-﻿@model BCWeb.Models.Project.ViewModel.BPProjectDetailsViewModel
+﻿@model BCWeb.Models.Project.ViewModel.SubsAndVendProjectDetailsViewModel
 @{
     ViewBag.Title = "Project Details";
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
 <div class="row">
-    <div class="large-2 columns">
+    @*<div class="large-2 columns">
         <ul class="side-nav">
-            @* limit to architect*@
-            <li>@Html.RouteLink("Edit...", "Default", new { controller = "Project", action = "Edit", id = Model.Id })</li>
-
             @{
                 if (User.IsInRole("general_contractor"))
                 {
@@ -29,11 +26,11 @@
             }
 
         </ul>
-    </div>
+    </div>*@
     <div class="large-8 columns left">
         <div class="row">
             <div class="large-4 columns">
-                <h2>@ViewBag.Title</h2>@Html.HiddenFor(m => m.ProjectId)@Html.HiddenFor(m => m.BidPackageId)
+                <h2>@ViewBag.Title</h2>@Html.HiddenFor(m => m.ProjectId)
             </div>
         </div>
 
@@ -50,14 +47,6 @@
                 @Html.LabelFor(m => m.Description)
                 @Html.DisplayFor(m => m.Description)
             </div>
-        </div>
-
-        <div class="row">
-            <div class="large-4 columns">
-                @Html.LabelFor(m => m.BidDateTime)
-                @Html.DisplayFor(m => m.BidDateTime)
-            </div>
-
         </div>
 
         <div class="row">
@@ -101,15 +90,11 @@
                 </div>
             </div>
         </div>
+
+        @* break out by GC invite *@
         <div class="row">
             <div class="large-12 columns">
-                @Html.LabelFor(m => m.SelectedScope)
-                <ul>
-                    @foreach (var x in Model.SelectedScope)
-                    {
-                        <li>@x</li>
-                    }
-                </ul>
+                
             </div>
         </div>
 

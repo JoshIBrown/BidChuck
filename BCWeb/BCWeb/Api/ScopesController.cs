@@ -2,6 +2,7 @@
 using BCModel.Projects;
 using BCWeb.Areas.Account.Models.Scopes.ServiceLayer;
 using BCWeb.Areas.Account.Models.Scopes.ViewModel;
+using BCWeb.Areas.Project.Models.BidPackage.ViewModel;
 using BCWeb.Models;
 using BCWeb.Models.GenericViewModel;
 using Microsoft.Web.WebPages.OAuth;
@@ -16,7 +17,7 @@ using WebMatrix.WebData;
 
 namespace BCWeb.Controllers.Api
 {
-    [Authorize(Roles = "Manager,Administrator")]
+    [Authorize]
     public class ScopesController : ApiController
     {
 
@@ -61,6 +62,48 @@ namespace BCWeb.Controllers.Api
 
             return viewModel;
         }
+
+        // /api/Scopes/GetScopesForBidPackage?type=new&ident=1
+        public IEnumerable<BidPackageScopeMgmtViewModel> GetScopesForBidPackage([FromUri]string type, [FromUri]int ident)
+        {
+            IEnumerable<BidPackageScopeMgmtViewModel> viewModel;
+            BidPackage theBidPackage;
+            IEnumerable<Scope> selectedScopes;
+            IEnumerable<Scope> templatedScopes;
+
+            switch (type)
+            {
+                case "new":
+                    // should never wind up in scenario where creating master bid package and using this
+                    theBidPackage = _service.GetBidPackage(ident); // bid package to use as template
+                    selectedScopes = new List<Scope>(); // it's a new bp so nothing has been selected
+                    // pull scopes from master template of available scopes
+                    templatedScopes = theBidPackage.Scopes.Select(s => s.Scope).ToList();
+                    break;
+                case "existing":
+                    theBidPackage = _service.GetBidPackage(ident);
+                    selectedScopes = theBidPackage.Scopes.Select(s => s.Scope).ToList();
+                    // pull scopes from master template of available scopes
+                    templatedScopes = theBidPackage.TemplateBidPackage.Scopes.Select(s => s.Scope).ToList();
+                    break;
+                default:
+                    throw new ArgumentException("unknown type");
+            }
+
+
+            viewModel = _service.GetEnumerable().Select(s => new BidPackageScopeMgmtViewModel
+            {
+                Templated = templatedScopes.Contains(s),
+                Checked = selectedScopes.Contains(s),
+                Description = s.Description,
+                Id = s.Id,
+                ParentId = s.ParentId,
+                CsiNumber = s.CsiNumber
+            }).ToArray();
+
+            return viewModel;
+        }
+
 
         // /api/Scopes/GetScopesToManage?user=soandso@ladeeda.com
         public IEnumerable<ScopeMgmtViewModel> GetScopesToManage([FromUri]string type, [FromUri]string ident)
@@ -140,7 +183,7 @@ namespace BCWeb.Controllers.Api
                         throw new ArgumentException("ident for a bid package must be an int");
                     }
                     break;
-                case "existingbidpackage": // should be able to reach this as an architect.  updates to master BP are handles when editing the project
+                case "existingbidpackage":
                     if (int.TryParse(ident, out bpId))
                     {
                         theBidPackage = _service.GetBidPackage(bpId);
@@ -173,6 +216,7 @@ namespace BCWeb.Controllers.Api
 
 
         // FIXME
+        [Authorize(Roles = "Manager,Administrator")]
         [ValidateHttpAntiForgeryTokenAttribute]
         public JQueryPostResult PutSelectedScopes([FromBody] SelectedScopesViewModel viewModel)
         {

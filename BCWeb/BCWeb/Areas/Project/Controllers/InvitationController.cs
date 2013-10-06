@@ -50,7 +50,7 @@ namespace BCWeb.Areas.Project.Controllers
                 List<BidPackageXInvitee> invites = new List<BidPackageXInvitee>();
                 foreach (var c in viewModel.CompanyId)
                 {
-                    invites.Add(new BidPackageXInvitee { BidPackageId = viewModel.BidPackageId, CompanyId = c, Sent = DateTime.Now, InviteStatus = InviteStatus.Sent });
+                    invites.Add(new BidPackageXInvitee { BidPackageId = viewModel.BidPackageId, CompanyId = c, Sent = DateTime.Now});
                 }
 
                 if (_service.CreateRange(invites))

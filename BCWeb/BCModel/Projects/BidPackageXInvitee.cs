@@ -32,7 +32,7 @@ namespace BCModel.Projects
         public string Email { get; set; }
 
         public DateTime Sent { get; set; }
-
-        public InviteStatus InviteStatus { get; set; }
+        public DateTime Accepted { get; set; }
+        public DateTime Rejected { get; set; }
     }
 }

@@ -21,8 +21,9 @@
                                 ng-model="x.Checked"
                                 ng-change="changeScopeSelection(x)"
                                 value="{{x.Id}}" />
-                            <span ng-click="t1Expand(x.Id)">{{x.CsiNumber | truncate: 2: ""}}
-                                    {{x.Description | truncate: 30}}</span></td>
+                            <span ng-click="t1Expand(x.Id)"
+                                ng-style="x.Templated && { 'font-weight' : 'bold' }">{{x.CsiNumber | truncate: 2: ""}} {{x.Description | truncate: 30}}
+                            </span></td>
                         <td class="width:30px;"><span style="display: inline-block !important;"
                             class="ui-icon ui-icon-circle-arrow-e"
                             ng-click="t1Expand(x.Id)"></span></td>
@@ -45,8 +46,8 @@
                                 ng-model="y.Checked"
                                 ng-change="changeScopeSelection(y)"
                                 value="{{y.Id}}" />
-                            <span ng-click="t2Expand(y.Id)">{{y.CsiNumber}} 
-                                    {{y.Description | truncate: 26}}</span></td>
+                            <span ng-click="t2Expand(y.Id)"
+                                ng-style="x.Templated && { 'font-weight' : 'bold' }">{{y.CsiNumber}} {{y.Description | truncate: 26}}</span></td>
                         <td><span style="display: inline-block !important;"
                             class="ui-icon ui-icon-circle-arrow-e"
                             ng-click="t2Expand(y.Id)"></span></td>
@@ -67,9 +68,8 @@
                                 type="checkbox"
                                 ng-model="z.Checked"
                                 ng-change="changeScopeSelection(z)"
-                                value="{{z.Id}}" />
-                            {{z.CsiNumber}}
-                                    {{z.Description | truncate: 31}}</td>
+                                value="{{z.Id}}" /><span ng-style="x.Templated && { 'font-weight' : 'bold' }">
+                            {{z.CsiNumber}} {{z.Description | truncate: 31}}</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -78,16 +78,20 @@
     </div>
 </fieldset>
 
-
 <div class="row">
-    <div class="small-12 columns ">
+    <div class="large-6 columns">
+        <span id="pickerLegend"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns ">
         <fieldset class="panel">
             <legend>Selected Scopes</legend>
             <ul class="inline-list">
                 <li ng-repeat="s in selectedScopes | filter:{Checked: true} | orderBy: 'Csi'">
                     <div class="alert-box radius" style="padding: 2px 25px 2px 7px;">
                         {{s.Csi}} {{s.Desc}}
-                        <input type="checkbox" name ="SelectedScope" value="{{s.Id}}" ng-checked="s.Checked" style="display:none;" />
+                        <input type="checkbox" name="SelectedScope" value="{{s.Id}}" ng-checked="s.Checked" style="display: none;" />
                         <a href="#" class="close" ng-click="removeTag(s)">&times;</a>
                     </div>
                 </li>
