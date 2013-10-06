@@ -136,5 +136,13 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
                 return false;
             }
         }
+
+
+        public IEnumerable<BCModel.Projects.BidPackageXInvitee> GetEnumerableByBidPackage(int bpId)
+        {
+            return (from r in _repo.Query()
+                    where r.BidPackageId == bpId
+                    select r).AsEnumerable();
+        }
     }
 }

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BCWeb.Areas.Project.Models.Invitation.ViewModel.InvitationListItem>
+@{
+    ViewBag.Title = "Bid Package Invitations";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<div class="row">
+    <div class="large-12 columns">
+        <h2>ViewBag.Title</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-8 columns">
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model.OrderBy(m => m.SortOrder))
+                {
+                    <tr>
+                        <td>@i.CompanyName</td>
+                        <td>@i.Status</td>
+                        <td>Action Button</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

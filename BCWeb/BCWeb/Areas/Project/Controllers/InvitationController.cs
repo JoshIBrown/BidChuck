@@ -38,7 +38,7 @@ namespace BCWeb.Areas.Project.Controllers
             BidPackageInvitationViewModel viewModel = new BidPackageInvitationViewModel();
             viewModel.BidPackageId = id;
 
-            return View("Send",viewModel);
+            return View("Send", viewModel);
         }
 
         [HttpPost]
@@ -50,7 +50,7 @@ namespace BCWeb.Areas.Project.Controllers
                 List<BidPackageXInvitee> invites = new List<BidPackageXInvitee>();
                 foreach (var c in viewModel.CompanyId)
                 {
-                    invites.Add(new BidPackageXInvitee { BidPackageId = viewModel.BidPackageId, CompanyId = c, Sent = DateTime.Now});
+                    invites.Add(new BidPackageXInvitee { BidPackageId = viewModel.BidPackageId, CompanyId = c, SentDate = DateTime.Now });
                 }
 
                 if (_service.CreateRange(invites))
@@ -70,6 +70,24 @@ namespace BCWeb.Areas.Project.Controllers
                 return View("Send", viewModel);
             }
 
+        }
+
+        [HttpGet]
+        public ActionResult ViewInvited(int bpId)
+        {
+            IEnumerable<InvitationListItem> viewModel = _service.GetEnumerableByBidPackage(bpId)
+                .Select(i => new InvitationListItem
+                {
+                    Id = i.Id,
+                    BidPackageId = i.BidPackageId,
+                    InvitedCompanyId = i.CompanyId.HasValue ? i.CompanyId.Value : -1,
+                    CompanyName = i.CompanyId.HasValue ? i.Company.CompanyName : i.Email,
+                    SentDate = i.SentDate.ToShortDateString(),
+                    Status = i.AcceptedDate.HasValue ? "Accepted" : i.RejectedDate.HasValue ? "Declined" : "Invited",
+                    SortOrder = i.AcceptedDate.HasValue ? 1 : i.RejectedDate.HasValue ? 3 : 2
+                });
+
+            return View("ViewInvited", viewModel);
         }
     }
 }

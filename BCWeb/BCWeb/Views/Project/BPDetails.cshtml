@@ -7,7 +7,7 @@
 <div class="row">
     <div class="large-2 columns">
         <ul class="side-nav">
-            @* limit to architect*@
+            @* limit to creator*@
             <li>@Html.RouteLink("Edit...", "Default", new { controller = "Project", action = "Edit", id = Model.ProjectId })</li>
 
             @{
@@ -17,16 +17,11 @@
                 <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId, templateId = Model.BidPackageId })</li>
                 <li>@Html.RouteLink("Manage Bid Packages", "Project_default", new { controller = "BidPackage", action = "Index", projectId = Model.ProjectId })</li>
                 }
-
-                if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))
-                {
-                <li><a href="#">View Bid Packages</a></li>
-                }
-
+                
                 if (User.IsInRole("architect"))
                 {
                 <li>@Html.RouteLink("Invite General Contractors", "Project_default", new { controller = "Invitation", action = "Send", id = Model.BidPackageId })</li>
-                <li>View Invited</li>
+                <li>@Html.RouteLink("View Invited", "Project_default", new { controller = "Invitation", action = "ViewInvited", bpId = Model.BidPackageId })</li>
                 }
             }
 

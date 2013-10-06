@@ -8,9 +8,6 @@ using System.Text;
 
 namespace BCModel.Projects
 {
-    public enum InviteStatus{
-        Sent = 0, Accepted = 1, Rejected =2
-    }
     public class BidPackageXInvitee
     {
         [Key]
@@ -31,8 +28,8 @@ namespace BCModel.Projects
         [EmailAddress]
         public string Email { get; set; }
 
-        public DateTime Sent { get; set; }
-        public DateTime Accepted { get; set; }
-        public DateTime Rejected { get; set; }
+        public DateTime SentDate { get; set; }
+        public DateTime? AcceptedDate { get; set; }
+        public DateTime? RejectedDate { get; set; }
     }
 }

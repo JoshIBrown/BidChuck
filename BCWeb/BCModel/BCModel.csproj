@@ -166,6 +166,10 @@
     <Compile Include="Migrations\201310052313425_addDateFieldToInvitation.Designer.cs">
       <DependentUpon>201310052313425_addDateFieldToInvitation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310062123185_makeAcceptRejectInvitationNullable.cs" />
+    <Compile Include="Migrations\201310062123185_makeAcceptRejectInvitationNullable.Designer.cs">
+      <DependentUpon>201310062123185_makeAcceptRejectInvitationNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -277,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310052313425_addDateFieldToInvitation.resx">
       <DependentUpon>201310052313425_addDateFieldToInvitation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310062123185_makeAcceptRejectInvitationNullable.resx">
+      <DependentUpon>201310062123185_makeAcceptRejectInvitationNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

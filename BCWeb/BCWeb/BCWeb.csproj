@@ -229,6 +229,7 @@
     <Compile Include="Areas\Project\Models\Invitation\ServiceLayer\IInvitationServiceLayer.cs" />
     <Compile Include="Areas\Project\Models\Invitation\ServiceLayer\InvitationServiceLayer.cs" />
     <Compile Include="Areas\Project\Models\Invitation\ViewModel\BidPackageInvitationViewModel.cs" />
+    <Compile Include="Areas\Project\Models\Invitation\ViewModel\InvitationListItem.cs" />
     <Compile Include="Areas\Project\ProjectsAreaRegistration.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -313,6 +314,7 @@
     <Content Include="Areas\Project\Views\BidPackage\Details.cshtml" />
     <Content Include="Areas\Project\Views\BidPackage\EditorTemplates\EditBidPackageViewModel.cshtml" />
     <Content Include="Areas\Project\Views\BidPackage\Edit.cshtml" />
+    <Content Include="Areas\Project\Views\Invitation\ViewInvited.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />

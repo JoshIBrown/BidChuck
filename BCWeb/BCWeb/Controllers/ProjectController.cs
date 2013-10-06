@@ -84,7 +84,7 @@ namespace BCWeb.Controllers
                     // if user is a GC, self-invite
                     if (_security.IsUserInRole("general_contractor"))
                     {
-                        projectPackage.Invitees.Add(new BidPackageXInvitee { BidPackage = projectPackage, CompanyId = companyId, Sent = DateTime.Now });
+                        projectPackage.Invitees.Add(new BidPackageXInvitee { BidPackage = projectPackage, CompanyId = companyId, SentDate = DateTime.Now });
                     }
 
                     // add bp to project

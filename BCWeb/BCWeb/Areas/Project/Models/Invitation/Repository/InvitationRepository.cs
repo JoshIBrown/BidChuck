@@ -73,7 +73,7 @@ namespace BCWeb.Areas.Project.Models.Invitation.Repository
 
         public IQueryable<BCModel.Projects.BidPackageXInvitee> Query()
         {
-            return _invites;
+            return _invites.Include(i=>i.Company).Include(i=>i.BidPackage);
         }
 
         public void Save()
