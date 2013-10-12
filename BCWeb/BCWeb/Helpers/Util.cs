@@ -111,6 +111,10 @@ namespace BCWeb.Helpers
         ChangeCompanyInfoSuccess,
         ChangeEmailSuccess,
         ChangeProfileSuccess,
-        NewDelegateSuccess
+        NewDelegateSuccess,
+        PublishSuccess,
+        PublishFail,
+        UnpublishSuccess,
+        UnpublishFail
     }
 }

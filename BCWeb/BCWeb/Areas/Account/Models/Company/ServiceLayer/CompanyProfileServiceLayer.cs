@@ -126,5 +126,11 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
         {
             return _repo.QueryUserProfiles().Where(predicate).AsEnumerable();
         }
+
+
+        public BCModel.UserProfile GetUserProfile(int id)
+        {
+            return _repo.GetUserProfile(id);
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace BCWeb.Areas.Account.Controllers
     [Authorize]
     public class CompanyController : Controller
     {
-        
+
         private IWebSecurityWrapper _security;
         private ICompanyProfileServiceLayer _serviceLayer;
 
@@ -25,13 +25,67 @@ namespace BCWeb.Areas.Account.Controllers
         }
 
         [Authorize(Roles = "Manager,Administrator")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Publish(int id)
+        {
+            CompanyProfile company = _serviceLayer.Get(id);
+            UserProfile user = _serviceLayer.GetUserProfile(_security.GetUserId(User.Identity.Name));
+            if (company.Users.Contains(user))
+            {
+                // publish the company
+                company.Published = true;
+                if (_serviceLayer.Update(company))
+                {
+                    return RedirectToRoute("Default", new { controller = "Account", action = "Manage", message = ManageMessageId.PublishSuccess });
+                }
+                else
+                {
+                    return RedirectToRoute("Default", new { controller = "Account", action = "Manage", message = ManageMessageId.PublishFail });
+                }
+            }
+            else
+            {
+                // you are not allowed to do this
+                throw new Exception("unauthorized operation");
+            }
+        }
+
+        [Authorize(Roles = "Manager,Administrator")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Unpublish(int id)
+        {
+            CompanyProfile company = _serviceLayer.Get(id);
+            UserProfile user = _serviceLayer.GetUserProfile(_security.GetUserId(User.Identity.Name));
+            if (company.Users.Contains(user))
+            {
+                // publish the company
+                company.Published = false;
+                if (_serviceLayer.Update(company))
+                {
+                    return RedirectToRoute("Default", new { controller = "Account", action = "Manage", message = ManageMessageId.UnpublishSuccess });
+                }
+                else
+                {
+                    return RedirectToRoute("Default", new { controller = "Account", action = "Manage", message = ManageMessageId.UnpublishFail });
+                }
+            }
+            else
+            {
+                // you are not allowed to do this
+                throw new Exception("unauthorized operation");
+            }
+        }
+
+        [Authorize(Roles = "Manager,Administrator")]
         [HttpGet]
         public ActionResult Edit()
         {
 
             // get users company
             int userId = _security.GetUserId(User.Identity.Name);
-            var raw = _serviceLayer.GetUserProfiles(u=> u.UserId == userId).FirstOrDefault().Company;
+            var raw = _serviceLayer.GetUserProfiles(u => u.UserId == userId).FirstOrDefault().Company;
 
             // transpose into viewmodel
             EditCompanyViewModel viewModel = new EditCompanyViewModel
@@ -164,12 +218,12 @@ namespace BCWeb.Areas.Account.Controllers
                     company.BusinessType = viewModel.BusinessType;
                 }
 
-                
+
 
                 // update changes in the database
                 if (_serviceLayer.Update(company))
                 {
-                    return RedirectToRoute("Default", new { controller="Account", action="Manage", message = ManageMessageId.ChangeCompanyInfoSuccess });
+                    return RedirectToRoute("Default", new { controller = "Account", action = "Manage", message = ManageMessageId.ChangeCompanyInfoSuccess });
                 }
                 else
                 {

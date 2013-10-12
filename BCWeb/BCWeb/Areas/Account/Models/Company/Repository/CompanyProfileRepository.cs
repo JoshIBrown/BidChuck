@@ -71,5 +71,11 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         {
             return _users;   
         }
+
+
+        public UserProfile GetUserProfile(int id)
+        {
+            return _users.Find(id);
+        }
     }
 }

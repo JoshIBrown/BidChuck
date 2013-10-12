@@ -65,10 +65,10 @@ namespace BCWeb.Controllers
 
             if (ModelState.IsValid)
             {
-
                 UserProfile user = _serviceLayer.GetUserProfiles(u => u.Email.ToLower() == model.Email.Trim().ToLower()).FirstOrDefault();
 
-                if (user != null)
+                // if user exists and has confirmed their membership
+                if (user != null && _security.IsConfirmed(model.Email.Trim()))
                 {
                     try
                     {
@@ -85,8 +85,10 @@ namespace BCWeb.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Email", "Unknown email address.");
+                    ModelState.AddModelError("Email", "Either you have not confirmed your registration or this email address is unknown to us.");
                 }
+
+
             }
 
             // If we got this far, something failed, redisplay form
@@ -104,6 +106,10 @@ namespace BCWeb.Controllers
                 : message == ManageMessageId.ChangeEmailSuccess ? "Email successfully updated."
                 : message == ManageMessageId.ChangeProfileSuccess ? "Profile Information successfully updated."
                 : message == ManageMessageId.NewDelegateSuccess ? "New delegate successfully added."
+                : message == ManageMessageId.PublishFail ? "Unable to publish company."
+                : message == ManageMessageId.PublishSuccess ? "Company published."
+                : message == ManageMessageId.UnpublishSuccess ? "Company unpublished."
+                : message == ManageMessageId.UnpublishFail ? "Unable to unpublish company."
                 : "";
 
             var raw = _serviceLayer.GetUserProfile(_security.GetUserId(User.Identity.Name));
@@ -115,12 +121,14 @@ namespace BCWeb.Controllers
                 BusinessType = Util.GetEnumDescription(raw.Company.BusinessType),
                 City = raw.Company.City,
                 CompanyName = raw.Company.CompanyName,
+                CompanyId = raw.CompanyId,
                 Email = raw.Email,
                 OperatingRadius = raw.Company.OperatingDistance.ToString(),
                 Phone = raw.Company.Phone,
                 PostalCode = raw.Company.PostalCode,
                 State = raw.Company.State.Abbr,
-                Name = raw.FirstName + " " + raw.LastName
+                Name = raw.FirstName + " " + raw.LastName,
+                Published = raw.Company.Published
             };
 
             viewModel.Scopes = raw.Scopes
@@ -267,7 +275,7 @@ namespace BCWeb.Controllers
                                 LastName = model.LastName,
                                 CompanyId = cp.Id
                             }, true);
-                         
+
                         _security.AddUserToRole(model.Email, "Manager");
 
 
@@ -433,7 +441,7 @@ namespace BCWeb.Controllers
         [HttpGet]
         public ActionResult ChangePassword()
         {
-            
+
             // not used
             //ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(_security.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("ChangePassword");

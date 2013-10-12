@@ -17,6 +17,22 @@
             @if (Roles.IsUserInRole("Manager") || Roles.IsUserInRole("Administrator"))
             {
                 <li>@Html.RouteLink("Update Company Information", "Account_default", new { controller = "Company", action = "Edit" })</li>
+                if (Model.Published)
+                {
+                <li>@using (Html.BeginRouteForm("Account_default", new { controller = "Company", action = "Unpublish", id = Model.CompanyId }, FormMethod.Post, new { id = "PublishCompanyForm" }))
+                    {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('PublishCompanyForm').submit()">Unpublish</a>
+                    }</li>
+                }
+                else
+                {                
+                <li>@using (Html.BeginRouteForm("Account_default", new { controller = "Company", action = "Publish", id = Model.CompanyId }, FormMethod.Post, new { id = "PublishCompanyForm" }))
+                    {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('PublishCompanyForm').submit()">Publish</a>
+                    }</li>
+                }
             }
             <li>@Html.RouteLink("Update Personal Information", "Default", new { controller = "Account", action = "EditProfile" })</li>
             @*only show scopes for a sub or vendor who is the company manager*@

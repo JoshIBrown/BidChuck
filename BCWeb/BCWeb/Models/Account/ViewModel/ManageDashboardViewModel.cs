@@ -10,6 +10,7 @@ namespace BCWeb.Models.Account.ViewModel
         public string Name { get; set; }
         public string Email { get; set; }
         public string CompanyName { get; set; }
+        public int CompanyId { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }

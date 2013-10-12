@@ -15,5 +15,6 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
         //IEnumerable<BusinessType> GetBusinessTypes();
         IEnumerable<UserProfile> GetUserProfiles();
         IEnumerable<UserProfile> GetUserProfiles(Expression<Func<UserProfile, bool>> predicate);
+        UserProfile GetUserProfile(int id);
     }
 }

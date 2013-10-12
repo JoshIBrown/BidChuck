@@ -13,5 +13,7 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         IQueryable<State> QueryStates();
         //IQueryable<BusinessType> QueryBusinessTypes();
         IQueryable<UserProfile> QueryUserProfiles();
+
+        UserProfile GetUserProfile(int id);
     }
 }

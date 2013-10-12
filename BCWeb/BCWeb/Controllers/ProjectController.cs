@@ -171,6 +171,7 @@ namespace BCWeb.Controllers
                     Title = theProject.Title,
                     BidPackages = bps
                 };
+                // get distinct list of scopes
 
 
                 return View("SubAndVendDetails", sAndVViewModel);

@@ -37,5 +37,6 @@ namespace BCWeb.Models.Project.ViewModel
         public string ConstructionType { get; set; }
 
         public IEnumerable<ProjectBPViewModel> BidPackages { get; set; }
+        // linq pivot
     }
 }
