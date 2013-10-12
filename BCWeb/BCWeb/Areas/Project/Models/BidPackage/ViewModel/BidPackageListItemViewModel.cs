@@ -11,5 +11,8 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ViewModel
         public string Description { get; set; }
         public string BidDateTime { get; set; }
         public int Invited { get; set; }
+        public int HaveBid { get; set; }
+        public int Accepted { get; set; }
+        public int Declined { get; set; }
     }
 }

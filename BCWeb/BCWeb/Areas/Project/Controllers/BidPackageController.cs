@@ -38,11 +38,13 @@ namespace BCWeb.Areas.Project.Controllers
                     BidDateTime = bp.BidDateTime.Value.ToString(),
                     Description = bp.Description,
                     Id = bp.Id,
-                    Invited = bp.Invitees == null ? 0 : bp.Invitees.Count()
+                    Invited = bp.Invitees == null ? 0 : bp.Invitees.Count(),
+                    Accepted = bp.Invitees == null ? 0: bp.Invitees.Where(i => i.AcceptedDate.HasValue).Count(),
+                    Declined = bp.Invitees == null ? 0 : bp.Invitees.Where(i => i.RejectedDate.HasValue).Count()
                 });
 
             BCModel.Projects.Project project = _service.GetProject(projectId);
-            ProjectBidPackagesViewModel viewModel = new ProjectBidPackagesViewModel { ProjectId = projectId, ProjectName = project.Title, BidPackages = bps };
+            ProjectBidPackagesViewModel viewModel = new ProjectBidPackagesViewModel { ProjectId = projectId, ProjectName = project.Title, BidPackages = bps, };
 
             return View("Index", viewModel);
         }

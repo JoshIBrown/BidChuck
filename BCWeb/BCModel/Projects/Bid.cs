@@ -20,10 +20,10 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual BidPackage BidPackage { get; set; }
 
-        public int CompanyId { get; set; }
-        [ForeignKey("CompanyId")]
+        public int BiddingCompanyId { get; set; }
+        [ForeignKey("BiddingCompanyId")]
         [IgnoreDataMember]
-        public virtual CompanyProfile Company{ get; set; }
+        public virtual CompanyProfile BiddingCompany{ get; set; }
 
         // more meta data
     }
