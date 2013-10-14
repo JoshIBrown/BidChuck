@@ -140,20 +140,20 @@ namespace BCWeb.Controllers
 
             UserProfile user = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
 
-            
-            
-            
+
+
+
             // if invited sub, show bp invited to
             if (User.IsInRole("subcontractor") || User.IsInRole("materials_vendor"))
             {
                 IEnumerable<BidPackageXInvitee> invites = _service.GetInvitations(theProject.Id, user.CompanyId);
-                IEnumerable<ProjectBPViewModel> bps = invites.Select(b => new ProjectBPViewModel
-                {
-                    Id = b.BidPackageId,
-                    BidDateTime = b.BidPackage.BidDateTime.Value,
-                    Description = b.BidPackage.Description,
-                    SelectedScope = b.BidPackage.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description)
-                });
+
+
+                //Dictionary<int,string> bidDates = invites.ToDictionary(i => i.CompanyId.Value, i => i.BidPackage.BidDateTime.Value.ToString());
+                Dictionary<int, IEnumerable<int>> scopeselection = _service.GetInvitationScopesByInvitingCompany(theProject.Id, user.CompanyId);
+                Dictionary<int, string> inviters = _service.GetInvitatingCompanies(theProject.Id, user.CompanyId);
+                Dictionary<int, string> scopes = _service.GetInvitationScopes(theProject.Id, user.CompanyId);
+
 
                 SubsAndVendProjectDetailsViewModel sAndVViewModel = new SubsAndVendProjectDetailsViewModel
                 {
@@ -169,10 +169,11 @@ namespace BCWeb.Controllers
                     ProjectType = theProject.ProjectType.ToDescription(),
                     State = theProject.State.Abbr,
                     Title = theProject.Title,
-                    BidPackages = bps
+                    Inviters = inviters,
+                    Scopes = scopes,
+                    ScopeSelection = scopeselection
                 };
                 // get distinct list of scopes
-
 
                 return View("SubAndVendDetails", sAndVViewModel);
             }
@@ -199,7 +200,7 @@ namespace BCWeb.Controllers
                 Title = theProject.Title
             };
             return View("BPDetails", gcViewModel);
-            
+
 
             //// if architect, show base level
             //ProjectDetailsViewModel viewModel = new ProjectDetailsViewModel

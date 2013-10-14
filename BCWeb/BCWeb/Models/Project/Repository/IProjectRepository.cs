@@ -21,5 +21,7 @@ namespace BCWeb.Models.Project.Repository
         IQueryable<CompanyProfile> GetCompanyProfiles();
 
         IQueryable<BidPackageXInvitee> QueryInvites();
+        IQueryable<BidPackage> QueryBidPackages();
+        IQueryable<BidPackageXScope> QueryBidPackageScopes();
     }
 }

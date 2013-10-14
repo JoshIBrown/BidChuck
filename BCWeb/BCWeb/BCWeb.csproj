@@ -277,6 +277,7 @@
     <Compile Include="Models\Project\ServiceLayer\IProjectServiceLayer.cs" />
     <Compile Include="Models\Project\ServiceLayer\ProjectServiceLayer.cs" />
     <Compile Include="Models\Project\ViewModel\BPProjectDetailsViewModel.cs" />
+    <Compile Include="Models\Project\ViewModel\Class1.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectBPViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\SubsAndVendProjectDetailsViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\EditProjectViewModel.cs" />

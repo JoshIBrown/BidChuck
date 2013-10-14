@@ -23,5 +23,9 @@ namespace BCWeb.Models.Project.ServiceLayer
 
         IEnumerable<BidPackageXInvitee> GetInvitations(int companyId);
         IEnumerable<BidPackageXInvitee> GetInvitations(int projectId, int companyId);
+
+        Dictionary<int, string> GetInvitationScopes(int projectId, int invitedCompanyId);
+        Dictionary<int, string> GetInvitatingCompanies(int projectId, int invitedCompanyId);
+        Dictionary<int, IEnumerable<int>> GetInvitationScopesByInvitingCompany(int projectId, int invitedCompanyId);
     }
 }

@@ -36,7 +36,14 @@ namespace BCWeb.Models.Project.ViewModel
         [Display(Name = "Construction Type")]
         public string ConstructionType { get; set; }
 
-        public IEnumerable<ProjectBPViewModel> BidPackages { get; set; }
+        //public IEnumerable<ProjectBPViewModel> BidPackages { get; set; }
+
         // linq pivot
+
+        public Dictionary<int, string> Scopes { get; set; }
+        public Dictionary<int, string> Inviters { get; set; }
+        public Dictionary<int, IEnumerable<int>> ScopeSelection { get; set; }
+        public Dictionary<int, string> BidDate { get; set; }
+        public Dictionary<int, string> WalkThroughDate { get; set; }
     }
 }

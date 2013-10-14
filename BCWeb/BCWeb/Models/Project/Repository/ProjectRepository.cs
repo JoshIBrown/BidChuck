@@ -14,13 +14,16 @@ namespace BCWeb.Models.Project.Repository
         private DbSet<UserProfile> _users;
         private DbSet<CompanyProfile> _companies;
         private DbSet<BidPackageXInvitee> _invites;
-
+        private DbSet<BidPackageXScope> _bidPackageScopes;
+        private DbSet<BidPackage> _bidPackages;
         public ProjectRepository()
         {
             _projects = _context.Projects;
             _users = _context.UserProfiles;
             _companies = _context.Companies;
             _invites = _context.BidPackageXInvitees;
+            _bidPackageScopes = _context.BidPackageScopes;
+            _bidPackages = _context.BidPackages;
         }
         public IQueryable<BCModel.Projects.ConstructionType> QueryConstructionType()
         {
@@ -66,7 +69,10 @@ namespace BCWeb.Models.Project.Repository
         public IQueryable<BCModel.Projects.Project> Query()
         {
             // eager load architect, state, and client
-            return _projects.Include(s => s.Architect).Include(s => s.State).Include(s => s.Client);
+            return _projects.Include(s => s.Architect)
+                .Include(s => s.State)
+                .Include(s => s.Client)
+                .Include(s => s.BidPackages);
         }
 
         public void Save()
@@ -100,6 +106,17 @@ namespace BCWeb.Models.Project.Repository
         public IQueryable<BCModel.Projects.BidPackageXInvitee> QueryInvites()
         {
             return _invites.Include(i => i.BidPackage).Include(i => i.BidPackage.Project);
+        }
+
+
+        public IQueryable<BidPackage> QueryBidPackages()
+        {
+            return _bidPackages;
+        }
+
+        public IQueryable<BidPackageXScope> QueryBidPackageScopes()
+        {
+            return _bidPackageScopes;
         }
     }
 }

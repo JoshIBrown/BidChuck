@@ -94,7 +94,37 @@
         @* break out by GC invite *@
         <div class="row">
             <div class="large-12 columns">
-                
+                <div style="overflow-x: scroll;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Scope/Company</th>
+                                @for (int y = 0; y < Model.Inviters.Count(); y++)
+                                {
+                                    <th>@Model.Inviters.ElementAt(y).Value.ToString()</th>  @* put company name in the header*@
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int x = 0; x < Model.Scopes.Count(); x++)
+                            {
+                                <tr>
+                                    <th>
+                                        @Model.Scopes.ElementAt(x).Value.ToString()
+                                    </th>
+                                    @for (int y = 0; y < Model.Inviters.Count(); y++)
+                                    {
+                                        <td>
+                                            
+                                            @Model.ScopeSelection[Model.Scopes.ElementAt(x).Key].Contains(Model.Inviters.ElementAt(y).Key)
+                                             
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
