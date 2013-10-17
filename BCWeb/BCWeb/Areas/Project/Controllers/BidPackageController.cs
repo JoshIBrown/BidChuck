@@ -35,7 +35,7 @@ namespace BCWeb.Areas.Project.Controllers
             IEnumerable<BidPackageListItemViewModel> bps = _service.GetEnumerableByCompanyAndProject(user.CompanyId, projectId)
                 .Select(bp => new BidPackageListItemViewModel
                 {
-                    BidDateTime = bp.BidDateTime.Value.ToString(),
+                    BidDateTime = bp.BidDateTime.ToString(),
                     Description = bp.Description,
                     Id = bp.Id,
                     Invited = bp.Invitees == null ? 0 : bp.Invitees.Count(),
@@ -129,7 +129,7 @@ namespace BCWeb.Areas.Project.Controllers
             BidPackageDetailsViewModel viewModel = new BidPackageDetailsViewModel
             {
                 Architect = raw.Project.Architect.CompanyName,
-                BidDateTime = raw.BidDateTime.Value.ToString(),
+                BidDateTime = raw.BidDateTime.ToString(),
                 CreatingCompany = raw.CreatedBy.CompanyName,
                 Description = raw.Description,
                 DocLink = raw.DocLink,
@@ -150,7 +150,7 @@ namespace BCWeb.Areas.Project.Controllers
             var raw = _service.Get(id);
             EditBidPackageViewModel viewModel = new EditBidPackageViewModel
             {
-                BidDateTime = raw.BidDateTime.HasValue ? raw.BidDateTime.Value : raw.Project.BidDateTime,
+                BidDateTime = raw.BidDateTime,
                 Description = raw.Description,
                 DocLink = raw.DocLink,
                 Id = raw.Id,

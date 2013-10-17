@@ -195,10 +195,16 @@ namespace BCWeb.Controllers
                 BidPackageId = masterBP.Id,
                 PostalCode = theProject.PostalCode,
                 ProjectType = theProject.ProjectType.ToDescription(),
-                SelectedScope = masterBP.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description).OrderBy(s => s),
                 State = theProject.State.Abbr,
                 Title = theProject.Title
             };
+            gcViewModel.SelectedScope = masterBP.Scopes
+                .Select(s => new ProjectScopeListItem
+                {
+                    Id = s.ScopeId,
+                    Description = s.Scope.CsiNumber + " " + s.Scope.Description,
+                    parentId = s.Scope.ParentId
+                }).ToList();
             return View("BPDetails", gcViewModel);
 
 

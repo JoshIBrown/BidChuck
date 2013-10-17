@@ -17,7 +17,7 @@
                 <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId, templateId = Model.BidPackageId })</li>
                 <li>@Html.RouteLink("Manage Bid Packages", "Project_default", new { controller = "BidPackage", action = "Index", projectId = Model.ProjectId })</li>
                 }
-                
+
                 if (User.IsInRole("architect"))
                 {
                 <li>@Html.RouteLink("Invite General Contractors", "Project_default", new { controller = "Invitation", action = "Send", id = Model.BidPackageId })</li>
@@ -101,12 +101,30 @@
         <div class="row">
             <div class="large-12 columns">
                 @Html.LabelFor(m => m.SelectedScope)
-                <ul>
-                    @foreach (var x in Model.SelectedScope)
+
+                <div class="section-container accordion" data-section="accordion">
+                    @foreach (var s1 in Model.SelectedScope.Where(s => !s.parentId.HasValue))
                     {
-                        <li>@x</li>
+                        <section>
+                            <p class="title" data-section-title><a href="#">@s1.Description</a></p>
+                            <div class="content" data-section-content>
+                                <ul>
+                                    @foreach (var s2 in Model.SelectedScope.Where(s => s.parentId == s1.Id))
+                                    {
+                                        <li>@s2.Description
+                                                <ul>
+                                                    @foreach (var s3 in Model.SelectedScope.Where(s => s.parentId == s2.Id))
+                                                    {
+                                                        <li>@s3.Description</li>
+                                                    }
+                                                </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </section>
                     }
-                </ul>
+                </div>
             </div>
         </div>
 

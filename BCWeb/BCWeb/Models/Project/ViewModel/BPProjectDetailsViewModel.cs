@@ -45,6 +45,6 @@ namespace BCWeb.Models.Project.ViewModel
         public string ConstructionType { get; set; }
 
         [Display(Name = "Selected Scopes")]
-        public IEnumerable<string> SelectedScope { get; set; }
+        public IEnumerable<ProjectScopeListItem> SelectedScope { get; set; }
     }
 }

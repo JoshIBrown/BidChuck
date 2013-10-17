@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201310122130584_renameFileInBid.Designer.cs">
       <DependentUpon>201310122130584_renameFileInBid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310142115380_makeBidDateNotNUllable.cs" />
+    <Compile Include="Migrations\201310142115380_makeBidDateNotNUllable.Designer.cs">
+      <DependentUpon>201310142115380_makeBidDateNotNUllable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -298,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310122130584_renameFileInBid.resx">
       <DependentUpon>201310122130584_renameFileInBid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310142115380_makeBidDateNotNUllable.resx">
+      <DependentUpon>201310142115380_makeBidDateNotNUllable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

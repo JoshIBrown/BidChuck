@@ -16,6 +16,7 @@ namespace BCWeb.Models.Project.Repository
         private DbSet<BidPackageXInvitee> _invites;
         private DbSet<BidPackageXScope> _bidPackageScopes;
         private DbSet<BidPackage> _bidPackages;
+        private DbSet<Scope> _scopes;
         public ProjectRepository()
         {
             _projects = _context.Projects;
@@ -24,6 +25,7 @@ namespace BCWeb.Models.Project.Repository
             _invites = _context.BidPackageXInvitees;
             _bidPackageScopes = _context.BidPackageScopes;
             _bidPackages = _context.BidPackages;
+            _scopes = _context.Scopes;
         }
         public IQueryable<BCModel.Projects.ConstructionType> QueryConstructionType()
         {
@@ -111,12 +113,18 @@ namespace BCWeb.Models.Project.Repository
 
         public IQueryable<BidPackage> QueryBidPackages()
         {
-            return _bidPackages;
+            return _bidPackages.Include(b => b.Scopes);
         }
 
         public IQueryable<BidPackageXScope> QueryBidPackageScopes()
         {
             return _bidPackageScopes;
+        }
+
+
+        public IQueryable<Scope> QueryScopes()
+        {
+            return _scopes;
         }
     }
 }

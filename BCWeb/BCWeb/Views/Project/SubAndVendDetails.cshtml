@@ -5,28 +5,14 @@
 }
 
 <div class="row">
-    @*<div class="large-2 columns">
+    <div class="large-2 columns">
         <ul class="side-nav">
-            @{
-                if (User.IsInRole("general_contractor"))
-                {
-                    
-                <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.Id })</li>
-                }
-
-                if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))
-                {
-                <li><a href="#">View Bid Packages</a></li>
-                }
-
-                if (User.IsInRole("architect"))
-                {
-                <li><a href="#">Invite General Contractors</a></li>
-                }
-            }
-
+            @*<li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId })</li>
+            <li><a href="#">View Bid Packages</a></li>
+            <li><a href="#">Invite Sub Contractors or Material Vendors</a></li>*@
+            <li>Assemble a Bid</li>
         </ul>
-    </div>*@
+    </div>
     <div class="large-8 columns left">
         <div class="row">
             <div class="large-4 columns">
@@ -40,15 +26,12 @@
                 @Html.DisplayFor(m => m.Title)
             </div>
         </div>
-
-
         <div class="row">
             <div class="large-12 columns">
                 @Html.LabelFor(m => m.Description)
                 @Html.DisplayFor(m => m.Description)
             </div>
         </div>
-
         <div class="row">
 
             <div class="large-4 columns left">
@@ -115,9 +98,7 @@
                                     @for (int y = 0; y < Model.Inviters.Count(); y++)
                                     {
                                         <td>
-                                            
                                             @Model.ScopeSelection[Model.Scopes.ElementAt(x).Key].Contains(Model.Inviters.ElementAt(y).Key)
-                                             
                                         </td>
                                     }
                                 </tr>

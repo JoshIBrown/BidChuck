@@ -34,7 +34,8 @@ namespace BCModel.Projects
         public virtual BidPackage TemplateBidPackage { get; set; }
 
         [Required]
-        public DateTime? BidDateTime { get; set; }
+        public DateTime BidDateTime { get; set; }
+
 
         [Required]
         public bool IsMaster { get; set; }
