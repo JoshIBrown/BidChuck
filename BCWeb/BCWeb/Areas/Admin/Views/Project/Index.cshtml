@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Projects";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<div class="row">
+    <div class="large-4 columns">
+        <h4>@ViewBag.Title</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns" ng-controller="ProjectCtrl">
+        <table ng-datatable="options" ao-column-defs="columnDefs">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Number</th>
+                    <th>Title</th>
+                    <th>Bid Date</th>
+                    <th>State</th>
+                    <th>Created By</th>
+                    <th>Architect</th>
+                    <th>Project Type</th>
+                    <th>Construction Type</th>
+                    <th>Buiding Type</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/admin/project")
+}
+@section head{
+    @Styles.Render("~/Content/DataTables/media/css/jquery.dataTables.css")
+}

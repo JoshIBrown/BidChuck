@@ -121,7 +121,12 @@ namespace BCWeb.Api
             response.iTotalDisplayRecords = _service.GetEnumerable(predicate).Count();
             response.iTotalRecords = _service.GetEnumerable().Count();
 
-            response.aaData = _service.GetEnumerable(predicate)
+            CompanyProfileListItem[] data;
+
+            switch (sSortDir_0)
+            {
+                case "asc":
+                    data = _service.GetEnumerable(predicate)
                 .Select(s => new CompanyProfileListItem
                 {
                     BusinessType = s.BusinessType.ToDescription(),
@@ -130,12 +135,35 @@ namespace BCWeb.Api
                     PostalCode = s.PostalCode,
                     Published = s.Published,
                     State = s.State.Abbr,
-                    Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + " " + u.FirstName).FirstOrDefault()
+                    Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
                 })
                 .OrderBy(orderBy)
                 .Skip(iDisplayStart)
                 .Take(iDisplayLength)
                 .ToArray();
+                    break;
+                case "desc":
+                    data = _service.GetEnumerable(predicate)
+                .Select(s => new CompanyProfileListItem
+                {
+                    BusinessType = s.BusinessType.ToDescription(),
+                    CompanyName = s.CompanyName,
+                    Id = s.Id,
+                    PostalCode = s.PostalCode,
+                    Published = s.Published,
+                    State = s.State.Abbr,
+                    Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
+                })
+                .OrderByDescending(orderBy)
+                .Skip(iDisplayStart)
+                .Take(iDisplayLength)
+                .ToArray();
+                    break;
+                default:
+                    throw new Exception("invalid sort direction");
+            }
+
+            response.aaData = data;
 
             return response;
         }

@@ -224,6 +224,7 @@
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\Companies\CompanyProfileListItem.cs" />
+    <Compile Include="Areas\Admin\Models\Projects\ProjectListItem.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
     <Compile Include="Areas\Project\Controllers\BidPackageController.cs" />
     <Compile Include="Areas\Project\Controllers\InvitationController.cs" />
@@ -409,6 +410,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular\controllers\admin\CompanyProfileCtrl.js" />
+    <Content Include="Scripts\angular\controllers\admin\ProjectCtrl.js" />
     <Content Include="Scripts\angular\controllers\admin\UserProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\BidPackageIndexCtrl.js" />
     <Content Include="Scripts\angular\controllers\EditBidPackageCtrl.js" />
@@ -477,6 +479,7 @@
     <Content Include="Content\DataTables\extras\TableTools\media\images\psd\collection.psd" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Company\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\Index.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />

@@ -74,7 +74,10 @@ namespace BCWeb.Models.Project.Repository
             return _projects.Include(s => s.Architect)
                 .Include(s => s.State)
                 .Include(s => s.Client)
-                .Include(s => s.BidPackages);
+                .Include(s => s.BidPackages)
+                .Include(s=> s.CreatedBy)
+                .Include(s => s.ConstructionType)
+                .Include(s => s.BuildingType);
         }
 
         public void Save()

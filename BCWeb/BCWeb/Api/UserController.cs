@@ -92,7 +92,12 @@ namespace BCWeb.Api
             response.iTotalRecords = _service.GetEnumerable().Count();
             response.iTotalDisplayRecords = _service.GetEnumerable(search).Count();
 
-            response.aaData = _service.GetEnumerable(search)
+            UserProfileListItem[] data;
+
+            switch (sSortDir_0)
+            {
+                case "asc":
+                    data = _service.GetEnumerable(search)
                 .Select(s => new UserProfileListItem
                 {
                     CompanyId = s.CompanyId,
@@ -107,7 +112,29 @@ namespace BCWeb.Api
                 .Skip(iDisplayStart)
                 .Take(iDisplayLength)
                 .ToArray();
+                    break;
+                case "desc":
+                    data = _service.GetEnumerable(search)
+                .Select(s => new UserProfileListItem
+                {
+                    CompanyId = s.CompanyId,
+                    Confirmed = _security.IsConfirmed(s.Email),
+                    Email = s.Email,
+                    FirstName = s.FirstName,
+                    Id = s.UserId,
+                    LastName = s.LastName,
+                    JobTitle = s.JobTitle
+                })
+                .OrderByDescending(orderBy)
+                .Skip(iDisplayStart)
+                .Take(iDisplayLength)
+                .ToArray();
+                    break;
+                default:
+                    throw new Exception("invalid sort direction");
+            }
 
+            response.aaData = data;
             return response;
         }
     }
