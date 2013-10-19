@@ -49,6 +49,12 @@ namespace BCWeb
             bundles.Add(new ScriptBundle("~/bundles/editproject").Include("~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/EditProjectCtrl.js"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/projectbpdetail").Include(
+                "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/controllers/ProjectBPDetailCtrl.js"));
             #endregion
 
             #region Bid Packages
@@ -97,6 +103,16 @@ namespace BCWeb
                       "~/Scripts/foundation/foundation.js",
                       "~/Scripts/foundation/foundation.*",
                       "~/Scripts/foundation/app.js"));
+            #endregion
+
+
+            #region admin bundles
+            bundles.Add(new ScriptBundle("~/bundles/admin/userProfile").Include(
+                "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/DataTables/media/js/jquery.dataTables.js",
+                "~/Scripts/angular/directives/bcweb.angular.DataTables.js",
+                "~/Scripts/angular/controllers/admin/UserProfileCtrl.js"));
             #endregion
         }
     }

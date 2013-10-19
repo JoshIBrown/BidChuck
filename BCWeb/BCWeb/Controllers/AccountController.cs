@@ -417,6 +417,10 @@ namespace BCWeb.Controllers
             // if valid model state, user is confirmed, and sign in successful
             if (ModelState.IsValid && _security.IsConfirmed(model.Email) && _security.Login(model.Email, model.Password, persistCookie: model.RememberMe))
             {
+                if (User.IsInRole("Administrator"))
+                {
+                    return RedirectToRoute("Default", new { controller = "Admin", action = "Index" });
+                }
                 if (returnUrl == null || returnUrl == "")
                     return RedirectToRoute("Default", new { controller = "Home", action = "Index" });
                 else

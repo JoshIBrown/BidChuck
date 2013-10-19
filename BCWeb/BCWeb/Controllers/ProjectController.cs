@@ -141,7 +141,7 @@ namespace BCWeb.Controllers
             UserProfile user = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
 
 
-
+            // FIXME:should redo logic to check if user's compnay is invited
 
             // if invited sub, show bp invited to
             if (User.IsInRole("subcontractor") || User.IsInRole("materials_vendor"))
@@ -178,7 +178,7 @@ namespace BCWeb.Controllers
                 return View("SubAndVendDetails", sAndVViewModel);
             }
 
-
+            // else user is not a sub or material vendor
             BidPackage masterBP = theProject.BidPackages.Where(b => b.IsMaster).FirstOrDefault();
 
             BPProjectDetailsViewModel gcViewModel = new BPProjectDetailsViewModel
@@ -207,26 +207,6 @@ namespace BCWeb.Controllers
                 }).ToList();
             return View("BPDetails", gcViewModel);
 
-
-            //// if architect, show base level
-            //ProjectDetailsViewModel viewModel = new ProjectDetailsViewModel
-            //{
-            //    Address = theProject.Address,
-            //    Architect = theProject.Architect.CompanyName,
-            //    Owner = theProject.ClientId.HasValue ? theProject.Client.CompanyName : "",
-            //    BidDateTime = theProject.BidDateTime,
-            //    BuildingType = theProject.BuildingType.Name,
-            //    City = theProject.City,
-            //    ConstructionType = theProject.ConstructionType.Name,
-            //    Description = theProject.Description,
-            //    Id = theProject.Id,
-            //    PostalCode = theProject.PostalCode,
-            //    ProjectType = theProject.ProjectType.ToDescription(),
-            //    SelectedScope = theProject.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description).OrderBy(s => s),
-            //    State = theProject.State.Abbr,
-            //    Title = theProject.Title
-            //};
-            //return View("Details", viewModel);
         }
 
         // GET: /Projects/Edit/3

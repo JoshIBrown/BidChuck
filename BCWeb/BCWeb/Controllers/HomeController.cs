@@ -6,22 +6,20 @@ namespace BCWeb.Controllers
     {
         public ActionResult Index()
         {
-            //ViewBag.Message = "Welcome to BidChuck!";
+
+            if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                return RedirectToRoute("Default", new { controller = "Admin", action = "Index" });
 
             return View();
         }
 
         public ActionResult About()
         {
-            //ViewBag.Message = "About BidChuck...";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            //ViewBag.Message = "Contact BidChuck...";
-
             return View();
         }
     }

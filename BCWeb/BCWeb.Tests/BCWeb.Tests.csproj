@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\ScopesControllerTest.cs" />
+    <Compile Include="Api\InvitationControllerTest.cs" />
     <Compile Include="Api\UsersControllerTest.cs" />
     <Compile Include="Areas\Project\Controllers\BidPackageControllerTest.cs" />
     <Compile Include="Areas\Project\Controllers\InvitationControllerTest.cs" />
