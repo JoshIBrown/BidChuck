@@ -113,6 +113,13 @@ namespace BCWeb
                 "~/Scripts/DataTables/media/js/jquery.dataTables.js",
                 "~/Scripts/angular/directives/bcweb.angular.DataTables.js",
                 "~/Scripts/angular/controllers/admin/UserProfileCtrl.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/admin/CompanyProfile").Include(
+                "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/DataTables/media/js/jquery.dataTables.js",
+                "~/Scripts/angular/directives/bcweb.angular.DataTables.js",
+                "~/Scripts/angular/controllers/admin/CompanyProfileCtrl.js"));
             #endregion
         }
     }

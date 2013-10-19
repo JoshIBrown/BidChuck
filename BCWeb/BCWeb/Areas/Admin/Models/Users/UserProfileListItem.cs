@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BCWeb.Areas.Admin.Models.Users
 {
-    public class UserProfileViewModel
+    public class UserProfileListItem
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

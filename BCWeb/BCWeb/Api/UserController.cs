@@ -13,7 +13,7 @@ using System.Net.Http;
 using System.Web.Http;
 using WebMatrix.WebData;
 
-namespace BCWeb.Areas.Admin.Controllers.Api
+namespace BCWeb.Api
 {
     [Authorize(Roles = "Administrator")]
     public class UserController : ApiController
@@ -49,7 +49,7 @@ namespace BCWeb.Areas.Admin.Controllers.Api
                     m.JobTitle.Contains(sSearch));
             }
 
-            Func<UserProfileViewModel, IComparable> orderBy;
+            Func<UserProfileListItem, IComparable> orderBy;
 
             switch (iSortCol_0)
             {
@@ -93,7 +93,7 @@ namespace BCWeb.Areas.Admin.Controllers.Api
             response.iTotalDisplayRecords = _service.GetEnumerable(search).Count();
 
             response.aaData = _service.GetEnumerable(search)
-                .Select(s => new UserProfileViewModel
+                .Select(s => new UserProfileListItem
                 {
                     CompanyId = s.CompanyId,
                     Confirmed = _security.IsConfirmed(s.Email),

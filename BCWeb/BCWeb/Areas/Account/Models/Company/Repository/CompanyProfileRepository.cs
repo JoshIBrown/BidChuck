@@ -47,7 +47,7 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
 
         public IQueryable<BCModel.CompanyProfile> Query()
         {
-            return _companies.Include(c => c.State);
+            return _companies.Include(c => c.State).Include(c => c.Users);
         }
 
         public void Save()

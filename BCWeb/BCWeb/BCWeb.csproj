@@ -216,14 +216,15 @@
     <Compile Include="Areas\Account\Models\Users\ViewModel\NewUserViewModel.cs" />
     <Compile Include="Api\BidPackageController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\Api\UserController.cs" />
+    <Compile Include="Api\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\BidPackageController.cs" />
     <Compile Include="Areas\Admin\Controllers\BidPackageInvitationController.cs" />
     <Compile Include="Areas\Admin\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Admin\Controllers\DBAuditController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
-    <Compile Include="Areas\Admin\Models\Users\UserProfileViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\Companies\CompanyProfileListItem.cs" />
+    <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
     <Compile Include="Areas\Project\Controllers\BidPackageController.cs" />
     <Compile Include="Areas\Project\Controllers\InvitationController.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\Repository\BidPackageRepository.cs" />
@@ -244,7 +245,6 @@
     <Compile Include="Areas\Project\ProjectsAreaRegistration.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Api\UsersController.cs" />
     <Compile Include="Api\ScopesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -408,6 +408,7 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angular\controllers\admin\CompanyProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\admin\UserProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\BidPackageIndexCtrl.js" />
     <Content Include="Scripts\angular\controllers\EditBidPackageCtrl.js" />
@@ -475,6 +476,7 @@
     <Content Include="Content\DataTables\extras\TableTools\media\images\psd\copy document.psd" />
     <Content Include="Content\DataTables\extras\TableTools\media\images\psd\collection.psd" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Company\Index.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
