@@ -9,6 +9,7 @@ using BCWeb.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -94,7 +95,15 @@ namespace BCWeb.Api
         {
             DataTablesResponse response = new DataTablesResponse();
 
-
+            Expression<Func<Project, bool>> predicate = m => true;
+            if (sSearch != null && sSearch.Length > 0)
+            {
+                predicate = predicate.And(m => m.Architect.CompanyName.Contains(sSearch) ||
+                    m.Title.Contains(sSearch) ||
+                    m.Number.Contains(sSearch) ||
+                    m.BuildingType.Name.Contains(sSearch) ||
+                    m.ConstructionType.Name.Contains(sSearch));
+            }
 
             Func<ProjectListItem, IComparable> orderBy;
 
@@ -146,6 +155,7 @@ namespace BCWeb.Api
             }
 
             response.iTotalRecords = _service.GetEnumerable().Count();
+            response.iTotalDisplayRecords = _service.GetEnumerable(predicate).Count();
 
             ProjectListItem[] data;
 
@@ -153,7 +163,7 @@ namespace BCWeb.Api
             switch (sSortDir_0)
             {
                 case "asc":
-                    data = _service.GetEnumerable()
+                    data = _service.GetEnumerable(predicate)
                 .Select(p => new ProjectListItem
                 {
                     Id = p.Id,
@@ -173,7 +183,7 @@ namespace BCWeb.Api
                 .ToArray();
                     break;
                 case "desc":
-                    data = _service.GetEnumerable()
+                    data = _service.GetEnumerable(predicate)
                 .Select(p => new ProjectListItem
                 {
                     Id = p.Id,
