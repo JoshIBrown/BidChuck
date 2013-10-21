@@ -116,7 +116,7 @@ namespace BCWeb.Models.Project.Repository
 
         public IQueryable<BidPackage> QueryBidPackages()
         {
-            return _bidPackages.Include(b => b.Scopes);
+            return _bidPackages.Include(b => b.Scopes).Include(b=>b.Invitees);
         }
 
         public IQueryable<BidPackageXScope> QueryBidPackageScopes()

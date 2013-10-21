@@ -243,5 +243,14 @@ namespace BCWeb.Models.Project.ServiceLayer
 
             return output;
         }
+
+
+        public BidPackage GetMasterBidPackage(int projectId)
+        {
+            return (from b in _repo.QueryBidPackages()
+                    where b.ProjectId == projectId
+                    && b.IsMaster == true
+                    select b).FirstOrDefault();
+        }
     }
 }

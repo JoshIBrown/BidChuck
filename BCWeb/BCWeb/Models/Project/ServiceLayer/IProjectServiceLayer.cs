@@ -18,6 +18,8 @@ namespace BCWeb.Models.Project.ServiceLayer
 
         CompanyProfile GetCompanyProfile(int id);
         UserProfile GetUserProfile(int id);
+        BidPackage GetMasterBidPackage(int projectId);
+
         IEnumerable<CompanyProfile> GetCompanyProfiles();
         IEnumerable<CompanyProfile> GetCompanyProfiles(Expression<Func<CompanyProfile, bool>> predicate);
 

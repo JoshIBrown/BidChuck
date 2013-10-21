@@ -41,6 +41,9 @@ namespace BCWeb.Models.Project.ViewModel
         [Display(Name = "Construction Type")]
         public string ConstructionType { get; set; }
 
+        public bool? Accepted { get; set; }
+        public DateTime? AcceptDate { get; set; }
+
         [Display(Name = "Selected Scopes")]
         public IEnumerable<ProjectScopeListItem> SelectedScope { get; set; }
     }

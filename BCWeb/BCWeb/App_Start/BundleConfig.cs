@@ -54,7 +54,7 @@ namespace BCWeb
             bundles.Add(new ScriptBundle("~/bundles/projectbpdetail").Include(
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
-                "~/Scripts/angular/controllers/ProjectBPDetailCtrl.js"));
+                "~/Scripts/angular/controllers/ProjectBPDetailsCtrl.js"));
             #endregion
 
             #region Bid Packages

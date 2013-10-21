@@ -179,7 +179,9 @@ namespace BCWeb.Controllers
             }
 
             // else user is not a sub or material vendor
-            BidPackage masterBP = theProject.BidPackages.Where(b => b.IsMaster).FirstOrDefault();
+            BidPackage masterBP = _service.GetMasterBidPackage(id);
+
+
 
             BPProjectDetailsViewModel gcViewModel = new BPProjectDetailsViewModel
             {
@@ -198,6 +200,7 @@ namespace BCWeb.Controllers
                 State = theProject.State.Abbr,
                 Title = theProject.Title
             };
+
             gcViewModel.SelectedScope = masterBP.Scopes
                 .Select(s => new ProjectScopeListItem
                 {
@@ -205,6 +208,23 @@ namespace BCWeb.Controllers
                     Description = s.Scope.CsiNumber + " " + s.Scope.Description,
                     parentId = s.Scope.ParentId
                 }).ToList();
+
+            // invite is only relevant if user's comapny is a GC
+            if (user.Company.BusinessType == BusinessType.GeneralContractor)
+            {
+                BidPackageXInvitee invite = masterBP.Invitees.Where(i => i.CompanyId == user.CompanyId).FirstOrDefault();
+
+                if (invite != null)
+                {
+                    gcViewModel.Accepted = invite.AcceptedDate.HasValue ? true
+                        : invite.RejectedDate.HasValue ? false
+                        : default(bool?);
+                    gcViewModel.AcceptDate = invite.AcceptedDate.HasValue ? invite.AcceptedDate.Value
+                        : invite.RejectedDate.HasValue ? invite.RejectedDate.Value
+                        : default(DateTime?);
+                }
+            }
+
             return View("BPDetails", gcViewModel);
 
         }

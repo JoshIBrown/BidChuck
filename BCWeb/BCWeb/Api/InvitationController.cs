@@ -36,10 +36,13 @@ namespace BCWeb.Api
             if (invite.CompanyId == companyId)
             {
                 invite.AcceptedDate = DateTime.Now;
+                if (invite.RejectedDate.HasValue)
+                    invite.RejectedDate = default(DateTime?); // null out hte decline date
                 if (_service.Update(invite))
                 {
                     result.success = true;
                     result.message = "invitation accepted";
+                    result.data = new { date = invite.AcceptedDate.Value.ToShortDateString() };
                 }
                 else
                 {
@@ -66,10 +69,15 @@ namespace BCWeb.Api
             if (invite.CompanyId == companyId)
             {
                 invite.RejectedDate = DateTime.Now;
+
+                if (invite.AcceptedDate.HasValue)
+                    invite.AcceptedDate = default(DateTime?);
+
                 if (_service.Update(invite))
                 {
                     result.success = true;
                     result.message = "invitation declined";
+                    result.data = new { date = invite.RejectedDate.Value.ToShortDateString() };
                 }
                 else
                 {
