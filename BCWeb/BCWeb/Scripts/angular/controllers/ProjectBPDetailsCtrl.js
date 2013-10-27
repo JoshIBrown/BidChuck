@@ -1,7 +1,7 @@
 ﻿angular.element(document).ready(function () {
     var app = angular.module('bpDetails', []);
     app.controller('BPDetailsCtrl', ['$scope', '$http', '$compile', function ($scope, $http, $compile) {
-        $scope.inviteId = angular.element('#BidPackageId').val();
+        $scope.inviteId = angular.element('#inviteId').val();
         $scope.token = angular.element('input[name=__RequestVerificationToken]').val();
 
 

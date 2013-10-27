@@ -291,6 +291,7 @@ namespace BCWeb.Controllers
 
                 if (invite != null)
                 {
+                    gcViewModel.inviteId = invite.Id;
                     gcViewModel.Accepted = invite.AcceptedDate.HasValue ? true
                         : invite.RejectedDate.HasValue ? false
                         : default(bool?);
