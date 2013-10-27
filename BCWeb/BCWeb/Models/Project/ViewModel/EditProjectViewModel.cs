@@ -41,5 +41,9 @@ namespace BCWeb.Models.Project.ViewModel
         public IEnumerable<SelectListItem> ConstructionTypes { get; set; }
         public IEnumerable<BuildingType> BuildingTypes { get; set; }
         public IEnumerable<int> SelectedScope { get; set; }
+
+        public int ArchitectId { get; set; }
+
+        public string Number { get; set; }
     }
 }

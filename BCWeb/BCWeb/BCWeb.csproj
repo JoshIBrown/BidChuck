@@ -205,6 +205,7 @@
     <Compile Include="Areas\Account\Models\Company\Repository\ICompanyProfileRepository.cs" />
     <Compile Include="Areas\Account\Models\Company\ServiceLayer\CompanyProfileServiceLayer.cs" />
     <Compile Include="Areas\Account\Models\Company\ServiceLayer\ICompanyProfileServiceLayer.cs" />
+    <Compile Include="Areas\Account\Models\Company\ViewModel\NewArchitectViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\Repository\IScopeRepository.cs" />
     <Compile Include="Areas\Account\Models\Scopes\Repository\ScopeRepository.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ServiceLayer\IScopeServiceLayer.cs" />
@@ -287,6 +288,9 @@
     <Compile Include="Models\Project\ServiceLayer\IProjectServiceLayer.cs" />
     <Compile Include="Models\Project\ServiceLayer\ProjectServiceLayer.cs" />
     <Compile Include="Models\Project\ViewModel\BPProjectDetailsViewModel.cs" />
+    <Compile Include="Models\Project\ViewModel\DupeCheckViewModel.cs" />
+    <Compile Include="Models\Project\ViewModel\DuplicatesResponseViewModel.cs" />
+    <Compile Include="Models\Project\ViewModel\DuplicatesViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectBPViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectScopeListItem.cs" />
     <Compile Include="Models\Project\ViewModel\SubsAndVendProjectDetailsViewModel.cs" />
@@ -417,6 +421,7 @@
     <Content Include="Scripts\angular\controllers\CreateBidPackageCtrl.js" />
     <Content Include="Scripts\angular\controllers\EditProjectCtrl.js" />
     <Content Include="Scripts\angular\controllers\ProjectBPDetailsCtrl.js" />
+    <Content Include="Scripts\angular\controllers\ProjectSubVendDetailsCtrl.js" />
     <Content Include="Scripts\angular\controllers\SendInvitationCtrl.js" />
     <Content Include="Scripts\angular\directives\bcweb.angular.DataTables.js" />
     <Content Include="Scripts\angular\directives\bcweb.angular.InputValidators.js" />
@@ -461,6 +466,7 @@
     <Content Include="Scripts\DataTables\media\js\jquery.dataTables.js" />
     <Content Include="Scripts\DataTables\media\js\jquery.dataTables.min.js" />
     <Content Include="Scripts\DataTables\media\js\jquery.js" />
+    <Content Include="Scripts\jQuery\CreateProject.js" />
     <Content Include="Views\Shared\_ScopePicker.cshtml" />
     <Content Include="BuildingTypes.csv" />
     <Content Include="Areas\Project\Views\Web.config" />
@@ -480,6 +486,7 @@
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Company\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Project\Index.cshtml" />
+    <Content Include="Areas\Account\Views\Company\CreateArchitect.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
@@ -954,7 +961,7 @@
     <Content Include="Views\Account\AcceptInvitation.cshtml" />
     <Content Include="Views\Account\AcceptInvitationSuccess.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
-    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Project\CreateStepTwo.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EditProjectViewModel.cshtml" />
@@ -962,6 +969,8 @@
     <Content Include="Views\Project\SubAndVendDetails.cshtml" />
     <Content Include="Views\Shared\_Admin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Project\Duplicates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />

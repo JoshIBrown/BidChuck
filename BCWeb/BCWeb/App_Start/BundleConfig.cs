@@ -21,6 +21,9 @@ namespace BCWeb
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
 
+            bundles.Add(new StyleBundle("~/Content/jqueryuicss").Include(
+                    "~/Content/themes/base/jquery-ui.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate.min.js",
                         "~/Scripts/jquery.validate.unobtrusive.min.js"));
@@ -55,6 +58,11 @@ namespace BCWeb
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/ProjectBPDetailsCtrl.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/createprojectsimple").Include(
+                "~/Scripts/jquery-ui-{version}.js",
+                "~/Scripts/jQuery/CreateProject.js"
+                ));
             #endregion
 
             #region Bid Packages

@@ -61,6 +61,15 @@ namespace BCWeb.Api
             return companies;
         }
 
+
+        public KeyValuePair<int, string>[] GetArchitects(string query)
+        {
+            Dictionary<int, string> archs = _service.GetEnumerable(s => s.CompanyName.Contains(query) 
+                && s.BusinessType == BusinessType.Architect)
+                .ToDictionary(i => i.Id, i => i.CompanyName);
+            return archs.ToArray();
+        }
+
         public DataTablesResponse GetDataTable(
             [FromUri]int iDisplayStart,
             [FromUri]int iDisplayLength,

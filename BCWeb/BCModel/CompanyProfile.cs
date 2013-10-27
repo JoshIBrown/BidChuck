@@ -44,7 +44,7 @@ namespace BCModel
         public string Address2 { get; set; }
         public string City { get; set; }
 
-        [Required]
+        
         public string PostalCode { get; set; }
 
         public int StateId { get; set; }
@@ -58,7 +58,7 @@ namespace BCModel
         [IgnoreDataMember]
         public virtual County County { get; set; }
 
-        [Required]
+        
         public string Phone { get; set; }
 
         [EmailAddress]
@@ -66,7 +66,7 @@ namespace BCModel
 
         public bool Published { get; set; }
 
-        [Required]
+        
         public int OperatingDistance { get; set; }
 
         public string BusinessLicense { get; set; }

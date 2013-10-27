@@ -1,0 +1,28 @@
+﻿@model BCWeb.Models.Project.ViewModel.EditProjectViewModel
+@using BCWeb.Helpers
+
+@{
+    ViewBag.Title = "Create Project";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<div class="row">
+    <div class="large-4 columns large-centered">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns large-centered" ng-controller="CreateProjectCtrl">
+        @**FIXME: when submitting step two it's looking for a dupe check view model *@
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken();
+            @Html.EditorFor(m => m)
+            <input type="submit" value="Create" class="medium button" />
+        }
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/createproject")
+}

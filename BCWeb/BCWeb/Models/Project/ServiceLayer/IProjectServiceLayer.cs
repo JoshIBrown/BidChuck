@@ -29,5 +29,7 @@ namespace BCWeb.Models.Project.ServiceLayer
         Dictionary<int, string> GetInvitationScopes(int projectId, int invitedCompanyId);
         Dictionary<int, string> GetInvitatingCompanies(int projectId, int invitedCompanyId);
         Dictionary<int, IEnumerable<int>> GetInvitationScopesByInvitingCompany(int projectId, int invitedCompanyId);
+        IEnumerable<BCModel.Projects.Project> FindDuplicate(string title, string number, int architectId);
+        IEnumerable<BCModel.Projects.Project> FindDuplicate(string title, string number);
     }
 }

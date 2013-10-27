@@ -17,11 +17,13 @@ namespace BCWeb.Areas.Account.Controllers
 
         private IWebSecurityWrapper _security;
         private ICompanyProfileServiceLayer _serviceLayer;
+        private IEmailSender _email;
 
-        public CompanyController(ICompanyProfileServiceLayer serviceLayer, IWebSecurityWrapper security)
+        public CompanyController(ICompanyProfileServiceLayer serviceLayer, IWebSecurityWrapper security, IEmailSender email)
         {
             _security = security;
             _serviceLayer = serviceLayer;
+            _email = email;
         }
 
         [Authorize(Roles = "Manager,Administrator")]
@@ -239,6 +241,71 @@ namespace BCWeb.Areas.Account.Controllers
                 //viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
                 return View(viewModel);
             }
+        }
+
+        [Authorize(Roles = "genaral_contractor")]
+        [HttpGet]
+        public ActionResult CreateArchitect(string name, string title, string number)
+        {
+            NewArchitectViewModel viewModel = new NewArchitectViewModel
+            {
+                CompanyName = name,
+                ProjectNumber = number,
+                ProjectTitle = title
+            };
+            return View(viewModel);
+        }
+
+        [Authorize(Roles = "genaral_contractor")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateArchitect(NewArchitectViewModel viewModel)
+        {
+            CompanyProfile toCreate = new CompanyProfile
+                {
+                    CompanyName = viewModel.CompanyName,
+                    ContactEmail = viewModel.ContactEmail,
+                    BusinessType = BusinessType.Architect
+                };
+
+            // create record if user doesn't exist
+            if (!_security.UserExists(viewModel.ContactEmail))
+            {
+                if (_serviceLayer.Create(toCreate))
+                {
+                    Guid password = new Guid();
+
+                    var token = _security.CreateUserAndAccount(viewModel.ContactEmail, password.ToString(),
+                        new
+                        {
+                            FirstName = viewModel.ContactFirstName,
+                            LastName = viewModel.ContactLastName,
+                            CompanyId = toCreate.Id
+                        }
+                        , true);
+
+                    var user = _serviceLayer.GetUserProfile(_security.GetUserId(User.Identity.Name));
+
+                    string invitingTagLine = string.Format("{0} {1} of {2}", user.FirstName, user.LastName, user.Company.CompanyName);
+
+                    string name = string.Format("{0} {1}", viewModel.ContactFirstName, viewModel.ContactLastName);
+
+                    //send email
+                    _email.InviteArchitect(viewModel.ContactEmail, name, viewModel.CompanyName, invitingTagLine, token);
+                    return RedirectToRoute("Default", new { controller = "Project", action = "CreateStepTwo", architect = toCreate.Id, title = viewModel.ProjectTitle, number = viewModel.ProjectNumber });
+                }
+                else
+                {
+                    Util.MapValidationErrors(_serviceLayer.ValidationDic, this.ModelState);
+                    return View(viewModel);
+                }
+            }
+            else
+            {
+                this.ModelState.AddModelError("ContactEmail", "There is already someone registered using that email");
+                return View(viewModel);
+            }
+
         }
     }
 }

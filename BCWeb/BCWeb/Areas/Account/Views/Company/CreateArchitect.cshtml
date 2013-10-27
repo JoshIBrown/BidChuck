@@ -1,0 +1,27 @@
+﻿@model BCWeb.Areas.Account.Models.Company.ViewModel.NewArchitectViewModel
+@{
+    ViewBag.Title = "Add Architect";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<div class="row">
+    <div class="large-4 colums">
+        <h3>@ViewBag.Title</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="large-6 columns">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.ProjectNumber)
+            @Html.HiddenFor(m => m.ProjectTitle)
+   
+            @Html.LabelFor(m => m.CompanyName)
+            @Html.TextBoxFor(m => m.CompanyName)
+
+            @Html.LabelFor(m => m.ContactEmail)
+            @Html.TextBoxFor(m => m.ContactEmail)
+        }
+    </div>
+</div>

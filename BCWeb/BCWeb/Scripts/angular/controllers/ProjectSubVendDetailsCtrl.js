@@ -1,11 +1,12 @@
 ﻿angular.element(document).ready(function () {
-    var app = angular.module('bpDetails', []);
-    app.controller('BPDetailsCtrl', ['$scope', '$http', '$compile', function ($scope, $http, $compile) {
-        $scope.inviteId = angular.element('#BidPackageId').val();
+    var app = angular.module('projectDetails', []);
+    app.controller('ProjectDetailsCtrl', ['$scope', '$http', '$compile', function ($scope, $http, $compile) {
+        
         $scope.token = angular.element('input[name=__RequestVerificationToken]').val();
 
 
         $scope.accept = function () {
+
             $http.post('/api/Invitation/PostAccept/' + $scope.inviteId, null, {
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: '__RequestVerificationToken',
@@ -20,6 +21,7 @@
                 });
         };
         $scope.decline = function () {
+
             $http.post('/api/Invitation/PostDecline/' + $scope.inviteId, null, {
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: '__RequestVerificationToken',
@@ -28,10 +30,10 @@
                 .success(function (result) {
                     var wrapper = angular.element('#inviteResponseWrapper').html('<input id="acceptBtn" type="button" value="Accept Invite" class="small success button" ng-click="accept()" />');
                     $compile(wrapper)($scope);
-                    angular.element(inviteStatusWrapper).html('Declined: ' + result.data.date);                    
+                    angular.element(inviteStatusWrapper).html('Declined: ' + result.data.date);
                     // hide decline button
                 });
         };
     }]);
-    angular.bootstrap(document, ['bpDetails']);
+    angular.bootstrap(document, ['projectDetails']);
 });

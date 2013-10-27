@@ -11,6 +11,7 @@ using System.Security.Principal;
 using System.Threading;
 using System.Web;
 using BCModel.Projects;
+using BCModel;
 
 namespace BCWeb.Tests.Controllers
 {
@@ -35,7 +36,147 @@ namespace BCWeb.Tests.Controllers
         }
 
         [TestMethod]
-        public void GetCreateReturnsViewResult()
+        public void Get_Create_AsArchitect_Returns_CreateStepTwo_ViewResult()
+        {
+            // arrange
+            UserProfile theUser = new UserProfile { UserId = 1, CompanyId = 1 };
+            
+            Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
+            service.Setup(s => s.GetUserProfile(1)).Returns(theUser);
+
+            Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
+            security.Setup(s => s.GetUserId("qwert@qwer.com")).Returns(1);
+
+            ProjectController controller = new ProjectController(service.Object, security.Object);
+
+            Mock<ControllerContext> context = new Mock<ControllerContext>();
+            context.Setup(c => c.HttpContext.User.IsInRole("architect")).Returns(true);
+            context.Setup(p => p.HttpContext.User.Identity.Name).Returns("qwert@qwer.com");
+
+            controller.ControllerContext = context.Object;
+
+            // act
+            var result = controller.Create();
+
+            //assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.AreEqual("CreateStepTwo", ((ViewResult)result).ViewName);
+        }
+
+        [TestMethod]
+        public void Get_Create_AsGC_Returns_Create_ViewResult()
+        {
+            // arrange
+            UserProfile theUser = new UserProfile { UserId = 1, CompanyId = 1 };
+
+            Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
+
+            Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
+
+            ProjectController controller = new ProjectController(service.Object, security.Object);
+
+            Mock<ControllerContext> context = new Mock<ControllerContext>();
+            context.Setup(c => c.HttpContext.User.IsInRole("architect")).Returns(false);
+
+            controller.ControllerContext = context.Object;
+
+            // act
+            var result = controller.Create();
+
+            //assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.AreEqual("Create", ((ViewResult)result).ViewName);
+        }
+
+        [TestMethod]
+        public void Post_Create_UniqueProject_Redirects_CreateStepTwo()
+        {
+            // arrange
+            DupeCheckViewModel viewModel = new DupeCheckViewModel
+                {
+                    ArchitectId = 3,
+                    Number = "abc123 hello hello",
+                    Title = "build a house for cake"
+                };
+
+            Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
+            service.Setup(s => s.FindDuplicate(viewModel.Title, viewModel.Number, viewModel.ArchitectId.Value)).Returns(new List<Project>()); // return empty list.  no matches found
+
+
+            Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
+            ProjectController controller = new ProjectController(service.Object, security.Object);
+
+            // act
+            var result = controller.Create(viewModel);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.AreEqual("CreateStepTwo", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual("Project", ((RedirectToRouteResult)result).RouteValues["controller"]);
+        }
+
+
+        [TestMethod]
+        public void PostCreateDuplicateRedirectsToDuplicates()
+        {
+            // arrange
+            DupeCheckViewModel viewModel = new DupeCheckViewModel
+            {
+                ArchitectId = 3,
+                Number = "abc123 hello hello",
+                Title = "build a house for cake"
+            };
+            Project found = new Project { Id = 2, ArchitectId = viewModel.ArchitectId.Value, Title = viewModel.Title, Number = viewModel.Number };
+            Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
+            service.Setup(s => s.FindDuplicate(viewModel.Title, viewModel.Number, viewModel.ArchitectId.Value)).Returns(new List<Project> { found }); // return empty list.  no matches found
+
+
+            Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
+            ProjectController controller = new ProjectController(service.Object, security.Object);
+
+            // act
+            var result = controller.Create(viewModel);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.AreEqual("Duplicates", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual("Project", ((RedirectToRouteResult)result).RouteValues["controller"]);
+        }
+
+        [TestMethod]
+        public void Post_Create_NewArchitect_RedirectsTo_CreateArchitect()
+        {
+            // arrange
+            DupeCheckViewModel viewModel = new DupeCheckViewModel
+            {
+                Architect = "u build it, we draw it",
+                Number = "abc123 hello hello",
+                Title = "build a house for cake"
+            };
+
+            Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
+
+
+            Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
+            ProjectController controller = new ProjectController(service.Object, security.Object);
+
+            // act
+            var result = controller.Create(viewModel);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.AreEqual("CreateArchitect", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual("Company", ((RedirectToRouteResult)result).RouteValues["controller"]);
+        }
+
+
+        [TestMethod]
+        public void Get_CreateStepTwo_Returns_ViewResult()
         {
             // arrange
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
@@ -43,16 +184,16 @@ namespace BCWeb.Tests.Controllers
             ProjectController controller = new ProjectController(service.Object, security.Object);
 
             // act
-            var result = controller.Create();
+            var result = controller.CreateStepTwo(1, "a project", "abc123");
 
             // assert
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
-            Assert.AreEqual("Create", ((ViewResult)result).ViewName);
+            Assert.AreEqual("CreateStepTwo", ((ViewResult)result).ViewName);
         }
 
         [TestMethod]
-        public void PostCreateValidProjectRedirectsToDetails()
+        public void Post_CreateStepTwo_ValidProject_RedirectsTo_Details()
         {
             // arrange
             EditProjectViewModel viewModel = new EditProjectViewModel();
@@ -78,7 +219,7 @@ namespace BCWeb.Tests.Controllers
             controller.ControllerContext = context.Object;
 
             // act
-            var result = controller.Create(viewModel);
+            var result = controller.CreateStepTwo(viewModel);
 
             // assert
             Assert.IsNotNull(result);
@@ -87,7 +228,7 @@ namespace BCWeb.Tests.Controllers
         }
 
         [TestMethod]
-        public void PostCreateProjectValidationFailReturnsModelStateErrors()
+        public void PostCreateStepTwoProjectValidationFailReturnsModelStateErrors()
         {
             // arrange
             EditProjectViewModel viewModel = new EditProjectViewModel();
@@ -114,18 +255,18 @@ namespace BCWeb.Tests.Controllers
             controller.ControllerContext = context.Object;
 
             // act
-            var result = controller.Create(viewModel);
+            var result = controller.CreateStepTwo(viewModel);
 
             // assert
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
-            Assert.AreEqual("Create", ((ViewResult)result).ViewName);
+            Assert.AreEqual("CreateStepTwo", ((ViewResult)result).ViewName);
             Assert.IsTrue(((ViewResult)result).ViewData.ModelState.ContainsKey("Duplicate"));
             Assert.AreEqual("Title already exists", ((ViewResult)result).ViewData.ModelState["Duplicate"].Errors[0].ErrorMessage.ToString());
         }
 
         [TestMethod]
-        public void PostCreateProjectThrowsExceptionReturnsModelStateErrors()
+        public void PostCreateStepTwoProjectThrowsExceptionReturnsModelStateErrors()
         {
             // arrange
             EditProjectViewModel viewModel = new EditProjectViewModel();
@@ -151,12 +292,12 @@ namespace BCWeb.Tests.Controllers
             controller.ControllerContext = context.Object;
 
             // act
-            var result = controller.Create(viewModel);
+            var result = controller.CreateStepTwo(viewModel);
 
             // assert
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
-            Assert.AreEqual("Create", ((ViewResult)result).ViewName);
+            Assert.AreEqual("CreateStepTwo", ((ViewResult)result).ViewName);
             Assert.IsTrue(((ViewResult)result).ViewData.ModelState.ContainsKey("Exception"));
             Assert.AreEqual("something broke", ((ViewResult)result).ViewData.ModelState["Exception"].Errors[0].ErrorMessage.ToString());
         }

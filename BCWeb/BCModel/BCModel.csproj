@@ -50,6 +50,7 @@
     <Compile Include="CompanyXScope.cs" />
     <Compile Include="County.cs" />
     <Compile Include="DBAudit.cs" />
+    <Compile Include="MemberInvitation.cs" />
     <Compile Include="Migrations\201308241727578_changeNumberToCsiNumber.cs" />
     <Compile Include="Migrations\201308241727578_changeNumberToCsiNumber.Designer.cs">
       <DependentUpon>201308241727578_changeNumberToCsiNumber.cs</DependentUpon>
@@ -182,6 +183,14 @@
     <Compile Include="Migrations\201310142115380_makeBidDateNotNUllable.Designer.cs">
       <DependentUpon>201310142115380_makeBidDateNotNUllable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310230121431_removeRequirementFromFieldsInCompanyProfile.cs" />
+    <Compile Include="Migrations\201310230121431_removeRequirementFromFieldsInCompanyProfile.Designer.cs">
+      <DependentUpon>201310230121431_removeRequirementFromFieldsInCompanyProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310270502094_makeFieldsInProjectRequired.cs" />
+    <Compile Include="Migrations\201310270502094_makeFieldsInProjectRequired.Designer.cs">
+      <DependentUpon>201310270502094_makeFieldsInProjectRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -305,6 +314,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310142115380_makeBidDateNotNUllable.resx">
       <DependentUpon>201310142115380_makeBidDateNotNUllable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310230121431_removeRequirementFromFieldsInCompanyProfile.resx">
+      <DependentUpon>201310230121431_removeRequirementFromFieldsInCompanyProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310270502094_makeFieldsInProjectRequired.resx">
+      <DependentUpon>201310270502094_makeFieldsInProjectRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

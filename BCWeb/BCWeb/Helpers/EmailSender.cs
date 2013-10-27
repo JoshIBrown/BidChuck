@@ -24,7 +24,7 @@ namespace BCWeb
 
                 To complete your registration visit:
 
-                http://bcdev.azurewebsites.net/Account/RegisterConfirmation/" + ConfirmationToken + @"
+                http://bidchuck.com/Account/RegisterConfirmation/" + ConfirmationToken + @"
 
                 Thanks!
 
@@ -37,7 +37,7 @@ namespace BCWeb
                     <p>Hello " + FirstName + @",</p>
                     <p>To complete your registration visit:</p>
                     <p></p>
-                    <p><a href=""http://bcdev.azurewebsites.net/Account/RegisterConfirmation/" + ConfirmationToken + @""">http://bcdev.azurewebsites.net/Account/RegisterConfirmation/" + ConfirmationToken + @"</a></p>
+                    <p><a href=""http://bidchuck.com/Account/RegisterConfirmation/" + ConfirmationToken + @""">http://bidchuck.com/Account/RegisterConfirmation/" + ConfirmationToken + @"</a></p>
                     <p></p>
                     <p>Thanks!</p>
                     <p></p>
@@ -63,7 +63,7 @@ namespace BCWeb
 
                 To reset your password visit:
                 
-                http://bcdev.azurewebsites.net/Account/ResetPassword?user=" + Email + @"&token=" + PasswordResetToken + @"
+                http://bidchuck.com/Account/ResetPassword?user=" + Email + @"&token=" + PasswordResetToken + @"
 
                 Thanks!
 
@@ -76,7 +76,7 @@ namespace BCWeb
                     <p>Hello " + FirstName + @",</p>
                     <p>To reset your password visit:</p>
                     <p></p>
-                    <p><a href=""http://bcdev.azurewebsites.net/Account/ResetPassword?user=" + Email + @"&token=" + PasswordResetToken + @""">http://bcdev.azurewebsites.net/Account/ResetPassword?user=" + Email + @"&token=" + PasswordResetToken + @"</a></p>
+                    <p><a href=""http://bidchuck.com/Account/ResetPassword?user=" + Email + @"&token=" + PasswordResetToken + @""">http://bidchuck.com/Account/ResetPassword?user=" + Email + @"&token=" + PasswordResetToken + @"</a></p>
                     <p></p>
                     <p>Thanks!</p>
                     <p></p>
@@ -102,7 +102,7 @@ namespace BCWeb
 
                 Inviter + @"has added you to their bidCHUCK account.  To complete the process please go to: 
                 
-                http://bcdev.azurewebsites.net/Account/AcceptInvitation?user=" + Email + @"&token=" + ConfirmAccoutToken + @"
+                http://bidchuck.com/Account/AcceptInvitation?user=" + Email + @"&token=" + ConfirmAccoutToken + @"
 
                 Thanks!
 
@@ -115,7 +115,7 @@ namespace BCWeb
                     <p>Hello " + FirstName + @",</p>
                     <p>" + Inviter + @"has added you to their bidCHUCK account.  To complete the process please go to: </p>
                     <p></p>
-                    <p><a href=""http://bcdev.azurewebsites.net/Account/AcceptInvitation?user=" + Email + @"&token=" + ConfirmAccoutToken + @""">http://bcdev.azurewebsites.net/Account/AcceptInvitation?user=" + Email + @"&token=" + ConfirmAccoutToken + @"</a></p>
+                    <p><a href=""http://bidchuck.com/Account/AcceptInvitation?user=" + Email + @"&token=" + ConfirmAccoutToken + @""">http://bidchuck.com/Account/AcceptInvitation?user=" + Email + @"&token=" + ConfirmAccoutToken + @"</a></p>
                     <p></p>
                     <p>Thanks!</p>
                     <p></p>
@@ -136,6 +136,48 @@ namespace BCWeb
             {
                 smtpClient.Send(message);
             }
+        }
+
+
+
+
+        public void InviteArchitect(string email, string name, string company, string invitingTagLine, string token)
+        {
+            MailMessage message = new MailMessage();
+            List<MailAddress> recipients = new List<MailAddress>();
+
+            message.To.Add(new MailAddress(email, name));
+            message.From = new MailAddress("admin@bidchuck.com", "BidChuck Admin");
+            message.Subject = "BidChuck Invitation from " + invitingTagLine;
+
+            string text = @"
+                Hello " + name + @"," +
+
+                invitingTagLine + @"has invited you to join bidChuck.com.  You can accept this invitation, and register " + company + @" with bidChuck.com by following this link: 
+                
+                http://bidchuck.com/Account/AcceptInvitation?user=" + email + @"&token=" + token + @"
+
+                Thanks!
+
+                -The BidChuck Team
+            ";
+
+            string html = @"
+                <html>
+                  <body>
+                    <p>Hello " + name + @",</p>
+                    <p>" + invitingTagLine + @"has invited you to join bidChuck.com.  You can accept this invitation, and register " + company + @" with bidChuck.com by following this link:  </p>
+                    <p></p>
+                    <p><a href=""http://bidchuck.com/Account/AcceptInvitation?user=" + email + @"&token=" + token + @""">http://bidchuck.com/Account/AcceptInvitation?user=" + email + @"&token=" + token + @"</a></p>
+                    <p></p>
+                    <p>Thanks!</p>
+                    <p></p>
+                    <p>-The BidChuck Team</p>
+                  </body>
+                </html>
+            ";
+
+            SendMail(message, text, html);
         }
     }
 }

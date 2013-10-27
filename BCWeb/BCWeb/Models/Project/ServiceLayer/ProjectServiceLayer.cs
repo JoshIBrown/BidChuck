@@ -2,6 +2,7 @@
 using BCWeb.Models.Project.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
@@ -82,6 +83,18 @@ namespace BCWeb.Models.Project.ServiceLayer
                 {
                     return false;
                 }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                ValidationDic.Clear();
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        ValidationDic.Add(validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+                return false;
             }
             catch (Exception ex)
             {
@@ -209,7 +222,7 @@ namespace BCWeb.Models.Project.ServiceLayer
                           where b.ProjectId == projectId
                           && i.CompanyId == invitedCompanyId
                           select new { s.ScopeId, Description = s.Scope.CsiNumber + " " + s.Scope.Description }).Distinct();
-                          
+
 
             return output.ToDictionary(x => x.ScopeId, y => y.Description);
         }
@@ -218,16 +231,16 @@ namespace BCWeb.Models.Project.ServiceLayer
         public Dictionary<int, IEnumerable<int>> GetInvitationScopesByInvitingCompany(int projectId, int invitedCompanyId)
         {
             Dictionary<int, IEnumerable<int>> output = (from b in _repo.QueryBidPackages()
-                          from s in b.Scopes
-                          join i in _repo.QueryInvites() on b.Id equals i.BidPackageId
-                          where b.ProjectId == projectId
-                          && i.CompanyId == invitedCompanyId
-                          group b by s.ScopeId into bsi
-                          select new
-                          {
-                              ScopeId = bsi.Key,
-                              InvitingCompanies = bsi.Select( x => x.CreatedById).AsEnumerable()
-                          }).AsEnumerable()
+                                                        from s in b.Scopes
+                                                        join i in _repo.QueryInvites() on b.Id equals i.BidPackageId
+                                                        where b.ProjectId == projectId
+                                                        && i.CompanyId == invitedCompanyId
+                                                        group b by s.ScopeId into bsi
+                                                        select new
+                                                        {
+                                                            ScopeId = bsi.Key,
+                                                            InvitingCompanies = bsi.Select(x => x.CreatedById).AsEnumerable()
+                                                        }).AsEnumerable()
                           .ToDictionary(x => x.ScopeId, y => y.InvitingCompanies);
             return output;
         }
@@ -251,6 +264,25 @@ namespace BCWeb.Models.Project.ServiceLayer
                     where b.ProjectId == projectId
                     && b.IsMaster == true
                     select b).FirstOrDefault();
+        }
+
+
+        public IEnumerable<BCModel.Projects.Project> FindDuplicate(string title, string number, int architectId)
+        {
+            return (from p in _repo.Query()
+                    where p.ArchitectId == architectId
+                    && p.Number.ToLower() == number.ToLower()
+                    && p.Title.ToLower() == title.ToLower()
+                    select p).AsEnumerable();
+        }
+
+
+        public IEnumerable<BCModel.Projects.Project> FindDuplicate(string title, string number)
+        {
+            return (from p in _repo.Query()
+                    where p.Number.ToLower() == number.ToLower()
+                    && p.Title.ToLower() == title.ToLower()
+                    select p).AsEnumerable();
         }
     }
 }

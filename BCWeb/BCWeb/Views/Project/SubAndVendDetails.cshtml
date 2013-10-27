@@ -89,6 +89,22 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <th>Bid Date</th>
+                                @for (int y = 0; y < Model.Inviters.Count(); y++)
+                                {
+                                    <td>@Model.BidDate[Model.Inviters.ElementAt(y).Key]</td>
+                                }
+                            </tr>
+                            <tr>
+                                <th>Your Response</th>
+                                @for (int y = 0; y < Model.Inviters.Count(); y++)
+                                {
+                                    <td>
+                                        put a button here
+                                    </td>
+                                }
+                            </tr>
                             @for (int x = 0; x < Model.Scopes.Count(); x++)
                             {
                                 <tr>

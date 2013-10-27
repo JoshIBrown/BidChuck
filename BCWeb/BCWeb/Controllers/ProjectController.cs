@@ -35,16 +35,87 @@ namespace BCWeb.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            EditProjectViewModel viewModel = new EditProjectViewModel();
+            // check user role
+            // if architect, go right to step two
+            // if GC, go through dupe check process
 
-            rePopViewModel(viewModel);
-            return View("Create", viewModel);
+            if (User.IsInRole("architect"))
+            {
+                var user = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
+                EditProjectViewModel viewModel = new EditProjectViewModel();
+                viewModel.ArchitectId = user.CompanyId;
+                rePopViewModel(viewModel);
+                return View("CreateStepTwo", viewModel);
+            }
+            else
+            {
+                return View("Create");
+            }
+        }
+
+        [Authorize(Roles = "general_contractor,Administrator")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(DupeCheckViewModel viewModel)
+        {
+            // check for duplicate project
+            if (viewModel.ArchitectId.HasValue)
+            {
+                var dupes = _service.FindDuplicate(viewModel.Title, viewModel.Number, viewModel.ArchitectId.Value);
+                if (dupes.Count() > 0)
+                {
+                    return RedirectToRoute("Default", new { controller = "Project", action = "Duplicates" });
+                }
+                else
+                {
+                    return RedirectToRoute("Default", new { controller = "Project", action = "CreateStepTwo", architect = viewModel.ArchitectId, title = viewModel.Title, number = viewModel.Number });
+                }
+
+
+            }
+            else // architect is not in the system.  let's make a record of them, and send them an invite.
+            {
+                return RedirectToRoute("Account_default", new { controller = "Company", action = "CreateArchitect", name = viewModel.Architect });
+            }
+        }
+
+        [Authorize(Roles = "general_contractor,architect,Administrator")]
+        [HttpGet]
+        public ActionResult Duplicates(int architect, string title, string number)
+        {
+            // build list of duplicates
+            var dupes = _service.FindDuplicate(title, number, architect).Select(d => new ProjectListViewModel { Architect = d.Architect.CompanyName, Id = d.Id, Number = d.Number, Title = d.Title });
+            DuplicatesViewModel viewModel = new DuplicatesViewModel();
+            viewModel.Projects = dupes;
+
+
+            return View(viewModel);
         }
 
         [Authorize(Roles = "general_contractor,architect,Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EditProjectViewModel viewModel)
+        public ActionResult Duplicates(DuplicatesResponseViewModel viewModel)
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "general_contractor,architect,Administrator")]
+        [HttpGet]
+        public ActionResult CreateStepTwo(int architect, string title, string number)
+        {
+            EditProjectViewModel viewModel = new EditProjectViewModel();
+            viewModel.ArchitectId = architect;
+            viewModel.Title = title;
+            viewModel.Number = number;
+            rePopViewModel(viewModel);
+            return View("CreateStepTwo", viewModel);
+        }
+
+        [Authorize(Roles = "general_contractor,architect,Administrator")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateStepTwo(EditProjectViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -56,8 +127,9 @@ namespace BCWeb.Controllers
                     // create project
                     BCModel.Projects.Project toCreate = new BCModel.Projects.Project
                     {
+                        Number = viewModel.Number,
+                        ArchitectId = viewModel.ArchitectId,
                         Address = viewModel.Address,
-                        ArchitectId = companyId,
                         BidDateTime = viewModel.BidDateTime,
                         BuildingTypeId = viewModel.BuildingTypeId,
                         City = viewModel.City,
@@ -76,9 +148,11 @@ namespace BCWeb.Controllers
                     {
                         IsMaster = true,
                         BidDateTime = toCreate.BidDateTime,
+                        Description = "Master Bid Package",
                         CreatedById = companyId,
                         Project = toCreate,
-                        Scopes = new List<BidPackageXScope>()
+                        Scopes = new List<BidPackageXScope>(),
+                        Invitees = new List<BidPackageXInvitee>()
                     };
 
                     // if user is a GC, self-invite
@@ -106,7 +180,7 @@ namespace BCWeb.Controllers
                     {
                         Util.MapValidationErrors(_service.ValidationDic, this.ModelState);
                         rePopViewModel(viewModel);
-                        return View("Create", viewModel);
+                        return View("CreateStepTwo", viewModel);
                     }
                 }
                 catch (Exception ex)
@@ -114,13 +188,13 @@ namespace BCWeb.Controllers
 
                     ModelState.AddModelError("Exception", ex.Message);
                     rePopViewModel(viewModel);
-                    return View("Create", viewModel);
+                    return View("CreateStepTwo", viewModel);
                 }
             }
 
             // modelstate is not valid
             rePopViewModel(viewModel);
-            return View("Create", viewModel);
+            return View("CreateStepTwo", viewModel);
         }
 
         private void rePopViewModel(EditProjectViewModel viewModel)
@@ -149,11 +223,11 @@ namespace BCWeb.Controllers
                 IEnumerable<BidPackageXInvitee> invites = _service.GetInvitations(theProject.Id, user.CompanyId);
 
 
-                //Dictionary<int,string> bidDates = invites.ToDictionary(i => i.CompanyId.Value, i => i.BidPackage.BidDateTime.Value.ToString());
+                Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.ToShortDateString());
                 Dictionary<int, IEnumerable<int>> scopeselection = _service.GetInvitationScopesByInvitingCompany(theProject.Id, user.CompanyId);
                 Dictionary<int, string> inviters = _service.GetInvitatingCompanies(theProject.Id, user.CompanyId);
                 Dictionary<int, string> scopes = _service.GetInvitationScopes(theProject.Id, user.CompanyId);
-
+                Dictionary<int, bool?> inviteResponses = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.AcceptedDate.HasValue ? true : i.RejectedDate.HasValue ? false : default(bool?));
 
                 SubsAndVendProjectDetailsViewModel sAndVViewModel = new SubsAndVendProjectDetailsViewModel
                 {
@@ -171,7 +245,8 @@ namespace BCWeb.Controllers
                     Title = theProject.Title,
                     Inviters = inviters,
                     Scopes = scopes,
-                    ScopeSelection = scopeselection
+                    ScopeSelection = scopeselection,
+                    BidDate = bidDates
                 };
                 // get distinct list of scopes
 

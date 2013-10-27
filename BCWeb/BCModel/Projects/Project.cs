@@ -35,6 +35,7 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual UserProfile CreatedBy { get; set; }
 
+        [Required]
         public int ArchitectId { get; set; }
         [ForeignKey("ArchitectId")]
         [IgnoreDataMember]
@@ -60,8 +61,11 @@ namespace BCModel.Projects
         public DateTime BidDateTime { get; set; }
 
         public string Address { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string PostalCode { get; set; }
+        [Required]
         public int StateId { get; set; }
         [ForeignKey("StateId")]
         [IgnoreDataMember]

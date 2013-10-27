@@ -1,28 +1,35 @@
-﻿@model BCWeb.Models.Project.ViewModel.EditProjectViewModel
-@using BCWeb.Helpers
-
+﻿@model BCWeb.Models.Project.ViewModel.DupeCheckViewModel
 @{
     ViewBag.Title = "Create Project";
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
 <div class="row">
-    <div class="large-4 columns large-centered">
-        <h2>@ViewBag.Title</h2>
+    <div class="large-4 columns">
+        <h3>@ViewBag.Title</h3>
     </div>
 </div>
-<div class="row" ng-app="createProject">
-    <div class="large-12 columns large-centered" ng-controller="CreateProjectCtrl">
-
+<div class="row">
+    <div class="large-6 columns">
         @using (Html.BeginForm())
         {
-            @Html.AntiForgeryToken();
-            @Html.EditorFor(m => m)
-            <input type="submit" value="Create" class="medium button" />
+            @Html.AntiForgeryToken()
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title)
+            @Html.LabelFor(m => m.Number)
+            @Html.TextBoxFor(m => m.Number)
+            @Html.LabelFor(m => m.Architect)
+            @Html.TextBoxFor(m => m.Architect)
+            @Html.HiddenFor(m => m.ArchitectId)
+            <input type="submit" value="submit" class="medium button" />
         }
     </div>
 </div>
+
 @section scripts{
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/createproject")
+    @Scripts.Render("~/bundles/createprojectsimple")
+}
+@section head
+{
+    @Styles.Render("~/Content/jqueryuicss")
 }
