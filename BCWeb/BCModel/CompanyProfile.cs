@@ -47,7 +47,7 @@ namespace BCModel
         
         public string PostalCode { get; set; }
 
-        public int StateId { get; set; }
+        public int? StateId { get; set; }
         [ForeignKey("StateId")]
         [IgnoreDataMember]
         public virtual State State { get; set; }

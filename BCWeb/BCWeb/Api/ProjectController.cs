@@ -37,7 +37,8 @@ namespace BCWeb.Api
                 {
                     Architect = s.Architect.CompanyName,
                     Id = s.Id,
-                    Title = s.Title
+                    Title = s.Title,
+                    Number = s.Number
                 });
 
             return list;
@@ -52,7 +53,8 @@ namespace BCWeb.Api
                 {
                     Architect = s.Architect.CompanyName,
                     Id = s.Id,
-                    Title = s.Title
+                    Title = s.Title,
+                    Number = s.Number
                 });
 
             return list;
@@ -67,7 +69,8 @@ namespace BCWeb.Api
                 {
                     Architect = s.Architect.CompanyName,
                     Id = s.Id,
-                    Title = s.Title
+                    Title = s.Title,
+                    Number = s.Number
                 });
 
             return list;

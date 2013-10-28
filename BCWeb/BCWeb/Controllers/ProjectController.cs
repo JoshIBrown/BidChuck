@@ -61,10 +61,10 @@ namespace BCWeb.Controllers
             // check for duplicate project
             if (viewModel.ArchitectId.HasValue)
             {
-                var dupes = _service.FindDuplicate(viewModel.Title, viewModel.Number, viewModel.ArchitectId.Value);
+                List<Project> dupes = _service.FindDuplicate(viewModel.Title, viewModel.Number, viewModel.ArchitectId.Value).ToList();
                 if (dupes.Count() > 0)
                 {
-                    return RedirectToRoute("Default", new { controller = "Project", action = "Duplicates" });
+                    return RedirectToRoute("Default", new { controller = "Project", action = "Duplicates", architect = viewModel.ArchitectId, title = viewModel.Title, number = viewModel.Number });
                 }
                 else
                 {
@@ -75,7 +75,7 @@ namespace BCWeb.Controllers
             }
             else // architect is not in the system.  let's make a record of them, and send them an invite.
             {
-                return RedirectToRoute("Account_default", new { controller = "Company", action = "CreateArchitect", name = viewModel.Architect });
+                return RedirectToRoute("Account_default", new { controller = "Company", action = "CreateArchitect", name = viewModel.Architect, title = viewModel.Title, number = viewModel.Number });
             }
         }
 
@@ -158,7 +158,7 @@ namespace BCWeb.Controllers
                     // if user is a GC, self-invite
                     if (_security.IsUserInRole("general_contractor"))
                     {
-                        projectPackage.Invitees.Add(new BidPackageXInvitee { BidPackage = projectPackage, CompanyId = companyId, SentDate = DateTime.Now });
+                        projectPackage.Invitees.Add(new BidPackageXInvitee { BidPackage = projectPackage, CompanyId = companyId, SentDate = DateTime.Now, AcceptedDate = DateTime.Now });
                     }
 
                     // add bp to project

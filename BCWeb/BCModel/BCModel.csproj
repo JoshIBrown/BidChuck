@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201310270502094_makeFieldsInProjectRequired.Designer.cs">
       <DependentUpon>201310270502094_makeFieldsInProjectRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310272346233_makeStateNullableInCompanyProfile.cs" />
+    <Compile Include="Migrations\201310272346233_makeStateNullableInCompanyProfile.Designer.cs">
+      <DependentUpon>201310272346233_makeStateNullableInCompanyProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -320,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310270502094_makeFieldsInProjectRequired.resx">
       <DependentUpon>201310270502094_makeFieldsInProjectRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310272346233_makeStateNullableInCompanyProfile.resx">
+      <DependentUpon>201310272346233_makeStateNullableInCompanyProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

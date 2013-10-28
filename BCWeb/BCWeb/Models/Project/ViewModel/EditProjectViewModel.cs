@@ -16,6 +16,7 @@ namespace BCWeb.Models.Project.ViewModel
         [Required]
         public string Description { get; set; }
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime BidDateTime { get; set; }
 
         public string Address { get; set; }

@@ -99,7 +99,7 @@ namespace BCWeb.Areas.Account.Controllers
                 CompanyName = raw.CompanyName,
                 Id = raw.Id,
                 OperatingDistance = raw.OperatingDistance,
-                Phone = raw.Phone == "" ? "" : Util.ConvertPhoneForDisplay(raw.Phone),
+                Phone = raw.Phone == null || raw.Phone == "" ? "" : Util.ConvertPhoneForDisplay(raw.Phone),
                 PostalCode = raw.PostalCode,
                 StateId = raw.StateId
             };
@@ -149,7 +149,7 @@ namespace BCWeb.Areas.Account.Controllers
                     company.PostalCode = viewModel.PostalCode.Trim();
 
                 // did state change?
-                if (viewModel.StateId == 0 && company.StateId != viewModel.StateId)
+                if (viewModel.StateId != 0 && company.StateId != viewModel.StateId)
                     company.StateId = viewModel.StateId;
 
                 // did business type change?
@@ -243,7 +243,7 @@ namespace BCWeb.Areas.Account.Controllers
             }
         }
 
-        [Authorize(Roles = "genaral_contractor")]
+        [Authorize(Roles = "general_contractor,Adminstrator")]
         [HttpGet]
         public ActionResult CreateArchitect(string name, string title, string number)
         {
@@ -256,7 +256,7 @@ namespace BCWeb.Areas.Account.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "genaral_contractor")]
+        [Authorize(Roles = "general_contractor,Adminstrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateArchitect(NewArchitectViewModel viewModel)
@@ -283,6 +283,8 @@ namespace BCWeb.Areas.Account.Controllers
                             CompanyId = toCreate.Id
                         }
                         , true);
+
+                    _security.AddUserToRoles(viewModel.ContactEmail, new[] { "architect", "Manager" });
 
                     var user = _serviceLayer.GetUserProfile(_security.GetUserId(User.Identity.Name));
 

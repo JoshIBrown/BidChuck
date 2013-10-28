@@ -14,7 +14,7 @@
 <div class="row">
     <div class="large-12 columns large-centered" ng-controller="CreateProjectCtrl">
         @**FIXME: when submitting step two it's looking for a dupe check view model *@
-        @using (Html.BeginForm())
+        @using (Html.BeginRouteForm("Default", new { controller = "Project", action = "CreateStepTwo" }, FormMethod.Post))
         {
             @Html.AntiForgeryToken();
             @Html.EditorFor(m => m)

@@ -44,7 +44,7 @@ namespace BCWeb.Areas.Account.Models.Company.ViewModel
         [Required]
         [Display(Name = "State")]
         [DataType(DataType.PostalCode)]
-        public int StateId { get; set; }
+        public int? StateId { get; set; }
 
         [Required]
         [Display(Name = "Phone Number")]

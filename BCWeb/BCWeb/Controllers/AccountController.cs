@@ -126,7 +126,7 @@ namespace BCWeb.Controllers
                 OperatingRadius = raw.Company.OperatingDistance.ToString(),
                 Phone = raw.Company.Phone,
                 PostalCode = raw.Company.PostalCode,
-                State = raw.Company.State.Abbr,
+                State = raw.Company.StateId.HasValue ? raw.Company.State.Abbr : "NOT SET",
                 Name = raw.FirstName + " " + raw.LastName,
                 Published = raw.Company.Published
             };

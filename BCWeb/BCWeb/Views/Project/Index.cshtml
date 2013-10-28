@@ -14,15 +14,56 @@
 <div class="row" ng-app="projectIndex">
     <div class="large-8 columns" ng-controller="ProjectIndexCtrl">
         <h5>my projects</h5>
+
+        @if (User.IsInRole("architect"))
+        {
+            <div class="row">
+                <div class="large-12 columns">
+                    <table style="width: 100%;">
+                        <caption>My projects</caption>
+                        <thead>
+                            <tr>
+                                <th>Id
+                                </th>
+                                <th>Number
+                                </th>
+                                <th>Name
+                                </th>
+                                <th>Architect
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="mp in myProjects">
+                                <td>{{mp.Id}}
+                                </td>
+                                <td>{{mp.Number}}
+                                </td>
+                                <td>{{mp.Title}}
+                                </td>
+                                <td>{{mp.Architect}}
+                                </td>
+                                <td>
+                                    <a href="/Project/Details/{{mp.Id}}">Details</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
         @if (User.IsInRole("architect") || User.IsInRole("general_contractor"))
         {
             <div class="row">
-                <div class="large-6 columns">
-                    <table>
+                <div class="large-12 columns">
+                    <table style="width: 100%;">
                         <caption>Projects I created</caption>
                         <thead>
                             <tr>
                                 <th>Id
+                                </th>
+                                <th>Number
                                 </th>
                                 <th>Name
                                 </th>
@@ -34,6 +75,8 @@
                         <tbody>
                             <tr ng-repeat="mcp in myCreateProjects">
                                 <td>{{mcp.Id}}
+                                </td>
+                                <td>{{mcp.Number}}
                                 </td>
                                 <td>{{mcp.Title}}
                                 </td>
@@ -52,12 +95,14 @@
         @if (!User.IsInRole("architect"))
         {
             <div class="row">
-                <div class="large-6 columns">
-                    <table>
+                <div class="large-12 columns">
+                    <table style="width: 100%;">
                         <caption>Projects I have been invited to bid on</caption>
                         <thead>
                             <tr>
                                 <th>Id
+                                </th>
+                                <th>Number
                                 </th>
                                 <th>Name
                                 </th>
@@ -69,6 +114,8 @@
                         <tbody>
                             <tr ng-repeat="ip in invitedProjects">
                                 <td>{{ip.Id}}
+                                </td>
+                                <td>{{ip.Number}}
                                 </td>
                                 <td>{{ip.Title}}
                                 </td>

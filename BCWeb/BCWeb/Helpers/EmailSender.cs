@@ -166,7 +166,7 @@ namespace BCWeb
                 <html>
                   <body>
                     <p>Hello " + name + @",</p>
-                    <p>" + invitingTagLine + @"has invited you to join bidChuck.com.  You can accept this invitation, and register " + company + @" with bidChuck.com by following this link:  </p>
+                    <p>" + invitingTagLine + @" has invited you to join bidChuck.com.  You can accept this invitation, and register " + company + @" with bidChuck.com by following this link:  </p>
                     <p></p>
                     <p><a href=""http://bidchuck.com/Account/AcceptInvitation?user=" + email + @"&token=" + token + @""">http://bidchuck.com/Account/AcceptInvitation?user=" + email + @"&token=" + token + @"</a></p>
                     <p></p>
