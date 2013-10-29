@@ -964,7 +964,7 @@
     <Content Include="Views\Project\CreateStepTwo.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\EditProjectViewModel.cshtml" />
+    <Content Include="Views\Project\EditorTemplates\EditProjectViewModel.cshtml" />
     <Content Include="Views\Project\BPDetails.cshtml" />
     <Content Include="Views\Project\SubAndVendDetails.cshtml" />
     <Content Include="Views\Shared\_Admin.cshtml" />

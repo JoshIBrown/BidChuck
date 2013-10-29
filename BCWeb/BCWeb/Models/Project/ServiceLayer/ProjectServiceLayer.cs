@@ -49,23 +49,7 @@ namespace BCWeb.Models.Project.ServiceLayer
             bool valid = true;
             ValidationDic.Clear();
 
-            // TODO: ADD LOGIC
-            // if architect, address and city, title combo already exists
-            if (_repo.Query().Where(r => r.Address.ToLower().Trim() == entity.Address.ToLower().Trim()
-                && r.City.ToLower().Trim() == entity.City.ToLower().Trim()
-                //&& r.Architect.Trim().ToLower() == entity.Architect.Trim().ToLower()
-                && r.Title.ToLower().Trim() == entity.Title.ToLower().Trim()).Count() > 0)
-            {
-                valid = false;
-                ValidationDic.Add("City", "");
-                ValidationDic.Add("Title", "");
-                ValidationDic.Add("Architect", "");
-                ValidationDic.Add("Address", "");
-                ValidationDic.Add("unique", "A Project by this architect, with this title at this location already exists");
-            }
-
-
-
+            // TODO: add validation logic
             return valid;
         }
 

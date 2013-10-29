@@ -21,9 +21,17 @@
         </div>
 
         <div class="row">
-            <div class="large-6 columns">
+            <div class="large-5 columns">
                 @Html.LabelFor(m => m.Title)
                 @Html.DisplayFor(m => m.Title)
+            </div>
+            <div class="large-4 columns">
+                @Html.LabelFor(m => m.Number)
+                @Html.DisplayFor(m => m.Number)
+            </div>
+            <div class="large-3 columns">
+                @Html.LabelFor(m => m.Architect)
+                @Html.DisplayFor(m => m.Architect)
             </div>
         </div>
         <div class="row">
@@ -100,8 +108,7 @@
                                 <th>Your Response</th>
                                 @for (int y = 0; y < Model.Inviters.Count(); y++)
                                 {
-                                    <td>
-                                        put a button here
+                                    <td>put a button here
                                     </td>
                                 }
                             </tr>

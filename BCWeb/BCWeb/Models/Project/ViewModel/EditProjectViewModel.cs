@@ -46,5 +46,7 @@ namespace BCWeb.Models.Project.ViewModel
         public int ArchitectId { get; set; }
 
         public string Number { get; set; }
+
+        public string Architect { get; set; }
     }
 }

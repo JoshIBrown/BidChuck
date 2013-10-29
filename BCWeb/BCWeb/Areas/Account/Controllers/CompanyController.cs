@@ -294,7 +294,7 @@ namespace BCWeb.Areas.Account.Controllers
 
                     //send email
                     _email.InviteArchitect(viewModel.ContactEmail, name, viewModel.CompanyName, invitingTagLine, token);
-                    return RedirectToRoute("Default", new { controller = "Project", action = "CreateStepTwo", architect = toCreate.Id, title = viewModel.ProjectTitle, number = viewModel.ProjectNumber });
+                    return RedirectToRoute("Default", new { controller = "Project", action = "CreateStepTwo", architectId = toCreate.Id, title = viewModel.ProjectTitle, number = viewModel.ProjectNumber });
                 }
                 else
                 {

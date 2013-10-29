@@ -64,11 +64,11 @@ namespace BCWeb.Controllers
                 List<Project> dupes = _service.FindDuplicate(viewModel.Title, viewModel.Number, viewModel.ArchitectId.Value).ToList();
                 if (dupes.Count() > 0)
                 {
-                    return RedirectToRoute("Default", new { controller = "Project", action = "Duplicates", architect = viewModel.ArchitectId, title = viewModel.Title, number = viewModel.Number });
+                    return RedirectToRoute("Default", new { controller = "Project", action = "Duplicates", architectId = viewModel.ArchitectId, title = viewModel.Title, number = viewModel.Number });
                 }
                 else
                 {
-                    return RedirectToRoute("Default", new { controller = "Project", action = "CreateStepTwo", architect = viewModel.ArchitectId, title = viewModel.Title, number = viewModel.Number });
+                    return RedirectToRoute("Default", new { controller = "Project", action = "CreateStepTwo", architectId = viewModel.ArchitectId, title = viewModel.Title, number = viewModel.Number });
                 }
 
 
@@ -81,13 +81,16 @@ namespace BCWeb.Controllers
 
         [Authorize(Roles = "general_contractor,architect,Administrator")]
         [HttpGet]
-        public ActionResult Duplicates(int architect, string title, string number)
+        public ActionResult Duplicates(int architectId, string title, string number)
         {
             // build list of duplicates
-            var dupes = _service.FindDuplicate(title, number, architect).Select(d => new ProjectListViewModel { Architect = d.Architect.CompanyName, Id = d.Id, Number = d.Number, Title = d.Title });
+            var dupes = _service.FindDuplicate(title, number, architectId)
+                .Select(d => new ProjectListViewModel { Architect = d.Architect.CompanyName, Id = d.Id, Number = d.Number, Title = d.Title });
             DuplicatesViewModel viewModel = new DuplicatesViewModel();
             viewModel.Projects = dupes;
-
+            viewModel.ArchitectId = architectId;
+            viewModel.Number = number;
+            viewModel.Title = title;
 
             return View(viewModel);
         }
@@ -95,17 +98,42 @@ namespace BCWeb.Controllers
         [Authorize(Roles = "general_contractor,architect,Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Duplicates(DuplicatesResponseViewModel viewModel)
+        public ActionResult Duplicates(DuplicatesViewModel viewModel)
         {
-            return View();
+            if (viewModel.btn != "")
+            {
+                // what button did the user click
+                switch (viewModel.btn)
+                {
+                    case "Create New Project":
+                        return RedirectToRoute("Default", new { controller = "Project", action = "CreateStepTwo", architectId = viewModel.ArchitectId, title = viewModel.Title, number = viewModel.Number });
+                    case "Go Back":
+                        return RedirectToRoute("Default", new { controller = "Project", action = "Create" });
+                    default: // should never reach this.  need to fail more elegantly
+                        var dupes = _service.FindDuplicate(viewModel.Title, viewModel.Number, viewModel.ArchitectId)
+                            .Select(d => new ProjectListViewModel { Architect = d.Architect.CompanyName, Id = d.Id, Number = d.Number, Title = d.Title });
+                        viewModel.Projects = dupes;
+                        return View(viewModel);
+                };
+            }
+            else // should never reach this
+            {
+                var dupes = _service.FindDuplicate(viewModel.Title, viewModel.Number, viewModel.ArchitectId)
+                    .Select(d => new ProjectListViewModel { Architect = d.Architect.CompanyName, Id = d.Id, Number = d.Number, Title = d.Title });
+                viewModel.Projects = dupes;
+                return View(viewModel);
+            }
+
         }
 
         [Authorize(Roles = "general_contractor,architect,Administrator")]
         [HttpGet]
-        public ActionResult CreateStepTwo(int architect, string title, string number)
+        public ActionResult CreateStepTwo(int architectId, string title, string number)
         {
+            string archName = _service.GetCompanyProfile(architectId).CompanyName;
             EditProjectViewModel viewModel = new EditProjectViewModel();
-            viewModel.ArchitectId = architect;
+            viewModel.ArchitectId = architectId;
+            viewModel.Architect = archName;
             viewModel.Title = title;
             viewModel.Number = number;
             rePopViewModel(viewModel);
@@ -233,6 +261,7 @@ namespace BCWeb.Controllers
                 {
                     Address = theProject.Address,
                     Architect = theProject.Architect.CompanyName,
+                    Number = theProject.Number,
                     Owner = theProject.ClientId.HasValue ? theProject.Client.CompanyName : "",
                     BuildingType = theProject.BuildingType.Name,
                     City = theProject.City,
@@ -262,6 +291,7 @@ namespace BCWeb.Controllers
             {
                 Address = theProject.Address,
                 Architect = theProject.Architect.CompanyName,
+                Number = theProject.Number,
                 Owner = theProject.ClientId.HasValue ? theProject.Client.CompanyName : "",
                 BidDateTime = theProject.BidDateTime,
                 BuildingType = theProject.BuildingType.Name,
@@ -311,6 +341,8 @@ namespace BCWeb.Controllers
             var raw = _service.Get(id);
             EditProjectViewModel viewModel = new EditProjectViewModel
             {
+                Architect = raw.Architect.CompanyName,
+                ArchitectId = raw.ArchitectId,
                 Address = raw.Address,
                 BidDateTime = raw.BidDateTime,
                 BuildingTypeId = raw.BuildingTypeId,
@@ -320,7 +352,8 @@ namespace BCWeb.Controllers
                 Id = raw.Id,
                 PostalCode = raw.PostalCode,
                 StateId = raw.StateId,
-                Title = raw.Title
+                Title = raw.Title,
+                Number = raw.Number
             };
             viewModel.SelectedScope = raw.Scopes.Select(x => x.ScopeId).ToList();
             viewModel.States = _service.GetStates().OrderBy(s => s.Abbr).Select(s => new SelectListItem { Text = s.Abbr, Value = s.Id.ToString(), Selected = s.Id == viewModel.StateId });
@@ -338,7 +371,6 @@ namespace BCWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 try
                 {
                     int userId = _security.GetUserId(User.Identity.Name);
@@ -378,6 +410,9 @@ namespace BCWeb.Controllers
                     if (toUpdate.StateId != viewModel.StateId)
                         toUpdate.StateId = viewModel.StateId;
 
+                    if (toUpdate.Number != viewModel.Number)
+                        toUpdate.Number = viewModel.Number;
+
                     // update primary bid package
                     var ProjectPackage = toUpdate.BidPackages.Where(b => b.IsMaster).FirstOrDefault();
 
@@ -414,7 +449,6 @@ namespace BCWeb.Controllers
                     else
                     {
                         bpScopes = ProjectPackage.Scopes.ToList();
-
                     }
 
                     // get scopes from new selection that are not in existing selection

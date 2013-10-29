@@ -26,9 +26,21 @@
                         <td>@p.Number</td>
                         <td>@p.Title</td>
                         <td>@p.Architect</td>
+                        <td>@Html.RouteLink("Details","Default", new { controller = "Project", action = "Details", id = p.Id })</td>
                     </tr>
                 }
             </tbody>
         </table>
+    </div>
+</div>
+<div class="row">
+    <div class="large-6 columns">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Title) @Html.HiddenFor(m => m.Number) @Html.HiddenFor(m => m.ArchitectId)
+            <input type="submit" name="btn" value="Create New Project" />
+            <input type="submit" name="btn" value="Go Back" />
+        }
     </div>
 </div>

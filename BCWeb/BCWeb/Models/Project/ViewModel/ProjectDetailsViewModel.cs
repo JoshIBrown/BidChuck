@@ -14,6 +14,8 @@ namespace BCWeb.Models.Project.ViewModel
         [Display(Name = "Title")]
         public string Title { get; set; }
 
+        public string Number { get; set; }
+
         public string Architect { get; set; }
 
         public string Owner { get; set; }
