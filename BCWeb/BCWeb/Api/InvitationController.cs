@@ -93,5 +93,22 @@ namespace BCWeb.Api
 
             return result;
         }
+
+        public JQueryPostResult PostJoin(int id)
+        {
+            JQueryPostResult result = new JQueryPostResult();
+            var bidPackage = _service.GetBidPackage(id);
+
+            return result;
+        }
+
+        public JQueryPostResult PostLeave(int id)
+        {
+            JQueryPostResult result = new JQueryPostResult();
+            var bidPackage = _service.GetBidPackage(id);
+
+            return result;
+        }
+
     }
 }

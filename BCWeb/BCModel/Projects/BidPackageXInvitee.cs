@@ -31,5 +31,14 @@ namespace BCModel.Projects
         public DateTime SentDate { get; set; }
         public DateTime? AcceptedDate { get; set; }
         public DateTime? RejectedDate { get; set; }
+
+        public InvitationType InvitationType { get; set; } 
+
+    }
+
+    public enum InvitationType
+    {
+        SentFromCreatedBy = 0,
+        SelfInvite = 1
     }
 }

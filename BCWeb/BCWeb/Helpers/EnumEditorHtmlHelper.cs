@@ -53,7 +53,7 @@ namespace BCWeb.Helpers
             TProperty value = htmlHelper.ViewData.Model == null
                 ? default(TProperty)
                 : expression.Compile()(htmlHelper.ViewData.Model);
-            string selected = value == null ? String.Empty : value.ToString();
+            string selected = htmlHelper.ViewData.Model == null ? String.Empty : value.ToString();
             IEnumerable<SelectListItem> selectList = createSelectList(expression.ReturnType, selected);
             return htmlHelper.DropDownListFor(expression, selectList, optionLabel, htmlAttributes);
         }
@@ -66,16 +66,32 @@ namespace BCWeb.Helpers
         /// <returns></returns>
         private static IEnumerable<SelectListItem> createSelectList(Type enumType, string selectedItem)
         {
-            return (from object item in Enum.GetValues(enumType)
-                    let fi = enumType.GetField(item.ToString())
-                    let attribute = fi.GetCustomAttributes(typeof(DescriptionAttribute), true).FirstOrDefault()
-                    let title = attribute == null ? item.ToString() : ((DescriptionAttribute)attribute).Description
-                    select new SelectListItem
-                    {
-                        Value = item.ToString(),
-                        Text = title,
-                        Selected = selectedItem == item.ToString()
-                    }).ToList();
+            if (selectedItem == string.Empty)
+            {
+                return (from object item in Enum.GetValues(enumType)
+                        let fi = enumType.GetField(item.ToString())
+                        let attribute = fi.GetCustomAttributes(typeof(DescriptionAttribute), true).FirstOrDefault()
+                        let title = attribute == null ? item.ToString() : ((DescriptionAttribute)attribute).Description
+                        select new SelectListItem
+                        {
+                            Value = item.ToString(),
+                            Text = title
+                        }).ToList();
+            }
+            else
+            {
+                return (from object item in Enum.GetValues(enumType)
+                        let fi = enumType.GetField(item.ToString())
+                        let attribute = fi.GetCustomAttributes(typeof(DescriptionAttribute), true).FirstOrDefault()
+                        let title = attribute == null ? item.ToString() : ((DescriptionAttribute)attribute).Description
+                        select new SelectListItem
+                        {
+                            Value = item.ToString(),
+                            Text = title,
+                            Selected = selectedItem == item.ToString()
+                        }).ToList();
+            }
+            
         }
     }
 

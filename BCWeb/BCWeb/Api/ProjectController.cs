@@ -64,7 +64,7 @@ namespace BCWeb.Api
         {
             int userId = _security.GetUserId(User.Identity.Name);
 
-            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(x => x.ProjectType == ProjectType.Federal || x.ProjectType == ProjectType.Local || x.ProjectType == ProjectType.State)
+            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(x => x.ProjectType == ProjectType.Federal || x.ProjectType == ProjectType.County || x.ProjectType == ProjectType.State)
                 .Select(s => new ProjectListViewModel
                 {
                     Architect = s.Architect.CompanyName,

@@ -1,5 +1,5 @@
 ﻿@model BCWeb.Models.Project.ViewModel.EditProjectViewModel
-@using BCWeb.Helpers
+
 
 @Html.HiddenFor(m => m.Id)
 <div class="row">
@@ -40,11 +40,15 @@
 
 <div class="row">
 
-    <div class="large-4 columns left">
+    <div class="large-2 columns left">
         @Html.LabelFor(m => m.ProjectType)
-        @Html.DropDownListFor(m => m.ProjectType, new { @class = "pretty" })
+        @Html.DropDownListFor(m => m.ProjectType, Model.ProjectTypes, "Select...", new { @class = "pretty" })
     </div>
-    <div class="large-4 columns left">
+    <div class="large-2 columns left">
+        @Html.LabelFor(m => m.ProjectCategory)
+        @Html.DropDownListFor(m => m.ProjectCategory, Model.ProjectCategories, "Select...", new { @class = "pretty" })
+    </div>
+    <div class="large-3 columns left">
         @Html.LabelFor(m => m.ConstructionTypeId)
         @Html.DropDownListFor(m => m.ConstructionTypeId, Model.ConstructionTypes, "Select...", new { @class = "pretty" })
     </div>

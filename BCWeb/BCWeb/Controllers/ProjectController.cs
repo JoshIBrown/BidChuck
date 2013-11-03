@@ -145,6 +145,11 @@ namespace BCWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateStepTwo(EditProjectViewModel viewModel)
         {
+            if (!viewModel.ProjectCategory.HasValue)
+                ModelState.AddModelError("ProjectCategory", "Project Category is required");
+            if (!viewModel.ProjectType.HasValue)
+                ModelState.AddModelError("ProjectType", "Project Type is required");
+
             if (ModelState.IsValid)
             {
                 try
@@ -165,7 +170,8 @@ namespace BCWeb.Controllers
                         CreatedById = userId,
                         Description = viewModel.Description,
                         PostalCode = viewModel.PostalCode,
-                        ProjectType = viewModel.ProjectType,
+                        ProjectType = viewModel.ProjectType.Value,
+                        ProjectCategory = viewModel.ProjectCategory.Value,
                         StateId = viewModel.StateId,
                         Title = viewModel.Title,
                         Scopes = new List<ProjectXScope>(),
@@ -186,7 +192,14 @@ namespace BCWeb.Controllers
                     // if user is a GC, self-invite
                     if (_security.IsUserInRole("general_contractor"))
                     {
-                        projectPackage.Invitees.Add(new BidPackageXInvitee { BidPackage = projectPackage, CompanyId = companyId, SentDate = DateTime.Now, AcceptedDate = DateTime.Now });
+                        projectPackage.Invitees.Add(new BidPackageXInvitee
+                        {
+                            BidPackage = projectPackage,
+                            CompanyId = companyId,
+                            SentDate = DateTime.Now,
+                            AcceptedDate = DateTime.Now,
+                            InvitationType = InvitationType.SentFromCreatedBy
+                        });
                     }
 
                     // add bp to project
@@ -228,7 +241,8 @@ namespace BCWeb.Controllers
         private void rePopViewModel(EditProjectViewModel viewModel)
         {
 
-
+            viewModel.ProjectTypes = Util.CreateSelectListFromEnum(typeof(ProjectType));
+            viewModel.ProjectCategories = Util.CreateSelectListFromEnum(typeof(ProjectCategory));
             viewModel.ConstructionTypes = _service.GetConstructionTypes().OrderBy(c => c.Name).Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString(), Selected = c.Id == viewModel.ConstructionTypeId });
             //viewModel.ProjectTypes = 
             viewModel.States = _service.GetStates().OrderBy(s => s.Abbr).Select(s => new SelectListItem { Text = s.Abbr, Value = s.Id.ToString(), Selected = s.Id == viewModel.StateId });
@@ -285,8 +299,6 @@ namespace BCWeb.Controllers
             // else user is not a sub or material vendor
             BidPackage masterBP = _service.GetMasterBidPackage(id);
 
-
-
             BPProjectDetailsViewModel gcViewModel = new BPProjectDetailsViewModel
             {
                 Address = theProject.Address,
@@ -321,7 +333,7 @@ namespace BCWeb.Controllers
 
                 if (invite != null)
                 {
-                    gcViewModel.inviteId = invite.Id;
+                    gcViewModel.InviteId = invite.Id;
                     gcViewModel.Accepted = invite.AcceptedDate.HasValue ? true
                         : invite.RejectedDate.HasValue ? false
                         : default(bool?);
@@ -331,7 +343,7 @@ namespace BCWeb.Controllers
                 }
             }
 
-            return View("BPDetails", gcViewModel);
+            return View(gcViewModel);
 
         }
 
@@ -369,6 +381,11 @@ namespace BCWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditProjectViewModel viewModel)
         {
+            if (!viewModel.ProjectCategory.HasValue)
+                ModelState.AddModelError("ProjectCategory", "Project Category is required");
+            if (!viewModel.ProjectType.HasValue)
+                ModelState.AddModelError("ProjectType", "Project Type is required");
+
             if (ModelState.IsValid)
             {
                 try
@@ -404,8 +421,11 @@ namespace BCWeb.Controllers
                     if (toUpdate.PostalCode != viewModel.PostalCode)
                         toUpdate.PostalCode = viewModel.PostalCode;
 
-                    if (toUpdate.ProjectType != viewModel.ProjectType)
-                        toUpdate.ProjectType = viewModel.ProjectType;
+                    if (toUpdate.ProjectType != viewModel.ProjectType.Value)
+                        toUpdate.ProjectType = viewModel.ProjectType.Value;
+
+                    if (toUpdate.ProjectCategory != viewModel.ProjectCategory.Value)
+                        toUpdate.ProjectCategory = viewModel.ProjectCategory.Value;
 
                     if (toUpdate.StateId != viewModel.StateId)
                         toUpdate.StateId = viewModel.StateId;

@@ -1,6 +1,7 @@
 ﻿using BCModel.Projects;
 using BCWeb.Areas.Project.Models.BidPackage.ServiceLayer;
 using BCWeb.Models;
+using BCWeb.Models.GenericViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

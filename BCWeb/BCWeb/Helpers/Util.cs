@@ -100,6 +100,39 @@ namespace BCWeb.Helpers
             else
                 return value.ToString();
         }
+
+        public static IEnumerable<SelectListItem> CreateSelectListFromEnum(Type enumType)
+        {
+
+            return (from object item in Enum.GetValues(enumType)
+                    let fi = enumType.GetField(item.ToString())
+                    let attribute = fi.GetCustomAttributes(typeof(DescriptionAttribute), true).FirstOrDefault()
+                    let title = attribute == null ? item.ToString() : ((DescriptionAttribute)attribute).Description
+                    select new SelectListItem
+                    {
+                        Value = item.ToString(),
+                        Text = title
+                    }).ToList();
+
+
+        }
+
+        public static IEnumerable<SelectListItem> CreateSelectListFromEnum(Type enumType, string selectedItem)
+        {
+
+            return (from object item in Enum.GetValues(enumType)
+                    let fi = enumType.GetField(item.ToString())
+                    let attribute = fi.GetCustomAttributes(typeof(DescriptionAttribute), true).FirstOrDefault()
+                    let title = attribute == null ? item.ToString() : ((DescriptionAttribute)attribute).Description
+                    select new SelectListItem
+                    {
+                        Value = item.ToString(),
+                        Text = title,
+                        Selected = selectedItem == item.ToString()
+                    }).ToList();
+
+
+        }
     }
 
     public enum ManageMessageId

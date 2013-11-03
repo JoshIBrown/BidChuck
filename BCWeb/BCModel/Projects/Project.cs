@@ -16,12 +16,27 @@ namespace BCModel.Projects
         Federal = 0,
         [Description("State Government")]
         State = 1,
-        [Description("Local Government")]
-        Local = 2,
+        [Description("County Government")]
+        County = 2,
         [Description("Private")]
         Private = 3,
         [Description("Private - Non-Profit")]
-        PrivateNP = 4
+        PrivateNP = 4,
+        [Description("City Government")]
+        City = 5
+    }
+
+    public enum ProjectCategory
+    {
+        [Description("New Construction")]
+        NewConstruction = 0,
+        [Description("Renovation")]
+        Renovation = 1,
+        [Description("Tenant Improvement")]
+        TenantImprovement = 2,
+        [Description("Addition")]
+        Addition = 3
+
     }
 
     public class Project
@@ -86,6 +101,8 @@ namespace BCModel.Projects
 
 
         public ProjectType ProjectType { get; set; }
+
+        public ProjectCategory ProjectCategory { get; set; }
 
         public int ConstructionTypeId { get; set; }
         [ForeignKey("ConstructionTypeId")]
