@@ -18,7 +18,7 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
         }
 
 
-        public BCModel.UserProfile GetUerProfile(int id)
+        public BCModel.UserProfile GetUserProfile(int id)
         {
             return _repo.GetUerProfile(id);
         }

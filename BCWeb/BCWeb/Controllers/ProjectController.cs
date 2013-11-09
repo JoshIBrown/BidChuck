@@ -333,11 +333,12 @@ namespace BCWeb.Controllers
 
                 if (invite != null)
                 {
+                    gcViewModel.InviteType = invite.InvitationType;
                     gcViewModel.InviteId = invite.Id;
                     gcViewModel.Accepted = invite.AcceptedDate.HasValue ? true
                         : invite.RejectedDate.HasValue ? false
                         : default(bool?);
-                    gcViewModel.AcceptDate = invite.AcceptedDate.HasValue ? invite.AcceptedDate.Value
+                    gcViewModel.ResponseDate = invite.AcceptedDate.HasValue ? invite.AcceptedDate.Value
                         : invite.RejectedDate.HasValue ? invite.RejectedDate.Value
                         : default(DateTime?);
                 }

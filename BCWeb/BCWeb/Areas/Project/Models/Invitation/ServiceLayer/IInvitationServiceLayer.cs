@@ -12,7 +12,7 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
     public interface IInvitationServiceLayer : IGenericServiceLayer<BidPackageXInvitee>
     {
 
-        UserProfile GetUerProfile(int id);
+        UserProfile GetUserProfile(int id);
         CompanyProfile GetCompanyProfile(int id);
 
         BCModel.Projects.BidPackage GetBidPackage(int id);

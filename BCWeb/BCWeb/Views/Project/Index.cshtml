@@ -129,7 +129,44 @@
                     </table>
                 </div>
             </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <table style="width: 100%;">
+                        <caption>Public Projects</caption>
+                        <thead>
+                            <tr>
+                                <th>Id
+                                </th>
+                                <th>Number
+                                </th>
+                                <th>Name
+                                </th>
+                                <th>Architect
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ip in publicProjects">
+                                <td>{{ip.Id}}
+                                </td>
+                                <td>{{ip.Number}}
+                                </td>
+                                <td>{{ip.Title}}
+                                </td>
+                                <td>{{ip.Architect}}
+                                </td>
+                                <td>
+                                    <a href="/Project/Details/{{ip.Id}}">Details</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         }
+
+
     </div>
 </div>
 @section scripts{

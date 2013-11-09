@@ -31,49 +31,38 @@
         <div class="large-8 columns left">
             <div class="row">
                 <div class="large-4 columns">
-                    <h3>@ViewBag.Title</h3>@Html.HiddenFor(m => m.ProjectId)@Html.HiddenFor(m => m.BidPackageId)
+                    <h3>@ViewBag.Title</h3>@Html.HiddenFor(m => m.ProjectId)@Html.HiddenFor(m => m.BidPackageId)@Html.HiddenFor(m => m.InviteId)
                 </div>
-                @if (User.IsInRole("general_contractor") && Model.InviteId.HasValue)
+                @if (User.IsInRole("general_contractor"))
                 {
                     // if user is a GC and is invited
                     <div class="large-6 columns">
                         <div class="row">
                             <div class="large-12 columns" id="inviteResponseWrapper">
-                                @Html.HiddenFor(m => m.InviteId)
                                 @* hide appropriate button depending on accept status*@
-                                @if (!Model.Accepted.HasValue || !Model.Accepted.Value)
+                                @if ((!Model.Accepted.HasValue || !Model.Accepted.Value) && (Model.InviteType.HasValue && Model.InviteType.Value == BCModel.Projects.InvitationType.SentFromCreatedBy))
                                 {
                                     <input id="acceptBtn" type="button" value="Accept Invite" class="small success button" ng-click="accept()" />
                                 }
-                                @if (!Model.Accepted.HasValue || Model.Accepted.Value)
+                                @if (!Model.Accepted.HasValue || (Model.Accepted.Value && (Model.InviteType.HasValue && Model.InviteType.Value == BCModel.Projects.InvitationType.SentFromCreatedBy)))
                                 {   
                                     <input id="declineBtn" type="button" value="Decline Invite" class="small alert button" ng-click="decline()" />
+                                }
+                                @if (!Model.Accepted.HasValue || (!Model.Accepted.Value && Model.InviteType.HasValue && Model.InviteType.Value == BCModel.Projects.InvitationType.SelfInvite))
+                                {
+                                    <input id="joinBtn" type="button" value="Join Project" class="small success button" ng-click="join()" />
+                                }
+                                @if (Model.ResponseDate.HasValue && (Model.Accepted.HasValue && Model.Accepted.Value) && (Model.InviteType.HasValue && Model.InviteType.Value == BCModel.Projects.InvitationType.SelfInvite))
+                                {
+                                    <input id="leaveBtn" type="button" value="Leave Project" class="small alert button" ng-click="leave()" />
                                 }
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-12 columns" id="inviteStatusWrapper">
-                                @if (Model.Accepted.HasValue && Model.AcceptDate.HasValue)
+                                @if (Model.Accepted.HasValue && Model.ResponseDate.HasValue)
                                 {
-                                    <span>@(Model.Accepted.Value ? "Accepted" : "Declined") on  @Model.AcceptDate.Value.ToShortDateString()</span>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                }
-                else if (User.IsInRole("general_contractor") && !Model.InviteId.HasValue)
-                {
-                    // else user is a GC but was not invited && project is open
-                    <div class="large-6 columns">
-                        <div class="row">
-                            <div class="large-12 columns" id="joinProjectWrapper">
-                                @if (!Model.Accepted.HasValue || !Model.Accepted.Value)
-                                {
-                                    <input id="joinBtn" type="button" value="Join Project" class="small success button" ng-click="join()" />
-                                }
-                                else if (Model.Accepted.HasValue && Model.Accepted.Value)
-                                {
-                                    <input id="leaveBtn" type="button" value="Leave Project" class="small alert button" ng-click="leave()" />
+                                    <span>@(Model.Accepted.Value ? "Accepted" : "Declined") on  @Model.ResponseDate.Value.ToShortDateString()</span>
                                 }
                             </div>
                         </div>

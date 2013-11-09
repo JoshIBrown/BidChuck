@@ -28,7 +28,7 @@ namespace BCWeb.Api
             _security = security;
         }
 
-        public IEnumerable<ProjectListViewModel> GetMyCreated()
+        public IEnumerable<ProjectListViewModel> GetMyCreatedList()
         {
             int userId = _security.GetUserId(User.Identity.Name);
 
@@ -44,7 +44,7 @@ namespace BCWeb.Api
             return list;
         }
 
-        public IEnumerable<ProjectListViewModel> GetByMyCompany()
+        public IEnumerable<ProjectListViewModel> GetByMyCompanyList()
         {
             int userId = _security.GetUserId(User.Identity.Name);
             UserProfile theUser = _service.GetUserProfile(userId);
@@ -60,11 +60,11 @@ namespace BCWeb.Api
             return list;
         }
 
-        public IEnumerable<ProjectListViewModel> GetPublic()
+        public IEnumerable<ProjectListViewModel> GetPublicList()
         {
             int userId = _security.GetUserId(User.Identity.Name);
 
-            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(x => x.ProjectType == ProjectType.Federal || x.ProjectType == ProjectType.County || x.ProjectType == ProjectType.State)
+            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(x => x.BidDateTime > DateTime.Now)
                 .Select(s => new ProjectListViewModel
                 {
                     Architect = s.Architect.CompanyName,
@@ -76,7 +76,7 @@ namespace BCWeb.Api
             return list;
         }
 
-        public IEnumerable<ProjectListViewModel> GetProjectsInvitedTo()
+        public IEnumerable<ProjectListViewModel> GetProjectsInvitedToList()
         {
             UserProfile theUser = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
             IEnumerable<BidPackageXInvitee> invites = _service.GetInvitations(theUser.CompanyId);

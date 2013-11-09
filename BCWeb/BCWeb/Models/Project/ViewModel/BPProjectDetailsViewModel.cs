@@ -44,11 +44,13 @@ namespace BCWeb.Models.Project.ViewModel
         public string ConstructionType { get; set; }
 
         public bool? Accepted { get; set; }
-        public DateTime? AcceptDate { get; set; }
+        public DateTime? ResponseDate { get; set; }
 
         public int? InviteId { get; set; }
 
         [Display(Name = "Selected Scopes")]
         public IEnumerable<ProjectScopeListItem> SelectedScope { get; set; }
+
+        public InvitationType? InviteType { get; set; }
     }
 }
