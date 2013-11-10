@@ -36,12 +36,12 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
             return _repo.GetBidPackage(id);
         }
 
-        public BCModel.Projects.BidPackageXInvitee GetInvite(int id)
+        public BCModel.Projects.Invitation GetInvite(int id)
         {
             return _repo.GetInvite(id);
         }
 
-        public IEnumerable<BCModel.Projects.BidPackageXInvitee> GetInvites(int projectId, int companyId)
+        public IEnumerable<BCModel.Projects.Invitation> GetInvites(int projectId, int companyId)
         {
             return (from r in _repo.QueryInvites()
                     where r.BidPackage.ProjectId == projectId
@@ -118,9 +118,9 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
             return _repo.Query().Where(predicate).ToList();
         }
 
-        public BCModel.Projects.Bid Get(int id)
+        public BCModel.Projects.Bid Get(params object[] key)
         {
-            return _repo.Get(id);
+            return _repo.Get(key);
         }
 
         public bool Exists(int id)

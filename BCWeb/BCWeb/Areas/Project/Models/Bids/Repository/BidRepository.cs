@@ -14,7 +14,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
         private DbSet<Bid> _bids;
         private DbSet<BCModel.Projects.BidPackage> _bidPackages;
         private DbSet<BCModel.Projects.Project> _projects;
-        private DbSet<BidPackageXInvitee> _invites;
+        private DbSet<Invitation> _invites;
         private DbSet<UserProfile> _users;
         private DbSet<CompanyProfile> _companies;
 
@@ -23,7 +23,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
             _bids = _context.Bids;
             _bidPackages = _context.BidPackages;
             _projects = _context.Projects;
-            _invites = _context.BidPackageXInvitees;
+            _invites = _context.Invitations;
             _users = _context.UserProfiles;
             _companies = _context.Companies;
         }
@@ -74,9 +74,9 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
             _bids.Remove(entity);
         }
 
-        public BCModel.Projects.Bid Get(int id)
+        public BCModel.Projects.Bid Get(params object[] key)
         {
-            return _bids.Find(id);
+            return _bids.Find(key);
         }
 
         public IQueryable<BCModel.Projects.Bid> Query()
@@ -90,12 +90,12 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
         }
 
 
-        public BidPackageXInvitee GetInvite(int id)
+        public Invitation GetInvite(int id)
         {
             return _invites.Find(id);
         }
 
-        public IQueryable<BidPackageXInvitee> QueryInvites()
+        public IQueryable<Invitation> QueryInvites()
         {
             return _invites;
         }

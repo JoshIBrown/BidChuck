@@ -95,9 +95,9 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
             return _repo.Query().Where(predicate).AsEnumerable();
         }
 
-        public BCModel.CompanyProfile Get(int id)
+        public BCModel.CompanyProfile Get(params object[] key)
         {
-            return _repo.Get(id);
+            return _repo.Get(key);
         }
 
         public bool Exists(int id)

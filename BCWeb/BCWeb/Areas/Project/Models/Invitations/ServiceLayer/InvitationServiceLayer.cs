@@ -1,10 +1,10 @@
-﻿using BCWeb.Areas.Project.Models.Invitation.Repository;
+﻿using BCWeb.Areas.Project.Models.Invitations.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
+namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
 {
     public class InvitationServiceLayer : IInvitationServiceLayer
     {
@@ -44,7 +44,7 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
             private set;
         }
 
-        public bool Create(BCModel.Projects.BidPackageXInvitee entity)
+        public bool Create(BCModel.Projects.Invitation entity)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
             }
         }
 
-        public bool Update(BCModel.Projects.BidPackageXInvitee entity)
+        public bool Update(BCModel.Projects.Invitation entity)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
             }
         }
 
-        public bool Delete(BCModel.Projects.BidPackageXInvitee entity)
+        public bool Delete(BCModel.Projects.Invitation entity)
         {
             try
             {
@@ -97,19 +97,19 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
             return Delete(_repo.Get(id));
         }
 
-        public IEnumerable<BCModel.Projects.BidPackageXInvitee> GetEnumerable()
+        public IEnumerable<BCModel.Projects.Invitation> GetEnumerable()
         {
             return _repo.Query().AsEnumerable();
         }
 
-        public IEnumerable<BCModel.Projects.BidPackageXInvitee> GetEnumerable(System.Linq.Expressions.Expression<Func<BCModel.Projects.BidPackageXInvitee, bool>> predicate)
+        public IEnumerable<BCModel.Projects.Invitation> GetEnumerable(System.Linq.Expressions.Expression<Func<BCModel.Projects.Invitation, bool>> predicate)
         {
             return _repo.Query().Where(predicate).AsEnumerable();
         }
 
-        public BCModel.Projects.BidPackageXInvitee Get(int id)
+        public BCModel.Projects.Invitation Get(params object[] key)
         {
-            return _repo.Get(id);
+            return _repo.Get(key);
         }
 
         public bool Exists(int id)
@@ -118,7 +118,7 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
         }
 
 
-        public bool CreateRange(IEnumerable<BCModel.Projects.BidPackageXInvitee> invitees)
+        public bool CreateRange(IEnumerable<BCModel.Projects.Invitation> invitees)
         {
             try
             {
@@ -138,7 +138,7 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
         }
 
 
-        public IEnumerable<BCModel.Projects.BidPackageXInvitee> GetEnumerableByBidPackage(int bpId)
+        public IEnumerable<BCModel.Projects.Invitation> GetEnumerableByBidPackage(int bpId)
         {
             return (from r in _repo.Query()
                     where r.BidPackageId == bpId

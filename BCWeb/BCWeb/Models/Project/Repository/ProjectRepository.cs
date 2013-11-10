@@ -13,7 +13,7 @@ namespace BCWeb.Models.Project.Repository
         private DbSet<BCModel.Projects.Project> _projects;
         private DbSet<UserProfile> _users;
         private DbSet<CompanyProfile> _companies;
-        private DbSet<BidPackageXInvitee> _invites;
+        private DbSet<Invitation> _invites;
         private DbSet<BidPackageXScope> _bidPackageScopes;
         private DbSet<BidPackage> _bidPackages;
         private DbSet<Scope> _scopes;
@@ -22,7 +22,7 @@ namespace BCWeb.Models.Project.Repository
             _projects = _context.Projects;
             _users = _context.UserProfiles;
             _companies = _context.Companies;
-            _invites = _context.BidPackageXInvitees;
+            _invites = _context.Invitations;
             _bidPackageScopes = _context.BidPackageScopes;
             _bidPackages = _context.BidPackages;
             _scopes = _context.Scopes;
@@ -36,11 +36,6 @@ namespace BCWeb.Models.Project.Repository
         {
             return _context.BuildingTypes;
         }
-
-        //public IQueryable<BCModel.Projects.ProjectType> QueryProjectType()
-        //{
-        //    return _context.ProjectTypes;
-        //}
 
         public void Create(BCModel.Projects.Project entity)
         {
@@ -63,9 +58,9 @@ namespace BCWeb.Models.Project.Repository
             _projects.Remove(entity);
         }
 
-        public BCModel.Projects.Project Get(int id)
+        public BCModel.Projects.Project Get(params object[] key)
         {
-            return _projects.Find(id);
+            return _projects.Find(key);
         }
 
         public IQueryable<BCModel.Projects.Project> Query()
@@ -108,7 +103,7 @@ namespace BCWeb.Models.Project.Repository
         }
 
 
-        public IQueryable<BCModel.Projects.BidPackageXInvitee> QueryInvites()
+        public IQueryable<BCModel.Projects.Invitation> QueryInvites()
         {
             return _invites.Include(i => i.BidPackage).Include(i => i.BidPackage.Project);
         }

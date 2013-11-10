@@ -23,8 +23,8 @@ namespace BCWeb.Models.Project.ServiceLayer
         IEnumerable<CompanyProfile> GetCompanyProfiles();
         IEnumerable<CompanyProfile> GetCompanyProfiles(Expression<Func<CompanyProfile, bool>> predicate);
 
-        IEnumerable<BidPackageXInvitee> GetInvitations(int companyId);
-        IEnumerable<BidPackageXInvitee> GetInvitations(int projectId, int companyId);
+        IEnumerable<Invitation> GetInvitations(int companyId);
+        IEnumerable<Invitation> GetInvitations(int projectId, int companyId);
 
         Dictionary<int, string> GetInvitationScopes(int projectId, int invitedCompanyId);
         Dictionary<int, string> GetInvitatingCompanies(int projectId, int invitedCompanyId);

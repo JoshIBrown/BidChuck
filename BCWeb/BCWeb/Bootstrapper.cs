@@ -16,8 +16,8 @@ using BCWeb.Models.Project.Repository;
 using BCWeb.Models.Project.ServiceLayer;
 using BCWeb.Areas.Project.Models.BidPackage.Repository;
 using BCWeb.Areas.Project.Models.BidPackage.ServiceLayer;
-using BCWeb.Areas.Project.Models.Invitation.Repository;
-using BCWeb.Areas.Project.Models.Invitation.ServiceLayer;
+using BCWeb.Areas.Project.Models.Invitations.Repository;
+using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
 using BCWeb.Areas.Project.Models.Bids.Repository;
 using BCWeb.Areas.Project.Models.Bids.ServiceLayer;
 

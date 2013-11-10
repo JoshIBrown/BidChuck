@@ -7,7 +7,7 @@
 
         $scope.accept = function () {
 
-            $http.post('/api/Invitation/PostAccept/' + $scope.inviteId, null, {
+            $http.post('/api/Invitation/PostAccept/?bidPackageId=' + $scope.inviteId, null, {
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: '__RequestVerificationToken',
                 headers: { "X-XSRF-Token": $scope.token }
@@ -22,7 +22,7 @@
         };
         $scope.decline = function () {
 
-            $http.post('/api/Invitation/PostDecline/' + $scope.inviteId, null, {
+            $http.post('/api/Invitation/PostDecline/?bidPackageId=' + $scope.inviteId, null, {
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: '__RequestVerificationToken',
                 headers: { "X-XSRF-Token": $scope.token }

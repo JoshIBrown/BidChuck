@@ -46,8 +46,6 @@ namespace BCWeb.Models.Project.ViewModel
         public bool? Accepted { get; set; }
         public DateTime? ResponseDate { get; set; }
 
-        public int? InviteId { get; set; }
-
         [Display(Name = "Selected Scopes")]
         public IEnumerable<ProjectScopeListItem> SelectedScope { get; set; }
 

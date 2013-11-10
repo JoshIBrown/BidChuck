@@ -11,7 +11,7 @@ namespace BCWeb.Models
         void Update(T entity);
         void Delete(int id);
         void Delete(T entity);
-        T Get(int id);
+        T Get(params object[] key);
         IQueryable<T> Query();
         void Save();
     }

@@ -23,7 +23,8 @@ namespace BCModel.Projects
         public int BiddingCompanyId { get; set; }
         [ForeignKey("BiddingCompanyId")]
         [IgnoreDataMember]
-        public virtual CompanyProfile BiddingCompany{ get; set; }
+        public virtual CompanyProfile BiddingCompany { get; set; }
+
 
         // more meta data
     }

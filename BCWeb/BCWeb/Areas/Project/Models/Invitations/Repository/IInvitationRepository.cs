@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Areas.Project.Models.Invitation.Repository
+namespace BCWeb.Areas.Project.Models.Invitations.Repository
 {
-    public interface IInvitationRepository : IGenericRepository<BidPackageXInvitee>
+    public interface IInvitationRepository : IGenericRepository<Invitation>
     {
 
         UserProfile GetUerProfile(int id);

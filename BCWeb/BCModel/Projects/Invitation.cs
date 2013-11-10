@@ -8,31 +8,27 @@ using System.Text;
 
 namespace BCModel.Projects
 {
-    public class BidPackageXInvitee
+    public class Invitation
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
+        [Key, Column(Order = 1)]
         public int BidPackageId { get; set; }
         [ForeignKey("BidPackageId")]
         [IgnoreDataMember]
         public virtual BidPackage BidPackage { get; set; }
 
-
-        public int? CompanyId { get; set; }
+        [Key, Column(Order = 2)]
+        public int CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         [IgnoreDataMember]
         public virtual CompanyProfile Company { get; set; }
 
-        [EmailAddress]
-        public string Email { get; set; }
+
 
         public DateTime SentDate { get; set; }
         public DateTime? AcceptedDate { get; set; }
         public DateTime? RejectedDate { get; set; }
 
-        public InvitationType InvitationType { get; set; } 
+        public InvitationType InvitationType { get; set; }
 
     }
 

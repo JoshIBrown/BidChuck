@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace BCWeb.Areas.Project.Controllers
 {
+    [Authorize]
     public class BidController : Controller
     {
         private IBidServiceLayer _service;
@@ -22,6 +23,12 @@ namespace BCWeb.Areas.Project.Controllers
         // GET: /Project/Bid/
 
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Compose(int projectId)
         {
             return View();
         }

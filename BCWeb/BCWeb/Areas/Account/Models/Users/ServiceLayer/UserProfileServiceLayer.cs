@@ -86,9 +86,9 @@ namespace BCWeb.Areas.Account.Models.Users.ServiceLayer
             return _repo.Query().Where(predicate).AsEnumerable();
         }
 
-        public UserProfile Get(int id)
+        public UserProfile Get(params object[] key)
         {
-            return _repo.Get(id);
+            return _repo.Get(key);
         }
 
         public bool Exists(int id)

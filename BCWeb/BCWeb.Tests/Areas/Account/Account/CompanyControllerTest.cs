@@ -108,7 +108,7 @@ namespace BCWeb.Tests.Areas.Account.Account
             // arrange
             string currentUserEmail = "asdf@asdf.com";
             int currentUserId = 321;
-            int newArchitectId = 123;
+            
 
             NewArchitectViewModel viewModel = new NewArchitectViewModel
             {

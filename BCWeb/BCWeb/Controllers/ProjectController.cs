@@ -186,13 +186,13 @@ namespace BCWeb.Controllers
                         CreatedById = companyId,
                         Project = toCreate,
                         Scopes = new List<BidPackageXScope>(),
-                        Invitees = new List<BidPackageXInvitee>()
+                        Invitees = new List<Invitation>()
                     };
 
                     // if user is a GC, self-invite
                     if (_security.IsUserInRole("general_contractor"))
                     {
-                        projectPackage.Invitees.Add(new BidPackageXInvitee
+                        projectPackage.Invitees.Add(new Invitation
                         {
                             BidPackage = projectPackage,
                             CompanyId = companyId,
@@ -262,7 +262,7 @@ namespace BCWeb.Controllers
             // if invited sub, show bp invited to
             if (User.IsInRole("subcontractor") || User.IsInRole("materials_vendor"))
             {
-                IEnumerable<BidPackageXInvitee> invites = _service.GetInvitations(theProject.Id, user.CompanyId);
+                IEnumerable<Invitation> invites = _service.GetInvitations(theProject.Id, user.CompanyId);
 
 
                 Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.ToShortDateString());
@@ -329,12 +329,11 @@ namespace BCWeb.Controllers
             // invite is only relevant if user's comapny is a GC
             if (user.Company.BusinessType == BusinessType.GeneralContractor)
             {
-                BidPackageXInvitee invite = masterBP.Invitees.Where(i => i.CompanyId == user.CompanyId).FirstOrDefault();
+                Invitation invite = masterBP.Invitees.Where(i => i.CompanyId == user.CompanyId).FirstOrDefault();
 
                 if (invite != null)
                 {
                     gcViewModel.InviteType = invite.InvitationType;
-                    gcViewModel.InviteId = invite.Id;
                     gcViewModel.Accepted = invite.AcceptedDate.HasValue ? true
                         : invite.RejectedDate.HasValue ? false
                         : default(bool?);

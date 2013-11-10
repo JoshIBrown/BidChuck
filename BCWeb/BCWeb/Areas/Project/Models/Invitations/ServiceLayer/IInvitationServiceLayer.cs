@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
+namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
 {
-    public interface IInvitationServiceLayer : IGenericServiceLayer<BidPackageXInvitee>
+    public interface IInvitationServiceLayer : IGenericServiceLayer<Invitation>
     {
 
         UserProfile GetUserProfile(int id);
@@ -17,7 +17,7 @@ namespace BCWeb.Areas.Project.Models.Invitation.ServiceLayer
 
         BCModel.Projects.BidPackage GetBidPackage(int id);
         BCModel.Projects.Project GetProject(int id);
-        bool CreateRange(IEnumerable<BidPackageXInvitee> invitees);
-        IEnumerable<BidPackageXInvitee> GetEnumerableByBidPackage(int bpId);
+        bool CreateRange(IEnumerable<Invitation> invitees);
+        IEnumerable<Invitation> GetEnumerableByBidPackage(int bpId);
     }
 }

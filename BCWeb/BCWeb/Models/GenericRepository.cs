@@ -36,9 +36,9 @@ namespace BCWeb.Models
             _context.Set<T>().Remove(entity);
         }
 
-        public T Get(int id)
+        public T Get(params object[] key)
         {
-            return _entities.Find(id);
+            return _entities.Find(key);
         }
 
         public IQueryable<T> Query()

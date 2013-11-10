@@ -15,10 +15,10 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
     {
         BCModel.Projects.Project GetProject(int id);
         CompanyProfile GetCompany(int id);
-        BidPackageXInvitee GetInvite(int id);
+        Invitation GetInvite(int id);
         IQueryable<Scope> QueryScopes();
         IQueryable<BidPackageXScope> QuerySelectedScopes();
-        IQueryable<BidPackageXInvitee> QueryInvites();
+        IQueryable<Invitation> QueryInvites();
         IQueryable<CompanyProfile> QueryCompanies();
         UserProfile GetUser(int id);
     }

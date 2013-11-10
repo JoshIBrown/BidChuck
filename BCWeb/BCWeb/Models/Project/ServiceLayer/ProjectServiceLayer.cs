@@ -28,11 +28,6 @@ namespace BCWeb.Models.Project.ServiceLayer
             return _repo.QueryConstructionType().AsEnumerable();
         }
 
-        //public IEnumerable<BCModel.Projects.ProjectType> GetProjectTypes()
-        //{
-        //    return _repo.QueryProjectType().AsEnumerable();
-        //}
-
         public IEnumerable<BCModel.State> GetStates()
         {
             return _repo.QueryStates().AsEnumerable();
@@ -147,9 +142,9 @@ namespace BCWeb.Models.Project.ServiceLayer
             return _repo.Query().Where(predicate).AsEnumerable();
         }
 
-        public BCModel.Projects.Project Get(int id)
+        public BCModel.Projects.Project Get(params object[] key)
         {
-            return _repo.Get(id);
+            return _repo.Get(key);
         }
 
         public bool Exists(int id)
@@ -179,9 +174,9 @@ namespace BCWeb.Models.Project.ServiceLayer
         }
 
 
-        public IEnumerable<BCModel.Projects.BidPackageXInvitee> GetInvitations(int projectId, int companyId)
+        public IEnumerable<BCModel.Projects.Invitation> GetInvitations(int projectId, int companyId)
         {
-            IEnumerable<BidPackageXInvitee> Invites = from r in _repo.QueryInvites()
+            IEnumerable<Invitation> Invites = from r in _repo.QueryInvites()
                                                       where r.BidPackage.ProjectId == projectId
                                                       && r.CompanyId == companyId
                                                       select r;
@@ -189,9 +184,9 @@ namespace BCWeb.Models.Project.ServiceLayer
         }
 
 
-        public IEnumerable<BidPackageXInvitee> GetInvitations(int companyId)
+        public IEnumerable<Invitation> GetInvitations(int companyId)
         {
-            IEnumerable<BidPackageXInvitee> Invites = from r in _repo.QueryInvites()
+            IEnumerable<Invitation> Invites = from r in _repo.QueryInvites()
                                                       where r.CompanyId == companyId
                                                       select r;
             return Invites.ToList();

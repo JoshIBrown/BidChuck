@@ -55,9 +55,9 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
             _scopes.Remove(entity);
         }
 
-        public Scope Get(int id)
+        public Scope Get(params object[] key)
         {
-            return _scopes.Find(id);
+            return _scopes.Find(key);
         }
 
         public IQueryable<Scope> Query()

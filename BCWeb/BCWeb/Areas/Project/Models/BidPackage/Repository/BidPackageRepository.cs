@@ -13,7 +13,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
     {
         private DbSet<BCModel.Projects.BidPackage> _bidPackages;
         private DbSet<CompanyProfile> _companies;
-        private DbSet<BidPackageXInvitee> _invites;
+        private DbSet<Invitation> _invites;
         private DbSet<BidPackageXScope> _selectedScopes;
         private DbSet<Scope> _scopes;
         private DbSet<UserProfile> _users;
@@ -23,7 +23,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
         {
             _bidPackages = _context.BidPackages;
             _companies = _context.Companies;
-            _invites = _context.BidPackageXInvitees;
+            _invites = _context.Invitations;
             _selectedScopes = _context.BidPackageScopes;
             _scopes = _context.Scopes;
             _users = _context.UserProfiles;
@@ -49,7 +49,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
             return _selectedScopes;
         }
 
-        public IQueryable<BCModel.Projects.BidPackageXInvitee> QueryInvites()
+        public IQueryable<BCModel.Projects.Invitation> QueryInvites()
         {
             return _invites.Include(i => i.Company);
         }
@@ -80,9 +80,9 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
             _bidPackages.Remove(entity);
         }
 
-        public BCModel.Projects.BidPackage Get(int id)
+        public BCModel.Projects.BidPackage Get(params object[] key)
         {
-            return _bidPackages.Find(id);
+            return _bidPackages.Find(key);
         }
 
         public IQueryable<BCModel.Projects.BidPackage> Query()
@@ -95,7 +95,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
             _context.SaveChanges();
         }
 
-        public BidPackageXInvitee GetInvite(int id)
+        public Invitation GetInvite(int id)
         {
             return _invites.Find(id);
         }

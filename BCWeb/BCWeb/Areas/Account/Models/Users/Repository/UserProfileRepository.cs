@@ -40,9 +40,9 @@ namespace BCWeb.Areas.Account.Models.Users.Repository
             _profiles.Remove(entity);
         }
 
-        public UserProfile Get(int id)
+        public UserProfile Get(params object[] key)
         {
-            return _profiles.Find(id);
+            return _profiles.Find(key);
         }
 
         public IQueryable<UserProfile> Query()

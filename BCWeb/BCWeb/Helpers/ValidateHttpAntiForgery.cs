@@ -39,7 +39,7 @@ namespace Web.Attributes
                     AntiForgery.Validate();
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 //LogManager.GetCurrentClassLogger().Warn("Anti-XSRF Validation Failed", ex);

@@ -15,8 +15,8 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
         CompanyProfile GetCompanyProfile(int id);
         BCModel.Projects.Project GetProject(int id);
         BCModel.Projects.BidPackage GetBidPackage(int id);
-        BCModel.Projects.BidPackageXInvitee GetInvite(int id);
-        IEnumerable<BidPackageXInvitee> GetInvites(int projectId, int companyId);
+        BCModel.Projects.Invitation GetInvite(int id);
+        IEnumerable<Invitation> GetInvites(int projectId, int companyId);
 
     }
 }

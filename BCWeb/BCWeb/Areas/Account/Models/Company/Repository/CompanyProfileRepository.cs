@@ -40,9 +40,9 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
             _companies.Remove(entity);
         }
 
-        public BCModel.CompanyProfile Get(int id)
+        public BCModel.CompanyProfile Get(params object[] key)
         {
-            return _companies.Find(id);
+            return _companies.Find(key);
         }
 
         public IQueryable<BCModel.CompanyProfile> Query()

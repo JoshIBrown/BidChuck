@@ -16,7 +16,7 @@ namespace BCWeb.Models
         bool Delete(int id);
         IEnumerable<T> GetEnumerable();
         IEnumerable<T> GetEnumerable(Expression<Func<T, bool>> predicate);
-        T Get(int id);
+        T Get(params object[] key);
         bool Exists(int id);
     }
 }

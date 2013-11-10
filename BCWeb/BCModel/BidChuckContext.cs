@@ -155,7 +155,7 @@ namespace BCModel
         //public DbSet<ProjectType> ProjectTypes { get; set; }
         public DbSet<ConstructionType> ConstructionTypes { get; set; }
         public DbSet<BuildingType> BuildingTypes { get; set; }
-        public DbSet<BidPackageXInvitee> BidPackageXInvitees { get; set; }
+        public DbSet<Invitation> Invitations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

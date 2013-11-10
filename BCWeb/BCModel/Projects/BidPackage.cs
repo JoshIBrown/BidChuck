@@ -50,7 +50,7 @@ namespace BCModel.Projects
         public virtual ICollection<BidPackageXScope> Scopes { get; set; }
 
         [IgnoreDataMember]
-        public virtual ICollection<BidPackageXInvitee> Invitees { get; set; }
+        public virtual ICollection<Invitation> Invitees { get; set; }
 
         [IgnoreDataMember]
         public virtual ICollection<BidPackage> PatternedBidPackages { get; set; }

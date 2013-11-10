@@ -203,12 +203,16 @@
     <Compile Include="Migrations\201310300418335_addProjectCategory.Designer.cs">
       <DependentUpon>201310300418335_addProjectCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201311102233122_refactorBidPackageInvitation.cs" />
+    <Compile Include="Migrations\201311102233122_refactorBidPackageInvitation.Designer.cs">
+      <DependentUpon>201311102233122_refactorBidPackageInvitation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
     <Compile Include="Projects\BidPackageXScope.cs" />
     <Compile Include="Projects\BuildingType.cs" />
-    <Compile Include="Projects\BidPackageXInvitee.cs" />
+    <Compile Include="Projects\Invitation.cs" />
     <Compile Include="Projects\ConstructionType.cs" />
     <Compile Include="Projects\Project.cs" />
     <Compile Include="Projects\ProjectXScope.cs" />
@@ -341,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310300418335_addProjectCategory.resx">
       <DependentUpon>201310300418335_addProjectCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311102233122_refactorBidPackageInvitation.resx">
+      <DependentUpon>201311102233122_refactorBidPackageInvitation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

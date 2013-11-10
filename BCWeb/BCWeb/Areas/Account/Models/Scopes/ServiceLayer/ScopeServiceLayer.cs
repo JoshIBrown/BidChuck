@@ -99,9 +99,9 @@ namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
             return _repo.Query().Where(predicate).AsEnumerable();
         }
 
-        public BCModel.Scope Get(int id)
+        public BCModel.Scope Get(params object[] key)
         {
-            return _repo.Get(id);
+            return _repo.Get(key);
         }
 
         public bool Exists(int id)

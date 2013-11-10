@@ -1,6 +1,6 @@
 ﻿using BCModel.Projects;
-using BCWeb.Areas.Project.Models.Invitation.ServiceLayer;
-using BCWeb.Areas.Project.Models.Invitation.ViewModel;
+using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
+using BCWeb.Areas.Project.Models.Invitations.ViewModel;
 using BCWeb.Helpers;
 using BCWeb.Models;
 using System;
@@ -47,10 +47,10 @@ namespace BCWeb.Areas.Project.Controllers
         {
             try
             {
-                List<BidPackageXInvitee> invites = new List<BidPackageXInvitee>();
+                List<Invitation> invites = new List<Invitation>();
                 foreach (var c in viewModel.CompanyId)
                 {
-                    invites.Add(new BidPackageXInvitee { BidPackageId = viewModel.BidPackageId, CompanyId = c, SentDate = DateTime.Now, InvitationType = InvitationType.SentFromCreatedBy });
+                    invites.Add(new Invitation { BidPackageId = viewModel.BidPackageId, CompanyId = c, SentDate = DateTime.Now, InvitationType = InvitationType.SentFromCreatedBy });
                 }
 
                 if (_service.CreateRange(invites))
@@ -78,10 +78,9 @@ namespace BCWeb.Areas.Project.Controllers
             IEnumerable<InvitationListItem> viewModel = _service.GetEnumerableByBidPackage(bpId)
                 .Select(i => new InvitationListItem
                 {
-                    Id = i.Id,
                     BidPackageId = i.BidPackageId,
-                    InvitedCompanyId = i.CompanyId.HasValue ? i.CompanyId.Value : -1,
-                    CompanyName = i.CompanyId.HasValue ? i.Company.CompanyName : i.Email,
+                    InvitedCompanyId = i.CompanyId,
+                    CompanyName = i.Company.CompanyName,
                     SentDate = i.SentDate.ToShortDateString(),
                     Status = i.AcceptedDate.HasValue ? "Accepted" : i.RejectedDate.HasValue ? "Declined" : "Invited",
                     SortOrder = i.AcceptedDate.HasValue ? 1 : i.RejectedDate.HasValue ? 3 : 2

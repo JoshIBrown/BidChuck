@@ -105,10 +105,17 @@
                                 }
                             </tr>
                             <tr>
-                                <th>Your Response</th>
+                                <th rowspan="2">Your Response</th>
                                 @for (int y = 0; y < Model.Inviters.Count(); y++)
                                 {
-                                    <td>put a button here
+                                    <td><input type="button" value="Accept" class="small success button" ng-click="accept()" />
+                                    </td>
+                                }
+                            </tr>
+                            <tr>
+                                @for (int y = 0; y < Model.Inviters.Count(); y++)
+                                {
+                                    <td><input type="button" value="Decline" class="small alert button" ng-click="decline()"
                                     </td>
                                 }
                             </tr>

@@ -1,6 +1,6 @@
 ﻿using BCModel;
 using BCModel.Projects;
-using BCWeb.Areas.Project.Models.Invitation.ServiceLayer;
+using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
 using BCWeb.Models;
 using BCWeb.Models.GenericViewModel;
 using BCWeb.Models.Project.ViewModel;
@@ -27,12 +27,12 @@ namespace BCWeb.Api
         }
 
         [ValidateHttpAntiForgeryToken]
-        public JQueryPostResult PostAccept([FromUri]int id)
+        public JQueryPostResult PostAccept([FromUri]int bidPackageId)
         {
             JQueryPostResult result = new JQueryPostResult();
-
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
-            BidPackageXInvitee invite = _service.Get(id);
+            Invitation invite = _service.Get(bidPackageId, companyId);
+
             if (invite.CompanyId == companyId)
             {
                 invite.AcceptedDate = DateTime.Now;
@@ -60,12 +60,12 @@ namespace BCWeb.Api
         }
 
         [ValidateHttpAntiForgeryToken]
-        public JQueryPostResult PostDecline([FromUri]int id)
+        public JQueryPostResult PostDecline([FromUri]int bidPackageId)
         {
             JQueryPostResult result = new JQueryPostResult();
 
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
-            BidPackageXInvitee invite = _service.Get(id);
+            Invitation invite = _service.Get(bidPackageId, companyId);
 
             // make sure company responding is the same company that the invite is for
             if (invite.CompanyId == companyId)
@@ -105,10 +105,10 @@ namespace BCWeb.Api
 
             // make sure an invited user didn't accidentally find this link and join the project again
             // or that they haven't already joined the project
-            if (bidPackage.Invitees.Where(i => i.CompanyId == companyId).Count() == 0)
+            if (_service.Get(bidPackage.Id, companyId) == null)
             {
                 // assemble invite
-                BidPackageXInvitee selfInvitation = new BidPackageXInvitee
+                Invitation selfInvitation = new Invitation
                 {
 
                     AcceptedDate = DateTime.Now,
@@ -123,7 +123,7 @@ namespace BCWeb.Api
                 {
                     result.success = true;
                     result.message = "joined project";
-                    result.data = new { date = selfInvitation.AcceptedDate.Value.ToShortDateString(), inviteId = selfInvitation.Id };
+                    result.data = new { date = selfInvitation.AcceptedDate.Value.ToShortDateString() };
                 }
                 else
                 {
@@ -133,7 +133,7 @@ namespace BCWeb.Api
             }
             else if (bidPackage.Invitees.Where(i => i.CompanyId == companyId).Count() == 1)
             {
-                var invite = bidPackage.Invitees.Where(i => i.CompanyId == companyId).First();
+                var invite = _service.Get(bidPackageId, companyId);
                 invite.RejectedDate = default(DateTime?);
                 invite.AcceptedDate = DateTime.Now;
 
@@ -160,11 +160,12 @@ namespace BCWeb.Api
         }
 
         [ValidateHttpAntiForgeryToken]
-        public JQueryPostResult PostLeave(int id)
+        public JQueryPostResult PostLeave(int bidPackageId)
         {
             JQueryPostResult result = new JQueryPostResult();
-            BidPackageXInvitee invite = _service.Get(id);
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
+            Invitation invite = _service.Get(bidPackageId, companyId);
+
 
             if (invite.CompanyId == companyId)
             {

@@ -73,16 +73,7 @@ namespace BCModel
 
         public string Website { get; set; }
 
-        //public int BusinessTypeId { get; set; }
-        //[ForeignKey("BusinessTypeId")]
-        //[IgnoreDataMember]
-        //public virtual BusinessType BusinessType { get; set; }
         public BusinessType BusinessType { get; set; }
-
-        //public int? ManagerId { get; set; }
-        //[ForeignKey("ManagerId")]
-        //[IgnoreDataMember]
-        //public virtual UserProfile Manager { get; set; }
 
         [IgnoreDataMember]
         public virtual ICollection<UserProfile> Users { get; set; }
@@ -92,7 +83,7 @@ namespace BCModel
         public virtual ICollection<CompanyXScope> Scopes { get; set; }
 
         [IgnoreDataMember]
-        public virtual ICollection<BidPackageXInvitee> InvitesToBPs { get; set; }
+        public virtual ICollection<Invitation> InvitesToBPs { get; set; }
 
         [IgnoreDataMember]
         public virtual ICollection<Project> Projects { get; set; }
