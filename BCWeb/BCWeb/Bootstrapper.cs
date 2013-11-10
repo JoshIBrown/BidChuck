@@ -18,6 +18,8 @@ using BCWeb.Areas.Project.Models.BidPackage.Repository;
 using BCWeb.Areas.Project.Models.BidPackage.ServiceLayer;
 using BCWeb.Areas.Project.Models.Invitation.Repository;
 using BCWeb.Areas.Project.Models.Invitation.ServiceLayer;
+using BCWeb.Areas.Project.Models.Bids.Repository;
+using BCWeb.Areas.Project.Models.Bids.ServiceLayer;
 
 namespace BCWeb
 {
@@ -43,7 +45,8 @@ namespace BCWeb
 
             // e.g. container.RegisterType<ITestService, TestService>();    
 
-            
+            container.RegisterType<IBidServiceLayer, BidServiceLayer>();
+            container.RegisterType<IBidRepository, BidRepository>();
             container.RegisterType<IAccountRepository, AccountRepository>();
             container.RegisterType<IAccountServiceLayer, AccountServiceLayer>();
             container.RegisterType<IUserProfileServiceLayer, UserProfileServiceLayer>();
@@ -59,7 +62,7 @@ namespace BCWeb
             container.RegisterType<IBidPackageRepository, BidPackageRepository>();
             container.RegisterType<IBidPackageServiceLayer, BidPackageServiceLayer>();
             container.RegisterType<IInvitationRepository, InvitationRepository>();
-            container.RegisterType<IInvitationServiceLayer,InvitationServiceLayer>();
+            container.RegisterType<IInvitationServiceLayer, InvitationServiceLayer>();
             RegisterTypes(container);
 
             return container;

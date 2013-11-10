@@ -69,7 +69,7 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
 
         public IQueryable<UserProfile> QueryUserProfiles()
         {
-            return _users;   
+            return _users;
         }
 
 
