@@ -29,9 +29,9 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
             return _repo.GetCompany(id);
         }
 
-        public BCModel.Projects.Invitation GetInvite(int id)
+        public BCModel.Projects.Invitation GetInvite(int bidPackageId, int companyId)
         {
-            return _repo.GetInvite(id);
+            return _repo.GetInvite(bidPackageId,companyId);
         }
 
         public IEnumerable<BCModel.Scope> GetScopes()
@@ -223,12 +223,43 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         }
 
 
-        public IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByCompanyAndProject(int companyId, int projectId)
+        public IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByCompanyAndProject(int creatingCompanyId, int projectId)
         {
             return (from r in _repo.Query()
                     where r.ProjectId == projectId
-                    && r.CreatedById == companyId
+                    && r.CreatedById == creatingCompanyId
                     select r).ToList();
+        }
+
+
+        public IEnumerable<Invitation> GetCompanyInvitesForProject(int projectId, int invitedCompanyId)
+        {
+            return (from r in _repo.QueryInvites()
+                    where r.CompanyId == invitedCompanyId
+                    && r.BidPackage.ProjectId == projectId
+                    select r).ToList();
+        }
+
+
+        public IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProjectAndInvitedCompany(int projectId, int invitedCompanyId)
+        {
+            return (from r in _repo.QueryInvites()
+                    where r.CompanyId == invitedCompanyId
+                    && r.BidPackage.ProjectId == projectId
+                    select r.BidPackage).ToList();
+        }
+
+        public Dictionary<int, string> GetInvitationScopes(int projectId, int invitedCompanyId)
+        {
+            var output = (from i in _repo.QueryInvites()
+                          join b in _repo.Query() on i.BidPackageId equals b.Id
+                          join s in _repo.QuerySelectedScopes() on b.Id equals s.BidPackageId
+                          where b.ProjectId == projectId
+                          && i.CompanyId == invitedCompanyId
+                          select new { s.ScopeId, Description = s.Scope.CsiNumber + " " + s.Scope.Description }).Distinct();
+
+
+            return output.ToDictionary(x => x.ScopeId, y => y.Description);
         }
     }
 }

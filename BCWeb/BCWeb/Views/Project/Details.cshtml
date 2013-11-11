@@ -48,7 +48,7 @@
                                 {   
                                     <input id="declineBtn" type="button" value="Decline Invite" class="small alert button" ng-click="decline()" />
                                 }
-                                @if (!Model.Accepted.HasValue || (!Model.Accepted.Value && Model.InviteType.HasValue && Model.InviteType.Value == BCModel.Projects.InvitationType.SelfInvite))
+                                @if ((!Model.Accepted.HasValue && !Model.InviteType.HasValue) || (Model.Accepted.HasValue && !Model.Accepted.Value && Model.InviteType.HasValue && Model.InviteType.Value == BCModel.Projects.InvitationType.SelfInvite))
                                 {
                                     <input id="joinBtn" type="button" value="Join Project" class="small success button" ng-click="join()" />
                                 }

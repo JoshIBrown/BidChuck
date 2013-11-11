@@ -4,6 +4,7 @@
     app.controller('SendInvitationCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.invited = [];
         $scope.filterId = [];
+        $scope.companies = [];
         // search system for companies matching query string
         $scope.searchCompanies = function () {
             var searchString = $scope.companySearchString;
@@ -18,6 +19,7 @@
             return $scope.companies.filter(function (company) {
                 return $scope.filterId.indexOf(company.Id) === -1;
             });
+
         };
 
         $scope.invite = function (id) {

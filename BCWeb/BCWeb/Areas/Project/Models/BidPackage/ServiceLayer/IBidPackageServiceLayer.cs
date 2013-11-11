@@ -14,12 +14,13 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
     {
         BCModel.Projects.Project GetProject(int id);
         CompanyProfile GetCompany(int id);
-        Invitation GetInvite(int id);
+        Invitation GetInvite(int bidPackageId, int companyId);
         IEnumerable<Scope> GetScopes();
         IEnumerable<Scope> GetScopes(Expression<Func<Scope, bool>> predicate);
         IEnumerable<BidPackageXScope> GetSelectedScopes();
         IEnumerable<BidPackageXScope> GetSelectedScopes(Expression<Func<BidPackageXScope, bool>> predicate);
         IEnumerable<Invitation> GetInvites();
+        IEnumerable<Invitation> GetCompanyInvitesForProject(int projectId, int invitedCompanyId);
         IEnumerable<CompanyProfile> GetCompanies();
         IEnumerable<Invitation> GetInvitesByCompany(int id);
         IEnumerable<Invitation> GetInvitesByBidPackage(int id);
@@ -28,6 +29,8 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         IEnumerable<BCModel.Projects.BidPackage> GetByCompany(int id);
         UserProfile GetUser(int id);
         IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProject(int projectId);
-        IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByCompanyAndProject(int companyId, int projectId);
+        IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByCompanyAndProject(int creatingCompanyId, int projectId);
+        IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProjectAndInvitedCompany(int projectId, int invitedCompanyId);
+        Dictionary<int, string> GetInvitationScopes(int projectId, int companyId);
     }
 }

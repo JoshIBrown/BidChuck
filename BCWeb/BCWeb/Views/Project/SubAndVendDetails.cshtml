@@ -3,142 +3,111 @@
     ViewBag.Title = "Project Details";
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
-
-<div class="row">
-    <div class="large-2 columns">
-        <ul class="side-nav">
-            @*<li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId })</li>
+<div ng-controller="ProjectDetailsCtrl">
+    <div class="row">
+        <div class="large-2 columns">
+            <ul class="side-nav">
+                @*<li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId })</li>
             <li><a href="#">View Bid Packages</a></li>
             <li><a href="#">Invite Sub Contractors or Material Vendors</a></li>*@
-            <li>Assemble a Bid</li>
-        </ul>
-    </div>
-    <div class="large-8 columns left">
-        <div class="row">
-            <div class="large-4 columns">
-                <h2>@ViewBag.Title</h2>@Html.HiddenFor(m => m.ProjectId)
-            </div>
+                <li>Assemble a Bid</li>
+            </ul>
         </div>
-
-        <div class="row">
-            <div class="large-5 columns">
-                @Html.LabelFor(m => m.Title)
-                @Html.DisplayFor(m => m.Title)
-            </div>
-            <div class="large-4 columns">
-                @Html.LabelFor(m => m.Number)
-                @Html.DisplayFor(m => m.Number)
-            </div>
-            <div class="large-3 columns">
-                @Html.LabelFor(m => m.Architect)
-                @Html.DisplayFor(m => m.Architect)
-            </div>
-        </div>
-        <div class="row">
-            <div class="large-12 columns">
-                @Html.LabelFor(m => m.Description)
-                @Html.DisplayFor(m => m.Description)
-            </div>
-        </div>
-        <div class="row">
-
-            <div class="large-4 columns left">
-                @Html.LabelFor(m => m.ProjectType)
-                @Html.DisplayFor(m => m.ProjectType)
-            </div>
-            <div class="large-4 columns left">
-                @Html.LabelFor(m => m.ConstructionType)
-                @Html.DisplayFor(m => m.ConstructionType)
-            </div>
-            <div class="large-4 columns left">
-                @Html.LabelFor(m => m.BuildingType)
-                @Html.DisplayFor(m => m.BuildingType)
-            </div>
-        </div>
-        <div class="row">
-            <div class="large-7 columns">
-                <div class="row">
-                    <div class="large-12 columns">
-                        @Html.LabelFor(m => m.Address)
-                        @Html.DisplayFor(m => m.Address)
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="large-5 columns">
-                        @Html.LabelFor(m => m.City)
-                        @Html.DisplayFor(m => m.City)
-                    </div>
-                    <div class="large-3 columns">
-                        @Html.LabelFor(m => m.State)
-                        @Html.DisplayFor(m => m.State)
-                    </div>
-                    <div class="large-4 columns">
-                        @Html.LabelFor(m => m.PostalCode)
-                        @Html.DisplayFor(m => m.PostalCode)
-
-                    </div>
+        <div class="large-8 columns left">
+            <div class="row">
+                <div class="large-4 columns">
+                    <h2>@ViewBag.Title</h2>@Html.HiddenFor(m => m.ProjectId)
                 </div>
             </div>
-        </div>
 
-        @* break out by GC invite *@
-        <div class="row">
-            <div class="large-12 columns">
-                <div style="overflow-x: scroll;">
+            <div class="row">
+                <div class="large-5 columns">
+                    @Html.LabelFor(m => m.Title)
+                    @Html.DisplayFor(m => m.Title)
+                </div>
+                <div class="large-4 columns">
+                    @Html.LabelFor(m => m.Number)
+                    @Html.DisplayFor(m => m.Number)
+                </div>
+                <div class="large-3 columns">
+                    @Html.LabelFor(m => m.Architect)
+                    @Html.DisplayFor(m => m.Architect)
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    @Html.LabelFor(m => m.Description)
+                    @Html.DisplayFor(m => m.Description)
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="large-4 columns left">
+                    @Html.LabelFor(m => m.ProjectType)
+                    @Html.DisplayFor(m => m.ProjectType)
+                </div>
+                <div class="large-4 columns left">
+                    @Html.LabelFor(m => m.ConstructionType)
+                    @Html.DisplayFor(m => m.ConstructionType)
+                </div>
+                <div class="large-4 columns left">
+                    @Html.LabelFor(m => m.BuildingType)
+                    @Html.DisplayFor(m => m.BuildingType)
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-7 columns">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            @Html.LabelFor(m => m.Address)
+                            @Html.DisplayFor(m => m.Address)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="large-5 columns">
+                            @Html.LabelFor(m => m.City)
+                            @Html.DisplayFor(m => m.City)
+                        </div>
+                        <div class="large-3 columns">
+                            @Html.LabelFor(m => m.State)
+                            @Html.DisplayFor(m => m.State)
+                        </div>
+                        <div class="large-4 columns">
+                            @Html.LabelFor(m => m.PostalCode)
+                            @Html.DisplayFor(m => m.PostalCode)
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* break out by GC invite *@
+
+            <div class="row">
+                <div class="large-12 columns">
                     <table>
+                        <caption>Bid Packages</caption>
                         <thead>
                             <tr>
-                                <th>Scope/Company</th>
-                                @for (int y = 0; y < Model.Inviters.Count(); y++)
-                                {
-                                    <th>@Model.Inviters.ElementAt(y).Value.ToString()</th>  @* put company name in the header*@
-                                }
+                                <th></th>
+                                <th ng-repeat="x in myData.BidPackages">{{x.InvitingCompanyName}}
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>Bid Date</th>
-                                @for (int y = 0; y < Model.Inviters.Count(); y++)
-                                {
-                                    <td>@Model.BidDate[Model.Inviters.ElementAt(y).Key]</td>
-                                }
+                            <tr ng-repeat="s in myData.Scopes">
+                                <td>{{s.Value}}</td>
+                                <td ng-repeat="b in myData.BidPackages">{{s.Key | IsScopeIncluded: b.SelectedScopes }}
+                                </td>
                             </tr>
-                            <tr>
-                                <th rowspan="2">Your Response</th>
-                                @for (int y = 0; y < Model.Inviters.Count(); y++)
-                                {
-                                    <td><input type="button" value="Accept" class="small success button" ng-click="accept()" />
-                                    </td>
-                                }
-                            </tr>
-                            <tr>
-                                @for (int y = 0; y < Model.Inviters.Count(); y++)
-                                {
-                                    <td><input type="button" value="Decline" class="small alert button" ng-click="decline()"
-                                    </td>
-                                }
-                            </tr>
-                            @for (int x = 0; x < Model.Scopes.Count(); x++)
-                            {
-                                <tr>
-                                    <th>
-                                        @Model.Scopes.ElementAt(x).Value.ToString()
-                                    </th>
-                                    @for (int y = 0; y < Model.Inviters.Count(); y++)
-                                    {
-                                        <td>
-                                            @Model.ScopeSelection[Model.Scopes.ElementAt(x).Key].Contains(Model.Inviters.ElementAt(y).Key)
-                                        </td>
-                                    }
-                                </tr>
-                            }
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
+@section scripts{
+    @Scripts.Render("~/bundles/projectsubvenddetail")
+}

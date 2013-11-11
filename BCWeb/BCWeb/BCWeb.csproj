@@ -239,6 +239,8 @@
     <Compile Include="Areas\Project\Models\BidPackage\ViewModel\BidPackageScopeMgmtViewModel.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\ViewModel\EditBidPackageViewModel.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\ViewModel\ProjectBidPackagesViewModel.cs" />
+    <Compile Include="Areas\Project\Models\BidPackage\ViewModel\SubAndVendBidPackageListItem.cs" />
+    <Compile Include="Areas\Project\Models\BidPackage\ViewModel\SubAndVendBidPackageAngularModel.cs" />
     <Compile Include="Areas\Project\Models\Bids\Repository\BidRepository.cs" />
     <Compile Include="Areas\Project\Models\Bids\Repository\IBidRepository.cs" />
     <Compile Include="Areas\Project\Models\Bids\ServiceLayer\BidServiceLayer.cs" />
@@ -431,6 +433,7 @@
     <Content Include="Scripts\angular\directives\bcweb.angular.DataTables.js" />
     <Content Include="Scripts\angular\directives\bcweb.angular.InputValidators.js" />
     <Content Include="Scripts\angular\directives\bcweb.angular.ResettableForm.js" />
+    <Content Include="Scripts\BidChuck.js" />
     <Content Include="Scripts\DataTables\docs\media\js\doc.js" />
     <Content Include="Scripts\DataTables\docs\media\js\jquery.js" />
     <Content Include="Scripts\DataTables\docs\media\js\shBrushJScript.js" />
@@ -472,6 +475,10 @@
     <Content Include="Scripts\DataTables\media\js\jquery.dataTables.min.js" />
     <Content Include="Scripts\DataTables\media\js\jquery.js" />
     <Content Include="Scripts\jQuery\CreateProject.js" />
+    <Content Include="Scripts\moment-with-langs.js" />
+    <Content Include="Scripts\moment-with-langs.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Views\Shared\_ScopePicker.cshtml" />
     <Content Include="BuildingTypes.csv" />
     <Content Include="Areas\Project\Views\Web.config" />

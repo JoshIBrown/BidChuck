@@ -15,7 +15,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
     {
         BCModel.Projects.Project GetProject(int id);
         CompanyProfile GetCompany(int id);
-        Invitation GetInvite(int id);
+        Invitation GetInvite(int bidPackageId, int companyId);
         IQueryable<Scope> QueryScopes();
         IQueryable<BidPackageXScope> QuerySelectedScopes();
         IQueryable<Invitation> QueryInvites();

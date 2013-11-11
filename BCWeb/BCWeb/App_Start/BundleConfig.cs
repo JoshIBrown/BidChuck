@@ -59,6 +59,12 @@ namespace BCWeb
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/ProjectBPDetailsCtrl.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/projectsubvenddetail").Include(
+                "~/Scripts/moment.js",
+                "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/controllers/ProjectSubVendDetailsCtrl.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/createprojectsimple").Include(
                 "~/Scripts/jquery-ui-{version}.js",
                 "~/Scripts/jQuery/CreateProject.js"
@@ -108,6 +114,7 @@ namespace BCWeb
                        "~/Content/foundation/app.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/foundation").Include(
+                      "~/Scripts/BidChuck.js",
                       "~/Scripts/foundation/foundation.js",
                       "~/Scripts/foundation/foundation.*",
                       "~/Scripts/foundation/app.js"));

@@ -95,9 +95,9 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
             _context.SaveChanges();
         }
 
-        public Invitation GetInvite(int id)
+        public Invitation GetInvite(int bidPackageId, int companyId)
         {
-            return _invites.Find(id);
+            return _invites.Find(bidPackageId,companyId);
         }
 
 
