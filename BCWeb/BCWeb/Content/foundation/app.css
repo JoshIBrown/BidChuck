@@ -58,7 +58,7 @@ select.pretty {
 ul.vcard .has-tip {
     font-weight: normal;
     font-size: inherit;
-    cursor:default;
+    cursor: default;
 }
 
     ul.vcard .has-tip:hover, ul.vcard .has-tip:focus {
@@ -68,8 +68,14 @@ ul.vcard .has-tip {
     }
 
 ul.vcard.newCmpny {
-    width:200px;
+    width: 200px;
     height: 150px;
-    border:none !important;
-    background-color:#ddd;
+    border: none !important;
+    background-color: #ddd;
+}
+
+
+
+table tbody tr td INPUT[type="button"] {
+    margin: 0px !important;
 }

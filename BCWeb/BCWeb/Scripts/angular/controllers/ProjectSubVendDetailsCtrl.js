@@ -1,13 +1,16 @@
 ﻿angular.element(document).ready(function () {
-    var app = angular.module('projectDetails', []);
+    var app = angular.module('projectDetails', ['filters']);
     app.controller('ProjectDetailsCtrl', ['$scope', '$http', '$compile', function ($scope, $http, $compile) {
 
         $scope.token = angular.element('input[name=__RequestVerificationToken]').val();
+
         $scope.ProjectId = angular.element('#ProjectId').val();
 
         $http.get('/api/BidPackage/GetInvitedPackagesForProject/?projectId=' + $scope.ProjectId)
             .success(function (result) {
                 $scope.myData = result;
+                var wrapper = angular.element('#bidPackageWrapper');
+                $compile(wrapper)($scope);
             });
 
         $scope.accept = function (bpId) {
@@ -18,14 +21,11 @@
                 headers: { "X-XSRF-Token": $scope.token }
             })
                 .success(function (result) {
-
-                    // change buttons so that only decline is showing
-                    var wrapper = angular.element('#inviteResponseWrapper').html('<input id="declineBtn" type="button" value="Decline Invite" class="small alert button" ng-click="decline()" />');
-                    // recompile for angular so that angular events are fired/detected
-                    $compile(wrapper)($scope);
-                    angular.element(inviteStatusWrapper).html('Accepted: ' + result.data.date);
+                    // set invitation response
+                    $scope.SetInviteResponse(bpId, true);
                 });
         };
+
         $scope.decline = function (bpId) {
 
             $http.post('/api/Invitation/PostDecline/?bidPackageId=' + bpId, null, {
@@ -34,12 +34,21 @@
                 headers: { "X-XSRF-Token": $scope.token }
             })
                 .success(function (result) {
-                    var wrapper = angular.element('#inviteResponseWrapper').html('<input id="acceptBtn" type="button" value="Accept Invite" class="small success button" ng-click="accept()" />');
-                    // recompile for angular so that angular events are fired/detected
-                    $compile(wrapper)($scope);
-                    angular.element(inviteStatusWrapper).html('Declined: ' + result.data.date);
+                    // set invitation response
+                    $scope.SetInviteResponse(bpId, false);
                 });
         };
+
+        $scope.SetInviteResponse = function (bpId, resp) {
+            for (i = 0; i < $scope.myData.BidPackages.length; i++) {
+                if ($scope.myData.BidPackages[i].BidPackageId === bpId) {
+                    $scope.myData.BidPackages[i].InviteResponse = resp;
+                    return;
+                }
+            }
+        };
+
+
     }]);
     app.filter('IsScopeIncluded', function () {
         return function (scope, selectedScopes) {

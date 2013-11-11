@@ -32,3 +32,11 @@ flt.filter('parentIdEqual', function () {
         return arrayToReturn;
     };
 });
+
+
+// requires moment.js to be loaded
+flt.filter('ReadableTimeStamp', function () {
+    return function (theDate) {
+        return moment(theDate).format("MMM Do YYYY hh:mm a");
+    }
+});
