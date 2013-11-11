@@ -32,7 +32,7 @@ namespace BCWeb.Areas.Project.Controllers
         {
             UserProfile user = _service.GetUser(_security.GetUserId(User.Identity.Name));
 
-            IEnumerable<BidPackageListItemViewModel> bps = _service.GetEnumerableByCompanyAndProject(user.CompanyId, projectId)
+            IEnumerable<BidPackageListItemViewModel> bps = _service.GetEnumerableByProjectAndCreatingCompany(projectId, user.CompanyId)
                 .Select(bp => new BidPackageListItemViewModel
                 {
                     BidDateTime = bp.BidDateTime.ToString(),

@@ -223,11 +223,12 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         }
 
 
-        public IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByCompanyAndProject(int creatingCompanyId, int projectId)
+        public IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProjectAndCreatingCompany(int projectId, int creatingCompanyId)
         {
             return (from r in _repo.Query()
                     where r.ProjectId == projectId
                     && r.CreatedById == creatingCompanyId
+                    && !r.IsMaster
                     select r).ToList();
         }
 
