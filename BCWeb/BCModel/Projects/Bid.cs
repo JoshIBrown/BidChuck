@@ -25,7 +25,9 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual CompanyProfile BiddingCompany { get; set; }
 
+        public virtual ICollection<BaseBid> BaseBids { get; set; }
 
+        public virtual ICollection<ComputedBid> ComputedBids { get; set; }
         // more meta data
     }
 }

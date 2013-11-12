@@ -148,6 +148,8 @@ namespace BCModel
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectXScope> ProjectScopes { get; set; }
         public DbSet<Bid> Bids { get; set; }
+        public DbSet<BaseBid> BaseBids { get; set; }
+        public DbSet<ComputedBid> ComputedBids { get; set; }
         
         public DbSet<BidPackage> BidPackages { get; set; }
         public DbSet<BidPackageXScope> BidPackageScopes { get; set; }

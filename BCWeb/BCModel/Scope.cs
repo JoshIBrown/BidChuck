@@ -41,5 +41,11 @@ namespace BCModel
 
         [IgnoreDataMember]
         public virtual ICollection<BidPackageXScope> BidPackages { get; set; }
+
+        [IgnoreDataMember]
+        public virtual ICollection<BaseBid> BaseBids { get; set; }
+
+        [IgnoreDataMember]
+        public virtual ICollection<ComputedBid> ComputedBids { get; set; }
     }
 }
