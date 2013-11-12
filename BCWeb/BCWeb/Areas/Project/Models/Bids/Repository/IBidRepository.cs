@@ -13,7 +13,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
     {
         BCModel.Projects.Project GetProject(int id);
         BCModel.Projects.BidPackage GetBidPackage(int id);
-        Invitation GetInvite(int id);
+        Invitation GetInvite(params object[] key);
         IQueryable<Invitation> QueryInvites();
         IQueryable<BCModel.Projects.BidPackage> QueryBidPackages();
         UserProfile GetUserProfile(int id);

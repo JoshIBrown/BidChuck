@@ -40,7 +40,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
 
         public IQueryable<BCModel.Projects.BidPackage> QueryBidPackages()
         {
-            return _bidPackages;
+            return _bidPackages.Include(b => b.Scopes);
         }
 
         public BCModel.UserProfile GetUserProfile(int id)
@@ -90,9 +90,9 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
         }
 
 
-        public Invitation GetInvite(int id)
+        public Invitation GetInvite(params object[] key)
         {
-            return _invites.Find(id);
+            return _invites.Find(key);
         }
 
         public IQueryable<Invitation> QueryInvites()

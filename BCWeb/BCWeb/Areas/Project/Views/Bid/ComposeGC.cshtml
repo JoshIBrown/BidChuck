@@ -1,6 +1,17 @@
-﻿@{
-    ViewBag.Title = "ComposeGC";
+﻿@model BCWeb.Areas.Project.Models.Bids.ViewModel.ComposeGCViewModel
+@{
+    ViewBag.Title = "Compose Bid for " + Model.ProjectName;
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
-<h2>ComposeGC</h2>
+<div class="row">
+    <div class="large-6 columns">
+        <h3>@ViewBag.Title</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="large-8 columns">
+
+        @Html.Partial("_GCBidPackage", Model.BaseBids)
+    </div>
+</div>

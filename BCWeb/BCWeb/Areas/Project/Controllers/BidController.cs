@@ -1,4 +1,7 @@
-﻿using BCWeb.Areas.Project.Models.Bids.ServiceLayer;
+﻿using BCModel;
+using BCModel.Projects;
+using BCWeb.Areas.Project.Models.Bids.ServiceLayer;
+using BCWeb.Areas.Project.Models.Bids.ViewModel;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -29,12 +32,32 @@ namespace BCWeb.Areas.Project.Controllers
 
         [Authorize(Roles = "general_contractor,subcontractor,materials_vendor,Administrator")]
         [HttpGet]
+        [HandleError(ExceptionType=typeof(Exception))]      
         public ActionResult Compose(int projectId)
         {
+            int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
             // if GC
             if (User.IsInRole("general_contractor"))
             {
-                return View("ComposeGC");
+                ComposeGCViewModel viewModel = new ComposeGCViewModel();
+                Invitation invite = _service.GetInvites(projectId, companyId).SingleOrDefault();
+
+                if (invite != null)
+                {
+                    viewModel.ProjectId = projectId;
+                    viewModel.ProjectName = _service.GetProject(projectId).Title;
+                    viewModel.BaseBids = _service.GetBidPackageScopes(invite.BidPackageId)
+                        .Select(s => new BaseBidItem
+                        {
+                            ScopeDescription = s.CsiNumber + " " + s.Description,
+                            ScopeId = s.Id
+                        });
+                    return View("ComposeGC", viewModel);
+                }
+                else
+                {
+                    throw new Exception("company does not have invite to this project");
+                }
             }
             // else if sub or vendor
             if (User.IsInRole("subcontractor") || User.IsInRole("materials_vendor"))

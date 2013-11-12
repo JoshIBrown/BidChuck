@@ -265,6 +265,7 @@
     </Compile>
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\EnumEditorHtmlHelper.cs" />
+    <Compile Include="Helpers\HtmlPrefixExtensions.cs" />
     <Compile Include="Helpers\ParameterRebinder.cs" />
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="Helpers\ValidateHttpAntiForgery.cs" />
@@ -504,6 +505,8 @@
     <Content Include="Areas\Project\Views\Bid\ComposeGC.cshtml" />
     <Content Include="Areas\Project\Views\Bid\ComposeSubAndVend.cshtml" />
     <Content Include="Areas\Project\Views\Bid\Compose.cshtml" />
+    <Content Include="Areas\Project\Views\Bid\_SubVendBidPackage.cshtml" />
+    <Content Include="Areas\Project\Views\Bid\_GCBidPackage.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />

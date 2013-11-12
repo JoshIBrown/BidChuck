@@ -36,9 +36,9 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
             return _repo.GetBidPackage(id);
         }
 
-        public BCModel.Projects.Invitation GetInvite(int id)
+        public BCModel.Projects.Invitation GetInvite(int bidPackageId, int companyId)
         {
-            return _repo.GetInvite(id);
+            return _repo.GetInvite(bidPackageId, companyId);
         }
 
         public IEnumerable<BCModel.Projects.Invitation> GetInvites(int projectId, int companyId)
@@ -126,6 +126,12 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
         public bool Exists(int id)
         {
             return _repo.Get(id) == null;
+        }
+
+
+        public IEnumerable<BCModel.Scope> GetBidPackageScopes(int bidPackageId)
+        {
+            return _repo.GetBidPackage(bidPackageId).Scopes.Select(s => s.Scope).ToList();
         }
     }
 }
