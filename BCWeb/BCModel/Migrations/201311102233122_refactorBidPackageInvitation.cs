@@ -8,10 +8,10 @@ namespace BCModel.Migrations
         public override void Up()
         {
 
-            DropForeignKey("dbo.BidPackageXInvitee", "BidPackageId", "dbo.BidPackage");
-            DropForeignKey("dbo.BidPackageXInvitee", "CompanyId", "dbo.CompanyProfile");
-            DropIndex("dbo.BidPackageXInvitee", new[] { "BidPackageId" });
-            DropIndex("dbo.BidPackageXInvitee", new[] { "CompanyId" });
+            //DropForeignKey("dbo.BidPackageXInvitee", "BidPackageId", "dbo.BidPackage");
+            //DropForeignKey("dbo.BidPackageXInvitee", "CompanyId", "dbo.CompanyProfile");
+            //DropIndex("dbo.BidPackageXInvitee", new[] { "BidPackageId" });
+            //DropIndex("dbo.BidPackageXInvitee", new[] { "CompanyId" });
             AlterColumn("dbo.BidPackageXInvitee", "CompanyId", c => c.Int(nullable: false));
             CreateTable(
                 "dbo.Invitation",
@@ -23,6 +23,7 @@ namespace BCModel.Migrations
                         AcceptedDate = c.DateTime(),
                         RejectedDate = c.DateTime(),
                         InvitationType = c.Int(nullable: false),
+                        BidSentDate = c.DateTime(nullable: true)
                     })
                 .PrimaryKey(t => new { t.BidPackageId, t.CompanyId })
                 .ForeignKey("dbo.BidPackage", t => t.BidPackageId)

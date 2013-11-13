@@ -9,9 +9,19 @@
         <h3>@ViewBag.Title</h3>
     </div>
 </div>
-<div class="row">
-    <div class="large-8 columns">
-
-        @Html.Partial("_GCBidPackage", Model.BaseBids)
+@using (Html.BeginRouteForm("Project_default", new { controller = "Bid", action = "Compose" }, FormMethod.Post, new { }))
+{
+    <div class="row">
+        <div class="large-8 columns">
+            @Html.DisplayFor(m => m.ProjectName)
+            @Html.HiddenFor(m => m.ProjectId)
+            @Html.HiddenFor(m => m.BidPackageId)
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="large-8 columns">
+
+            @Html.Partial("_GCBidPackage", Model.BaseBids)
+        </div>
+    </div>
+}

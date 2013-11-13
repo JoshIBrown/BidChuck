@@ -32,7 +32,7 @@ namespace BCWeb.Areas.Project.Controllers
 
         [Authorize(Roles = "general_contractor,subcontractor,materials_vendor,Administrator")]
         [HttpGet]
-        [HandleError(ExceptionType=typeof(Exception))]      
+        [HandleError(ExceptionType = typeof(Exception))]
         public ActionResult Compose(int projectId)
         {
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
@@ -73,6 +73,16 @@ namespace BCWeb.Areas.Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Compose(ComposeGCViewModel viewModel)
         {
+            int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
+
+            if (ModelState.IsValid)
+            {
+
+            }
+            else
+            {
+                return View("ComposeGC", viewModel);
+            }
             throw new NotImplementedException();
         }
 
