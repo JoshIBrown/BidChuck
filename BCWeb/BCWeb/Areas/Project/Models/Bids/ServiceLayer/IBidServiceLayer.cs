@@ -9,13 +9,27 @@ using System.Threading.Tasks;
 
 namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
 {
-    public interface IBidServiceLayer 
+    public interface IBidServiceLayer
     {
+        bool CreateBaseBid(BaseBid bid);
+        bool UpdateBaseBid(BaseBid bid);
+        bool DeleteBaseBid(BaseBid bid);
+        BaseBid GetBaseBid(int projectId, int sentToId, int scopeId);
+        IEnumerable<BaseBid> GetEnumerableBaseBid();
+        IEnumerable<BaseBid> GetCompanyBaseBidsForProject(int companyId, int projectId);
+
+        bool CreateComputedBid(ComputedBid bid);
+        bool UpdateComputedBid(ComputedBid bid);
+        bool DeleteComputedBid(ComputedBid bid);
+        ComputedBid GetComputedBid(int bidPackageId, int sentToId, int scopeId);
+        IEnumerable<ComputedBid> GetEnumerableComputedBid();
+        IEnumerable<ComputedBid> GetCompanyComputedBidsForBidPackage(int bidPackageId, int companyId);
+
         UserProfile GetUserProfile(int id);
         CompanyProfile GetCompanyProfile(int id);
         BCModel.Projects.Project GetProject(int id);
         BCModel.Projects.BidPackage GetBidPackage(int id);
-        BCModel.Projects.Invitation GetInvite(int projectId, int companyId);
+        BCModel.Projects.Invitation GetInvite(int bidPackageId, int companyId);
         IEnumerable<Invitation> GetInvites(int projectId, int companyId);
         IEnumerable<Scope> GetBidPackageScopes(int bidPackageId);
     }

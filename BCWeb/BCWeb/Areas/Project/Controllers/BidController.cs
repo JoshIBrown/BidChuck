@@ -68,5 +68,13 @@ namespace BCWeb.Areas.Project.Controllers
             return View();
         }
 
+        [Authorize(Roles = "general_contractor,subcontractor,materials_vendor,Administrator")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Compose(ComposeGCViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -33,5 +33,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
 
         UserProfile GetUserProfile(int id);
         CompanyProfile GetCompanyProfile(int id);
+
+        void Save();
     }
 }

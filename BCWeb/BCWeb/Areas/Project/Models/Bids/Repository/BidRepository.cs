@@ -73,52 +73,54 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
 
         public void CreateBaseBid(BaseBid bid)
         {
-            throw new NotImplementedException();
+            _baseBids.Add(bid);
         }
 
         public void UpdateBaseBid(BaseBid bid)
         {
-            throw new NotImplementedException();
+            var current = _baseBids.Find(bid.ProjectId, bid.SentToId, bid.ScopeId);
+            _context.Entry<BaseBid>(current).CurrentValues.SetValues(bid);
         }
 
         public void DeleteBaseBid(BaseBid bid)
         {
-            throw new NotImplementedException();
+            _baseBids.Remove(bid);
         }
 
         public BaseBid GetBaseBid(params object[] key)
         {
-            throw new NotImplementedException();
+            return _baseBids.Find(key);
         }
 
         public IQueryable<BaseBid> QueryBaseBid()
         {
-            throw new NotImplementedException();
+            return _baseBids;
         }
 
         public void CreateComputedBid(ComputedBid bid)
         {
-            throw new NotImplementedException();
+            _computedBids.Add(bid);
         }
 
         public void UpdateComputedBid(ComputedBid bid)
         {
-            throw new NotImplementedException();
+            var current = _computedBids.Find(bid.BidPackageId, bid.SentToId, bid.ScopeId);
+            _context.Entry<ComputedBid>(current).CurrentValues.SetValues(bid);
         }
 
         public void DeleteComputedBid(ComputedBid bid)
         {
-            throw new NotImplementedException();
+            _computedBids.Remove(bid);
         }
 
         public ComputedBid GetComputedBid(params object[] key)
         {
-            throw new NotImplementedException();
+            return _computedBids.Find(key);
         }
 
         public IQueryable<ComputedBid> QueryComputedBid()
         {
-            throw new NotImplementedException();
+            return _computedBids;
         }
     }
 }

@@ -62,5 +62,137 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
         {
             return _repo.GetBidPackage(bidPackageId).Scopes.Select(s => s.Scope).ToList();
         }
+
+        public bool CreateBaseBid(BCModel.Projects.BaseBid bid)
+        {
+            try
+            {
+                _repo.CreateBaseBid(bid);
+                _repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
+        }
+
+        public bool UpdateBaseBid(BCModel.Projects.BaseBid bid)
+        {
+            try
+            {
+                _repo.UpdateBaseBid(bid);
+                _repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
+        }
+
+        public bool DeleteBaseBid(BCModel.Projects.BaseBid bid)
+        {
+            try
+            {
+                _repo.DeleteBaseBid(bid);
+                _repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
+        }
+
+        public BCModel.Projects.BaseBid GetBaseBid(int projectId, int sentToId, int scopeId)
+        {
+            return _repo.GetBaseBid(projectId, sentToId, scopeId);
+        }
+
+        public IEnumerable<BCModel.Projects.BaseBid> GetEnumerableBaseBid()
+        {
+            return _repo.QueryBaseBid().ToList();
+        }
+
+        public IEnumerable<BCModel.Projects.BaseBid> GetCompanyBaseBidsForProject(int companyId, int projectId)
+        {
+            return (from r in _repo.QueryBaseBid()
+                    where r.SentToId == companyId
+                    && r.ProjectId == projectId
+                    select r).ToList();
+        }
+
+        public bool CreateComputedBid(BCModel.Projects.ComputedBid bid)
+        {
+            try
+            {
+                _repo.CreateComputedBid(bid);
+                _repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
+        }
+
+        public bool UpdateComputedBid(BCModel.Projects.ComputedBid bid)
+        {
+            try
+            {
+                _repo.UpdateComputedBid(bid);
+                _repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
+        }
+
+        public bool DeleteComputedBid(BCModel.Projects.ComputedBid bid)
+        {
+            try
+            {
+                _repo.DeleteComputedBid(bid);
+                _repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
+        }
+
+        public BCModel.Projects.ComputedBid GetComputedBid(int bidPackageId, int sentToId, int scopeId)
+        {
+            return _repo.GetComputedBid(bidPackageId, sentToId, scopeId);
+        }
+
+        public IEnumerable<BCModel.Projects.ComputedBid> GetEnumerableComputedBid()
+        {
+            return _repo.QueryComputedBid().ToList();
+        }
+
+        public IEnumerable<BCModel.Projects.ComputedBid> GetCompanyComputedBidsForBidPackage(int bidPackageId, int companyId)
+        {
+            return (from r in _repo.QueryComputedBid()
+                    where r.BidPackageId == bidPackageId
+                    && r.SentToId == companyId
+                    select r).ToList();
+        }
     }
 }
