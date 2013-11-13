@@ -43,8 +43,6 @@ namespace BCModel.Projects
         public string DocLink { get; set; }
         public string Notes { get; set; }
 
-        [IgnoreDataMember]
-        public virtual ICollection<Bid> Bids { get; set; }
 
         [IgnoreDataMember]
         public virtual ICollection<BidPackageXScope> Scopes { get; set; }
@@ -55,6 +53,8 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual ICollection<BidPackage> PatternedBidPackages { get; set; }
 
+        [IgnoreDataMember]
+        public virtual ICollection<ComputedBid> ComputedBids { get; set; }
         // more meta data
     }
 }

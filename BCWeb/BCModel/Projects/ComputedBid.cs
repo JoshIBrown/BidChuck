@@ -11,16 +11,19 @@ namespace BCModel.Projects
 {
     public class ComputedBid
     {
+        [Key, Column(Order = 0)]
+        public int BidPackageId { get; set; }
+        [ForeignKey("BidPackageId"), IgnoreDataMember]
+        public virtual BidPackage BidPackage { get; set; }
+
         [Key, Column(Order = 1)]
-        public int BidId { get; set; }
-        [ForeignKey("BidId")]
-        [IgnoreDataMember]
-        public Bid Bid { get; set; }
+        public int SentToId { get; set; }
+        [ForeignKey("SentToId"), IgnoreDataMember]
+        public CompanyProfile SentTo { get; set; }
 
         [Key, Column(Order = 2)]
         public int ScopeId { get; set; }
-        [ForeignKey("ScopeId")]
-        [IgnoreDataMember]
+        [ForeignKey("ScopeId"), IgnoreDataMember]
         public Scope Scope { get; set; }
 
         public decimal? RiskFactor { get; set; }

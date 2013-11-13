@@ -44,7 +44,7 @@ namespace BCWeb.Api
                 {
                     BidDateTime = x.BidDateTime,
                     BidPackageId = x.Id,
-                    InviteResponse = x.Invitees.Where(i => i.CompanyId == companyId).FirstOrDefault().AcceptedDate.HasValue ? true : x.Invitees.Where(i => i.CompanyId == companyId).FirstOrDefault().RejectedDate.HasValue ? false : default(bool?),
+                    InviteResponse = x.Invitees.Where(i => i.SentToId == companyId).FirstOrDefault().AcceptedDate.HasValue ? true : x.Invitees.Where(i => i.SentToId == companyId).FirstOrDefault().RejectedDate.HasValue ? false : default(bool?),
                     InvitingCompanyId = x.CreatedById,
                     InvitingCompanyName = x.CreatedBy.CompanyName,
                     SelectedScopes = x.Scopes.Select(s => s.ScopeId).ToArray()

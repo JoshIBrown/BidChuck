@@ -45,7 +45,7 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
         {
             return (from r in _repo.QueryInvites()
                     where r.BidPackage.ProjectId == projectId
-                    && r.CompanyId == companyId
+                    && r.SentToId == companyId
                     select r).ToList();
         }
 
@@ -55,78 +55,7 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
             private set;
         }
 
-        public bool Create(BCModel.Projects.Bid entity)
-        {
-            try
-            {
-                _repo.Create(entity);
-                _repo.Save();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                ValidationDic.Clear();
-                ValidationDic.Add("Exception", ex.Message);
-                return false;
-            }
-        }
 
-        public bool Update(BCModel.Projects.Bid entity)
-        {
-            try
-            {
-                _repo.Update(entity);
-                _repo.Save();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                ValidationDic.Clear();
-                ValidationDic.Add("Exception", ex.Message);
-                return false;
-            }
-        }
-
-        public bool Delete(BCModel.Projects.Bid entity)
-        {
-            try
-            {
-                _repo.Delete(entity);
-                _repo.Save();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                ValidationDic.Clear();
-                ValidationDic.Add("Exception", ex.Message);
-                return false;
-            }
-        }
-
-        public bool Delete(int id)
-        {
-            return Delete(_repo.Get(id));
-        }
-
-        public IEnumerable<BCModel.Projects.Bid> GetEnumerable()
-        {
-            return _repo.Query().ToList();
-        }
-
-        public IEnumerable<BCModel.Projects.Bid> GetEnumerable(System.Linq.Expressions.Expression<Func<BCModel.Projects.Bid, bool>> predicate)
-        {
-            return _repo.Query().Where(predicate).ToList();
-        }
-
-        public BCModel.Projects.Bid Get(params object[] key)
-        {
-            return _repo.Get(key);
-        }
-
-        public bool Exists(int id)
-        {
-            return _repo.Get(id) == null;
-        }
 
 
         public IEnumerable<BCModel.Scope> GetBidPackageScopes(int bidPackageId)

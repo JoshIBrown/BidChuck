@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
 {
-    public interface IBidServiceLayer : IGenericServiceLayer<Bid>
+    public interface IBidServiceLayer 
     {
         UserProfile GetUserProfile(int id);
         CompanyProfile GetCompanyProfile(int id);

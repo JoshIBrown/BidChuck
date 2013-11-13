@@ -33,7 +33,7 @@ namespace BCWeb.Api
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
             Invitation invite = _service.Get(bidPackageId, companyId);
 
-            if (invite.CompanyId == companyId)
+            if (invite.SentToId == companyId)
             {
                 invite.AcceptedDate = DateTime.Now;
                 if (invite.RejectedDate.HasValue)
@@ -68,7 +68,7 @@ namespace BCWeb.Api
             Invitation invite = _service.Get(bidPackageId, companyId);
 
             // make sure company responding is the same company that the invite is for
-            if (invite.CompanyId == companyId)
+            if (invite.SentToId == companyId)
             {
                 invite.RejectedDate = DateTime.Now;
 
@@ -113,7 +113,7 @@ namespace BCWeb.Api
 
                     AcceptedDate = DateTime.Now,
                     BidPackage = bidPackage,
-                    CompanyId = companyId,
+                    SentToId = companyId,
                     InvitationType = InvitationType.SelfInvite,
                     SentDate = DateTime.Now
                 };
@@ -131,7 +131,7 @@ namespace BCWeb.Api
                     result.message = "unable to join project";
                 }
             }
-            else if (bidPackage.Invitees.Where(i => i.CompanyId == companyId).Count() == 1)
+            else if (bidPackage.Invitees.Where(i => i.SentToId == companyId).Count() == 1)
             {
                 var invite = _service.Get(bidPackageId, companyId);
                 invite.RejectedDate = default(DateTime?);
@@ -167,7 +167,7 @@ namespace BCWeb.Api
             Invitation invite = _service.Get(bidPackageId, companyId);
 
 
-            if (invite.CompanyId == companyId)
+            if (invite.SentToId == companyId)
             {
                 invite.AcceptedDate = default(DateTime?);
                 invite.RejectedDate = DateTime.Now;

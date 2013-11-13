@@ -178,7 +178,7 @@ namespace BCWeb.Models.Project.ServiceLayer
         {
             IEnumerable<Invitation> Invites = from r in _repo.QueryInvites()
                                                       where r.BidPackage.ProjectId == projectId
-                                                      && r.CompanyId == companyId
+                                                      && r.SentToId == companyId
                                                       select r;
             return Invites.ToList();
         }
@@ -187,7 +187,7 @@ namespace BCWeb.Models.Project.ServiceLayer
         public IEnumerable<Invitation> GetInvitations(int companyId)
         {
             IEnumerable<Invitation> Invites = from r in _repo.QueryInvites()
-                                                      where r.CompanyId == companyId
+                                                      where r.SentToId == companyId
                                                       select r;
             return Invites.ToList();
         }
@@ -199,7 +199,7 @@ namespace BCWeb.Models.Project.ServiceLayer
                           join b in _repo.QueryBidPackages() on i.BidPackageId equals b.Id
                           join s in _repo.QueryBidPackageScopes() on b.Id equals s.BidPackageId
                           where b.ProjectId == projectId
-                          && i.CompanyId == invitedCompanyId
+                          && i.SentToId == invitedCompanyId
                           select new { s.ScopeId, Description = s.Scope.CsiNumber + " " + s.Scope.Description }).Distinct();
 
 
@@ -213,7 +213,7 @@ namespace BCWeb.Models.Project.ServiceLayer
                                                         from s in b.Scopes
                                                         join i in _repo.QueryInvites() on b.Id equals i.BidPackageId
                                                         where b.ProjectId == projectId
-                                                        && i.CompanyId == invitedCompanyId
+                                                        && i.SentToId == invitedCompanyId
                                                         group b by s.ScopeId into bsi
                                                         select new
                                                         {
@@ -230,7 +230,7 @@ namespace BCWeb.Models.Project.ServiceLayer
             var output = (from i in _repo.QueryInvites()
                           join b in _repo.QueryBidPackages() on i.BidPackageId equals b.Id
                           where b.ProjectId == projectId
-                          && i.CompanyId == invitedCompanyId
+                          && i.SentToId == invitedCompanyId
                           select new { b.CreatedById, b.CreatedBy.CompanyName }).ToDictionary(x => x.CreatedById, y => y.CompanyName);
 
             return output;

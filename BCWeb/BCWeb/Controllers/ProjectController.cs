@@ -195,7 +195,7 @@ namespace BCWeb.Controllers
                         projectPackage.Invitees.Add(new Invitation
                         {
                             BidPackage = projectPackage,
-                            CompanyId = companyId,
+                            SentToId = companyId,
                             SentDate = DateTime.Now,
                             AcceptedDate = DateTime.Now,
                             InvitationType = InvitationType.SentFromCreatedBy
@@ -329,7 +329,7 @@ namespace BCWeb.Controllers
             // invite is only relevant if user's comapny is a GC
             if (user.Company.BusinessType == BusinessType.GeneralContractor)
             {
-                Invitation invite = masterBP.Invitees.Where(i => i.CompanyId == user.CompanyId).FirstOrDefault();
+                Invitation invite = masterBP.Invitees.Where(i => i.SentToId == user.CompanyId).FirstOrDefault();
 
                 if (invite != null)
                 {

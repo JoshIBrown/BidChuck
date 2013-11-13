@@ -11,19 +11,22 @@ namespace BCModel.Projects
 {
     public class BaseBid
     {
+
+        [Key, Column(Order = 0)]
+        public int ProjectId { get; set; }
+        [ForeignKey("ProjectId"), IgnoreDataMember]
+        public Project Project { get; set; }
+
         [Key, Column(Order = 1)]
-        public int BidId { get; set; }
-        [ForeignKey("BidId")]
-        [IgnoreDataMember]
-        public Bid Bid { get; set; }
+        public int SentToId { get; set; }
+        [ForeignKey("SentToId"), IgnoreDataMember]
+        public CompanyProfile SentTo { get; set; }
 
         [Key, Column(Order = 2)]
         public int ScopeId { get; set; }
-        [ForeignKey("ScopeId")]
-        [IgnoreDataMember]
+        [ForeignKey("ScopeId"), IgnoreDataMember]
         public Scope Scope { get; set; }
 
-        
-        public decimal? Amount { get; set; }
+        public decimal Amount { get; set; }
     }
 }

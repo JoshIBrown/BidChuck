@@ -17,17 +17,17 @@ namespace BCModel.Projects
         public virtual BidPackage BidPackage { get; set; }
 
         [Key, Column(Order = 2)]
-        public int CompanyId { get; set; }
-        [ForeignKey("CompanyId")]
+        public int SentToId { get; set; }
+        [ForeignKey("SentToId")]
         [IgnoreDataMember]
-        public virtual CompanyProfile Company { get; set; }
+        public virtual CompanyProfile SentTo { get; set; }
 
 
 
         public DateTime SentDate { get; set; }
         public DateTime? AcceptedDate { get; set; }
         public DateTime? RejectedDate { get; set; }
-
+        public DateTime? BidSentDate { get; set; }
         public InvitationType InvitationType { get; set; }
 
     }

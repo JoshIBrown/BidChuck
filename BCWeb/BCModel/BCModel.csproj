@@ -211,9 +211,12 @@
     <Compile Include="Migrations\201311120324315_addBaseAndComputedBid.Designer.cs">
       <DependentUpon>201311120324315_addBaseAndComputedBid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201311122333347_refactorBidSystem.cs" />
+    <Compile Include="Migrations\201311122333347_refactorBidSystem.Designer.cs">
+      <DependentUpon>201311122333347_refactorBidSystem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\BaseBid.cs" />
-    <Compile Include="Projects\Bid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
     <Compile Include="Projects\BidPackageXScope.cs" />
     <Compile Include="Projects\BuildingType.cs" />
@@ -357,6 +360,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201311120324315_addBaseAndComputedBid.resx">
       <DependentUpon>201311120324315_addBaseAndComputedBid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311122333347_refactorBidSystem.resx">
+      <DependentUpon>201311122333347_refactorBidSystem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

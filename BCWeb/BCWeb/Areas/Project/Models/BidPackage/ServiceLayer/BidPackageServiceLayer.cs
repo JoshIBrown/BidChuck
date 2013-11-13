@@ -63,7 +63,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         public IEnumerable<BCModel.Projects.Invitation> GetInvitesByCompany(int id)
         {
             return (from r in _repo.QueryInvites()
-                    where r.CompanyId == id
+                    where r.SentToId == id
                     select r).AsEnumerable();
         }
 
@@ -236,7 +236,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         public IEnumerable<Invitation> GetCompanyInvitesForProject(int projectId, int invitedCompanyId)
         {
             return (from r in _repo.QueryInvites()
-                    where r.CompanyId == invitedCompanyId
+                    where r.SentToId == invitedCompanyId
                     && r.BidPackage.ProjectId == projectId
                     select r).ToList();
         }
@@ -245,7 +245,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         public IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProjectAndInvitedCompany(int projectId, int invitedCompanyId)
         {
             return (from r in _repo.QueryInvites()
-                    where r.CompanyId == invitedCompanyId
+                    where r.SentToId == invitedCompanyId
                     && r.BidPackage.ProjectId == projectId
                     select r.BidPackage).ToList();
         }
@@ -256,7 +256,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
                           join b in _repo.Query() on i.BidPackageId equals b.Id
                           join s in _repo.QuerySelectedScopes() on b.Id equals s.BidPackageId
                           where b.ProjectId == projectId
-                          && i.CompanyId == invitedCompanyId
+                          && i.SentToId == invitedCompanyId
                           select new { s.ScopeId, Description = s.Scope.CsiNumber + " " + s.Scope.Description }).Distinct();
 
 

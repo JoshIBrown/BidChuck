@@ -50,7 +50,7 @@ namespace BCWeb.Areas.Project.Controllers
                 List<Invitation> invites = new List<Invitation>();
                 foreach (var c in viewModel.CompanyId)
                 {
-                    invites.Add(new Invitation { BidPackageId = viewModel.BidPackageId, CompanyId = c, SentDate = DateTime.Now, InvitationType = InvitationType.SentFromCreatedBy });
+                    invites.Add(new Invitation { BidPackageId = viewModel.BidPackageId, SentToId = c, SentDate = DateTime.Now, InvitationType = InvitationType.SentFromCreatedBy });
                 }
 
                 if (_service.CreateRange(invites))
@@ -79,8 +79,8 @@ namespace BCWeb.Areas.Project.Controllers
                 .Select(i => new InvitationListItem
                 {
                     BidPackageId = i.BidPackageId,
-                    InvitedCompanyId = i.CompanyId,
-                    CompanyName = i.Company.CompanyName,
+                    InvitedCompanyId = i.SentToId,
+                    CompanyName = i.SentTo.CompanyName,
                     SentDate = i.SentDate.ToShortDateString(),
                     Status = i.AcceptedDate.HasValue ? "Accepted" : i.RejectedDate.HasValue ? "Declined" : "Invited",
                     SortOrder = i.AcceptedDate.HasValue ? 1 : i.RejectedDate.HasValue ? 3 : 2

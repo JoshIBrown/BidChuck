@@ -52,7 +52,7 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
 
         public void Update(BCModel.Projects.Invitation entity)
         {
-            var current = _invites.Find(entity.BidPackageId, entity.CompanyId);
+            var current = _invites.Find(entity.BidPackageId, entity.SentToId);
             _context.Entry<Invitation>(current).CurrentValues.SetValues(entity);
         }
 
@@ -73,7 +73,7 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
 
         public IQueryable<BCModel.Projects.Invitation> Query()
         {
-            return _invites.Include(i => i.Company).Include(i => i.BidPackage);
+            return _invites.Include(i => i.SentTo).Include(i => i.BidPackage);
         }
 
         public void Save()
