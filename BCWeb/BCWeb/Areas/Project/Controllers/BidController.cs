@@ -47,12 +47,25 @@ namespace BCWeb.Areas.Project.Controllers
                 viewModel.ProjectId = projectId;
                 viewModel.ProjectName = _service.GetProject(projectId).Title;
                 viewModel.BidPackageId = invite.BidPackageId;
-                viewModel.BaseBids = _service.GetBidPackageScopes(invite.BidPackageId)
-                    .Select(s => new BaseBidItem
+                IEnumerable<BaseBid> baseBids = _service.GetCompanyBaseBidsForProject(companyId, projectId);
+                if (baseBids == null || baseBids.Count() == 0)
+                {
+                    viewModel.BaseBids = _service.GetBidPackageScopes(invite.BidPackageId)
+                        .Select(s => new BaseBidItem
+                        {
+                            ScopeDescription = s.CsiNumber + " " + s.Description,
+                            ScopeId = s.Id
+                        });
+                }
+                else
+                {
+                    viewModel.BaseBids = baseBids.Select(b => new BaseBidItem
                     {
-                        ScopeDescription = s.CsiNumber + " " + s.Description,
-                        ScopeId = s.Id
+                        ScopeDescription = b.Scope.CsiNumber + " " + b.Scope.Description,
+                        ScopeId = b.ScopeId,
+                        Amount = b.Amount
                     });
+                }
                 return View(viewModel);
             }
             else

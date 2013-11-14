@@ -83,7 +83,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
 
         public IQueryable<BaseBid> QueryBaseBid()
         {
-            return _baseBids;
+            return _baseBids.Include(s => s.Scope);
         }
 
         public void DeleteComputedBid(ComputedBid bid)
@@ -98,7 +98,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
 
         public IQueryable<ComputedBid> QueryComputedBid()
         {
-            return _computedBids;
+            return _computedBids.Include(s => s.Scope).Include(b => b.BidPackage);
         }
 
 
