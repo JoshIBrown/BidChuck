@@ -30,61 +30,95 @@ namespace BCWeb.Areas.Project.Controllers
             return View();
         }
 
-        [Authorize(Roles = "general_contractor,subcontractor,materials_vendor,Administrator")]
+        [Authorize(Roles = "general_contractor,Administrator")]
         [HttpGet]
         [HandleError(ExceptionType = typeof(Exception))]
-        public ActionResult Compose(int projectId)
+        public ActionResult ComposeGC(int projectId)
         {
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
-            // if GC
-            if (User.IsInRole("general_contractor"))
-            {
-                ComposeGCViewModel viewModel = new ComposeGCViewModel();
-                Invitation invite = _service.GetInvites(projectId, companyId).SingleOrDefault();
 
-                if (invite != null)
-                {
-                    viewModel.ProjectId = projectId;
-                    viewModel.ProjectName = _service.GetProject(projectId).Title;
-                    viewModel.BaseBids = _service.GetBidPackageScopes(invite.BidPackageId)
-                        .Select(s => new BaseBidItem
-                        {
-                            ScopeDescription = s.CsiNumber + " " + s.Description,
-                            ScopeId = s.Id
-                        });
-                    return View("ComposeGC", viewModel);
-                }
-                else
-                {
-                    throw new Exception("company does not have invite to this project");
-                }
-            }
-            // else if sub or vendor
-            if (User.IsInRole("subcontractor") || User.IsInRole("materials_vendor"))
-            {
-                return View("ComposeSubAndVend");
-            }
+            ComposeGCViewModel viewModel = new ComposeGCViewModel();
+            Invitation invite = _service.GetInvites(projectId, companyId).SingleOrDefault();
 
-            return View();
+            if (invite != null)
+            {
+                viewModel.ProjectId = projectId;
+                viewModel.ProjectName = _service.GetProject(projectId).Title;
+                viewModel.BaseBids = _service.GetBidPackageScopes(invite.BidPackageId)
+                    .Select(s => new BaseBidItem
+                    {
+                        ScopeDescription = s.CsiNumber + " " + s.Description,
+                        ScopeId = s.Id
+                    });
+                return View(viewModel);
+            }
+            else
+            {
+                throw new Exception("company does not have invite to this project");
+            }
         }
 
-        [Authorize(Roles = "general_contractor,subcontractor,materials_vendor,Administrator")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Compose(ComposeGCViewModel viewModel)
+        [Authorize(Roles = "general_contractor,Administrator")]
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult ComposeGC(ComposeGCViewModel viewModel)
         {
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
 
             if (ModelState.IsValid)
             {
 
+                IEnumerable<BaseBid> baseBids = viewModel.BaseBids.Select(b => new BaseBid { Amount = b.Amount, ProjectId = viewModel.ProjectId, SentToId = companyId });
+                IEnumerable<ComputedBid> computedBids = viewModel.BaseBids.Select(b => new ComputedBid { RiskFactor = 1.00m, BidPackageId = viewModel.BidPackageId, SentToId = companyId });
+
+                Dictionary<int, IEnumerable<ComputedBid>> computedBidDic = new Dictionary<int, IEnumerable<ComputedBid>>();
+                computedBidDic.Add(viewModel.BidPackageId, computedBids);
+
+                switch (viewModel.btn)
+                {
+                    case "Save":
+                        //if (_service.SaveDraft(baseBids, computedBidDic))
+                        //{
+                            return View(viewModel);
+                        //}
+                        break;
+                    case "Submit":
+                        //if (_service.SaveFinalBid(baseBids, computedBidDic, companyId, DateTime.Now))
+                        //{
+                        //}
+                        break;
+                    default:
+                        break;
+                }
+
+
+                return View(viewModel);
             }
             else
             {
-                return View("ComposeGC", viewModel);
+                return View(viewModel);
             }
+        }
+
+        [HttpGet, Authorize(Roles = "general_contractor,Administrator")]
+        public ActionResult ReviewGC(int projectId)
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "subcontractor,materials_vendor,Administrator")]
+        [HttpGet]
+        public ActionResult ComposeSV(int projectId)
+        {
             throw new NotImplementedException();
         }
+
+        [Authorize(Roles = "subcontractor,materials_vendor,Administrator")]
+        [HttpPost, ValidateAntiForgeryTokenAttribute]
+        public ActionResult ComposeSV(ComposeSubVendViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
+
 
     }
 }

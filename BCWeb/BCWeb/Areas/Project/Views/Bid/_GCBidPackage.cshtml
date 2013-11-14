@@ -15,11 +15,13 @@
             <tr>
                 <td>
                     @Html.DisplayFor(m => m.ElementAt(i).ScopeDescription)
+
                 </td>
                 <td>
-                    
+
                     @using (Html.BeginCollectionItem("BaseBids"))
                     {
+                        @Html.HiddenFor(m => m.ElementAt(i).ScopeDescription)
                         @Html.HiddenFor(m => m.ElementAt(i).ScopeId)
                         @Html.TextBoxFor(m => m.ElementAt(i).Amount)
                     }

@@ -71,17 +71,6 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
             return _invites;
         }
 
-        public void CreateBaseBid(BaseBid bid)
-        {
-            _baseBids.Add(bid);
-        }
-
-        public void UpdateBaseBid(BaseBid bid)
-        {
-            var current = _baseBids.Find(bid.ProjectId, bid.SentToId, bid.ScopeId);
-            _context.Entry<BaseBid>(current).CurrentValues.SetValues(bid);
-        }
-
         public void DeleteBaseBid(BaseBid bid)
         {
             _baseBids.Remove(bid);
@@ -97,17 +86,6 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
             return _baseBids;
         }
 
-        public void CreateComputedBid(ComputedBid bid)
-        {
-            _computedBids.Add(bid);
-        }
-
-        public void UpdateComputedBid(ComputedBid bid)
-        {
-            var current = _computedBids.Find(bid.BidPackageId, bid.SentToId, bid.ScopeId);
-            _context.Entry<ComputedBid>(current).CurrentValues.SetValues(bid);
-        }
-
         public void DeleteComputedBid(ComputedBid bid)
         {
             _computedBids.Remove(bid);
@@ -121,6 +99,31 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
         public IQueryable<ComputedBid> QueryComputedBid()
         {
             return _computedBids;
+        }
+
+
+        public void UpdateInvitation(Invitation invite)
+        {
+            var current = _invites.Find(invite.BidPackageId, invite.SentToId);
+            _context.Entry<Invitation>(current).CurrentValues.SetValues(invite);
+        }
+
+        public void AddOrUpdateBaseBid(BaseBid bid)
+        {
+            var current = _baseBids.Find(bid.ProjectId, bid.SentToId, bid.ScopeId);
+            if (current != null)
+                _context.Entry<BaseBid>(current).CurrentValues.SetValues(bid);
+            else
+                _baseBids.Add(bid);
+        }
+
+        public void AddOrUpdateComputedBid(ComputedBid bid)
+        {
+            var current = _computedBids.Find(bid.BidPackageId, bid.SentToId, bid.ScopeId);
+            if (current != null)
+                _context.Entry<ComputedBid>(current).CurrentValues.SetValues(bid);
+            else
+                _computedBids.Add(bid);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BCWeb.Areas.Project.Models.Bids.Repository;
+﻿using BCModel.Projects;
+using BCWeb.Areas.Project.Models.Bids.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,37 +64,7 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
             return _repo.GetBidPackage(bidPackageId).Scopes.Select(s => s.Scope).ToList();
         }
 
-        public bool CreateBaseBid(BCModel.Projects.BaseBid bid)
-        {
-            try
-            {
-                _repo.CreateBaseBid(bid);
-                _repo.Save();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                ValidationDic.Clear();
-                ValidationDic.Add("Exception", ex.Message);
-                return false;
-            }
-        }
 
-        public bool UpdateBaseBid(BCModel.Projects.BaseBid bid)
-        {
-            try
-            {
-                _repo.UpdateBaseBid(bid);
-                _repo.Save();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                ValidationDic.Clear();
-                ValidationDic.Add("Exception", ex.Message);
-                return false;
-            }
-        }
 
         public bool DeleteBaseBid(BCModel.Projects.BaseBid bid)
         {
@@ -129,37 +100,6 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
                     select r).ToList();
         }
 
-        public bool CreateComputedBid(BCModel.Projects.ComputedBid bid)
-        {
-            try
-            {
-                _repo.CreateComputedBid(bid);
-                _repo.Save();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                ValidationDic.Clear();
-                ValidationDic.Add("Exception", ex.Message);
-                return false;
-            }
-        }
-
-        public bool UpdateComputedBid(BCModel.Projects.ComputedBid bid)
-        {
-            try
-            {
-                _repo.UpdateComputedBid(bid);
-                _repo.Save();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                ValidationDic.Clear();
-                ValidationDic.Add("Exception", ex.Message);
-                return false;
-            }
-        }
 
         public bool DeleteComputedBid(BCModel.Projects.ComputedBid bid)
         {
@@ -193,6 +133,86 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
                     where r.BidPackageId == bidPackageId
                     && r.SentToId == companyId
                     select r).ToList();
+        }
+
+
+        public bool SetBidDate(int bidPackageId, int companyId, DateTime dateTime)
+        {
+            try
+            {
+                Invitation invite = _repo.GetInvite(bidPackageId, companyId);
+                invite.BidSentDate = dateTime;
+                _repo.UpdateInvitation(invite);
+                _repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception",ex.Message);
+                return false;
+            }
+        }
+
+
+        public bool SaveDraft(IEnumerable<BaseBid> baseBids, Dictionary<int, IEnumerable<ComputedBid>> computedBids)
+        {
+            try
+            {
+                foreach (BaseBid bb in baseBids)
+                {
+                    _repo.AddOrUpdateBaseBid(bb);
+                }
+                foreach (KeyValuePair<int, IEnumerable<ComputedBid>> kvp in computedBids)
+                {
+                    foreach (ComputedBid cb in kvp.Value)
+                    {
+                        _repo.AddOrUpdateComputedBid(cb);
+                    }
+                }
+                _repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
+        }
+
+        public bool SaveFinalBid(IEnumerable<BaseBid> baseBids, Dictionary<int, IEnumerable<ComputedBid>> computedBids, int companyId, DateTime sentDate)
+        {
+            try
+            {
+                Invitation invite;
+                
+                foreach (BaseBid bb in baseBids)
+                {
+                    _repo.AddOrUpdateBaseBid(bb);
+                }
+                foreach (KeyValuePair<int, IEnumerable<ComputedBid>> kvp in computedBids)
+                {
+                
+                    // set bid sent date in the invite
+                    invite = _repo.GetInvite(kvp.Key, companyId);
+                    invite.BidSentDate = sentDate;
+                    _repo.UpdateInvitation(invite);
+
+                    foreach (ComputedBid cb in kvp.Value)
+                    {
+                        _repo.AddOrUpdateComputedBid(cb);
+                    }
+                }
+                _repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
         }
     }
 }

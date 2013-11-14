@@ -9,11 +9,14 @@ namespace BCWeb.Areas.Project.Models.Bids.ViewModel
     public class ComposeGCViewModel
     {
         [Required]
+        [RegularExpression(@"Save|Submit")]
+        public string btn { get; set; }
+        [Required]
         public int ProjectId { get; set; }
         [Required]
         public int BidPackageId { get; set; }
         public string ProjectName { get; set; }
-        
+
         public IEnumerable<BaseBidItem> BaseBids { get; set; }
     }
 

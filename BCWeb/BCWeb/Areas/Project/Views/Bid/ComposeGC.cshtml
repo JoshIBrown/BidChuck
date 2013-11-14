@@ -9,13 +9,15 @@
         <h3>@ViewBag.Title</h3>
     </div>
 </div>
-@using (Html.BeginRouteForm("Project_default", new { controller = "Bid", action = "Compose" }, FormMethod.Post, new { }))
+@using (Html.BeginForm())
 {
     <div class="row">
         <div class="large-8 columns">
             @Html.DisplayFor(m => m.ProjectName)
+            @Html.HiddenFor(m => m.ProjectName)
             @Html.HiddenFor(m => m.ProjectId)
             @Html.HiddenFor(m => m.BidPackageId)
+            @Html.AntiForgeryToken()
         </div>
     </div>
     <div class="row">
@@ -24,4 +26,5 @@
             @Html.Partial("_GCBidPackage", Model.BaseBids)
         </div>
     </div>
+    <input type="submit" value="Submit" name="btn" /><input type="submit" value="Save" name="btn" />
 }

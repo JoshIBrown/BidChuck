@@ -8,10 +8,10 @@ namespace BCModel.Migrations
         public override void Up()
         {
 
-            //DropForeignKey("dbo.BidPackageXInvitee", "BidPackageId", "dbo.BidPackage");
-            //DropForeignKey("dbo.BidPackageXInvitee", "CompanyId", "dbo.CompanyProfile");
-            //DropIndex("dbo.BidPackageXInvitee", new[] { "BidPackageId" });
-            //DropIndex("dbo.BidPackageXInvitee", new[] { "CompanyId" });
+            DropForeignKey("dbo.BidPackageXInvitee", "BidPackageId", "dbo.BidPackage");
+            DropForeignKey("dbo.BidPackageXInvitee", "CompanyId", "dbo.CompanyProfile");
+            DropIndex("dbo.BidPackageXInvitee", new[] { "BidPackageId" });
+            DropIndex("dbo.BidPackageXInvitee", new[] { "CompanyId" });
             AlterColumn("dbo.BidPackageXInvitee", "CompanyId", c => c.Int(nullable: false));
             CreateTable(
                 "dbo.Invitation",
@@ -53,7 +53,11 @@ namespace BCModel.Migrations
                         RejectedDate = c.DateTime(),
                         InvitationType = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BidPackage", t => t.BidPackageId)
+                .ForeignKey("dbo.CompanyProfile", t => t.CompanyId)
+                .Index(t => t.CompanyId)
+                .Index(t => t.BidPackageId);
 
             Sql(@"insert dbo.BidPackageXInvitee(BidPackageId,CompanyId,SentDate,AcceptedDate,RejectedDate,InvitationType)
                   select BidPackageId,CompanyId,SentDate,AcceptedDate,RejectedDate,InvitationType from dbo.Invitation");

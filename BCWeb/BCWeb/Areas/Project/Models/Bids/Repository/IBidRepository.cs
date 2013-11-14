@@ -11,14 +11,14 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
 {
     public interface IBidRepository
     {
-        void CreateBaseBid(BaseBid bid);
-        void UpdateBaseBid(BaseBid bid);
+
+
+        void AddOrUpdateBaseBid(BaseBid bid);
         void DeleteBaseBid(BaseBid bid);
         BaseBid GetBaseBid(params object[] key);
         IQueryable<BaseBid> QueryBaseBid();
 
-        void CreateComputedBid(ComputedBid bid);
-        void UpdateComputedBid(ComputedBid bid);
+        void AddOrUpdateComputedBid(ComputedBid bid);
         void DeleteComputedBid(ComputedBid bid);
         ComputedBid GetComputedBid(params object[] key);
         IQueryable<ComputedBid> QueryComputedBid();
@@ -35,5 +35,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
         CompanyProfile GetCompanyProfile(int id);
 
         void Save();
+
+        void UpdateInvitation(Invitation invite);
     }
 }
