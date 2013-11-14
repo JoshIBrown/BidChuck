@@ -1,4 +1,5 @@
-﻿@model BCWeb.Areas.Project.Models.Bids.ViewModel.ComposeGCViewModel
+﻿@model BCWeb.Areas.Project.Models.Bids.ViewModel.GCBidEditModel
+
 @{
     ViewBag.Title = "Compose Bid for " + Model.ProjectName;
     Layout = "~/Views/Shared/_Foundation.cshtml";
@@ -23,7 +24,7 @@
     <div class="row">
         <div class="large-8 columns">
 
-            @Html.Partial("_GCBidPackage", Model.BaseBids)
+            @Html.Partial("_GCBidPackageEdit", Model.BaseBids)
         </div>
     </div>
     <input type="submit" value="Submit" name="btn" /><input type="submit" value="Save" name="btn" />

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BCWeb.Areas.Project.Models.Bids.ViewModel.BaseBidEditItem>
+@using BCWeb.Areas.Project.Models.Bids.ViewModel
+@using BCWeb.Helpers.Html
+
+<table>
+    <thead>
+        <tr>
+            <th>Scope</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => m.ElementAt(i).ScopeDescription)
+
+                </td>
+                <td>
+
+                    @using (Html.BeginCollectionItem("BaseBids"))
+                    {
+                        @Html.HiddenFor(m => m.ElementAt(i).ScopeDescription)
+                        @Html.HiddenFor(m => m.ElementAt(i).ScopeId)
+                        @Html.TextBoxFor(m => m.ElementAt(i).Amount)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

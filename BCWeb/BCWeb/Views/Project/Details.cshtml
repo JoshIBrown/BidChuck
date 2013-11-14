@@ -18,6 +18,7 @@
                     <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId, templateId = Model.BidPackageId })</li>
                     <li>@Html.RouteLink("Manage Bid Packages", "Project_default", new { controller = "BidPackage", action = "Index", projectId = Model.ProjectId })</li>
                     <li>@Html.RouteLink("Compose Bid", "Project_default", new { controller = "Bid", action = "ComposeGC", projectId = Model.ProjectId })</li>
+                    <li>@Html.RouteLink("Review Bid", "Project_default", new { controller = "Bid", action = "ReviewGC", projectId = Model.ProjectId })</li>
                     }
 
                     if (User.IsInRole("architect"))

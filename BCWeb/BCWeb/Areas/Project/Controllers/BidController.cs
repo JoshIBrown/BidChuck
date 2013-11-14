@@ -2,6 +2,7 @@
 using BCModel.Projects;
 using BCWeb.Areas.Project.Models.Bids.ServiceLayer;
 using BCWeb.Areas.Project.Models.Bids.ViewModel;
+using BCWeb.Helpers;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -37,21 +38,29 @@ namespace BCWeb.Areas.Project.Controllers
         {
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
 
-            ComposeGCViewModel viewModel = new ComposeGCViewModel();
             Invitation invite = _service.GetInvites(projectId, companyId).SingleOrDefault();
 
-            // TODO: pull saved info from server. check if bid was already submitted
+            // block user from editing bid once submitted
+            if (invite.BidSentDate.HasValue)
+            {
+                return RedirectToRoute("Project_default", new { controller = "Bid", action = "ReviewGC", projectId = projectId });
+            }
 
+            GCBidEditModel viewModel = new GCBidEditModel();
+
+            // if user has an invite
             if (invite != null)
             {
                 viewModel.ProjectId = projectId;
                 viewModel.ProjectName = _service.GetProject(projectId).Title;
                 viewModel.BidPackageId = invite.BidPackageId;
                 IEnumerable<BaseBid> baseBids = _service.GetCompanyBaseBidsForProject(companyId, projectId);
+
+                // if there isn't a saved draft
                 if (baseBids == null || baseBids.Count() == 0)
                 {
                     viewModel.BaseBids = _service.GetBidPackageScopes(invite.BidPackageId)
-                        .Select(s => new BaseBidItem
+                        .Select(s => new BaseBidEditItem
                         {
                             ScopeDescription = s.CsiNumber + " " + s.Description,
                             ScopeId = s.Id
@@ -59,7 +68,7 @@ namespace BCWeb.Areas.Project.Controllers
                 }
                 else
                 {
-                    viewModel.BaseBids = baseBids.Select(b => new BaseBidItem
+                    viewModel.BaseBids = baseBids.Select(b => new BaseBidEditItem
                     {
                         ScopeDescription = b.Scope.CsiNumber + " " + b.Scope.Description,
                         ScopeId = b.ScopeId,
@@ -76,7 +85,7 @@ namespace BCWeb.Areas.Project.Controllers
 
         [Authorize(Roles = "general_contractor,Administrator")]
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult ComposeGC(ComposeGCViewModel viewModel)
+        public ActionResult ComposeGC(GCBidEditModel viewModel)
         {
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
 
@@ -96,18 +105,25 @@ namespace BCWeb.Areas.Project.Controllers
                         {
                             return View(viewModel);
                         }
-                        break;
+                        else
+                        {
+                            Util.MapValidationErrors(_service.ValidationDic, this.ModelState);
+                            return View(viewModel);
+                        }
                     case "Submit":
-                        //if (_service.SaveFinalBid(baseBids, computedBidDic, companyId, DateTime.Now))
-                        //{
-                        //}
-                        break;
+                        if (_service.SaveFinalBid(baseBids, computedBidDic, companyId, DateTime.Now))
+                        {
+                            return RedirectToRoute("Project_default", new { controlle = "Bid", action = "ReviewGC", projectId = viewModel.ProjectId });
+                        }
+                        else
+                        {
+                            Util.MapValidationErrors(_service.ValidationDic, this.ModelState);
+                            return View(viewModel);
+                        }
                     default:
-                        break;
+                        throw new Exception("invalid action");
                 }
 
-
-                return View(viewModel);
             }
             else
             {
@@ -118,7 +134,13 @@ namespace BCWeb.Areas.Project.Controllers
         [HttpGet, Authorize(Roles = "general_contractor,Administrator")]
         public ActionResult ReviewGC(int projectId)
         {
-            return View();
+            int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
+
+            Invitation invite = _service.GetInvites(projectId, companyId).SingleOrDefault();
+            GCBidViewModel viewModel = new GCBidViewModel();
+            viewModel.ProjectId = invite.BidPackage.ProjectId;
+            viewModel.BaseBids = _service.GetCompanyBaseBidsForProject(companyId, projectId).Select(t => new BaseBidViewItem { Amount = t.Amount, ScopeDescription = t.Scope.CsiNumber + " " + t.Scope.Description });
+            return View(viewModel);
         }
 
         [Authorize(Roles = "subcontractor,materials_vendor,Administrator")]
@@ -130,7 +152,7 @@ namespace BCWeb.Areas.Project.Controllers
 
         [Authorize(Roles = "subcontractor,materials_vendor,Administrator")]
         [HttpPost, ValidateAntiForgeryTokenAttribute]
-        public ActionResult ComposeSV(ComposeSubVendViewModel viewModel)
+        public ActionResult ComposeSV(SubVendBidViewModel viewModel)
         {
             throw new NotImplementedException();
         }

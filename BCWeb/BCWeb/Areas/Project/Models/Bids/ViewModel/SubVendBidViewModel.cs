@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BCWeb.Areas.Project.Models.Bids.ViewModel
 {
-    public class ComposeSubVendViewModel
+    public class SubVendBidViewModel
     {
     }
 }

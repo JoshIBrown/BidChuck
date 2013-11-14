@@ -34,5 +34,7 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
         bool SaveDraft(IEnumerable<BaseBid> baseBids, Dictionary<int, IEnumerable<ComputedBid>> computedBids);
 
         bool SaveFinalBid(IEnumerable<BaseBid> baseBids, Dictionary<int, IEnumerable<ComputedBid>> computedBids, int companyId, DateTime dateTime);
+
+        Dictionary<string, string> ValidationDic { get; }
     }
 }

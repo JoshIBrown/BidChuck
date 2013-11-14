@@ -245,8 +245,9 @@
     <Compile Include="Areas\Project\Models\Bids\Repository\IBidRepository.cs" />
     <Compile Include="Areas\Project\Models\Bids\ServiceLayer\BidServiceLayer.cs" />
     <Compile Include="Areas\Project\Models\Bids\ServiceLayer\IBidServiceLayer.cs" />
-    <Compile Include="Areas\Project\Models\Bids\ViewModel\ComposeGCViewModel.cs" />
-    <Compile Include="Areas\Project\Models\Bids\ViewModel\ComposeSubVendViewModel.cs" />
+    <Compile Include="Areas\Project\Models\Bids\ViewModel\GCBidViewModel.cs" />
+    <Compile Include="Areas\Project\Models\Bids\ViewModel\GCBidEditModel.cs" />
+    <Compile Include="Areas\Project\Models\Bids\ViewModel\SubVendBidViewModel.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\IInvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\InvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\ServiceLayer\IInvitationServiceLayer.cs" />
@@ -506,8 +507,9 @@
     <Content Include="Areas\Project\Views\Bid\ComposeGC.cshtml" />
     <Content Include="Areas\Project\Views\Bid\ComposeSV.cshtml" />
     <Content Include="Areas\Project\Views\Bid\_SubVendBidPackage.cshtml" />
-    <Content Include="Areas\Project\Views\Bid\_GCBidPackage.cshtml" />
+    <Content Include="Areas\Project\Views\Bid\_GCBidPackageEdit.cshtml" />
     <Content Include="Areas\Project\Views\Bid\ReviewGC.cshtml" />
+    <None Include="Areas\Project\Views\Bid\_GCBidPackageDisplay.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />

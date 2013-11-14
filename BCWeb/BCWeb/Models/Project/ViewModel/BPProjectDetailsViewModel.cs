@@ -45,6 +45,7 @@ namespace BCWeb.Models.Project.ViewModel
 
         public bool? Accepted { get; set; }
         public DateTime? ResponseDate { get; set; }
+        public DateTime? BidSentDate { get; set; }
 
         [Display(Name = "Selected Scopes")]
         public IEnumerable<ProjectScopeListItem> SelectedScope { get; set; }

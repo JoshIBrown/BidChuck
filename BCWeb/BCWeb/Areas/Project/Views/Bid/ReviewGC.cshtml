@@ -1,6 +1,26 @@
-﻿@{
+﻿@model BCWeb.Areas.Project.Models.Bids.ViewModel.GCBidViewModel
+
+@{
     ViewBag.Title = "ReviewGC";
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
-<h2>ReviewGC</h2>
+<div class="row">
+    <div class="large-6 columns">
+        <h3>@ViewBag.Title</h3>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="large-8 columns">
+            @Html.DisplayFor(m => m.ProjectName)
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-8 columns">
+
+            @Html.Partial("_GCBidPackageDisplay", Model.BaseBids)
+        </div>
+    </div>
+}
