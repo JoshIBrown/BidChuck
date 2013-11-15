@@ -17,14 +17,19 @@
                     
                     <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId, templateId = Model.BidPackageId })</li>
                     <li>@Html.RouteLink("Manage Bid Packages", "Project_default", new { controller = "BidPackage", action = "Index", projectId = Model.ProjectId })</li>
+                        if (Model.Accepted.HasValue && Model.Accepted.Value)
+                        { 
+                        
                     <li>@Html.RouteLink("Compose Bid", "Project_default", new { controller = "Bid", action = "ComposeGC", projectId = Model.ProjectId })</li>
                     <li>@Html.RouteLink("Review Bid", "Project_default", new { controller = "Bid", action = "ReviewGC", projectId = Model.ProjectId })</li>
+                        }
                     }
 
                     if (User.IsInRole("architect"))
                     {
                     <li>@Html.RouteLink("Invite General Contractors", "Project_default", new { controller = "Invitation", action = "Send", id = Model.BidPackageId })</li>
                     <li>@Html.RouteLink("View Invited", "Project_default", new { controller = "Invitation", action = "ViewInvited", bpId = Model.BidPackageId })</li>
+                    <li>@Html.RouteLink("View Bids", "Project_default", new { controller = "Bid", action = "List", projectId = Model.ProjectId })</li>
                     }
                 }
 
@@ -32,12 +37,14 @@
         </div>
         <div class="large-8 columns left">
             <div class="row">
-                <div class="large-4 columns">
-                    <h3>@ViewBag.Title</h3>@Html.HiddenFor(m => m.ProjectId)@Html.HiddenFor(m => m.BidPackageId)
+                <div class="large-12 columns">
+                    <h3>@Model.Title</h3>@Html.HiddenFor(m => m.ProjectId)@Html.HiddenFor(m => m.BidPackageId)
                 </div>
+
+            </div>
+            <div class="row">
                 @if (User.IsInRole("general_contractor"))
                 {
-                    // if user is a GC and is invited
                     <div class="large-6 columns">
                         <div class="row">
                             <div class="large-12 columns" id="inviteResponseWrapper">
@@ -69,14 +76,21 @@
                             </div>
                         </div>
                     </div>
+
+                }
+
+                @if (User.IsInRole("general_contractor") || User.IsInRole("architect"))
+                {
+
+                    if (Model.Invited.HasValue && Model.AcceptedInvite.HasValue && Model.DeclinedInvite.HasValue && Model.SubmittedBid.HasValue)
+                    {
+                    <div class="large-6 columns">
+                        <span>Sent @Model.Invited.Value.ToString() | Accepted @Model.AcceptedInvite.Value.ToString() | Declined @Model.DeclinedInvite.Value.ToString() | Bid @Model.SubmittedBid.Value.ToString()</span>
+                    </div>
+                    }
                 }
             </div>
-
             <div class="row">
-                <div class="large-5 columns">
-                    @Html.LabelFor(m => m.Title)
-                    @Html.DisplayFor(m => m.Title)
-                </div>
                 <div class="large-4 columns">
                     @Html.LabelFor(m => m.Number)
                     @Html.DisplayFor(m => m.Number)

@@ -49,17 +49,6 @@ namespace BCWeb.Areas.Project.Controllers
             return View("Index", viewModel);
         }
 
-
-        //// GET: /Projects/BidPackage/Create
-        //[Authorize(Roles = "general_contractor")]
-        //public ActionResult Create(int projectId)
-        //{
-        //    EditBidPackageViewModel viewModel = new EditBidPackageViewModel();
-        //    viewModel.ProjectId = projectId;
-        //    viewModel.TemplateId = _service.GetProject(projectId).BidPackages.Where(b => b.IsMaster).FirstOrDefault().Id;
-        //    return View("Create", viewModel);
-        //}
-
         //
         // GET: /Projects/BidPackage/Create
         [Authorize(Roles = "general_contractor,subcontractor,materials_vendor")]

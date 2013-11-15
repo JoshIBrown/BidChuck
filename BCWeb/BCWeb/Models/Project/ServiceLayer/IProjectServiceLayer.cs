@@ -24,7 +24,8 @@ namespace BCWeb.Models.Project.ServiceLayer
         IEnumerable<CompanyProfile> GetCompanyProfiles(Expression<Func<CompanyProfile, bool>> predicate);
 
         IEnumerable<Invitation> GetInvitations(int companyId);
-        IEnumerable<Invitation> GetInvitations(int projectId, int companyId);
+        IEnumerable<Invitation> GetRcvdInvitations(int projectId, int companyId);
+        IEnumerable<Invitation> GetSentInvitations(int projectId, int companyId);
 
         Dictionary<int, string> GetInvitationScopes(int projectId, int invitedCompanyId);
         Dictionary<int, string> GetInvitatingCompanies(int projectId, int invitedCompanyId);

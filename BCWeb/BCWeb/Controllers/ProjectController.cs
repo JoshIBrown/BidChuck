@@ -262,7 +262,7 @@ namespace BCWeb.Controllers
             // if invited sub, show bp invited to
             if (User.IsInRole("subcontractor") || User.IsInRole("materials_vendor"))
             {
-                IEnumerable<Invitation> invites = _service.GetInvitations(theProject.Id, user.CompanyId);
+                IEnumerable<Invitation> invites = _service.GetRcvdInvitations(theProject.Id, user.CompanyId);
 
 
                 Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.ToShortDateString());
@@ -325,6 +325,24 @@ namespace BCWeb.Controllers
                     Description = s.Scope.CsiNumber + " " + s.Scope.Description,
                     parentId = s.Scope.ParentId
                 }).ToList();
+
+            if (user.Company.BusinessType == BusinessType.GeneralContractor)
+            {
+                var invitees = _service.GetSentInvitations(id, user.CompanyId);
+                gcViewModel.Invited = invitees.Count();
+                gcViewModel.AcceptedInvite = invitees.Where(i => i.AcceptedDate.HasValue).Count();
+                gcViewModel.DeclinedInvite = invitees.Where(i => i.RejectedDate.HasValue).Count();
+                gcViewModel.SubmittedBid = invitees.Where(i => i.AcceptedDate.HasValue && i.BidSentDate.HasValue).Count();
+            }
+
+            if (user.Company.BusinessType == BusinessType.Architect)
+            {
+                var invitees = masterBP.Invitees;
+                gcViewModel.Invited = invitees.Count();
+                gcViewModel.AcceptedInvite = invitees.Where(i => i.AcceptedDate.HasValue).Count();
+                gcViewModel.DeclinedInvite = invitees.Where(i => i.RejectedDate.HasValue).Count();
+                gcViewModel.SubmittedBid = invitees.Where(i => i.AcceptedDate.HasValue && i.BidSentDate.HasValue).Count();
+            }
 
             // invite is only relevant if user's comapny is a GC
             if (user.Company.BusinessType == BusinessType.GeneralContractor)

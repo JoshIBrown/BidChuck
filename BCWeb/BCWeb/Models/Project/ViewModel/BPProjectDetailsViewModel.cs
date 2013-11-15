@@ -51,5 +51,10 @@ namespace BCWeb.Models.Project.ViewModel
         public IEnumerable<ProjectScopeListItem> SelectedScope { get; set; }
 
         public InvitationType? InviteType { get; set; }
+
+        public int? Invited { get; set; }
+        public int? AcceptedInvite { get; set; }
+        public int? DeclinedInvite { get; set; }
+        public int? SubmittedBid { get; set; }
     }
 }

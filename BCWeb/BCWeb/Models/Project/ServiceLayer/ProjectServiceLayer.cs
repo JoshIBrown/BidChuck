@@ -44,7 +44,22 @@ namespace BCWeb.Models.Project.ServiceLayer
             bool valid = true;
             ValidationDic.Clear();
 
-            // TODO: add validation logic
+
+            var results = (from r in _repo.Query()
+                           where r.ArchitectId == entity.ArchitectId
+                           && r.Number == entity.Number
+                           && r.Title == entity.Title
+                           && r.CreatedById == entity.CreatedById
+                           select r);
+
+            if (results.Count() > 0)
+            {
+                valid = false;
+                ValidationDic.Add("Duplicate", "You have already created this project");
+            }
+
+            // TODO: add more validation logic
+
             return valid;
         }
 
@@ -174,21 +189,29 @@ namespace BCWeb.Models.Project.ServiceLayer
         }
 
 
-        public IEnumerable<BCModel.Projects.Invitation> GetInvitations(int projectId, int companyId)
+        public IEnumerable<BCModel.Projects.Invitation> GetRcvdInvitations(int projectId, int companyId)
         {
             IEnumerable<Invitation> Invites = from r in _repo.QueryInvites()
-                                                      where r.BidPackage.ProjectId == projectId
-                                                      && r.SentToId == companyId
-                                                      select r;
+                                              where r.BidPackage.ProjectId == projectId
+                                              && r.SentToId == companyId
+                                              select r;
             return Invites.ToList();
         }
 
+        public IEnumerable<Invitation> GetSentInvitations(int projectId, int companyId)
+        {
+            IEnumerable<Invitation> Invites = from r in _repo.QueryInvites()
+                                              where r.BidPackage.ProjectId == projectId
+                                              && r.BidPackage.CreatedById == companyId
+                                              select r;
+            return Invites.ToList();
+        }
 
         public IEnumerable<Invitation> GetInvitations(int companyId)
         {
             IEnumerable<Invitation> Invites = from r in _repo.QueryInvites()
-                                                      where r.SentToId == companyId
-                                                      select r;
+                                              where r.SentToId == companyId
+                                              select r;
             return Invites.ToList();
         }
 
@@ -263,5 +286,9 @@ namespace BCWeb.Models.Project.ServiceLayer
                     && p.Title.ToLower() == title.ToLower()
                     select p).AsEnumerable();
         }
+
+
+
+
     }
 }

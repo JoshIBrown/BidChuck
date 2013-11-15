@@ -31,6 +31,11 @@ namespace BCWeb.Areas.Project.Controllers
             return View();
         }
 
+        public ActionResult List(int projectId)
+        {
+            return View();
+        }
+
         [Authorize(Roles = "general_contractor,Administrator")]
         [HttpGet]
         [HandleError(ExceptionType = typeof(Exception))]
