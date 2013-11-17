@@ -52,12 +52,6 @@ namespace BCWeb.Api
 
             viewModel.Scopes = _service.GetInvitationScopes(projectId, companyId).ToArray();
 
-            //IEnumerable<Invitation> invites = _service.GetInvitations(theProject.Id, user.CompanyId);
-            //Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.ToShortDateString());
-            //Dictionary<int, IEnumerable<int>> scopeselection = _service.GetInvitationScopesByInvitingCompany(theProject.Id, user.CompanyId);
-            //Dictionary<int, string> inviters = _service.GetInvitatingCompanies(theProject.Id, user.CompanyId);
-            //Dictionary<int, string> scopes = _service.GetInvitationScopes(theProject.Id, user.CompanyId);
-            //Dictionary<int, bool?> inviteResponses = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.AcceptedDate.HasValue ? true : i.RejectedDate.HasValue ? false : default(bool?));
             return viewModel;
         }
     }

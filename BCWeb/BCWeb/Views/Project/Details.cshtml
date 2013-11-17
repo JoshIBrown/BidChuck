@@ -29,7 +29,7 @@
                     {
                     <li>@Html.RouteLink("Invite General Contractors", "Project_default", new { controller = "Invitation", action = "Send", id = Model.BidPackageId })</li>
                     <li>@Html.RouteLink("View Invited", "Project_default", new { controller = "Invitation", action = "ViewInvited", bpId = Model.BidPackageId })</li>
-                    <li>@Html.RouteLink("View Bids", "Project_default", new { controller = "Bid", action = "List", projectId = Model.ProjectId })</li>
+                    <li>@Html.RouteLink("View Bids", "Project_default", new { controller = "Bid", action = "Received", projectId = Model.ProjectId })</li>
                     }
                 }
 

@@ -31,9 +31,17 @@ namespace BCWeb.Areas.Project.Controllers
             return View();
         }
 
-        public ActionResult List(int projectId)
+
+
+        public ActionResult Received(int projectId)
         {
-            return View();
+            var project = _service.GetProject(projectId);
+            ReceivedBidViewModel viewModel = new ReceivedBidViewModel
+            {
+                ProjectId = projectId,
+                ProjectTitle = project.Title
+            };
+            return View(viewModel);
         }
 
         [Authorize(Roles = "general_contractor,Administrator")]

@@ -1,5 +1,6 @@
 ﻿using BCModel;
 using BCModel.Projects;
+using BCWeb.Areas.Project.Models.Bids.ViewModel;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -36,5 +37,22 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
         bool SaveFinalBid(IEnumerable<BaseBid> baseBids, Dictionary<int, IEnumerable<ComputedBid>> computedBids, int companyId, DateTime dateTime);
 
         Dictionary<string, string> ValidationDic { get; }
+
+        BCModel.Projects.BidPackage GetMasterBidPackage(int projectId);
+
+        IEnumerable<ComputedBid> GetEnumerableComputedBidsByBidPackage(int bidPackageId);
+
+        IEnumerable<BaseBid> GetBaseBidsForCompanies(int projectId, int[] invitedCompanyId);
+
+        IEnumerable<Invitation> GetInvitationListForSender(int projectId, int companyId);
+
+        IEnumerable<BCModel.Projects.BidPackage> GetBidPackagesCreatedByCompanyForProject(int projectId, int companyId);
+
+
+        IEnumerable<Invitation> GetInvitesForBidPackage(int bidPackageId);
+
+        IEnumerable<CalculatedBid> GetCalculatedBidOfBidPackageForCompany(int bidPackageId, int companyId);
+
+        int[] GetCompanyIdsThatSubmittedBid(int bidPackageId);
     }
 }

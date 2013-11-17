@@ -1,0 +1,15 @@
+﻿@model BCWeb.Areas.Project.Models.Bids.ViewModel.ReceivedBidViewModel
+@{
+    ViewBag.Title = "Received";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<h2>Received</h2>
+<div ng-controller="ReceivedBidsCtrl">
+    @Html.HiddenFor(m => m.ProjectId)
+    TODO: create angular controller
+test calls to web api
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/receivedbids")
+}

@@ -68,7 +68,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
 
         public IQueryable<Invitation> QueryInvites()
         {
-            return _invites;
+            return _invites.Include(i => i.BidPackage);
         }
 
         public void DeleteBaseBid(BaseBid bid)
