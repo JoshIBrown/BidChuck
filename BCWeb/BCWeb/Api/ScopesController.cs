@@ -91,9 +91,9 @@ namespace BCWeb.Controllers.Api
             }
 
 
-            viewModel = _service.GetEnumerable().Select(s => new BidPackageScopeMgmtViewModel
+            viewModel = templatedScopes.Select(s => new BidPackageScopeMgmtViewModel
             {
-                Templated = templatedScopes.Contains(s),
+                //Templated = templatedScopes.Contains(s),
                 Checked = selectedScopes.Contains(s),
                 Description = s.Description,
                 Id = s.Id,
