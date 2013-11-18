@@ -251,7 +251,7 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
         public IEnumerable<BCModel.Projects.BidPackage> GetBidPackagesCreatedByCompanyForProject(int projectId, int companyId)
         {
             return (from r in _repo.QueryBidPackages()
-                    where r.ProjectId == companyId
+                    where r.ProjectId == projectId
                     && r.CreatedById == companyId
                     && !r.IsMaster
                     select r).AsEnumerable();

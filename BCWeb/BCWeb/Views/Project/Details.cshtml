@@ -11,27 +11,29 @@
                 @* limit to creator*@
                 <li>@Html.RouteLink("Edit...", "Default", new { controller = "Project", action = "Edit", id = Model.ProjectId })</li>
 
-                @{
-                    if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))
-                    {
-                    
+
+                @if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))
+                {
+
+
+                    if (Model.Accepted.HasValue && Model.Accepted.Value)
+                    { 
                     <li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId, templateId = Model.BidPackageId })</li>
-                    <li>@Html.RouteLink("Manage Bid Packages", "Project_default", new { controller = "BidPackage", action = "Index", projectId = Model.ProjectId })</li>
-                        if (Model.Accepted.HasValue && Model.Accepted.Value)
-                        { 
-                        
+                    <li>@Html.RouteLink("Manage Bid Packages", "Project_default", new { controller = "BidPackage", action = "Index", projectId = Model.ProjectId })</li>    
+                    <li>@Html.RouteLink("View Bids", "Project_default", new { controller = "Bid", action = "Received", projectId = Model.ProjectId })</li>
+                    <li class="divider"></li>
                     <li>@Html.RouteLink("Compose Bid", "Project_default", new { controller = "Bid", action = "ComposeGC", projectId = Model.ProjectId })</li>
                     <li>@Html.RouteLink("Review Bid", "Project_default", new { controller = "Bid", action = "ReviewGC", projectId = Model.ProjectId })</li>
-                        }
                     }
+                }
 
-                    if (User.IsInRole("architect"))
-                    {
+                @if (User.IsInRole("architect"))
+                {
                     <li>@Html.RouteLink("Invite General Contractors", "Project_default", new { controller = "Invitation", action = "Send", id = Model.BidPackageId })</li>
                     <li>@Html.RouteLink("View Invited", "Project_default", new { controller = "Invitation", action = "ViewInvited", bpId = Model.BidPackageId })</li>
                     <li>@Html.RouteLink("View Bids", "Project_default", new { controller = "Bid", action = "Received", projectId = Model.ProjectId })</li>
-                    }
                 }
+
 
             </ul>
         </div>

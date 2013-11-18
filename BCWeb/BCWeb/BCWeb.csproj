@@ -315,6 +315,7 @@
     <Compile Include="Models\RepositoryBase.cs" />
     <Compile Include="Models\ServiceLayerBase.cs" />
     <Compile Include="Models\Shared\DataTablesResponse.cs" />
+    <Compile Include="Models\Shared\LookupItem.cs" />
     <Compile Include="Models\WebSecurityWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

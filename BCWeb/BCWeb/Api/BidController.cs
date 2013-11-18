@@ -3,12 +3,14 @@ using BCModel.Projects;
 using BCWeb.Areas.Project.Models.Bids.ServiceLayer;
 using BCWeb.Areas.Project.Models.Bids.ViewModel;
 using BCWeb.Models;
+using BCWeb.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace BCWeb.Api
 {
@@ -44,22 +46,22 @@ namespace BCWeb.Api
         //    return null;
         //}
 
-        public KeyValuePair<int, string>[] GetBidPackagesForProject(int projectId)
+        public IEnumerable<SelectListItem> GetBidPackagesForProject(int projectId)
         {
             CompanyProfile company = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).Company;
 
-            Dictionary<int, string> result = new Dictionary<int, string>();
+            List<SelectListItem> result = new List<SelectListItem>();
             if (company.BusinessType == BusinessType.Architect)
             {
                 var masterBp = _service.GetMasterBidPackage(projectId);
-                result.Add(masterBp.Id, "");
+                result.Add(new SelectListItem { Value = masterBp.Id.ToString(), Text = "" });
 
             }
             else
             {
-                result = _service.GetBidPackagesCreatedByCompanyForProject(projectId, company.Id).ToDictionary(x => x.Id, x => x.Description);
+                result = _service.GetBidPackagesCreatedByCompanyForProject(projectId, company.Id).Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Description }).ToList();
             }
-            return result.ToArray();
+            return result;
         }
 
         public IEnumerable<BidSheetReviewItem> GetBidsToReviewForProject(int projectId)
@@ -138,11 +140,11 @@ namespace BCWeb.Api
             return result;
         }
 
-        public KeyValuePair<int, string>[] GetScopesForBidPackages(int bidPackageId)
+        public IEnumerable<LookupItem> GetScopesForBidPackages(int bidPackageId)
         {
-            Dictionary<int, string> result = new Dictionary<int, string>();
+            LookupItem[] result = _service.GetBidPackageScopes(bidPackageId).Select(p => new LookupItem { Id = p.Id, Value = p.CsiNumber + " " + p.Description }).ToArray();
 
-            return result.ToArray();
+            return result;
         }
     }
 }

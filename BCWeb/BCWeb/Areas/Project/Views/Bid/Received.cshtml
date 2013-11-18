@@ -3,12 +3,60 @@
     ViewBag.Title = "Received";
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
+<div class="row">
+    <div class="large-12 columns">
+        <ul class="breadcrumbs">
+            <li>@Html.RouteLink("Home", "Default", new { controller = "Home", action = "Index" })</li>
+            <li>@Html.RouteLink("Projects", "Default", new { controller = "Project", action = "Index" })</li>
+            <li>@Html.RouteLink(Model.ProjectTitle, "Default", new { controller = "Project", action = "Details", id = Model.ProjectId })</li>
+            <li class="current"><a href="#">Received Bids</a></li>
+        </ul>
+    </div>
+</div>
 
-<h2>Received</h2>
 <div ng-controller="ReceivedBidsCtrl">
     @Html.HiddenFor(m => m.ProjectId)
-    TODO: create angular controller
-test calls to web api
+    <div class="row">
+        <div class="large-12 columns">
+            <select class="large-4 columns" ng-model="selectedBP" ng-options="x.Value as x.Text for x in bidPackages" ng-change="GetScopes()">
+                <option value="">--select bid package--</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="row">
+                <div class="large-3 columns">
+                    <table style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Spec/Company</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="csi in bpScopes">
+                                <td>{{csi.Value}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="large-8 columns">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>loop through company names</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>loop through scopes
+                                <td>loop through companies</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @section scripts{
     @Scripts.Render("~/bundles/receivedbids")
