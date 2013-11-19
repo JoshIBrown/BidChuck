@@ -294,5 +294,15 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
                     && i.BidSentDate.HasValue
                     select i.SentToId).ToArray();
         }
+
+
+        public IEnumerable<BCModel.CompanyProfile> GetCompaniessThatSubmittedBid(int bidPackageId)
+        {
+            return (from i in _repo.QueryInvites()
+                    where i.BidPackageId == bidPackageId
+                    && i.AcceptedDate.HasValue
+                    && i.BidSentDate.HasValue
+                    select i.SentTo).AsEnumerable();
+        }
     }
 }

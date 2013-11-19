@@ -152,6 +152,7 @@ namespace BCWeb.Areas.Project.Controllers
             Invitation invite = _service.GetInvites(projectId, companyId).SingleOrDefault();
             GCBidViewModel viewModel = new GCBidViewModel();
             viewModel.ProjectId = invite.BidPackage.ProjectId;
+            viewModel.ProjectTitle = invite.BidPackage.Project.Title;
             viewModel.BaseBids = _service.GetCompanyBaseBidsForProject(companyId, projectId).Select(t => new BaseBidViewItem { Amount = t.Amount, ScopeDescription = t.Scope.CsiNumber + " " + t.Scope.Description });
             return View(viewModel);
         }

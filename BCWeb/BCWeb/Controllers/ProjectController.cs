@@ -183,7 +183,7 @@ namespace BCWeb.Controllers
                         IsMaster = true,
                         BidDateTime = toCreate.BidDateTime,
                         Description = "Master Bid Package",
-                        CreatedById = companyId,
+                        CreatedById = viewModel.ArchitectId,
                         Project = toCreate,
                         Scopes = new List<BidPackageXScope>(),
                         Invitees = new List<Invitation>()

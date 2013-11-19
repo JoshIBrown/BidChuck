@@ -54,5 +54,7 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
         IEnumerable<CalculatedBid> GetCalculatedBidOfBidPackageForCompany(int bidPackageId, int companyId);
 
         int[] GetCompanyIdsThatSubmittedBid(int bidPackageId);
+
+        IEnumerable<CompanyProfile> GetCompaniessThatSubmittedBid(int bidPackageId);
     }
 }

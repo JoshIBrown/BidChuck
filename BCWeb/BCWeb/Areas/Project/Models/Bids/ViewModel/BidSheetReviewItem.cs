@@ -8,12 +8,14 @@ namespace BCWeb.Areas.Project.Models.Bids.ViewModel
     public class BidSheetReviewItem
     {
         public int BidPackageId { get; set; }
+        public string BidPackageDesc { get; set; }
         public IEnumerable<CompanyBidReviewItem> CompanyBids { get; set; }
     }
 
     public class CompanyBidReviewItem
     {
         public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
         public IEnumerable<ScopeBidReviewItem> ScopeBids { get; set; }
     }
 

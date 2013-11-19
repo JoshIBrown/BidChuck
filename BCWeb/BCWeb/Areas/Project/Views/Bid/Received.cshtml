@@ -18,7 +18,7 @@
     @Html.HiddenFor(m => m.ProjectId)
     <div class="row">
         <div class="large-12 columns">
-            <select class="large-4 columns" ng-model="selectedBP" ng-options="x.Value as x.Text for x in bidPackages" ng-change="GetScopes()">
+            <select class="large-4 columns" ng-model="selectedBP" ng-options="x.Value as x.Text for x in bidPackages" ng-change="GetBids()" id="bpDropDown">
                 <option value="">--select bid package--</option>
             </select>
         </div>
@@ -30,26 +30,26 @@
                     <table style="width: 100%;">
                         <thead>
                             <tr>
-                                <th>Spec/Company</th>
+                                <th>Spec</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="csi in bpScopes">
-                                <td>{{csi.Value}}</td>
+                                <td style="overflow-x: hidden; white-space: nowrap;">{{csi.Value | truncate:40}}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="large-8 columns">
+                <div class="large-8 columns" style="overflow-x: scroll;">
                     <table>
                         <thead>
                             <tr>
-                                <th>loop through company names</th>
+                                <th ng-repeat="bid in companyBP.CompanyBids">{{bid.CompanyName}}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>loop through scopes
-                                <td>loop through companies</td>
+                            <tr ng-repeat="csi in bpScopes">
+                                <td ng-repeat="bid in companyBP.CompanyBids">{{bid.ScopeBids | CsiAmount : csi.Id}}</td>
                             </tr>
                         </tbody>
                     </table>

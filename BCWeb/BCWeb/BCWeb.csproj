@@ -516,6 +516,7 @@
     <Content Include="Areas\Project\Views\Bid\_GCBidPackageEdit.cshtml" />
     <Content Include="Areas\Project\Views\Bid\ReviewGC.cshtml" />
     <Content Include="Areas\Project\Views\Bid\Received.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <None Include="Areas\Project\Views\Bid\_GCBidPackageDisplay.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />

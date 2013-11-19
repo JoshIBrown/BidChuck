@@ -123,16 +123,16 @@ namespace BCWeb.Api
 
             BidPackage theBidPackge = _service.GetBidPackage(bidPackageId);
             result.BidPackageId = bidPackageId;
-            int[] biddingCompanyId = _service.GetCompanyIdsThatSubmittedBid(bidPackageId);
+            CompanyProfile[] biddingCompany = _service.GetCompaniessThatSubmittedBid(bidPackageId).ToArray();
 
             companyBidList = new List<CompanyBidReviewItem>();
 
-            for (int i = 0; i < biddingCompanyId.Length; i++)
+            for (int i = 0; i < biddingCompany.Length; i++)
             {
-                scopeBidList = _service.GetCalculatedBidOfBidPackageForCompany(bidPackageId, biddingCompanyId[i])
+                scopeBidList = _service.GetCalculatedBidOfBidPackageForCompany(bidPackageId, biddingCompany[i].Id)
                     .Select(p => new ScopeBidReviewItem { BidAmount = p.CalculatedAmount, ScopeId = p.ScopeId })
                     .ToList();
-                companyBidList.Add(new CompanyBidReviewItem { CompanyId = biddingCompanyId[i], ScopeBids = scopeBidList });
+                companyBidList.Add(new CompanyBidReviewItem { CompanyId = biddingCompany[i].Id, CompanyName = biddingCompany[i].CompanyName, ScopeBids = scopeBidList });
             }
 
             result.CompanyBids = companyBidList;

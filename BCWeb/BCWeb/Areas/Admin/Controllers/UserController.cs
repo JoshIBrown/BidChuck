@@ -37,6 +37,7 @@ namespace BCWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(UserProfileEditModel user)
         {
+            
             return View();
         }
     }

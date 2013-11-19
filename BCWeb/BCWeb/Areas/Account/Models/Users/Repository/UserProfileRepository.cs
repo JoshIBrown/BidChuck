@@ -21,7 +21,7 @@ namespace BCWeb.Areas.Account.Models.Users.Repository
 
         public void Create(UserProfile entity)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Use web security to create a user");
         }
 
         public void Update(UserProfile entity)
@@ -58,6 +58,12 @@ namespace BCWeb.Areas.Account.Models.Users.Repository
         public CompanyProfile GetCompany(int id)
         {
             return _companies.Find(id);
+        }
+
+
+        public IQueryable<CompanyProfile> QueryCompanyProfile()
+        {
+            return _companies;
         }
     }
 }

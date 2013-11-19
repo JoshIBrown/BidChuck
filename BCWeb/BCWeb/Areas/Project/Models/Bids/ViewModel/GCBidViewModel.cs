@@ -9,7 +9,7 @@ namespace BCWeb.Areas.Project.Models.Bids.ViewModel
     public class GCBidViewModel
     {
         public int ProjectId { get; set; }
-        public string ProjectName { get; set; }
+        public string ProjectTitle { get; set; }
         public IEnumerable<BaseBidViewItem> BaseBids { get; set; }
     }
 

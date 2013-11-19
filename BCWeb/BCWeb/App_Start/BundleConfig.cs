@@ -43,6 +43,7 @@ namespace BCWeb
             #region BIDs
             bundles.Add(new ScriptBundle("~/bundles/receivedbids").Include(
                 "~/Scripts/angular/angular.js",
+                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/ReceivedBidCtrl.js"
                 ));
             #endregion
