@@ -13,10 +13,10 @@ namespace BCWeb.Models
         bool Create(T entity);
         bool Update(T entity);
         bool Delete(T entity);
-        bool Delete(int id);
+        bool Delete(params object[] key);
         IEnumerable<T> GetEnumerable();
         IEnumerable<T> GetEnumerable(Expression<Func<T, bool>> predicate);
         T Get(params object[] key);
-        bool Exists(int id);
+        bool Exists(params object[] key);
     }
 }

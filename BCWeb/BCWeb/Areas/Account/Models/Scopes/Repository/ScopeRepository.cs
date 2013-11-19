@@ -45,9 +45,9 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
             _context.Entry<Scope>(current).CurrentValues.SetValues(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(params object[] key)
         {
-            _scopes.Remove(_scopes.Find(id));
+            _scopes.Remove(_scopes.Find(key));
         }
 
         public void Delete(Scope entity)

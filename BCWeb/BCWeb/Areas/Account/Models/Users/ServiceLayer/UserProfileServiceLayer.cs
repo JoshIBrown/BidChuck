@@ -26,7 +26,7 @@ namespace BCWeb.Areas.Account.Models.Users.ServiceLayer
 
         public bool Create(UserProfile entity)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Use web security to create a user");
         }
 
         public bool Update(UserProfile entity)
@@ -60,11 +60,11 @@ namespace BCWeb.Areas.Account.Models.Users.ServiceLayer
             }
         }
 
-        public bool Delete(int id)
+        public bool Delete(params object[] key)
         {
             try
             {
-                _repo.Delete(id);
+                _repo.Delete(key);
                 return true;
             }
             catch (Exception ex)
@@ -91,14 +91,20 @@ namespace BCWeb.Areas.Account.Models.Users.ServiceLayer
             return _repo.Get(key);
         }
 
-        public bool Exists(int id)
+        public bool Exists(params object[] key)
         {
-            return _repo.Get(id) == null;
+            return _repo.Get(key) == null;
         }
 
         public CompanyProfile GetCompany(int id)
         {
             return _repo.GetCompany(id);
+        }
+
+
+        public IEnumerable<CompanyProfile> GetEnumerableCompanies()
+        {
+            throw new NotImplementedException();
         }
     }
 }

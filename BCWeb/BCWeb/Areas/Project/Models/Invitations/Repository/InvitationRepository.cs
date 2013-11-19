@@ -56,9 +56,9 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
             _context.Entry<Invitation>(current).CurrentValues.SetValues(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(params object[] key)
         {
-            Delete(_invites.Find(id));
+            Delete(_invites.Find(key));
         }
 
         public void Delete(BCModel.Projects.Invitation entity)

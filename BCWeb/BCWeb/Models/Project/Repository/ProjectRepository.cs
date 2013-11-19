@@ -48,9 +48,9 @@ namespace BCWeb.Models.Project.Repository
             _context.Entry<BCModel.Projects.Project>(current).CurrentValues.SetValues(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(params object[] key)
         {
-            Delete(_projects.Find(id));
+            Delete(_projects.Find(key));
         }
 
         public void Delete(BCModel.Projects.Project entity)

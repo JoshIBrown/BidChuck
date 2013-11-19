@@ -12,5 +12,6 @@ namespace BCWeb.Areas.Account.Models.Users.ServiceLayer
     public interface IUserProfileServiceLayer : IGenericServiceLayer<UserProfile>
     {
         CompanyProfile GetCompany(int id);
+        IEnumerable<CompanyProfile> GetEnumerableCompanies();
     }
 }

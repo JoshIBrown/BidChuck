@@ -70,9 +70,9 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
             _context.Entry<BCModel.Projects.BidPackage>(current).CurrentValues.SetValues(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(params object[] key)
         {
-            Delete(_bidPackages.Find(id));
+            Delete(_bidPackages.Find(key));
         }
 
         public void Delete(BCModel.Projects.BidPackage entity)

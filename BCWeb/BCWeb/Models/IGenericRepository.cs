@@ -9,7 +9,7 @@ namespace BCWeb.Models
     {
         void Create(T entity);
         void Update(T entity);
-        void Delete(int id);
+        void Delete(params object[] key);
         void Delete(T entity);
         T Get(params object[] key);
         IQueryable<T> Query();

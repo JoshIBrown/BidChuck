@@ -30,9 +30,9 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
             _context.Entry<CompanyProfile>(current).CurrentValues.SetValues(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(params object[] key)
         {
-            Delete(_companies.Find(id));
+            Delete(_companies.Find(key));
         }
 
         public void Delete(BCModel.CompanyProfile entity)

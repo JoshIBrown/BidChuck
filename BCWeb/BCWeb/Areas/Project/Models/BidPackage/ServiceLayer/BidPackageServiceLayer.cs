@@ -155,11 +155,11 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
             }
         }
 
-        public bool Delete(int id)
+        public bool Delete(params object[] key)
         {
             try
             {
-                _repo.Delete(id);
+                _repo.Delete(key);
                 _repo.Save();
                 return true;
             }
@@ -195,9 +195,9 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
             return _repo.Get(key);
         }
 
-        public bool Exists(int id)
+        public bool Exists(params object[] key)
         {
-            return _repo.Get(id) == null;
+            return _repo.Get(key) == null;
         }
 
 

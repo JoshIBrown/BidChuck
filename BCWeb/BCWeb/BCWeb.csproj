@@ -227,6 +227,7 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\Companies\CompanyProfileListItem.cs" />
     <Compile Include="Areas\Admin\Models\Projects\ProjectListItem.cs" />
+    <Compile Include="Areas\Admin\Models\Users\UserProfileEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
     <Compile Include="Areas\Project\Controllers\BidController.cs" />
     <Compile Include="Areas\Project\Controllers\BidPackageController.cs" />
@@ -292,7 +293,6 @@
     <Compile Include="Models\Account\ViewModel\InvitationViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\ManageDashboardViewModel.cs" />
     <Compile Include="Models\Company\ViewModel\CompanySearchResult.cs" />
-    <Compile Include="Models\GenericRepository.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
     <Compile Include="Models\Company\ViewModel\NewCompanyViewModel.cs" />
     <Compile Include="Models\IGenericRepository.cs" />

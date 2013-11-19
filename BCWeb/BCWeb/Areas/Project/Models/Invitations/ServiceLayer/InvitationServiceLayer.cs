@@ -92,9 +92,9 @@ namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
             }
         }
 
-        public bool Delete(int id)
+        public bool Delete(params object[] key)
         {
-            return Delete(_repo.Get(id));
+            return Delete(_repo.Get(key));
         }
 
         public IEnumerable<BCModel.Projects.Invitation> GetEnumerable()
@@ -112,9 +112,9 @@ namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
             return _repo.Get(key);
         }
 
-        public bool Exists(int id)
+        public bool Exists(params object[] key)
         {
-            return _repo.Get(id) == null;
+            return _repo.Get(key) == null;
         }
 
 

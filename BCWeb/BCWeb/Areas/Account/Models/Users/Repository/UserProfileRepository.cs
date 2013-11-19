@@ -30,9 +30,9 @@ namespace BCWeb.Areas.Account.Models.Users.Repository
             _context.Entry<UserProfile>(current).CurrentValues.SetValues(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(params object[] key)
         {
-            Delete(_profiles.Find(id));
+            Delete(_profiles.Find(key));
         }
 
         public void Delete(UserProfile entity)
