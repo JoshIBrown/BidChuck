@@ -271,7 +271,7 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
             return (from i in _repo.QueryInvites()
                     join cb in _repo.QueryComputedBid() on new { i.BidPackageId, i.SentToId } equals new { cb.BidPackageId, cb.SentToId }
                     join bp in _repo.QueryBidPackages() on i.BidPackageId equals bp.Id
-                    join bb in _repo.QueryBaseBid() on new { bp.ProjectId, i.SentToId } equals new { bb.ProjectId, bb.SentToId }
+                    join bb in _repo.QueryBaseBid() on new { bp.ProjectId, i.SentToId, cb.ScopeId } equals new { bb.ProjectId, bb.SentToId, bb.ScopeId }
                     where i.BidPackageId == bidPackageId
                     && i.SentToId == companyId
                     && i.BidSentDate.HasValue
