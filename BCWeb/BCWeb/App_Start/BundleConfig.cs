@@ -46,6 +46,12 @@ namespace BCWeb
                  "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/ReceivedBidCtrl.js"
                 ));
+
+            bundles.Add(new ScriptBundle("~/bundles/svcomposebid").Include(
+                "~/Scripts/angular/angular.js",
+                 "~/Scripts/angular/bcweb.filters.angular.js",
+                 "~/Scripts/angular/controllers/SVComposeBid.js"
+                ));
             #endregion
 
             #region Projects

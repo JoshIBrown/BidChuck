@@ -18,6 +18,13 @@ namespace BCModel.Projects
         [Required]
         public string Name { get; set; }
 
+        public int? ParentId { get; set; }
+        [ForeignKey("ParentId"), IgnoreDataMember]
+        public virtual ConstructionType Parent { get; set; }
+
+        [IgnoreDataMember]
+        public virtual ICollection<ConstructionType> Children { get; set; }
+
         [IgnoreDataMember]
         public virtual ICollection<Project> Projects { get; set; }
     }

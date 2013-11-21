@@ -247,12 +247,14 @@
     <Compile Include="Areas\Project\Models\Bids\Repository\IBidRepository.cs" />
     <Compile Include="Areas\Project\Models\Bids\ServiceLayer\BidServiceLayer.cs" />
     <Compile Include="Areas\Project\Models\Bids\ServiceLayer\IBidServiceLayer.cs" />
+    <Compile Include="Areas\Project\Models\Bids\ViewModel\BaseBidEditItem.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\BidSheetReviewItem.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\CalculatedBid.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\GCBidViewModel.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\GCBidEditModel.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\ReceivedBidViewModel.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\SubVendBidViewModel.cs" />
+    <Compile Include="Areas\Project\Models\Bids\ViewModel\SVBidEditModel.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\IInvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\InvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\ServiceLayer\IInvitationServiceLayer.cs" />
@@ -431,6 +433,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular\controllers\admin\CompanyProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\admin\ProjectCtrl.js" />
+    <Content Include="Scripts\angular\controllers\admin\SVComposeBid.js" />
     <Content Include="Scripts\angular\controllers\admin\UserProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\BidPackageIndexCtrl.js" />
     <Content Include="Scripts\angular\controllers\EditBidPackageCtrl.js" />
@@ -517,7 +520,7 @@
     <Content Include="Areas\Project\Views\Bid\ReviewGC.cshtml" />
     <Content Include="Areas\Project\Views\Bid\Received.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
-    <None Include="Areas\Project\Views\Bid\_GCBidPackageDisplay.cshtml" />
+    <Content Include="Areas\Project\Views\Bid\_GCBidPackageDisplay.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />

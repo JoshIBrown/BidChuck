@@ -6,17 +6,16 @@ using System.Web;
 
 namespace BCWeb.Areas.Project.Models.Bids.ViewModel
 {
-    public class GCBidEditModel
+    public class SVBidEditModel
     {
         [Required]
         [RegularExpression(@"Save|Submit")]
         public string btn { get; set; }
         [Required]
         public int ProjectId { get; set; }
-        [Required]
-        public int BidPackageId { get; set; }
         public string ProjectName { get; set; }
 
         public IEnumerable<BaseBidEditItem> BaseBids { get; set; }
+        public IEnumerable<IEnumerable<ComputedBidEditItem>> ComputedBids { get; set; }
     }
 }

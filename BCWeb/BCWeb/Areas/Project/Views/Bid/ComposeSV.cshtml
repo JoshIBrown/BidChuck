@@ -1,6 +1,30 @@
-﻿@{
-    ViewBag.Title = "ComposeSubAndVend";
+﻿@model
+@{
+    ViewBag.Title = "Compose Bid";
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
-<h2>ComposeSubAndVend</h2>
+<div class="row">
+    <div class="large-6 columns">
+        <h3>@ViewBag.Title</h3>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="large-8 columns">
+            @Html.DisplayFor(m => m.ProjectName)
+            @Html.HiddenFor(m => m.ProjectName)
+            @Html.HiddenFor(m => m.ProjectId)
+            @Html.HiddenFor(m => m.BidPackageId)
+            @Html.AntiForgeryToken()
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-8 columns">
+
+            @Html.Partial("_GCBidPackageEdit", Model.BaseBids)
+        </div>
+    </div>
+    <input type="submit" value="Submit" name="btn" /><input type="submit" value="Save" name="btn" />
+}
