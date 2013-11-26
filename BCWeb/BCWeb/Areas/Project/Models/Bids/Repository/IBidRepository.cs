@@ -31,6 +31,8 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
 
         IQueryable<BCModel.Projects.BidPackage> QueryBidPackages();
 
+        IQueryable<BidPackageXScope> QueryBidPackageScopes();
+
         UserProfile GetUserProfile(int id);
         CompanyProfile GetCompanyProfile(int id);
 

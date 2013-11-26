@@ -14,6 +14,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
         private DbSet<BaseBid> _baseBids;
         private DbSet<ComputedBid> _computedBids;
         private DbSet<BCModel.Projects.BidPackage> _bidPackages;
+        private DbSet<BidPackageXScope> _bidPackageScopes;
         private DbSet<BCModel.Projects.Project> _projects;
         private DbSet<Invitation> _invites;
         private DbSet<UserProfile> _users;
@@ -24,6 +25,7 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
             _baseBids = _context.BaseBids;
             _computedBids = _context.ComputedBids;
             _bidPackages = _context.BidPackages;
+            _bidPackageScopes = _context.BidPackageScopes;
             _projects = _context.Projects;
             _invites = _context.Invitations;
             _users = _context.UserProfiles;
@@ -124,6 +126,12 @@ namespace BCWeb.Areas.Project.Models.Bids.Repository
                 _context.Entry<ComputedBid>(current).CurrentValues.SetValues(bid);
             else
                 _computedBids.Add(bid);
+        }
+
+
+        public IQueryable<BidPackageXScope> QueryBidPackageScopes()
+        {
+            return _bidPackageScopes.Include(i => i.BidPackage).Include(i => i.Scope);
         }
     }
 }

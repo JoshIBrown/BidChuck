@@ -515,7 +515,6 @@
     <Content Include="Areas\Project\Views\Bid\Index.cshtml" />
     <Content Include="Areas\Project\Views\Bid\ComposeGC.cshtml" />
     <Content Include="Areas\Project\Views\Bid\ComposeSV.cshtml" />
-    <Content Include="Areas\Project\Views\Bid\_SubVendBidPackage.cshtml" />
     <Content Include="Areas\Project\Views\Bid\_GCBidPackageEdit.cshtml" />
     <Content Include="Areas\Project\Views\Bid\ReviewGC.cshtml" />
     <Content Include="Areas\Project\Views\Bid\Received.cshtml" />

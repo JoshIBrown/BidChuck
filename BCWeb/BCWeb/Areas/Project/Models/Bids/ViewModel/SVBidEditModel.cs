@@ -15,7 +15,15 @@ namespace BCWeb.Areas.Project.Models.Bids.ViewModel
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
 
-        public IEnumerable<BaseBidEditItem> BaseBids { get; set; }
-        public IEnumerable<IEnumerable<ComputedBidEditItem>> ComputedBids { get; set; }
+        public List<BaseBidEditItem> BaseBids { get; set; }
+        public List<SVBidPackageItem> BidPackages { get; set; }
+    }
+
+
+    public class SVBidPackageItem
+    {
+        public List<ComputedBidEditItem> ComputedBids { get; set; }
+        public int BidPacakgeId { get; set; }
+        public string CompanyName { get; set; }
     }
 }

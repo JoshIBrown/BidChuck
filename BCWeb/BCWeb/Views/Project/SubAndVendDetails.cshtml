@@ -10,7 +10,7 @@
                 @*<li>@Html.RouteLink("Create Bid Package", "Project_default", new { controller = "BidPackage", action = "Create", projectId = Model.ProjectId })</li>
             <li><a href="#">View Bid Packages</a></li>
             <li><a href="#">Invite Sub Contractors or Material Vendors</a></li>*@
-                <li>Assemble a Bid</li>
+                <li>@Html.RouteLink("Compose Bid", "Project_default", new { controller = "Bid", action = "ComposeSV", projectId = Model.ProjectId })</li>
             </ul>
         </div>
         <div class="large-8 columns left">

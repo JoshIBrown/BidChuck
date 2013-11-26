@@ -304,5 +304,26 @@ namespace BCWeb.Areas.Project.Models.Bids.ServiceLayer
                     && i.BidSentDate.HasValue
                     select i.SentTo).AsEnumerable();
         }
+
+
+        public IEnumerable<Invitation> GetInvitesCompanyHasAccepted(int projectId, int companyId)
+        {
+            return (from r in _repo.QueryInvites()
+                    where r.BidPackage.ProjectId == projectId
+                    && r.SentToId == companyId
+                    && r.AcceptedDate.HasValue
+                    select r).ToList();
+        }
+
+
+        public IEnumerable<BCModel.Scope> GetCompanyScopesForProject(int projectId, int companyId)
+        {
+            return (from bp in _repo.QueryBidPackages()
+                    join i in _repo.QueryInvites() on bp.Id equals i.BidPackageId
+                    join s in _repo.QueryBidPackageScopes() on bp.Id equals s.BidPackageId
+                    where bp.ProjectId == projectId
+                    && i.SentToId == companyId
+                    select s.Scope).Distinct().ToList();
+        }
     }
 }

@@ -22,8 +22,6 @@ namespace BCWeb.Areas.Project.Models.Bids.ViewModel
         [Required]
         public int ScopeId { get; set; }
         [Required]
-        public int BidPackageId { get; set; }
-        [Required]
         public decimal RiskFactor { get; set; }
     }
 }

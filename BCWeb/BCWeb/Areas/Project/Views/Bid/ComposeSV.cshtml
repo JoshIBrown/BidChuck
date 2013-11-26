@@ -1,4 +1,5 @@
-﻿@model
+﻿@model BCWeb.Areas.Project.Models.Bids.ViewModel.SVBidEditModel
+@using BCWeb.Helpers.Html
 @{
     ViewBag.Title = "Compose Bid";
     Layout = "~/Views/Shared/_Foundation.cshtml";
@@ -16,14 +17,87 @@
             @Html.DisplayFor(m => m.ProjectName)
             @Html.HiddenFor(m => m.ProjectName)
             @Html.HiddenFor(m => m.ProjectId)
-            @Html.HiddenFor(m => m.BidPackageId)
+
             @Html.AntiForgeryToken()
         </div>
     </div>
     <div class="row">
-        <div class="large-8 columns">
+        <div class="large-4 columns">
+            @* loop through  base bids *@
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Specification</th>
+                        <th>Base Bid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int b = 0; b < Model.BaseBids.Count; b++)
+                    {
+                        <tr>
+                            <td>@Model.BaseBids[b].ScopeDescription</td>
+                            <td>
+                                @using (Html.BeginCollectionItem("BaseBids"))
+                                {
+                                    @Html.HiddenFor(m => m.BaseBids[b].ScopeDescription)
+                                    @Html.HiddenFor(m => m.BaseBids[b].ScopeId)
+                                    @Html.TextBoxFor(m => m.BaseBids[b].Amount)
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-            @Html.Partial("_GCBidPackageEdit", Model.BaseBids)
+        </div>
+        <div class="large-8 columns" style="overflow-x: scroll;">
+            <table style="border: none !important; padding: 0px !important;">
+                <tr style="padding: 0px !important;">
+                    @* loop through bid packages*@
+                    @for (int b = 0; b < Model.BidPackages.Count; b++)
+                    {
+                        <td style="padding: 0px !important;">
+                            @* collection of bid packages *@
+                            @using (Html.BeginCollectionItem("BidPackages"))
+                            {
+                                <table style="margin: 0px !important;">
+                                    <thead>
+                                        <tr>
+                                            <th>@Model.BidPackages[b].CompanyName @Html.HiddenFor(m => m.BidPackages[b].BidPacakgeId)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int s = 0; s < Model.BaseBids.Count; s++)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @* collection of computed bids in a bid package *@
+                                                    @using (Html.BeginCollectionItem("ComputedBids"))
+                                                    {
+
+                                                        int idx = Model.BidPackages[b].ComputedBids.FindIndex(x => x.ScopeId == Model.BaseBids[s].ScopeId);
+                                                        if (idx < 0)
+                                                        {
+                                                        @Html.Raw("<span>EXC</span>")
+                                                        }
+                                                        else
+                                                        {
+                                                        @Html.HiddenFor(m => m.BidPackages[b].ComputedBids[idx].ScopeId)
+                                                        @Html.TextBoxFor(m => m.BidPackages[b].ComputedBids[idx].RiskFactor)
+                                                        }
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        </td>
+                    }
+                </tr>
+            </table>
+
+
         </div>
     </div>
     <input type="submit" value="Submit" name="btn" /><input type="submit" value="Save" name="btn" />
