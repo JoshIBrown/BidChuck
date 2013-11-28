@@ -64,7 +64,7 @@ namespace BCWeb.Api
 
         public KeyValuePair<int, string>[] GetArchitects(string query)
         {
-            Dictionary<int, string> archs = _service.GetEnumerable(s => s.CompanyName.Contains(query) 
+            Dictionary<int, string> archs = _service.GetEnumerable(s => s.CompanyName.Contains(query)
                 && s.BusinessType == BusinessType.Architect)
                 .ToDictionary(i => i.Id, i => i.CompanyName);
             return archs.ToArray();
@@ -141,9 +141,9 @@ namespace BCWeb.Api
                     BusinessType = s.BusinessType.ToDescription(),
                     CompanyName = s.CompanyName,
                     Id = s.Id,
-                    PostalCode = s.PostalCode,
+                    PostalCode = s.PostalCode == null ? "not set" : s.PostalCode,
                     Published = s.Published,
-                    State = s.State.Abbr,
+                    State = s.State == null ? "not set" : s.State.Abbr,
                     Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
                 })
                 .OrderBy(orderBy)

@@ -87,6 +87,7 @@ namespace BCWeb.Api
             return viewModel;
         }
 
+        [Authorize(Roles = "Administrator")]
         public DataTablesResponse GetDataTable(
             [FromUri]int iDisplayStart,
             [FromUri]int iDisplayLength,
