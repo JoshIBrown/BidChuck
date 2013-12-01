@@ -15,10 +15,12 @@ namespace BCWeb.Areas.Admin.Controllers
     {
         private IWebSecurityWrapper _security;
         private IUserProfileServiceLayer _service;
-        public UserController(IUserProfileServiceLayer service, IWebSecurityWrapper security)
+        private IEmailSender _email;
+        public UserController(IUserProfileServiceLayer service, IWebSecurityWrapper security, IEmailSender email)
         {
             _service = service;
             _security = security;
+            _email = email;
         }
 
         //
@@ -31,14 +33,57 @@ namespace BCWeb.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            UserProfileEditModel viewModel = new UserProfileEditModel();
+            viewModel.Companies = _service.GetEnumerableCompanies().Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() });
+            return View(viewModel);
         }
 
         [ValidateAntiForgeryToken]
+        [HandleError()]
         public ActionResult Create(UserProfileEditModel user)
         {
-            
-            return View();
+            // check for existing user
+            if (_security.UserExists(user.Email))
+            {
+                ModelState.AddModelError("Email", "User already exists");
+            }
+
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // random password
+                    Guid random = new Guid();
+
+                    // create user
+                    _security.CreateUserAndAccount(user.Email, random.ToString(),
+                        new
+                        {
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            CompanyId = user.CompanyId
+                        }, false);
+
+                    // generate password reset token
+                    string token = _security.GeneratePasswordResetToken(user.Email);
+
+                    // send email with token
+                    _email.SendPasswordResetMail(user.FirstName, user.Email, token);
+
+                    return RedirectToAction("Index");
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            user.Companies = _service.GetEnumerableCompanies().Select(s => new SelectListItem { Selected = s.Id == user.CompanyId, Text = s.CompanyName, Value = s.Id.ToString() });
+            return View(user);
         }
+
+
     }
 }

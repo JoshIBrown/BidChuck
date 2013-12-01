@@ -20,6 +20,7 @@ namespace BCWeb.Areas.Admin.Models.Users
 
         public string JobTitle { get; set; }
 
+        [Required]
         public int CompanyId { get; set; }
 
         public IEnumerable<SelectListItem> Companies { get; set; }

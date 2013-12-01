@@ -1,6 +1,6 @@
 ﻿angular.element(document).ready(function () {
     var app = angular.module('userProfileList', ['ngDataTables']);
-    app.controller('UserProfileCtrl', ['$scope', '$http','$compile', function ($scope, $http,$compile) {
+    app.controller('UserProfileCtrl', ['$scope', '$http', '$compile', function ($scope, $http, $compile) {
 
         $scope.options = {
             "bStateSave": true,
@@ -15,7 +15,9 @@
             "bProcessing": true,
             "bServerSide": true,
             "sAjaxSource": "/api/User/GetDataTable",
-            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) { // compile any angular code in the row
+            "sDom": '<"toolbar">lfrtip',
+            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                // compile any angular code in the row
                 $compile(nRow)($scope);
             }
         };
@@ -28,6 +30,7 @@
             { "mDataProp": "CompanyId", "aTargets": [5] },
             { "mDataProp": "Confirmed", "aTargets": [6] }
         ];
+
     }]);
     angular.bootstrap(document, ['userProfileList']);
 });
