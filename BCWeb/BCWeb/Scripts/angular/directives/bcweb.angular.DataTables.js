@@ -44,6 +44,15 @@ mimirDirectives.directive('ngDatatable', ['$compile', function ($compile) {
 
         // apply the plugin
         var dataTable = element.dataTable(options);
+
+
+        // if there is a custom toolbar, render it.  will need to use toolbar in sdom for this to work
+        if (options.sDom && attrs.toolbar) {
+            var toolbar = scope.$eval(attrs.toolbar);
+            var toobarDiv = angular.element('div.toolbar').html(toolbar);
+            $compile(toobarDiv)(scope);
+        }
+
         // this is to fix auto column sizing issues when hiding columns
         dataTable.width('100%');
 

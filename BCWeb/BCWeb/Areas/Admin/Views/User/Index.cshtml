@@ -9,13 +9,11 @@
     </div>
 </div>
 <div class="row">
-    <div class="large-12 columns">
-        <ul></ul>
-    </div>
-</div>
-<div class="row">
     <div class="large-12 columns" ng-controller="UserProfileCtrl">
-        <table ng-datatable="options" aa-data="theData" ao-column-defs="columnDefs">
+        <table ng-datatable="options" 
+            aa-data="theData" 
+            ao-column-defs="columnDefs"
+            toolbar="myToolbar">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -37,5 +35,5 @@
     @Scripts.Render("~/bundles/admin/userProfile")
 }
 @section head{
-    @Styles.Render("~/Content/DataTables/media/css/jquery.dataTables.css")
+    @Styles.Render("~/Content/dataTables")
 }

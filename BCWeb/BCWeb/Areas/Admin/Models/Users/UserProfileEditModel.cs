@@ -22,7 +22,10 @@ namespace BCWeb.Areas.Admin.Models.Users
 
         [Required]
         public int CompanyId { get; set; }
+        [Required]
+        public bool IsManager { get; set; }
 
+        // list of companies
         public IEnumerable<SelectListItem> Companies { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Admin.cshtml";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
 <h2>Create</h2>
@@ -15,6 +15,13 @@
     <fieldset>
         <legend>UserProfileEditModel</legend>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserId)
+            @Html.ValidationMessageFor(model => model.UserId)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Email)
@@ -49,10 +56,18 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.IsManager)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.IsManager)
+            @Html.ValidationMessageFor(model => model.IsManager)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.CompanyId)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(m => m.CompanyId, Model.Companies, new { @class = "pretty" })
+            @Html.DropDownListFor(model => model.CompanyId, Model.Companies, new { @class = "pretty" })
             @Html.ValidationMessageFor(model => model.CompanyId)
         </div>
 

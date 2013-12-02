@@ -104,7 +104,7 @@ namespace BCWeb.Areas.Account.Models.Users.ServiceLayer
 
         public IEnumerable<CompanyProfile> GetEnumerableCompanies()
         {
-            throw new NotImplementedException();
+            return _repo.QueryCompanyProfile().AsEnumerable();
         }
     }
 }

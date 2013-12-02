@@ -79,3 +79,17 @@ ul.vcard.newCmpny {
 table tbody tr td INPUT[type="button"] {
     margin: 0px !important;
 }
+
+
+/*datatables foundation correction for 100% width*/
+.dataTables_length select {
+    height: 2.19em;
+    border: 1px solid #cccccc;
+}
+
+
+.dataTables_wrapper .toolbar {
+    float: left;
+    padding-top: 6px !important;
+    margin-right: 10px;
+}

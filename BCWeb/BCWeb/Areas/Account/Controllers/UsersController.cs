@@ -15,13 +15,13 @@ using WebMatrix.WebData;
 namespace BCWeb.Areas.Account.Controllers
 {
     [Authorize]
-    public class UsersController : Controller
+    public class UserController : Controller
     {
         private IUserProfileServiceLayer _service;
         private IWebSecurityWrapper _security;
         private IEmailSender _emailer;
 
-        public UsersController(IUserProfileServiceLayer service,IWebSecurityWrapper security, IEmailSender emailer)
+        public UserController(IUserProfileServiceLayer service,IWebSecurityWrapper security, IEmailSender emailer)
         {
             _service = service;
             _security = security;

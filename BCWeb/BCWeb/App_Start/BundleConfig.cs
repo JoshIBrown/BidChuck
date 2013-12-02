@@ -134,12 +134,15 @@ namespace BCWeb
                       "~/Scripts/foundation/app.js"));
             #endregion
 
-
+            #region Datatables bundles
+            bundles.Add(new StyleBundle("~/Content/dataTables").Include("~/Content/foundation/dataTables.foundation.css"));
+            #endregion
             #region admin bundles
             bundles.Add(new ScriptBundle("~/bundles/admin/userProfile").Include(
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/DataTables/media/js/jquery.dataTables.js",
+                "~/Scripts/DataTables/media/js/dataTables.foundation.js",
                 "~/Scripts/angular/directives/bcweb.angular.DataTables.js",
                 "~/Scripts/angular/controllers/admin/UserProfileCtrl.js"));
 
@@ -147,6 +150,7 @@ namespace BCWeb
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/DataTables/media/js/jquery.dataTables.js",
+                "~/Scripts/DataTables/media/js/dataTables.foundation.js",
                 "~/Scripts/angular/directives/bcweb.angular.DataTables.js",
                 "~/Scripts/angular/controllers/admin/CompanyProfileCtrl.js"));
 
@@ -154,6 +158,7 @@ namespace BCWeb
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/DataTables/media/js/jquery.dataTables.js",
+                "~/Scripts/DataTables/media/js/dataTables.foundation.js",
                 "~/Scripts/angular/directives/bcweb.angular.DataTables.js",
                 "~/Scripts/angular/controllers/admin/ProjectCtrl.js"));
             #endregion
