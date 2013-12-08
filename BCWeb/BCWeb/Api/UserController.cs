@@ -15,7 +15,7 @@ using WebMatrix.WebData;
 
 namespace BCWeb.Api
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize]
     public class UserController : ApiController
     {
         private IUserProfileServiceLayer _service;
@@ -28,6 +28,7 @@ namespace BCWeb.Api
 
         }
 
+        [Authorize(Roles = "Administrator")]
         public DataTablesResponse GetDataTable(
             [FromUri]int iDisplayStart,
             [FromUri]int iDisplayLength,

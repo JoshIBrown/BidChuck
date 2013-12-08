@@ -137,6 +137,7 @@ namespace BCWeb
             #region Datatables bundles
             bundles.Add(new StyleBundle("~/Content/dataTables").Include("~/Content/foundation/dataTables.foundation.css"));
             #endregion
+
             #region admin bundles
             bundles.Add(new ScriptBundle("~/bundles/admin/userProfile").Include(
                 "~/Scripts/angular/angular.js",

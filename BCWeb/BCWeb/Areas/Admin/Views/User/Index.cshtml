@@ -11,7 +11,6 @@
 <div class="row">
     <div class="large-12 columns" ng-controller="UserProfileCtrl">
         <table ng-datatable="options" 
-            aa-data="theData" 
             ao-column-defs="columnDefs"
             toolbar="myToolbar">
             <thead>
@@ -35,5 +34,5 @@
     @Scripts.Render("~/bundles/admin/userProfile")
 }
 @section head{
-    @Styles.Render("~/Content/dataTables")
+    @Styles.Render("~/Content/foundation/dataTables.foundation.css")
 }

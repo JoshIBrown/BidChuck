@@ -225,6 +225,7 @@
     <Compile Include="Areas\Admin\Controllers\DBAuditController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Models\Companies\CompanyProfileEditItem.cs" />
     <Compile Include="Areas\Admin\Models\Companies\CompanyProfileListItem.cs" />
     <Compile Include="Areas\Admin\Models\Projects\ProjectListItem.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileEditModel.cs" />
@@ -770,6 +771,8 @@
     <Content Include="Areas\Project\Views\Bid\Received.cshtml" />
     <Content Include="Areas\Project\Views\Bid\_GCBidPackageDisplay.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Company\Create.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
@@ -917,6 +920,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\SignIn.cshtml" />

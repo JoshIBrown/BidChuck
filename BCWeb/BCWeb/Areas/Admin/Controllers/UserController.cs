@@ -1,6 +1,7 @@
 ﻿using BCModel;
 using BCWeb.Areas.Account.Models.Users.ServiceLayer;
 using BCWeb.Areas.Admin.Models.Users;
+using BCWeb.Helpers;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,13 @@ namespace BCWeb.Areas.Admin.Controllers
 
         //
         // GET: /Admin/User/
-
         public ActionResult Index()
         {
             return View();
         }
 
+
+        // GET: /Admin/User/Create/
         [HttpGet]
         public ActionResult Create()
         {
@@ -39,6 +41,7 @@ namespace BCWeb.Areas.Admin.Controllers
             return View(viewModel);
         }
 
+        // POST: /Admin/User/
         [HttpPost, ValidateAntiForgeryToken, HandleError()]
         public ActionResult Create(UserProfileEditModel user)
         {
@@ -67,7 +70,7 @@ namespace BCWeb.Areas.Admin.Controllers
 
                     // add roles
                     // if manager else employee
-                    
+
                     CompanyProfile company = _service.GetCompany(user.CompanyId);
 
                     // add appropriate business role
@@ -99,6 +102,10 @@ namespace BCWeb.Areas.Admin.Controllers
                             break;
                     };
 
+                    if (user.IsManager)
+                        _security.AddUserToRole(user.Email, "Manager");
+                    else
+                        _security.AddUserToRole(user.Email, "Employee");
 
                     // generate password reset token
                     string token = _security.GeneratePasswordResetToken(user.Email);
@@ -119,6 +126,80 @@ namespace BCWeb.Areas.Admin.Controllers
             return View(user);
         }
 
+        // GET: /Admin/User/Edit/4
+        [HttpGet]
+        [HandleError(ExceptionType = typeof(KeyNotFoundException))]
+        public ActionResult Edit(int id)
+        {
 
+                UserProfile theUser = _service.Get(id);
+                if (theUser != null)
+                {
+                    UserProfileEditModel viewModel = new UserProfileEditModel
+                        {
+                            CompanyId = theUser.CompanyId,
+                            Email = theUser.Email,
+                            FirstName = theUser.FirstName,
+                            LastName = theUser.LastName,
+                            IsManager = _security.IsUserInRole(theUser.Email, "Manager"),
+                            JobTitle = theUser.JobTitle,
+                            UserId = theUser.UserId
+                        };
+                    viewModel.Companies = _service.GetEnumerableCompanies().Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() , Selected = s.Id == theUser.CompanyId});
+                    return View(viewModel);
+                }
+                else
+                {
+                    throw new KeyNotFoundException();
+                }
+        }
+
+        [HttpPost, ValidateAntiForgeryToken(), HandleError]
+        public ActionResult Edit(UserProfileEditModel viewModel)
+        {
+            UserProfile theUser = _service.Get(viewModel.UserId);
+
+            // if email address has changed, and the newly chosen address already exists
+            if (theUser.Email != viewModel.Email && _security.UserExists(viewModel.Email))
+            {
+                ModelState.AddModelError("Email", "user with that email already exists");
+            }
+
+            if (ModelState.IsValid)
+            {
+                 // if user was not a manager previously, but is now
+                if (viewModel.IsManager && !_security.IsUserInRole(theUser.Email, "Manager"))
+                {
+                    _security.AddUserToRole(theUser.Email, "Manager");
+                    _security.RemoveUserFromRole(theUser.Email, "Employee");
+                }
+
+                // if user was a manager previously, but is no longer
+                if (!viewModel.IsManager && _security.IsUserInRole(theUser.Email, "Manager"))
+                {
+                    _security.AddUserToRole(theUser.Email, "Employee");
+                    _security.RemoveUserFromRole(theUser.Email, "Manager");
+                }
+
+                // make changes
+                theUser.FirstName = viewModel.FirstName;
+                theUser.LastName = viewModel.LastName;
+                theUser.Email = viewModel.Email;
+                theUser.CompanyId = viewModel.CompanyId;
+                theUser.JobTitle = viewModel.JobTitle;
+
+                // apply changes
+                if (_service.Update(theUser))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    Util.MapValidationErrors(_service.ValidationDic, this.ModelState);
+                }
+            }
+            viewModel.Companies = _service.GetEnumerableCompanies().Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString(), Selected = s.Id == viewModel.CompanyId });
+            return View(viewModel);
+        }
     }
 }

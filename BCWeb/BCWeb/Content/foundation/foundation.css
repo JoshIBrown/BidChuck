@@ -5487,7 +5487,7 @@ form.custom {
         padding: 0;
         background: white;
         border: solid 1px #cccccc;
-        font-size: 16;
+        font-size: 16pt;
     }
 
         form.custom .custom.dropdown ul li {
@@ -6342,7 +6342,7 @@ a.th {
     height: auto;
     background: white;
     border: solid 1px #cccccc;
-    font-size: 16;
+    font-size: 16pt;
     z-index: 99;
     margin-top: 2px;
     max-width: 200px;
@@ -6422,7 +6422,7 @@ a.th {
         max-height: none;
         background: white;
         border: solid 1px #cccccc;
-        font-size: 16;
+        font-size: 16pt;
         z-index: 99;
         max-width: 200px;
     }
