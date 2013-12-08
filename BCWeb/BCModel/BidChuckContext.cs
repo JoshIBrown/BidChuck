@@ -18,6 +18,7 @@ namespace BCModel
     public class BidChuckContext : DbContext
     {
         private string _currentUser = "";
+        private string _ipAddress = "";
 
         public BidChuckContext()
             : base("DefaultConnection")
@@ -27,18 +28,20 @@ namespace BCModel
             oc.ObjectContext.SavingChanges += new EventHandler(ObjectContext_SavingChanges);
         }
 
-        public BidChuckContext(string currentUser)
+        public BidChuckContext(string currentUser, string ipAddress)
             : base("DefaultConnection")
         {
             _currentUser = currentUser;
+            _ipAddress = ipAddress;
             var oc = this as IObjectContextAdapter;
             oc.ObjectContext.SavingChanges += new EventHandler(ObjectContext_SavingChanges);
         }
 
-        public BidChuckContext(string currentUser, string connection)
+        public BidChuckContext(string currentUser, string ipAddress, string connection)
             : base(connection)
         {
             _currentUser = currentUser;
+            _ipAddress = ipAddress;
             var oc = this as IObjectContextAdapter;
             oc.ObjectContext.SavingChanges += new EventHandler(ObjectContext_SavingChanges);
         }
@@ -50,17 +53,17 @@ namespace BCModel
             List<ObjectStateEntry> entries = oc.ObjectContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Deleted | System.Data.EntityState.Modified).ToList();
             foreach (ObjectStateEntry entry in entries)
             {
-                if (/*!entry.IsRelationship && */entry.Entity != null && !(entry.Entity is Audit.DBAudit))
+                if (!entry.IsRelationship && entry.Entity != null && !(entry.Entity is Audit.DBAudit))
                 {
                     string userName = _currentUser;
-                    Audit.DBAudit audit = this.AuditTrailFactory(entry, userName);
+                    Audit.DBAudit audit = this.AuditTrailFactory(entry, userName, _ipAddress);
                     this.DBAudits.Add(audit);
                 }
             }
 
         }
 
-        private Audit.DBAudit AuditTrailFactory(ObjectStateEntry entry, string userName)
+        private Audit.DBAudit AuditTrailFactory(ObjectStateEntry entry, string userName, string ip)
         {
             var oc = this as IObjectContextAdapter; ;
             oc.ObjectContext.DetectChanges();
@@ -69,6 +72,7 @@ namespace BCModel
             audit.TimeStamp = DateTime.Now;
             audit.Entity = entry.EntitySet.Name;
             audit.User = userName;
+            audit.Address = ip;
 
             // set action type
             switch (entry.State)
@@ -88,11 +92,7 @@ namespace BCModel
                     break;
             }
 
-
-
             audit.NewValue = serializeEntity(entry);
-
-
 
             return audit;
         }
@@ -135,7 +135,7 @@ namespace BCModel
         public DbSet<UserXScope> UserScopes { get; set; }
 
         public DbSet<Scope> Scopes { get; set; }
-        
+
         public DbSet<DBAudit> DBAudits { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<County> Counties { get; set; }
@@ -149,10 +149,10 @@ namespace BCModel
         public DbSet<ProjectXScope> ProjectScopes { get; set; }
         public DbSet<BaseBid> BaseBids { get; set; }
         public DbSet<ComputedBid> ComputedBids { get; set; }
-        
+
         public DbSet<BidPackage> BidPackages { get; set; }
         public DbSet<BidPackageXScope> BidPackageScopes { get; set; }
-        
+
         //public DbSet<ProjectType> ProjectTypes { get; set; }
         public DbSet<ConstructionType> ConstructionTypes { get; set; }
         public DbSet<BuildingType> BuildingTypes { get; set; }

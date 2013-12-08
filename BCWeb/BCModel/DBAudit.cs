@@ -24,6 +24,8 @@ namespace BCModel.Audit
         [Required]
         public string User { get; set; }
 
+        public string Address { get; set; }
+
         [Required]
         public string Entity { get; set; }
 
