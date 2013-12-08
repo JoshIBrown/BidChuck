@@ -132,26 +132,26 @@ namespace BCWeb.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
 
-                UserProfile theUser = _service.Get(id);
-                if (theUser != null)
-                {
-                    UserProfileEditModel viewModel = new UserProfileEditModel
-                        {
-                            CompanyId = theUser.CompanyId,
-                            Email = theUser.Email,
-                            FirstName = theUser.FirstName,
-                            LastName = theUser.LastName,
-                            IsManager = _security.IsUserInRole(theUser.Email, "Manager"),
-                            JobTitle = theUser.JobTitle,
-                            UserId = theUser.UserId
-                        };
-                    viewModel.Companies = _service.GetEnumerableCompanies().Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString() , Selected = s.Id == theUser.CompanyId});
-                    return View(viewModel);
-                }
-                else
-                {
-                    throw new KeyNotFoundException();
-                }
+            UserProfile theUser = _service.Get(id);
+            if (theUser != null)
+            {
+                UserProfileEditModel viewModel = new UserProfileEditModel
+                    {
+                        CompanyId = theUser.CompanyId,
+                        Email = theUser.Email,
+                        FirstName = theUser.FirstName,
+                        LastName = theUser.LastName,
+                        IsManager = _security.IsUserInRole(theUser.Email, "Manager"),
+                        JobTitle = theUser.JobTitle,
+                        UserId = theUser.UserId
+                    };
+                viewModel.Companies = _service.GetEnumerableCompanies().Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString(), Selected = s.Id == theUser.CompanyId });
+                return View(viewModel);
+            }
+            else
+            {
+                throw new KeyNotFoundException();
+            }
         }
 
         [HttpPost, ValidateAntiForgeryToken(), HandleError]
@@ -167,7 +167,7 @@ namespace BCWeb.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                 // if user was not a manager previously, but is now
+                // if user was not a manager previously, but is now
                 if (viewModel.IsManager && !_security.IsUserInRole(theUser.Email, "Manager"))
                 {
                     _security.AddUserToRole(theUser.Email, "Manager");
@@ -199,6 +199,27 @@ namespace BCWeb.Areas.Admin.Controllers
                 }
             }
             viewModel.Companies = _service.GetEnumerableCompanies().Select(s => new SelectListItem { Text = s.CompanyName, Value = s.Id.ToString(), Selected = s.Id == viewModel.CompanyId });
+            return View(viewModel);
+        }
+
+        //
+        // GET: /Admin/User/Details/123
+        public ActionResult Details(int id)
+        {
+            UserProfile user = _service.Get(id);
+            UserProfileDetailsModel viewModel = new UserProfileDetailsModel
+            {
+                CompanyId = user.CompanyId,
+                CompanyName = user.Company.CompanyName,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                Id = user.UserId,
+                IsConfirmed = _security.IsConfirmed(user.Email) ? "Yes" : "No",
+                IsManager = _security.IsUserInRole("Manager") ? "Yes" : "No",
+                JobTitle = user.JobTitle,
+                LastName = user.LastName,
+                Roles = _security.GetRolesForUser(user.Email).ToList()
+            };
             return View(viewModel);
         }
     }

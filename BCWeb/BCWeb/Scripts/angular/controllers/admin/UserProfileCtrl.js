@@ -24,7 +24,11 @@
         };
 
         $scope.columnDefs = [
-            { "mDataProp": "Id", "aTargets": [0] },
+            {
+                "mDataProp": "Id", "aTargets": [0], "mRender": function (data, type, full) {
+                    return '<a href="/Admin/User/Details/' + data + '">' + data + '</a>';
+                }
+            },
             { "mDataProp": "Email", "aTargets": [1] },
             { "mDataProp": "LastName", "aTargets": [2] },
             { "mDataProp": "FirstName", "aTargets": [3] },
