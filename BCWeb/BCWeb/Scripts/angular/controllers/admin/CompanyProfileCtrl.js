@@ -23,7 +23,11 @@
             }
         };
         $scope.columnDefs = [
-            { "mDataProp": "Id", "aTargets": [0] },
+            {
+                "mDataProp": "Id", "aTargets": [0], "mRender": function (data, type, full) {
+                    return '<a href="/Admin/Company/Details/' + data + '">' + data + '</a>';
+                }
+            },
             { "mDataProp": "CompanyName", "aTargets": [1] },
             { "mDataProp": "BusinessType", "aTargets": [2] },
             { "mDataProp": "Manager", "aTargets": [3] },

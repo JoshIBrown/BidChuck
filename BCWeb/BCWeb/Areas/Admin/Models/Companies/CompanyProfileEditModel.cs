@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace BCWeb.Areas.Admin.Models.Companies
 {
-    public class CompanyProfileEditItem
+    public class CompanyProfileEditModel
     {
         public int Id { get; set; }
 

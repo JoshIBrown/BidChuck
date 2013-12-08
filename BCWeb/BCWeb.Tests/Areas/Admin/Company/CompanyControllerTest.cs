@@ -59,8 +59,8 @@ namespace BCWeb.Tests.Areas.Admin.Company
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Model, typeof(CompanyProfileEditItem));
-            Assert.AreEqual(states.Count, ((CompanyProfileEditItem)result.Model).States.Count());
+            Assert.IsInstanceOfType(result.Model, typeof(CompanyProfileEditModel));
+            Assert.AreEqual(states.Count, ((CompanyProfileEditModel)result.Model).States.Count());
         }
     }
 }

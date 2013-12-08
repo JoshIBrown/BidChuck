@@ -225,7 +225,8 @@
     <Compile Include="Areas\Admin\Controllers\DBAuditController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
-    <Compile Include="Areas\Admin\Models\Companies\CompanyProfileEditItem.cs" />
+    <Compile Include="Areas\Admin\Models\Companies\CompanyProfileDetailsModel.cs" />
+    <Compile Include="Areas\Admin\Models\Companies\CompanyProfileEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Companies\CompanyProfileListItem.cs" />
     <Compile Include="Areas\Admin\Models\Projects\ProjectListItem.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileDetailsModel.cs" />
@@ -439,7 +440,7 @@
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\angular\controllers\admin\CompanyProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\admin\ProjectCtrl.js" />
-    <Content Include="Scripts\angular\controllers\admin\SVComposeBid.js" />
+    <Content Include="Scripts\angular\controllers\SVComposeBid.js" />
     <Content Include="Scripts\angular\controllers\admin\UserProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\BidPackageIndexCtrl.js" />
     <Content Include="Scripts\angular\controllers\EditBidPackageCtrl.js" />
@@ -775,6 +776,8 @@
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Company\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Company\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Company\Details.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />

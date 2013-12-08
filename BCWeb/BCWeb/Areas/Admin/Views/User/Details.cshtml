@@ -49,7 +49,7 @@
         </div>
         <div>
             @Html.LabelFor(m => m.CompanyName)
-            @Html.DisplayFor(m => m.CompanyName)
+            @Html.RouteLink(Model.CompanyName, "Admin_default", new { controller = "Company", action = "Details", id = Model.CompanyId })
         </div>
         <div>
             @Html.LabelFor(m => m.IsConfirmed)
