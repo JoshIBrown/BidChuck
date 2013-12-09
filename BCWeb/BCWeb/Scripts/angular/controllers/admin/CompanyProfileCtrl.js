@@ -1,5 +1,5 @@
 ﻿angular.element(document).ready(function () {
-    var app = angular.module('companyProfileList', ['ngDataTables']);
+    var app = angular.module('companyProfileList', ['DataTablesDirective']);
     app.controller('CompanyProfileCtrl', ['$scope', '$http', '$compile', function ($scope, $http, $compile) {
 
         $scope.myToolbar = '<input type="button" class="small button" value="Add Company" ng-click="Add()" />';

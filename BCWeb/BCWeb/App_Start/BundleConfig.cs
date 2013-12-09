@@ -162,6 +162,13 @@ namespace BCWeb
                 "~/Scripts/DataTables/media/js/dataTables.foundation.js",
                 "~/Scripts/angular/directives/bcweb.angular.DataTables.js",
                 "~/Scripts/angular/controllers/admin/ProjectCtrl.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/admin/projectEdit").Include(
+                "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/anuglar/directives/bcweb.angular.ScopePicker.js",
+                "~/Scripts/angular/controllers/admin/ProjectEditCtrl.js"
+                ));
             #endregion
         }
     }

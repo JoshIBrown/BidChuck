@@ -180,12 +180,12 @@ namespace BCWeb.Models.Project.ServiceLayer
 
         public IEnumerable<BCModel.CompanyProfile> GetCompanyProfiles()
         {
-            return _repo.GetCompanyProfiles();
+            return _repo.QueryCompanyProfiles();
         }
 
         public IEnumerable<BCModel.CompanyProfile> GetCompanyProfiles(System.Linq.Expressions.Expression<Func<BCModel.CompanyProfile, bool>> predicate)
         {
-            return _repo.GetCompanyProfiles().Where(predicate);
+            return _repo.QueryCompanyProfiles().Where(predicate);
         }
 
 
@@ -288,7 +288,28 @@ namespace BCWeb.Models.Project.ServiceLayer
         }
 
 
+        public IEnumerable<BCModel.CompanyProfile> GetArchitects()
+        {
+            return (from r in _repo.QueryCompanyProfiles()
+                    where r.BusinessType == BCModel.BusinessType.Architect
+                    select r).AsEnumerable();
+        }
 
 
+        public IEnumerable<BCModel.CompanyProfile> GetGeneralContractors()
+        {
+            return (from r in _repo.QueryCompanyProfiles()
+                    where r.BusinessType == BCModel.BusinessType.GeneralContractor
+                    select r).AsEnumerable();
+        }
+
+
+        public IEnumerable<BCModel.CompanyProfile> GetArchitectsAndGenContractors()
+        {
+            return (from r in _repo.QueryCompanyProfiles()
+                    where r.BusinessType == BCModel.BusinessType.GeneralContractor
+                    || r.BusinessType == BCModel.BusinessType.Architect
+                    select r).AsEnumerable();
+        }
     }
 }

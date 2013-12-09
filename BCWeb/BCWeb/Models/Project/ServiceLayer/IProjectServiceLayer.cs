@@ -21,6 +21,9 @@ namespace BCWeb.Models.Project.ServiceLayer
         BidPackage GetMasterBidPackage(int projectId);
 
         IEnumerable<CompanyProfile> GetCompanyProfiles();
+        IEnumerable<CompanyProfile> GetArchitects();
+        IEnumerable<CompanyProfile> GetGeneralContractors();
+        IEnumerable<CompanyProfile> GetArchitectsAndGenContractors();
         IEnumerable<CompanyProfile> GetCompanyProfiles(Expression<Func<CompanyProfile, bool>> predicate);
 
         IEnumerable<Invitation> GetInvitations(int companyId);

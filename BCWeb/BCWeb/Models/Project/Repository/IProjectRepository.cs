@@ -18,7 +18,7 @@ namespace BCWeb.Models.Project.Repository
         UserProfile GetUserProfile(int id);
 
         CompanyProfile GetCompanyProfile(int id);
-        IQueryable<CompanyProfile> GetCompanyProfiles();
+        IQueryable<CompanyProfile> QueryCompanyProfiles();
 
         IQueryable<Invitation> QueryInvites();
         IQueryable<BidPackage> QueryBidPackages();

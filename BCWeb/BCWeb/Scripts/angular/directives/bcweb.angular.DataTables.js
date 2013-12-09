@@ -1,4 +1,4 @@
-﻿var mimirDirectives = angular.module('ngDataTables', []);
+﻿var mimirDirectives = angular.module('DataTablesDirective', []);
 
 mimirDirectives.directive('ngDatatable', ['$compile', function ($compile) {
     return function (scope, element, attrs) {

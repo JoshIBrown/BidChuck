@@ -24,6 +24,11 @@ namespace BCWeb.Controllers.Api
         private IScopeServiceLayer _service;
         private IWebSecurityWrapper _security;
 
+        public enum EntityType
+        {
+            Project, BidPackage, User, Company
+        }
+
         public ScopesController(IScopeServiceLayer service, IWebSecurityWrapper security)
         {
             _service = service;
