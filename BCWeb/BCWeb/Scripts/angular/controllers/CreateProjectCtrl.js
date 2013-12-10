@@ -4,10 +4,52 @@
         'use strict';
 
 
+        $scope.updateWalkThru = function () {
+            switch ($scope.walkThru) {
+                case 'yes':
+                    angular.element('#NoWalkThru').val(false);
+                    angular.element('#WalkThruTBD').val(false);
+                    break;
+                case 'tbd':
+                    angular.element('#WalkThruDateTime').val('');
+                    angular.element('#NoWalkThru').val(false);
+                    angular.element('#WalkThruTBD').val(true);
+
+                    break;
+                case 'none':
+                    angular.element('#WalkThruDateTime').val('');
+                    angular.element('#NoWalkThru').val(true);
+                    angular.element('#WalkThruTBD').val(false);
+                    break;
+                default:
+                    break;
+            };
+        };
 
 
+        $scope.setWalkThru = function () {
+            var date = $scope.WalkThruDateTB;
+            var time = $scope.WalkThruTimeTB
 
+            var result = date + ' ' + time;
 
+            // requires moment.js
+            if (moment(result).isValid()) {
+                angular.element('#WalkThruDateTime').val(result);
+            }
+        };
+
+        $scope.setBidDeadline = function () {
+            var date = $scope.BidDateTB;
+            var time = $scope.BidTimeTB;
+
+            var result = date + ' ' + time;
+
+            // requires moment.js
+            if (moment(result).isValid()) {
+                angular.element('#BidDateTime').val(result);
+            }
+        };
 
         $scope.t1Parent = 0;
         $scope.t2Parent = 0;

@@ -39,7 +39,7 @@
         @Html.HiddenFor(m => m.BidDateTime)
         <div class="row collapse">
             <div class="large-8 small-8 columns ">
-                <input type="text" id="BidDateTB" name="BidDateTB" />
+                <input type="text" id="BidDateTB" name="BidDateTB" ng-model="BidDateTB" ng-change="setBidDeadline()" />
             </div>
             <div class="large-4 small-4 columns">
                 <span class="postfix">Date</span>
@@ -47,7 +47,7 @@
         </div>
         <div class="row collapse">
             <div class="large-8 small-8 columns">
-                <input type="text" id="BidTimeTB" name="BidTimeTB" />
+                <input type="text" id="BidTimeTB" name="BidTimeTB" ng-model="BidTimeTB" ng-change="setBidDeadline()" />
             </div>
             <div class="large-4 small-4 columns">
                 <span class="postfix">Time</span>
@@ -62,29 +62,29 @@
         <div class="row">
             <div class="large-3 columns">
                 <label>
-                    <input type="radio" id="walkThru" name="walkThru" value="none" ng-model="walkThru" />
+                    <input type="radio" id="walkThru" name="walkThru" value="none" ng-model="walkThru" ng-change="updateWalkThru()" />
                     None</label>
                 <label>
-                    <input type="radio" id="walkThru" name="walkThru" value="tbd" ng-model="walkThru" />
+                    <input type="radio" id="walkThru" name="walkThru" value="tbd" ng-model="walkThru" ng-change="updateWalkThru()" />
                     TBD</label>
                 <label>
-                    <input type="radio" id="walkThru" name="walkThru" value="yes" ng-model="walkThru" />
+                    <input type="radio" id="walkThru" name="walkThru" value="yes" ng-model="walkThru" ng-change="updateWalkThru()" />
                     Yes</label>
             </div>
 
             <div class="large-9 columns">
-                @Html.HiddenFor(m => m.WalkThruTBD)
-                @Html.HiddenFor(m => m.NoWalkThru)
+                @Html.HiddenFor(m => m.WalkThruTBD, new { value = "false" })
+                @Html.HiddenFor(m => m.NoWalkThru, new { value = "false" })
                 @Html.HiddenFor(m => m.WalkThruDateTime)
                 <div class="row collapse">
                     <div class="large-8 small-8 columns">
-                        <input type="text" id="WalkThruDateTB" name="WalkThruDateTB" ng-model="WalkThruDateTB" ng-disabled="!(walkThru=='yes')" />
+                        <input type="text" id="WalkThruDateTB" name="WalkThruDateTB" ng-model="WalkThruDateTB" ng-disabled="!(walkThru=='yes')" ng-change="setWalkThru()" />
                     </div>
                     <div class="large-4 small-4 columns"><span class="postfix">Date</span></div>
                 </div>
                 <div class="row collapse">
                     <div class="large-8 small-8 columns">
-                        <input type="text" id="WalkThruTimeTB" name="WalkThruTimeTB" ng-model="WalkThruTimeTB" ng-disabled="!(walkThru=='yes')" />
+                        <input type="text" id="WalkThruTimeTB" name="WalkThruTimeTB" ng-model="WalkThruTimeTB" ng-disabled="!(walkThru=='yes')" ng-change="setWalkThru()" />
                     </div>
                     <div class="large-4 small-4 columns">
                         <span class="postfix">Time</span>

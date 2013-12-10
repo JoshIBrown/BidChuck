@@ -60,10 +60,12 @@ namespace BCWeb
                 "~/Scripts/angular/controllers/ProjectIndexCtrl.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/createproject").Include("~/Scripts/angular/angular.js",
+                "~/Scripts/moment.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/CreateProjectCtrl.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/editproject").Include("~/Scripts/angular/angular.js",
+                "~/Scripts/moment.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/EditProjectCtrl.js"));
 
