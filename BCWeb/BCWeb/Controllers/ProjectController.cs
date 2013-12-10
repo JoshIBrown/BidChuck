@@ -44,6 +44,7 @@ namespace BCWeb.Controllers
                 var user = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
                 EditProjectViewModel viewModel = new EditProjectViewModel();
                 viewModel.ArchitectId = user.CompanyId;
+                viewModel.Architect = user.Company.CompanyName;
                 rePopViewModel(viewModel);
                 return View("CreateStepTwo", viewModel);
             }

@@ -32,10 +32,67 @@
 </div>
 
 <div class="row">
-    <div class="large-4 columns">
-        @Html.LabelFor(m => m.BidDateTime)
-        @Html.TextBoxFor(m => m.BidDateTime)
-    </div>
+
+
+    <fieldset class="large-3 columns left">
+        <legend>Bid Deadline</legend>
+        @Html.HiddenFor(m => m.BidDateTime)
+        <div class="row collapse">
+            <div class="large-8 small-8 columns ">
+                <input type="text" id="BidDateTB" name="BidDateTB" />
+            </div>
+            <div class="large-4 small-4 columns">
+                <span class="postfix">Date</span>
+            </div>
+        </div>
+        <div class="row collapse">
+            <div class="large-8 small-8 columns">
+                <input type="text" id="BidTimeTB" name="BidTimeTB" />
+            </div>
+            <div class="large-4 small-4 columns">
+                <span class="postfix">Time</span>
+            </div>
+        </div>
+    </fieldset>
+
+
+
+    <fieldset class="large-4 columns left">
+        <legend>Walk Though</legend>
+        <div class="row">
+            <div class="large-3 columns">
+                <label>
+                    <input type="radio" id="walkThru" name="walkThru" value="none" ng-model="walkThru" />
+                    None</label>
+                <label>
+                    <input type="radio" id="walkThru" name="walkThru" value="tbd" ng-model="walkThru" />
+                    TBD</label>
+                <label>
+                    <input type="radio" id="walkThru" name="walkThru" value="yes" ng-model="walkThru" />
+                    Yes</label>
+            </div>
+
+            <div class="large-9 columns">
+                @Html.HiddenFor(m => m.WalkThruTBD)
+                @Html.HiddenFor(m => m.NoWalkThru)
+                @Html.HiddenFor(m => m.WalkThruDateTime)
+                <div class="row collapse">
+                    <div class="large-8 small-8 columns">
+                        <input type="text" id="WalkThruDateTB" name="WalkThruDateTB" ng-model="WalkThruDateTB" ng-disabled="!(walkThru=='yes')" />
+                    </div>
+                    <div class="large-4 small-4 columns"><span class="postfix">Date</span></div>
+                </div>
+                <div class="row collapse">
+                    <div class="large-8 small-8 columns">
+                        <input type="text" id="WalkThruTimeTB" name="WalkThruTimeTB" ng-model="WalkThruTimeTB" ng-disabled="!(walkThru=='yes')" />
+                    </div>
+                    <div class="large-4 small-4 columns">
+                        <span class="postfix">Time</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
 </div>
 
 <div class="row">

@@ -3,6 +3,12 @@
     app.controller('CreateProjectCtrl', ['$scope', '$http', function ($scope, $http) {
         'use strict';
 
+
+
+
+
+
+
         $scope.t1Parent = 0;
         $scope.t2Parent = 0;
         $scope.selectedScopes = [];
