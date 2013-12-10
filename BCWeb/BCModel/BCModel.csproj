@@ -227,6 +227,18 @@
     <Compile Include="Migrations\201312082114198_addCodeToContext.Designer.cs">
       <DependentUpon>201312082114198_addCodeToContext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312092349403_addWalkthroughToProject.cs" />
+    <Compile Include="Migrations\201312092349403_addWalkthroughToProject.Designer.cs">
+      <DependentUpon>201312092349403_addWalkthroughToProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312100038411_removeDocLinkFromBidPackage.cs" />
+    <Compile Include="Migrations\201312100038411_removeDocLinkFromBidPackage.Designer.cs">
+      <DependentUpon>201312100038411_removeDocLinkFromBidPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312100045380_addProjectDocEntity.cs" />
+    <Compile Include="Migrations\201312100045380_addProjectDocEntity.Designer.cs">
+      <DependentUpon>201312100045380_addProjectDocEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\BaseBid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -236,6 +248,7 @@
     <Compile Include="Projects\Invitation.cs" />
     <Compile Include="Projects\ConstructionType.cs" />
     <Compile Include="Projects\Project.cs" />
+    <Compile Include="Projects\ProjectDocument.cs" />
     <Compile Include="Projects\ProjectXScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
@@ -384,6 +397,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312082114198_addCodeToContext.resx">
       <DependentUpon>201312082114198_addCodeToContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312092349403_addWalkthroughToProject.resx">
+      <DependentUpon>201312092349403_addWalkthroughToProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312100038411_removeDocLinkFromBidPackage.resx">
+      <DependentUpon>201312100038411_removeDocLinkFromBidPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312100045380_addProjectDocEntity.resx">
+      <DependentUpon>201312100045380_addProjectDocEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

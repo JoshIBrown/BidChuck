@@ -19,6 +19,10 @@ namespace BCWeb.Models.Project.ViewModel
         [DataType(DataType.DateTime)]
         public DateTime BidDateTime { get; set; }
 
+        public DateTime? WalkThruDateTime { get; set; }
+        public bool NoWalkThru { get; set; }
+        public bool WalkThruTBD { get; set; }
+
         public string Address { get; set; }
 
 

@@ -39,6 +39,10 @@ namespace BCWeb.Areas.Admin.Models.Projects
         [Required]
         public DateTime BidDateTime { get; set; }
 
+        public DateTime? WalkThruDateTime { get; set; }
+        public bool NoWalkThru { get; set; }
+        public bool WalkThruTBD { get; set; }
+
         public string Address { get; set; }
         [Required]
         public string City { get; set; }

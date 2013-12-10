@@ -42,7 +42,7 @@ namespace BCWeb.Api
             viewModel.BidPackages = _service.GetEnumerableByProjectAndInvitedCompany(projectId, companyId)
                 .Select(x => new SubAndVendBidPackageListItem
                 {
-                    BidDateTime = x.BidDateTime,
+                    //BidDateTime = x.BidDateTime,  //FIXME
                     BidPackageId = x.Id,
                     InviteResponse = x.Invitees.Where(i => i.SentToId == companyId).FirstOrDefault().AcceptedDate.HasValue ? true : x.Invitees.Where(i => i.SentToId == companyId).FirstOrDefault().RejectedDate.HasValue ? false : default(bool?),
                     InvitingCompanyId = x.CreatedById,

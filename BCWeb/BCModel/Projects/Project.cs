@@ -75,6 +75,10 @@ namespace BCModel.Projects
         [Required]
         public DateTime BidDateTime { get; set; }
 
+        public DateTime? WalkThruDateTime { get; set; }
+        public bool NoWalkThru { get; set; }
+        public bool WalkThruTBD { get; set; }
+
         public string Address { get; set; }
         [Required]
         public string City { get; set; }
@@ -109,6 +113,7 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual ConstructionType ConstructionType { get; set; }
 
-
+        [IgnoreDataMember]
+        public virtual ICollection<ProjectDocument> ProjectDocuments { get; set; }
     }
 }
