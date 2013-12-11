@@ -235,6 +235,7 @@
     <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
     <Compile Include="Areas\Project\Controllers\BidController.cs" />
     <Compile Include="Areas\Project\Controllers\BidPackageController.cs" />
+    <Compile Include="Areas\Project\Controllers\DocumentController.cs" />
     <Compile Include="Areas\Project\Controllers\InvitationController.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\Repository\BidPackageRepository.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\Repository\IBidPackageRepository.cs" />
@@ -259,6 +260,10 @@
     <Compile Include="Areas\Project\Models\Bids\ViewModel\ReceivedBidViewModel.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\SubVendBidViewModel.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\SVBidEditModel.cs" />
+    <Compile Include="Areas\Project\Models\Documents\Repository\IProjectDocRepository.cs" />
+    <Compile Include="Areas\Project\Models\Documents\Repository\ProjectDocRepository.cs" />
+    <Compile Include="Areas\Project\Models\Documents\ServiceLayer\IProjectDocServiceLayer.cs" />
+    <Compile Include="Areas\Project\Models\Documents\ServiceLayer\ProjectDocServiceLayer.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\IInvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\InvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\ServiceLayer\IInvitationServiceLayer.cs" />
@@ -979,6 +984,7 @@
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Project\Models\Documents\ViewModel\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
     <Folder Include="Scripts\Areas\Home\" />

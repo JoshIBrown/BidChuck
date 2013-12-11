@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201312100045380_addProjectDocEntity.Designer.cs">
       <DependentUpon>201312100045380_addProjectDocEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312110448285_addNotesToProjectDocument.cs" />
+    <Compile Include="Migrations\201312110448285_addNotesToProjectDocument.Designer.cs">
+      <DependentUpon>201312110448285_addNotesToProjectDocument.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\BaseBid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -406,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312100045380_addProjectDocEntity.resx">
       <DependentUpon>201312100045380_addProjectDocEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312110448285_addNotesToProjectDocument.resx">
+      <DependentUpon>201312110448285_addNotesToProjectDocument.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
