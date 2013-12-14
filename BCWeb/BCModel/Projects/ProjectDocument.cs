@@ -23,6 +23,9 @@ namespace BCModel.Projects
         public int CompanyId { get; set; }
         [ForeignKey("CompanyId"), IgnoreDataMember]
         public virtual CompanyProfile Company { get; set; }
+        
+        [Required]
+        public string Name { get; set; }
 
         [Required]
         public string Url { get; set; }

@@ -311,5 +311,11 @@ namespace BCWeb.Models.Project.ServiceLayer
                     || r.BusinessType == BCModel.BusinessType.Architect
                     select r).AsEnumerable();
         }
+
+
+        public IEnumerable<ProjectDocument> GetDocuments(int projectId, int companyId)
+        {
+            return _repo.QueryDocuments().Where(d => d.ProjectId == projectId && d.CompanyId == companyId).AsEnumerable();
+        }
     }
 }

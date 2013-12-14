@@ -115,5 +115,11 @@ namespace BCWeb.Areas.Project.Models.Documents.ServiceLayer
         {
             return _repo.Get(key) == null;
         }
+
+
+        public BCModel.UserProfile GetUser(int id)
+        {
+            return _repo.FindUser(id);
+        }
     }
 }

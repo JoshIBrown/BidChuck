@@ -13,5 +13,7 @@ namespace BCWeb.Areas.Project.Models.Documents.Repository
     {
         BCModel.Projects.Project FindProject(int id);
         CompanyProfile FindCompanyProfile(int id);
+
+        UserProfile FindUser(int id);
     }
 }

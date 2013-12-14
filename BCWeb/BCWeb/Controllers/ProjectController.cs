@@ -1,5 +1,6 @@
 ﻿using BCModel;
 using BCModel.Projects;
+using BCWeb.Areas.Project.Models.Documents.ViewModel;
 using BCWeb.Helpers;
 using BCWeb.Models;
 using BCWeb.Models.Project.ServiceLayer;
@@ -302,8 +303,16 @@ namespace BCWeb.Controllers
 
             // else user is not a sub or material vendor
             BidPackage masterBP = _service.GetMasterBidPackage(id);
+            IEnumerable<ProjectDocListItem> docs = _service.GetDocuments(id, user.CompanyId)
+                .Select(d => new ProjectDocListItem
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Notes = d.Notes,
+                    Url = d.Url
+                });
 
-            BPProjectDetailsViewModel gcViewModel = new BPProjectDetailsViewModel
+            ProjectDetailsViewModel gcViewModel = new ProjectDetailsViewModel
             {
                 Address = theProject.Address,
                 Architect = theProject.Architect.CompanyName,
@@ -324,6 +333,11 @@ namespace BCWeb.Controllers
                 WalkThruTBD = theProject.WalkThruTBD,
                 NoWalkThru = theProject.NoWalkThru
             };
+
+            if (docs != null)
+            {
+                gcViewModel.ProjectDocs = docs;
+            }
 
             gcViewModel.SelectedScope = masterBP.Scopes
                 .Select(s => new ProjectScopeListItem

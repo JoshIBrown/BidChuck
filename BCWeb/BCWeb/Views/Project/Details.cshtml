@@ -1,4 +1,4 @@
-﻿@model BCWeb.Models.Project.ViewModel.BPProjectDetailsViewModel
+﻿@model BCWeb.Models.Project.ViewModel.ProjectDetailsViewModel
 @{
     ViewBag.Title = "Project Details";
     Layout = "~/Views/Shared/_Foundation.cshtml";
@@ -10,7 +10,7 @@
             <ul class="side-nav">
                 @* limit to creator*@
                 <li>@Html.RouteLink("Edit...", "Default", new { controller = "Project", action = "Edit", id = Model.ProjectId })</li>
-
+                <li>@Html.RouteLink("Add Documents", "Project_default", new { controller = "Document", action = "Create", projectId = Model.ProjectId })</li>
 
                 @if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))
                 {
@@ -160,6 +160,36 @@
                     </div>
                 </div>
             </div>
+            @if (User.IsInRole("general_contractor"))
+            {
+                <div class="row">
+                    <div class="large-8 columns">
+                        <table>
+                            <caption>Dcouments</caption>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Url</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.ProjectDocs != null)
+                                {
+                                    foreach (var doc in Model.ProjectDocs)
+                                    {
+                                    <tr>
+                                        <td>@Html.RouteLink(doc.Name, "Project_default", new { controller = "Document", action = "Details", id = doc.Id })</td>
+                                        <td><a href="@doc.Url">@doc.Url.Substring(0, 20)...</a></td>
+                                        <td title="@doc.Notes">@doc.Notes.Substring(0, 20)...</td>
+                                    </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
             <div class="row">
                 <div class="large-12 columns">
                     @Html.LabelFor(m => m.SelectedScope)
