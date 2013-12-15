@@ -18,7 +18,7 @@
             $http.post('/api/Invitation/PostAccept/?bidPackageId=' + bpId, null, {
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: '__RequestVerificationToken',
-                headers: { "X-XSRF-Token": $scope.token }
+                headers: { "X-XSRF-Token": $scope.token, "X-Requested-With": "XMLHttpRequest" }
             })
                 .success(function (result) {
                     // set invitation response
@@ -31,7 +31,7 @@
             $http.post('/api/Invitation/PostDecline/?bidPackageId=' + bpId, null, {
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: '__RequestVerificationToken',
-                headers: { "X-XSRF-Token": $scope.token }
+                headers: { "X-XSRF-Token": $scope.token, "X-Requested-With": "XMLHttpRequest" }
             })
                 .success(function (result) {
                     // set invitation response
