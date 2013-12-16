@@ -1,19 +1,20 @@
-﻿@model BCWeb.Areas.Admin.Models.Users.UserProfileEditModel
+﻿@model BCWeb.Areas.Admin.Models.Companies.CompanyProfileEditModel
 
 @{
-    ViewBag.Title = "Create User";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
 <div class="row">
     <div class="large-6 columns">
+
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
             <fieldset>
-                <legend>UserProfileEditModel</legend>
+                <legend>CompanyProfileEditItem</legend>
 
                 @Html.EditorForModel()
 

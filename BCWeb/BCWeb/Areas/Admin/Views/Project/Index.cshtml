@@ -11,7 +11,8 @@
 
 <div class="row">
     <div class="large-12 columns" ng-controller="ProjectCtrl">
-        <table ng-datatable="options" ao-column-defs="columnDefs">
+        <table ng-datatable="options" ao-column-defs="columnDefs"
+            toolbar="myToolbar">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -36,5 +37,5 @@
     @Scripts.Render("~/bundles/admin/project")
 }
 @section head{
-    @Styles.Render("~/Content/DataTables/media/css/jquery.dataTables.css")
+    @Styles.Render("~/Content/foundation/dataTables.foundation.css")
 }

@@ -1,8 +1,8 @@
 ﻿angular.element(document).ready(function () {
-    var app = angular.module('userProfileList', ['ngDataTables']);
+    var app = angular.module('userProfileList', ['DataTablesDirective']);
     app.controller('UserProfileCtrl', ['$scope', '$http', '$compile', function ($scope, $http, $compile) {
 
-        $scope.myToolbar = '<input type="button" class="small button" value="Add User" ng-click="AddUser()" />';
+        $scope.myToolbar = '<input type="button" class="small button" value="Add User" ng-click="Add()" />';
         $scope.options = {
             "bStateSave": true,
             "iCookieDuration": 2419200, /* 1 month */
@@ -24,7 +24,11 @@
         };
 
         $scope.columnDefs = [
-            { "mDataProp": "Id", "aTargets": [0] },
+            {
+                "mDataProp": "Id", "aTargets": [0], "mRender": function (data, type, full) {
+                    return '<a href="/Admin/User/Details/' + data + '">' + data + '</a>';
+                }
+            },
             { "mDataProp": "Email", "aTargets": [1] },
             { "mDataProp": "LastName", "aTargets": [2] },
             { "mDataProp": "FirstName", "aTargets": [3] },
@@ -33,7 +37,7 @@
             { "mDataProp": "Confirmed", "aTargets": [6] }
         ];
 
-        $scope.AddUser = function () {
+        $scope.Add = function () {
             window.location = "/Admin/User/Create"
         }
     }]);
