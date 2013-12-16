@@ -1,0 +1,51 @@
+﻿@model BCWeb.Areas.Project.Models.Documents.ViewModel.ProjectDocViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<div class="row">
+    <div class="large-12 columns">
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li>@Html.RouteLink("Projects", "Default", new { controller = "Project", action = "Index" })</li>
+            <li>@Html.RouteLink(Model.ProjectTitle, "Default", new { controller = "Project", action = "Details", id = Model.ProjectId })</li>
+            <li><a href="#">Documents</a></li>
+            <li class="current"><a href="#">@Model.Name</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <fieldset>
+        <legend>ProjectDocViewModel</legend>
+
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Url)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Url)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Notes)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Notes)
+        </div>
+
+
+    </fieldset>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.RouteLink("Back to Project", "Default", new { controller = "Project", action = "Details", id = Model.ProjectId })
+    </p>
+</div>

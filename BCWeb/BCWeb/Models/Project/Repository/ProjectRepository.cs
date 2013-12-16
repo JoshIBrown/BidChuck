@@ -17,6 +17,8 @@ namespace BCWeb.Models.Project.Repository
         private DbSet<BidPackageXScope> _bidPackageScopes;
         private DbSet<BidPackage> _bidPackages;
         private DbSet<Scope> _scopes;
+        private DbSet<ProjectDocument> _docs;
+
         public ProjectRepository()
         {
             _projects = _context.Projects;
@@ -26,6 +28,7 @@ namespace BCWeb.Models.Project.Repository
             _bidPackageScopes = _context.BidPackageScopes;
             _bidPackages = _context.BidPackages;
             _scopes = _context.Scopes;
+            _docs = _context.ProjectDocs;
         }
         public IQueryable<BCModel.Projects.ConstructionType> QueryConstructionType()
         {
@@ -123,6 +126,12 @@ namespace BCWeb.Models.Project.Repository
         public IQueryable<Scope> QueryScopes()
         {
             return _scopes;
+        }
+
+
+        public IQueryable<ProjectDocument> QueryDocuments()
+        {
+            return _docs;
         }
     }
 }

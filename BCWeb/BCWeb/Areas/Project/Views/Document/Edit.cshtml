@@ -1,0 +1,43 @@
+﻿@model BCWeb.Areas.Project.Models.Documents.ViewModel.ProjectDocEditModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<div class="row">
+    <div class="large-12 columns">
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li>@Html.RouteLink("Projects", "Default", new { controller = "Project", action = "Index" })</li>
+            <li>@Html.RouteLink(Model.ProjectTitle, "Default", new { controller = "Project", action = "Details", id = Model.ProjectId })</li>
+            <li><a href="#">Documents</a></li>
+            <li>@Html.RouteLink(Model.Name, "Project_default", new { controller = "Document", action = "Details", id = Model.Id })</li>
+            <li class="current"><a href="#">Edit</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="large-6 columns">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            
+            @Html.EditorForModel()
+
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+            
+        }
+
+        <div>
+            @Html.RouteLink("Back to Project", "Default", new { controller = "Project", action = "Details", id = Model.ProjectId })
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
