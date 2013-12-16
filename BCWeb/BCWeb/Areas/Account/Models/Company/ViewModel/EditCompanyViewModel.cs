@@ -11,7 +11,7 @@ namespace BCWeb.Areas.Account.Models.Company.ViewModel
     public class EditCompanyViewModel
     {
         public IEnumerable<SelectListItem> States { get; set; }
-        //public IEnumerable<SelectListItem> BusinessTypes { get; set; }
+        public IEnumerable<SelectListItem> BusinessTypes { get; set; }
 
         [Required]
         public int Id { get; set; }
