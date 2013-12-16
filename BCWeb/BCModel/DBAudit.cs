@@ -25,6 +25,9 @@ namespace BCModel.Audit
         public string User { get; set; }
 
         [Required]
+        public string Address { get; set; }
+
+        [Required]
         public string Entity { get; set; }
 
         [Column(TypeName = "xml")]

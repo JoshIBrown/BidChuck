@@ -13,13 +13,15 @@ namespace BCWeb.Models
         public RepositoryBase()
         {
             var iid = HttpContext.Current.User.Identity;
-            _context = new BidChuckContext(iid.Name);
+            var ipAddress = HttpContext.Current.Request.UserHostAddress;
+            _context = new BidChuckContext(iid.Name, ipAddress);
         }
 
         public RepositoryBase(string connection)
         {
             var iid = HttpContext.Current.User.Identity;
-            _context = new BidChuckContext(iid.Name,connection);
+            var ipAddress = HttpContext.Current.Request.UserHostAddress;
+            _context = new BidChuckContext(iid.Name, ipAddress, connection);
         }
     }
 }
