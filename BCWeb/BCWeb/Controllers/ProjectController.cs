@@ -44,7 +44,6 @@ namespace BCWeb.Controllers
                 var user = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
                 EditProjectViewModel viewModel = new EditProjectViewModel();
                 viewModel.ArchitectId = user.CompanyId;
-                viewModel.Architect = user.Company.CompanyName;
                 rePopViewModel(viewModel);
                 return View("CreateStepTwo", viewModel);
             }
@@ -176,10 +175,7 @@ namespace BCWeb.Controllers
                         StateId = viewModel.StateId,
                         Title = viewModel.Title,
                         Scopes = new List<ProjectXScope>(),
-                        BidPackages = new List<BidPackage>(),
-                        WalkThruDateTime = viewModel.WalkThruDateTime,
-                        NoWalkThru = viewModel.NoWalkThru,
-                        WalkThruTBD = viewModel.WalkThruTBD
+                        BidPackages = new List<BidPackage>()
                     };
                     // create master bid package
                     BidPackage projectPackage = new BidPackage
@@ -268,8 +264,8 @@ namespace BCWeb.Controllers
             {
                 IEnumerable<Invitation> invites = _service.GetRcvdInvitations(theProject.Id, user.CompanyId);
 
-                // FIXME: account for user choosing to use the project bid date
-                //Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.ToShortDateString());
+
+                Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.ToShortDateString());
                 Dictionary<int, IEnumerable<int>> scopeselection = _service.GetInvitationScopesByInvitingCompany(theProject.Id, user.CompanyId);
                 Dictionary<int, string> inviters = _service.GetInvitatingCompanies(theProject.Id, user.CompanyId);
                 Dictionary<int, string> scopes = _service.GetInvitationScopes(theProject.Id, user.CompanyId);
@@ -292,8 +288,8 @@ namespace BCWeb.Controllers
                     Title = theProject.Title,
                     Inviters = inviters,
                     Scopes = scopes,
-                    ScopeSelection = scopeselection//,
-                    //BidDate = bidDates // FIXME
+                    ScopeSelection = scopeselection,
+                    BidDate = bidDates
                 };
                 // get distinct list of scopes
 
@@ -309,7 +305,7 @@ namespace BCWeb.Controllers
                 Architect = theProject.Architect.CompanyName,
                 Number = theProject.Number,
                 Owner = theProject.ClientId.HasValue ? theProject.Client.CompanyName : "",
-                BidDateTime = theProject.BidDateTime.ToString("MM/dd/yy hh:mm tt"),
+                BidDateTime = theProject.BidDateTime,
                 BuildingType = theProject.BuildingType.Name,
                 City = theProject.City,
                 ConstructionType = theProject.ConstructionType.Name,
@@ -319,10 +315,7 @@ namespace BCWeb.Controllers
                 PostalCode = theProject.PostalCode,
                 ProjectType = theProject.ProjectType.ToDescription(),
                 State = theProject.State.Abbr,
-                Title = theProject.Title,
-                WalkThruDateTime = theProject.WalkThruDateTime.HasValue ? theProject.WalkThruDateTime.Value.ToString("MM/dd/yy hh:mm tt") : "",
-                WalkThruTBD = theProject.WalkThruTBD,
-                NoWalkThru = theProject.NoWalkThru
+                Title = theProject.Title
             };
 
             gcViewModel.SelectedScope = masterBP.Scopes
@@ -390,10 +383,7 @@ namespace BCWeb.Controllers
                 PostalCode = raw.PostalCode,
                 StateId = raw.StateId,
                 Title = raw.Title,
-                Number = raw.Number,
-                WalkThruDateTime = raw.WalkThruDateTime,
-                NoWalkThru = raw.NoWalkThru,
-                WalkThruTBD = raw.WalkThruTBD
+                Number = raw.Number
             };
             viewModel.SelectedScope = raw.Scopes.Select(x => x.ScopeId).ToList();
             viewModel.States = _service.GetStates().OrderBy(s => s.Abbr).Select(s => new SelectListItem { Text = s.Abbr, Value = s.Id.ToString(), Selected = s.Id == viewModel.StateId });
@@ -425,21 +415,41 @@ namespace BCWeb.Controllers
                     Project toUpdate = _service.Get(viewModel.Id);
 
                     // update project attributes
-                    toUpdate.Title = viewModel.Title;
-                    toUpdate.Description = viewModel.Description;
-                    toUpdate.Address = viewModel.Address;
-                    toUpdate.BidDateTime = viewModel.BidDateTime;
-                    toUpdate.BuildingTypeId = viewModel.BuildingTypeId;
-                    toUpdate.City = viewModel.City;
-                    toUpdate.ConstructionTypeId = viewModel.ConstructionTypeId;
-                    toUpdate.PostalCode = viewModel.PostalCode;
-                    toUpdate.ProjectType = viewModel.ProjectType.Value;
-                    toUpdate.ProjectCategory = viewModel.ProjectCategory.Value;
-                    toUpdate.StateId = viewModel.StateId;
-                    toUpdate.Number = viewModel.Number;
-                    toUpdate.WalkThruDateTime = viewModel.WalkThruDateTime;
-                    toUpdate.NoWalkThru = viewModel.NoWalkThru;
-                    toUpdate.WalkThruTBD = viewModel.WalkThruTBD;
+                    if (toUpdate.Title != viewModel.Title)
+                        toUpdate.Title = viewModel.Title;
+
+                    if (toUpdate.Description != viewModel.Description)
+                        toUpdate.Description = viewModel.Description;
+
+                    if (toUpdate.Address != viewModel.Address)
+                        toUpdate.Address = viewModel.Address;
+
+                    if (toUpdate.BidDateTime != viewModel.BidDateTime)
+                        toUpdate.BidDateTime = viewModel.BidDateTime;
+
+                    if (toUpdate.BuildingTypeId != viewModel.BuildingTypeId)
+                        toUpdate.BuildingTypeId = viewModel.BuildingTypeId;
+
+                    if (toUpdate.City != viewModel.City)
+                        toUpdate.City = viewModel.City;
+
+                    if (toUpdate.ConstructionTypeId != viewModel.ConstructionTypeId)
+                        toUpdate.ConstructionTypeId = viewModel.ConstructionTypeId;
+
+                    if (toUpdate.PostalCode != viewModel.PostalCode)
+                        toUpdate.PostalCode = viewModel.PostalCode;
+
+                    if (toUpdate.ProjectType != viewModel.ProjectType.Value)
+                        toUpdate.ProjectType = viewModel.ProjectType.Value;
+
+                    if (toUpdate.ProjectCategory != viewModel.ProjectCategory.Value)
+                        toUpdate.ProjectCategory = viewModel.ProjectCategory.Value;
+
+                    if (toUpdate.StateId != viewModel.StateId)
+                        toUpdate.StateId = viewModel.StateId;
+
+                    if (toUpdate.Number != viewModel.Number)
+                        toUpdate.Number = viewModel.Number;
 
                     // update primary bid package
                     var ProjectPackage = toUpdate.BidPackages.Where(b => b.IsMaster).FirstOrDefault();

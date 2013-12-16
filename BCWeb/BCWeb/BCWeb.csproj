@@ -225,17 +225,12 @@
     <Compile Include="Areas\Admin\Controllers\DBAuditController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
-    <Compile Include="Areas\Admin\Models\Companies\CompanyProfileDetailsModel.cs" />
-    <Compile Include="Areas\Admin\Models\Companies\CompanyProfileEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Companies\CompanyProfileListItem.cs" />
-    <Compile Include="Areas\Admin\Models\Projects\ProjectEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Projects\ProjectListItem.cs" />
-    <Compile Include="Areas\Admin\Models\Users\UserProfileDetailsModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
     <Compile Include="Areas\Project\Controllers\BidController.cs" />
     <Compile Include="Areas\Project\Controllers\BidPackageController.cs" />
-    <Compile Include="Areas\Project\Controllers\DocumentController.cs" />
     <Compile Include="Areas\Project\Controllers\InvitationController.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\Repository\BidPackageRepository.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\Repository\IBidPackageRepository.cs" />
@@ -260,10 +255,6 @@
     <Compile Include="Areas\Project\Models\Bids\ViewModel\ReceivedBidViewModel.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\SubVendBidViewModel.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\SVBidEditModel.cs" />
-    <Compile Include="Areas\Project\Models\Documents\Repository\IProjectDocRepository.cs" />
-    <Compile Include="Areas\Project\Models\Documents\Repository\ProjectDocRepository.cs" />
-    <Compile Include="Areas\Project\Models\Documents\ServiceLayer\IProjectDocServiceLayer.cs" />
-    <Compile Include="Areas\Project\Models\Documents\ServiceLayer\ProjectDocServiceLayer.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\IInvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\InvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\ServiceLayer\IInvitationServiceLayer.cs" />
@@ -275,7 +266,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Api\ScopesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AngularTemplateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Helpers\EmailSender.cs" />
@@ -447,8 +437,7 @@
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\angular\controllers\admin\CompanyProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\admin\ProjectCtrl.js" />
-    <Content Include="Scripts\angular\controllers\admin\ProjectEditCtrl.js" />
-    <Content Include="Scripts\angular\controllers\SVComposeBid.js" />
+    <Content Include="Scripts\angular\controllers\admin\SVComposeBid.js" />
     <Content Include="Scripts\angular\controllers\admin\UserProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\BidPackageIndexCtrl.js" />
     <Content Include="Scripts\angular\controllers\EditBidPackageCtrl.js" />
@@ -460,7 +449,6 @@
     <Content Include="Scripts\angular\controllers\SendInvitationCtrl.js" />
     <Content Include="Scripts\angular\directives\bcweb.angular.DataTables.js" />
     <Content Include="Scripts\angular\directives\bcweb.angular.InputValidators.js" />
-    <Content Include="Scripts\angular\directives\bcweb.angular.ScopePicker.js" />
     <Content Include="Scripts\angular\directives\bcweb.angular.ResettableForm.js" />
     <Content Include="Scripts\BidChuck.js" />
     <Content Include="Scripts\DataTables\docs\media\js\doc.js" />
@@ -783,12 +771,6 @@
     <Content Include="Areas\Project\Views\Bid\_GCBidPackageDisplay.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Company\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Company\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Company\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\User\EditorTemplates\UserProfileEditModel.cshtml" />
-    <Content Include="Areas\Admin\Views\Project\Create.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
@@ -979,12 +961,10 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Duplicates.cshtml" />
-    <Content Include="Views\AngularTemplate\ScopePicker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Project\Models\Documents\ViewModel\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
     <Folder Include="Scripts\Areas\Home\" />

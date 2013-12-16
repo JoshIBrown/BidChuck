@@ -11,10 +11,9 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ViewModel
         public int ProjectId { get; set; }
         public string Description { get; set; }
         public IEnumerable<int> SelectedScope { get; set; }
-        public bool UseProjectBidDateTime { get; set; }
-        public DateTime? BidDateTime { get; set; }
-        public bool UserProjectWalkThruDateTime { get; set; }
+        public DateTime BidDateTime { get; set; }
         public DateTime? WalkThroughDateTime { get; set; }
+        public string DocLink { get; set; }
         public string Notes { get; set; }
 
         public int? TemplateId { get; set; }

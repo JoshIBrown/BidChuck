@@ -25,11 +25,7 @@ namespace BCWeb.Models.Project.ViewModel
         public string Description { get; set; }
 
         [Display(Name = "Bid Date/Time")]
-        public string BidDateTime { get; set; }
-
-        public string WalkThruDateTime { get; set; }
-        public bool NoWalkThru { get; set; }
-        public bool WalkThruTBD { get; set; }
+        public DateTime BidDateTime { get; set; }
 
         public string Address { get; set; }
 

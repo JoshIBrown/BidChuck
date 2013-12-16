@@ -20,8 +20,6 @@ using BCWeb.Areas.Project.Models.Invitations.Repository;
 using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
 using BCWeb.Areas.Project.Models.Bids.Repository;
 using BCWeb.Areas.Project.Models.Bids.ServiceLayer;
-using BCWeb.Areas.Project.Models.Documents.ServiceLayer;
-using BCWeb.Areas.Project.Models.Documents.Repository;
 
 namespace BCWeb
 {
@@ -47,8 +45,6 @@ namespace BCWeb
 
             // e.g. container.RegisterType<ITestService, TestService>();    
 
-            container.RegisterType<IProjectDocRepository, ProjectDocRepository>();
-            container.RegisterType<IProjectDocServiceLayer, ProjectDocServiceLayer>();
             container.RegisterType<IBidServiceLayer, BidServiceLayer>();
             container.RegisterType<IBidRepository, BidRepository>();
             container.RegisterType<IAccountRepository, AccountRepository>();

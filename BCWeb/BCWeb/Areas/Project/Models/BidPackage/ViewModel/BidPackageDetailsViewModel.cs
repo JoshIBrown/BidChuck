@@ -15,6 +15,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ViewModel
         public string CreatingCompany { get; set; }
         public string BidDateTime { get; set; }
         public string WalkThruDateTime { get; set; }
+        public string DocLink { get; set; }
         public string Notes { get; set; }
         public IEnumerable<string> Scopes { get; set; }
         

@@ -97,9 +97,9 @@ namespace BCWeb.Models.Project.Repository
             return _companies.Find(id);
         }
 
-        public IQueryable<BCModel.CompanyProfile> QueryCompanyProfiles()
+        public IQueryable<BCModel.CompanyProfile> GetCompanyProfiles()
         {
-            return _companies.Include(i => i.State);
+            return _companies;
         }
 
 

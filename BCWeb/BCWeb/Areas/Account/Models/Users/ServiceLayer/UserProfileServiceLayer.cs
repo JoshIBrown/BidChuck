@@ -35,7 +35,6 @@ namespace BCWeb.Areas.Account.Models.Users.ServiceLayer
             {
                 // TODO: validate before update
                 _repo.Update(entity);
-                _repo.Save();
                 return true;
             }
             catch (Exception ex)
@@ -51,7 +50,6 @@ namespace BCWeb.Areas.Account.Models.Users.ServiceLayer
             try
             {
                 _repo.Delete(entity);
-                _repo.Save();
                 return true;
             }
             catch (Exception ex)
@@ -67,7 +65,6 @@ namespace BCWeb.Areas.Account.Models.Users.ServiceLayer
             try
             {
                 _repo.Delete(key);
-                _repo.Save();
                 return true;
             }
             catch (Exception ex)

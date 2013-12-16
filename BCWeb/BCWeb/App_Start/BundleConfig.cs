@@ -60,12 +60,10 @@ namespace BCWeb
                 "~/Scripts/angular/controllers/ProjectIndexCtrl.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/createproject").Include("~/Scripts/angular/angular.js",
-                "~/Scripts/moment.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/CreateProjectCtrl.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/editproject").Include("~/Scripts/angular/angular.js",
-                "~/Scripts/moment.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/EditProjectCtrl.js"));
 
@@ -164,13 +162,6 @@ namespace BCWeb
                 "~/Scripts/DataTables/media/js/dataTables.foundation.js",
                 "~/Scripts/angular/directives/bcweb.angular.DataTables.js",
                 "~/Scripts/angular/controllers/admin/ProjectCtrl.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/admin/projectEdit").Include(
-                "~/Scripts/angular/angular.js",
-                "~/Scripts/angular/bcweb.filters.angular.js",
-                "~/Scripts/anuglar/directives/bcweb.angular.ScopePicker.js",
-                "~/Scripts/angular/controllers/admin/ProjectEditCtrl.js"
-                ));
             #endregion
         }
     }

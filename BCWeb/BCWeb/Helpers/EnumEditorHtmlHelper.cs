@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
-namespace BCWeb.Helpers.Html
+namespace BCWeb.Helpers
 {
     /// <summary>
     /// http://www.spicelogic.com/Journal/ASP-NET-MVC-DropDownListFor-Html-Helper-Enum-5
