@@ -281,9 +281,6 @@
     <Compile Include="Areas\Project\Models\Documents\Repository\ProjectDocRepository.cs" />
     <Compile Include="Areas\Project\Models\Documents\ServiceLayer\IProjectDocServiceLayer.cs" />
     <Compile Include="Areas\Project\Models\Documents\ServiceLayer\ProjectDocServiceLayer.cs" />
-    <Compile Include="Areas\Project\Models\Documents\ViewModel\ProjectDocEditModel.cs" />
-    <Compile Include="Areas\Project\Models\Documents\ViewModel\ProjectDocListItem.cs" />
-    <Compile Include="Areas\Project\Models\Documents\ViewModel\ProjectDocViewModel.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\IInvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\InvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\ServiceLayer\IInvitationServiceLayer.cs" />
@@ -334,7 +331,7 @@
     <Compile Include="Models\Project\Repository\ProjectRepository.cs" />
     <Compile Include="Models\Project\ServiceLayer\IProjectServiceLayer.cs" />
     <Compile Include="Models\Project\ServiceLayer\ProjectServiceLayer.cs" />
-    <Compile Include="Models\Project\ViewModel\ProjectDetailsViewModel.cs" />
+    <Compile Include="Models\Project\ViewModel\BPProjectDetailsViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\DupeCheckViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\DuplicatesResponseViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\DuplicatesViewModel.cs" />
@@ -342,6 +339,7 @@
     <Compile Include="Models\Project\ViewModel\ProjectScopeListItem.cs" />
     <Compile Include="Models\Project\ViewModel\SubsAndVendProjectDetailsViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\EditProjectViewModel.cs" />
+    <Compile Include="Models\Project\ViewModel\ProjectDetailsViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectListViewModel.cs" />
     <Compile Include="Models\RepositoryBase.cs" />
     <Compile Include="Models\ServiceLayerBase.cs" />
@@ -813,10 +811,6 @@
     <Content Include="Areas\Admin\Views\Company\Details.cshtml" />
     <Content Include="Areas\Admin\Views\User\EditorTemplates\UserProfileEditModel.cshtml" />
     <Content Include="Areas\Admin\Views\Project\Create.cshtml" />
-    <Content Include="Areas\Project\Views\Document\Create.cshtml" />
-    <Content Include="Areas\Project\Views\Document\EditorTemplates\ProjectDocEditModel.cshtml" />
-    <Content Include="Areas\Project\Views\Document\Details.cshtml" />
-    <Content Include="Areas\Project\Views\Document\Edit.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
@@ -1006,6 +1000,7 @@
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Project\Models\Documents\ViewModel\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
     <Folder Include="Scripts\Areas\Home\" />
