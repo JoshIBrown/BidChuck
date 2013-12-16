@@ -12,7 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Web.Attributes;
+using BCWeb.Web.Attributes;
 using WebMatrix.WebData;
 
 namespace BCWeb.Controllers.Api

@@ -12,7 +12,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
 
-namespace Web.Attributes
+namespace BCWeb.Web.Attributes
 {
 
     /// <summary>
