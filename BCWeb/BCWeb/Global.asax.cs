@@ -23,8 +23,8 @@ namespace BCWeb
         {
             //System.IO.Directory.CreateDirectory(@"C:\email\");
             AreaRegistration.RegisterAllAreas();
-            UnityConfig.RegisterComponents();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

@@ -4,18 +4,17 @@ using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
 using BCWeb.Models;
 using BCWeb.Models.GenericViewModel;
 using BCWeb.Models.Project.ViewModel;
-using BCWeb.Web.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using Web.Attributes;
 
 namespace BCWeb.Api
 {
-
+    [Authorize]
     public class InvitationController : ApiController
     {
         private IInvitationServiceLayer _service;
@@ -27,7 +26,6 @@ namespace BCWeb.Api
             _security = security;
         }
 
-        // POST: /api/Invitation/PostAccept/?bidPackageId=123
         [ValidateHttpAntiForgeryToken]
         public JQueryPostResult PostAccept([FromUri]int bidPackageId)
         {

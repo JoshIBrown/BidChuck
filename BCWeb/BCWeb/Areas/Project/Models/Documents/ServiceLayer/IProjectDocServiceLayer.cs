@@ -13,6 +13,5 @@ namespace BCWeb.Areas.Project.Models.Documents.ServiceLayer
     {
         BCModel.Projects.Project GetProject(int id);
         CompanyProfile GetCompany(int id);
-        UserProfile GetUser(int id);
     }
 }

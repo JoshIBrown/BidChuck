@@ -1,5 +1,4 @@
 ﻿using BCModel.Projects;
-using BCWeb.Areas.Project.Models.Documents.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,8 +9,7 @@ namespace BCWeb.Models.Project.ViewModel
 {
     public class ProjectDetailsViewModel
     {
-        public int ProjectId { get; set; }
-        public int BidPackageId { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Title")]
         public string Title { get; set; }
@@ -26,13 +24,12 @@ namespace BCWeb.Models.Project.ViewModel
         public string Description { get; set; }
 
         [Display(Name = "Bid Date/Time")]
-        public string BidDateTime { get; set; }
+        public DateTime BidDateTime { get; set; }
 
-        public string WalkThruDateTime { get; set; }
-        public bool NoWalkThru { get; set; }
-        public bool WalkThruTBD { get; set; }
 
         public string Address { get; set; }
+
+
 
         public string City { get; set; }
 
@@ -48,20 +45,7 @@ namespace BCWeb.Models.Project.ViewModel
         [Display(Name = "Construction Type")]
         public string ConstructionType { get; set; }
 
-        public bool? Accepted { get; set; }
-        public DateTime? ResponseDate { get; set; }
-        public DateTime? BidSentDate { get; set; }
-
         [Display(Name = "Selected Scopes")]
-        public IEnumerable<ProjectScopeListItem> SelectedScope { get; set; }
-
-        public IEnumerable<ProjectDocListItem> ProjectDocs { get; set; }
-        
-        public InvitationType? InviteType { get; set; }
-
-        public int? Invited { get; set; }
-        public int? AcceptedInvite { get; set; }
-        public int? DeclinedInvite { get; set; }
-        public int? SubmittedBid { get; set; }
+        public IEnumerable<string> SelectedScope { get; set; }
     }
 }

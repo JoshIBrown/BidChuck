@@ -3,10 +3,9 @@ using BCModel.Projects;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
-
+using System.Data.Objects;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -51,7 +50,7 @@ namespace BCModel
         {
 
             var oc = this as IObjectContextAdapter;
-            List<ObjectStateEntry> entries = oc.ObjectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Added | EntityState.Deleted | EntityState.Modified).ToList();
+            List<ObjectStateEntry> entries = oc.ObjectContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Deleted | System.Data.EntityState.Modified).ToList();
             foreach (ObjectStateEntry entry in entries)
             {
                 if (!entry.IsRelationship && entry.Entity != null && !(entry.Entity is Audit.DBAudit))
@@ -78,14 +77,14 @@ namespace BCModel
             // set action type
             switch (entry.State)
             {
-                case EntityState.Added:
+                case System.Data.EntityState.Added:
                     audit.ActionType = ActionTypes.I.ToString();
                     break;
-                case EntityState.Modified:
+                case System.Data.EntityState.Modified:
                     audit.ActionType = ActionTypes.U.ToString();
                     audit.Columns = getModifiedColumns(entry);
                     break;
-                case EntityState.Deleted:
+                case System.Data.EntityState.Deleted:
                     audit.ActionType = ActionTypes.D.ToString();
                     break;
                 default:

@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using BCWeb.Web.Attributes;
+
 namespace BCWeb
 {
     public class FilterConfig

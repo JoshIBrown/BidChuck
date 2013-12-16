@@ -66,11 +66,5 @@ namespace BCWeb.Areas.Project.Models.Documents.Repository
         {
             _context.SaveChanges();
         }
-
-
-        public BCModel.UserProfile FindUser(int id)
-        {
-            return _context.UserProfiles.Find(id);
-        }
     }
 }

@@ -30,16 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -246,10 +243,6 @@
     <Compile Include="Migrations\201312110448285_addNotesToProjectDocument.Designer.cs">
       <DependentUpon>201312110448285_addNotesToProjectDocument.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201312141857328_addNameFieldToProjectDoc.cs" />
-    <Compile Include="Migrations\201312141857328_addNameFieldToProjectDoc.Designer.cs">
-      <DependentUpon>201312141857328_addNameFieldToProjectDoc.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\BaseBid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -420,9 +413,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312110448285_addNotesToProjectDocument.resx">
       <DependentUpon>201312110448285_addNotesToProjectDocument.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201312141857328_addNameFieldToProjectDoc.resx">
-      <DependentUpon>201312141857328_addNameFieldToProjectDoc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
