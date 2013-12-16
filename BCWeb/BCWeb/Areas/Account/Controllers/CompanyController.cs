@@ -106,7 +106,7 @@ namespace BCWeb.Areas.Account.Controllers
 
             // fill states and business types
             viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-            //viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
+            viewModel.BusinessTypes = Util.CreateSelectListFromEnum(typeof(BusinessType), raw.BusinessType.ToString());
 
             return View(viewModel);
         }
