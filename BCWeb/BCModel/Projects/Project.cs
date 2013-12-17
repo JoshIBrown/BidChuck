@@ -39,6 +39,12 @@ namespace BCModel.Projects
 
     }
 
+    public enum WalkThruStatus
+    {
+        NoWalkThru = 0,
+        WalkThruTBD = 1,
+        WalkThruIncluded = 2
+    }
     public class Project
     {
         [Key]
@@ -75,6 +81,12 @@ namespace BCModel.Projects
         [Required]
         public DateTime BidDateTime { get; set; }
 
+
+        [Required]
+        public WalkThruStatus WalkThruStatus { get; set; }
+        public DateTime? WalkThruDateTime { get; set; }
+        
+
         public string Address { get; set; }
         [Required]
         public string City { get; set; }
@@ -109,6 +121,7 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual ConstructionType ConstructionType { get; set; }
 
-
+        [IgnoreDataMember]
+        public virtual ICollection<ProjectDocument> ProjectDocuments { get; set; }
     }
 }

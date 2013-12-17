@@ -39,7 +39,7 @@ namespace BCWeb.Areas.Project.Controllers
                     Description = bp.Description,
                     Id = bp.Id,
                     Invited = bp.Invitees == null ? 0 : bp.Invitees.Count(),
-                    Accepted = bp.Invitees == null ? 0: bp.Invitees.Where(i => i.AcceptedDate.HasValue).Count(),
+                    Accepted = bp.Invitees == null ? 0 : bp.Invitees.Where(i => i.AcceptedDate.HasValue).Count(),
                     Declined = bp.Invitees == null ? 0 : bp.Invitees.Where(i => i.RejectedDate.HasValue).Count()
                 });
 
@@ -78,7 +78,6 @@ namespace BCWeb.Areas.Project.Controllers
                                 IsMaster = false,
                                 ProjectId = viewModel.ProjectId,
                                 TemplateBidPackageId = viewModel.TemplateId,
-                                DocLink = viewModel.DocLink,
                                 Notes = viewModel.Notes
                             };
 
@@ -121,7 +120,6 @@ namespace BCWeb.Areas.Project.Controllers
                 BidDateTime = raw.BidDateTime.ToString(),
                 CreatingCompany = raw.CreatedBy.CompanyName,
                 Description = raw.Description,
-                DocLink = raw.DocLink,
                 Id = raw.Id,
                 Notes = raw.Notes,
                 ProjectId = raw.ProjectId,
@@ -139,9 +137,8 @@ namespace BCWeb.Areas.Project.Controllers
             var raw = _service.Get(id);
             EditBidPackageViewModel viewModel = new EditBidPackageViewModel
             {
-                BidDateTime = raw.BidDateTime,
+                //BidDateTime = raw.BidDateTime, // FIXME
                 Description = raw.Description,
-                DocLink = raw.DocLink,
                 Id = raw.Id,
                 Notes = raw.Notes,
                 ProjectId = raw.ProjectId,
@@ -164,17 +161,9 @@ namespace BCWeb.Areas.Project.Controllers
                 {
                     BidPackage toUpdate = _service.Get(viewModel.Id);
 
-                    if (toUpdate.BidDateTime != viewModel.BidDateTime)
-                        toUpdate.BidDateTime = viewModel.BidDateTime;
-
-                    if (toUpdate.Description != viewModel.Description)
-                        toUpdate.Description = viewModel.Description;
-
-                    if (toUpdate.DocLink != viewModel.DocLink)
-                        toUpdate.DocLink = viewModel.DocLink;
-
-                    if (toUpdate.Notes != viewModel.Notes)
-                        toUpdate.Notes = viewModel.Notes;
+                    toUpdate.BidDateTime = viewModel.BidDateTime;
+                    toUpdate.Description = viewModel.Description;
+                    toUpdate.Notes = viewModel.Notes;
 
                     // get scopes that have been added
                     IEnumerable<int> toAdd = viewModel.SelectedScope.Where(s => !toUpdate.Scopes.Select(x => x.ScopeId).Contains(s));

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace BCWeb.Models.Project.ViewModel
 {
-    public class EditProjectViewModel
+    public class ProjectEditModel
     {
         public int Id { get; set; }
         [Required]
@@ -18,6 +18,10 @@ namespace BCWeb.Models.Project.ViewModel
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime BidDateTime { get; set; }
+
+        public DateTime? WalkThruDateTime { get; set; }
+        [Required]
+        public WalkThruStatus? WalkThruStatus { get; set; }
 
         public string Address { get; set; }
 
@@ -43,7 +47,7 @@ namespace BCWeb.Models.Project.ViewModel
         public IEnumerable<SelectListItem> States { get; set; }
         public IEnumerable<SelectListItem> ConstructionTypes { get; set; }
         public IEnumerable<BuildingType> BuildingTypes { get; set; }
-        public IEnumerable<int> SelectedScope { get; set; }
+        public int[] SelectedScope { get; set; }
 
         public int ArchitectId { get; set; }
 

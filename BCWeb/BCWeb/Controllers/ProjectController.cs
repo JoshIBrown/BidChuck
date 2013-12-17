@@ -42,8 +42,9 @@ namespace BCWeb.Controllers
             if (User.IsInRole("architect"))
             {
                 var user = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
-                EditProjectViewModel viewModel = new EditProjectViewModel();
+                ProjectEditModel viewModel = new ProjectEditModel();
                 viewModel.ArchitectId = user.CompanyId;
+                viewModel.Architect = user.Company.CompanyName;
                 rePopViewModel(viewModel);
                 return View("CreateStepTwo", viewModel);
             }
@@ -131,7 +132,7 @@ namespace BCWeb.Controllers
         public ActionResult CreateStepTwo(int architectId, string title, string number)
         {
             string archName = _service.GetCompanyProfile(architectId).CompanyName;
-            EditProjectViewModel viewModel = new EditProjectViewModel();
+            ProjectEditModel viewModel = new ProjectEditModel();
             viewModel.ArchitectId = architectId;
             viewModel.Architect = archName;
             viewModel.Title = title;
@@ -143,7 +144,7 @@ namespace BCWeb.Controllers
         [Authorize(Roles = "general_contractor,architect,Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateStepTwo(EditProjectViewModel viewModel)
+        public ActionResult CreateStepTwo(ProjectEditModel viewModel)
         {
             if (!viewModel.ProjectCategory.HasValue)
                 ModelState.AddModelError("ProjectCategory", "Project Category is required");
@@ -175,7 +176,9 @@ namespace BCWeb.Controllers
                         StateId = viewModel.StateId,
                         Title = viewModel.Title,
                         Scopes = new List<ProjectXScope>(),
-                        BidPackages = new List<BidPackage>()
+                        BidPackages = new List<BidPackage>(),
+                        WalkThruDateTime = viewModel.WalkThruDateTime,
+                        WalkThruStatus = viewModel.WalkThruStatus.Value
                     };
                     // create master bid package
                     BidPackage projectPackage = new BidPackage
@@ -238,13 +241,12 @@ namespace BCWeb.Controllers
             return View("CreateStepTwo", viewModel);
         }
 
-        private void rePopViewModel(EditProjectViewModel viewModel)
+        private void rePopViewModel(ProjectEditModel viewModel)
         {
 
-            viewModel.ProjectTypes = Util.CreateSelectListFromEnum(typeof(ProjectType));
-            viewModel.ProjectCategories = Util.CreateSelectListFromEnum(typeof(ProjectCategory));
+            viewModel.ProjectTypes = Util.CreateSelectListFromEnum(typeof(ProjectType), viewModel.ProjectType.ToString());
+            viewModel.ProjectCategories = Util.CreateSelectListFromEnum(typeof(ProjectCategory), viewModel.ProjectCategory.ToString());
             viewModel.ConstructionTypes = _service.GetConstructionTypes().OrderBy(c => c.Name).Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString(), Selected = c.Id == viewModel.ConstructionTypeId });
-            //viewModel.ProjectTypes = 
             viewModel.States = _service.GetStates().OrderBy(s => s.Abbr).Select(s => new SelectListItem { Text = s.Abbr, Value = s.Id.ToString(), Selected = s.Id == viewModel.StateId });
             viewModel.BuildingTypes = _service.GetBuildingTypes();
         }
@@ -265,7 +267,7 @@ namespace BCWeb.Controllers
                 IEnumerable<Invitation> invites = _service.GetRcvdInvitations(theProject.Id, user.CompanyId);
 
 
-                Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.ToShortDateString());
+                //Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.ToShortDateString()); //FIXME
                 Dictionary<int, IEnumerable<int>> scopeselection = _service.GetInvitationScopesByInvitingCompany(theProject.Id, user.CompanyId);
                 Dictionary<int, string> inviters = _service.GetInvitatingCompanies(theProject.Id, user.CompanyId);
                 Dictionary<int, string> scopes = _service.GetInvitationScopes(theProject.Id, user.CompanyId);
@@ -288,8 +290,8 @@ namespace BCWeb.Controllers
                     Title = theProject.Title,
                     Inviters = inviters,
                     Scopes = scopes,
-                    ScopeSelection = scopeselection,
-                    BidDate = bidDates
+                    ScopeSelection = scopeselection //,
+                    //BidDate = bidDates // FIXME
                 };
                 // get distinct list of scopes
 
@@ -299,7 +301,7 @@ namespace BCWeb.Controllers
             // else user is not a sub or material vendor
             BidPackage masterBP = _service.GetMasterBidPackage(id);
 
-            BPProjectDetailsViewModel gcViewModel = new BPProjectDetailsViewModel
+            ProjectViewModel gcViewModel = new ProjectViewModel
             {
                 Address = theProject.Address,
                 Architect = theProject.Architect.CompanyName,
@@ -369,7 +371,7 @@ namespace BCWeb.Controllers
         public ActionResult Edit(int id)
         {
             var raw = _service.Get(id);
-            EditProjectViewModel viewModel = new EditProjectViewModel
+            ProjectEditModel viewModel = new ProjectEditModel
             {
                 Architect = raw.Architect.CompanyName,
                 ArchitectId = raw.ArchitectId,
@@ -383,12 +385,11 @@ namespace BCWeb.Controllers
                 PostalCode = raw.PostalCode,
                 StateId = raw.StateId,
                 Title = raw.Title,
+                WalkThruDateTime = raw.WalkThruDateTime,
+                WalkThruStatus = raw.WalkThruStatus,
                 Number = raw.Number
             };
-            viewModel.SelectedScope = raw.Scopes.Select(x => x.ScopeId).ToList();
-            viewModel.States = _service.GetStates().OrderBy(s => s.Abbr).Select(s => new SelectListItem { Text = s.Abbr, Value = s.Id.ToString(), Selected = s.Id == viewModel.StateId });
-            viewModel.BuildingTypes = _service.GetBuildingTypes();
-            viewModel.ConstructionTypes = _service.GetConstructionTypes().OrderBy(c => c.Name).Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString(), Selected = c.Id == viewModel.ConstructionTypeId });
+            rePopViewModel(viewModel);
             return View("Edit", viewModel);
         }
 
@@ -397,7 +398,7 @@ namespace BCWeb.Controllers
         [Authorize(Roles = "architect,general_contractor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(EditProjectViewModel viewModel)
+        public ActionResult Edit(ProjectEditModel viewModel)
         {
             if (!viewModel.ProjectCategory.HasValue)
                 ModelState.AddModelError("ProjectCategory", "Project Category is required");
@@ -415,41 +416,21 @@ namespace BCWeb.Controllers
                     Project toUpdate = _service.Get(viewModel.Id);
 
                     // update project attributes
-                    if (toUpdate.Title != viewModel.Title)
-                        toUpdate.Title = viewModel.Title;
 
-                    if (toUpdate.Description != viewModel.Description)
-                        toUpdate.Description = viewModel.Description;
-
-                    if (toUpdate.Address != viewModel.Address)
-                        toUpdate.Address = viewModel.Address;
-
-                    if (toUpdate.BidDateTime != viewModel.BidDateTime)
-                        toUpdate.BidDateTime = viewModel.BidDateTime;
-
-                    if (toUpdate.BuildingTypeId != viewModel.BuildingTypeId)
-                        toUpdate.BuildingTypeId = viewModel.BuildingTypeId;
-
-                    if (toUpdate.City != viewModel.City)
-                        toUpdate.City = viewModel.City;
-
-                    if (toUpdate.ConstructionTypeId != viewModel.ConstructionTypeId)
-                        toUpdate.ConstructionTypeId = viewModel.ConstructionTypeId;
-
-                    if (toUpdate.PostalCode != viewModel.PostalCode)
-                        toUpdate.PostalCode = viewModel.PostalCode;
-
-                    if (toUpdate.ProjectType != viewModel.ProjectType.Value)
-                        toUpdate.ProjectType = viewModel.ProjectType.Value;
-
-                    if (toUpdate.ProjectCategory != viewModel.ProjectCategory.Value)
-                        toUpdate.ProjectCategory = viewModel.ProjectCategory.Value;
-
-                    if (toUpdate.StateId != viewModel.StateId)
-                        toUpdate.StateId = viewModel.StateId;
-
-                    if (toUpdate.Number != viewModel.Number)
-                        toUpdate.Number = viewModel.Number;
+                    toUpdate.Title = viewModel.Title;
+                    toUpdate.Description = viewModel.Description;
+                    toUpdate.Address = viewModel.Address;
+                    toUpdate.BidDateTime = viewModel.BidDateTime;
+                    toUpdate.WalkThruDateTime = viewModel.WalkThruDateTime;
+                    toUpdate.WalkThruStatus = viewModel.WalkThruStatus.Value;
+                    toUpdate.BuildingTypeId = viewModel.BuildingTypeId;
+                    toUpdate.City = viewModel.City;
+                    toUpdate.ConstructionTypeId = viewModel.ConstructionTypeId;
+                    toUpdate.PostalCode = viewModel.PostalCode;
+                    toUpdate.ProjectType = viewModel.ProjectType.Value;
+                    toUpdate.ProjectCategory = viewModel.ProjectCategory.Value;
+                    toUpdate.StateId = viewModel.StateId;
+                    toUpdate.Number = viewModel.Number;
 
                     // update primary bid package
                     var ProjectPackage = toUpdate.BidPackages.Where(b => b.IsMaster).FirstOrDefault();

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BCWeb.Models.Project.ViewModel
 {
-    public class BPProjectDetailsViewModel
+    public class ProjectViewModel
     {
         public int ProjectId { get; set; }
         public int BidPackageId { get; set; }
@@ -26,6 +26,8 @@ namespace BCWeb.Models.Project.ViewModel
 
         [Display(Name = "Bid Date/Time")]
         public DateTime BidDateTime { get; set; }
+
+        public string WalkThruDate { get; set; }
 
         public string Address { get; set; }
 

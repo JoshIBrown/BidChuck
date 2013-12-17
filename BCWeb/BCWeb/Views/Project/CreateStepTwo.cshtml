@@ -1,4 +1,4 @@
-﻿@model BCWeb.Models.Project.ViewModel.EditProjectViewModel
+﻿@model BCWeb.Models.Project.ViewModel.ProjectEditModel
 @using BCWeb.Helpers
 
 @{
@@ -12,7 +12,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="large-12 columns large-centered" ng-controller="CreateProjectCtrl">
+    <div class="large-12 columns large-centered" ng-controller="ProjectCtrl">
         @**FIXME: when submitting step two it's looking for a dupe check view model *@
         @using (Html.BeginRouteForm("Default", new { controller = "Project", action = "CreateStepTwo" }, FormMethod.Post))
         {

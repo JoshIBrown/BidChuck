@@ -223,6 +223,14 @@
     <Compile Include="Migrations\201312161808324_addIpAddressToAuditTrail.Designer.cs">
       <DependentUpon>201312161808324_addIpAddressToAuditTrail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312161857043_addWalkThruToProject.cs" />
+    <Compile Include="Migrations\201312161857043_addWalkThruToProject.Designer.cs">
+      <DependentUpon>201312161857043_addWalkThruToProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312162350291_changeWalkThruStatusToEnum.cs" />
+    <Compile Include="Migrations\201312162350291_changeWalkThruStatusToEnum.Designer.cs">
+      <DependentUpon>201312162350291_changeWalkThruStatusToEnum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\BaseBid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -232,6 +240,7 @@
     <Compile Include="Projects\Invitation.cs" />
     <Compile Include="Projects\ConstructionType.cs" />
     <Compile Include="Projects\Project.cs" />
+    <Compile Include="Projects\ProjectDocument.cs" />
     <Compile Include="Projects\ProjectXScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
@@ -377,6 +386,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312161808324_addIpAddressToAuditTrail.resx">
       <DependentUpon>201312161808324_addIpAddressToAuditTrail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312161857043_addWalkThruToProject.resx">
+      <DependentUpon>201312161857043_addWalkThruToProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312162350291_changeWalkThruStatusToEnum.resx">
+      <DependentUpon>201312162350291_changeWalkThruStatusToEnum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

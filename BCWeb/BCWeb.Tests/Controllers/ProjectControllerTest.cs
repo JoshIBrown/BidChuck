@@ -40,7 +40,7 @@ namespace BCWeb.Tests.Controllers
         {
             // arrange
             UserProfile theUser = new UserProfile { UserId = 1, CompanyId = 1 };
-            
+
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
             service.Setup(s => s.GetUserProfile(1)).Returns(theUser);
 
@@ -196,8 +196,8 @@ namespace BCWeb.Tests.Controllers
         public void Post_CreateStepTwo_ValidProject_RedirectsTo_Details()
         {
             // arrange
-            EditProjectViewModel viewModel = new EditProjectViewModel();
-            viewModel.SelectedScope = new List<int>();
+            ProjectEditModel viewModel = new ProjectEditModel();
+            viewModel.SelectedScope = new int[0];
 
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
             service.Setup(s => s.Create(It.IsAny<BCModel.Projects.Project>())).Returns(true);
@@ -231,8 +231,8 @@ namespace BCWeb.Tests.Controllers
         public void PostCreateStepTwoProjectValidationFailReturnsModelStateErrors()
         {
             // arrange
-            EditProjectViewModel viewModel = new EditProjectViewModel();
-            viewModel.SelectedScope = new List<int>();
+            ProjectEditModel viewModel = new ProjectEditModel();
+            viewModel.SelectedScope = new int[0];
 
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
             service.Setup(s => s.Create(It.IsAny<BCModel.Projects.Project>())).Returns(false);
@@ -269,8 +269,8 @@ namespace BCWeb.Tests.Controllers
         public void PostCreateStepTwoProjectThrowsExceptionReturnsModelStateErrors()
         {
             // arrange
-            EditProjectViewModel viewModel = new EditProjectViewModel();
-            viewModel.SelectedScope = new List<int>();
+            ProjectEditModel viewModel = new ProjectEditModel();
+            viewModel.SelectedScope = new int[0];
 
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
             service.Setup(s => s.Create(It.IsAny<BCModel.Projects.Project>())).Throws(new Exception("something broke"));
@@ -306,8 +306,8 @@ namespace BCWeb.Tests.Controllers
         public void PostEditValidProjectRedirectsToDetails()
         {
             // arrange
-            EditProjectViewModel viewModel = new EditProjectViewModel { Id = 1, PostalCode = "98008" };
-            viewModel.SelectedScope = new List<int>();
+            ProjectEditModel viewModel = new ProjectEditModel { Id = 1, PostalCode = "98008" };
+            viewModel.SelectedScope = new int[0];
             Project aProject = new Project
             {
                 Id = 1,
