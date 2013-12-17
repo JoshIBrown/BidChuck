@@ -38,8 +38,7 @@ namespace BCModel.Projects
 
         public bool UseProjectWalkThruDateTime { get; set; }
         public DateTime? WalkThruDateTime { get; set; }
-        public bool NoWalkThru { get; set; }
-        public bool WalkThruTBD { get; set; }
+        public WalkThruStatus WalkThruStatus { get; set; }
 
 
         [Required]

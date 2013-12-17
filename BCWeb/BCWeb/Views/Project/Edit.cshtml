@@ -25,5 +25,9 @@
 </div>
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/editproject")
+    @Scripts.Render("~/Scripts/angular/angular.js",
+                "~/Scripts/moment.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/directives/bcweb.angular.ScopePicker.js",
+                "~/Scripts/angular/controllers/EditProjectCtrl.js")
 }

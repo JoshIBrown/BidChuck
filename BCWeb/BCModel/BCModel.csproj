@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201312162350291_changeWalkThruStatusToEnum.Designer.cs">
       <DependentUpon>201312162350291_changeWalkThruStatusToEnum.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312170855450_addWalkThruStatusToBidPackage.cs" />
+    <Compile Include="Migrations\201312170855450_addWalkThruStatusToBidPackage.Designer.cs">
+      <DependentUpon>201312170855450_addWalkThruStatusToBidPackage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\BaseBid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -392,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312162350291_changeWalkThruStatusToEnum.resx">
       <DependentUpon>201312162350291_changeWalkThruStatusToEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312170855450_addWalkThruStatusToBidPackage.resx">
+      <DependentUpon>201312170855450_addWalkThruStatusToBidPackage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
