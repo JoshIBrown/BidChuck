@@ -9,7 +9,7 @@
             $http.post('/api/Invitation/PostAccept/?bidPackageId=' + $scope.bidPackageId, null, {
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: '__RequestVerificationToken',
-                headers: { "X-XSRF-Token": $scope.token }
+                headers: { "X-XSRF-Token": $scope.token, "X-Requested-With": "XMLHttpRequest" }
             })
                 .success(function (result) {
                     // change buttons so that only decline is showing
@@ -27,7 +27,7 @@
             $http.post('/api/Invitation/PostDecline/?bidPackageId=' + $scope.bidPackageId, null, {
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: '__RequestVerificationToken',
-                headers: { "X-XSRF-Token": $scope.token }
+                headers: { "X-XSRF-Token": $scope.token, "X-Requested-With": "XMLHttpRequest" }
             })
                 .success(function (result) {
                     // change buttons so that only Accept is showing
@@ -46,7 +46,7 @@
                 {
                     xsrfHeaderName: "X-XSRF-Token",
                     xsrfCookieName: '__RequestVerificationToken',
-                    headers: { "X-XSRF-Token": $scope.token }
+                    headers: { "X-XSRF-Token": $scope.token, "X-Requested-With": "XMLHttpRequest" }
                 })
             .success(function (result) {
                 // change buttons so that only leave is showing
@@ -65,7 +65,7 @@
                 {
                     xsrfHeaderName: "X-XSRF-Token",
                     xsrfCookieName: "__RequestVerificationToken",
-                    headers: { "X-XSRF-Token": $scope.token }
+                    headers: { "X-XSRF-Token": $scope.token, "X-Requested-With": "XMLHttpRequest" }
                 })
             .success(function (result) {
                 // change buttons so that only join is showing

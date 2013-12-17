@@ -106,7 +106,7 @@ namespace BCWeb.Areas.Account.Controllers
 
             // fill states and business types
             viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-            //viewModel.BusinessTypes = _serviceLayer.GetBusinessTypes().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString(), Selected = x.Id == viewModel.BusinessTypeId });
+            viewModel.BusinessTypes = Util.CreateSelectListFromEnum(typeof(BusinessType), raw.BusinessType.ToString());
 
             return View(viewModel);
         }
@@ -158,7 +158,7 @@ namespace BCWeb.Areas.Account.Controllers
 
 
                     // add new role for all users in company
-                    switch (viewModel.BusinessType)
+                    switch (viewModel.BusinessType.Value)
                     {
                         case BusinessType.GeneralContractor:
                             _security.AddUsersToRole(company.Users.Select(x => x.Email).ToArray(), "general_contractor");
@@ -217,7 +217,7 @@ namespace BCWeb.Areas.Account.Controllers
                     };
 
                     // update company business type
-                    company.BusinessType = viewModel.BusinessType;
+                    company.BusinessType = viewModel.BusinessType.Value;
                 }
 
 

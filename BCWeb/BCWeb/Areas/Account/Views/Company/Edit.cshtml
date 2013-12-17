@@ -69,7 +69,7 @@
                     </div>
                     <div class="large-4 columns">
                         @Html.LabelFor(m => m.BusinessType)
-                        @Html.DropDownListFor(m => m.BusinessType, new { @class = "pretty" })
+                        @Html.DropDownListFor(m => m.BusinessType, Model.BusinessTypes, "Select...", new { @class = "pretty" })
                     </div>
                     <div class="large-4 columns">
                         @Html.LabelFor(m => m.OperatingDistance)
