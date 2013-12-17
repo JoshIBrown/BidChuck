@@ -312,5 +312,9 @@ namespace BCWeb.Models.Project.ServiceLayer
         }
 
 
+        public IEnumerable<ProjectDocument> GetDocuments(int projectId, int companyId)
+        {
+            return _repo.QueryDocuments().Where(d => d.ProjectId == projectId && d.CompanyId == companyId).AsEnumerable();
+        }
     }
 }

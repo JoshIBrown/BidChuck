@@ -1,4 +1,5 @@
 ﻿using BCModel.Projects;
+using BCWeb.Areas.Project.Models.Documents.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,7 +26,7 @@ namespace BCWeb.Models.Project.ViewModel
         public string Description { get; set; }
 
         [Display(Name = "Bid Date/Time")]
-        public DateTime BidDateTime { get; set; }
+        public string BidDateTime { get; set; }
 
         public string WalkThruDate { get; set; }
 
@@ -51,6 +52,8 @@ namespace BCWeb.Models.Project.ViewModel
 
         [Display(Name = "Selected Scopes")]
         public IEnumerable<ProjectScopeListItem> SelectedScope { get; set; }
+
+        public IEnumerable<ProjectDocListItem> ProjectDocs { get; set; }
 
         public InvitationType? InviteType { get; set; }
 

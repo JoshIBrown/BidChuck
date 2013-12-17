@@ -17,7 +17,7 @@ namespace BCWeb.Areas.Project
             context.MapRoute(
                 "Project_default",
                 "Project/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }, new { controller = @"BidPackage|Invitation|Bid" }
+                new { action = "Index", id = UrlParameter.Optional }, new { controller = @"BidPackage|Invitation|Bid|Document" }
             );
         }
     }

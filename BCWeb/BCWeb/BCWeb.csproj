@@ -235,6 +235,7 @@
     <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
     <Compile Include="Areas\Project\Controllers\BidController.cs" />
     <Compile Include="Areas\Project\Controllers\BidPackageController.cs" />
+    <Compile Include="Areas\Project\Controllers\DocumentController.cs" />
     <Compile Include="Areas\Project\Controllers\InvitationController.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\Repository\BidPackageRepository.cs" />
     <Compile Include="Areas\Project\Models\BidPackage\Repository\IBidPackageRepository.cs" />
@@ -259,6 +260,13 @@
     <Compile Include="Areas\Project\Models\Bids\ViewModel\ReceivedBidViewModel.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\SubVendBidViewModel.cs" />
     <Compile Include="Areas\Project\Models\Bids\ViewModel\SVBidEditModel.cs" />
+    <Compile Include="Areas\Project\Models\Documents\Repository\IProjectDocRepository.cs" />
+    <Compile Include="Areas\Project\Models\Documents\Repository\ProjectDocRepository.cs" />
+    <Compile Include="Areas\Project\Models\Documents\ServiceLayer\IProjectDocServiceLayer.cs" />
+    <Compile Include="Areas\Project\Models\Documents\ServiceLayer\ProjectDocServiceLayer.cs" />
+    <Compile Include="Areas\Project\Models\Documents\ViewModel\ProjectDocEditModel.cs" />
+    <Compile Include="Areas\Project\Models\Documents\ViewModel\ProjectDocListItem.cs" />
+    <Compile Include="Areas\Project\Models\Documents\ViewModel\ProjectDocViewModel.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\IInvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\Repository\InvitationRepository.cs" />
     <Compile Include="Areas\Project\Models\Invitations\ServiceLayer\IInvitationServiceLayer.cs" />
@@ -783,6 +791,10 @@
     <Content Include="Areas\Admin\Views\User\EditorTemplates\UserProfileEditModel.cshtml" />
     <Content Include="Areas\Admin\Views\Company\EditorTemplates\CompanyProfileEditModel.cshtml" />
     <Content Include="Areas\Admin\Views\Project\Create.cshtml" />
+    <Content Include="Areas\Project\Views\Document\Create.cshtml" />
+    <Content Include="Areas\Project\Views\Document\Details.cshtml" />
+    <Content Include="Areas\Project\Views\Document\Edit.cshtml" />
+    <Content Include="Areas\Project\Views\Document\EditorTemplates\ProjectDocEditModel.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />

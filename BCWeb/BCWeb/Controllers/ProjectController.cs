@@ -1,5 +1,6 @@
 ﻿using BCModel;
 using BCModel.Projects;
+using BCWeb.Areas.Project.Models.Documents.ViewModel;
 using BCWeb.Helpers;
 using BCWeb.Models;
 using BCWeb.Models.Project.ServiceLayer;
@@ -300,6 +301,14 @@ namespace BCWeb.Controllers
 
             // else user is not a sub or material vendor
             BidPackage masterBP = _service.GetMasterBidPackage(id);
+            IEnumerable<ProjectDocListItem> docs = _service.GetDocuments(id, user.CompanyId)
+                .Select(d => new ProjectDocListItem
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Notes = d.Notes,
+                    Url = d.Url
+                });
 
             ProjectViewModel gcViewModel = new ProjectViewModel
             {
@@ -307,7 +316,7 @@ namespace BCWeb.Controllers
                 Architect = theProject.Architect.CompanyName,
                 Number = theProject.Number,
                 Owner = theProject.ClientId.HasValue ? theProject.Client.CompanyName : "",
-                BidDateTime = theProject.BidDateTime,
+                BidDateTime = theProject.BidDateTime.ToString("MM/dd/yyyy hh:mm tt"),
                 BuildingType = theProject.BuildingType.Name,
                 City = theProject.City,
                 ConstructionType = theProject.ConstructionType.Name,
@@ -317,8 +326,14 @@ namespace BCWeb.Controllers
                 PostalCode = theProject.PostalCode,
                 ProjectType = theProject.ProjectType.ToDescription(),
                 State = theProject.State.Abbr,
-                Title = theProject.Title
+                Title = theProject.Title,
+                WalkThruDate = theProject.WalkThruStatus == WalkThruStatus.WalkThruIncluded && theProject.WalkThruDateTime.HasValue ? theProject.WalkThruDateTime.Value.ToString("MM/dd/yyyy hh:mm tt") : theProject.WalkThruStatus.ToString()
             };
+
+            if (docs != null)
+            {
+                gcViewModel.ProjectDocs = docs;
+            }
 
             gcViewModel.SelectedScope = masterBP.Scopes
                 .Select(s => new ProjectScopeListItem
