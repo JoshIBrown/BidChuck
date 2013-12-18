@@ -57,6 +57,7 @@ namespace BCWeb.Areas.Project.Controllers
             EditBidPackageViewModel viewModel = new EditBidPackageViewModel();
             viewModel.ProjectId = projectId;
             viewModel.TemplateId = templateId;
+            viewModel.BidDateTime = DateTime.Now;
             return View("Create", viewModel);
         }
 

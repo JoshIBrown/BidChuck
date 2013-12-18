@@ -101,6 +101,15 @@
                                 <td ng-repeat="bp in myData.BidPackages">{{bp.BidDateTime | ReadableTimeStamp}}</td>
                             </tr>
                             <tr>
+                                <th>Documents
+                                </th>
+                                <td ng-repeat="bp in myData.BidPackages">
+                                    <ul>
+                                        <li ng-repeat="dd in bp.ProjectDocs"><a href="/Project/Document/Details/{{dd.Id}}">{{dd.Name}}</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Response</th>
                                 <td ng-repeat="bp in myData.BidPackages">
                                     <span ng-show="bp.InviteResponse==true">Accepted</span><span ng-show="bp.InviteResponse==false">Declined</span>

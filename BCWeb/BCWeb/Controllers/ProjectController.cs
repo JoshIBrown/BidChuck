@@ -46,6 +46,7 @@ namespace BCWeb.Controllers
                 ProjectEditModel viewModel = new ProjectEditModel();
                 viewModel.ArchitectId = user.CompanyId;
                 viewModel.Architect = user.Company.CompanyName;
+                viewModel.BidDateTime = DateTime.Now;
                 rePopViewModel(viewModel);
                 return View("CreateStepTwo", viewModel);
             }
@@ -138,6 +139,7 @@ namespace BCWeb.Controllers
             viewModel.Architect = archName;
             viewModel.Title = title;
             viewModel.Number = number;
+            viewModel.BidDateTime = DateTime.Now;
             rePopViewModel(viewModel);
             return View("CreateStepTwo", viewModel);
         }
@@ -268,11 +270,11 @@ namespace BCWeb.Controllers
                 IEnumerable<Invitation> invites = _service.GetRcvdInvitations(theProject.Id, user.CompanyId);
 
 
-                //Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.ToShortDateString()); //FIXME
+                Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.HasValue ? i.BidPackage.BidDateTime.Value.ToString("MM/dd/yyyy hh:mm tt") : "none"); //FIXME
                 Dictionary<int, IEnumerable<int>> scopeselection = _service.GetInvitationScopesByInvitingCompany(theProject.Id, user.CompanyId);
                 Dictionary<int, string> inviters = _service.GetInvitatingCompanies(theProject.Id, user.CompanyId);
                 Dictionary<int, string> scopes = _service.GetInvitationScopes(theProject.Id, user.CompanyId);
-                Dictionary<int, bool?> inviteResponses = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.AcceptedDate.HasValue ? true : i.RejectedDate.HasValue ? false : default(bool?));
+                Dictionary<int, bool?> inviteResponses = invites.Distinct().ToDictionary(i => i.BidPackage.CreatedById, i => i.AcceptedDate.HasValue ? true : i.RejectedDate.HasValue ? false : default(bool?));
 
                 SubsAndVendProjectDetailsViewModel sAndVViewModel = new SubsAndVendProjectDetailsViewModel
                 {
@@ -291,8 +293,8 @@ namespace BCWeb.Controllers
                     Title = theProject.Title,
                     Inviters = inviters,
                     Scopes = scopes,
-                    ScopeSelection = scopeselection //,
-                    //BidDate = bidDates // FIXME
+                    ScopeSelection = scopeselection,
+                    BidDate = bidDates // FIXME
                 };
                 // get distinct list of scopes
 

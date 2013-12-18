@@ -32,7 +32,8 @@
             @Html.DisplayNameFor(model => model.Url)
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.Url)
+            <a href="@Model.Url">@Model.Url</a>
+        
         </div>
 
         <div class="display-label">
@@ -45,7 +46,10 @@
 
     </fieldset>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @if (User.IsInRole("general_contractor"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        } 
     @Html.RouteLink("Back to Project", "Default", new { controller = "Project", action = "Details", id = Model.ProjectId })
     </p>
 </div>

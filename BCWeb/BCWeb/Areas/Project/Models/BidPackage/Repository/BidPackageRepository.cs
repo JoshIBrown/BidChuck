@@ -51,7 +51,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.Repository
 
         public IQueryable<BCModel.Projects.Invitation> QueryInvites()
         {
-            return _invites.Include(i => i.SentTo);
+            return _invites.Include(i => i.SentTo).Include(i => i.BidPackage.Project).Include(i => i.BidPackage.Project.ProjectDocuments);
         }
 
         public IQueryable<BCModel.CompanyProfile> QueryCompanies()

@@ -254,7 +254,7 @@ namespace BCWeb.Models.Project.ServiceLayer
                           join b in _repo.QueryBidPackages() on i.BidPackageId equals b.Id
                           where b.ProjectId == projectId
                           && i.SentToId == invitedCompanyId
-                          select new { b.CreatedById, b.CreatedBy.CompanyName }).ToDictionary(x => x.CreatedById, y => y.CompanyName);
+                          select new { b.CreatedById, b.CreatedBy.CompanyName }).Distinct().ToDictionary(x => x.CreatedById, y => y.CompanyName);
 
             return output;
         }

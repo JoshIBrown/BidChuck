@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace BCWeb.Areas.Project.Controllers
 {
-    [Authorize]
+    [Authorize, HandleError]
     public class DocumentController : Controller
     {
 
@@ -49,11 +49,13 @@ namespace BCWeb.Areas.Project.Controllers
         [HttpPost, ValidateAntiForgeryToken, HandleError]
         public ActionResult Create(ProjectDocEditModel viewModel)
         {
+            UserProfile theUser = _service.GetUser(_security.GetUserId(User.Identity.Name));
+
             if (ModelState.IsValid)
             {
                 ProjectDocument toCreate = new ProjectDocument
                 {
-                    CompanyId = viewModel.CompanyId,
+                    CompanyId = theUser.CompanyId,
                     Name = viewModel.Name,
                     Notes = viewModel.Notes,
                     ProjectId = viewModel.ProjectId,
@@ -76,6 +78,14 @@ namespace BCWeb.Areas.Project.Controllers
         public ActionResult Details(int id)
         {
             ProjectDocument doc = _service.Get(id);
+
+            UserProfile theUser = _service.GetUser(_security.GetUserId(User.Identity.Name));
+
+            if (doc.CompanyId != theUser.CompanyId && _security.IsUserInRole("general_contractor"))
+            {
+                throw new HttpException(403, "this is not your document");
+            }
+
             ProjectDocViewModel viewModel = new ProjectDocViewModel
             {
                 Id = doc.Id,
@@ -88,9 +98,17 @@ namespace BCWeb.Areas.Project.Controllers
             return View(viewModel);
         }
 
+        [HandleError]
         public ActionResult Edit(int id)
         {
             ProjectDocument doc = _service.Get(id);
+            UserProfile theUser = _service.GetUser(_security.GetUserId(User.Identity.Name));
+
+            if (doc.CompanyId != theUser.CompanyId)
+            {
+                throw new HttpException(403, "this is not your document");
+            }
+
             ProjectDocEditModel viewModel = new ProjectDocEditModel
             {
                 CompanyId = doc.CompanyId,
@@ -107,9 +125,16 @@ namespace BCWeb.Areas.Project.Controllers
         [HttpPost, ValidateAntiForgeryToken, HandleError]
         public ActionResult Edit(ProjectDocEditModel viewModel)
         {
+
             if (ModelState.IsValid)
             {
+                UserProfile theUser = _service.GetUser(_security.GetUserId(User.Identity.Name));
                 ProjectDocument toUpdate = _service.Get(viewModel.Id);
+
+                if (theUser.CompanyId != toUpdate.CompanyId)
+                {
+                    throw new HttpException(403, "this is not your document");
+                }
 
                 toUpdate.Notes = viewModel.Notes;
                 toUpdate.Name = viewModel.Name;

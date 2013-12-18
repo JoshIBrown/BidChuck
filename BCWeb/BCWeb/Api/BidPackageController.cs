@@ -1,6 +1,7 @@
 ﻿using BCModel.Projects;
 using BCWeb.Areas.Project.Models.BidPackage.ServiceLayer;
 using BCWeb.Areas.Project.Models.BidPackage.ViewModel;
+using BCWeb.Areas.Project.Models.Documents.ViewModel;
 using BCWeb.Models;
 using BCWeb.Models.GenericViewModel;
 using System;
@@ -32,7 +33,7 @@ namespace BCWeb.Api
             return packages;
         }
 
-        
+
         public SubAndVendBidPackageAngularModel GetInvitedPackagesForProject(int projectId)
         {
             int companyId = _service.GetUser(_security.GetUserId(User.Identity.Name)).CompanyId;
@@ -42,12 +43,13 @@ namespace BCWeb.Api
             viewModel.BidPackages = _service.GetEnumerableByProjectAndInvitedCompany(projectId, companyId)
                 .Select(x => new SubAndVendBidPackageListItem
                 {
-                    //BidDateTime = x.BidDateTime, // FIXME
+                    BidDateTime = x.BidDateTime.HasValue ? x.BidDateTime.Value.ToString() : "none", // FIXME
                     BidPackageId = x.Id,
                     InviteResponse = x.Invitees.Where(i => i.SentToId == companyId).FirstOrDefault().AcceptedDate.HasValue ? true : x.Invitees.Where(i => i.SentToId == companyId).FirstOrDefault().RejectedDate.HasValue ? false : default(bool?),
                     InvitingCompanyId = x.CreatedById,
                     InvitingCompanyName = x.CreatedBy.CompanyName,
-                    SelectedScopes = x.Scopes.Select(s => s.ScopeId).ToArray()
+                    SelectedScopes = x.Scopes.Select(s => s.ScopeId).ToArray(),
+                    ProjectDocs = x.Project.ProjectDocuments.Where(p => p.CompanyId == x.CreatedById).AsEnumerable().Select(d => new ProjectDocLookupItem { Name = d.Name, Id = d.Id })
                 }).ToArray();
 
             viewModel.Scopes = _service.GetInvitationScopes(projectId, companyId).ToArray();
