@@ -90,14 +90,18 @@ namespace BCWeb
 
             #region Bid Packages
             bundles.Add(new ScriptBundle("~/bundles/bidpackagecreate").Include(
+                "~/Scripts/moment.js",
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/directives/bcweb.angular.ScopePicker.js",
                 "~/Scripts/angular/controllers/CreateBidPackageCtrl.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/bidpackageedit").Include(
+                "~/Scripts/moment.js",
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/directives/bcweb.angular.ScopePicker.js",
                 "~/Scripts/angular/controllers/EditBidPackageCtrl.js"
                 ));
 

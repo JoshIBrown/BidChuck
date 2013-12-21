@@ -10,7 +10,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ViewModel
         public int Id { get; set; }
         public int ProjectId { get; set; }
         public string Description { get; set; }
-        public IEnumerable<int> SelectedScope { get; set; }
+        public int[] SelectedScope { get; set; }
         public DateTime BidDateTime { get; set; }
         public DateTime? WalkThroughDateTime { get; set; }
         public string Notes { get; set; }

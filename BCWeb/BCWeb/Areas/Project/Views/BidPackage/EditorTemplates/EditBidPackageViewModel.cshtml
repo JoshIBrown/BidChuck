@@ -14,7 +14,16 @@
         @Html.LabelFor(m => m.Notes)
         @Html.TextAreaFor(m => m.Notes)
     </div>
-    <div class="large-8 columns left">
-        @Html.Partial("_ScopePicker")
+    <div class="large-12 columns left">
+        @if (Model.SelectedScope != null)
+        {
+            <div style="display: none;" id="passBackScopes">
+                @for (int s = 0; s < Model.SelectedScope.Count(); s++)
+                {
+                    @Html.HiddenFor(m => m.SelectedScope[s])
+                }
+            </div>
+        }
+        <csi-scope-picker service-url="theServiceUrl" selected-scopes="passBackSelection"></csi-scope-picker>
     </div>
 </div>
