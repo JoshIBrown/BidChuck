@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201312212338196_makeWalkThruStatusNullable.Designer.cs">
       <DependentUpon>201312212338196_makeWalkThruStatusNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312220410021_addLatLongToProjectAndCompany.cs" />
+    <Compile Include="Migrations\201312220410021_addLatLongToProjectAndCompany.Designer.cs">
+      <DependentUpon>201312220410021_addLatLongToProjectAndCompany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Projects\BaseBid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
@@ -406,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312212338196_makeWalkThruStatusNullable.resx">
       <DependentUpon>201312212338196_makeWalkThruStatusNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312220410021_addLatLongToProjectAndCompany.resx">
+      <DependentUpon>201312220410021_addLatLongToProjectAndCompany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
