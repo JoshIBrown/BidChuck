@@ -33,68 +33,66 @@
 
 <div class="row">
 
-
-    <fieldset class="large-3 columns left">
-        <legend>Bid Deadline</legend>
-        @Html.HiddenFor(m => m.BidDateTime)
-        <div class="row collapse">
-            <div class="large-8 small-8 columns ">
-                <input type="text" id="BidDateTB" name="BidDateTB" />
-            </div>
-            <div class="large-4 small-4 columns">
-                <span class="postfix">Date</span>
-            </div>
-        </div>
-        <div class="row collapse">
-            <div class="large-8 small-8 columns">
-                <input type="text" id="BidTimeTB" name="BidTimeTB" />
-            </div>
-            <div class="large-4 small-4 columns">
-                <span class="postfix">Time</span>
-            </div>
-        </div>
-    </fieldset>
-
-
-
-    <fieldset class="large-4 columns left">
-        <legend>Walk Though</legend>
-        @Html.HiddenFor(m => m.WalkThruDateTime)
-        <div class="row">
-            <div class="large-3 columns">
-                <label>
-                    @Html.RadioButtonFor(m => m.WalkThruStatus, BCModel.Projects.WalkThruStatus.NoWalkThru, new { ng_model = "walkThru" })
-                    None</label>
-                <label>
-                    @Html.RadioButtonFor(m => m.WalkThruStatus, BCModel.Projects.WalkThruStatus.WalkThruTBD, new { ng_model = "walkThru" })
-                    TBD</label>
-                <label>
-                    @Html.RadioButtonFor(m => m.WalkThruStatus, BCModel.Projects.WalkThruStatus.WalkThruIncluded, new { ng_model = "walkThru" })
-                    Yes</label>
-            </div>
-
-            <div class="large-9 columns">
-                <div class="row collapse">
-                    <div class="large-8 small-8 columns">
-                        <input type="text" id="WalkThruDateTB" name="WalkThruDateTB" ng-model="WalkThruDateTB" ng-disabled="!(walkThru=='WalkThruIncluded')" />
-                    </div>
-                    <div class="large-4 small-4 columns"><span class="postfix">Date</span></div>
+    <div class="large-12 columns">
+        <fieldset class="large-3 columns left">
+            <legend>Bid Deadline</legend>
+            @Html.HiddenFor(m => m.BidDateTime)
+            <div class="row collapse">
+                <div class="large-8 small-8 columns ">
+                    <input type="text" id="BidDateTB" name="BidDateTB" />
                 </div>
-                <div class="row collapse">
-                    <div class="large-8 small-8 columns">
-                        <input type="text" id="WalkThruTimeTB" name="WalkThruTimeTB" ng-model="WalkThruTimeTB" ng-disabled="!(walkThru=='WalkThruIncluded')" />
-                    </div>
-                    <div class="large-4 small-4 columns">
-                        <span class="postfix">Time</span>
-                    </div>
+                <div class="large-4 small-4 columns">
+                    <span class="postfix">Date</span>
                 </div>
             </div>
-        </div>
-    </fieldset>
+            <div class="row collapse">
+                <div class="large-8 small-8 columns">
+                    <input type="text" id="BidTimeTB" name="BidTimeTB" />
+                </div>
+                <div class="large-4 small-4 columns">
+                    <span class="postfix">Time</span>
+                </div>
+            </div>
+        </fieldset>
+
+
+
+        <fieldset class="large-4 columns left">
+            <legend>Walk Though</legend>
+            @Html.HiddenFor(m => m.WalkThruDateTime)
+            <div class="row">
+                <div class="large-3 columns">
+                    <label>
+                        @Html.RadioButtonFor(m => m.WalkThruStatus, BCModel.Projects.WalkThruStatus.NoWalkThru, new { ng_model = "walkThru" })
+                        None</label>
+                    <label>
+                        @Html.RadioButtonFor(m => m.WalkThruStatus, BCModel.Projects.WalkThruStatus.WalkThruTBD, new { ng_model = "walkThru" })
+                        TBD</label>
+                    <label>
+                        @Html.RadioButtonFor(m => m.WalkThruStatus, BCModel.Projects.WalkThruStatus.WalkThruIncluded, new { ng_model = "walkThru" })
+                        Yes</label>
+                </div>
+
+                <div class="large-9 columns">
+                    <div class="row collapse">
+                        <div class="large-8 small-8 columns">
+                            <input type="text" id="WalkThruDateTB" name="WalkThruDateTB" ng-model="WalkThruDateTB" ng-disabled="!(walkThru=='WalkThruIncluded')" />
+                        </div>
+                        <div class="large-4 small-4 columns"><span class="postfix">Date</span></div>
+                    </div>
+                    <div class="row collapse">
+                        <div class="large-8 small-8 columns">
+                            <input type="text" id="WalkThruTimeTB" name="WalkThruTimeTB" ng-model="WalkThruTimeTB" ng-disabled="!(walkThru=='WalkThruIncluded')" />
+                        </div>
+                        <div class="large-4 small-4 columns">
+                            <span class="postfix">Time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
 </div>
-
-
-
 <div class="row">
 
     <div class="large-2 columns left">

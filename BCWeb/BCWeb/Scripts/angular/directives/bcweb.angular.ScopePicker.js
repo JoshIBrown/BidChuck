@@ -1,6 +1,7 @@
 ﻿var app = angular.module('bcCsiScopePicker', ['filters']);
-app.directive('csiScopePicker', function ($http) {
 
+function csiScopePicker($http) {
+    // link function per directive signature
     function link(scope, element, attrs) {
         scope.pickerIsReady = false;
         scope.t1Parent = 0;
@@ -170,4 +171,7 @@ app.directive('csiScopePicker', function ($http) {
         },
         link: link
     };
-});
+};
+
+csiScopePicker.$inject = ["$http"];
+app.directive('csiScopePicker', csiScopePicker);

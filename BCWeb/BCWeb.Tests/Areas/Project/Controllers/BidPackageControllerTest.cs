@@ -65,7 +65,7 @@ namespace BCWeb.Tests.Areas.Project.Controllers
             {
                 ProjectId = 1,
                 TemplateId = 1,
-                SelectedScope = new List<int> { 1, 2, 3 },
+                SelectedScope = new int[] { 1, 2, 3 },
                 BidDateTime = new DateTime(2014, 2, 2, 17, 0, 0),
                 Description = "booga booga"
             };
@@ -109,7 +109,7 @@ namespace BCWeb.Tests.Areas.Project.Controllers
             {
                 ProjectId = 1,
                 TemplateId = 1,
-                SelectedScope = new List<int> { 1, 2, 3 },
+                SelectedScope = new int[] { 1, 2, 3 },
                 BidDateTime = new DateTime(2014, 2, 2, 17, 0, 0),
                 Description = "booga booga"
             };
@@ -152,7 +152,7 @@ namespace BCWeb.Tests.Areas.Project.Controllers
             {
                 ProjectId = 1,
                 TemplateId = 1,
-                SelectedScope = new List<int> { 1, 2, 3 },
+                SelectedScope = new int[] { 1, 2, 3 },
                 BidDateTime = new DateTime(2014, 2, 2, 17, 0, 0),
                 Description = "booga booga"
             };

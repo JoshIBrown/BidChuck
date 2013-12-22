@@ -137,8 +137,7 @@ namespace BCWeb
             bundles.Add(new ScriptBundle("~/bundles/foundation").Include(
                       "~/Scripts/BidChuck.js",
                       "~/Scripts/foundation/foundation.js",
-                      "~/Scripts/foundation/foundation.*",
-                      "~/Scripts/foundation/app.js"));
+                      "~/Scripts/foundation/foundation.*"));
             #endregion
 
             #region Datatables bundles

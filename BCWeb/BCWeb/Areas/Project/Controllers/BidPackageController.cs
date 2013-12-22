@@ -35,7 +35,7 @@ namespace BCWeb.Areas.Project.Controllers
             IEnumerable<BidPackageListItemViewModel> bps = _service.GetEnumerableByProjectAndCreatingCompany(projectId, user.CompanyId)
                 .Select(bp => new BidPackageListItemViewModel
                 {
-                    BidDateTime = bp.BidDateTime.ToString(),
+                    BidDateTime = bp.UseProjectBidDateTime ? bp.Project.BidDateTime.ToString() : bp.BidDateTime.ToString(),
                     Description = bp.Description,
                     Id = bp.Id,
                     Invited = bp.Invitees == null ? 0 : bp.Invitees.Count(),
@@ -58,6 +58,8 @@ namespace BCWeb.Areas.Project.Controllers
             viewModel.ProjectId = projectId;
             viewModel.TemplateId = templateId;
             viewModel.BidDateTime = DateTime.Now;
+            viewModel.UseProjectBidDate = true;
+            viewModel.UseProjectWalkThru = true;
             return View("Create", viewModel);
         }
 
@@ -118,14 +120,19 @@ namespace BCWeb.Areas.Project.Controllers
             BidPackageDetailsViewModel viewModel = new BidPackageDetailsViewModel
             {
                 Architect = raw.Project.Architect.CompanyName,
-                BidDateTime = raw.BidDateTime.ToString(),
+                BidDateTime = raw.UseProjectBidDateTime ? raw.Project.BidDateTime.ToString() : raw.BidDateTime.Value.ToString(),
                 CreatingCompany = raw.CreatedBy.CompanyName,
                 Description = raw.Description,
                 Id = raw.Id,
                 Notes = raw.Notes,
                 ProjectId = raw.ProjectId,
                 ProjectName = raw.Project.Title,
-                WalkThruDateTime = ""
+                WalkThruDateTime = raw.UseProjectWalkThruDateTime ?
+                    raw.Project.WalkThruStatus == WalkThruStatus.WalkThruIncluded ?
+                        raw.Project.WalkThruDateTime.Value.ToString() : raw.Project.WalkThruStatus.ToString() :
+                    raw.WalkThruStatus.HasValue ?
+                    raw.WalkThruStatus.Value == WalkThruStatus.WalkThruIncluded ?
+                        raw.WalkThruDateTime.Value.ToString() : raw.WalkThruStatus.Value.ToString() : "Unspecified"
             };
 
             viewModel.Scopes = raw.Scopes.Select(s => s.Scope.CsiNumber + " " + s.Scope.Description).OrderBy(s => s).ToList();
@@ -138,12 +145,16 @@ namespace BCWeb.Areas.Project.Controllers
             var raw = _service.Get(id);
             EditBidPackageViewModel viewModel = new EditBidPackageViewModel
             {
-                //BidDateTime = raw.BidDateTime, // FIXME
                 Description = raw.Description,
                 Id = raw.Id,
                 Notes = raw.Notes,
                 ProjectId = raw.ProjectId,
-                TemplateId = raw.TemplateBidPackageId
+                TemplateId = raw.TemplateBidPackageId,
+                UseProjectWalkThru = raw.UseProjectWalkThruDateTime,
+                UseProjectBidDate = raw.UseProjectBidDateTime,
+                BidDateTime = raw.UseProjectBidDateTime ? default(DateTime?) : raw.BidDateTime.Value,
+                WalkThruStatus = raw.UseProjectWalkThruDateTime ? default(WalkThruStatus?) : raw.WalkThruStatus.HasValue ? raw.WalkThruStatus.Value : default(WalkThruStatus?),
+                WalkThruDateTime = raw.WalkThruStatus.HasValue && raw.WalkThruStatus.Value == WalkThruStatus.WalkThruIncluded ? raw.WalkThruDateTime.Value : default(DateTime?)
             };
 
             return View("Edit", viewModel);
@@ -153,6 +164,19 @@ namespace BCWeb.Areas.Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditBidPackageViewModel viewModel)
         {
+            if (!viewModel.UseProjectBidDate && !viewModel.BidDateTime.HasValue)
+                ModelState.AddModelError("BidDateTime", "Pleae provide a Bid Date and Time if not use the Project's Bid Date and Time");
+
+            if (!viewModel.UseProjectWalkThru && !viewModel.WalkThruStatus.HasValue)
+                ModelState.AddModelError("WalkThruStatus", "Please Select a Walk Through option if not using Project's Walk Through settings");
+
+            if (!viewModel.UseProjectWalkThru &&
+                viewModel.WalkThruStatus.HasValue &&
+                viewModel.WalkThruStatus.Value == WalkThruStatus.WalkThruIncluded &&
+                !viewModel.WalkThruDateTime.HasValue)
+                ModelState.AddModelError("WalkThruDateTime", "Please set a Walk Through Date and Time");
+
+
             if (ModelState.IsValid)
             {
                 int userId = _security.GetUserId(User.Identity.Name);
@@ -162,7 +186,28 @@ namespace BCWeb.Areas.Project.Controllers
                 {
                     BidPackage toUpdate = _service.Get(viewModel.Id);
 
-                    toUpdate.BidDateTime = viewModel.BidDateTime;
+                    if (!viewModel.UseProjectBidDate && viewModel.BidDateTime.HasValue)
+                        toUpdate.BidDateTime = viewModel.BidDateTime.Value;
+                    else
+                        toUpdate.BidDateTime = default(DateTime?);
+
+                    if (!viewModel.UseProjectWalkThru && viewModel.WalkThruStatus.HasValue)
+                        toUpdate.WalkThruStatus = viewModel.WalkThruStatus.Value;
+                    else
+                        toUpdate.WalkThruStatus = default(WalkThruStatus?);
+
+                    if (!viewModel.UseProjectWalkThru &&
+                        viewModel.WalkThruStatus.HasValue &&
+                        viewModel.WalkThruStatus.Value == WalkThruStatus.WalkThruIncluded &&
+                        viewModel.WalkThruDateTime.HasValue)
+                        toUpdate.WalkThruDateTime = viewModel.WalkThruDateTime.Value;
+                    else
+                    {
+                        toUpdate.WalkThruDateTime = default(DateTime?);
+                    }
+
+                    toUpdate.UseProjectBidDateTime = viewModel.UseProjectBidDate;
+                    toUpdate.UseProjectWalkThruDateTime = viewModel.UseProjectWalkThru;
                     toUpdate.Description = viewModel.Description;
                     toUpdate.Notes = viewModel.Notes;
 

@@ -6,8 +6,12 @@
 
 <div class="row">
     <div class="large-12 columns">
-        <h2>@ViewBag.Title for @Html.DisplayFor(m => m.ProjectName)</h2>
-        @Html.HiddenFor(m => m.ProjectId)
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li>@Html.RouteLink("Projects", "Default", new { controller = "Project", action = "Index" })</li>
+            <li>@Html.RouteLink(Model.ProjectName, "Default", new { controller = "Project", action = "Details", id = Model.ProjectId })</li>
+            <li class="current"><a href="#">Manage Bid Packages</a></li>
+        </ul>
     </div>
 </div>
 

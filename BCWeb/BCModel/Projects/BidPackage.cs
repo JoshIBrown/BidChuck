@@ -33,12 +33,14 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual BidPackage TemplateBidPackage { get; set; }
 
-        public DateTime? BidDateTime { get; set; }
         public bool UseProjectBidDateTime { get; set; }
+        public DateTime? BidDateTime { get; set; }
 
+        
         public bool UseProjectWalkThruDateTime { get; set; }
+        public WalkThruStatus? WalkThruStatus { get; set; }
         public DateTime? WalkThruDateTime { get; set; }
-        public WalkThruStatus WalkThruStatus { get; set; }
+        
 
 
         [Required]

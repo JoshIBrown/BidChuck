@@ -198,35 +198,47 @@
                 <div class="large-12 columns">
                     @Html.LabelFor(m => m.SelectedScope)
 
-                    <div class="section-container accordion" data-section="accordion">
+                    <dl class="accordion" data-accordion>
                         @foreach (var s1 in Model.SelectedScope.Where(s => !s.parentId.HasValue))
                         {
-                            <section>
-                                <p class="title" data-section-title><a href="#">@s1.Description</a></p>
-                                <div class="content" data-section-content>
-                                    <ul>
-                                        @foreach (var s2 in Model.SelectedScope.Where(s => s.parentId == s1.Id))
-                                        {
-                                            <li>@s2.Description
-                                                <ul>
-                                                    @foreach (var s3 in Model.SelectedScope.Where(s => s.parentId == s2.Id))
+                            <dd>
+                                <a href="@string.Format("#{0}", s1.Id)">@s1.Description</a>
+                                @if (Model.SelectedScope.Where(s => s.parentId.HasValue && s.parentId.Value == s1.Id).Count() > 0)
+                                {
+                                    <div id="@s1.Id" class="content">
+                                        <dl class="accordion" data-accordion>
+                                            @foreach (var s2 in Model.SelectedScope.Where(s => s.parentId.HasValue && s.parentId.Value == s1.Id))
+                                            {
+                                                <dd>
+                                                    <a href="@string.Format("#{0}", s2.Id)">@s2.Description</a>
+                                                    @if (Model.SelectedScope.Where(s => s.parentId.HasValue && s.parentId.Value == s2.Id).Count() > 0)
                                                     {
-                                                        <li>@s3.Description</li>
+                                                        <div id="@s2.Id" class="content">
+                                                            <dl class="accordion" data-accordion>
+                                                                @foreach (var s3 in Model.SelectedScope.Where(s => s.parentId.HasValue && s.parentId.Value == s2.Id))
+                                                                {
+                                                                    <dd>
+                                                                        <a href="@string.Format("#{0}", s3.Id)">@s3.Description</a>
+                                                                    </dd>
+                                                                }
+                                                            </dl>
+                                                        </div>
                                                     }
-                                                </ul>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
-                            </section>
+                                                </dd>
+                                            }
+                                        </dl>
+                                    </div>
+                                }
+                            </dd>
                         }
-                    </div>
+                    </dl>
                 </div>
             </div>
-
-
         </div>
+
+
     </div>
+</div>
 </div>
 @Html.AntiForgeryToken()
 @section scripts{

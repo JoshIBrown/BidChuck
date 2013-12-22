@@ -8,7 +8,8 @@ angular.element(document).ready(function () { // same as $(document).ready()
     var app = angular.module('projectEdit', ['filters', 'bcCsiScopePicker']);
 
     // declare the controller for the application
-    app.controller('ProjectCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+
+    function ProjectCtrl($scope, $http, $window) {
         'use strict';
 
         // set the web service url for the scope picker
@@ -67,6 +68,11 @@ angular.element(document).ready(function () { // same as $(document).ready()
                 angular.element('#BidDateTime').val(result);
             }
         };
-    }]);
+    };
+    // inject dependencies
+    ProjectCtrl.$inject = ['$scope', '$http', '$window'];
+    // set controller
+    app.controller('ProjectCtrl', ProjectCtrl);
+    // bootstrap the application
     angular.bootstrap(document, ['projectEdit']);
 });;
