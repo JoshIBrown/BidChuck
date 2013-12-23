@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCModel.Projects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,7 +21,7 @@ namespace BCModel
         [Required]
         public int RecipientId { get; set; }
         [ForeignKey("RecipientId"), IgnoreDataMember]
-        public virtual UserProfile Recipient{ get; set; }
+        public virtual UserProfile Recipient { get; set; }
 
         [Required]
         public bool Read { get; set; }
@@ -28,18 +29,32 @@ namespace BCModel
         [Required]
         public NotificationType NotificationType { get; set; }
 
-        public string Description { get; set; }
+        [Required]
+        public int ProjectId { get; set; }
+        [ForeignKey("ProjectId"), IgnoreDataMember]
+        public virtual Project Project { get; set; }
 
-        public string Url { get; set; }
+        [Required]
+        public int Count { get; set; }
 
-        public string LinkText { get; set; }
+    }
+
+    public class NotificationText
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        [Required]
+        public NotificationType NotificationType { get; set; }
+        [Required]
+        public string Text { get; set; }
     }
 
     public enum NotificationType
     {
         InvitationToBid = 0,
         InvitationResponse = 1,
-        ProjectChange = 2,
-        BidSubmitted = 3
+        InvitationRequest = 2,
+        ProjectChange = 3,
+        BidSubmitted = 4
     }
 }

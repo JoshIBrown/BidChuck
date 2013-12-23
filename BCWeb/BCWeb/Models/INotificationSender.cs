@@ -9,6 +9,6 @@ namespace BCWeb.Models
 {
     public interface INotificationSender
     {
-        bool SendNotification(int companyId, NotificationType notificationType);
+        bool SendNotification(int recipientId, NotificationType notificationType, int projectId);
     }
 }
