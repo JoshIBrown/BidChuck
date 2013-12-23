@@ -22,6 +22,8 @@ using BCWeb.Areas.Project.Models.Bids.Repository;
 using BCWeb.Areas.Project.Models.Bids.ServiceLayer;
 using BCWeb.Areas.Project.Models.Documents.ServiceLayer;
 using BCWeb.Areas.Project.Models.Documents.Repository;
+using BCWeb.Models.Notifications.Repository;
+using BCWeb.Models.Notifications.ServiceLayer;
 
 namespace BCWeb
 {
@@ -46,7 +48,8 @@ namespace BCWeb
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();    
-
+            container.RegisterType<INotificationServiceLayer, NotificationServiceLayer>();
+            container.RegisterType<INotificationRepository, NotificationRepository>();
             container.RegisterType<IProjectDocRepository, ProjectDocRepository>();
             container.RegisterType<IProjectDocServiceLayer, ProjectDocServiceLayer>();
             container.RegisterType<IBidServiceLayer, BidServiceLayer>();

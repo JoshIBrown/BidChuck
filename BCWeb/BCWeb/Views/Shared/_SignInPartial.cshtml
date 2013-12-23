@@ -2,7 +2,9 @@
 {
     <li>@Html.RouteLink("Projects", "Default", new { controller = "Project", action = "Index" })
     </li>
-    <li class="divider hide-for-small"></li>
+    <li><a href="#">
+        <img src="@Url.Content("~/Content/images/InfoFlag_32x24.png")" /></a><span id="notificationCount"></span></li>
+    
     <li class="has-dropdown"><a href="#">@User.Identity.Name</a>
         <ul class="dropdown">
             <li>@Html.RouteLink("Manage Account", "Default", new { controller = "Account", action = "Manage" })</li>

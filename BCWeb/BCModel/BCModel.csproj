@@ -243,7 +243,16 @@
     <Compile Include="Migrations\201312220410021_addLatLongToProjectAndCompany.Designer.cs">
       <DependentUpon>201312220410021_addLatLongToProjectAndCompany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312230123152_addNotifications.cs" />
+    <Compile Include="Migrations\201312230123152_addNotifications.Designer.cs">
+      <DependentUpon>201312230123152_addNotifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312230233202_addSubscriptionStatus.cs" />
+    <Compile Include="Migrations\201312230233202_addSubscriptionStatus.Designer.cs">
+      <DependentUpon>201312230233202_addSubscriptionStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Notification.cs" />
     <Compile Include="Projects\BaseBid.cs" />
     <Compile Include="Projects\BidPackage.cs" />
     <Compile Include="Projects\BidPackageXScope.cs" />
@@ -413,6 +422,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312220410021_addLatLongToProjectAndCompany.resx">
       <DependentUpon>201312220410021_addLatLongToProjectAndCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312230123152_addNotifications.resx">
+      <DependentUpon>201312230123152_addNotifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312230233202_addSubscriptionStatus.resx">
+      <DependentUpon>201312230233202_addSubscriptionStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

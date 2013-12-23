@@ -131,6 +131,8 @@ namespace BCModel
             I, U, D
         }
 
+        public DbSet<Notification> Notifications { get; set; }
+
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserXScope> UserScopes { get; set; }
 

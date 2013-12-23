@@ -32,6 +32,13 @@ namespace BCModel
         [Description("Owner/Client")]
         Owner = 7
     }
+
+    public enum SubscriptionStatus
+    {
+        Free = 0,
+        Paid = 1
+    }
+
     public class CompanyProfile
     {
         [Key]
@@ -39,6 +46,9 @@ namespace BCModel
         public int Id { get; set; }
 
         [Required]
+        public SubscriptionStatus SubscriptionStatus { get; set; }
+
+        [Required] 
         public string CompanyName { get; set; }
 
         public DbGeography GeoLocation { get; set; }
@@ -47,7 +57,7 @@ namespace BCModel
         public string Address2 { get; set; }
         public string City { get; set; }
 
-        
+
         public string PostalCode { get; set; }
 
         public int? StateId { get; set; }
@@ -61,7 +71,7 @@ namespace BCModel
         [IgnoreDataMember]
         public virtual County County { get; set; }
 
-        
+
         public string Phone { get; set; }
 
         [EmailAddress]
@@ -69,7 +79,7 @@ namespace BCModel
 
         public bool Published { get; set; }
 
-        
+
         public int OperatingDistance { get; set; }
 
         public string BusinessLicense { get; set; }

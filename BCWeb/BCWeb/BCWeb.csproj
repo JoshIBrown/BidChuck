@@ -281,6 +281,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AngularTemplateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Helpers\EmailSender.cs" />
     <Compile Include="Global.asax.cs">
@@ -313,7 +314,13 @@
     <Compile Include="Models\Company\ViewModel\NewCompanyViewModel.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
     <Compile Include="Models\IGenericServiceLayer.cs" />
+    <Compile Include="Models\INotificationSender.cs" />
     <Compile Include="Models\IWebSecurityWrapper.cs" />
+    <Compile Include="Models\NotificationSender.cs" />
+    <Compile Include="Models\Notifications\Repository\INotificationRepository.cs" />
+    <Compile Include="Models\Notifications\Repository\NotificationRepository.cs" />
+    <Compile Include="Models\Notifications\ServiceLayer\INotificationServiceLayer.cs" />
+    <Compile Include="Models\Notifications\ServiceLayer\NotificationServiceLayer.cs" />
     <Compile Include="Models\Project\Repository\IProjectRepository.cs" />
     <Compile Include="Models\Project\Repository\ProjectRepository.cs" />
     <Compile Include="Models\Project\ServiceLayer\IProjectServiceLayer.cs" />
@@ -430,6 +437,8 @@
     <Content Include="Content\foundation\foundation.css" />
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
+    <Content Include="Content\images\InfoFlag.png" />
+    <Content Include="Content\images\InfoFlag_32x24.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\angular\angular-animate.js" />
     <Content Include="Scripts\angular\angular-animate.min.js" />
@@ -995,6 +1004,7 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
+    <Folder Include="Models\Notifications\ViewModel\" />
     <Folder Include="Scripts\Areas\Home\" />
   </ItemGroup>
   <ItemGroup>
