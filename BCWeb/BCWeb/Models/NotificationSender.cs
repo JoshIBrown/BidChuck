@@ -2,6 +2,7 @@
 using BCWeb.Models.Notifications.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Linq;
 using System.Web;
 
@@ -34,9 +35,8 @@ namespace BCWeb.Models
                                                               && r.Recipient.CompanyId == recipientId                     // sent to company z
                                                               && r.ProjectId == projectId                       // for project x
                                                               && !r.Read                                        // not read yet
-                                                              && r.LastEditTimestamp.Date == DateTime.Now.Date  // from today
+                                                              && EntityFunctions.DiffDays(r.LastEditTimestamp, DateTime.Now).Value == 0  // from today
                                                               select r).ToList();
-
                         List<UserProfile> users = _repo.QueryUserProfiles().Where(x => x.CompanyId == recipientId).ToList();
 
                         if (existingNotices.Count == users.Count) // if there is an unread notice for each user of comany z

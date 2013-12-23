@@ -9,13 +9,15 @@ namespace BCWeb.Models.Notifications.Repository
 {
     public class NotificationRepository : RepositoryBase, INotificationRepository
     {
-        private DbSet<Notification> _notes { get; set; }
-        private DbSet<NotificationTemplate> _templates { get; set; }
+        private DbSet<Notification> _notes;
+        private DbSet<NotificationTemplate> _templates;
+        private DbSet<UserProfile> _users;
 
         public NotificationRepository()
         {
             _notes = _context.Notifications;
             _templates = _context.NotificationTemplates;
+            _users = _context.UserProfiles;
         }
 
         public void Create(BCModel.Notification entity)
@@ -52,6 +54,11 @@ namespace BCWeb.Models.Notifications.Repository
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        public IQueryable<UserProfile> QueryUserProfiles()
+        {
+            return _users.Include(u => u.Company);
         }
     }
 }

@@ -48,6 +48,7 @@ namespace BCWeb
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();    
+            container.RegisterType<INotificationSender, NotificationSender>();
             container.RegisterType<INotificationServiceLayer, NotificationServiceLayer>();
             container.RegisterType<INotificationRepository, NotificationRepository>();
             container.RegisterType<IProjectDocRepository, ProjectDocRepository>();

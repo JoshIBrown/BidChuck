@@ -64,7 +64,8 @@ namespace BCWeb.Areas.Project.Controllers
                         // send notices to all invited companies
                         for (int i = 0; i < invites.Count; i++)
                         {
-                            _notify.SendNotification(invites[i].SentToId, RecipientType.company, NotificationType.InvitationToBid, projectId);
+                            if (!_notify.SendNotification(invites[i].SentToId, RecipientType.company, NotificationType.InvitationToBid, projectId))
+                                throw new HttpException(500, "there was a problem sending notices");
                         }
 
                         return RedirectToRoute("Default", new { controller = "Project", action = "Details", id = projectId });

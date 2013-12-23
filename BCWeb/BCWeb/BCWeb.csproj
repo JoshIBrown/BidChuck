@@ -439,7 +439,8 @@
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Content\images\InfoFlag.png" />
-    <Content Include="Content\images\InfoFlag_32x24.png" />
+    <Content Include="Content\images\InfoFlag_read_32x24.png" />
+    <Content Include="Content\images\InfoFlag_unread_32x24.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\angular\angular-animate.js" />
     <Content Include="Scripts\angular\angular-animate.min.js" />
