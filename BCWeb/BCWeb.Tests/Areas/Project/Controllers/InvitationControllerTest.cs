@@ -22,9 +22,9 @@ namespace BCWeb.Tests.Areas.Project.Controllers
             // arrange
             Mock<IInvitationServiceLayer> service = new Mock<IInvitationServiceLayer>();
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            Mock<IEmailSender> email = new Mock<IEmailSender>();
+            Mock<INotificationSender> notify = new Mock<INotificationSender>();
 
-            InvitationController controller = new InvitationController(service.Object, security.Object, email.Object);
+            InvitationController controller = new InvitationController(service.Object, security.Object, notify.Object);
 
 
             // act
@@ -47,9 +47,9 @@ namespace BCWeb.Tests.Areas.Project.Controllers
             service.Setup(s => s.GetBidPackage(1)).Returns(new BidPackage { Id = 1, ProjectId = 1 });
 
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            Mock<IEmailSender> email = new Mock<IEmailSender>();
+            Mock<INotificationSender> notify = new Mock<INotificationSender>();
 
-            InvitationController controller = new InvitationController(service.Object, security.Object, email.Object);
+            InvitationController controller = new InvitationController(service.Object, security.Object, notify.Object);
 
             BidPackageInvitationViewModel viewModel = new BidPackageInvitationViewModel();
             viewModel.BidPackageId = 1;
@@ -76,9 +76,9 @@ namespace BCWeb.Tests.Areas.Project.Controllers
             service.Setup(s => s.GetBidPackage(1)).Returns(new BidPackage { Id = 1, ProjectId = 1 });
 
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            Mock<IEmailSender> email = new Mock<IEmailSender>();
+            Mock<INotificationSender> notify = new Mock<INotificationSender>();
 
-            InvitationController controller = new InvitationController(service.Object, security.Object, email.Object);
+            InvitationController controller = new InvitationController(service.Object, security.Object, notify.Object);
 
             BidPackageInvitationViewModel viewModel = new BidPackageInvitationViewModel();
             viewModel.BidPackageId = 1;

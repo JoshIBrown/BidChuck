@@ -132,6 +132,7 @@ namespace BCModel
         }
 
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<NotificationTemplate> NotificationTemplates { get; set; }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserXScope> UserScopes { get; set; }

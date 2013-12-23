@@ -7,7 +7,14 @@ using System.Threading.Tasks;
 
 namespace BCWeb.Models.Notifications.ServiceLayer
 {
-    public interface INotificationServiceLayer : IGenericServiceLayer<Notification>
+    public interface INotificationServiceLayer
     {
+        Dictionary<string, string> ValidationDic
+        {
+            get;
+        }
+
+        bool MarkAsRead(Guid id);
+        List<Notification> GetList();
     }
 }

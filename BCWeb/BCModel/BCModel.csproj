@@ -251,6 +251,14 @@
     <Compile Include="Migrations\201312230233202_addSubscriptionStatus.Designer.cs">
       <DependentUpon>201312230233202_addSubscriptionStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312231909356_createNotificationTemplate.cs" />
+    <Compile Include="Migrations\201312231909356_createNotificationTemplate.Designer.cs">
+      <DependentUpon>201312231909356_createNotificationTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312231912414_changeNotificationTemplatePrimaryKey.cs" />
+    <Compile Include="Migrations\201312231912414_changeNotificationTemplatePrimaryKey.Designer.cs">
+      <DependentUpon>201312231912414_changeNotificationTemplatePrimaryKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Projects\BaseBid.cs" />
@@ -428,6 +436,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312230233202_addSubscriptionStatus.resx">
       <DependentUpon>201312230233202_addSubscriptionStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312231909356_createNotificationTemplate.resx">
+      <DependentUpon>201312231909356_createNotificationTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312231912414_changeNotificationTemplatePrimaryKey.resx">
+      <DependentUpon>201312231912414_changeNotificationTemplatePrimaryKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

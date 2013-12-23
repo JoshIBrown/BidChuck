@@ -1,4 +1,5 @@
-﻿using BCModel.Projects;
+﻿using BCModel;
+using BCModel.Projects;
 using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
 using BCWeb.Areas.Project.Models.Invitations.ViewModel;
 using BCWeb.Helpers;
@@ -15,13 +16,14 @@ namespace BCWeb.Areas.Project.Controllers
     {
         private IInvitationServiceLayer _service;
         private IWebSecurityWrapper _security;
-        private IEmailSender _email;
+        private INotificationSender _notify;
 
-        public InvitationController(IInvitationServiceLayer service, IWebSecurityWrapper security, IEmailSender email)
+
+        public InvitationController(IInvitationServiceLayer service, IWebSecurityWrapper security, INotificationSender notify)
         {
             _service = service;
             _security = security;
-            _email = email;
+            _notify = notify;
         }
 
         //
@@ -45,31 +47,40 @@ namespace BCWeb.Areas.Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Send(BidPackageInvitationViewModel viewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                List<Invitation> invites = new List<Invitation>();
-                foreach (var c in viewModel.CompanyId)
+                try
                 {
-                    invites.Add(new Invitation { BidPackageId = viewModel.BidPackageId, SentToId = c, SentDate = DateTime.Now, InvitationType = InvitationType.SentFromCreatedBy });
-                }
+                    List<Invitation> invites = new List<Invitation>();
+                    foreach (var c in viewModel.CompanyId)
+                    {
+                        invites.Add(new Invitation { BidPackageId = viewModel.BidPackageId, SentToId = c, SentDate = DateTime.Now, InvitationType = InvitationType.SentFromCreatedBy });
+                    }
+                    // if successfully create invites
+                    if (_service.CreateRange(invites))
+                    {
+                        int projectId = _service.GetBidPackage(viewModel.BidPackageId).ProjectId;
 
-                if (_service.CreateRange(invites))
-                {
-                    int projectId = _service.GetBidPackage(viewModel.BidPackageId).ProjectId;
-                    return RedirectToRoute("Default", new { controller = "Project", action = "Details", id = projectId });
+                        // send notices to all invited companies
+                        for (int i = 0; i < invites.Count; i++)
+                        {
+                            _notify.SendNotification(invites[i].SentToId, RecipientType.company, NotificationType.InvitationToBid, projectId);
+                        }
+
+                        return RedirectToRoute("Default", new { controller = "Project", action = "Details", id = projectId });
+                    }
+                    else
+                    {
+                        Util.MapValidationErrors(_service.ValidationDic, this.ModelState);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Util.MapValidationErrors(_service.ValidationDic, this.ModelState);
-                    return View("Send", viewModel);
+                    ModelState.AddModelError("Exception", ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("Exception", ex.Message);
-                return View("Send", viewModel);
-            }
 
+            return View("Send", viewModel);
         }
 
         [HttpGet]

@@ -10,10 +10,12 @@ namespace BCWeb.Models.Notifications.Repository
     public class NotificationRepository : RepositoryBase, INotificationRepository
     {
         private DbSet<Notification> _notes { get; set; }
+        private DbSet<NotificationTemplate> _templates { get; set; }
 
         public NotificationRepository()
         {
             _notes = _context.Notifications;
+            _templates = _context.NotificationTemplates;
         }
 
         public void Create(BCModel.Notification entity)
@@ -44,7 +46,7 @@ namespace BCWeb.Models.Notifications.Repository
 
         public IQueryable<BCModel.Notification> Query()
         {
-            return _notes;
+            return _notes.Include(n => n.Recipient);
         }
 
         public void Save()

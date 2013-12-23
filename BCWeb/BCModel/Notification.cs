@@ -39,11 +39,9 @@ namespace BCModel
 
     }
 
-    public class NotificationText
+    public class NotificationTemplate
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [Required]
+        [Key]
         public NotificationType NotificationType { get; set; }
         [Required]
         public string Text { get; set; }
