@@ -154,12 +154,7 @@
     <div class="large-12 columns">
         @if (Model.SelectedScope != null)
         {
-            <div style="display: none;" id="passBackScopes">
-                @for (int s = 0; s < Model.SelectedScope.Count(); s++)
-                {
-                    @Html.HiddenFor(m => m.SelectedScope[s])
-                }
-            </div>
+            @Html.Partial("_SelectedScopes", Model.SelectedScope);
         }
         <csi-scope-picker service-url="theServiceUrl" selected-scopes="passBackSelection"></csi-scope-picker>
     </div>

@@ -15,5 +15,7 @@ namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
         CompanyProfile GetCompany(int id);
         BCModel.Projects.Project GetProject(int id);
         BidPackage GetBidPackage(int id);
+        
+        IEnumerable<Scope> GetEnumerableForCompany(int companyId);
     }
 }

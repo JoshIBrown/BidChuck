@@ -118,9 +118,11 @@ namespace BCWeb
                 "~/Scripts/angular/controllers/SendInvitationCtrl.js"
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/scopepicker").Include("~/Scripts/angular/angular.js",
+            bundles.Add(new ScriptBundle("~/bundles/companyscopes").Include(
+                "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
-                "~/Scripts/angular/controllers/ScopesList.js"));
+                "~/Scripts/angular/directives/bcweb.angular.ScopePicker.js",
+                "~/Scripts/angular/controllers/CompanyScopesCtrl.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/home").Include("~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",

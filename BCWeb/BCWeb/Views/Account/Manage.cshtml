@@ -38,7 +38,7 @@
             @*only show scopes for a sub or vendor who is the company manager*@
             @if ((Roles.IsUserInRole("subcontractor") || Roles.IsUserInRole("materials_vendor")) && Roles.IsUserInRole("Manager"))
             {
-                <li>@Html.RouteLink("Manage Company Scopes", "Account_default", new { controller = "Scopes", action = "Manage", type = "company", ident = "" })</li>
+                <li>@Html.RouteLink("Manage Company Scopes", "ManageCompanyScopes", new { controller = "Scopes", action = "ManageCompany" })</li>
                 <li>@Html.RouteLink("Manage My Scopes", "Account_default", new { controller = "Scopes", action = "Manage", type = "self", ident = "" })</li>
             }
             <li>@Html.RouteLink("Change Email Address", "Default", new { controller = "Account", action = "ChangeEmail" })</li>
@@ -54,7 +54,7 @@
                     <li class="fn">@Html.DisplayFor(m => m.CompanyName)</li>
                     <li class="street-address">@Html.DisplayFor(m => m.Address1)</li>
                     <li class="street-address">@Html.DisplayFor(m => m.Address2)</li>
-                    
+
                     <li><span class="locality">@Html.DisplayFor(m => m.City)</span> <span class="state">@Html.DisplayFor(m => m.State)</span>, <span class="zip">@Html.DisplayFor(m => m.PostalCode)</span></li>
                 </ul>
             </div>

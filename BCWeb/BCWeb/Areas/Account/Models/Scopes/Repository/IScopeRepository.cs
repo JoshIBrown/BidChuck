@@ -16,5 +16,8 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
         BCModel.Projects.Project GetProject(int id);
 
         BCModel.Projects.BidPackage GetBidPackage(int id);
+
+        IQueryable<CompanyXScope> QueryCompanyScopes();
+        IQueryable<UserXScope> QueryUserScopes();
     }
 }

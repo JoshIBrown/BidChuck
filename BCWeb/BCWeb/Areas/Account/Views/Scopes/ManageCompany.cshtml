@@ -1,0 +1,36 @@
+﻿@model BCWeb.Areas.Account.Models.Scopes.ViewModel.ManageCompanyScopesModel
+@{
+    ViewBag.Title = "Manage Scopes";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<h2>Manage Scopes for your company</h2>
+
+
+<div class="row">
+    <div class="large-12 columns" ng-controller="CompanyScopesCtrl">
+        <div class="row">
+            <div class="large-12 columns">
+                @using (Html.BeginForm())
+                {
+                    @Html.HiddenFor(m => m.CompanyId)
+
+                    @Html.AntiForgeryToken()
+                    
+                    <input type="submit" class="medium button" value="Save" />
+                    
+                    if (Model.SelectedScope != null)
+                    {
+                    @Html.Partial("_SelectedScopes", Model.SelectedScope);
+                    }
+                    <csi-scope-picker service-url="theServiceUrl" selected-scopes="passBackSelection"></csi-scope-picker>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/companyscopes")
+}

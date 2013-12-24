@@ -1,0 +1,11 @@
+﻿@model int[]
+
+@if (Model != null)
+{
+    <div style="display: none;" id="passBackScopes">
+        @for (int s = 0; s < Model.Length; s++)
+        {
+            <input type="hidden" id="@string.Format("SelectedScope[{0}]",@s)" name="@string.Format("SelectedScope_{0}_",@s)" value="@Model[s]" />
+        }
+    </div>
+}

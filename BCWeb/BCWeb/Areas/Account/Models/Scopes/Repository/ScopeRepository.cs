@@ -62,7 +62,7 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
 
         public IQueryable<Scope> Query()
         {
-            return _scopes;
+            return _scopes.Include(s => s.Companies).Include(s => s.Users);
         }
 
         public void Save()
@@ -85,6 +85,17 @@ namespace BCWeb.Areas.Account.Models.Scopes.Repository
         public BCModel.Projects.BidPackage GetBidPackage(int id)
         {
             return _bidPackages.Find(id);
+        }
+
+
+        public IQueryable<CompanyXScope> QueryCompanyScopes()
+        {
+            return _context.CompanyScopes;
+        }
+
+        public IQueryable<UserXScope> QueryUserScopes()
+        {
+            return _context.UserScopes;
         }
     }
 }

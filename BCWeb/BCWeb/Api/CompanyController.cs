@@ -4,7 +4,6 @@ using BCWeb.Areas.Admin.Models.Companies;
 using BCWeb.Helpers;
 using BCWeb.Models;
 using BCWeb.Models.Company.ViewModel;
-using BCWeb.Models.Company.ViewModels;
 using BCWeb.Models.Shared;
 using System;
 using System.Collections.Generic;
@@ -30,25 +29,8 @@ namespace BCWeb.Api
         }
 
         // /api/Company/GetNewest
-        [AllowAnonymous]
-        public IEnumerable<NewCompanyViewModel> GetNewest()
-        {
-            // get 10 most recently registered and published companies.  avoid delegates in results
-            var companies = _service.GetEnumerable()
-                                                .OrderByDescending(x => x.Id)
-                                                .Take(10)
-                                                .Select(x => new NewCompanyViewModel
-                                                {
-                                                    Id = x.Id,
-                                                    CompanyName = x.CompanyName,
-                                                    BusinessType = Util.GetEnumDescription(x.BusinessType),
-                                                    Scopes = x.Scopes
-                                                        .Where(s => !s.Scope.ParentId.HasValue).Select(s => s.Scope.CsiNumber.Substring(0, 2) + " " + s.Scope.Description)
-                                                        .ToArray()
-                                                })
-                                                .ToArray();
-            return companies;
-        }
+       
+        
 
         // get newest group by scope
 

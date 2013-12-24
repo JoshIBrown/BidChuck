@@ -1,6 +1,9 @@
 ﻿
-var app = angular.module('myApp', ['filters'])
-    .controller('HomeCtrl', ['$scope','$http',function ($scope, $http) {
+angular.element(document).ready(function () {
+    var app = angular.module('homePage', ['filters']);
+
+
+    function HomeCtrl($scope, $http) {
         console.log('poo');
         $scope.newCompanies = [];
         $http.get('/api/Users/GetNewestCompanies')
@@ -8,4 +11,11 @@ var app = angular.module('myApp', ['filters'])
                 $scope.newCompanies = data;
             });
 
-    }]);
+    }
+
+    HomeCtrl.$inject = ['$scope', '$http'];
+
+    app.controller('HomeCtrl', HomeCtrl);
+
+    angular.bootstrap(document, ['homePage']);
+});

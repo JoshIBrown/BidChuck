@@ -125,5 +125,15 @@ namespace BCWeb.Areas.Account.Models.Scopes.ServiceLayer
         {
             return _repo.GetBidPackage(id);
         }
+
+
+        public IEnumerable<BCModel.Scope> GetEnumerableForCompany(int companyId)
+        {
+            return (from s in _repo.Query()
+                    join c in _repo.QueryCompanyScopes() on s.Id equals c.ScopeId
+                    where c.CompanyId == companyId
+                    select s).AsEnumerable();
+                    
+        }
     }
 }

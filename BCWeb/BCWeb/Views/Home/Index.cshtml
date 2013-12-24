@@ -2,19 +2,20 @@
     ViewBag.Title = "Welcome to bidCHUCK!";
 }
 
-<div ng-app="myApp">
-    <div ng-controller="HomeCtrl">
-        <div class="row">
-            <div class="large-8 columns large-centered">
-                <h1>@ViewBag.Title</h1>
-            </div>
+
+<div ng-controller="HomeCtrl">
+    <div class="row">
+        <div class="large-8 columns large-centered">
+            <h1>@ViewBag.Title</h1>
         </div>
-
-        @Html.Partial("_NewestMembers")
-
-
     </div>
+
+
+
+
+
 </div>
+
 
 @section scripts{
     @Scripts.Render("~/bundles/home")

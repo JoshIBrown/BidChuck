@@ -212,6 +212,8 @@
     <Compile Include="Areas\Account\Models\Scopes\Repository\ScopeRepository.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ServiceLayer\IScopeServiceLayer.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ServiceLayer\ScopeServiceLayer.cs" />
+    <Compile Include="Areas\Account\Models\Scopes\ViewModel\ManageCompanyScopesModel.cs" />
+    <Compile Include="Areas\Account\Models\Scopes\ViewModel\ManageUserScopesModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeHierarchyViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeMgmtViewModel.cs" />
@@ -312,7 +314,6 @@
     <Compile Include="Models\Account\ViewModel\ManageDashboardViewModel.cs" />
     <Compile Include="Models\Company\ViewModel\CompanySearchResult.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
-    <Compile Include="Models\Company\ViewModel\NewCompanyViewModel.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
     <Compile Include="Models\IGenericServiceLayer.cs" />
     <Compile Include="Models\INotificationSender.cs" />
@@ -898,7 +899,7 @@
     <Content Include="Foundation_readme.txt" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Account\Views\Web.config" />
-    <Content Include="Areas\Account\Views\Scopes\Manage.cshtml" />
+    <Content Include="Areas\Account\Views\Scopes\ManageCompany.cshtml" />
     <Content Include="county.csv" />
     <Content Include="Foundation_readme.md" />
     <None Include="Properties\PublishProfiles\bcdev - FTP.pubxml" />
@@ -908,7 +909,7 @@
     <Content Include="Scripts\angular\controllers\ProjectIndexCtrl.js" />
     <Content Include="Scripts\Areas\Account\ManageView.js" />
     <Content Include="Scripts\angular\controllers\RegCtrl.js" />
-    <Content Include="Scripts\angular\controllers\ScopesList.js" />
+    <Content Include="Scripts\angular\controllers\CompanyScopesCtrl.js" />
     <Content Include="Scripts\angular\controllers\HomeCtrl.js" />
     <Content Include="Scripts\cvl.js" />
     <Content Include="Scripts\angular\bcweb.filters.angular.js" />
@@ -982,7 +983,6 @@
     <Content Include="Views\Account\ManageScopes.cshtml" />
     <Content Include="Views\Shared\_Foundation.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Home\_NewestMembers.cshtml" />
     <Content Include="Areas\Account\Views\Company\Edit.cshtml" />
     <Content Include="Views\Account\ChangeEmail.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
@@ -1000,6 +1000,7 @@
     <Content Include="Views\Project\Duplicates.cshtml" />
     <Content Include="Views\AngularTemplate\ScopePicker.cshtml" />
     <Content Include="Views\Home\Foundation_Index.cshtml" />
+    <Content Include="Views\Shared\_SelectedScopes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
