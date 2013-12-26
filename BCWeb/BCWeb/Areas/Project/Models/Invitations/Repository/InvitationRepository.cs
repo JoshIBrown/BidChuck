@@ -80,5 +80,11 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
         {
             _context.SaveChanges();
         }
+
+
+        public IQueryable<BCModel.CompanyProfile> QueryCompanies()
+        {
+            return _companies.Include(s => s.InvitesToBPs).Include(s => s.Scopes);
+        }
     }
 }

@@ -16,5 +16,7 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
 
         BCModel.Projects.BidPackage GetBidPackage(int id);
         BCModel.Projects.Project GetProject(int id);
+
+        IQueryable<CompanyProfile> QueryCompanies();
     }
 }

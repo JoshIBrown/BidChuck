@@ -207,6 +207,7 @@
     <Compile Include="Areas\Account\Models\Company\Repository\ICompanyProfileRepository.cs" />
     <Compile Include="Areas\Account\Models\Company\ServiceLayer\CompanyProfileServiceLayer.cs" />
     <Compile Include="Areas\Account\Models\Company\ServiceLayer\ICompanyProfileServiceLayer.cs" />
+    <Compile Include="Areas\Account\Models\Company\ViewModel\CompanyScopeItem.cs" />
     <Compile Include="Areas\Account\Models\Company\ViewModel\NewArchitectViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\Repository\IScopeRepository.cs" />
     <Compile Include="Areas\Account\Models\Scopes\Repository\ScopeRepository.cs" />
@@ -292,6 +293,7 @@
     </Compile>
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\EnumEditorHtmlHelper.cs" />
+    <Compile Include="Helpers\GeoLocator.cs" />
     <Compile Include="Helpers\HtmlPrefixExtensions.cs" />
     <Compile Include="Helpers\ParameterRebinder.cs" />
     <Compile Include="Helpers\Util.cs" />
@@ -339,6 +341,7 @@
     <Compile Include="Models\Project\ViewModel\ProjectListViewModel.cs" />
     <Compile Include="Models\RepositoryBase.cs" />
     <Compile Include="Models\ServiceLayerBase.cs" />
+    <Compile Include="Models\Shared\BingMapsResponse.cs" />
     <Compile Include="Models\Shared\DataTablesResponse.cs" />
     <Compile Include="Models\Shared\LookupItem.cs" />
     <Compile Include="Models\WebSecurityWrapper.cs" />

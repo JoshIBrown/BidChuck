@@ -14,6 +14,7 @@ using BCWeb.Models.Account.ViewModel;
 using BCWeb.Helpers;
 using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
+using System.Data.Spatial;
 
 namespace BCWeb.Controllers
 {
@@ -241,12 +242,37 @@ namespace BCWeb.Controllers
                 ModelState.AddModelError("", "Incorrect captcha answer.");
             }
 
+
+
+
+
+
             int cpId;
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
                 try
                 {
+
+                    GeoLocator loc = new GeoLocator();
+                    
+                    DbGeography latlong = default(DbGeography);
+
+                    string state = _serviceLayer.GetStates().Where(x => x.Id == model.StateId).FirstOrDefault().Abbr;
+                    loc.GetFromAddress(model.Address1, model.City, state, model.PostalCode, (abc) =>
+                    {
+                        if (abc.statusCode != 200)
+                        {
+                            throw new ArgumentException("Unable to reach geolocation services");
+                        }
+                        if (abc.resourceSets[0] != null && abc.resourceSets[0].resources[0] != null)
+                        {
+                            // order is specified here http://msdn.microsoft.com/en-us/library/ff701726.aspx
+                            double lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                            double lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                            latlong = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                        }
+                    });
 
                     CompanyProfile cp = new CompanyProfile
                     {
@@ -261,6 +287,11 @@ namespace BCWeb.Controllers
                         Published = false,
                         StateId = model.StateId
                     };
+
+                    if (latlong != null)
+                    {
+                        cp.GeoLocation = latlong;
+                    }
 
                     // if we can create the company, create the user
                     if (_serviceLayer.CreateCompany(cp))
@@ -320,6 +351,10 @@ namespace BCWeb.Controllers
                 catch (MembershipCreateUserException e)
                 {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("Exception", ex.Message);
                 }
             }
 

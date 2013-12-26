@@ -28,7 +28,7 @@ namespace BCWeb.Tests.Areas.Project.Controllers
 
 
             // act
-            var result = controller.Send(1);
+            var result = controller.SendForBidPackage(1);
 
             // assert
             Assert.IsNotNull(result);
@@ -53,10 +53,10 @@ namespace BCWeb.Tests.Areas.Project.Controllers
 
             BidPackageInvitationViewModel viewModel = new BidPackageInvitationViewModel();
             viewModel.BidPackageId = 1;
-            viewModel.CompanyId = new List<int> { 1, 2, 3, 4, 5, 6 };
+            viewModel.CompanyId = new int[] { 1, 2, 3, 4, 5, 6 };
 
             // act
-            var result = controller.Send(viewModel);
+            var result = controller.SendForBidPackage(viewModel);
 
             // assert
             Assert.IsNotNull(result);
@@ -82,10 +82,10 @@ namespace BCWeb.Tests.Areas.Project.Controllers
 
             BidPackageInvitationViewModel viewModel = new BidPackageInvitationViewModel();
             viewModel.BidPackageId = 1;
-            viewModel.CompanyId = new List<int> { 1, 2, 3, 4, 5, 6 };
+            viewModel.CompanyId = new int[] { 1, 2, 3, 4, 5, 6 };
 
             // act
-            var result = controller.Send(viewModel);
+            var result = controller.SendForBidPackage(viewModel);
 
             // assert
             Assert.IsNotNull(result);

@@ -7,7 +7,10 @@ namespace BCWeb.Areas.Project.Models.Invitations.ViewModel
 {
     public class BidPackageInvitationViewModel
     {
-        public IEnumerable<int> CompanyId { get; set; }
+        public int[] CompanyId { get; set; }
         public int BidPackageId { get; set; }
+        public string ProjectName { get; set; }
+        public string BidPackageTitle { get; set; }
+        public int BPScopeCount { get; set; }
     }
 }

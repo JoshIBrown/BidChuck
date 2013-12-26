@@ -1,5 +1,6 @@
 ﻿using BCModel;
 using BCModel.Projects;
+using BCWeb.Areas.Account.Models.Company.ViewModel;
 using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
 using BCWeb.Models;
 using BCWeb.Models.GenericViewModel;
@@ -24,6 +25,19 @@ namespace BCWeb.Api
         {
             _service = service;
             _security = security;
+        }
+
+
+        public IEnumerable<CompanyScopeItem> GetCompaniesToInvite(int bidPackageId)
+        {
+            IEnumerable<CompanyScopeItem> result = new List<CompanyScopeItem>();
+
+            
+            // exclude companies that have already been sent an invitation
+            // if paid member, include all companies in operating radius
+            // else only include members in social connection 
+
+            return result;
         }
 
         [ValidateHttpAntiForgeryToken]

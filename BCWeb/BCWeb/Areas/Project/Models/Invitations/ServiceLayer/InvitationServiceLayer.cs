@@ -144,5 +144,20 @@ namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
                     where r.BidPackageId == bpId
                     select r).AsEnumerable();
         }
+
+
+        public IEnumerable<BCModel.CompanyProfile> GetBestFitCompanies(int bpId, bool inNetworkOnly)
+        {
+            BCModel.Projects.BidPackage theBidPackage = _repo.GetBidPackage(bpId);
+
+            // get companies who operate in the area of the project
+            var foo = from c in _repo.QueryCompanies()
+                      where c.GeoLocation.Distance(theBidPackage.Project.GeoLocation) <= c.OperatingDistance
+                      select c;
+
+
+                         
+            throw new NotImplementedException();
+        }
     }
 }

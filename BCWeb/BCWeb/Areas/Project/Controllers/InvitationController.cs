@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace BCWeb.Areas.Project.Controllers
 {
+    [Authorize]
     public class InvitationController : Controller
     {
         private IInvitationServiceLayer _service;
@@ -35,17 +36,18 @@ namespace BCWeb.Areas.Project.Controllers
         }
 
         // GET: /Project/Invitation/Send/1
-        public ActionResult Send(int id)
+        public ActionResult SendForBidPackage(int bidPackageId)
         {
             BidPackageInvitationViewModel viewModel = new BidPackageInvitationViewModel();
-            viewModel.BidPackageId = id;
+            viewModel.BidPackageId = bidPackageId;
+
 
             return View("Send", viewModel);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Send(BidPackageInvitationViewModel viewModel)
+        
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult SendForBidPackage(BidPackageInvitationViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -82,6 +84,18 @@ namespace BCWeb.Areas.Project.Controllers
             }
 
             return View("Send", viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult SendForProject(int projectId)
+        {
+            return View();
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult SendForProject(object viewModel)
+        {
+            return View();
         }
 
         [HttpGet]

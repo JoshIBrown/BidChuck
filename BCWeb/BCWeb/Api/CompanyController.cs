@@ -1,5 +1,6 @@
 ﻿using BCModel;
 using BCWeb.Areas.Account.Models.Company.ServiceLayer;
+using BCWeb.Areas.Account.Models.Company.ViewModel;
 using BCWeb.Areas.Admin.Models.Companies;
 using BCWeb.Helpers;
 using BCWeb.Models;
@@ -27,12 +28,6 @@ namespace BCWeb.Api
             _service = service;
             _security = security;
         }
-
-        // /api/Company/GetNewest
-       
-        
-
-        // get newest group by scope
 
         public IEnumerable<CompanySearchResult> GetSearch(string query)
         {
