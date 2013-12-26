@@ -85,24 +85,25 @@ namespace BCWeb.Models
 
         [Required]
         [Display(Name = "First Name")]
-        [RegularExpression("^[a-zA-Z]*")]
+        [RegularExpression(@"^\w*")]
         public string FirstName { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
-        [RegularExpression("^[a-zA-Z -]*")]
+        [RegularExpression(@"^\w*")]
         public string LastName { get; set; }
 
 
         [Display(Name = "Address (optional)")]
-        [RegularExpression(@"^[a-zA-Z\d\s]+$")]
+        [RegularExpression(@"^[a-zA-Z\d\s-]+$")]
         public string Address1 { get; set; }
         [Display(Name = "Address 2 (optional)")]
-        [RegularExpression(@"^[a-zA-Z\d\s#]*$")]
+        [RegularExpression(@"^[a-zA-Z\d\s#-]*$")]
         public string Address2 { get; set; }
 
-        [Display(Name = "City (optional)")]
+        [Display(Name = "City")]
         [RegularExpression("^[a-zA-Z -]*")]
+        [Required]
         public string City { get; set; }
 
         [Required]

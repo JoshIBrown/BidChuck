@@ -242,11 +242,6 @@ namespace BCWeb.Controllers
                 ModelState.AddModelError("", "Incorrect captcha answer.");
             }
 
-
-
-
-
-
             int cpId;
             if (ModelState.IsValid)
             {
@@ -255,24 +250,47 @@ namespace BCWeb.Controllers
                 {
 
                     GeoLocator loc = new GeoLocator();
-                    
+
                     DbGeography latlong = default(DbGeography);
 
                     string state = _serviceLayer.GetStates().Where(x => x.Id == model.StateId).FirstOrDefault().Abbr;
-                    loc.GetFromAddress(model.Address1, model.City, state, model.PostalCode, (abc) =>
+
+                    if (model.Address1 == null || model.Address1 == string.Empty)
                     {
-                        if (abc.statusCode != 200)
+                        loc.GetFromCityStateZip(model.City, state, model.PostalCode, (abc) =>
                         {
-                            throw new ArgumentException("Unable to reach geolocation services");
-                        }
-                        if (abc.resourceSets[0] != null && abc.resourceSets[0].resources[0] != null)
+                            if (abc.statusCode != 200)
+                            {
+                                throw new ArgumentException("Unable to reach geolocation services");
+                            }
+                            if (abc.resourceSets[0] != null && abc.resourceSets[0].resources[0] != null)
+                            {
+                                // order is specified here http://msdn.microsoft.com/en-us/library/ff701726.aspx
+                                double lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                                double lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                                latlong = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                            }
+                        });
+                    }
+                    else
+                    {
+                        loc.GetFromAddress(model.Address1, model.City, state, model.PostalCode, (abc) =>
                         {
-                            // order is specified here http://msdn.microsoft.com/en-us/library/ff701726.aspx
-                            double lat = abc.resourceSets[0].resources[0].point.coordinates[0];
-                            double lng = abc.resourceSets[0].resources[0].point.coordinates[1];
-                            latlong = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
-                        }
-                    });
+                            if (abc.statusCode != 200)
+                            {
+                                throw new ArgumentException("Unable to reach geolocation services");
+                            }
+                            if (abc.resourceSets[0] != null && abc.resourceSets[0].resources[0] != null)
+                            {
+                                // order is specified here http://msdn.microsoft.com/en-us/library/ff701726.aspx
+                                double lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                                double lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                                latlong = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                            }
+                        });
+                    }
+
+
 
                     CompanyProfile cp = new CompanyProfile
                     {
