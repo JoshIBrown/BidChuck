@@ -56,7 +56,24 @@ namespace BCWeb.Helpers
                 RootObject dser = JsonConvert.DeserializeObject<RootObject>(response);
                 callback(dser);
             }
+        }
 
+        public void GetFromStateZip(string state, string postalcode, Action<RootObject> callback)
+        {
+            string key = ConfigurationManager.AppSettings["bingMapsKey"].ToString();
+
+            // http://dev.virtualearth.net/REST/v1/Locations/US/adminDistrict/postalCode/locality/addressLine?includeNeighborhood=includeNeighborhood&maxResults=maxResults&key=BingMapsKey
+            // http://msdn.microsoft.com/en-us/library/ff701714.aspx
+
+            string uri = string.Format("http://dev.virtualearth.net/REST/v1/Locations/?adminDistrict={0}&postalCode={1}&countryRegion=US&key={2}", state, postalcode, key);
+
+            string response = new WebClient().DownloadString(uri);
+
+            if (callback != null && response != string.Empty)
+            {
+                RootObject dser = JsonConvert.DeserializeObject<RootObject>(response);
+                callback(dser);
+            }
         }
     }
 }

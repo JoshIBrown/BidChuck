@@ -4,6 +4,7 @@ using BCWeb.Areas.Admin.Models.Companies;
 using BCWeb.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Data.Spatial;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -152,6 +153,79 @@ namespace BCWeb.Areas.Admin.Controllers
             };
 
             return View(viewModel);
+        }
+
+        public ActionResult UpdateEmptyLatLong()
+        {
+            // get list of companies with missing lat long
+            var companies = _service.GetEmptyLatLongList().Select(s => new CompanyProfileListItem { Id = s.Id, CompanyName = s.CompanyName }).ToList();
+            // show to user
+            return View(companies);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult UpdateEmptyLatLong(int[] companyId)
+        {
+            GeoLocator locator = new GeoLocator();
+            CompanyProfile company;
+
+            for (int i = 0; i < companyId.Length; i++)
+            {
+                company = _service.Get(companyId[i]);
+                if (company.Id != 1)
+                {
+                    if (company.Address1 == null && company.City == null && company.StateId != null && company.PostalCode != null)
+                    {
+
+                        locator.GetFromStateZip(company.State.Abbr, company.PostalCode, (abc) =>
+                        {
+                            if (abc.statusCode == 200
+                                && abc.resourceSets != null
+                                && abc.resourceSets.Count == 1
+                                && abc.resourceSets[0].estimatedTotal == 1)
+                            {
+                                var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                                var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                                company.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                                _service.Update(company);
+                            }
+                        });
+                    }
+                    else if ((company.Address1 == null || company.Address1 == string.Empty) && company.StateId != null && company.PostalCode != null)
+                    {
+                        locator.GetFromCityStateZip(company.City, company.State.Abbr, company.PostalCode, (abc) =>
+                        {
+                            if (abc.statusCode == 200
+                                && abc.resourceSets != null
+                                && abc.resourceSets.Count == 1
+                                && abc.resourceSets[0].estimatedTotal == 1)
+                            {
+                                var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                                var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                                company.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                                _service.Update(company);
+                            }
+                        });
+                    }
+                    else if ((company.Address1 != null && company.Address1 != string.Empty) && (company.City != null && company.City != string.Empty) && company.StateId != null && company.PostalCode != null)
+                    {
+                        locator.GetFromAddress(company.Address1, company.City, company.State.Abbr, company.PostalCode, (abc) =>
+                        {
+                            if (abc.statusCode == 200
+                                && abc.resourceSets != null
+                                && abc.resourceSets.Count == 1
+                                && abc.resourceSets[0].estimatedTotal == 1)
+                            {
+                                var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                                var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                                company.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                                _service.Update(company);
+                            }
+                        });
+                    }
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         private void rePopViewModel(CompanyProfileEditModel viewModel)

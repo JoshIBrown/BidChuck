@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using BCWeb.Areas.Account.Models.Company.Repository;
 using BCWeb.Helpers;
+using System.Data.Spatial;
 namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
 {
     public class CompanyProfileServiceLayer: ICompanyProfileServiceLayer
@@ -131,6 +132,14 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
         public BCModel.UserProfile GetUserProfile(int id)
         {
             return _repo.GetUserProfile(id);
+        }
+
+
+        public IEnumerable<BCModel.CompanyProfile> GetEmptyLatLongList()
+        {
+            return (from r in _repo.Query()
+                    where r.GeoLocation == null || r.GeoLocation == default(DbGeography)
+                    select r).AsEnumerable();
         }
     }
 }

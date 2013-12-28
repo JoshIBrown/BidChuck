@@ -40,7 +40,10 @@ body {
   font-style: normal;
   line-height: 1;
   position: relative;
-  cursor: default; }
+  cursor: default;
+  margin-top: 45px;
+}
+
 
 a:hover {
   cursor: pointer; }
@@ -1442,14 +1445,17 @@ meta.foundation-mq-topbar {
   width: 100%;
   background: #333333; }
   .contain-to-grid .top-bar {
-    margin-bottom: 0; }
+    margin-bottom: 0; 
+    
+  }
 
 .fixed {
   width: 100%;
   left: 0;
   position: fixed;
   top: 0;
-  z-index: 99; }
+  z-index: 99;
+}
   .fixed.expanded:not(.top-bar) {
     overflow-y: auto;
     height: auto;

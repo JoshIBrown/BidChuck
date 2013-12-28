@@ -1,0 +1,29 @@
+﻿@model List<BCWeb.Areas.Admin.Models.Companies.CompanyProfileListItem>
+@{
+    ViewBag.Title = "UpdateEmptyLatLong";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<div class="row">
+    <div class="large-12 columns">
+        <h2>Companies missing lat long</h2>
+        <p>clicking update will have the server loop through each company, and use the location information provided to get a lat and long coordinate from bing maps.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="large-6 columns">
+        @using (Html.BeginForm())
+        {
+            <ul>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <li>
+                        <input type="hidden" value="@Model[i].Id" name="@string.Format("companyId[{0}]", i)" />
+                        @Model[i].CompanyName</li>
+                }
+            </ul>
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Update Lat Long" class="medium button" />
+        }
+    </div>
+</div>

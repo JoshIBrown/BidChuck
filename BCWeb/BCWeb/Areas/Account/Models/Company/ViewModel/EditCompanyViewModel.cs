@@ -32,7 +32,8 @@ namespace BCWeb.Areas.Account.Models.Company.ViewModel
         [RegularExpression(@"^[a-zA-Z\d\s#]*$")]
         public string Address2 { get; set; }
 
-        [Display(Name = "City (optional)")]
+        [Display(Name = "City")]
+        [Required]
         [RegularExpression("^[a-zA-Z -]*")]
         public string City { get; set; }
 

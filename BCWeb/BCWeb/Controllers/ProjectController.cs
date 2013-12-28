@@ -7,6 +7,7 @@ using BCWeb.Models.Project.ServiceLayer;
 using BCWeb.Models.Project.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Spatial;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -158,6 +159,49 @@ namespace BCWeb.Controllers
             {
                 try
                 {
+
+                    GeoLocator loc = new GeoLocator();
+
+                    DbGeography latlong = default(DbGeography);
+
+                    string state = _service.GetStates().Where(x => x.Id == viewModel.StateId).FirstOrDefault().Abbr;
+
+                    if (viewModel.Address == null || viewModel.Address == string.Empty)
+                    {
+                        loc.GetFromCityStateZip(viewModel.City, state, viewModel.PostalCode, (abc) =>
+                        {
+                            if (abc.statusCode != 200)
+                            {
+                                throw new ArgumentException("Unable to reach geolocation services");
+                            }
+                            if (abc.resourceSets[0] != null && abc.resourceSets[0].resources[0] != null)
+                            {
+                                // order is specified here http://msdn.microsoft.com/en-us/library/ff701726.aspx
+                                double lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                                double lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                                latlong = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                            }
+                        });
+                    }
+                    else
+                    {
+                        loc.GetFromAddress(viewModel.Address, viewModel.City, state, viewModel.PostalCode, (abc) =>
+                        {
+                            if (abc.statusCode != 200)
+                            {
+                                throw new ArgumentException("Unable to reach geolocation services");
+                            }
+                            if (abc.resourceSets[0] != null && abc.resourceSets[0].resources[0] != null)
+                            {
+                                // order is specified here http://msdn.microsoft.com/en-us/library/ff701726.aspx
+                                double lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                                double lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                                latlong = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                            }
+                        });
+                    }
+
+
                     int userId = _security.GetUserId(User.Identity.Name);
                     int companyId = _service.GetUserProfile(userId).CompanyId;
 
@@ -181,8 +225,10 @@ namespace BCWeb.Controllers
                         Scopes = new List<ProjectXScope>(),
                         BidPackages = new List<BidPackage>(),
                         WalkThruDateTime = viewModel.WalkThruDateTime,
-                        WalkThruStatus = viewModel.WalkThruStatus.Value
+                        WalkThruStatus = viewModel.WalkThruStatus.Value,
+                        GeoLocation = latlong
                     };
+
                     // create master bid package
                     BidPackage projectPackage = new BidPackage
                     {

@@ -16,5 +16,7 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
         IEnumerable<UserProfile> GetUserProfiles();
         IEnumerable<UserProfile> GetUserProfiles(Expression<Func<UserProfile, bool>> predicate);
         UserProfile GetUserProfile(int id);
+
+        IEnumerable<CompanyProfile> GetEmptyLatLongList();
     }
 }

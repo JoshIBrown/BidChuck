@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BCModel;
+using System.Data.Spatial;
 
 namespace BCWeb.Areas.Account.Controllers
 {
@@ -122,35 +123,69 @@ namespace BCWeb.Areas.Account.Controllers
                 int userId = _security.GetUserId(User.Identity.Name);
                 var company = _serviceLayer.GetUserProfiles(u => u.UserId == userId).FirstOrDefault().Company;
 
-                // did address change?
-                if (viewModel.Address1 != null && company.Address1 != viewModel.Address1.Trim())
+                if (viewModel.Address1 != null)
                     company.Address1 = viewModel.Address1.Trim();
-                if (viewModel.Address2 != null && company.Address2 != viewModel.Address2.Trim())
+                if (viewModel.Address2 != null)
                     company.Address2 = viewModel.Address2.Trim();
 
-                // did city change?
-                if (viewModel.City != null && company.City != viewModel.City)
-                    company.City = viewModel.City;
+                company.City = viewModel.City;
+                company.CompanyName = viewModel.CompanyName.Trim();
+                company.OperatingDistance = viewModel.OperatingDistance;
+                company.Phone = Util.ConvertPhoneForStorage(viewModel.Phone.Trim());
+                company.PostalCode = viewModel.PostalCode.Trim();
+                company.StateId = viewModel.StateId;
 
-                // did company name change?
-                if (viewModel.CompanyName != null && company.CompanyName != viewModel.CompanyName.Trim())
-                    company.CompanyName = viewModel.CompanyName.Trim();
+                GeoLocator locator = new GeoLocator();
 
-                // did operating distance change?
-                if (viewModel.OperatingDistance == 0 && company.OperatingDistance != viewModel.OperatingDistance)
-                    company.OperatingDistance = viewModel.OperatingDistance;
+                if (company.Address1 == null && company.City == null && company.StateId != null && company.PostalCode != null)
+                {
 
-                // did phone change?
-                if (viewModel.Phone != null && company.Phone != viewModel.Phone.Trim())
-                    company.Phone = Util.ConvertPhoneForStorage(viewModel.Phone.Trim());
+                    locator.GetFromStateZip(company.State.Abbr, company.PostalCode, (abc) =>
+                    {
+                        if (abc.statusCode == 200
+                            && abc.resourceSets != null
+                            && abc.resourceSets.Count == 1
+                            && abc.resourceSets[0].estimatedTotal == 1)
+                        {
+                            var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                            var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                            company.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
 
-                // did postal code change?
-                if (viewModel.PostalCode != null && company.PostalCode != viewModel.PostalCode.Trim())
-                    company.PostalCode = viewModel.PostalCode.Trim();
+                        }
+                    });
+                }
+                else if ((company.Address1 == null || company.Address1 == string.Empty) && company.StateId != null && company.PostalCode != null)
+                {
+                    locator.GetFromCityStateZip(company.City, company.State.Abbr, company.PostalCode, (abc) =>
+                    {
+                        if (abc.statusCode == 200
+                            && abc.resourceSets != null
+                            && abc.resourceSets.Count == 1
+                            && abc.resourceSets[0].estimatedTotal == 1)
+                        {
+                            var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                            var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                            company.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
 
-                // did state change?
-                if (viewModel.StateId != 0 && company.StateId != viewModel.StateId)
-                    company.StateId = viewModel.StateId;
+                        }
+                    });
+                }
+                else if ((company.Address1 != null && company.Address1 != string.Empty) && (company.City != null && company.City != string.Empty) && company.StateId != null && company.PostalCode != null)
+                {
+                    locator.GetFromAddress(company.Address1, company.City, company.State.Abbr, company.PostalCode, (abc) =>
+                    {
+                        if (abc.statusCode == 200
+                            && abc.resourceSets != null
+                            && abc.resourceSets.Count == 1
+                            && abc.resourceSets[0].estimatedTotal == 1)
+                        {
+                            var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                            var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                            company.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+
+                        }
+                    });
+                }
 
                 // did business type change?
                 if (company.BusinessType != viewModel.BusinessType)

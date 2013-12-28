@@ -827,6 +827,7 @@
     <Content Include="Areas\Project\Views\Document\Details.cshtml" />
     <Content Include="Areas\Project\Views\Document\Edit.cshtml" />
     <Content Include="Areas\Project\Views\Document\EditorTemplates\ProjectDocEditModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Company\UpdateEmptyLatLong.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
