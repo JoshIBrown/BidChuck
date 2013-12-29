@@ -176,52 +176,15 @@ namespace BCWeb.Areas.Admin.Controllers
                 {
                     if (company.Address1 == null && company.City == null && company.StateId != null && company.PostalCode != null)
                     {
-
-                        locator.GetFromStateZip(company.State.Abbr, company.PostalCode, (abc) =>
-                        {
-                            if (abc.statusCode == 200
-                                && abc.resourceSets != null
-                                && abc.resourceSets.Count == 1
-                                && abc.resourceSets[0].estimatedTotal == 1)
-                            {
-                                var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
-                                var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
-                                company.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
-                                _service.Update(company);
-                            }
-                        });
+                       company.GeoLocation = locator.GetFromStateZip(company.State.Abbr, company.PostalCode);
                     }
                     else if ((company.Address1 == null || company.Address1 == string.Empty) && company.StateId != null && company.PostalCode != null)
                     {
-                        locator.GetFromCityStateZip(company.City, company.State.Abbr, company.PostalCode, (abc) =>
-                        {
-                            if (abc.statusCode == 200
-                                && abc.resourceSets != null
-                                && abc.resourceSets.Count == 1
-                                && abc.resourceSets[0].estimatedTotal == 1)
-                            {
-                                var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
-                                var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
-                                company.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
-                                _service.Update(company);
-                            }
-                        });
+                        company.GeoLocation = locator.GetFromCityStateZip(company.City, company.State.Abbr, company.PostalCode);
                     }
                     else if ((company.Address1 != null && company.Address1 != string.Empty) && (company.City != null && company.City != string.Empty) && company.StateId != null && company.PostalCode != null)
                     {
-                        locator.GetFromAddress(company.Address1, company.City, company.State.Abbr, company.PostalCode, (abc) =>
-                        {
-                            if (abc.statusCode == 200
-                                && abc.resourceSets != null
-                                && abc.resourceSets.Count == 1
-                                && abc.resourceSets[0].estimatedTotal == 1)
-                            {
-                                var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
-                                var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
-                                company.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
-                                _service.Update(company);
-                            }
-                        });
+                        company.GeoLocation = locator.GetFromAddress(company.Address1, company.City, company.State.Abbr, company.PostalCode);
                     }
                 }
             }

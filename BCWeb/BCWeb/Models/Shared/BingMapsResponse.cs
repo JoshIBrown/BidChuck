@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Models.Shared
+namespace BCWeb.Models.Shared.BingMaps
 {
     public class Point
     {

@@ -85,48 +85,15 @@ namespace BCWeb.Areas.Admin.Controllers
 
                 if (viewModel.Address == null && viewModel.City == null && viewModel.StateId != null && viewModel.PostalCode != null)
                 {
-                    locator.GetFromStateZip(projectState.Abbr, viewModel.PostalCode, (abc) =>
-                    {
-                        if (abc.statusCode == 200
-                            && abc.resourceSets != null
-                            && abc.resourceSets.Count == 1
-                            && abc.resourceSets[0].estimatedTotal == 1)
-                        {
-                            var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
-                            var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
-                            toCreate.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
-                        }
-                    });
+                    toCreate.GeoLocation = locator.GetFromStateZip(projectState.Abbr, viewModel.PostalCode);
                 }
                 else if ((viewModel.Address == null || viewModel.Address == string.Empty) && viewModel.StateId != null && viewModel.PostalCode != null)
                 {
-                    locator.GetFromCityStateZip(viewModel.City, projectState.Abbr, viewModel.PostalCode, (abc) =>
-                    {
-                        if (abc.statusCode == 200
-                            && abc.resourceSets != null
-                            && abc.resourceSets.Count == 1
-                            && abc.resourceSets[0].estimatedTotal == 1)
-                        {
-                            var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
-                            var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
-                            toCreate.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
-                        }
-                    });
+                    toCreate.GeoLocation = locator.GetFromCityStateZip(viewModel.City, projectState.Abbr, viewModel.PostalCode);
                 }
                 else if ((viewModel.Address != null && viewModel.Address != string.Empty) && (viewModel.City != null && viewModel.City != string.Empty) && viewModel.StateId != null && viewModel.PostalCode != null)
                 {
-                    locator.GetFromAddress(viewModel.Address, viewModel.City, projectState.Abbr, viewModel.PostalCode, (abc) =>
-                    {
-                        if (abc.statusCode == 200
-                            && abc.resourceSets != null
-                            && abc.resourceSets.Count == 1
-                            && abc.resourceSets[0].estimatedTotal == 1)
-                        {
-                            var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
-                            var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
-                            toCreate.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
-                        }
-                    });
+                    toCreate.GeoLocation = locator.GetFromAddress(viewModel.Address, viewModel.City, projectState.Abbr, viewModel.PostalCode);
                 }
 
 
@@ -268,49 +235,17 @@ namespace BCWeb.Areas.Admin.Controllers
 
             if (viewModel.Address == null && viewModel.City == null && viewModel.StateId != null && viewModel.PostalCode != null)
             {
-                locator.GetFromStateZip(projectState.Abbr, viewModel.PostalCode, (abc) =>
-                {
-                    if (abc.statusCode == 200
-                        && abc.resourceSets != null
-                        && abc.resourceSets.Count == 1
-                        && abc.resourceSets[0].estimatedTotal == 1)
-                    {
-                        var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
-                        var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
-                        toUpdate.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
-                    }
-                });
+                toUpdate.GeoLocation = locator.GetFromStateZip(projectState.Abbr, viewModel.PostalCode);
             }
             else if ((viewModel.Address == null || viewModel.Address == string.Empty) && viewModel.StateId != null && viewModel.PostalCode != null)
             {
-                locator.GetFromCityStateZip(viewModel.City, projectState.Abbr, viewModel.PostalCode, (abc) =>
-                {
-                    if (abc.statusCode == 200
-                        && abc.resourceSets != null
-                        && abc.resourceSets.Count == 1
-                        && abc.resourceSets[0].estimatedTotal == 1)
-                    {
-                        var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
-                        var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
-                        toUpdate.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
-                    }
-                });
+                toUpdate.GeoLocation = locator.GetFromCityStateZip(viewModel.City, projectState.Abbr, viewModel.PostalCode);
             }
             else if ((viewModel.Address != null && viewModel.Address != string.Empty) && (viewModel.City != null && viewModel.City != string.Empty) && viewModel.StateId != null && viewModel.PostalCode != null)
             {
-                locator.GetFromAddress(viewModel.Address, viewModel.City, projectState.Abbr, viewModel.PostalCode, (abc) =>
-                {
-                    if (abc.statusCode == 200
-                        && abc.resourceSets != null
-                        && abc.resourceSets.Count == 1
-                        && abc.resourceSets[0].estimatedTotal == 1)
-                    {
-                        var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
-                        var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
-                        toUpdate.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
-                    }
-                });
+                toUpdate.GeoLocation = locator.GetFromAddress(viewModel.Address, viewModel.City, projectState.Abbr, viewModel.PostalCode);
             }
+
             try
             {
                 if (_service.Update(toUpdate))
@@ -328,6 +263,41 @@ namespace BCWeb.Areas.Admin.Controllers
             }
             rePopVieModel(viewModel);
             return View(viewModel);
+        }
+
+        public ActionResult UpdateEmptyLatLong()
+        {
+            List<ProjectListItem> viewModel = _service.GetEmptyLatLongList().Select(x => new ProjectListItem { Id = x.Id, Title = x.Title, Architect = x.Architect.CompanyName, Number = x.Number }).ToList();
+            return View(viewModel);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult UpdateEmptyLatLong(int[] projectId)
+        {
+
+            GeoLocator locator = new GeoLocator();
+            BCModel.Projects.Project theProject;
+            for (int i = 0; i < projectId.Length; i++)
+            {
+
+                theProject = _service.Get(projectId[i]);
+
+                if (theProject.Address == null && theProject.City == null && theProject.StateId != null && theProject.PostalCode != null)
+                {
+                    theProject.GeoLocation = locator.GetFromStateZip(theProject.State.Abbr, theProject.PostalCode);
+                }
+                else if ((theProject.Address == null || theProject.Address == string.Empty) && theProject.StateId != null && theProject.PostalCode != null)
+                {
+                    theProject.GeoLocation = locator.GetFromCityStateZip(theProject.City, theProject.State.Abbr, theProject.PostalCode);
+                }
+                else if ((theProject.Address != null && theProject.Address != string.Empty) && (theProject.City != null && theProject.City != string.Empty) && theProject.StateId != null && theProject.PostalCode != null)
+                {
+                    theProject.GeoLocation = locator.GetFromAddress(theProject.Address, theProject.City, theProject.State.Abbr, theProject.PostalCode);
+                }
+                _service.Update(theProject);
+            }
+
+            return RedirectToAction("Index");
         }
 
         private void rePopVieModel(BCWeb.Areas.Admin.Models.Projects.ViewModel.ProjectEditModel viewModel)

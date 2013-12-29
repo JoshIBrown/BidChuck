@@ -332,5 +332,13 @@ namespace BCWeb.Models.Project.ServiceLayer
         {
             return _repo.QueryStates().Where(s => s.Id == id).FirstOrDefault();
         }
+
+
+        public List<BCModel.Projects.Project> GetEmptyLatLongList()
+        {
+            return (from r in _repo.Query()
+                    where r.GeoLocation == null
+                    select r).ToList();
+        }
     }
 }

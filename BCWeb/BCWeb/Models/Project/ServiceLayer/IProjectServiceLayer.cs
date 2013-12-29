@@ -41,5 +41,7 @@ namespace BCWeb.Models.Project.ServiceLayer
         IEnumerable<UserProfile> GetArchitectsAndGenContractorUsers();
 
         State GetState(int id);
+
+        List<BCModel.Projects.Project> GetEmptyLatLongList();
     }
 }
