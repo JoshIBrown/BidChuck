@@ -2,7 +2,7 @@
     var app = angular.module('projectList', ['DataTablesDirective']);
     app.controller('ProjectCtrl', ['$scope', '$http', '$compile', function ($scope, $http, $compile) {
 
-        $scope.myToolbar = '<input type="button" class="small button" value="Add User" ng-click="Add()" />';
+        $scope.myToolbar = '<input type="button" class="small button" value="Add Project" ng-click="Add()" />';
         $scope.options = {
             "bStateSave": true,
             "iCookieDuration": 2419200, /* 1 month */

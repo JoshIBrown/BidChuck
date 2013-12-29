@@ -25,5 +25,7 @@ namespace BCWeb.Models.Project.Repository
         IQueryable<BidPackageXScope> QueryBidPackageScopes();
         IQueryable<Scope> QueryScopes();
         IQueryable<ProjectDocument> QueryDocuments();
+        IQueryable<UserProfile> QueryUserProfiles();
+        
     }
 }

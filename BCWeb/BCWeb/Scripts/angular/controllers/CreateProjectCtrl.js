@@ -9,7 +9,7 @@ angular.element(document).ready(function () { // same as $(document).ready()
 
     // declare the controller for the application
 
-    function ProjectCtrl($scope, $http, $window) {
+    function ProjectCtrl($scope, $http) {
         'use strict';
 
         // set the web service url for the scope picker
@@ -70,7 +70,7 @@ angular.element(document).ready(function () { // same as $(document).ready()
         };
     };
     // inject dependencies
-    ProjectCtrl.$inject = ['$scope', '$http', '$window'];
+    ProjectCtrl.$inject = ['$scope', '$http'];
     // set controller
     app.controller('ProjectCtrl', ProjectCtrl);
     // bootstrap the application

@@ -5,6 +5,7 @@ using BCWeb.Helpers;
 using BCWeb.Models.Project.ServiceLayer;
 using System;
 using System.Collections.Generic;
+using System.Data.Spatial;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -41,7 +42,7 @@ namespace BCWeb.Areas.Admin.Controllers
             viewModel.ConstructionTypes = _service.GetConstructionTypes().Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
             viewModel.BuildingTypes = _service.GetBuildingTypes().Select(b => new SelectListItem { Text = b.Name, Value = b.Id.ToString() });
             viewModel.Architects = _service.GetArchitects().Select(a => new SelectListItem { Text = a.CompanyName + " - " + (a.StateId.HasValue ? a.State.Abbr : "N/A"), Value = a.Id.ToString() });
-            viewModel.CreatedBy = _service.GetArchitectsAndGenContractors().Select(c => new SelectListItem { Text = c.CompanyName + " - " + (c.StateId.HasValue ? c.State.Abbr : "N/A"), Value = c.Id.ToString() });
+            viewModel.CreatedBy = _service.GetArchitectsAndGenContractorUsers().OrderBy(u => u.Company.CompanyName).Select(u => new SelectListItem { Text = u.Company.CompanyName + " --- " + u.Email, Value = u.UserId.ToString() });
 
             return View(viewModel);
         }
@@ -78,6 +79,56 @@ namespace BCWeb.Areas.Admin.Controllers
                     WalkThruStatus = viewModel.WalkThruStatus.Value
                 };
 
+                GeoLocator locator = new GeoLocator();
+                State projectState = _service.GetState(viewModel.StateId);
+
+                if (viewModel.Address == null && viewModel.City == null && viewModel.StateId != null && viewModel.PostalCode != null)
+                {
+                    locator.GetFromStateZip(projectState.Abbr, viewModel.PostalCode, (abc) =>
+                    {
+                        if (abc.statusCode == 200
+                            && abc.resourceSets != null
+                            && abc.resourceSets.Count == 1
+                            && abc.resourceSets[0].estimatedTotal == 1)
+                        {
+                            var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                            var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                            toCreate.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                        }
+                    });
+                }
+                else if ((viewModel.Address == null || viewModel.Address == string.Empty) && viewModel.StateId != null && viewModel.PostalCode != null)
+                {
+                    locator.GetFromCityStateZip(viewModel.City, projectState.Abbr, viewModel.PostalCode, (abc) =>
+                    {
+                        if (abc.statusCode == 200
+                            && abc.resourceSets != null
+                            && abc.resourceSets.Count == 1
+                            && abc.resourceSets[0].estimatedTotal == 1)
+                        {
+                            var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                            var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                            toCreate.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                        }
+                    });
+                }
+                else if ((viewModel.Address != null && viewModel.Address != string.Empty) && (viewModel.City != null && viewModel.City != string.Empty) && viewModel.StateId != null && viewModel.PostalCode != null)
+                {
+                    locator.GetFromAddress(viewModel.Address, viewModel.City, projectState.Abbr, viewModel.PostalCode, (abc) =>
+                    {
+                        if (abc.statusCode == 200
+                            && abc.resourceSets != null
+                            && abc.resourceSets.Count == 1
+                            && abc.resourceSets[0].estimatedTotal == 1)
+                        {
+                            var lat = abc.resourceSets[0].resources[0].point.coordinates[0];
+                            var lng = abc.resourceSets[0].resources[0].point.coordinates[1];
+                            toCreate.GeoLocation = DbGeography.FromText(string.Format("POINT({1} {0})", lat, lng));
+                        }
+                    });
+                }
+
+
                 BidPackage projectPackage = new BidPackage
                 {
                     IsMaster = true,
@@ -90,10 +141,10 @@ namespace BCWeb.Areas.Admin.Controllers
                 };
 
 
-                CompanyProfile createdBy = _service.GetCompanyProfile(viewModel.CreatedById);
+                UserProfile createdBy = _service.GetUserProfile(viewModel.CreatedById);
 
                 // if createdby is a GC, self-invite
-                if (createdBy.BusinessType == BusinessType.GeneralContractor)
+                if (createdBy.Company.BusinessType == BusinessType.GeneralContractor)
                 {
                     projectPackage.Invitees.Add(new Invitation
                     {
@@ -130,6 +181,25 @@ namespace BCWeb.Areas.Admin.Controllers
             return View();
         }
 
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var raw = _service.Get(id);
+            ProjectEditModel viewModel = new ProjectEditModel { };
+            rePopVieModel(viewModel);
+            return View(viewModel);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(ProjectEditModel viewModel)
+        {
+            return View();
+        }
+
         private void rePopVieModel(ProjectEditModel viewModel)
         {
             viewModel.States = _service.GetStates().Select(s => new SelectListItem { Text = s.Abbr, Value = s.Abbr.ToString(), Selected = s.Id == viewModel.StateId });
@@ -138,7 +208,7 @@ namespace BCWeb.Areas.Admin.Controllers
             viewModel.ConstructionTypes = _service.GetConstructionTypes().Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString(), Selected = c.Id == viewModel.ConstructionTypeId });
             viewModel.BuildingTypes = _service.GetBuildingTypes().Select(b => new SelectListItem { Text = b.Name, Value = b.Id.ToString(), Selected = b.Id == viewModel.BuildingTypeId });
             viewModel.Architects = _service.GetArchitects().Select(a => new SelectListItem { Text = a.CompanyName + " - " + (a.StateId.HasValue ? a.State.Abbr : "N/A"), Value = a.Id.ToString(), Selected = a.Id == viewModel.ArchitectId });
-            viewModel.CreatedBy = _service.GetArchitectsAndGenContractors().Select(c => new SelectListItem { Text = c.CompanyName + " - " + (c.StateId.HasValue ? c.State.Abbr : "N/A"), Value = c.Id.ToString(), Selected = c.Id == viewModel.CreatedById });
+            viewModel.CreatedBy = _service.GetArchitectsAndGenContractorUsers().OrderBy(u => u.Company.CompanyName).Select(u => new SelectListItem { Text = u.Company.CompanyName + " --- " + u.Email, Value = u.UserId.ToString(), Selected = viewModel.CreatedById == u.UserId });
         }
     }
 }

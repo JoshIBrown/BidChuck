@@ -1,0 +1,182 @@
+﻿@model BCWeb.Areas.Admin.Models.Projects.ProjectEditModel
+<fieldset>
+    <legend>ProjectEditModel</legend>
+    <div class="row">
+        <div class="large-8 columns">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CreatedById)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.CreatedById, Model.CreatedBy, "Select...", new { @class = "pretty" })
+                @Html.ValidationMessageFor(model => model.CreatedById)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ArchitectId)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.ArchitectId, Model.Architects, "Select...", new { @class = "pretty" })
+                @Html.ValidationMessageFor(model => model.ArchitectId)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Title)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Number)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Number)
+                @Html.ValidationMessageFor(model => model.Number)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Description)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+
+            <div class="row">
+                <div class="large-12 columns">
+                    <fieldset class="large-3 columns left">
+                        <legend>Bid Deadline</legend>
+                        @Html.HiddenFor(m => m.BidDateTime)
+                        <div class="row collapse">
+                            <div class="large-8 small-8 columns ">
+                                <input type="text" id="BidDateTB" name="BidDateTB" ng-model="BidDateTB" ng-change="setBidDeadline()" />
+                            </div>
+                            <div class="large-4 small-4 columns">
+                                <span class="postfix">Date</span>
+                            </div>
+                        </div>
+                        <div class="row collapse">
+                            <div class="large-8 small-8 columns">
+                                <input type="text" id="BidTimeTB" name="BidTimeTB" ng-model="BidTimeTB" ng-change="setBidDeadline()" />
+                            </div>
+                            <div class="large-4 small-4 columns">
+                                <span class="postfix">Time</span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+
+                    <fieldset class="large-4 columns left">
+                        <legend>Walk Though</legend>
+                        @Html.HiddenFor(m => m.WalkThruDateTime)
+                        <div class="row">
+                            <div class="large-3 columns">
+                                <label>
+                                    @Html.RadioButtonFor(m => m.WalkThruStatus, BCModel.Projects.WalkThruStatus.NoWalkThru, new { ng_model = "walkThru" })
+                                    None</label>
+                                <label>
+                                    @Html.RadioButtonFor(m => m.WalkThruStatus, BCModel.Projects.WalkThruStatus.WalkThruTBD, new { ng_model = "walkThru" })
+                                    TBD</label>
+                                <label>
+                                    @Html.RadioButtonFor(m => m.WalkThruStatus, BCModel.Projects.WalkThruStatus.WalkThruIncluded, new { ng_model = "walkThru" })
+                                    Yes</label>
+                            </div>
+
+                            <div class="large-9 columns">
+                                <div class="row collapse">
+                                    <div class="large-8 small-8 columns">
+                                        <input type="text" id="WalkThruDateTB" name="WalkThruDateTB" ng-model="WalkThruDateTB" ng-disabled="!(walkThru=='WalkThruIncluded')" ng-change="setWalkThru()" />
+                                    </div>
+                                    <div class="large-4 small-4 columns"><span class="postfix">Date</span></div>
+                                </div>
+                                <div class="row collapse">
+                                    <div class="large-8 small-8 columns">
+                                        <input type="text" id="WalkThruTimeTB" name="WalkThruTimeTB" ng-model="WalkThruTimeTB" ng-disabled="!(walkThru=='WalkThruIncluded')" ng-change="setWalkThru()" />
+                                    </div>
+                                    <div class="large-4 small-4 columns">
+                                        <span class="postfix">Time</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Address)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.City)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.City)
+                @Html.ValidationMessageFor(model => model.City)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PostalCode)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PostalCode)
+                @Html.ValidationMessageFor(model => model.PostalCode)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.StateId)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.StateId, Model.States, "Select...", new { @class = "pretty" })
+                @Html.ValidationMessageFor(model => model.StateId)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProjectType)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.ProjectType, Model.ProjectTypes, "Select...", new { @class = "pretty" })
+                @Html.ValidationMessageFor(model => model.ProjectType)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProjectCategory)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.ProjectCategory, Model.ProjectCategories, "Select...", new { @class = "pretty" })
+                @Html.ValidationMessageFor(model => model.ProjectCategory)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ConstructionTypeId)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.ConstructionTypeId, Model.ConstructionTypes, "Select...", new { @class = "pretty" })
+                @Html.ValidationMessageFor(model => model.ConstructionTypeId)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.BuildingTypeId)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.BuildingTypeId, Model.BuildingTypes, "Select...", new { @class = "pretty" })
+                @Html.ValidationMessageFor(model => model.BuildingTypeId)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            @if (Model.SelectedScope != null)
+            {
+                @Html.Partial("_SelectedScopes", Model.SelectedScope);
+            }
+            <csi-scope-picker service-url="theServiceUrl" selected-scopes="passBackSelection"></csi-scope-picker>
+        </div>
+    </div>
+</fieldset>

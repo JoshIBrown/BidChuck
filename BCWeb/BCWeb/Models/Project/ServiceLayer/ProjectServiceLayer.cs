@@ -316,5 +316,21 @@ namespace BCWeb.Models.Project.ServiceLayer
         {
             return _repo.QueryDocuments().Where(d => d.ProjectId == projectId && d.CompanyId == companyId).AsEnumerable();
         }
+
+
+        public IEnumerable<BCModel.UserProfile> GetArchitectsAndGenContractorUsers()
+        {
+            return (from r in _repo.QueryCompanyProfiles()
+                    join u in _repo.QueryUserProfiles() on r.Id equals u.CompanyId
+                    where r.BusinessType == BCModel.BusinessType.GeneralContractor
+                    || r.BusinessType == BCModel.BusinessType.Architect
+                    select u).AsEnumerable();
+        }
+
+
+        public BCModel.State GetState(int id)
+        {
+            return _repo.QueryStates().Where(s => s.Id == id).FirstOrDefault();
+        }
     }
 }

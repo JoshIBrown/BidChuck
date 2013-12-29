@@ -66,6 +66,6 @@ namespace BCWeb.Areas.Admin.Models.Projects
         public IEnumerable<SelectListItem> ConstructionTypes { get; set; }
 
 
-        public IEnumerable<int> SelectedScope { get; set; }
+        public int[] SelectedScope { get; set; }
     }
 }

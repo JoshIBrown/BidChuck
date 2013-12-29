@@ -133,5 +133,11 @@ namespace BCWeb.Models.Project.Repository
         {
             return _docs;
         }
+
+
+        public IQueryable<UserProfile> QueryUserProfiles()
+        {
+            return _users;
+        }
     }
 }
