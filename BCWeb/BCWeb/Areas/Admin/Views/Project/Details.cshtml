@@ -1,6 +1,182 @@
-﻿@{
+﻿@model BCWeb.Areas.Admin.Models.Projects.ViewModel.ProjectViewModel
+
+@{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
-<h2>Details</h2>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<fieldset>
+    <legend>ProjectViewModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedById)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedById)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ArchitectId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ArchitectId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Architect)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Architect)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Number)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Number)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BidDateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BidDateTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WalkThruDateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WalkThruDateTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WalkThruStatus)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WalkThruStatus)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Address)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.City)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.City)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PostalCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PostalCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.State)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.State)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BuildingType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BuildingType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProjectType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProjectType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProjectCategory)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProjectCategory)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ConstructionType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ConstructionType)
+    </div>
+    <div class="row">
+                <div class="large-12 columns">
+                    @Html.LabelFor(m => m.SelectedScope)
+
+                    <dl class="accordion" data-accordion>
+                        @foreach (var s1 in Model.SelectedScope.Where(s => !s.parentId.HasValue))
+                        {
+                            <dd>
+                                <a href="@string.Format("#{0}", s1.Id)">@s1.Description</a>
+                                @if (Model.SelectedScope.Where(s => s.parentId.HasValue && s.parentId.Value == s1.Id).Count() > 0)
+                                {
+                                    <div id="@s1.Id" class="content">
+                                        <dl class="accordion" data-accordion>
+                                            @foreach (var s2 in Model.SelectedScope.Where(s => s.parentId.HasValue && s.parentId.Value == s1.Id))
+                                            {
+                                                <dd>
+                                                    <a href="@string.Format("#{0}", s2.Id)">@s2.Description</a>
+                                                    @if (Model.SelectedScope.Where(s => s.parentId.HasValue && s.parentId.Value == s2.Id).Count() > 0)
+                                                    {
+                                                        <div id="@s2.Id" class="content">
+                                                            <dl class="accordion" data-accordion>
+                                                                @foreach (var s3 in Model.SelectedScope.Where(s => s.parentId.HasValue && s.parentId.Value == s2.Id))
+                                                                {
+                                                                    <dd>
+                                                                        <a href="@string.Format("#{0}", s3.Id)">@s3.Description</a>
+                                                                    </dd>
+                                                                }
+                                                            </dl>
+                                                        </div>
+                                                    }
+                                                </dd>
+                                            }
+                                        </dl>
+                                    </div>
+                                }
+                            </dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+</fieldset>
+

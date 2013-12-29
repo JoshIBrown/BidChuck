@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Areas.Admin.Models.Projects
+namespace BCWeb.Areas.Admin.Models.Projects.ViewModel
 {
     public class ProjectListItem
     {

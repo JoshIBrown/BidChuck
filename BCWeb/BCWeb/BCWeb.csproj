@@ -232,8 +232,9 @@
     <Compile Include="Areas\Admin\Models\Companies\CompanyProfileDetailsModel.cs" />
     <Compile Include="Areas\Admin\Models\Companies\CompanyProfileEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Companies\CompanyProfileListItem.cs" />
-    <Compile Include="Areas\Admin\Models\Projects\ProjectEditModel.cs" />
-    <Compile Include="Areas\Admin\Models\Projects\ProjectListItem.cs" />
+    <Compile Include="Areas\Admin\Models\Projects\ViewModel\ProjectEditModel.cs" />
+    <Compile Include="Areas\Admin\Models\Projects\ViewModel\ProjectListItem.cs" />
+    <Compile Include="Areas\Admin\Models\Projects\ViewModel\ProjectViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileDetailsModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
@@ -830,6 +831,7 @@
     <Content Include="Areas\Admin\Views\Company\UpdateEmptyLatLong.cshtml" />
     <Content Include="Areas\Admin\Views\Project\EditorTemplates\ProjectEditModel.cshtml" />
     <Content Include="Areas\Admin\Views\Project\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\Edit.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />

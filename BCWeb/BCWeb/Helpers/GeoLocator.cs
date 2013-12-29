@@ -47,7 +47,7 @@ namespace BCWeb.Helpers
             // http://dev.virtualearth.net/REST/v1/Locations/US/adminDistrict/postalCode/locality/addressLine?includeNeighborhood=includeNeighborhood&maxResults=maxResults&key=BingMapsKey
             // http://msdn.microsoft.com/en-us/library/ff701714.aspx
 
-            string uri = string.Format("http://dev.virtualearth.net/REST/v1/Locations/?adminDistrict={1}&postalCode={2}&locality={1}&countryRegion=US&key={3}", city, state, postalcode, key);
+            string uri = string.Format("http://dev.virtualearth.net/REST/v1/Locations/?adminDistrict={1}&postalCode={2}&locality={0}&countryRegion=US&key={3}", city, state, postalcode, key);
 
             string response = new WebClient().DownloadString(uri);
 

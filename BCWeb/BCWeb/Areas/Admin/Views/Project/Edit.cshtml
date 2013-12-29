@@ -1,10 +1,9 @@
 ﻿@model BCWeb.Areas.Admin.Models.Projects.ViewModel.ProjectEditModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
-
 
 <div ng-controller="ProjectCtrl">
     <div class="row">
@@ -20,7 +19,7 @@
                 <div class="row">
                     <div class="large-12 columns">
                         <p>
-                            <input type="submit" value="Create" />
+                            <input type="submit" value="Save" />
                         </p>
                     </div>
                 </div>
@@ -33,5 +32,5 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval", "~/bundles/createproject")
+    @Scripts.Render("~/bundles/jqueryval", "~/bundles/editproject")
 }

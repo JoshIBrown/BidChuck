@@ -1,6 +1,6 @@
 ﻿using BCModel;
 using BCModel.Projects;
-using BCWeb.Areas.Admin.Models.Projects;
+using BCWeb.Areas.Admin.Models.Projects.ViewModel;
 using BCWeb.Helpers;
 using BCWeb.Models;
 using BCWeb.Models.GenericViewModel;

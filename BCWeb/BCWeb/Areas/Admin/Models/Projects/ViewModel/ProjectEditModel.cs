@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BCWeb.Areas.Admin.Models.Projects
+namespace BCWeb.Areas.Admin.Models.Projects.ViewModel
 {
     public class ProjectEditModel
     {
