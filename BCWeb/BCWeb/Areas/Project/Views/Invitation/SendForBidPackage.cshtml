@@ -16,23 +16,19 @@
         </div>
     </div>
     <div class="row">
-        <div class="large-5 columns left">
-            <h4>Search Results</h4>
-            <ul>
-                <li ng-repeat="sc in filteredSearch(companies)">{{sc.CompanyName}} -- {{sc.BusinessType}}  -- {{sc.City}} {{sc.State}}
-                    <input type="button" class="tiny button" value="Invite" ng-click="invite(sc.Id)" /></li>
-            </ul>
-        </div>
-        <div class="large-4 columns">
+
+        <div class="large-8 columns">
             @using (Html.BeginForm())
             {
                 @Html.ValidationSummary()
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.BidPackageId)
-                <h4>Selected for invite</h4>
+                
                 <ul>
-                    <li ng-repeat="i in invited">{{i.CompanyName}}<input type="checkbox" value="{{i.Id}}"  checked="checked" name="CompanyId" style="display: none;" />
-                        <input type="button" class="tiny button" value="Remove" ng-click="uninvite(i.Id)" /></li>
+                    <li ng-repeat="sc in companies">
+                        <input type="checkbox" id="" name="" value="{{sc.CompanyId}}" />
+                        {{sc.CompanyName}}
+                    -- {{sc.BusinessType}}</li>
                 </ul>
                 <input type="submit" class="medium button" value="Send" />
             }

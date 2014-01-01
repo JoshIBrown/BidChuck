@@ -42,7 +42,7 @@ namespace BCWeb.Areas.Project.Controllers
             viewModel.BidPackageId = bidPackageId;
 
 
-            return View("Send", viewModel);
+            return View(viewModel);
         }
 
         
@@ -83,7 +83,7 @@ namespace BCWeb.Areas.Project.Controllers
                 }
             }
 
-            return View("Send", viewModel);
+            return View( viewModel);
         }
 
         [HttpGet]

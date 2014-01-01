@@ -1,4 +1,5 @@
-﻿using BCModel.Projects;
+﻿using BCModel;
+using BCModel.Projects;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
         private DbSet<BCModel.Projects.Project> _projects;
         private DbSet<BCModel.UserProfile> _users;
         private DbSet<BCModel.CompanyProfile> _companies;
+        private DbSet<BCModel.Scope> _scopes;
+        private DbSet<CompanyXScope> _companyScopes;
 
         public InvitationRepository()
         {
@@ -23,6 +26,8 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
             _projects = _context.Projects;
             _users = _context.UserProfiles;
             _companies = _context.Companies;
+            _scopes = _context.Scopes;
+            _companyScopes = _context.CompanyScopes;
         }
 
         public BCModel.UserProfile GetUerProfile(int id)
@@ -85,6 +90,18 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
         public IQueryable<BCModel.CompanyProfile> QueryCompanies()
         {
             return _companies.Include(s => s.InvitesToBPs).Include(s => s.Scopes);
+        }
+
+
+        public IQueryable<BCModel.Scope> QueryScopes()
+        {
+            return _scopes;
+        }
+
+
+        public IQueryable<CompanyXScope> QueryCompanyScopes()
+        {
+            return _companyScopes;
         }
     }
 }

@@ -1,56 +1,32 @@
 ﻿angular.element(document).ready(function () {
     'use strict';
     var app = angular.module('sendInvitation', []);
-    app.controller('SendInvitationCtrl', ['$scope', '$http', function ($scope, $http) {
+
+    function SendInvitationCtrl($scope, $http) {
         $scope.invited = [];
         $scope.filterId = [];
         $scope.companies = [];
-        // search system for companies matching query string
-        $scope.searchCompanies = function () {
-            var searchString = $scope.companySearchString;
-            $http.get('/api/Company/GetSearch/?query=' + searchString)
+        $scope.bpId = angular.element('#BidPackageId').val();
+
+        $http.get('/api/Invitation/GetCompaniesToInvite/?bidPackageId=' + $scope.bpId)
                 .success(function (result) {
                     $scope.companies = result;
                 });
+
+        $scope.getFieldName = function (i) {
+            return "CompanyId[" + i + "]";
         };
 
-        $scope.filteredSearch = function () {
-            // filter array of companies to exclude ones chosen for invite
-            return $scope.companies.filter(function (company) {
-                return $scope.filterId.indexOf(company.Id) === -1;
-            });
-
+        $scope.getFieldId = function (i) {
+            return "CompanyId_" + i + "_";
         };
 
-        $scope.invite = function (id) {
-            // add user with id to list of invites
-            var searchResult = $scope.companies;
-            for (var i = 0; i < searchResult.length; i++) {
-                if (searchResult[i].Id === id) {
-                    $scope.invited.push(searchResult[i]);
-                    $scope.filterId.push(searchResult[i].Id);
-                    break;
-                }
-            }
+    };
 
-        };
+    SendInvitationCtrl.$inject = ['$scope', '$http'];
 
-        $scope.uninvite = function (id) {
-            for (var i = 0; i < $scope.invited.length; i++) {
-                if ($scope.invited[i].Id === id) {
-                    $scope.invited.splice(i, 1);
-                    break;
-                }
-            };
-            for (var i = 0; i < $scope.filterId.length; i++) {
-                if ($scope.filterId[i] === id) {
-                    $scope.filterId.splice(i, 1);
-                    break;
-                }
-            };
+    app.controller('SendInvitationCtrl', SendInvitationCtrl);
 
-        }
-    }]);
     angular.bootstrap(document, ['sendInvitation']);
 });
 

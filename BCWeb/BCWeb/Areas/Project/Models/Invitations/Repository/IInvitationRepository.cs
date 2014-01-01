@@ -18,5 +18,9 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
         BCModel.Projects.Project GetProject(int id);
 
         IQueryable<CompanyProfile> QueryCompanies();
+
+        IQueryable<Scope> QueryScopes();
+
+        IQueryable<CompanyXScope> QueryCompanyScopes();
     }
 }

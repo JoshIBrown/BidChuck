@@ -149,15 +149,26 @@ namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
         public IEnumerable<BCModel.CompanyProfile> GetBestFitCompanies(int bpId, bool inNetworkOnly)
         {
             BCModel.Projects.BidPackage theBidPackage = _repo.GetBidPackage(bpId);
+            // get deepest level scope
+            var bpScopes = theBidPackage.Scopes.Where(s => s.Scope.ParentId != null && (s.Scope.Children == null || s.Scope.Children.Count() == 0)).Select(s => s.ScopeId);
 
-            // get companies who operate in the area of the project
-            var foo = from c in _repo.QueryCompanies()
-                      where c.GeoLocation.Distance(theBidPackage.Project.GeoLocation) <= c.OperatingDistance
-                      select c;
+            var companiesWithInvite = from i in _repo.Query()
+                                      where i.BidPackageId == bpId
+                                      select i.SentToId;
+            var companyScopes =  (from s in _repo.QueryCompanyScopes() where bpScopes.Contains(s.ScopeId) select s.CompanyId);
+            // TODO:
+            // if paid member, include all companies in operating radius
+            // else only include members in social connection 
+            var companiesInArea = from c in _repo.QueryCompanies()
+                                  // get companies who operate in the area of the project
+                                  where (c.GeoLocation.Distance(theBidPackage.Project.GeoLocation) * 0.00062137) <= c.OperatingDistance
+                                      // exclude companies that have already been sent an invitation
+                                  && !companiesWithInvite.Contains(c.Id)
+                                      // include only companies that match at least one deep level scope
+                                  && companyScopes.Contains(c.Id)
+                                  select c;
 
-
-                         
-            throw new NotImplementedException();
+            return companiesInArea;
         }
     }
 }

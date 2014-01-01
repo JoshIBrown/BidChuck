@@ -2,6 +2,7 @@
 using BCModel.Projects;
 using BCWeb.Areas.Account.Models.Company.ViewModel;
 using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
+using BCWeb.Helpers;
 using BCWeb.Models;
 using BCWeb.Models.GenericViewModel;
 using BCWeb.Models.Project.ViewModel;
@@ -30,12 +31,18 @@ namespace BCWeb.Api
 
         public IEnumerable<CompanyScopeItem> GetCompaniesToInvite(int bidPackageId)
         {
-            IEnumerable<CompanyScopeItem> result = new List<CompanyScopeItem>();
+            IEnumerable<CompanyScopeItem> result = _service.GetBestFitCompanies(bidPackageId, true)
+                .Select(c => new CompanyScopeItem
+                {
+                    BusinessType = c.BusinessType.ToDescription(),
+                    CompanyId = c.Id,
+                    CompanyName = c.CompanyName,
+                    ScopesOfWork = c.Scopes
+                        .Select(s => s.Scope.CsiNumber + " " + s.Scope.Description)
+                });
 
-            
-            // exclude companies that have already been sent an invitation
-            // if paid member, include all companies in operating radius
-            // else only include members in social connection 
+
+
 
             return result;
         }

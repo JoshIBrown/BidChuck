@@ -793,7 +793,7 @@
     <Content Include="Areas\Project\Views\Web.config" />
     <Content Include="Areas\Project\Views\BidPackage\Index.cshtml" />
     <Content Include="Areas\Project\Views\BidPackage\Create.cshtml" />
-    <Content Include="Areas\Project\Views\Invitation\Send.cshtml" />
+    <Content Include="Areas\Project\Views\Invitation\SendForBidPackage.cshtml" />
     <Content Include="Areas\Project\Views\BidPackage\Details.cshtml" />
     <Content Include="Areas\Project\Views\BidPackage\EditorTemplates\EditBidPackageViewModel.cshtml" />
     <Content Include="Areas\Project\Views\BidPackage\Edit.cshtml" />

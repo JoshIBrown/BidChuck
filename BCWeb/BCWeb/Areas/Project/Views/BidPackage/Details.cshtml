@@ -15,7 +15,7 @@
         <ul class="side-nav">
             <li>@Html.RouteLink("Back to list", "Project_default", new { controller = "BidPackage", action = "Index", projectId = Model.ProjectId })</li>
             <li>@Html.RouteLink("Edit", "Project_default", new { controller = "BidPackage", action = "Edit", id = Model.Id })</li>
-            <li>@Html.RouteLink("Invite Sub or Vendor", "Project_default", new { controller = "Invitation", action = "Send", id = Model.Id })</li>
+            <li>@Html.RouteLink("Invite Sub or Vendor", "BidPackageInvite", new { controller = "Invitation", action = "SendForBidPackage", bidPackageId = Model.Id })</li>
             <li>@Html.RouteLink("View Invited", "Project_default", new { controller = "Invitation", action = "ViewInvited", bpId = Model.Id })</li>
         </ul>
     </div>
