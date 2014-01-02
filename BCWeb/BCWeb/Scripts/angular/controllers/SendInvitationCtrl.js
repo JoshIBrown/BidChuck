@@ -23,9 +23,21 @@
 
     };
 
+
+
     SendInvitationCtrl.$inject = ['$scope', '$http'];
 
     app.controller('SendInvitationCtrl', SendInvitationCtrl);
+
+    app.filter('scopeMatchFilter', function () {
+        return function (company, min) {
+            if (company.ScopesOfWork) {
+                if (company.ScopesOfWork.length >= min) {
+                    return company;
+                }
+            }
+        };
+    });
 
     angular.bootstrap(document, ['sendInvitation']);
 });

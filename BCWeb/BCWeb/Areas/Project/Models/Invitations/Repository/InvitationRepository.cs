@@ -18,6 +18,7 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
         private DbSet<BCModel.CompanyProfile> _companies;
         private DbSet<BCModel.Scope> _scopes;
         private DbSet<CompanyXScope> _companyScopes;
+        private DbSet<BidPackageXScope> _bpScopes;
 
         public InvitationRepository()
         {
@@ -28,6 +29,7 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
             _companies = _context.Companies;
             _scopes = _context.Scopes;
             _companyScopes = _context.CompanyScopes;
+            _bpScopes = _context.BidPackageScopes;
         }
 
         public BCModel.UserProfile GetUerProfile(int id)
@@ -101,7 +103,13 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
 
         public IQueryable<CompanyXScope> QueryCompanyScopes()
         {
-            return _companyScopes;
+            return _companyScopes.Include(s => s.Scope);
+        }
+
+
+        public IQueryable<BidPackageXScope> QueryBidPackageScopes()
+        {
+            return _bpScopes.Include(s => s.Scope).Include(s => s.Scope.Children).Include(s => s.Scope.Parent);
         }
     }
 }

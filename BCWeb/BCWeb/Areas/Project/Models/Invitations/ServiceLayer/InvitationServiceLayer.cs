@@ -1,6 +1,7 @@
 ﻿using BCWeb.Areas.Project.Models.Invitations.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Spatial;
 using System.Linq;
 using System.Web;
 
@@ -146,29 +147,39 @@ namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
         }
 
 
-        public IEnumerable<BCModel.CompanyProfile> GetBestFitCompanies(int bpId, bool inNetworkOnly)
+        public List<BCModel.CompanyProfile> GetBestFitCompanies(int bpId, bool inNetworkOnly)
         {
-            BCModel.Projects.BidPackage theBidPackage = _repo.GetBidPackage(bpId);
-            // get deepest level scope
-            var bpScopes = theBidPackage.Scopes.Where(s => s.Scope.ParentId != null && (s.Scope.Children == null || s.Scope.Children.Count() == 0)).Select(s => s.ScopeId);
+            DbGeography projectLocation = _repo.GetBidPackage(bpId).Project.GeoLocation;
 
+            // get deepest level scope
+            var bpScopes = _repo.QueryBidPackageScopes().Where(s => s.BidPackageId == bpId && s.Scope.ParentId != null
+                //&& (s.Scope.Children == null || s.Scope.Children.Count() == 0)
+                ).Select(s => s.ScopeId);
+
+
+            // companies that have already been invited.  used for exclusion clause.
             var companiesWithInvite = from i in _repo.Query()
                                       where i.BidPackageId == bpId
                                       select i.SentToId;
-            var companyScopes =  (from s in _repo.QueryCompanyScopes() where bpScopes.Contains(s.ScopeId) select s.CompanyId);
-            // TODO:
-            // if paid member, include all companies in operating radius
-            // else only include members in social connection 
-            var companiesInArea = from c in _repo.QueryCompanies()
-                                  // get companies who operate in the area of the project
-                                  where (c.GeoLocation.Distance(theBidPackage.Project.GeoLocation) * 0.00062137) <= c.OperatingDistance
-                                      // exclude companies that have already been sent an invitation
-                                  && !companiesWithInvite.Contains(c.Id)
-                                      // include only companies that match at least one deep level scope
-                                  && companyScopes.Contains(c.Id)
-                                  select c;
 
-            return companiesInArea;
+            // companies with scopes contained in bid package, and operating in the project area
+            var companyScopes = (from s in _repo.QueryCompanyScopes()
+                                 join c in _repo.QueryCompanies() on s.CompanyId equals c.Id
+                                 // limit to scopes chosen for bid package
+                                 where bpScopes.Contains(s.ScopeId)
+                                     // limit to companies operating in the area of the project
+                                 && (c.GeoLocation.Distance(projectLocation) * 0.00062137) <= c.OperatingDistance
+                                     // exclude companies that have already been invited
+                                 && !companiesWithInvite.Contains(c.Id)
+                                 select c.Id);
+            //// TODO:
+            //// if paid member, include all companies in operating radius
+            //// else only include members in social connection 
+            var result = (from r in _repo.QueryCompanies()
+                          where companyScopes.Contains(r.Id)
+                          select r).ToList();
+
+            return result;
         }
     }
 }

@@ -38,9 +38,12 @@ namespace BCWeb.Areas.Project.Controllers
         // GET: /Project/Invitation/Send/1
         public ActionResult SendForBidPackage(int bidPackageId)
         {
+            var raw = _service.GetBidPackage(bidPackageId);
             BidPackageInvitationViewModel viewModel = new BidPackageInvitationViewModel();
             viewModel.BidPackageId = bidPackageId;
-
+            viewModel.ProjectId = raw.ProjectId;
+            viewModel.ProjectName = raw.Project.Title;
+            viewModel.BidPackageTitle = raw.Description;
 
             return View(viewModel);
         }
