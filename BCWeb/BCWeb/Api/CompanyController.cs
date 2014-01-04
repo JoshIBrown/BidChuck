@@ -121,7 +121,7 @@ namespace BCWeb.Api
                     PostalCode = s.PostalCode == null ? "not set" : s.PostalCode,
                     Published = s.Published,
                     State = s.State == null ? "not set" : s.State.Abbr,
-                    Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
+                    Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Count() == 0 ? "not set" : s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
                 })
                 .OrderBy(orderBy)
                 .Skip(iDisplayStart)

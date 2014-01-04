@@ -285,16 +285,18 @@ namespace BCWeb.Areas.Admin.Controllers
                 if (theProject.Address == null && theProject.City == null && theProject.StateId != null && theProject.PostalCode != null)
                 {
                     theProject.GeoLocation = locator.GetFromStateZip(theProject.State.Abbr, theProject.PostalCode);
+                    _service.Update(theProject);
                 }
                 else if ((theProject.Address == null || theProject.Address == string.Empty) && theProject.StateId != null && theProject.PostalCode != null)
                 {
                     theProject.GeoLocation = locator.GetFromCityStateZip(theProject.City, theProject.State.Abbr, theProject.PostalCode);
+                    _service.Update(theProject);
                 }
                 else if ((theProject.Address != null && theProject.Address != string.Empty) && (theProject.City != null && theProject.City != string.Empty) && theProject.StateId != null && theProject.PostalCode != null)
                 {
                     theProject.GeoLocation = locator.GetFromAddress(theProject.Address, theProject.City, theProject.State.Abbr, theProject.PostalCode);
+                    _service.Update(theProject);
                 }
-                _service.Update(theProject);
             }
 
             return RedirectToAction("Index");

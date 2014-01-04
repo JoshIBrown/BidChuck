@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace BCWeb.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator"), HandleError]
     public class CompanyController : Controller
     {
         private ICompanyProfileServiceLayer _service;
@@ -168,27 +168,38 @@ namespace BCWeb.Areas.Admin.Controllers
         {
             GeoLocator locator = new GeoLocator();
             CompanyProfile company;
-
-            for (int i = 0; i < companyId.Length; i++)
+            
+            try
             {
-                company = _service.Get(companyId[i]);
-                if (company.Id != 1)
+                for (int i = 0; i < companyId.Length; i++)
                 {
-                    if (company.Address1 == null && company.City == null && company.StateId != null && company.PostalCode != null)
+                    company = _service.Get(companyId[i]);
+                    if (company.Id != 1)
                     {
-                       company.GeoLocation = locator.GetFromStateZip(company.State.Abbr, company.PostalCode);
-                    }
-                    else if ((company.Address1 == null || company.Address1 == string.Empty) && company.StateId != null && company.PostalCode != null)
-                    {
-                        company.GeoLocation = locator.GetFromCityStateZip(company.City, company.State.Abbr, company.PostalCode);
-                    }
-                    else if ((company.Address1 != null && company.Address1 != string.Empty) && (company.City != null && company.City != string.Empty) && company.StateId != null && company.PostalCode != null)
-                    {
-                        company.GeoLocation = locator.GetFromAddress(company.Address1, company.City, company.State.Abbr, company.PostalCode);
+                        if (company.Address1 == null && company.City == null && company.StateId != null && company.PostalCode != null)
+                        {
+                            company.GeoLocation = locator.GetFromStateZip(company.State.Abbr, company.PostalCode);
+                            _service.Update(company);
+                        }
+                        else if ((company.Address1 == null || company.Address1 == string.Empty) && company.StateId != null && company.PostalCode != null)
+                        {
+                            company.GeoLocation = locator.GetFromCityStateZip(company.City, company.State.Abbr, company.PostalCode);
+                            _service.Update(company);
+                        }
+                        else if ((company.Address1 != null && company.Address1 != string.Empty) && (company.City != null && company.City != string.Empty) && company.StateId != null && company.PostalCode != null)
+                        {
+                            company.GeoLocation = locator.GetFromAddress(company.Address1, company.City, company.State.Abbr, company.PostalCode);
+                            _service.Update(company);
+                        }
                     }
                 }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+
+                throw new HttpException(500, ex.Message);
+            }
         }
 
         private void rePopViewModel(CompanyProfileEditModel viewModel)

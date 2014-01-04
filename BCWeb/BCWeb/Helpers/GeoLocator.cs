@@ -31,7 +31,7 @@ namespace BCWeb.Helpers
                 // http://dev.virtualearth.net/REST/v1/Locations/US/adminDistrict/postalCode/locality/addressLine?includeNeighborhood=includeNeighborhood&maxResults=maxResults&key=BingMapsKey
                 // http://msdn.microsoft.com/en-us/library/ff701714.aspx
 
-                string uri = string.Format("http://dev.virtualearth.net/REST/v1/Locations/US/{2}/{3}/{1}/{0}?key={4}", address, city, state, postalcode, key);
+                string uri = string.Format("https://dev.virtualearth.net/REST/v1/Locations/US/{2}/{3}/{1}/{0}?key={4}", address, city, state, postalcode, key);
 
                 string response = new WebClient().DownloadString(uri);
 
@@ -55,7 +55,7 @@ namespace BCWeb.Helpers
 
             try
             {
-                string uri = string.Format("http://dev.virtualearth.net/REST/v1/Locations/?adminDistrict={1}&postalCode={2}&locality={0}&countryRegion=US&key={3}", city, state, postalcode, key);
+                string uri = string.Format("https://dev.virtualearth.net/REST/v1/Locations/?adminDistrict={1}&postalCode={2}&locality={0}&countryRegion=US&key={3}", city, state, postalcode, key);
 
                 string response = new WebClient().DownloadString(uri);
 
@@ -78,7 +78,7 @@ namespace BCWeb.Helpers
 
             try
             {
-                string uri = string.Format("http://dev.virtualearth.net/REST/v1/Locations/?adminDistrict={0}&postalCode={1}&countryRegion=US&key={2}", state, postalcode, key);
+                string uri = string.Format("https://dev.virtualearth.net/REST/v1/Locations/?adminDistrict={0}&postalCode={1}&countryRegion=US&key={2}", state, postalcode, key);
 
                 string response = new WebClient().DownloadString(uri);
 
@@ -107,7 +107,7 @@ namespace BCWeb.Helpers
             }
             else
             {
-                return null;
+                throw new Exception(rootObject.statusCode.ToString() + " " + rootObject.statusDescription);
             }
         }
     }
