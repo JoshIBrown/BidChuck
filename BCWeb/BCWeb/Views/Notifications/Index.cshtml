@@ -17,11 +17,11 @@
                     <h5>{{dp.Date}}</h5>
                     <ul>
                         @* loop through notifications. sorted by most recent received*@
-                        <li ng-repeat="n in dp.Notices">{{n.Message}}
+                        <li ng-repeat="n in dp.Notices"><a href="{{n.Link}}">{{n.Message}}</a>
                         </li>
                     </ul>
                 </li>
-                
+
             </ul>
         </div>
     </div>
