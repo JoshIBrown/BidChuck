@@ -12,12 +12,14 @@ namespace BCWeb.Models.Notifications.Repository
         private DbSet<Notification> _notes;
         private DbSet<NotificationTemplate> _templates;
         private DbSet<UserProfile> _users;
+        private DbSet<BCModel.Projects.Project> _projects;
 
         public NotificationRepository()
         {
             _notes = _context.Notifications;
             _templates = _context.NotificationTemplates;
             _users = _context.UserProfiles;
+            _projects = _context.Projects;
         }
 
         public void Create(BCModel.Notification entity)
@@ -59,6 +61,12 @@ namespace BCWeb.Models.Notifications.Repository
         public IQueryable<UserProfile> QueryUserProfiles()
         {
             return _users.Include(u => u.Company);
+        }
+
+
+        public BCModel.Projects.Project GetProject(int id)
+        {
+            return _projects.Find(id);
         }
     }
 }

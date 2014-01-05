@@ -37,6 +37,8 @@ namespace BCModel
         [Required]
         public int Count { get; set; }
 
+        [Required]
+        public string Message { get; set; }
     }
 
     public class NotificationTemplate

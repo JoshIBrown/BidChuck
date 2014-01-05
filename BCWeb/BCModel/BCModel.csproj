@@ -259,6 +259,10 @@
     <Compile Include="Migrations\201312231912414_changeNotificationTemplatePrimaryKey.Designer.cs">
       <DependentUpon>201312231912414_changeNotificationTemplatePrimaryKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201401050440086_addMessageToNotification.cs" />
+    <Compile Include="Migrations\201401050440086_addMessageToNotification.Designer.cs">
+      <DependentUpon>201401050440086_addMessageToNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Projects\BaseBid.cs" />
@@ -442,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312231912414_changeNotificationTemplatePrimaryKey.resx">
       <DependentUpon>201312231912414_changeNotificationTemplatePrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401050440086_addMessageToNotification.resx">
+      <DependentUpon>201401050440086_addMessageToNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

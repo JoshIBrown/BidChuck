@@ -10,5 +10,7 @@ namespace BCWeb.Models.Notifications.Repository
     public interface INotificationRepository : IGenericRepository<Notification>
     {
         IQueryable<UserProfile> QueryUserProfiles();
+
+        BCModel.Projects.Project GetProject(int id);
     }
 }

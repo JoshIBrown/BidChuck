@@ -117,5 +117,10 @@ namespace BCWeb.Areas.Project.Controllers
 
             return View("ViewInvited", viewModel);
         }
+
+        public ActionResult Requests(int projectId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -11,6 +11,13 @@ namespace BCWeb.Models
     public class NotificationSender : INotificationSender
     {
         private INotificationRepository _repo;
+        private const string _InvitationToBidMsg = "You have been invited to bid on {0}";                     // Invitation to Bid	You have been invited to bid on {{project name}}
+        private const string _ResponseToInvatiationMsg = "You have new invitation responses for {0}";         // Invitation Response	You have new  invitation responses for {{project name}}
+        private const string _InvitationRequestMsg = "Companies are requesting an invitation to {0}";         // Invitation Request Companies are requesting an invitation to {{project name}}
+        private const string _BidSubmissionMsg = "You have received new bids for {0}";                        // Bid Submission	You have received new bids for {{project name}}
+        private const string _ChangesToProjectMsg = "There are recent updates to the project: {0}";           // Project change	There are recent updates to the project: {{project name}}
+        private const string _BidWinnerMsg = "Your company has won the bid for {0}";                          // Bid Winner	Your company has won the bid for {{project name}}
+
         public NotificationSender(INotificationRepository repo)
         {
             _repo = repo;
@@ -121,7 +128,7 @@ namespace BCWeb.Models
         {
             try
             {
-
+                BCModel.Projects.Project theProject = _repo.GetProject(projectId);
                 Notification newNotice;
                 for (int i = 0; i < userId.Length; i++)
                 {
@@ -134,6 +141,26 @@ namespace BCWeb.Models
                         RecipientId = userId[i],
                         Read = false
                     };
+
+                    switch (notificationType)
+                    {
+                        case NotificationType.BidSubmitted:
+                            newNotice.Message = string.Format(_BidSubmissionMsg, theProject.Title);
+                            break;
+                        case NotificationType.InvitationRequest:
+                            newNotice.Message = string.Format(_InvitationRequestMsg, theProject.Title);
+                            break;
+                        case NotificationType.InvitationResponse:
+                            newNotice.Message = string.Format(_ResponseToInvatiationMsg, theProject.Title);
+                            break;
+                        case NotificationType.InvitationToBid:
+                            newNotice.Message = string.Format(_InvitationToBidMsg, theProject.Title);
+                            break;
+                        case NotificationType.ProjectChange:
+                            newNotice.Message = string.Format(_ChangesToProjectMsg, theProject.Title);
+                            break;
+                    }
+
                     _repo.Create(newNotice);
                 }
             }

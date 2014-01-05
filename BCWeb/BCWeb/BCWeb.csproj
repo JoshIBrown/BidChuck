@@ -326,6 +326,8 @@
     <Compile Include="Models\Notifications\Repository\NotificationRepository.cs" />
     <Compile Include="Models\Notifications\ServiceLayer\INotificationServiceLayer.cs" />
     <Compile Include="Models\Notifications\ServiceLayer\NotificationServiceLayer.cs" />
+    <Compile Include="Models\Notifications\ViewModel\AllNoticesViewModel.cs" />
+    <Compile Include="Models\Notifications\ViewModel\NoticeListItem.cs" />
     <Compile Include="Models\Project\Repository\IProjectRepository.cs" />
     <Compile Include="Models\Project\Repository\ProjectRepository.cs" />
     <Compile Include="Models\Project\ServiceLayer\IProjectServiceLayer.cs" />
@@ -468,6 +470,7 @@
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\angular\controllers\admin\CompanyProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\admin\ProjectCtrl.js" />
+    <Content Include="Scripts\angular\controllers\NotificationCtrl.js" />
     <Content Include="Scripts\angular\controllers\SVComposeBid.js" />
     <Content Include="Scripts\angular\controllers\admin\UserProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\BidPackageIndexCtrl.js" />
@@ -1010,13 +1013,13 @@
     <Content Include="Views\AngularTemplate\ScopePicker.cshtml" />
     <Content Include="Views\Home\Foundation_Index.cshtml" />
     <Content Include="Views\Shared\_SelectedScopes.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
-    <Folder Include="Models\Notifications\ViewModel\" />
     <Folder Include="Scripts\Areas\Home\" />
   </ItemGroup>
   <ItemGroup>
