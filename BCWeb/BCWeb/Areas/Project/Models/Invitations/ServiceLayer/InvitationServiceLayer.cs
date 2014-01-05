@@ -1,4 +1,5 @@
-﻿using BCWeb.Areas.Project.Models.Invitations.Repository;
+﻿using BCModel;
+using BCWeb.Areas.Project.Models.Invitations.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Spatial;
@@ -153,7 +154,7 @@ namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
 
             // get deepest level scope
             var bpScopes = _repo.QueryBidPackageScopes().Where(s => s.BidPackageId == bpId && s.Scope.ParentId != null
-                //&& (s.Scope.Children == null || s.Scope.Children.Count() == 0)
+                && ( s.Scope.Children.Count == 0)
                 ).Select(s => s.ScopeId);
 
 
@@ -180,6 +181,18 @@ namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
                           select r).ToList();
 
             return result;
+        }
+
+
+        public IEnumerable<Scope> GetBidPackageScopes(int id)
+        {
+            return _repo.QueryBidPackageScopes().Where(b => b.BidPackageId == id).Select(s => s.Scope).ToList();
+        }
+
+
+        public IEnumerable<Scope> GetBidPackageScopesDeepestScopes(int id)
+        {
+            return _repo.QueryBidPackageScopes().Where(b => b.BidPackageId == id && b.Scope.Children.Count == 0).Select(s => s.Scope).ToList();
         }
     }
 }

@@ -31,13 +31,14 @@ namespace BCWeb.Api
 
         public IEnumerable<CompanyScopeItem> GetCompaniesToInvite(int bidPackageId)
         {
+            int[] bpScopes = _service.GetBidPackageScopesDeepestScopes(bidPackageId).Select(s => s.Id).ToArray();
             IEnumerable<CompanyScopeItem> result = _service.GetBestFitCompanies(bidPackageId, true)
                 .Select(c => new CompanyScopeItem
                 {
                     BusinessType = c.BusinessType.ToDescription(),
                     CompanyId = c.Id,
                     CompanyName = c.CompanyName,
-                    ScopesOfWork = c.Scopes
+                    ScopesOfWork = c.Scopes.Where(s => bpScopes.Contains(s.ScopeId))
                         .Select(s => s.Scope.CsiNumber + " " + s.Scope.Description)
                 });
 

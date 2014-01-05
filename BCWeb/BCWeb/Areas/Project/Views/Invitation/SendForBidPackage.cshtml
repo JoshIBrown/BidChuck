@@ -35,7 +35,12 @@
                     <li ng-repeat="sc in companies">
                         <input type="checkbox" id="{{getFieldId($index)}}" name="{{getFieldName($index)}}" value="{{sc.CompanyId}}" />
                         {{sc.CompanyName}}
-                    -- {{sc.BusinessType}}</li>
+                    -- {{sc.BusinessType}}
+                        <ul>
+                            <li ng-repeat="csi in sc.ScopesOfWork">{{csi}}
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 <input type="submit" class="medium button" value="Send" />
             }

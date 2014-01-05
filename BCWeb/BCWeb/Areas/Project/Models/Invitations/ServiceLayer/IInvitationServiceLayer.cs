@@ -20,5 +20,9 @@ namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
         bool CreateRange(IEnumerable<Invitation> invitees);
         IEnumerable<Invitation> GetEnumerableByBidPackage(int bpId);
         List<CompanyProfile> GetBestFitCompanies(int bpId, bool inNetworkOnly);
+
+        IEnumerable<Scope> GetBidPackageScopes(int id);
+
+        IEnumerable<Scope> GetBidPackageScopesDeepestScopes(int id);
     }
 }
