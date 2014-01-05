@@ -64,6 +64,7 @@ namespace BCWeb.Models.Notifications.ServiceLayer
         {
             return (from r in _repo.Query()
                     where EntityFunctions.DiffDays(DateTime.Now, r.LastEditTimestamp) < 8
+                    && r.RecipientId == userId
                     orderby r.LastEditTimestamp descending
                     select r).AsEnumerable();
         }

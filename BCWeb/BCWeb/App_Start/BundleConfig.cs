@@ -112,17 +112,21 @@ namespace BCWeb
                 ));
             #endregion
 
+            #region Invitation
             bundles.Add(new ScriptBundle("~/bundles/sendinvitation").Include(
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/SendInvitationCtrl.js"
                 ));
+            #endregion
 
+            #region account management
             bundles.Add(new ScriptBundle("~/bundles/companyscopes").Include(
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/directives/bcweb.angular.ScopePicker.js",
                 "~/Scripts/angular/controllers/CompanyScopesCtrl.js"));
+            #endregion
 
             bundles.Add(new ScriptBundle("~/bundles/home").Include("~/Scripts/angular/angular.js",
                 "~/Scripts/angular/bcweb.filters.angular.js",
@@ -170,6 +174,14 @@ namespace BCWeb
                 "~/Scripts/DataTables/media/js/dataTables.foundation.js",
                 "~/Scripts/angular/directives/bcweb.angular.DataTables.js",
                 "~/Scripts/angular/controllers/admin/ProjectCtrl.js"));
+            #endregion
+
+            #region notification
+            bundles.Add(new ScriptBundle("~/bundles/allnotifications").Include(
+                "~/Scripts/moment.js",
+                "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/controllers/NotificationCtrl.js"
+                ));
             #endregion
         }
     }

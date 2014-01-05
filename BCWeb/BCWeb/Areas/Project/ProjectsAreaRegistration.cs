@@ -14,6 +14,21 @@ namespace BCWeb.Areas.Project
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+            context.MapRoute(
+                "ReceivedBids",
+                "Project/{id}/Bid/Received",
+                new { controller = "Bid", action = "Received", id = UrlParameter.Optional },
+                new { controller = @"Bid", action = "Received" },
+                new[] { @"BCWeb.Areas.Project.Controllers" }
+                );
+
+            context.MapRoute(
+                "InvitationRequests",
+                "Project/{id}/Invitation/Requests",
+                new { controller = "Invitation", action = "Requests", id = UrlParameter.Optional },
+                new { controller = @"Invitation", action = "Requests" },
+                new[] { @"BCWeb.Areas.Project.Controllers" }
+                );
 
             context.MapRoute(
                 "BidPackageInvite",
@@ -27,9 +42,9 @@ namespace BCWeb.Areas.Project
             context.MapRoute(
                 "Project_default",
                 "Project/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }, 
+                new { action = "Index", id = UrlParameter.Optional },
                 new { controller = @"BidPackage|Invitation|Bid|Document" },
-                new[] { @"BCWeb.Areas.Project.Controllers" } 
+                new[] { @"BCWeb.Areas.Project.Controllers" }
             );
         }
     }

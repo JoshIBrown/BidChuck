@@ -10,7 +10,24 @@
 </div>
 <div class="row">
     <div class="large-8 columns">
-        @* loop through date*@
-        @* loop through notifications. sorted by most recent received*@
+        <div ng-controller="NotificationCtrl">
+            <ul class="no-bullet">
+                @* loop through date*@
+                <li ng-repeat="dp in DatePool">
+                    <h5>{{dp.Date}}</h5>
+                    <ul>
+                        @* loop through notifications. sorted by most recent received*@
+                        <li ng-repeat="n in dp.Notices">{{n.Message}}
+                        </li>
+                    </ul>
+                </li>
+                
+            </ul>
+        </div>
     </div>
 </div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/allnotifications")
+}

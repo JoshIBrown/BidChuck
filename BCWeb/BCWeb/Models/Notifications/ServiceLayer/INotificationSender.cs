@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCWeb.Models
+namespace BCWeb.Models.Notifications.ServiceLayer
 {
     public interface INotificationSender
     {

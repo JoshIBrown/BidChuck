@@ -4,7 +4,7 @@
     function NotificationCtrl(scope, http) {
         http.get('/api/Notification/GetAll')
             .success(function (result) {
-                scope.notes = result.Notices;
+                scope.DatePool = result.DatePool;
             });
     };
 

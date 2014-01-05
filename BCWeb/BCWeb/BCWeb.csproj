@@ -319,14 +319,15 @@
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
     <Compile Include="Models\IGenericServiceLayer.cs" />
-    <Compile Include="Models\INotificationSender.cs" />
+    <Compile Include="Models\Notifications\ServiceLayer\INotificationSender.cs" />
     <Compile Include="Models\IWebSecurityWrapper.cs" />
-    <Compile Include="Models\NotificationSender.cs" />
+    <Compile Include="Models\Notifications\ServiceLayer\NotificationSender.cs" />
     <Compile Include="Models\Notifications\Repository\INotificationRepository.cs" />
     <Compile Include="Models\Notifications\Repository\NotificationRepository.cs" />
     <Compile Include="Models\Notifications\ServiceLayer\INotificationServiceLayer.cs" />
     <Compile Include="Models\Notifications\ServiceLayer\NotificationServiceLayer.cs" />
     <Compile Include="Models\Notifications\ViewModel\AllNoticesViewModel.cs" />
+    <Compile Include="Models\Notifications\ViewModel\NewestNoticesViewModel.cs" />
     <Compile Include="Models\Notifications\ViewModel\NoticeListItem.cs" />
     <Compile Include="Models\Project\Repository\IProjectRepository.cs" />
     <Compile Include="Models\Project\Repository\ProjectRepository.cs" />

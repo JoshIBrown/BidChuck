@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
 using BCWeb.Models;
+using BCWeb.Models.Notifications.ServiceLayer;
 using BCWeb.Areas.Project.Controllers;
 using System.Web.Mvc;
 using BCWeb.Areas.Project.Models.Invitations.ViewModel;

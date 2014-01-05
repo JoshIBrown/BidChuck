@@ -4,6 +4,7 @@ using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
 using BCWeb.Areas.Project.Models.Invitations.ViewModel;
 using BCWeb.Helpers;
 using BCWeb.Models;
+using BCWeb.Models.Notifications.ServiceLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
