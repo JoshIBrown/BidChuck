@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BCWeb.Models.Project.ViewModel
 {
-    public class SubsAndVendProjectDetailsViewModel
+    public class ProjectDetailsForSubAndVendViewModel
     {
         public int ProjectId { get; set; }
 
@@ -40,11 +40,11 @@ namespace BCWeb.Models.Project.ViewModel
 
 
 
-        public Dictionary<int, bool?> AcceptedInvites { get; set; }
-        public Dictionary<int, string> Scopes { get; set; }
-        public Dictionary<int, string> Inviters { get; set; }
-        public Dictionary<int, IEnumerable<int>> ScopeSelection { get; set; }
-        public Dictionary<int, string> BidDate { get; set; }
-        public Dictionary<int, string> WalkThroughDate { get; set; }
+        //public Dictionary<int, bool?> AcceptedInvites { get; set; }
+        //public Dictionary<int, string> Scopes { get; set; }
+        //public Dictionary<int, string> Inviters { get; set; }
+        //public Dictionary<int, IEnumerable<int>> ScopeSelection { get; set; }
+        //public Dictionary<int, string> BidDate { get; set; }
+        //public Dictionary<int, string> WalkThroughDate { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using BCWeb.Areas.Project.Models.BidPackage.ServiceLayer;
 using BCWeb.Areas.Project.Models.BidPackage.ViewModel;
 using BCWeb.Helpers;
 using BCWeb.Models;
+using BCWeb.Models.Notifications.ServiceLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,13 @@ namespace BCWeb.Areas.Project.Controllers
 
         private IBidPackageServiceLayer _service;
         private IWebSecurityWrapper _security;
+        private INotificationSender _notice;
 
-        public BidPackageController(IBidPackageServiceLayer service, IWebSecurityWrapper security)
+        public BidPackageController(IBidPackageServiceLayer service, IWebSecurityWrapper security, INotificationSender notice)
         {
             _service = service;
             _security = security;
+            _notice = notice;
         }
 
 
@@ -233,6 +236,14 @@ namespace BCWeb.Areas.Project.Controllers
                     // try to update db record
                     if (_service.Update(toUpdate))
                     {
+
+                        // notify invited companies
+                        int[] invitees = _service.GetAcceptedOrUnansweredInvitations(toUpdate.Id).Select(i => i.SentToId).ToArray();
+                        
+                        for(int i = 0; i < invitees.Length; i++)
+                        {
+                            _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, toUpdate.ProjectId);
+                        }
                         return RedirectToRoute("Project_default", new { controller = "BidPackage", action = "Details", id = toUpdate.Id });
                     }
                     else

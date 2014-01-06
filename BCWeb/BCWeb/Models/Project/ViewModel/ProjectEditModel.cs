@@ -38,6 +38,10 @@ namespace BCWeb.Models.Project.ViewModel
         [Required]
         public ProjectType? ProjectType { get; set; }
         [Required]
+        public bool InvitationOnly { get; set; }
+        [Required]
+        public bool HiddenFromSearch { get; set; }
+        [Required]
         public ProjectCategory? ProjectCategory { get; set; }
         [Required]
         public int ConstructionTypeId { get; set; }

@@ -141,5 +141,11 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
                     where r.GeoLocation == null || r.GeoLocation == default(DbGeography)
                     select r).AsEnumerable();
         }
+
+
+        public BCModel.State GetState(int id)
+        {
+            return _repo.QueryStates().Where(x => x.Id == id).FirstOrDefault();
+        }
     }
 }

@@ -18,5 +18,7 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
         UserProfile GetUserProfile(int id);
 
         IEnumerable<CompanyProfile> GetEmptyLatLongList();
+
+        State GetState(int id);
     }
 }

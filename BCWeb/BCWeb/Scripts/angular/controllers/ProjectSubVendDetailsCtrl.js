@@ -54,10 +54,10 @@
         return function (scope, selectedScopes) {
             for (i = 0; i < selectedScopes.length; i++) {
                 if (selectedScopes[i] === scope) {
-                    return "Inc";
+                    return "inc";
                 }
             }
-            return "-";
+            return "---";
         };
     });
 

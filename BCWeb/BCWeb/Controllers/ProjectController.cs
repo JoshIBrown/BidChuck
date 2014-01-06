@@ -279,22 +279,12 @@ namespace BCWeb.Controllers
 
             UserProfile user = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
 
-
-            // FIXME:should redo logic to check if user's compnay is invited
-
             // if invited sub, show bp invited to
             if (User.IsInRole("subcontractor") || User.IsInRole("materials_vendor"))
             {
-                IEnumerable<Invitation> invites = _service.GetRcvdInvitations(theProject.Id, user.CompanyId);
 
 
-                Dictionary<int, string> bidDates = invites.ToDictionary(i => i.BidPackage.CreatedById, i => i.BidPackage.BidDateTime.HasValue ? i.BidPackage.BidDateTime.Value.ToString("MM/dd/yyyy hh:mm tt") : "none"); //FIXME
-                Dictionary<int, IEnumerable<int>> scopeselection = _service.GetInvitationScopesByInvitingCompany(theProject.Id, user.CompanyId);
-                Dictionary<int, string> inviters = _service.GetInvitatingCompanies(theProject.Id, user.CompanyId);
-                Dictionary<int, string> scopes = _service.GetInvitationScopes(theProject.Id, user.CompanyId);
-                Dictionary<int, bool?> inviteResponses = invites.Distinct().ToDictionary(i => i.BidPackage.CreatedById, i => i.AcceptedDate.HasValue ? true : i.RejectedDate.HasValue ? false : default(bool?));
-
-                SubsAndVendProjectDetailsViewModel sAndVViewModel = new SubsAndVendProjectDetailsViewModel
+                ProjectDetailsForSubAndVendViewModel sAndVViewModel = new ProjectDetailsForSubAndVendViewModel
                 {
                     Address = theProject.Address,
                     Architect = theProject.Architect.CompanyName,
@@ -308,11 +298,7 @@ namespace BCWeb.Controllers
                     PostalCode = theProject.PostalCode,
                     ProjectType = theProject.ProjectType.ToDescription(),
                     State = theProject.State.Abbr,
-                    Title = theProject.Title,
-                    Inviters = inviters,
-                    Scopes = scopes,
-                    ScopeSelection = scopeselection,
-                    BidDate = bidDates // FIXME
+                    Title = theProject.Title
                 };
                 // get distinct list of scopes
 
@@ -422,7 +408,9 @@ namespace BCWeb.Controllers
                 Title = raw.Title,
                 WalkThruDateTime = raw.WalkThruDateTime,
                 WalkThruStatus = raw.WalkThruStatus,
-                Number = raw.Number
+                Number = raw.Number,
+                ProjectCategory = raw.ProjectCategory,
+                ProjectType = raw.ProjectType
             };
             rePopViewModel(viewModel);
             return View("Edit", viewModel);

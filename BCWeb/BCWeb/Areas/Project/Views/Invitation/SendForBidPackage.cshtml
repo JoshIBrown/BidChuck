@@ -19,7 +19,8 @@
 <div ng-controller="SendInvitationCtrl">
     <div class="row">
         <div class="large-4 columns left">
-            <input type="text" name="companySearchString" id="companySearchString" ng-model="companySearchString" ng-change="searchCompanies()" placeholder="Search for company" />
+            @*<input type="text" name="companySearchString" id="companySearchString" ng-model="companySearchString" ng-change="searchCompanies()" placeholder="Search for company" />*@
+            <h4>Best fit companies</h4>
         </div>
     </div>
     <div class="row">
@@ -31,8 +32,8 @@
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.BidPackageId)
                 
-                <ul>
-                    <li ng-repeat="sc in companies">
+                <ul class="no-bullet">
+                    <li ng-repeat="sc in companies" class="panel">
                         <input type="checkbox" id="{{getFieldId($index)}}" name="{{getFieldName($index)}}" value="{{sc.CompanyId}}" />
                         {{sc.CompanyName}}
                     -- {{sc.BusinessType}}

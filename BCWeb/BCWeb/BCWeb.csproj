@@ -225,6 +225,7 @@
     <Compile Include="Api\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\BidPackageController.cs" />
     <Compile Include="Areas\Admin\Controllers\BidPackageInvitationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BuildingTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Admin\Controllers\DBAuditController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
@@ -339,7 +340,7 @@
     <Compile Include="Models\Project\ViewModel\DuplicatesViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectBPViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectScopeListItem.cs" />
-    <Compile Include="Models\Project\ViewModel\SubsAndVendProjectDetailsViewModel.cs" />
+    <Compile Include="Models\Project\ViewModel\ProjectDetailsForSubAndVendViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectEditModel.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectDetailsViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectListViewModel.cs" />
@@ -837,6 +838,9 @@
     <Content Include="Areas\Admin\Views\Project\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Project\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Project\UpdateEmptyLatLong.cshtml" />
+    <Content Include="Areas\Admin\Views\BuildingType\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BuildingType\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BuildingType\Create.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />

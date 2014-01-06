@@ -43,5 +43,7 @@ namespace BCWeb.Models.Project.ServiceLayer
         State GetState(int id);
 
         List<BCModel.Projects.Project> GetEmptyLatLongList();
+
+        IEnumerable<BidPackage> GetBidPackagesInvitedTo(int projectId, int invitedCompanyId);
     }
 }

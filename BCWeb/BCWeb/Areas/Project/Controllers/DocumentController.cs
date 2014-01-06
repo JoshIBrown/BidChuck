@@ -4,6 +4,7 @@ using BCWeb.Areas.Project.Models.Documents.ServiceLayer;
 using BCWeb.Areas.Project.Models.Documents.ViewModel;
 using BCWeb.Helpers;
 using BCWeb.Models;
+using BCWeb.Models.Notifications.ServiceLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,15 @@ namespace BCWeb.Areas.Project.Controllers
     public class DocumentController : Controller
     {
 
-        IProjectDocServiceLayer _service;
-        IWebSecurityWrapper _security;
+        private IProjectDocServiceLayer _service;
+        private IWebSecurityWrapper _security;
+        private INotificationSender _notice;
 
-        public DocumentController(IProjectDocServiceLayer service, IWebSecurityWrapper security)
+        public DocumentController(IProjectDocServiceLayer service, IWebSecurityWrapper security,INotificationSender notice)
         {
             _service = service;
             _security = security;
+            _notice = notice;
         }
 
         //
@@ -64,6 +67,8 @@ namespace BCWeb.Areas.Project.Controllers
 
                 if (_service.Create(toCreate))
                 {
+                    // get bid packages created by users company
+                    // get invitations
                     return RedirectToAction("Details", new { id = toCreate.Id });
                 }
                 else

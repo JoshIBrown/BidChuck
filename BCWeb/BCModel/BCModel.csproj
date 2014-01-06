@@ -263,6 +263,10 @@
     <Compile Include="Migrations\201401050440086_addMessageToNotification.Designer.cs">
       <DependentUpon>201401050440086_addMessageToNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201401060118089_addInviteOnlyAndHiddenFromSearchToProject.cs" />
+    <Compile Include="Migrations\201401060118089_addInviteOnlyAndHiddenFromSearchToProject.Designer.cs">
+      <DependentUpon>201401060118089_addInviteOnlyAndHiddenFromSearchToProject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Projects\BaseBid.cs" />
@@ -285,7 +289,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Migrations\BuildingTypes.csv" />
     <None Include="Migrations\county.csv" />
     <None Include="Migrations\state.csv" />
     <None Include="packages.config" />
@@ -449,6 +452,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201401050440086_addMessageToNotification.resx">
       <DependentUpon>201401050440086_addMessageToNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401060118089_addInviteOnlyAndHiddenFromSearchToProject.resx">
+      <DependentUpon>201401060118089_addInviteOnlyAndHiddenFromSearchToProject.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

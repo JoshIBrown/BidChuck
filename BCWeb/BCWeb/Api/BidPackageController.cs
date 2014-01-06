@@ -39,11 +39,14 @@ namespace BCWeb.Api
             int companyId = _service.GetUser(_security.GetUserId(User.Identity.Name)).CompanyId;
 
             SubAndVendBidPackageAngularModel viewModel = new SubAndVendBidPackageAngularModel();
+              
+            // need to group by inviting company and bid date
+            // this should handle auto-invite 3rd tier so that here are not 20 items for 1 company all with the same bid date
 
-            viewModel.BidPackages = _service.GetEnumerableByProjectAndInvitedCompany(projectId, companyId)
+            viewModel.BidPackages = _service.GetBidPackagesByProjectAndInvitedCompany(projectId, companyId)
                 .Select(x => new SubAndVendBidPackageListItem
                 {
-                    BidDateTime = x.BidDateTime.HasValue ? x.BidDateTime.Value.ToString() : "none", // FIXME
+                    BidDateTime = x.UseProjectBidDateTime ? x.Project.BidDateTime.ToString() : x.BidDateTime.Value.ToString(), // FIXME
                     BidPackageId = x.Id,
                     InviteResponse = x.Invitees.Where(i => i.SentToId == companyId).FirstOrDefault().AcceptedDate.HasValue ? true : x.Invitees.Where(i => i.SentToId == companyId).FirstOrDefault().RejectedDate.HasValue ? false : default(bool?),
                     InvitingCompanyId = x.CreatedById,

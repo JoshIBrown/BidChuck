@@ -30,7 +30,9 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         UserProfile GetUser(int id);
         IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProject(int projectId);
         IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProjectAndCreatingCompany(int projectId, int creatingCompanyId);
-        IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProjectAndInvitedCompany(int projectId, int invitedCompanyId);
+        IEnumerable<BCModel.Projects.BidPackage> GetBidPackagesByProjectAndInvitedCompany(int projectId, int invitedCompanyId);
         Dictionary<int, string> GetInvitationScopes(int projectId, int companyId);
+
+        IEnumerable<Invitation> GetAcceptedOrUnansweredInvitations(int bidPackageId);
     }
 }

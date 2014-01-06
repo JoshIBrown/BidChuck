@@ -133,8 +133,8 @@ namespace BCWeb.Areas.Account.Controllers
                 company.OperatingDistance = viewModel.OperatingDistance;
                 company.Phone = Util.ConvertPhoneForStorage(viewModel.Phone.Trim());
                 company.PostalCode = viewModel.PostalCode.Trim();
-                company.StateId = viewModel.StateId;
-
+                //company.StateId = viewModel.StateId;
+                company.State = _serviceLayer.GetState(viewModel.StateId.Value);
                 GeoLocator locator = new GeoLocator();
 
                 if (company.Address1 == null && company.City == null && company.StateId != null && company.PostalCode != null)

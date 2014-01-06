@@ -114,6 +114,9 @@ namespace BCModel.Projects
         [IgnoreDataMember]
         public virtual BuildingType BuildingType { get; set; }
 
+        public bool InvitationOnly { get; set; }
+        
+        public bool HiddenFromSearch { get; set; }
 
         public ProjectType ProjectType { get; set; }
 

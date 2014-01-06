@@ -340,5 +340,17 @@ namespace BCWeb.Models.Project.ServiceLayer
                     where r.GeoLocation == null
                     select r).ToList();
         }
+
+
+        public IEnumerable<BidPackage> GetBidPackagesInvitedTo(int projectId, int invitedCompanyId)
+        {
+            var output = (from i in _repo.QueryInvites()
+                          join b in _repo.QueryBidPackages() on i.BidPackageId equals b.Id
+                          where b.ProjectId == projectId
+                          && i.SentToId == invitedCompanyId
+                          select b).AsEnumerable();
+
+            return output;
+        }
     }
 }

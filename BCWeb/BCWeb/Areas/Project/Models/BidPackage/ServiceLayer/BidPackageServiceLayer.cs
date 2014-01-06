@@ -242,7 +242,7 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         }
 
 
-        public IEnumerable<BCModel.Projects.BidPackage> GetEnumerableByProjectAndInvitedCompany(int projectId, int invitedCompanyId)
+        public IEnumerable<BCModel.Projects.BidPackage> GetBidPackagesByProjectAndInvitedCompany(int projectId, int invitedCompanyId)
         {
             return (from r in _repo.QueryInvites()
                     where r.SentToId == invitedCompanyId
@@ -261,6 +261,17 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
 
 
             return output.ToDictionary(x => x.ScopeId, y => y.Description);
+        }
+
+
+        public IEnumerable<Invitation> GetAcceptedOrUnansweredInvitations(int bidPackageId)
+        {
+            var result = (from r in _repo.QueryInvites()
+                          where r.BidPackageId == bidPackageId
+                          && (r.AcceptedDate.HasValue || (!r.AcceptedDate.HasValue && !r.RejectedDate.HasValue))
+                          select r).AsEnumerable();
+
+            return result;
         }
     }
 }
