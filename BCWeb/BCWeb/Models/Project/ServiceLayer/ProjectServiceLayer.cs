@@ -352,5 +352,16 @@ namespace BCWeb.Models.Project.ServiceLayer
 
             return output;
         }
+
+
+        public IEnumerable<BCModel.Projects.Project> GetActivePublicSearchable()
+        {
+            var result = (from p in _repo.Query()
+                          where p.BidDateTime >= DateTime.Now
+                          && !p.HiddenFromSearch
+                          select p).AsEnumerable();
+
+            return result;
+        }
     }
 }

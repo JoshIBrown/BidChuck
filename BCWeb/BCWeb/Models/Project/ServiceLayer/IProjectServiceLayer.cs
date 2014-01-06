@@ -45,5 +45,7 @@ namespace BCWeb.Models.Project.ServiceLayer
         List<BCModel.Projects.Project> GetEmptyLatLongList();
 
         IEnumerable<BidPackage> GetBidPackagesInvitedTo(int projectId, int invitedCompanyId);
+
+        IEnumerable<BCModel.Projects.Project> GetActivePublicSearchable();
     }
 }

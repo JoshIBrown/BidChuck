@@ -188,7 +188,8 @@ namespace BCWeb.Controllers
                         BidPackages = new List<BidPackage>(),
                         WalkThruDateTime = viewModel.WalkThruDateTime,
                         WalkThruStatus = viewModel.WalkThruStatus.Value,
-
+                        HiddenFromSearch = viewModel.HiddenFromSearch,
+                        InvitationOnly = viewModel.InvitationOnly
                     };
 
                     GeoLocator locator = new GeoLocator();
@@ -280,7 +281,26 @@ namespace BCWeb.Controllers
         {
             Project theProject = _service.Get(id);
 
+            // graceful error handling
+            if (theProject == null)
+            {
+                return View("NotFound");
+            }
+
             UserProfile user = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
+
+            // if hidden from search, and user is not invited
+            if (theProject.HiddenFromSearch && (User.IsInRole("subcontractor") || User.IsInRole("materials_vendor") || User.IsInRole("general_contractor")))
+            {
+                // check for invitations to project
+                var invites = _service.GetRcvdInvitations(id, user.CompanyId);
+
+                if (invites == null || invites.Count() == 0)
+                {
+                    return View("NotFound");
+                }
+            }
+
 
             // if invited sub, show bp invited to
             if (User.IsInRole("subcontractor") || User.IsInRole("materials_vendor"))
@@ -300,6 +320,9 @@ namespace BCWeb.Controllers
                     ProjectId = theProject.Id,
                     PostalCode = theProject.PostalCode,
                     ProjectType = theProject.ProjectType.ToDescription(),
+                    ProjectCategory = theProject.ProjectCategory.ToDescription(),
+                    InviteOnly = theProject.InvitationOnly,
+                    HiddenFromSearch = theProject.HiddenFromSearch,
                     State = theProject.State.Abbr,
                     Title = theProject.Title
                 };
@@ -334,8 +357,11 @@ namespace BCWeb.Controllers
                 BidPackageId = masterBP.Id,
                 PostalCode = theProject.PostalCode,
                 ProjectType = theProject.ProjectType.ToDescription(),
+                ProjectCategory = theProject.ProjectCategory.ToDescription(),
                 State = theProject.State.Abbr,
                 Title = theProject.Title,
+                InviteOnly = theProject.InvitationOnly,
+                HiddenFromSearch = theProject.HiddenFromSearch,
                 WalkThruDate = theProject.WalkThruStatus == WalkThruStatus.WalkThruIncluded && theProject.WalkThruDateTime.HasValue ? theProject.WalkThruDateTime.Value.ToString("MM/dd/yyyy hh:mm tt") : theProject.WalkThruStatus.ToString()
             };
 
@@ -413,7 +439,9 @@ namespace BCWeb.Controllers
                 WalkThruStatus = raw.WalkThruStatus,
                 Number = raw.Number,
                 ProjectCategory = raw.ProjectCategory,
-                ProjectType = raw.ProjectType
+                ProjectType = raw.ProjectType,
+                HiddenFromSearch = raw.HiddenFromSearch,
+                InvitationOnly = raw.InvitationOnly
             };
             rePopViewModel(viewModel);
             return View("Edit", viewModel);
@@ -457,6 +485,8 @@ namespace BCWeb.Controllers
                     toUpdate.ProjectCategory = viewModel.ProjectCategory.Value;
                     toUpdate.StateId = viewModel.StateId;
                     toUpdate.Number = viewModel.Number;
+                    toUpdate.InvitationOnly = viewModel.InvitationOnly;
+                    toUpdate.HiddenFromSearch = viewModel.HiddenFromSearch;
 
                     // update primary bid package
                     var ProjectPackage = toUpdate.BidPackages.Where(b => b.IsMaster).FirstOrDefault();

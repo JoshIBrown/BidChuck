@@ -61,5 +61,11 @@ namespace BCWeb.Models.Project.ViewModel
         public int? AcceptedInvite { get; set; }
         public int? DeclinedInvite { get; set; }
         public int? SubmittedBid { get; set; }
+
+        public string ProjectCategory { get; set; }
+
+        public bool InviteOnly { get; set; }
+
+        public bool HiddenFromSearch { get; set; }
     }
 }

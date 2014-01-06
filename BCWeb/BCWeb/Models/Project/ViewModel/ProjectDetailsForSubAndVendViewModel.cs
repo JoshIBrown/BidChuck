@@ -46,5 +46,11 @@ namespace BCWeb.Models.Project.ViewModel
         //public Dictionary<int, IEnumerable<int>> ScopeSelection { get; set; }
         //public Dictionary<int, string> BidDate { get; set; }
         //public Dictionary<int, string> WalkThroughDate { get; set; }
+
+        public string ProjectCategory { get; set; }
+
+        public bool InviteOnly { get; set; }
+
+        public bool HiddenFromSearch { get; set; }
     }
 }

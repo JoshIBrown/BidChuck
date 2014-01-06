@@ -68,7 +68,7 @@ namespace BCWeb.Api
         {
             int userId = _security.GetUserId(User.Identity.Name);
 
-            IEnumerable<ProjectListViewModel> list = _service.GetEnumerable(x => x.BidDateTime > DateTime.Now)
+            IEnumerable<ProjectListViewModel> list = _service.GetActivePublicSearchable()
                 .Select(s => new ProjectListViewModel
                 {
                     Architect = s.Architect.CompanyName,
@@ -85,7 +85,13 @@ namespace BCWeb.Api
             UserProfile theUser = _service.GetUserProfile(_security.GetUserId(User.Identity.Name));
             IEnumerable<Invitation> invites = _service.GetInvitations(theUser.CompanyId);
             var projects = invites.Select(i => i.BidPackage.Project).Distinct();
-            var viewModel = projects.Select(p => new ProjectListViewModel { Id = p.Id, Title = p.Title, Architect = p.Architect.CompanyName });
+            var viewModel = projects.Select(p => new ProjectListViewModel
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Architect = p.Architect.CompanyName,
+                Number = p.Number
+            });
 
 
             return viewModel;

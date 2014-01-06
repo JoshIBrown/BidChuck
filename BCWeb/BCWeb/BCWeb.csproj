@@ -1019,6 +1019,7 @@
     <Content Include="Views\Home\Foundation_Index.cshtml" />
     <Content Include="Views\Shared\_SelectedScopes.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
+    <Content Include="Views\Project\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
