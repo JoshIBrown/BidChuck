@@ -3,6 +3,7 @@ using BCModel.Projects;
 using BCWeb.Areas.Project.Models.Documents.ViewModel;
 using BCWeb.Helpers;
 using BCWeb.Models;
+using BCWeb.Models.Notifications.ServiceLayer;
 using BCWeb.Models.Project.ServiceLayer;
 using BCWeb.Models.Project.ViewModel;
 using System;
@@ -21,11 +22,13 @@ namespace BCWeb.Controllers
         // GET: /Projects/
         private IProjectServiceLayer _service;
         private IWebSecurityWrapper _security;
+        private INotificationSender _notice;
 
-        public ProjectController(IProjectServiceLayer service, IWebSecurityWrapper security)
+        public ProjectController(IProjectServiceLayer service, IWebSecurityWrapper security, INotificationSender notice)
         {
             _service = service;
             _security = security;
+            _notice = notice;
         }
 
         public ActionResult Index()
@@ -522,6 +525,15 @@ namespace BCWeb.Controllers
                     // add project to system
                     if (_service.Update(toUpdate))
                     {
+
+                        // send notifications to invited members
+                        int[] invitees = _notice.GetInvitationsNotDeclined(toUpdate.Id, companyId).Select(s => s.SentToId).ToArray();
+
+                        for (int i = 0; i < invitees.Length; i++)
+                        {
+                            _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, toUpdate.Id);
+                        }
+
                         return RedirectToRoute("Default", new { controller = "Project", action = "Details", id = toUpdate.Id });
                     }
                     else
