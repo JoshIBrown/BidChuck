@@ -10,10 +10,10 @@
             <ul class="side-nav">
                 @* limit to creator*@
                 <li>@Html.RouteLink("Edit...", "Default", new { controller = "Project", action = "Edit", id = Model.ProjectId })</li>
-                <li>@Html.RouteLink("Add Documents", "Project_default", new { controller = "Document", action = "Create", projectId = Model.ProjectId })</li>
+                
 
 
-                @if (User.IsInRole("general_contractor") || User.IsInRole("subcontractor"))
+                @if (User.IsInRole("general_contractor"))
                 {
 
 
@@ -25,6 +25,7 @@
                     <li class="divider"></li>
                     <li>@Html.RouteLink("Compose Bid", "Project_default", new { controller = "Bid", action = "ComposeGC", projectId = Model.ProjectId })</li>
                     <li>@Html.RouteLink("Review Bid", "Project_default", new { controller = "Bid", action = "ReviewGC", projectId = Model.ProjectId })</li>
+                    <li>@Html.RouteLink("Add Documents", "Project_default", new { controller = "Document", action = "Create", projectId = Model.ProjectId })</li>
                     }
                 }
 
