@@ -264,14 +264,6 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         }
 
 
-        public IEnumerable<Invitation> GetAcceptedOrUnansweredInvitations(int bidPackageId)
-        {
-            var result = (from r in _repo.QueryInvites()
-                          where r.BidPackageId == bidPackageId
-                          && (r.AcceptedDate.HasValue || (!r.AcceptedDate.HasValue && !r.RejectedDate.HasValue))
-                          select r).AsEnumerable();
-
-            return result;
-        }
+        
     }
 }

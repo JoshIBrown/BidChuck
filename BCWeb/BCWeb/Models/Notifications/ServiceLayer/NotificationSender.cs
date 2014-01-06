@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCModel.Projects;
 using BCWeb.Models.Notifications.Repository;
 using System;
 using System.Collections.Generic;
@@ -191,6 +192,18 @@ namespace BCWeb.Models.Notifications.ServiceLayer
 
                 throw ex;
             }
+        }
+
+        public IEnumerable<Invitation> GetInvitationsNotDeclined(int projectId, int sendingCompanyId)
+        {
+            var result = (from i in _repo.QueryInvites()
+                          join b in _repo.QueryBidPackages() on i.BidPackageId equals b.Id
+                          where b.ProjectId == projectId
+                          && b.CreatedById == sendingCompanyId
+                          && (i.AcceptedDate.HasValue || (!i.AcceptedDate.HasValue && !i.RejectedDate.HasValue))
+                          select i).AsEnumerable();
+
+            return result;
         }
     }
 }

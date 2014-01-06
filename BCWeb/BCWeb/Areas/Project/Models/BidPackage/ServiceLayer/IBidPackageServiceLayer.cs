@@ -33,6 +33,6 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
         IEnumerable<BCModel.Projects.BidPackage> GetBidPackagesByProjectAndInvitedCompany(int projectId, int invitedCompanyId);
         Dictionary<int, string> GetInvitationScopes(int projectId, int companyId);
 
-        IEnumerable<Invitation> GetAcceptedOrUnansweredInvitations(int bidPackageId);
+        
     }
 }

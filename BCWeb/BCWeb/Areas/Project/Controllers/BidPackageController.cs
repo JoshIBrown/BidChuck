@@ -238,9 +238,9 @@ namespace BCWeb.Areas.Project.Controllers
                     {
 
                         // notify invited companies
-                        int[] invitees = _service.GetAcceptedOrUnansweredInvitations(toUpdate.Id).Select(i => i.SentToId).ToArray();
-                        
-                        for(int i = 0; i < invitees.Length; i++)
+                        int[] invitees = _notice.GetInvitationsNotDeclined(toUpdate.ProjectId, companyId).Select(i => i.SentToId).ToArray();
+
+                        for (int i = 0; i < invitees.Length; i++)
                         {
                             _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, toUpdate.ProjectId);
                         }

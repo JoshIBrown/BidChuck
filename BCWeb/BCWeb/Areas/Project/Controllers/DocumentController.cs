@@ -67,8 +67,14 @@ namespace BCWeb.Areas.Project.Controllers
 
                 if (_service.Create(toCreate))
                 {
-                    // get bid packages created by users company
-                    // get invitations
+                    // send notifications to invited members
+                    int[] invitees =  _notice.GetInvitationsNotDeclined(viewModel.ProjectId, theUser.CompanyId).Select(s=>s.SentToId).ToArray();
+
+                    for (int i = 0; i < invitees.Length; i++)
+                    {
+                        _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, viewModel.ProjectId);
+                    }
+
                     return RedirectToAction("Details", new { id = toCreate.Id });
                 }
                 else
@@ -148,6 +154,14 @@ namespace BCWeb.Areas.Project.Controllers
 
                 if (_service.Update(toUpdate))
                 {
+                    // send notifications to invited members
+                    int[] invitees = _notice.GetInvitationsNotDeclined(viewModel.ProjectId, theUser.CompanyId).Select(s => s.SentToId).ToArray();
+
+                    for (int i = 0; i < invitees.Length; i++)
+                    {
+                        _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, viewModel.ProjectId);
+                    }
+
                     return RedirectToAction("Details", new { id = toUpdate.Id });
                 }
                 else

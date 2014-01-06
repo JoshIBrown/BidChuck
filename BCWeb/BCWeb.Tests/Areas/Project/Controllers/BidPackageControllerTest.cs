@@ -10,6 +10,7 @@ using BCModel.Projects;
 using BCModel;
 using System.Security.Principal;
 using System.Collections.Generic;
+using BCWeb.Models.Notifications.ServiceLayer;
 
 namespace BCWeb.Tests.Areas.Project.Controllers
 {
@@ -24,8 +25,9 @@ namespace BCWeb.Tests.Areas.Project.Controllers
             // arrange
             Mock<IBidPackageServiceLayer> service = new Mock<IBidPackageServiceLayer>();
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
 
-            BidPackageController controller = new BidPackageController(service.Object, security.Object);
+            BidPackageController controller = new BidPackageController(service.Object, security.Object, notice.Object);
 
             // act
             var result = controller.Create(1, 1);
@@ -48,9 +50,9 @@ namespace BCWeb.Tests.Areas.Project.Controllers
             service.Setup(s => s.GetUser(It.IsAny<int>())).Returns(new UserProfile { CompanyId = 1, UserId = 1 });
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId("qwert@qwer.com")).Returns(1);
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
 
-
-            BidPackageController controller = new BidPackageController(service.Object, security.Object);
+            BidPackageController controller = new BidPackageController(service.Object, security.Object, notice.Object);
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
             principal.Setup(p => p.Identity.Name).Returns("qwert@qwer.com");
@@ -93,8 +95,9 @@ namespace BCWeb.Tests.Areas.Project.Controllers
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId("qwert@qwer.com")).Returns(1);
 
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
 
-            BidPackageController controller = new BidPackageController(service.Object, security.Object);
+            BidPackageController controller = new BidPackageController(service.Object, security.Object, notice.Object);
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
             principal.Setup(p => p.Identity.Name).Returns("qwert@qwer.com");
@@ -136,8 +139,9 @@ namespace BCWeb.Tests.Areas.Project.Controllers
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId("qwert@qwer.com")).Returns(1);
 
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
 
-            BidPackageController controller = new BidPackageController(service.Object, security.Object);
+            BidPackageController controller = new BidPackageController(service.Object, security.Object, notice.Object);
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
             principal.Setup(p => p.Identity.Name).Returns("qwert@qwer.com");

@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCModel.Projects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,9 @@ namespace BCWeb.Models.Notifications.Repository
         IQueryable<UserProfile> QueryUserProfiles();
 
         BCModel.Projects.Project GetProject(int id);
+
+        IQueryable<Invitation> QueryInvites();
+
+        IQueryable<BidPackage> QueryBidPackages();
     }
 }

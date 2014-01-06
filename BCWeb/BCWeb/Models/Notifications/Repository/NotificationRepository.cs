@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCModel.Projects;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,6 +14,8 @@ namespace BCWeb.Models.Notifications.Repository
         private DbSet<NotificationTemplate> _templates;
         private DbSet<UserProfile> _users;
         private DbSet<BCModel.Projects.Project> _projects;
+        private DbSet<Invitation> _invites;
+        private DbSet<BidPackage> _bidPackages;
 
         public NotificationRepository()
         {
@@ -20,6 +23,8 @@ namespace BCWeb.Models.Notifications.Repository
             _templates = _context.NotificationTemplates;
             _users = _context.UserProfiles;
             _projects = _context.Projects;
+            _invites = _context.Invitations;
+            _bidPackages = _context.BidPackages;
         }
 
         public void Create(BCModel.Notification entity)
@@ -67,6 +72,18 @@ namespace BCWeb.Models.Notifications.Repository
         public BCModel.Projects.Project GetProject(int id)
         {
             return _projects.Find(id);
+        }
+
+
+        public IQueryable<BCModel.Projects.Invitation> QueryInvites()
+        {
+            return _invites;
+        }
+
+
+        public IQueryable<BidPackage> QueryBidPackages()
+        {
+            return _bidPackages;
         }
     }
 }
