@@ -13,6 +13,8 @@ namespace BCWeb.Models.Notifications.ServiceLayer
 
         bool SendNotification(int recipientId, RecipientType recipientType, NotificationType notificationType, int projectId);
         IEnumerable<Invitation> GetInvitationsNotDeclined(int projectId, int sendingCompanyId);
+
+        void SendInviteResponse(int bidPackageId);
     }
 
     public enum RecipientType

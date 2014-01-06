@@ -5,6 +5,7 @@ using BCWeb.Areas.Project.Models.Invitations.ServiceLayer;
 using BCWeb.Helpers;
 using BCWeb.Models;
 using BCWeb.Models.GenericViewModel;
+using BCWeb.Models.Notifications.ServiceLayer;
 using BCWeb.Models.Project.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,13 @@ namespace BCWeb.Api
     {
         private IInvitationServiceLayer _service;
         private IWebSecurityWrapper _security;
+        private INotificationSender _notice;
 
-        public InvitationController(IInvitationServiceLayer service, IWebSecurityWrapper security)
+        public InvitationController(IInvitationServiceLayer service, IWebSecurityWrapper security,INotificationSender notice)
         {
             _service = service;
             _security = security;
+            _notice = notice;
         }
 
 
@@ -62,6 +65,9 @@ namespace BCWeb.Api
                     invite.RejectedDate = default(DateTime?); // null out hte decline date
                 if (_service.Update(invite))
                 {
+                    // send notification
+                    _notice.SendInviteResponse(invite.BidPackageId);
+
                     result.success = true;
                     result.message = "invitation accepted";
                     result.data = new { date = invite.AcceptedDate.Value.ToShortDateString() };
@@ -99,6 +105,9 @@ namespace BCWeb.Api
 
                 if (_service.Update(invite))
                 {
+                    // send notification
+                    _notice.SendInviteResponse(invite.BidPackageId);
+
                     result.success = true;
                     result.message = "invitation declined";
                     result.data = new { date = invite.RejectedDate.Value.ToShortDateString() };
@@ -143,6 +152,9 @@ namespace BCWeb.Api
                 // try and add invite to system.
                 if (_service.Create(selfInvitation))
                 {
+                    // send notification
+                    _notice.SendInviteResponse(selfInvitation.BidPackageId);
+
                     result.success = true;
                     result.message = "joined project";
                     result.data = new { date = selfInvitation.AcceptedDate.Value.ToShortDateString() };
@@ -161,6 +173,10 @@ namespace BCWeb.Api
 
                 if (_service.Update(invite))
                 {
+
+                    // send notification
+                    _notice.SendInviteResponse(invite.BidPackageId);
+
                     result.success = true;
                     result.message = "joined project";
                     result.data = new { date = invite.AcceptedDate.Value.ToShortDateString() };
@@ -196,6 +212,9 @@ namespace BCWeb.Api
 
                 if (_service.Update(invite))
                 {
+                    // send notification
+                    _notice.SendInviteResponse(invite.BidPackageId);
+
                     result.message = "left project";
                     result.success = true;
                     result.data = new { date = invite.RejectedDate.Value.ToShortDateString() };
@@ -204,7 +223,6 @@ namespace BCWeb.Api
                 {
                     result.success = false;
                     result.message = "unable to leave project";
-
                 }
             }
             else
@@ -212,7 +230,6 @@ namespace BCWeb.Api
                 result.success = false;
                 result.message = "invalid project"; // secretly means some how someone wound up posting the wrong invite id
             }
-
 
             return result;
         }

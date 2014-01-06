@@ -85,5 +85,10 @@ namespace BCWeb.Models.Notifications.Repository
         {
             return _bidPackages;
         }
+
+        public BidPackage FindBidPackage(int bidPackageId)
+        {
+            return _bidPackages.Find(bidPackageId);
+        }
     }
 }

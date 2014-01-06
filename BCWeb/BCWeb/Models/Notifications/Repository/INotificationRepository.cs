@@ -17,5 +17,7 @@ namespace BCWeb.Models.Notifications.Repository
         IQueryable<Invitation> QueryInvites();
 
         IQueryable<BidPackage> QueryBidPackages();
+
+        BidPackage FindBidPackage(int bidPackageId);
     }
 }

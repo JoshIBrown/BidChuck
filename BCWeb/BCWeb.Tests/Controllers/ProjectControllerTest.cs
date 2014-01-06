@@ -12,6 +12,7 @@ using System.Threading;
 using System.Web;
 using BCModel.Projects;
 using BCModel;
+using BCWeb.Models.Notifications.ServiceLayer;
 
 namespace BCWeb.Tests.Controllers
 {
@@ -24,7 +25,8 @@ namespace BCWeb.Tests.Controllers
             // arrange
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
             // act
             var result = controller.Index();
@@ -47,7 +49,9 @@ namespace BCWeb.Tests.Controllers
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId("qwert@qwer.com")).Returns(1);
 
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
+
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
             Mock<ControllerContext> context = new Mock<ControllerContext>();
             context.Setup(c => c.HttpContext.User.IsInRole("architect")).Returns(true);
@@ -74,7 +78,9 @@ namespace BCWeb.Tests.Controllers
 
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
 
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
+
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
             Mock<ControllerContext> context = new Mock<ControllerContext>();
             context.Setup(c => c.HttpContext.User.IsInRole("architect")).Returns(false);
@@ -104,9 +110,10 @@ namespace BCWeb.Tests.Controllers
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
             service.Setup(s => s.FindDuplicate(viewModel.Title, viewModel.Number, viewModel.ArchitectId.Value)).Returns(new List<Project>()); // return empty list.  no matches found
 
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
 
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
             // act
             var result = controller.Create(viewModel);
@@ -133,9 +140,9 @@ namespace BCWeb.Tests.Controllers
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
             service.Setup(s => s.FindDuplicate(viewModel.Title, viewModel.Number, viewModel.ArchitectId.Value)).Returns(new List<Project> { found }); // return empty list.  no matches found
 
-
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
             // act
             var result = controller.Create(viewModel);
@@ -159,10 +166,10 @@ namespace BCWeb.Tests.Controllers
             };
 
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
-
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
 
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
             // act
             var result = controller.Create(viewModel);
@@ -181,7 +188,8 @@ namespace BCWeb.Tests.Controllers
             // arrange
             Mock<IProjectServiceLayer> service = new Mock<IProjectServiceLayer>();
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
             // act
             var result = controller.CreateStepTwo(1, "a project", "abc123");
@@ -205,8 +213,8 @@ namespace BCWeb.Tests.Controllers
 
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId(It.IsAny<string>())).Returns(1);
-
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
@@ -241,8 +249,8 @@ namespace BCWeb.Tests.Controllers
 
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId(It.IsAny<string>())).Returns(1);
-
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
@@ -278,8 +286,8 @@ namespace BCWeb.Tests.Controllers
 
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId(It.IsAny<string>())).Returns(1);
-
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
@@ -325,8 +333,8 @@ namespace BCWeb.Tests.Controllers
 
             Mock<IWebSecurityWrapper> security = new Mock<IWebSecurityWrapper>();
             security.Setup(s => s.GetUserId(It.IsAny<string>())).Returns(1);
-
-            ProjectController controller = new ProjectController(service.Object, security.Object);
+            Mock<INotificationSender> notice = new Mock<INotificationSender>();
+            ProjectController controller = new ProjectController(service.Object, security.Object, notice.Object);
 
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();

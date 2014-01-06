@@ -205,5 +205,13 @@ namespace BCWeb.Models.Notifications.ServiceLayer
 
             return result;
         }
+
+
+        public bool SendInviteResponse(int bidPackageId)
+        {
+            var bidPackage = _repo.FindBidPackage(bidPackageId);
+
+            return SendNotification(bidPackage.CreatedById, RecipientType.company, NotificationType.InvitationResponse, bidPackage.ProjectId);
+        }
     }
 }
