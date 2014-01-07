@@ -263,7 +263,7 @@ namespace BCWeb.Controllers
                         OperatingDistance = model.OperatingDistance,
                         Phone = Util.ConvertPhoneForStorage(model.Phone),
                         PostalCode = model.PostalCode,
-                        Published = false,
+                        Published = true,
                         StateId = model.StateId
                     };
 
@@ -401,6 +401,7 @@ namespace BCWeb.Controllers
         [AllowAnonymous]
         public ActionResult RegisterConfirmation(string ID)
         {
+            
             if (_security.ConfirmAccount(ID))
             {
                 return RedirectToAction("ConfirmationSuccess");
