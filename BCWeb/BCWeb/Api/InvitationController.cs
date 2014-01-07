@@ -43,7 +43,8 @@ namespace BCWeb.Api
                     CompanyName = c.CompanyName,
                     ScopesOfWork = c.Scopes.Where(s => bpScopes.Contains(s.ScopeId))
                         .Select(s => s.Scope.CsiNumber + " " + s.Scope.Description)
-                });
+                })
+                .OrderByDescending(o => o.ScopesOfWork.Count());
 
 
 

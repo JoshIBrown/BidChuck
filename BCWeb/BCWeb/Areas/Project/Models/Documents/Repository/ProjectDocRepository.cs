@@ -13,12 +13,14 @@ namespace BCWeb.Areas.Project.Models.Documents.Repository
         private DbSet<ProjectDocument> _docs;
         private DbSet<BCModel.Projects.Project> _projects;
         private DbSet<BCModel.CompanyProfile> _companies;
+        private DbSet<Invitation> _invites;
 
         public ProjectDocRepository()
         {
             _docs = _context.ProjectDocs;
             _projects = _context.Projects;
             _companies = _context.Companies;
+            _invites = _context.Invitations;
         }
 
         public BCModel.Projects.Project FindProject(int id)
@@ -71,6 +73,12 @@ namespace BCWeb.Areas.Project.Models.Documents.Repository
         public BCModel.UserProfile FindUser(int id)
         {
             return _context.UserProfiles.Find(id);
+        }
+
+
+        public IQueryable<Invitation> QueryInvites()
+        {
+            return _invites.Include(i => i.BidPackage);
         }
     }
 }

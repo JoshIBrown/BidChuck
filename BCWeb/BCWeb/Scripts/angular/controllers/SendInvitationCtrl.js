@@ -8,6 +8,7 @@
         $scope.companies = [];
         $scope.bpId = angular.element('#BidPackageId').val();
 
+
         $http.get('/api/Invitation/GetCompaniesToInvite/?bidPackageId=' + $scope.bpId)
                 .success(function (result) {
                     $scope.companies = result;
@@ -21,6 +22,31 @@
             return "CompanyId_" + i + "_";
         };
 
+        $scope.CheckAll = function () {
+            // get all checkboxes
+            var checkbox = angular.element('input[type="checkbox"]');
+
+            // if checkboxes are found
+            if (checkbox) {
+                // loop through collection of checkboxes
+                for (var i = 0; i < checkbox.length; i++) {
+                    checkbox[i].checked = true;
+                }
+            }
+        };
+
+        $scope.UncheckAll = function () {
+            // get all checkboxes
+            var checkbox = angular.element('input[type="checkbox"]');
+
+            // if checkboxes are found
+            if (checkbox) {
+                // loop through collection of checkboxes
+                for (var i = 0; i < checkbox.length; i++) {
+                    checkbox[i].checked = false;
+                }
+            }
+        };
     };
 
 
@@ -31,11 +57,17 @@
 
     app.filter('scopeMatchFilter', function () {
         return function (company, min) {
-            if (company.ScopesOfWork) {
-                if (company.ScopesOfWork.length >= min) {
-                    return company;
+            var arrayToReturn = [];
+            if (min && company) {
+                for (var i = 0; i < company.length; i++) {
+                    if (company[i].ScopesOfWork) {
+                        if (company[i].ScopesOfWork.length >= min) {
+                            arrayToReturn.push(company[i]);
+                        }
+                    }
                 }
             }
+            return arrayToReturn;
         };
     });
 

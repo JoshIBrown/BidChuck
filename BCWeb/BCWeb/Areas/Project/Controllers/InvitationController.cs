@@ -45,6 +45,7 @@ namespace BCWeb.Areas.Project.Controllers
             viewModel.ProjectId = raw.ProjectId;
             viewModel.ProjectName = raw.Project.Title;
             viewModel.BidPackageTitle = raw.Description;
+            viewModel.BPScopeCount = _service.GetBidPackageScopesDeepestScopes(bidPackageId).Count();
 
             return View(viewModel);
         }

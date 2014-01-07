@@ -21,7 +21,7 @@ namespace BCWeb.Areas.Project.Controllers
         private IWebSecurityWrapper _security;
         private INotificationSender _notice;
 
-        public DocumentController(IProjectDocServiceLayer service, IWebSecurityWrapper security,INotificationSender notice)
+        public DocumentController(IProjectDocServiceLayer service, IWebSecurityWrapper security, INotificationSender notice)
         {
             _service = service;
             _security = security;
@@ -40,6 +40,9 @@ namespace BCWeb.Areas.Project.Controllers
         {
             UserProfile theUser = _service.GetUser(_security.GetUserId(User.Identity.Name));
             BCModel.Projects.Project theProject = _service.GetProject(projectId);
+
+            if (!_service.UserIsInvitedToProject(theUser.CompanyId, theProject.Id))
+                throw new HttpException(403, "user is not invited to project");
 
             ProjectDocEditModel viewModel = new ProjectDocEditModel();
             viewModel.ProjectId = projectId;
@@ -68,7 +71,7 @@ namespace BCWeb.Areas.Project.Controllers
                 if (_service.Create(toCreate))
                 {
                     // send notifications to invited members
-                    int[] invitees =  _notice.GetInvitationsNotDeclined(viewModel.ProjectId, theUser.CompanyId).Select(s=>s.SentToId).ToArray();
+                    int[] invitees = _notice.GetInvitationsNotDeclined(viewModel.ProjectId, theUser.CompanyId).Select(s => s.SentToId).ToArray();
 
                     for (int i = 0; i < invitees.Length; i++)
                     {

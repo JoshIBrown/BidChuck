@@ -122,5 +122,18 @@ namespace BCWeb.Areas.Project.Models.Documents.ServiceLayer
             return _repo.FindUser(id);
         }
 
+
+
+        public bool UserIsInvitedToProject(int companyId,int projectId)
+        {
+            // should only check the master bid package
+            // because that is where the invite for a general contractor will be
+            var result = from i in _repo.QueryInvites()
+                         where i.BidPackage.ProjectId == projectId
+                         && i.SentToId == companyId
+                         select i;
+
+            return result != null || result.Count() > 0;
+        }
     }
 }
