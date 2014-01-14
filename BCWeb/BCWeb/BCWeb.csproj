@@ -286,9 +286,11 @@
     <Compile Include="Api\ScopesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AngularTemplateController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Helpers\EmailSender.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -316,6 +318,7 @@
     <Compile Include="Models\Account\ViewModel\EditProfileViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\InvitationViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\ManageDashboardViewModel.cs" />
+    <Compile Include="Models\Company\ViewModel\CompanyProfileViewModel.cs" />
     <Compile Include="Models\Company\ViewModel\CompanySearchResult.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
@@ -1020,6 +1023,8 @@
     <Content Include="Views\Shared\_SelectedScopes.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
     <Content Include="Views\Project\NotFound.cshtml" />
+    <Content Include="Views\Company\Profile.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />

@@ -1,0 +1,40 @@
+﻿@model BCWeb.Models.Company.ViewModel.CompanyProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+<div class="row">
+    <div class="large-12 columns">
+        <h2>@Model.CompanyName <small>@Model.BusinessType</small></h2>
+    </div>
+</div>
+<div class="row">
+    <div class="large-6 columns">
+        <ul class="vcard">
+            <li class="street-address">@Model.Address1</li>
+            @if (Model.Address2 != null || Model.Address2 != "")
+            {
+                <li class="street-address">@Model.Address2</li>
+            }
+            <li class="locality">@Model.City</li>
+            <li><span class="state">@Model.State</span>, <span class="zip">@Model.PostalCode</span></li>
+            <li>Operating Distance: @Model.OperatingDistance</li>
+        </ul>
+    </div>
+</div>
+@if (Model.BusinessType == "Materials Vendor" || Model.BusinessType == "Sub-Contractor")
+{
+    <div class="row">
+        <div class="large-6 columns">
+            <h4>Scopes of Work</h4>
+            <ul>
+                @foreach (var csi in Model.WorkScopes)
+                {
+                    <li>@csi</li>
+                }
+            </ul>
+        </div>
+    </div>
+}
