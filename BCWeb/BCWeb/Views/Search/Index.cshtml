@@ -2,5 +2,35 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
-
-<h2>Search</h2>
+<div class="row">
+    <div class="large-3 columns">
+        <h2>Search</h2>
+    </div>
+</div>
+<div ng-controller="SearchCtrl">
+    <div class="row">
+        <div class="large-8 columns">
+            <div class="row collapse">
+                <div class="large-10 columns">
+                    <input type="text" name="query" id="query" ng-model="queryString" />
+                </div>
+                <div class="large-2 columns">
+                    <input type="button" value="search" class="postfix button" ng-click="performSearch()" />
+                </div>
+            </div>
+            <a href="#">Advanced</a>
+        </div>
+    </div>
+    <div class="row" ng-show="hasResults()">
+        <div class="large-10 columns">
+            <h3>Results</h3>
+            <ul class="no-bullet">
+                <li ng-repeat="r in searchResults"><a href="{{r.LinkPath}}">{{r.Text}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/search")
+}

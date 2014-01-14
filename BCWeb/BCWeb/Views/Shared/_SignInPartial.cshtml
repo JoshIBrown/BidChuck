@@ -1,7 +1,8 @@
 ﻿@if (Request.IsAuthenticated)
 {
-    <li>@Html.RouteLink("Projects", "Default", new { controller = "Project", action = "Index" })
-    </li>
+    
+    <li>@Html.RouteLink("Search", "Default", new { controller = "Search", action = "Index" })</li>
+    <li>@Html.RouteLink("Projects", "Default", new { controller = "Project", action = "Index" })</li>
     <li><a href="/Notifications">
         <img src="@Url.Content("~/Content/images/InfoFlag_unread_32x24.png")" /></a><span id="notificationCount"></span></li>
     
@@ -26,7 +27,7 @@ else
 
     
     <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "RegisterLink" })</li>
-    <li class="divider hide-for-small"></li>
+   
     <li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "SignInLink" })</li>
     
 }

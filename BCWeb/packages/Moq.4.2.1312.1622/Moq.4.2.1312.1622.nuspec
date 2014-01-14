@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Moq</id>
-    <version>4.2.1312.1621</version>
+    <version>4.2.1312.1622</version>
     <title>Moq: an enjoyable mocking library</title>
     <authors>Daniel Cazzulino</authors>
     <owners>Daniel Cazzulino</owners>
@@ -14,7 +14,7 @@
 * Improved support for async APIs by making default value a completed task
 * Added support for async Returns and Throws
 * Improved mock invocation sequence testing
-
+* Improved support for multi-threaded tests
 
 Version 4.1
 * Added covariant IMock&lt;out T&gt; interface to Mock&lt;T&gt;

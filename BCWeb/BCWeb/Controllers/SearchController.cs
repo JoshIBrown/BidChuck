@@ -15,6 +15,5 @@ namespace BCWeb.Controllers
         {
             return View();
         }
-
     }
 }

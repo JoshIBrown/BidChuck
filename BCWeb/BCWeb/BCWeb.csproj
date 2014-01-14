@@ -197,6 +197,7 @@
     <Compile Include="Api\InvitationController.cs" />
     <Compile Include="Api\NotificationController.cs" />
     <Compile Include="Api\ProjectController.cs" />
+    <Compile Include="Api\SearchController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
@@ -348,6 +349,11 @@
     <Compile Include="Models\Project\ViewModel\ProjectDetailsViewModel.cs" />
     <Compile Include="Models\Project\ViewModel\ProjectListViewModel.cs" />
     <Compile Include="Models\RepositoryBase.cs" />
+    <Compile Include="Models\Search\Repository\ISearchRepository.cs" />
+    <Compile Include="Models\Search\Repository\SearchRepository.cs" />
+    <Compile Include="Models\Search\ServiceLayer\ISearchServiceLayer.cs" />
+    <Compile Include="Models\Search\ServiceLayer\SearchServiceLayer.cs" />
+    <Compile Include="Models\Search\ViewModel\SearchResultItem.cs" />
     <Compile Include="Models\ServiceLayerBase.cs" />
     <Compile Include="Models\Shared\BingMapsResponse.cs" />
     <Compile Include="Models\Shared\DataTablesResponse.cs" />
@@ -476,6 +482,7 @@
     <Content Include="Scripts\angular\controllers\admin\CompanyProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\admin\ProjectCtrl.js" />
     <Content Include="Scripts\angular\controllers\NotificationCtrl.js" />
+    <Content Include="Scripts\angular\controllers\SearchCtrl.js" />
     <Content Include="Scripts\angular\controllers\SVComposeBid.js" />
     <Content Include="Scripts\angular\controllers\admin\UserProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\BidPackageIndexCtrl.js" />
@@ -792,6 +799,7 @@
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\jQuery\CreateProject.js" />
+    <Content Include="Scripts\modernizr-2.7.1.js" />
     <Content Include="Scripts\moment-with-langs.js" />
     <Content Include="Scripts\moment-with-langs.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -964,7 +972,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jstd-scenario-adapter-config.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\ScopesCVL.js" />
     <Content Include="Scripts\zepto.js" />
     <Content Include="Unity.Mvc4.README.txt" />

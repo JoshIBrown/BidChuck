@@ -24,6 +24,8 @@ using BCWeb.Areas.Project.Models.Documents.ServiceLayer;
 using BCWeb.Areas.Project.Models.Documents.Repository;
 using BCWeb.Models.Notifications.Repository;
 using BCWeb.Models.Notifications.ServiceLayer;
+using BCWeb.Models.Search.Repository;
+using BCWeb.Models.Search.ServiceLayer;
 
 namespace BCWeb
 {
@@ -48,6 +50,8 @@ namespace BCWeb
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();    
+            container.RegisterType<ISearchRepository,SearchRepository>();
+            container.RegisterType<ISearchServiceLayer,SearchServiceLayer>();
             container.RegisterType<INotificationSender, NotificationSender>();
             container.RegisterType<INotificationServiceLayer, NotificationServiceLayer>();
             container.RegisterType<INotificationRepository, NotificationRepository>();
