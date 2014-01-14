@@ -31,7 +31,7 @@ namespace BCWeb.Controllers
             return View();
         }
 
-        public  ActionResult Profile(int? id)
+        public ActionResult Profile(int? id)
         {
 
             if (!id.HasValue)
@@ -51,7 +51,7 @@ namespace BCWeb.Controllers
                 Id = company.Id,
                 OperatingDistance = company.OperatingDistance.ToString() + " Miles",
                 PostalCode = company.PostalCode,
-                State = company.State.Abbr,
+                State = company.State == null ? "" : company.State.Abbr,
                 WorkScopes = company.Scopes.OrderBy(s => s.Scope.CsiNumber).Select(s => s.Scope.CsiNumber + " " + s.Scope.Description)
             };
 

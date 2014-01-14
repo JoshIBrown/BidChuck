@@ -176,6 +176,14 @@ namespace BCWeb
                 "~/Scripts/angular/controllers/admin/ProjectCtrl.js"));
             #endregion
 
+            #region Search
+
+            bundles.Add(new ScriptBundle("~/bundles/search").Include(
+                "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/controllers/SearchCtrl.js"));
+
+            #endregion
+
             #region notification
             bundles.Add(new ScriptBundle("~/bundles/allnotifications").Include(
                 "~/Scripts/moment.js",

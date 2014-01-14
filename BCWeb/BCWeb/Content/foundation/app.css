@@ -108,3 +108,16 @@ table tbody tr td INPUT[type="button"] {
 .top-bar-section .dropdown li a.parent-link {
     font-weight: bold;
 }
+
+
+.top-bar input[type="text"], .top-bar .button {
+    font-size: 0.85rem;
+    position: relative;
+    top: 7px;
+}
+.top-bar input[type="text"] {
+    height: auto;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+    font-size: 0.85rem;
+}
