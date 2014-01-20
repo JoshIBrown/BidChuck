@@ -7,9 +7,14 @@
         scope.performSearch = function () {
 
             if (scope.queryString) {
+                // as long as there is something to seach for
+                // otherwise, don't send an empty search request
                 if (scope.queryString.length > 0) {
 
-                    http.get('/api/Search/GetCompanies/?query=' + scope.queryString)
+                    http.get('/api/Search/GetCompanies/',
+                        {
+                            params: { query: scope.queryString, }
+                        })
                         .success(function (result) {
                             scope.searchResults = result;
                         });

@@ -195,6 +195,7 @@
     <Compile Include="Api\CompanyController.cs" />
     <Compile Include="Api\BidController.cs" />
     <Compile Include="Api\InvitationController.cs" />
+    <Compile Include="Api\NetworkController.cs" />
     <Compile Include="Api\NotificationController.cs" />
     <Compile Include="Api\ProjectController.cs" />
     <Compile Include="Api\SearchController.cs" />
@@ -240,6 +241,12 @@
     <Compile Include="Areas\Admin\Models\Users\UserProfileDetailsModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
+    <Compile Include="Areas\Company\CompanyAreaRegistration.cs" />
+    <Compile Include="Areas\Company\Controllers\NetworkController.cs" />
+    <Compile Include="Areas\Company\Models\Repository\INetworkRepository.cs" />
+    <Compile Include="Areas\Company\Models\Repository\NetworkRepository.cs" />
+    <Compile Include="Areas\Company\Models\ServiceLayer\INetworkServiceLayer.cs" />
+    <Compile Include="Areas\Company\Models\ServiceLayer\NetworkServiceLayer.cs" />
     <Compile Include="Areas\Project\Controllers\BidController.cs" />
     <Compile Include="Areas\Project\Controllers\BidPackageController.cs" />
     <Compile Include="Areas\Project\Controllers\DocumentController.cs" />
@@ -852,6 +859,7 @@
     <Content Include="Areas\Admin\Views\BuildingType\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\BuildingType\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BuildingType\Create.cshtml" />
+    <Content Include="Areas\Company\Views\Web.config" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
@@ -1036,6 +1044,8 @@
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Company\Models\ViewModel\" />
+    <Folder Include="Areas\Company\Views\Shared\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
     <Folder Include="Scripts\Areas\Home\" />

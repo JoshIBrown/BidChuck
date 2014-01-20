@@ -1,5 +1,6 @@
 ﻿using BCModel.Audit;
 using BCModel.Projects;
+using BCModel.SocialNetwork;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -161,6 +162,9 @@ namespace BCModel
         public DbSet<ConstructionType> ConstructionTypes { get; set; }
         public DbSet<BuildingType> BuildingTypes { get; set; }
         public DbSet<Invitation> Invitations { get; set; }
+
+        public DbSet<NetworkConnection> SocialNetworkConnections { get; set; }
+        public DbSet<NetworkRequest> SocialNetworkRequests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

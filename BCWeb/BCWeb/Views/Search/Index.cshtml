@@ -15,10 +15,54 @@
                     <input type="text" name="query" id="query" ng-model="queryString" />
                 </div>
                 <div class="large-2 columns">
-                    <input type="button" value="search" class="postfix button" ng-click="performSearch()" />
+                    <input type="button" value="search" class="postfix button" placeholder="Company, City,Postal Code" ng-click="performSearch()" />
                 </div>
             </div>
-            <a href="#">Advanced</a>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-7 columns">
+            <div class="row">
+                <div class="large-6 columns">
+                    <a href="#">Advanced</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-5 columns">
+                    <label>
+                        City
+                    <input type="text" name="city" id="city" ng-model="cityString" />
+                    </label>
+                </div>
+                <div class="large-2 columns">
+                    <label>
+                        State
+                    <select ng-model="state" name="state" id="state" ng-options="s in states">
+                        <option value="">WA</option>
+                    </select>
+                    </label>
+                </div>
+                <div class="large-2 columns">
+                    <label>
+                        Zip
+                    <input type="text" name="postal" id="postal" ng-model="postal" />
+                    </label>
+                </div>
+                <div class="large-3 columns">
+                    <label>
+                        Within
+                    <select ng-model="distance" name="distance" id="distance" ng-options="d in distance">
+                        <option value="">25 miles</option>
+                    </select>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <csi-scope-picker></csi-scope-picker>
         </div>
     </div>
     <div class="row" ng-show="hasResults()">

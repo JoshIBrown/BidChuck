@@ -11,5 +11,6 @@ namespace BCWeb.Models.Search.ServiceLayer
     {
         IEnumerable<BCModel.Projects.Project> SearchProjects(string query);
         IEnumerable<CompanyProfile> SearchCompanyProfiles(string query);
+        IEnumerable<CompanyProfile> SearchCompanyProfiles(string query, string city, string state, string postal, double? distance);
     }
 }
