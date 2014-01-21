@@ -2,8 +2,8 @@
     $('#Architect').autocomplete({
         source: function (request, response) {
             $.getJSON(
-                '/api/Company/GetArchitects',
-                { query: request.term }
+                '/api/Companies',
+                { query: request.term, type: "Architect" }
             ).success(function (data) {
                 response($.map(data, function (item) {
                     return {

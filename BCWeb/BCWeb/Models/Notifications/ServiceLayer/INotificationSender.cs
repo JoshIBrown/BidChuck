@@ -11,7 +11,7 @@ namespace BCWeb.Models.Notifications.ServiceLayer
     public interface INotificationSender
     {
 
-        bool SendNotification(int recipientId, RecipientType recipientType, NotificationType notificationType, int projectId);
+        bool SendNotification(int recipientId, RecipientType recipientType, NotificationType notificationType, int entityId, EntityType entityType);
         IEnumerable<Invitation> GetInvitationsNotDeclined(int projectId, int sendingCompanyId);
 
         bool SendInviteResponse(int bidPackageId);

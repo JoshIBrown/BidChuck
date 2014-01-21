@@ -18,36 +18,56 @@ using System.Web.Http;
 namespace BCWeb.Api
 {
     [Authorize]
-    public class CompanyController : ApiController
+    public class CompaniesController : ApiController
     {
         private ICompanyProfileServiceLayer _service;
         private IWebSecurityWrapper _security;
 
-        public CompanyController(ICompanyProfileServiceLayer service, IWebSecurityWrapper security)
+        public CompaniesController(ICompanyProfileServiceLayer service, IWebSecurityWrapper security)
         {
             _service = service;
             _security = security;
         }
 
-        public IEnumerable<CompanySearchResult> GetSearch(string query)
-        {
-            var companies = _service.GetEnumerable(x => x.Published && x.CompanyName.Contains(query))
-                .Select(x => new CompanySearchResult { Id = x.Id, BusinessType = x.BusinessType.ToDescription(), City = x.City, CompanyName = x.CompanyName, State = x.State.Abbr })
-                .ToArray();
 
-            return companies;
-        }
-
-
-        public KeyValuePair<int, string>[] GetArchitects(string query)
+        public KeyValuePair<int, string>[] Get(string query, BusinessType[] type)
         {
             Dictionary<int, string> archs = _service.GetEnumerable(s => s.CompanyName.Contains(query)
-                && s.BusinessType == BusinessType.Architect)
+                && type.Contains(s.BusinessType))
                 .ToDictionary(i => i.Id, i => i.CompanyName);
+
             return archs.ToArray();
         }
 
-        public DataTablesResponse GetDataTable(
+        public IEnumerable<CompanySearchResultItem> Get(string query, string city, string state, string postal, int? distance, int[] scopeId)
+        {
+            CompanySearchResultItem[] result = new CompanySearchResultItem[0];
+
+            if ((city == null || city == "") && (postal == null || postal == "") && (scopeId == null || scopeId.Length == 0))
+            {
+                result = _service.SearchCompanyProfiles(query)
+                     .Select(s => new CompanySearchResultItem
+                     {
+                         Text = s.CompanyName,
+                         LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = s.Id })
+                     })
+                     .ToArray();
+            }
+            else if (scopeId == null || scopeId.Length == 0)
+            {
+
+                result = _service.SearchCompanyProfiles(query, city, state, postal, distance)
+                     .Select(s => new CompanySearchResultItem
+                     {
+                         Text = s.CompanyName,
+                         LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = s.Id })
+                     })
+                     .ToArray();
+            }
+            return result;
+        }
+
+        public DataTablesResponse Get(
             [FromUri]int iDisplayStart,
             [FromUri]int iDisplayLength,
             [FromUri]int iColumns,

@@ -26,8 +26,8 @@ using BCWeb.Models.Notifications.Repository;
 using BCWeb.Models.Notifications.ServiceLayer;
 using BCWeb.Models.Search.Repository;
 using BCWeb.Models.Search.ServiceLayer;
-using BCWeb.Areas.Company.Models.Repository;
-using BCWeb.Areas.Company.Models.ServiceLayer;
+using BCWeb.Areas.Contacts.Models.Repository;
+using BCWeb.Areas.Contacts.Models.ServiceLayer;
 
 namespace BCWeb
 {

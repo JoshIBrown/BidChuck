@@ -561,7 +561,7 @@ namespace BCWeb.Controllers
 
                         for (int i = 0; i < invitees.Length; i++)
                         {
-                            _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, toUpdate.Id);
+                            _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, toUpdate.Id, EntityType.Project);
                         }
 
                         return RedirectToRoute("Default", new { controller = "Project", action = "Details", id = toUpdate.Id });

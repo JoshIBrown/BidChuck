@@ -7,18 +7,18 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Areas.Company.Models.Repository
+namespace BCWeb.Areas.Contacts.Models.Repository
 {
     public class NetworkRepository : RepositoryBase, INetworkRepository
     {
         private DbSet<NetworkConnection> _conns;
-        private DbSet<NetworkRequest> _reqs;
+        private DbSet<ConnectionRequest> _reqs;
         private DbSet<CompanyProfile> _companies;
 
         public NetworkRepository()
         {
-            _conns = _context.SocialNetworkConnections;
-            _reqs = _context.SocialNetworkRequests;
+            _conns = _context.NetworkConnections;
+            _reqs = _context.ConnectionRequests;
             _companies = _context.Companies;
         }
 
@@ -27,7 +27,7 @@ namespace BCWeb.Areas.Company.Models.Repository
             _conns.Add(entity);
         }
 
-        public void AddNetworkRequest(BCModel.SocialNetwork.NetworkRequest entity)
+        public void AddNetworkRequest(BCModel.SocialNetwork.ConnectionRequest entity)
         {
             _reqs.Add(entity);
         }
@@ -42,7 +42,7 @@ namespace BCWeb.Areas.Company.Models.Repository
             return _conns.Find(key);
         }
 
-        public BCModel.SocialNetwork.NetworkRequest FindNetworkRequest(Guid id)
+        public BCModel.SocialNetwork.ConnectionRequest FindNetworkRequest(Guid id)
         {
             return _reqs.Find(id);
         }
@@ -52,7 +52,7 @@ namespace BCWeb.Areas.Company.Models.Repository
             return _conns.Include(l => l.Left).Include(r => r.Right);
         }
 
-        public IQueryable<BCModel.SocialNetwork.NetworkRequest> QueryNetworkRequests()
+        public IQueryable<BCModel.SocialNetwork.ConnectionRequest> QueryNetworkRequests()
         {
             return _reqs.Include(s => s.Sender).Include(r => r.Recipient);
         }
@@ -78,10 +78,10 @@ namespace BCWeb.Areas.Company.Models.Repository
         }
 
 
-        public void UpdateNetworkRequest(NetworkRequest entity)
+        public void UpdateNetworkRequest(ConnectionRequest entity)
         {
             var current = _reqs.Find(entity.Id);
-            _context.Entry<NetworkRequest>(current).CurrentValues.SetValues(entity);
+            _context.Entry<ConnectionRequest>(current).CurrentValues.SetValues(entity);
         }
     }
 }

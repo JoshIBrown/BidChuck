@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BCModel.SocialNetwork
 {
-    public class NetworkRequest
+    public class ConnectionRequest
     {
         [Key, DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }

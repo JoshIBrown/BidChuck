@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCModel.SocialNetwork;
 using BCWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,17 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
     {
         private DbSet<CompanyProfile> _companies;
         private DbSet<UserProfile> _users;
+        private DbSet<NetworkConnection> _connections;
+        private DbSet<ConnectionRequest> _requests;
+        private DbSet<BlackList> _blackLists;
 
         public CompanyProfileRepository()
         {
             _companies = _context.Companies;
             _users = _context.UserProfiles;
+            _connections = _context.NetworkConnections;
+            _requests = _context.ConnectionRequests;
+            _blackLists = _context.BlackLists;
         }
 
         public void Create(BCModel.CompanyProfile entity)
@@ -76,6 +83,23 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         public UserProfile GetUserProfile(int id)
         {
             return _users.Find(id);
+        }
+
+
+        public IQueryable<BCModel.SocialNetwork.NetworkConnection> QueryNetworkConnections()
+        {
+            return _connections;
+        }
+
+
+        public IQueryable<ConnectionRequest> QueryConnectionRequests()
+        {
+            return _requests;
+        }
+
+        public IQueryable<BlackList> QueryBlackLists()
+        {
+            return _blackLists;
         }
     }
 }

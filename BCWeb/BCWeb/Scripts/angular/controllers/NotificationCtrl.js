@@ -2,7 +2,7 @@
     var app = angular.module('notificationList', []);
 
     function NotificationCtrl(scope, http) {
-        http.get('/api/Notification/GetAll')
+        http.get('/api/Notifications')
             .success(function (result) {
                 scope.DatePool = result.DatePool;
             });

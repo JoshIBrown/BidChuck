@@ -82,7 +82,7 @@ namespace BCWeb
                 "~/Scripts/angular/bcweb.filters.angular.js",
                 "~/Scripts/angular/controllers/ProjectSubVendDetailsCtrl.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/createprojectsimple").Include(
+            bundles.Add(new ScriptBundle("~/bundles/createprojectstepone").Include(
                 "~/Scripts/jquery-ui-{version}.js",
                 "~/Scripts/jQuery/CreateProject.js"
                 ));

@@ -75,7 +75,7 @@ namespace BCWeb.Areas.Project.Controllers
 
                     for (int i = 0; i < invitees.Length; i++)
                     {
-                        _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, viewModel.ProjectId);
+                        _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, viewModel.ProjectId, EntityType.Project);
                     }
 
                     return RedirectToAction("Details", new { id = toCreate.Id });
@@ -162,7 +162,7 @@ namespace BCWeb.Areas.Project.Controllers
 
                     for (int i = 0; i < invitees.Length; i++)
                     {
-                        _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, viewModel.ProjectId);
+                        _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, viewModel.ProjectId, EntityType.Project);
                     }
 
                     return RedirectToAction("Details", new { id = toUpdate.Id });

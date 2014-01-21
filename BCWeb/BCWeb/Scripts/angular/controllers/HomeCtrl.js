@@ -4,7 +4,7 @@ angular.element(document).ready(function () {
 
 
     function HomeCtrl($scope, $http) {
-        console.log('poo');
+        
         $scope.newCompanies = [];
         $http.get('/api/Users/GetNewestCompanies')
             .success(function (data) {

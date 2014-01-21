@@ -21,6 +21,8 @@ namespace BCWeb
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configuration.IncludeErrorDetailPolicy =
+    IncludeErrorDetailPolicy.Always;
             //System.IO.Directory.CreateDirectory(@"C:\email\");
             AreaRegistration.RegisterAllAreas();
 

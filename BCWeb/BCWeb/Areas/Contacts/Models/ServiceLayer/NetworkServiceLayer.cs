@@ -1,11 +1,11 @@
 ﻿using BCModel.SocialNetwork;
-using BCWeb.Areas.Company.Models.Repository;
+using BCWeb.Areas.Contacts.Models.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Areas.Company.Models.ServiceLayer
+namespace BCWeb.Areas.Contacts.Models.ServiceLayer
 {
     public enum RequestResponse
     {
@@ -23,7 +23,7 @@ namespace BCWeb.Areas.Company.Models.ServiceLayer
         }
 
 
-        private bool validateRequest(NetworkRequest request)
+        private bool validateRequest(ConnectionRequest request)
         {
             bool valid = true;
             ValidationDic.Clear();
@@ -56,7 +56,7 @@ namespace BCWeb.Areas.Company.Models.ServiceLayer
             return valid;
         }
 
-        public bool SendNetworkRequest(BCModel.SocialNetwork.NetworkRequest request)
+        public bool SendNetworkRequest(BCModel.SocialNetwork.ConnectionRequest request)
         {
             try
             {
@@ -80,21 +80,10 @@ namespace BCWeb.Areas.Company.Models.ServiceLayer
         }
 
 
-        public bool RespondToNetworkRequest(Guid id, RequestResponse response)
+        public bool UpdateNetworkRequest(ConnectionRequest request)
         {
             try
             {
-                NetworkRequest request = _repo.FindNetworkRequest(id);
-                switch (response)
-                {
-                    case RequestResponse.Accept:
-                        request.AcceptDate = DateTime.Now;
-                        break;
-                    case RequestResponse.Decline:
-                        request.DeclineDate = DateTime.Now;
-                        break;
-                }
-
                 _repo.UpdateNetworkRequest(request);
                 _repo.SaveChanges();
 
@@ -190,7 +179,7 @@ namespace BCWeb.Areas.Company.Models.ServiceLayer
             return conn;
         }
 
-        public BCModel.SocialNetwork.NetworkRequest GetNetworkRequest(Guid id)
+        public BCModel.SocialNetwork.ConnectionRequest GetNetworkRequest(Guid id)
         {
             return _repo.FindNetworkRequest(id);
         }
@@ -200,12 +189,12 @@ namespace BCWeb.Areas.Company.Models.ServiceLayer
             return _repo.QueryNetworkConnections().Where(c => c.RightId == companyId || c.LeftId == companyId);
         }
 
-        public IEnumerable<BCModel.SocialNetwork.NetworkRequest> GetSentRequests(int companyId)
+        public IEnumerable<BCModel.SocialNetwork.ConnectionRequest> GetSentRequests(int companyId)
         {
             return _repo.QueryNetworkRequests().Where(r => r.SenderId == companyId);
         }
 
-        public IEnumerable<BCModel.SocialNetwork.NetworkRequest> GetReceivedRequests(int companyId)
+        public IEnumerable<BCModel.SocialNetwork.ConnectionRequest> GetReceivedRequests(int companyId)
         {
             return _repo.QueryNetworkRequests().Where(r => r.RecipientId == companyId);
         }

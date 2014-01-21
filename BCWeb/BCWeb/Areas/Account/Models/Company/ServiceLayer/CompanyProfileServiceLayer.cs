@@ -5,9 +5,10 @@ using System.Web;
 using BCWeb.Areas.Account.Models.Company.Repository;
 using BCWeb.Helpers;
 using System.Data.Spatial;
+using BCWeb.Models.Company;
 namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
 {
-    public class CompanyProfileServiceLayer: ICompanyProfileServiceLayer
+    public class CompanyProfileServiceLayer : ICompanyProfileServiceLayer
     {
         private ICompanyProfileRepository _repo;
 
@@ -146,6 +147,73 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
         public BCModel.State GetState(int id)
         {
             return _repo.QueryStates().Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query)
+        {
+            var results = from c in _repo.Query()
+                          where c.CompanyName.Contains(query)
+                          || c.City.Contains(query)
+                          || c.PostalCode.Contains(query)
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, string city, string state, string postal, double? distance)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            DbGeography searchPoint = locator.GetFromAddress("", city, state, postal);
+            // determine how narrow our search params are
+
+
+
+
+            var results = from c in _repo.Query()
+                          where c.CompanyName.Contains(query)
+                          && c.GeoLocation.Distance(searchPoint) <= distance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+
+        public ConnectionStatus GetConnectionStatus(int currentCompany, int queriedCompany)
+        {
+            var connection = _repo.QueryNetworkConnections()
+                .Where(x => (x.LeftId == currentCompany && x.RightId == queriedCompany) || (x.RightId == currentCompany && x.LeftId == queriedCompany))
+                .SingleOrDefault();
+
+            if (connection != null)
+                return ConnectionStatus.Connected;
+
+            var sentInvite = _repo.QueryConnectionRequests()
+                .Where(x => x.SenderId == currentCompany && x.RecipientId == queriedCompany && !x.AcceptDate.HasValue && !x.DeclineDate.HasValue)
+                .SingleOrDefault();
+
+            if (sentInvite != null)
+                return ConnectionStatus.InvitationSent;
+
+            var recvdInvite = _repo.QueryConnectionRequests()
+                .Where(x => x.RecipientId == currentCompany && x.SenderId == queriedCompany && !x.AcceptDate.HasValue && !x.DeclineDate.HasValue)
+                .SingleOrDefault();
+
+            if (recvdInvite != null)
+                return ConnectionStatus.InvitationPending;
+
+            var blackList = _repo.QueryBlackLists()
+                .Where(x => (x.BlackListedCompanyId == currentCompany && x.CompanyId == queriedCompany) || (x.CompanyId == currentCompany && x.BlackListedCompanyId == queriedCompany))
+                .FirstOrDefault();
+
+            if (blackList != null)
+                return ConnectionStatus.BlackListed;
+
+
+            return ConnectionStatus.NotConnected;
+
         }
     }
 }

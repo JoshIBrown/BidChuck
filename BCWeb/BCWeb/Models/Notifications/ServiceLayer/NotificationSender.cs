@@ -18,6 +18,7 @@ namespace BCWeb.Models.Notifications.ServiceLayer
         private const string _BidSubmissionMsg = "You have received new bids for {0}";                        // Bid Submission	You have received new bids for {{project name}}
         private const string _ChangesToProjectMsg = "There are recent updates to the project: {0}";           // Project change	There are recent updates to the project: {{project name}}
         private const string _BidWinnerMsg = "Your company has won the bid for {0}";                          // Bid Winner	Your company has won the bid for {{project name}}
+        private const string _ConnectionAccepted = "You are now connected to {0}";
 
         public NotificationSender(INotificationRepository repo)
         {
@@ -31,17 +32,19 @@ namespace BCWeb.Models.Notifications.ServiceLayer
         /// <param name="notificationType">type of notification</param>
         /// <param name="projectId">the project the notification is for</param>
         /// <returns></returns>
-        public bool SendNotification(int recipientId, RecipientType recipientType, BCModel.NotificationType notificationType, int projectId)
+        public bool SendNotification(int recipientId, RecipientType recipientType, BCModel.NotificationType notificationType, int entityId, EntityType entityType)
         {
             try
             {
                 switch (recipientType)
                 {
-                    case RecipientType.company:  // if company, then loop through each of the companies users
+                    // if company, then loop through each of the companies users
+                    case RecipientType.company:
                         List<Notification> existingNotices = (from r in _repo.Query()
                                                               where r.NotificationType == notificationType      // notification type y
                                                               && r.Recipient.CompanyId == recipientId                     // sent to company z
-                                                              && r.ProjectId == projectId                       // for project x
+                                                              && r.EntityId == entityId                       // for project x
+                                                              && r.EntityType == entityType
                                                               && !r.Read                                        // not read yet
                                                               && EntityFunctions.DiffDays(r.LastEditTimestamp, DateTime.Now).Value == 0  // from today
                                                               select r).ToList();
@@ -59,7 +62,7 @@ namespace BCWeb.Models.Notifications.ServiceLayer
                             appendExistingNotices(existingNotices.ToArray());
 
                             // create new notices
-                            sendNewNotices(users.Where(x => !existingNotices.Select(e => e.RecipientId).Contains(x.UserId)).Select(s => s.UserId).ToArray(), notificationType, projectId);
+                            sendNewNotices(users.Where(x => !existingNotices.Select(e => e.RecipientId).Contains(x.UserId)).Select(s => s.UserId).ToArray(), notificationType, entityId, entityType);
 
                             // save changes
                             _repo.Save();
@@ -68,16 +71,19 @@ namespace BCWeb.Models.Notifications.ServiceLayer
                         else // else no notices exist
                         {
                             // create new notices
-                            sendNewNotices(users.Select(s => s.UserId).ToArray(), notificationType, projectId);
+                            sendNewNotices(users.Select(s => s.UserId).ToArray(), notificationType, entityId, entityType);
                             _repo.Save();
                             return true;
                         }
-                    case RecipientType.user:    // if user, only do the single notice
+
+                    // if user, only do the single notice
+                    case RecipientType.user:
                         // find out if there is already a notification type for this project from today
                         Notification existingNotice = (from r in _repo.Query()
                                                        where r.NotificationType == notificationType      // notification type y
                                                        && r.RecipientId == recipientId                     // sent to user z
-                                                       && r.ProjectId == projectId                       // for project x
+                                                       && r.EntityId == entityId                       // for project x
+                                                       && r.EntityType == entityType
                                                        && !r.Read                                        // not read yet
                                                        && r.LastEditTimestamp.Date == DateTime.Now.Date  // from today
                                                        select r).SingleOrDefault();
@@ -99,7 +105,8 @@ namespace BCWeb.Models.Notifications.ServiceLayer
                                 Count = 1,
                                 LastEditTimestamp = DateTime.Now,
                                 NotificationType = notificationType,
-                                ProjectId = projectId,
+                                EntityId = entityId,
+                                EntityType = entityType,
                                 Read = false,
                                 RecipientId = recipientId
                             };                      // draft the notice
@@ -124,12 +131,12 @@ namespace BCWeb.Models.Notifications.ServiceLayer
         /// </summary>
         /// <param name="userId">array of user id's</param>
         /// <param name="notificationType">type of notification</param>
-        /// <param name="projectId">the project id</param>
-        private void sendNewNotices(int[] userId, NotificationType notificationType, int projectId)
+        /// <param name="entityId">the project id</param>
+        private void sendNewNotices(int[] userId, NotificationType notificationType, int entityId, EntityType entityType)
         {
             try
             {
-                BCModel.Projects.Project theProject = _repo.GetProject(projectId);
+                BCModel.Projects.Project theProject = _repo.GetProject(entityId);
                 Notification newNotice;
                 for (int i = 0; i < userId.Length; i++)
                 {
@@ -138,7 +145,8 @@ namespace BCWeb.Models.Notifications.ServiceLayer
                         Count = 1,
                         LastEditTimestamp = DateTime.Now,
                         NotificationType = notificationType,
-                        ProjectId = projectId,
+                        EntityId = entityId,
+                        EntityType = entityType,
                         RecipientId = userId[i],
                         Read = false
                     };
@@ -211,7 +219,9 @@ namespace BCWeb.Models.Notifications.ServiceLayer
         {
             var bidPackage = _repo.FindBidPackage(bidPackageId);
 
-            return SendNotification(bidPackage.CreatedById, RecipientType.company, NotificationType.InvitationResponse, bidPackage.ProjectId);
+            return SendNotification(bidPackage.CreatedById, RecipientType.company, NotificationType.InvitationResponse, bidPackage.ProjectId, EntityType.Project);
         }
+
+
     }
 }

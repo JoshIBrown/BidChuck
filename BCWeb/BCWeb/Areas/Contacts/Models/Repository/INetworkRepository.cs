@@ -6,18 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCWeb.Areas.Company.Models.Repository
+namespace BCWeb.Areas.Contacts.Models.Repository
 {
     public interface INetworkRepository
     {
         void AddNetworkConnection(NetworkConnection entity);
-        void AddNetworkRequest(NetworkRequest entity);
-        void UpdateNetworkRequest(NetworkRequest entity);
+        void AddNetworkRequest(ConnectionRequest entity);
+        void UpdateNetworkRequest(ConnectionRequest entity);
         void DeleteNetworkConnection(NetworkConnection entity);
         NetworkConnection FindNetworkConnection(params object[] key);
-        NetworkRequest FindNetworkRequest(Guid id);
+        ConnectionRequest FindNetworkRequest(Guid id);
         IQueryable<NetworkConnection> QueryNetworkConnections();
-        IQueryable<NetworkRequest> QueryNetworkRequests();
+        IQueryable<ConnectionRequest> QueryNetworkRequests();
 
         CompanyProfile FindCompanyProfile(int id);
         IQueryable<CompanyProfile> QueryCompanyProfiles();

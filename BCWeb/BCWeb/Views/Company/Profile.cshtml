@@ -11,6 +11,28 @@
     </div>
 </div>
 <div class="row">
+    <div class="large-12 columns">
+        @switch (Model.ConnectionStatus)
+        {
+            case BCWeb.Models.Company.ConnectionStatus.Connected:
+            @Html.Partial("_Connected")
+                break;
+            case BCWeb.Models.Company.ConnectionStatus.NotConnected:
+            @Html.Partial("_NotConnected")
+                break;
+            case BCWeb.Models.Company.ConnectionStatus.InvitationSent:
+            @Html.Partial("_RequestSent")
+                break;
+            case BCWeb.Models.Company.ConnectionStatus.InvitationPending:
+            @Html.Partial("_PendingRequest")
+                break;
+            case BCWeb.Models.Company.ConnectionStatus.Self:
+            @Html.RouteLink("Edit", "Account_default", new { controller = "Company", action = "Edit" })
+                break;
+        }
+    </div>
+</div>
+<div class="row">
     <div class="large-6 columns">
         <ul class="vcard">
             <li class="street-address">@Model.Address1</li>

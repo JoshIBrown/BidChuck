@@ -11,7 +11,7 @@
                 // otherwise, don't send an empty search request
                 if (scope.queryString.length > 0) {
 
-                    http.get('/api/Search/GetCompanies/',
+                    http.get('/api/Companies',
                         {
                             params: { query: scope.queryString, }
                         })

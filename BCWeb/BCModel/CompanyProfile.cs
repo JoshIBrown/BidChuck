@@ -88,6 +88,8 @@ namespace BCModel
 
         public BusinessType BusinessType { get; set; }
 
+        public string CustomUrl { get; set; }
+
         [IgnoreDataMember]
         public virtual ICollection<UserProfile> Users { get; set; }
 

@@ -30,9 +30,10 @@ namespace BCModel
         public NotificationType NotificationType { get; set; }
 
         [Required]
-        public int ProjectId { get; set; }
-        [ForeignKey("ProjectId"), IgnoreDataMember]
-        public virtual Project Project { get; set; }
+        public int EntityId { get; set; }
+
+        [Required]
+        public EntityType EntityType { get; set; }
 
         [Required]
         public int Count { get; set; }
@@ -49,12 +50,19 @@ namespace BCModel
         public string Text { get; set; }
     }
 
+    public enum EntityType
+    {
+        Project = 0, Company = 1
+    }
+
     public enum NotificationType
     {
         InvitationToBid = 0,
         InvitationResponse = 1,
         InvitationRequest = 2,
         ProjectChange = 3,
-        BidSubmitted = 4
+        BidSubmitted = 4,
+        RequestToConnect = 5,
+        ConnectionAccepted = 6
     }
 }

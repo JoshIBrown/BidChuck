@@ -88,26 +88,26 @@ namespace BCWeb.Areas.Account.Controllers
 
             // get users company
             int userId = _security.GetUserId(User.Identity.Name);
-            var raw = _serviceLayer.GetUserProfiles(u => u.UserId == userId).FirstOrDefault().Company;
+            CompanyProfile company = _serviceLayer.GetUserProfiles(u => u.UserId == userId).FirstOrDefault().Company;
 
             // transpose into viewmodel
             EditCompanyViewModel viewModel = new EditCompanyViewModel
             {
-                Address1 = raw.Address1,
-                Address2 = raw.Address2,
-                BusinessType = raw.BusinessType,
-                City = raw.City,
-                CompanyName = raw.CompanyName,
-                Id = raw.Id,
-                OperatingDistance = raw.OperatingDistance,
-                Phone = raw.Phone == null || raw.Phone == "" ? "" : Util.ConvertPhoneForDisplay(raw.Phone),
-                PostalCode = raw.PostalCode,
-                StateId = raw.StateId
+                Address1 = company.Address1,
+                Address2 = company.Address2,
+                BusinessType = company.BusinessType,
+                City = company.City,
+                CompanyName = company.CompanyName,
+                Id = company.Id,
+                OperatingDistance = company.OperatingDistance,
+                Phone = company.Phone == null || company.Phone == "" ? "" : Util.ConvertPhoneForDisplay(company.Phone),
+                PostalCode = company.PostalCode,
+                StateId = company.StateId
             };
 
             // fill states and business types
             viewModel.States = _serviceLayer.GetStates().Select(x => new SelectListItem { Text = x.Abbr, Value = x.Id.ToString(), Selected = x.Id == viewModel.StateId });
-            viewModel.BusinessTypes = Util.CreateSelectListFromEnum(typeof(BusinessType), raw.BusinessType.ToString());
+            viewModel.BusinessTypes = Util.CreateSelectListFromEnum(typeof(BusinessType), company.BusinessType.ToString());
 
             return View(viewModel);
         }

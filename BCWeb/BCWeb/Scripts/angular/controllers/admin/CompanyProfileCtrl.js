@@ -16,7 +16,7 @@
             "bDestroy": true,
             "bProcessing": true,
             "bServerSide": true,
-            "sAjaxSource": "/api/Company/GetDataTable",
+            "sAjaxSource": "/api/Companies",
             "sDom": '<"toolbar">lfrtip',
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) { // compile any angular code in the row
                 $compile(nRow)($scope);

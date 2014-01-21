@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BCWeb.Models;
+using BCWeb.Models.Company;
 
 namespace BCWeb.Controllers
 {
@@ -33,14 +34,25 @@ namespace BCWeb.Controllers
 
         public ActionResult Profile(int? id)
         {
+            int currentCompanyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
 
             if (!id.HasValue)
             {
-                int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
-                return RedirectToAction("Profile", new { id = companyId });
+                return RedirectToAction("Profile", new { id = currentCompanyId });
             }
 
             CompanyProfile company = _service.Get(id);
+
+
+            ConnectionStatus status;
+            if (currentCompanyId == company.Id)
+                status = ConnectionStatus.Self;
+            else
+                status = _service.GetConnectionStatus(currentCompanyId, company.Id);
+
+            if (status == ConnectionStatus.BlackListed)
+                throw new HttpException(404, "No company found with that id");
+
             CompanyProfileViewModel viewModel = new CompanyProfileViewModel
             {
                 Address1 = company.Address1,
@@ -52,13 +64,14 @@ namespace BCWeb.Controllers
                 OperatingDistance = company.OperatingDistance.ToString() + " Miles",
                 PostalCode = company.PostalCode,
                 State = company.State == null ? "" : company.State.Abbr,
-                WorkScopes = company.Scopes.OrderBy(s => s.Scope.CsiNumber).Select(s => s.Scope.CsiNumber + " " + s.Scope.Description)
+                WorkScopes = company.Scopes.OrderBy(s => s.Scope.CsiNumber).Select(s => s.Scope.CsiNumber + " " + s.Scope.Description),
+                ConnectionStatus = status
             };
-
-
 
             return View(viewModel);
         }
+
+
 
         public ActionResult Connections(int id)
         {

@@ -242,7 +242,7 @@ namespace BCWeb.Areas.Project.Controllers
 
                         for (int i = 0; i < invitees.Length; i++)
                         {
-                            _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, toUpdate.ProjectId);
+                            _notice.SendNotification(invitees[i], RecipientType.company, NotificationType.ProjectChange, toUpdate.ProjectId, EntityType.Project);
                         }
                         return RedirectToRoute("Project_default", new { controller = "BidPackage", action = "Details", id = toUpdate.Id });
                     }
