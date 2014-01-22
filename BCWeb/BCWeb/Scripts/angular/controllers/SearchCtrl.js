@@ -13,7 +13,10 @@
 
                     http.get('/api/Companies',
                         {
-                            params: { query: scope.queryString, }
+                            params: {
+                                query: scope.queryString,
+                                type: ['GeneralContractor', 'SubContractor', 'Architect', 'MaterialsVendor', 'MaterialsMfg']
+                            }
                         })
                         .success(function (result) {
                             scope.searchResults = result;

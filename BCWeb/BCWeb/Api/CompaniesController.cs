@@ -30,16 +30,22 @@ namespace BCWeb.Api
         }
 
 
-        public KeyValuePair<int, string>[] Get(string query, BusinessType[] type)
+        public IEnumerable<CompanySearchResultItem> Get([FromUri]string query, [FromUri]BusinessType[] type)
         {
-            Dictionary<int, string> archs = _service.GetEnumerable(s => s.CompanyName.Contains(query)
+            CompanySearchResultItem[] result = _service.GetEnumerable(s => s.CompanyName.Contains(query)
                 && type.Contains(s.BusinessType))
-                .ToDictionary(i => i.Id, i => i.CompanyName);
+                .Select(s => new CompanySearchResultItem
+                {
+                    Id = s.Id,
+                    Text = s.CompanyName,
+                    LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = s.Id })
+                })
+                .ToArray();
 
-            return archs.ToArray();
+            return result;
         }
 
-        public IEnumerable<CompanySearchResultItem> Get(string query, string city, string state, string postal, int? distance, int[] scopeId)
+        public IEnumerable<CompanySearchResultItem> Get([FromUri]string query, [FromUri]BusinessType[] type, [FromUri]string city, [FromUri]string state, [FromUri]string postal, [FromUri]int? distance, [FromUri]int[] scopeId)
         {
             CompanySearchResultItem[] result = new CompanySearchResultItem[0];
 
@@ -48,6 +54,7 @@ namespace BCWeb.Api
                 result = _service.SearchCompanyProfiles(query)
                      .Select(s => new CompanySearchResultItem
                      {
+                         Id = s.Id,
                          Text = s.CompanyName,
                          LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = s.Id })
                      })

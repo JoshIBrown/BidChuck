@@ -1,5 +1,7 @@
 ﻿using BCModel;
 using BCWeb.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -23,6 +25,11 @@ namespace BCWeb
         {
             GlobalConfiguration.Configuration.IncludeErrorDetailPolicy =
     IncludeErrorDetailPolicy.Always;
+
+            JsonSerializerSettings jsonSetting = new JsonSerializerSettings();
+            jsonSetting.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings = jsonSetting;
+
             //System.IO.Directory.CreateDirectory(@"C:\email\");
             AreaRegistration.RegisterAllAreas();
 

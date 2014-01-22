@@ -14,17 +14,25 @@
     <div class="large-12 columns">
         @switch (Model.ConnectionStatus)
         {
-            case BCWeb.Models.Company.ConnectionStatus.Connected:
-            @Html.Partial("_Connected")
+            case BCWeb.Models.Company.ConnectionStatus.Connected: 
+            <form>
+                @Html.Partial("_Connected")
+            </form>
                 break;
             case BCWeb.Models.Company.ConnectionStatus.NotConnected:
-            @Html.Partial("_NotConnected")
+            <form>
+                @Html.Partial("_NotConnected")
+            </form>
                 break;
             case BCWeb.Models.Company.ConnectionStatus.InvitationSent:
-            @Html.Partial("_RequestSent")
+            <form>
+                @Html.Partial("_RequestSent")
+            </form>
                 break;
             case BCWeb.Models.Company.ConnectionStatus.InvitationPending:
-            @Html.Partial("_PendingRequest")
+            <form>
+                @Html.Partial("_PendingRequest")
+            </form>
                 break;
             case BCWeb.Models.Company.ConnectionStatus.Self:
             @Html.RouteLink("Edit", "Account_default", new { controller = "Company", action = "Edit" })

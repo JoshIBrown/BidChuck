@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Web.Attributes;
 
 namespace BCWeb.Api
 {
@@ -43,7 +44,7 @@ namespace BCWeb.Api
 
         // PUT
         // /api/ConnectionRequest/id?accept=true/false
-
+        [ValidateHttpAntiForgeryToken]
         public HttpResponseMessage Put(HttpRequestMessage request, Guid id, bool accept)
         {
             HttpResponseMessage response;
@@ -90,7 +91,7 @@ namespace BCWeb.Api
 
         // POST
         // /api/ConnectionRequest/id
-
+        [ValidateHttpAntiForgeryToken]
         public HttpResponseMessage Post(HttpRequestMessage request, int recipientId)
         {
             HttpResponseMessage response;

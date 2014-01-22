@@ -9,5 +9,7 @@ namespace BCWeb.Models.Company.ViewModel
     {
         public string Text { get; set; }
         public string LinkPath { get; set; }
+
+        public int Id { get; set; }
     }
 }

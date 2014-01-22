@@ -77,5 +77,25 @@ namespace BCWeb.Controllers
         {
             return View();
         }
+
+        public PartialViewResult Connected()
+        {
+            return PartialView("_Connected");
+        }
+
+        public PartialViewResult NotConnected()
+        {
+            return PartialView("_NotConnected");
+        }
+
+        public PartialViewResult RequestSent()
+        {
+            return PartialView("_RequestSent");
+        }
+
+        public PartialViewResult PendingRequest()
+        {
+            return PartialView("_PendingRequest");
+        }
     }
 }

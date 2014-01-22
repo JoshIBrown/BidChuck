@@ -492,6 +492,7 @@
     <Content Include="Scripts\angular\controllers\admin\CompanyProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\admin\ProjectCtrl.js" />
     <Content Include="Scripts\angular\controllers\NotificationCtrl.js" />
+    <Content Include="Scripts\angular\controllers\ProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\SearchCtrl.js" />
     <Content Include="Scripts\angular\controllers\SVComposeBid.js" />
     <Content Include="Scripts\angular\controllers\admin\UserProfileCtrl.js" />

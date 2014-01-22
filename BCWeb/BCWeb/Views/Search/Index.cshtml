@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
@@ -9,68 +8,69 @@
     </div>
 </div>
 <div ng-controller="SearchCtrl">
-    <div class="row">
-        <div class="large-8 columns">
-            <div class="row collapse">
-                <div class="large-10 columns">
-                    <input type="text" name="query" id="query" ng-model="queryString" />
+    <form name="searchForm" ng-submit="performSearch()">
+        <div class="row">
+            <div class="large-8 columns">
+                <div class="row collapse">
+                    <div class="large-10 columns">
+                        <input type="text" name="query" id="query" ng-model="queryString" />
+                    </div>
+                    <div class="large-2 columns">
+                        <input type="submit" value="search" class="postfix button" placeholder="Company, City,Postal Code" />
+                    </div>
                 </div>
-                <div class="large-2 columns">
-                    <input type="button" value="search" class="postfix button" placeholder="Company, City,Postal Code" ng-click="performSearch()" />
-                </div>
-            </div>
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-7 columns">
-            <div class="row">
-                <div class="large-6 columns">
-                    <a href="#">Advanced</a>
-                </div>
             </div>
-            <div class="row">
-                <div class="large-5 columns">
-                    <label>
-                        City
-                    <input type="text" name="city" id="city" />
-                    </label>
+        </div>
+        <div class="row">
+            <div class="large-7 columns">
+                <div class="row">
+                    <div class="large-6 columns">
+                        <a href="#">Advanced</a>
+                    </div>
                 </div>
-                <div class="large-2 columns">
-                    <label>
-                        State
-                    <select name="state" id="state" >
+                <div class="row">
+                    <div class="large-5 columns">
+                        <label>
+                            City
+                    <input type="text" name="city" id="city" />
+                        </label>
+                    </div>
+                    <div class="large-2 columns">
+                        <label>
+                            State
+                    <select name="state" id="state">
                         <option value="">WA</option>
                     </select>
-                    </label>
-                </div>
-                <div class="large-2 columns">
-                    <label>
-                        Zip
-                    <input type="text" name="postal" id="postal"  />
-                    </label>
-                </div>
-                <div class="large-3 columns">
-                    <label>
-                        Within
-                    <select name="distance" id="distance" >
+                        </label>
+                    </div>
+                    <div class="large-2 columns">
+                        <label>
+                            Zip
+                    <input type="text" name="postal" id="postal" />
+                        </label>
+                    </div>
+                    <div class="large-3 columns">
+                        <label>
+                            Within
+                    <select name="distance" id="distance">
                         <option value="">25 miles</option>
                     </select>
-                    </label>
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="large-12 columns">
-
+                <div class="row">
+                    <div class="large-12 columns">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="large-12 columns">
-            <csi-scope-picker></csi-scope-picker>
+        <div class="row">
+            <div class="large-12 columns">
+                <csi-scope-picker></csi-scope-picker>
+            </div>
         </div>
-    </div>
+    </form>
     <div class="row" ng-show="hasResults()">
         <div class="large-10 columns">
             <h3>Results</h3>
