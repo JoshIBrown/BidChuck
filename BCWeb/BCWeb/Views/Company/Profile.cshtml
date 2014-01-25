@@ -5,6 +5,9 @@
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
 
+@section scripts{
+    @Scripts.Render("~/bundles/profile")
+}
 <div class="row">
     <div class="large-12 columns">
         <h2>@Model.CompanyName <small>@Model.BusinessType</small></h2>
@@ -12,32 +15,12 @@
 </div>
 <div class="row">
     <div class="large-12 columns">
-        @switch (Model.ConnectionStatus)
-        {
-            case BCWeb.Models.Company.ConnectionStatus.Connected: 
-            <form>
-                @Html.Partial("_Connected")
-            </form>
-                break;
-            case BCWeb.Models.Company.ConnectionStatus.NotConnected:
-            <form>
-                @Html.Partial("_NotConnected")
-            </form>
-                break;
-            case BCWeb.Models.Company.ConnectionStatus.InvitationSent:
-            <form>
-                @Html.Partial("_RequestSent")
-            </form>
-                break;
-            case BCWeb.Models.Company.ConnectionStatus.InvitationPending:
-            <form>
-                @Html.Partial("_PendingRequest")
-            </form>
-                break;
-            case BCWeb.Models.Company.ConnectionStatus.Self:
-            @Html.RouteLink("Edit", "Account_default", new { controller = "Company", action = "Edit" })
-                break;
-        }
+        <div ng-controller="ProfileCtrl">
+            @Html.HiddenFor(m => m.Id)
+            <div id="contactStatusWrapper" ng-include="contactButtonUrl">
+                
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">

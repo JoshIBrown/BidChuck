@@ -3,7 +3,7 @@
         <div class="panel">
             <div>You have pending Contact Request</div>
 
-
+            @Html.AntiForgeryToken()
             <input type="button" class="medium button" value="Accept" />
             <input type="button" class="medium secondary button" value="Decline" />
         </div>

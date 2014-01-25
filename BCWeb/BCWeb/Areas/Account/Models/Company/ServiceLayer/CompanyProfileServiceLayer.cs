@@ -211,6 +211,8 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
             if (blackList != null)
                 return ConnectionStatus.BlackListed;
 
+            if (currentCompany == queriedCompany)
+                return ConnectionStatus.Self;
 
             return ConnectionStatus.NotConnected;
 

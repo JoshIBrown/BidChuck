@@ -7,8 +7,8 @@
             ).success(function (data) {
                 response($.map(data, function (item) {
                     return {
-                        label: item.Value,
-                        value: item.Key
+                        label: item.Text,
+                        value: item.Id
                     }
                 }));
             });

@@ -195,6 +195,7 @@
     <Compile Include="Api\CompaniesController.cs" />
     <Compile Include="Api\BidController.cs" />
     <Compile Include="Api\ConnectionRequestController.cs" />
+    <Compile Include="Api\ConnectionStatusController.cs" />
     <Compile Include="Api\InvitationController.cs" />
     <Compile Include="Api\NetworkConnectionController.cs" />
     <Compile Include="Api\NotificationsController.cs" />
@@ -1048,6 +1049,7 @@
     <Content Include="Views\Company\_Connected.cshtml" />
     <Content Include="Views\Company\_RequestSent.cshtml" />
     <Content Include="Views\Company\_PendingRequest.cshtml" />
+    <Content Include="Views\Company\_Self.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />

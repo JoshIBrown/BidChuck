@@ -22,8 +22,6 @@ namespace BCWeb.Models.Company.ViewModel
         public string BusinessType { get; set; }
         public string OperatingDistance { get; set; }
 
-        public ConnectionStatus ConnectionStatus { get; set; }
-
         public IEnumerable<string> WorkScopes { get; set; }
     }
 }

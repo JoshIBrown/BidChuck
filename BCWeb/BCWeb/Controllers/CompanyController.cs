@@ -43,14 +43,7 @@ namespace BCWeb.Controllers
 
             CompanyProfile company = _service.Get(id);
 
-
-            ConnectionStatus status;
-            if (currentCompanyId == company.Id)
-                status = ConnectionStatus.Self;
-            else
-                status = _service.GetConnectionStatus(currentCompanyId, company.Id);
-
-            if (status == ConnectionStatus.BlackListed)
+            if (_service.GetConnectionStatus(currentCompanyId, company.Id) == ConnectionStatus.BlackListed)
                 throw new HttpException(404, "No company found with that id");
 
             CompanyProfileViewModel viewModel = new CompanyProfileViewModel
@@ -64,8 +57,7 @@ namespace BCWeb.Controllers
                 OperatingDistance = company.OperatingDistance.ToString() + " Miles",
                 PostalCode = company.PostalCode,
                 State = company.State == null ? "" : company.State.Abbr,
-                WorkScopes = company.Scopes.OrderBy(s => s.Scope.CsiNumber).Select(s => s.Scope.CsiNumber + " " + s.Scope.Description),
-                ConnectionStatus = status
+                WorkScopes = company.Scopes.OrderBy(s => s.Scope.CsiNumber).Select(s => s.Scope.CsiNumber + " " + s.Scope.Description)
             };
 
             return View(viewModel);
@@ -75,6 +67,7 @@ namespace BCWeb.Controllers
 
         public ActionResult Connections(int id)
         {
+            // exclude black listed companies from returned data
             return View();
         }
 
@@ -96,6 +89,11 @@ namespace BCWeb.Controllers
         public PartialViewResult PendingRequest()
         {
             return PartialView("_PendingRequest");
+        }
+
+        public PartialViewResult Self()
+        {
+            return PartialView("_Self");
         }
     }
 }

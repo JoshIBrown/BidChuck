@@ -1,6 +1,7 @@
 ﻿<div class="row">
     <div class="large-2 columns">
-        <input type="button" class="medium button expand" value="Add Contact" />
+        @Html.AntiForgeryToken()
+        <input type="button" class="medium button expand" value="Add Contact" ng-click="sendContactRequest()" />
     </div>
 </div>
 @section scripts{
