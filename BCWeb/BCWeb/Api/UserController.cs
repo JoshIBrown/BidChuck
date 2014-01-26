@@ -29,7 +29,7 @@ namespace BCWeb.Api
         }
 
         [Authorize(Roles = "Administrator")]
-        public DataTablesResponse GetDataTable(
+        public DataTablesResponse Get(
             [FromUri]int iDisplayStart,
             [FromUri]int iDisplayLength,
             [FromUri]int iColumns,

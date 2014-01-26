@@ -13,11 +13,11 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
     {
         IQueryable<State> QueryStates();
         IQueryable<UserProfile> QueryUserProfiles();
-        IQueryable<NetworkConnection> QueryNetworkConnections();
+        IQueryable<ContactConnection> QueryNetworkConnections();
 
         UserProfile GetUserProfile(int id);
 
-        IQueryable<ConnectionRequest> QueryConnectionRequests();
+        IQueryable<ContactRequest> QueryConnectionRequests();
         IQueryable<BlackList> QueryBlackLists();
     }
 }

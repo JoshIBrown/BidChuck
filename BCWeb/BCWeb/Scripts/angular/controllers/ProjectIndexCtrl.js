@@ -1,19 +1,19 @@
 ﻿var app = angular.module('projectIndex', ['filters'])
     .controller('ProjectIndexCtrl', ['$scope', '$http', function ($scope, $http) {
 
-        $http.get('/api/Project/GetByMyCompanyList').success(function (result) {
+        $http.get('/api/Projects', { params: { type: 'IamArchitect' } }).success(function (result) {
             $scope.myProjects = result;
         });
 
-        $http.get('/api/Project/GetMyCreatedList').success(function (result) {
+        $http.get('/api/Projects', { params: { type: 'MyCreated' } }).success(function (result) {
             $scope.myCreateProjects = result;
         });
 
-        $http.get('/api/Project/GetProjectsInvitedToList').success(function (result) {
+        $http.get('/api/Projects', { params: { type: 'InvitedTo' } }).success(function (result) {
             $scope.invitedProjects = result;
         });
 
-        $http.get('/api/Project/GetPublicList').success(function (result) {
+        $http.get('/api/Projects', { params: { type: 'Open' } }).success(function (result) {
             $scope.publicProjects = result;
         });
     }]);

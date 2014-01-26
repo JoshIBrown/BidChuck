@@ -163,8 +163,8 @@ namespace BCModel
         public DbSet<BuildingType> BuildingTypes { get; set; }
         public DbSet<Invitation> Invitations { get; set; }
 
-        public DbSet<NetworkConnection> NetworkConnections { get; set; }
-        public DbSet<ConnectionRequest> ConnectionRequests { get; set; }
+        public DbSet<ContactConnection> NetworkConnections { get; set; }
+        public DbSet<ContactRequest> ConnectionRequests { get; set; }
         public DbSet<BlackList> BlackLists { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -192,14 +192,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\BlackListController.cs" />
     <Compile Include="Api\CompaniesController.cs" />
     <Compile Include="Api\BidController.cs" />
-    <Compile Include="Api\ConnectionRequestController.cs" />
+    <Compile Include="Api\ContactRequestController.cs" />
     <Compile Include="Api\ConnectionStatusController.cs" />
     <Compile Include="Api\InvitationController.cs" />
-    <Compile Include="Api\NetworkConnectionController.cs" />
+    <Compile Include="Api\ContactsController.cs" />
     <Compile Include="Api\NotificationsController.cs" />
-    <Compile Include="Api\ProjectController.cs" />
+    <Compile Include="Api\ProjectsController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
@@ -242,11 +243,10 @@
     <Compile Include="Areas\Admin\Models\Users\UserProfileDetailsModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
-    <Compile Include="Areas\Contacts\Models\Repository\INetworkRepository.cs" />
-    <Compile Include="Areas\Contacts\Models\Repository\NetworkRepository.cs" />
-    <Compile Include="Areas\Contacts\Models\ServiceLayer\INetworkServiceLayer.cs" />
-    <Compile Include="Areas\Contacts\Models\ServiceLayer\NetworkServiceLayer.cs" />
-    <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
+    <Compile Include="Models\Contacts\Repository\IContactRepository.cs" />
+    <Compile Include="Models\Contacts\Repository\ContactRepository.cs" />
+    <Compile Include="Models\Contacts\ServiceLayer\IContactServiceLayer.cs" />
+    <Compile Include="Models\Contacts\ServiceLayer\ContactServiceLayer.cs" />
     <Compile Include="Areas\Project\Controllers\BidController.cs" />
     <Compile Include="Areas\Project\Controllers\BidPackageController.cs" />
     <Compile Include="Areas\Project\Controllers\DocumentController.cs" />
@@ -327,7 +327,7 @@
     <Compile Include="Models\Account\ViewModel\EditProfileViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\InvitationViewModel.cs" />
     <Compile Include="Models\Account\ViewModel\ManageDashboardViewModel.cs" />
-    <Compile Include="Models\Company\ConnectionStatus.cs" />
+    <Compile Include="Models\Contacts\ConnectionStatus.cs" />
     <Compile Include="Models\Company\ViewModel\CompanyProfileViewModel.cs" />
     <Compile Include="Models\Company\ViewModel\CompanySearchResult.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
@@ -864,7 +864,6 @@
     <Content Include="Areas\Admin\Views\BuildingType\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\BuildingType\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BuildingType\Create.cshtml" />
-    <Content Include="Areas\Contacts\Views\Web.config" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
@@ -1054,9 +1053,6 @@
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Contacts\Controllers\" />
-    <Folder Include="Areas\Contacts\Models\ViewModel\" />
-    <Folder Include="Areas\Contacts\Views\Shared\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
     <Folder Include="Scripts\Areas\Home\" />

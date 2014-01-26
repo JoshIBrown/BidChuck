@@ -13,8 +13,8 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
     {
         private DbSet<CompanyProfile> _companies;
         private DbSet<UserProfile> _users;
-        private DbSet<NetworkConnection> _connections;
-        private DbSet<ConnectionRequest> _requests;
+        private DbSet<ContactConnection> _connections;
+        private DbSet<ContactRequest> _requests;
         private DbSet<BlackList> _blackLists;
 
         public CompanyProfileRepository()
@@ -86,13 +86,13 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         }
 
 
-        public IQueryable<BCModel.SocialNetwork.NetworkConnection> QueryNetworkConnections()
+        public IQueryable<BCModel.SocialNetwork.ContactConnection> QueryNetworkConnections()
         {
             return _connections;
         }
 
 
-        public IQueryable<ConnectionRequest> QueryConnectionRequests()
+        public IQueryable<ContactRequest> QueryConnectionRequests()
         {
             return _requests;
         }

@@ -1,35 +1,35 @@
 ﻿using BCModel.SocialNetwork;
-using BCWeb.Areas.Contacts.Models.Repository;
+using BCWeb.Models.Contacts.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BCWeb.Areas.Contacts.Models.ServiceLayer
+namespace BCWeb.Models.Contacts.ServiceLayer
 {
     public enum RequestResponse
     {
         Accept, Decline
     }
 
-    public class NetworkServiceLayer : INetworkServiceLayer
+    public class ContactServiceLayer : IContactServiceLayer
     {
-        private INetworkRepository _repo;
+        private IContactRepository _repo;
 
-        public NetworkServiceLayer(INetworkRepository repo)
+        public ContactServiceLayer(IContactRepository repo)
         {
             _repo = repo;
             ValidationDic = new Dictionary<string, string>();
         }
 
 
-        private bool validateRequest(ConnectionRequest request)
+        private bool validateRequest(ContactRequest request)
         {
             bool valid = true;
             ValidationDic.Clear();
 
             // get requests sent by company a to company b that have not been responded to yet
-            int openRequests = _repo.QueryNetworkRequests()
+            int openRequests = _repo.QueryContactRequests()
                                     .Where(r => ((r.SenderId == request.SenderId && r.RecipientId == request.RecipientId) || (r.SenderId == request.RecipientId && r.RecipientId == request.SenderId)) &&
                                         !r.AcceptDate.HasValue &&
                                         !r.DeclineDate.HasValue)
@@ -56,7 +56,7 @@ namespace BCWeb.Areas.Contacts.Models.ServiceLayer
             return valid;
         }
 
-        public bool SendNetworkRequest(BCModel.SocialNetwork.ConnectionRequest request)
+        public bool SendNetworkRequest(BCModel.SocialNetwork.ContactRequest request)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace BCWeb.Areas.Contacts.Models.ServiceLayer
         }
 
 
-        public bool UpdateNetworkRequest(ConnectionRequest request)
+        public bool UpdateNetworkRequest(ContactRequest request)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace BCWeb.Areas.Contacts.Models.ServiceLayer
             }
         }
 
-        private bool validateConnection(NetworkConnection connection)
+        private bool validateConnection(ContactConnection connection)
         {
             bool valid = true;
             ValidationDic.Clear();
@@ -113,7 +113,7 @@ namespace BCWeb.Areas.Contacts.Models.ServiceLayer
             return valid;
         }
 
-        public bool CreateNetworkConnection(BCModel.SocialNetwork.NetworkConnection connection)
+        public bool CreateNetworkConnection(BCModel.SocialNetwork.ContactConnection connection)
         {
             try
             {
@@ -142,7 +142,7 @@ namespace BCWeb.Areas.Contacts.Models.ServiceLayer
         {
             try
             {
-                NetworkConnection connection = _repo.FindNetworkConnection(companyA, companyB);
+                ContactConnection connection = _repo.FindNetworkConnection(companyA, companyB);
 
                 if (connection == null)
                     connection = _repo.FindNetworkConnection(companyB, companyA);
@@ -168,35 +168,35 @@ namespace BCWeb.Areas.Contacts.Models.ServiceLayer
             }
         }
 
-        public BCModel.SocialNetwork.NetworkConnection GetNetworkConnection(int left, int right)
+        public BCModel.SocialNetwork.ContactConnection GetNetworkConnection(int left, int right)
         {
 
-            NetworkConnection conn = _repo.FindNetworkConnection(left, right);
+            ContactConnection conn = _repo.FindNetworkConnection(left, right);
 
             if (conn == null)
-                conn = _repo.FindNetworkConnection(right,left);
+                conn = _repo.FindNetworkConnection(right, left);
 
             return conn;
         }
 
-        public BCModel.SocialNetwork.ConnectionRequest GetNetworkRequest(Guid id)
+        public BCModel.SocialNetwork.ContactRequest GetNetworkRequest(Guid id)
         {
             return _repo.FindNetworkRequest(id);
         }
 
-        public IEnumerable<BCModel.SocialNetwork.NetworkConnection> GetCompaniesConnections(int companyId)
+        public IEnumerable<BCModel.SocialNetwork.ContactConnection> GetCompaniesConnections(int companyId)
         {
             return _repo.QueryNetworkConnections().Where(c => c.RightId == companyId || c.LeftId == companyId);
         }
 
-        public IEnumerable<BCModel.SocialNetwork.ConnectionRequest> GetSentRequests(int companyId)
+        public IEnumerable<BCModel.SocialNetwork.ContactRequest> GetSentRequests(int companyId)
         {
-            return _repo.QueryNetworkRequests().Where(r => r.SenderId == companyId);
+            return _repo.QueryContactRequests().Where(r => r.SenderId == companyId);
         }
 
-        public IEnumerable<BCModel.SocialNetwork.ConnectionRequest> GetReceivedRequests(int companyId)
+        public IEnumerable<BCModel.SocialNetwork.ContactRequest> GetReceivedRequests(int companyId)
         {
-            return _repo.QueryNetworkRequests().Where(r => r.RecipientId == companyId);
+            return _repo.QueryContactRequests().Where(r => r.RecipientId == companyId);
         }
 
         public BCModel.UserProfile GetUserProfile(int id)
@@ -213,6 +213,71 @@ namespace BCWeb.Areas.Contacts.Models.ServiceLayer
         {
             get;
             private set;
+        }
+
+
+        public ContactRequest GetOpenNetworkRequest(int recipientId, int senderId)
+        {
+            return _repo.QueryContactRequests().Where(r => r.RecipientId == recipientId && r.SenderId == senderId && !r.AcceptDate.HasValue && !r.DeclineDate.HasValue).FirstOrDefault();
+        }
+
+
+        public BlackList GetBlackListItem(int senderId, int recipientId)
+        {
+            _repo.QueryBlackList();
+            throw new NotImplementedException();
+        }
+
+
+        public bool BlackListCompany(int companyId, int companyToBlockId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UnblackListCompany(int companyId, int blockedCompanyId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<BlackList> GetBlackListForCompany(int companyId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ConnectionStatus GetConnectionStatus(int currentCompany, int queriedCompany)
+        {
+            var connection = _repo.QueryNetworkConnections()
+                .Where(x => (x.LeftId == currentCompany && x.RightId == queriedCompany) || (x.RightId == currentCompany && x.LeftId == queriedCompany))
+                .SingleOrDefault();
+
+            if (connection != null)
+                return ConnectionStatus.Connected;
+
+            var sentInvite = _repo.QueryContactRequests()
+                .Where(x => x.SenderId == currentCompany && x.RecipientId == queriedCompany && !x.AcceptDate.HasValue && !x.DeclineDate.HasValue)
+                .SingleOrDefault();
+
+            if (sentInvite != null)
+                return ConnectionStatus.InvitationSent;
+
+            var recvdInvite = _repo.QueryContactRequests()
+                .Where(x => x.RecipientId == currentCompany && x.SenderId == queriedCompany && !x.AcceptDate.HasValue && !x.DeclineDate.HasValue)
+                .SingleOrDefault();
+
+            if (recvdInvite != null)
+                return ConnectionStatus.InvitationPending;
+
+            var blackList = _repo.QueryBlackList()
+                .Where(x => (x.BlackListedCompanyId == currentCompany && x.CompanyId == queriedCompany) || (x.CompanyId == currentCompany && x.BlackListedCompanyId == queriedCompany))
+                .FirstOrDefault();
+
+            if (blackList != null)
+                return ConnectionStatus.BlackListed;
+
+            if (currentCompany == queriedCompany)
+                return ConnectionStatus.Self;
+
+            return ConnectionStatus.NotConnected;
         }
     }
 }

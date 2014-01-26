@@ -1,6 +1,6 @@
-﻿using BCWeb.Areas.Account.Models.Company.ServiceLayer;
-using BCWeb.Models;
-using BCWeb.Models.Company;
+﻿using BCWeb.Models;
+using BCWeb.Models.Contacts;
+using BCWeb.Models.Contacts.ServiceLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +13,10 @@ namespace BCWeb.Api
     [Authorize]
     public class ConnectionStatusController : ApiController
     {
-        private ICompanyProfileServiceLayer _service;
+        private IContactServiceLayer _service;
         private IWebSecurityWrapper _security;
 
-        public ConnectionStatusController(ICompanyProfileServiceLayer service, IWebSecurityWrapper security)
+        public ConnectionStatusController(IContactServiceLayer service, IWebSecurityWrapper security)
         {
             _security = security;
             _service = service;

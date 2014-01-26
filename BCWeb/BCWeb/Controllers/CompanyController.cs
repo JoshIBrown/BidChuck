@@ -43,9 +43,6 @@ namespace BCWeb.Controllers
 
             CompanyProfile company = _service.Get(id);
 
-            if (_service.GetConnectionStatus(currentCompanyId, company.Id) == ConnectionStatus.BlackListed)
-                throw new HttpException(404, "No company found with that id");
-
             CompanyProfileViewModel viewModel = new CompanyProfileViewModel
             {
                 Address1 = company.Address1,

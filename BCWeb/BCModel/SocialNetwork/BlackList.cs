@@ -20,5 +20,10 @@ namespace BCModel.SocialNetwork
         public int BlackListedCompanyId { get; set; }
         [ForeignKey("BlackListedCompanyId"), IgnoreDataMember]
         public virtual CompanyProfile BlackListedCompany { get; set; }
+
+        [Required]
+        public DateTime BlackListDate { get; set; }
+
+        public string Notes { get; set; }
     }
 }

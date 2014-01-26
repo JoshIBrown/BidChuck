@@ -23,6 +23,6 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
         IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query);
         State GetState(int id);
 
-        ConnectionStatus GetConnectionStatus(int currentCompany, int queriedCompany);
+        
     }
 }

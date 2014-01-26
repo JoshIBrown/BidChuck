@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BCModel.SocialNetwork
 {
-    public class NetworkConnection
+    public class ContactConnection
     {
         [Key, Column(Order = 0)]
         public int LeftId { get; set; }

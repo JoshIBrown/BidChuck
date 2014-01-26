@@ -181,41 +181,7 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
         }
 
 
-        public ConnectionStatus GetConnectionStatus(int currentCompany, int queriedCompany)
-        {
-            var connection = _repo.QueryNetworkConnections()
-                .Where(x => (x.LeftId == currentCompany && x.RightId == queriedCompany) || (x.RightId == currentCompany && x.LeftId == queriedCompany))
-                .SingleOrDefault();
 
-            if (connection != null)
-                return ConnectionStatus.Connected;
-
-            var sentInvite = _repo.QueryConnectionRequests()
-                .Where(x => x.SenderId == currentCompany && x.RecipientId == queriedCompany && !x.AcceptDate.HasValue && !x.DeclineDate.HasValue)
-                .SingleOrDefault();
-
-            if (sentInvite != null)
-                return ConnectionStatus.InvitationSent;
-
-            var recvdInvite = _repo.QueryConnectionRequests()
-                .Where(x => x.RecipientId == currentCompany && x.SenderId == queriedCompany && !x.AcceptDate.HasValue && !x.DeclineDate.HasValue)
-                .SingleOrDefault();
-
-            if (recvdInvite != null)
-                return ConnectionStatus.InvitationPending;
-
-            var blackList = _repo.QueryBlackLists()
-                .Where(x => (x.BlackListedCompanyId == currentCompany && x.CompanyId == queriedCompany) || (x.CompanyId == currentCompany && x.BlackListedCompanyId == queriedCompany))
-                .FirstOrDefault();
-
-            if (blackList != null)
-                return ConnectionStatus.BlackListed;
-
-            if (currentCompany == queriedCompany)
-                return ConnectionStatus.Self;
-
-            return ConnectionStatus.NotConnected;
-
-        }
+        
     }
 }
