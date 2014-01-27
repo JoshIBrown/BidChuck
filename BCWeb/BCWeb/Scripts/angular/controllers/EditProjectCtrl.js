@@ -40,7 +40,7 @@ angular.element(document).ready(function () { // same as $(document).ready()
 
         // create web service url for scope picker
         $scope.projectId = angular.element('#Id').val();
-        $scope.theServiceUrl = '/api/Scopes/GetScopesToManage/?type=project&ident=' + $scope.projectId;
+        $scope.theServiceUrl = '/api/ProjectScopes/?id=' + $scope.projectId;
 
         // get passed back selected scopes if server side validation fails
         var passBackSelectedScopes = angular.element('#passBackScopes').children("input[name^='SelectedScope']");

@@ -36,7 +36,6 @@ namespace BCWeb.Areas.Account.Controllers
         {
             ManageCompanyScopesModel viewModel = new ManageCompanyScopesModel();
             viewModel.CompanyId = _service.GetUser(_security.GetUserId(User.Identity.Name)).CompanyId;
-            viewModel.SelectedScope = _service.GetEnumerableForCompany(viewModel.CompanyId).Select(s => s.Id).ToArray();
 
             return View(viewModel);
         }

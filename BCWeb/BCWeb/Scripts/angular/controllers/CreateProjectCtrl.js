@@ -13,7 +13,7 @@ angular.element(document).ready(function () { // same as $(document).ready()
         'use strict';
 
         // set the web service url for the scope picker
-        $scope.theServiceUrl = '/api/Scopes/GetAllScopesForPicker';
+        $scope.theServiceUrl = '/api/Scopes';
 
         // get passed back selected scopes if server side validation fails
         var passBackSelectedScopes = angular.element('#passBackScopes').children("input[name^='SelectedScope']");

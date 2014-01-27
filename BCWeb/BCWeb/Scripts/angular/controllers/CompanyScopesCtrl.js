@@ -1,14 +1,15 @@
 ﻿angular.element(document).ready(function () {
     var app = angular.module('companyScopePicker', ['filters', 'bcCsiScopePicker']);
 
-    function CompanyScopesCtrl($scope, $http, $window) {
+    function CompanyScopesCtrl(scope, http) {
 
-        $scope.theServiceUrl = '/api/Scopes/GetAllScopesForPicker';
+        scope.companyId = angular.element('#CompanyId').val();
+        scope.theServiceUrl = '/api/CompanyScopes/?id=' + scope.companyId;
 
         // get passed back selected scopes if server side validation fails
         var passBackSelectedScopes = angular.element('#passBackScopes').children("input[name^='SelectedScope']");
         if (passBackSelectedScopes.length > 0) {
-            $scope.passBackSelection = $.map(passBackSelectedScopes, function (item) {
+            scope.passBackSelection = $.map(passBackSelectedScopes, function (item) {
                 return parseInt(item.value);
             });
         }

@@ -192,15 +192,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\BidPackageScopesController.cs" />
     <Compile Include="Api\BlackListController.cs" />
     <Compile Include="Api\CompaniesController.cs" />
     <Compile Include="Api\BidController.cs" />
+    <Compile Include="Api\CompanyScopesController.cs" />
     <Compile Include="Api\ContactRequestController.cs" />
     <Compile Include="Api\ConnectionStatusController.cs" />
     <Compile Include="Api\InvitationController.cs" />
     <Compile Include="Api\ContactsController.cs" />
     <Compile Include="Api\NotificationsController.cs" />
     <Compile Include="Api\ProjectsController.cs" />
+    <Compile Include="Api\ProjectScopesController.cs" />
+    <Compile Include="Api\UserScopesController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />

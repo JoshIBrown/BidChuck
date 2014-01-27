@@ -61,7 +61,7 @@
 
 
         $scope.bpId = angular.element('#Id').val();
-        $scope.theServiceUrl = '/api/Scopes/GetScopesForBidPackage/?type=existing&ident=' + $scope.bpId;
+        $scope.theServiceUrl = '/api/BidPackageScopes/?id=' + $scope.bpId + '&idIsTemplate=false';
 
         $scope.bidDate = angular.element('#BidDateTime').val();
         $scope.walkDate = angular.element('#WalkThruDateTime').val();
