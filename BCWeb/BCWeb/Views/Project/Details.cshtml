@@ -10,7 +10,7 @@
             <ul class="side-nav">
                 @* limit to creator*@
                 <li>@Html.RouteLink("Edit...", "Default", new { controller = "Project", action = "Edit", id = Model.ProjectId })</li>
-                
+
 
 
                 @if (User.IsInRole("general_contractor"))
@@ -57,11 +57,11 @@
                                 {
                                     <input id="acceptBtn" type="button" value="Accept Invite" class="small success button" ng-click="accept()" />
                                 }
-                                @if (!Model.Accepted.HasValue || (Model.Accepted.Value && (Model.InviteType.HasValue && Model.InviteType.Value == BCModel.Projects.InvitationType.SentFromCreatedBy)))
+                                @if ((!Model.Accepted.HasValue && Model.InviteType.HasValue) || (Model.Accepted.HasValue && Model.Accepted.Value && (Model.InviteType.HasValue && Model.InviteType.Value == BCModel.Projects.InvitationType.SentFromCreatedBy)))
                                 {   
                                     <input id="declineBtn" type="button" value="Decline Invite" class="small alert button" ng-click="decline()" />
                                 }
-                                @*if (!Model.InviteOnly)
+                                @if (!Model.InviteOnly)
                                 {
                                     if ((!Model.Accepted.HasValue && !Model.InviteType.HasValue) || (Model.Accepted.HasValue && !Model.Accepted.Value && Model.InviteType.HasValue && Model.InviteType.Value == BCModel.Projects.InvitationType.SelfInvite))
                                     {
@@ -71,7 +71,7 @@
                                     {
                                     <input id="leaveBtn" type="button" value="Leave Project" class="small alert button" ng-click="leave()" />
                                     }
-                                }*@
+                                }
                             </div>
                         </div>
                         <div class="row">

@@ -203,6 +203,7 @@
     <Compile Include="Api\InvitationController.cs" />
     <Compile Include="Api\ContactsController.cs" />
     <Compile Include="Api\NotificationsController.cs" />
+    <Compile Include="Api\ProjectProfferController.cs" />
     <Compile Include="Api\ProjectsController.cs" />
     <Compile Include="Api\ProjectScopesController.cs" />
     <Compile Include="Api\UserScopesController.cs" />

@@ -32,7 +32,7 @@ namespace BCWeb.Api
             _notice = notice;
         }
 
-        public HttpResponseMessage Get(HttpRequestMessage request, int id)
+        public HttpResponseMessage Get(HttpRequestMessage request, int projectId)
         {
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
 
@@ -42,7 +42,7 @@ namespace BCWeb.Api
             // need to group by inviting company and bid date
             // this should handle auto-invite 3rd tier so that here are not 20 items for 1 company all with the same bid date
 
-            viewModel.BidPackages = _service.GetBidPackagesByProjectAndInvitedCompany(id, companyId)
+            viewModel.BidPackages = _service.GetBidPackagesByProjectAndInvitedCompany(projectId, companyId)
                 .Select(x => new SubAndVendBidPackageListItem
                 {
                     BidDateTime = x.UseProjectBidDateTime ? x.Project.BidDateTime.ToString() : x.BidDateTime.Value.ToString(), 
@@ -54,12 +54,12 @@ namespace BCWeb.Api
                     ProjectDocs = x.Project.ProjectDocuments.Where(p => p.CompanyId == x.CreatedById).AsEnumerable().Select(d => new ProjectDocLookupItem { Name = d.Name, Id = d.Id })
                 }).ToArray();
 
-            viewModel.Scopes = _service.GetInvitationScopes(id, companyId).ToArray();
+            viewModel.Scopes = _service.GetInvitationScopes(projectId, companyId).ToArray();
 
             return request.CreateResponse(HttpStatusCode.OK, viewModel);
         }
 
-        public HttpResponseMessage Put(HttpRequestMessage request, int id, int bidPackageId, InvitationResponse rsvp)
+        public HttpResponseMessage Put(HttpRequestMessage request, int projectId, int bidPackageId, InvitationResponse rsvp)
         {
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
             Invitation invite = _service.Get(bidPackageId, companyId);

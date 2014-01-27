@@ -7,12 +7,16 @@ namespace BCWeb
         public static void Register(HttpConfiguration config)
         {
 
+            config.Routes.MapHttpRoute(
+                name: "ProjectProffer",
+                routeTemplate: "api/Projects/{projectId}/Proffer/{bidPackageId}",
+                defaults: new { controller = "ProjectProffer", bidPackageId = RouteParameter.Optional }
+                );
 
             config.Routes.MapHttpRoute(
-                name: "BidPackageInvitationsPut",
-                routeTemplate: "api/Projects/{id}/Invitations/{bidPackageId}",
+                name: "BidPackageInvitations",
+                routeTemplate: "api/Projects/{projectId}/Invitations/{bidPackageId}",
                 defaults: new { controller = "BidPackageInvitations", bidPackageId = RouteParameter.Optional }
-
                 );
 
             config.Routes.MapHttpRoute(
