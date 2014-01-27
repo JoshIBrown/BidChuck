@@ -1,6 +1,8 @@
 ﻿angular.element(document).ready(function () {
     var app = angular.module('bpDetails', []);
-    app.controller('BPDetailsCtrl', ['$scope', '$http', '$compile', function ($scope, $http, $compile) {
+
+    function BPDetailsCtrl($scope, $http, $compile) {
+
         $scope.bidPackageId = angular.element('#BidPackageId').val();
         $scope.token = angular.element('input[name=__RequestVerificationToken]').val();
 
@@ -76,6 +78,11 @@
                 angular.element('#inviteStatusWrapper').html('Left on: ' + result.data.date);
             });
         };
-    }]);
+    }
+
+    app.controller('BPDetailsCtrl', BPDetailsCtrl);
+
+    BPDetailsCtrl.$inject = ['$scope', '$http', '$compile'];
+
     angular.bootstrap(document, ['bpDetails']);
 });

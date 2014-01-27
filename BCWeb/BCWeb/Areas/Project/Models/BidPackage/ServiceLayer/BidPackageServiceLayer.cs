@@ -241,29 +241,6 @@ namespace BCWeb.Areas.Project.Models.BidPackage.ServiceLayer
                     select r).ToList();
         }
 
-
-        public IEnumerable<BCModel.Projects.BidPackage> GetBidPackagesByProjectAndInvitedCompany(int projectId, int invitedCompanyId)
-        {
-            return (from r in _repo.QueryInvites()
-                    where r.SentToId == invitedCompanyId
-                    && r.BidPackage.ProjectId == projectId
-                    select r.BidPackage).ToList();
-        }
-
-        public Dictionary<int, string> GetInvitationScopes(int projectId, int invitedCompanyId)
-        {
-            var output = (from i in _repo.QueryInvites()
-                          join b in _repo.Query() on i.BidPackageId equals b.Id
-                          join s in _repo.QuerySelectedScopes() on b.Id equals s.BidPackageId
-                          where b.ProjectId == projectId
-                          && i.SentToId == invitedCompanyId
-                          select new { s.ScopeId, Description = s.Scope.CsiNumber + " " + s.Scope.Description }).Distinct();
-
-
-            return output.ToDictionary(x => x.ScopeId, y => y.Description);
-        }
-
-
         
     }
 }

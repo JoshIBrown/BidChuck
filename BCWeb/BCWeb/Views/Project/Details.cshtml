@@ -61,7 +61,7 @@
                                 {   
                                     <input id="declineBtn" type="button" value="Decline Invite" class="small alert button" ng-click="decline()" />
                                 }
-                                @if (!Model.InviteOnly)
+                                @*if (!Model.InviteOnly)
                                 {
                                     if ((!Model.Accepted.HasValue && !Model.InviteType.HasValue) || (Model.Accepted.HasValue && !Model.Accepted.Value && Model.InviteType.HasValue && Model.InviteType.Value == BCModel.Projects.InvitationType.SelfInvite))
                                     {
@@ -71,7 +71,7 @@
                                     {
                                     <input id="leaveBtn" type="button" value="Leave Project" class="small alert button" ng-click="leave()" />
                                     }
-                                }
+                                }*@
                             </div>
                         </div>
                         <div class="row">

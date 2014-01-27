@@ -116,7 +116,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\ScopesControllerTest.cs" />
     <Compile Include="Api\InvitationControllerTest.cs" />
     <Compile Include="Api\UsersControllerTest.cs" />
     <Compile Include="Areas\Account\Account\CompanyControllerTest.cs" />

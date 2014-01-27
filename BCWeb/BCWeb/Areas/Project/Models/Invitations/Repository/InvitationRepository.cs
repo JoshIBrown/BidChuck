@@ -111,5 +111,11 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
         {
             return _bpScopes.Include(s => s.Scope).Include(s => s.Scope.Children).Include(s => s.Scope.Parent);
         }
+
+
+        public IQueryable<BCModel.Projects.BidPackage> QueryBidPackages()
+        {
+            return _bidPackages.Include(i => i.Project).Include(i => i.Invitees);
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace BCWeb.Api
         private IWebSecurityWrapper _security;
         private INotificationSender _notice;
 
-        public InvitationController(IInvitationServiceLayer service, IWebSecurityWrapper security,INotificationSender notice)
+        public InvitationController(IInvitationServiceLayer service, IWebSecurityWrapper security, INotificationSender notice)
         {
             _service = service;
             _security = security;
@@ -59,31 +59,25 @@ namespace BCWeb.Api
             int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
             Invitation invite = _service.Get(bidPackageId, companyId);
 
-            if (invite.SentToId == companyId)
-            {
-                invite.AcceptedDate = DateTime.Now;
-                if (invite.RejectedDate.HasValue)
-                    invite.RejectedDate = default(DateTime?); // null out hte decline date
-                if (_service.Update(invite))
-                {
-                    // send notification
-                    _notice.SendInviteResponse(invite.BidPackageId);
 
-                    result.success = true;
-                    result.message = "invitation accepted";
-                    result.data = new { date = invite.AcceptedDate.Value.ToShortDateString() };
-                }
-                else
-                {
-                    result.success = false;
-                    result.message = "unable to accept invitation";
-                }
+            invite.AcceptedDate = DateTime.Now;
+            if (invite.RejectedDate.HasValue)
+                invite.RejectedDate = default(DateTime?); // null out hte decline date
+            if (_service.Update(invite))
+            {
+                // send notification
+                _notice.SendInviteResponse(invite.BidPackageId);
+
+                result.success = true;
+                result.message = "invitation accepted";
+                result.data = new { date = invite.AcceptedDate.Value.ToShortDateString() };
             }
-            else // prevent company from accepting other companies invite
+            else
             {
                 result.success = false;
-                result.message = "invalid invitation";
+                result.message = "unable to accept invitation";
             }
+
 
             return result;
         }
@@ -128,112 +122,112 @@ namespace BCWeb.Api
             return result;
         }
 
-        [ValidateHttpAntiForgeryToken]
-        public JQueryPostResult PostJoin(int bidPackageId)
-        {
-            JQueryPostResult result = new JQueryPostResult();
-            BidPackage bidPackage = _service.GetBidPackage(bidPackageId);
-            int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
+        //[ValidateHttpAntiForgeryToken]
+        //public JQueryPostResult PostJoin(int bidPackageId)
+        //{
+        //    JQueryPostResult result = new JQueryPostResult();
+        //    BidPackage bidPackage = _service.GetBidPackage(bidPackageId);
+        //    int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
 
-            // make sure an invited user didn't accidentally find this link and join the project again
-            // or that they haven't already joined the project
-            if (_service.Get(bidPackage.Id, companyId) == null)
-            {
-                // assemble invite
-                Invitation selfInvitation = new Invitation
-                {
+        //    // make sure an invited user didn't accidentally find this link and join the project again
+        //    // or that they haven't already joined the project
+        //    if (_service.Get(bidPackage.Id, companyId) == null)
+        //    {
+        //        // assemble invite
+        //        Invitation selfInvitation = new Invitation
+        //        {
 
-                    AcceptedDate = DateTime.Now,
-                    BidPackage = bidPackage,
-                    SentToId = companyId,
-                    InvitationType = InvitationType.SelfInvite,
-                    SentDate = DateTime.Now
-                };
+        //            AcceptedDate = DateTime.Now,
+        //            BidPackage = bidPackage,
+        //            SentToId = companyId,
+        //            InvitationType = InvitationType.SelfInvite,
+        //            SentDate = DateTime.Now
+        //        };
 
-                // try and add invite to system.
-                if (_service.Create(selfInvitation))
-                {
-                    // send notification
-                    _notice.SendInviteResponse(selfInvitation.BidPackageId);
+        //        // try and add invite to system.
+        //        if (_service.Create(selfInvitation))
+        //        {
+        //            // send notification
+        //            _notice.SendInviteResponse(selfInvitation.BidPackageId);
 
-                    result.success = true;
-                    result.message = "joined project";
-                    result.data = new { date = selfInvitation.AcceptedDate.Value.ToShortDateString() };
-                }
-                else
-                {
-                    result.success = false;
-                    result.message = "unable to join project";
-                }
-            }
-            else if (bidPackage.Invitees.Where(i => i.SentToId == companyId).Count() == 1)
-            {
-                var invite = _service.Get(bidPackageId, companyId);
-                invite.RejectedDate = default(DateTime?);
-                invite.AcceptedDate = DateTime.Now;
+        //            result.success = true;
+        //            result.message = "joined project";
+        //            result.data = new { date = selfInvitation.AcceptedDate.Value.ToShortDateString() };
+        //        }
+        //        else
+        //        {
+        //            result.success = false;
+        //            result.message = "unable to join project";
+        //        }
+        //    }
+        //    else if (bidPackage.Invitees.Where(i => i.SentToId == companyId).Count() == 1)
+        //    {
+        //        var invite = _service.Get(bidPackageId, companyId);
+        //        invite.RejectedDate = default(DateTime?);
+        //        invite.AcceptedDate = DateTime.Now;
 
-                if (_service.Update(invite))
-                {
+        //        if (_service.Update(invite))
+        //        {
 
-                    // send notification
-                    _notice.SendInviteResponse(invite.BidPackageId);
+        //            // send notification
+        //            _notice.SendInviteResponse(invite.BidPackageId);
 
-                    result.success = true;
-                    result.message = "joined project";
-                    result.data = new { date = invite.AcceptedDate.Value.ToShortDateString() };
-                }
-                else
-                {
-                    result.success = false;
-                    result.message = "unable to join project";
-                }
-            }
-            else
-            {
-                result.success = false;
-                result.message = "company is already invited";
-            }
-
-
-            return result;
-        }
-
-        [ValidateHttpAntiForgeryToken]
-        public JQueryPostResult PostLeave(int bidPackageId)
-        {
-            JQueryPostResult result = new JQueryPostResult();
-            int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
-            Invitation invite = _service.Get(bidPackageId, companyId);
+        //            result.success = true;
+        //            result.message = "joined project";
+        //            result.data = new { date = invite.AcceptedDate.Value.ToShortDateString() };
+        //        }
+        //        else
+        //        {
+        //            result.success = false;
+        //            result.message = "unable to join project";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        result.success = false;
+        //        result.message = "company is already invited";
+        //    }
 
 
-            if (invite.SentToId == companyId)
-            {
-                invite.AcceptedDate = default(DateTime?);
-                invite.RejectedDate = DateTime.Now;
+        //    return result;
+        //}
 
-                if (_service.Update(invite))
-                {
-                    // send notification
-                    _notice.SendInviteResponse(invite.BidPackageId);
+        //[ValidateHttpAntiForgeryToken]
+        //public JQueryPostResult PostLeave(int bidPackageId)
+        //{
+        //    JQueryPostResult result = new JQueryPostResult();
+        //    int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
+        //    Invitation invite = _service.Get(bidPackageId, companyId);
 
-                    result.message = "left project";
-                    result.success = true;
-                    result.data = new { date = invite.RejectedDate.Value.ToShortDateString() };
-                }
-                else
-                {
-                    result.success = false;
-                    result.message = "unable to leave project";
-                }
-            }
-            else
-            {
-                result.success = false;
-                result.message = "invalid project"; // secretly means some how someone wound up posting the wrong invite id
-            }
 
-            return result;
-        }
+        //    if (invite.SentToId == companyId)
+        //    {
+        //        invite.AcceptedDate = default(DateTime?);
+        //        invite.RejectedDate = DateTime.Now;
+
+        //        if (_service.Update(invite))
+        //        {
+        //            // send notification
+        //            _notice.SendInviteResponse(invite.BidPackageId);
+
+        //            result.message = "left project";
+        //            result.success = true;
+        //            result.data = new { date = invite.RejectedDate.Value.ToShortDateString() };
+        //        }
+        //        else
+        //        {
+        //            result.success = false;
+        //            result.message = "unable to leave project";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        result.success = false;
+        //        result.message = "invalid project"; // secretly means some how someone wound up posting the wrong invite id
+        //    }
+
+        //    return result;
+        //}
 
     }
 }

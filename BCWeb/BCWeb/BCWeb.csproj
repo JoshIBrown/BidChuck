@@ -192,6 +192,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\BidPackageInvitationsController.cs" />
     <Compile Include="Api\BidPackageScopesController.cs" />
     <Compile Include="Api\BlackListController.cs" />
     <Compile Include="Api\CompaniesController.cs" />

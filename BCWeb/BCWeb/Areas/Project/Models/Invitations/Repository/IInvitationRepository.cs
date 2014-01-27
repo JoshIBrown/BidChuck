@@ -22,7 +22,7 @@ namespace BCWeb.Areas.Project.Models.Invitations.Repository
         IQueryable<Scope> QueryScopes();
 
         IQueryable<CompanyXScope> QueryCompanyScopes();
-
+        IQueryable<BCModel.Projects.BidPackage> QueryBidPackages();
         IQueryable<BidPackageXScope> QueryBidPackageScopes();
     }
 }

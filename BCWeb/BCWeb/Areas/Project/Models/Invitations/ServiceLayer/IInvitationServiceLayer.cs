@@ -24,5 +24,9 @@ namespace BCWeb.Areas.Project.Models.Invitations.ServiceLayer
         IEnumerable<Scope> GetBidPackageScopes(int id);
 
         IEnumerable<Scope> GetBidPackageScopesDeepestScopes(int id);
+
+        IEnumerable<BCModel.Projects.BidPackage> GetBidPackagesByProjectAndInvitedCompany(int projectId, int companyId);
+
+        Dictionary<int, string> GetInvitationScopes(int projectId, int companyId);
     }
 }

@@ -6,7 +6,7 @@
 
         $scope.ProjectId = angular.element('#ProjectId').val();
 
-        $http.get('/api/BidPackage/GetInvitedPackagesForProject/?projectId=' + $scope.ProjectId)
+        $http.get('/api/Projects/' + $scope.ProjectId + '/Invitations')
             .success(function (result) {
                 $scope.myData = result;
                 var wrapper = angular.element('#bidPackageWrapper');
@@ -15,7 +15,7 @@
 
         $scope.accept = function (bpId) {
 
-            $http.post('/api/Invitation/PostAccept/?bidPackageId=' + bpId, null, {
+            $http.put('/api/Projects/' + $scope.ProjectId + '/Invitations/' + bpId + '?rsvp=accept', null, {
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: '__RequestVerificationToken',
                 headers: { "X-XSRF-Token": $scope.token, "X-Requested-With": "XMLHttpRequest" }
@@ -28,7 +28,7 @@
 
         $scope.decline = function (bpId) {
 
-            $http.post('/api/Invitation/PostDecline/?bidPackageId=' + bpId, null, {
+            $http.put('/api/Projects/' + $scope.ProjectId + '/Invitations/' + bpId + '?rsvp=decline', null, {
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: '__RequestVerificationToken',
                 headers: { "X-XSRF-Token": $scope.token, "X-Requested-With": "XMLHttpRequest" }
