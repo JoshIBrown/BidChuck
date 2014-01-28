@@ -7,9 +7,13 @@ namespace BCWeb.Models.Company.ViewModel
 {
     public class CompanySearchResultItem
     {
-        public string Text { get; set; }
+
+        public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
+        public string BusinessType { get; set; }
+        public bool BlackListed { get; set; }
+        public Dictionary<int, string> ScopesOfWork { get; set; }
         public string LinkPath { get; set; }
 
-        public int Id { get; set; }
     }
 }

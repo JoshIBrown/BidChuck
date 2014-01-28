@@ -230,7 +230,6 @@
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\ScopeMgmtViewModel.cs" />
     <Compile Include="Areas\Account\Models\Scopes\ViewModel\SelectedScopesViewModel.cs" />
     <Compile Include="Areas\Account\Models\Users\ViewModel\NewUserViewModel.cs" />
-    <Compile Include="Api\BidPackageController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Api\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\BidPackageController.cs" />

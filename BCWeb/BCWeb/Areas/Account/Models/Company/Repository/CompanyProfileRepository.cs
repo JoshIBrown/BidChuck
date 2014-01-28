@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCModel.Projects;
 using BCModel.SocialNetwork;
 using BCWeb.Models;
 using System;
@@ -16,6 +17,8 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         private DbSet<ContactConnection> _connections;
         private DbSet<ContactRequest> _requests;
         private DbSet<BlackList> _blackLists;
+        private DbSet<BCModel.Projects.Project> _projects;
+        private DbSet<BidPackage> _bidPackages;
 
         public CompanyProfileRepository()
         {
@@ -24,6 +27,8 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
             _connections = _context.NetworkConnections;
             _requests = _context.ConnectionRequests;
             _blackLists = _context.BlackLists;
+            _projects = _context.Projects;
+            _bidPackages = _context.BidPackages;
         }
 
         public void Create(BCModel.CompanyProfile entity)
@@ -100,6 +105,17 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         public IQueryable<BlackList> QueryBlackLists()
         {
             return _blackLists;
+        }
+
+
+        public BCModel.Projects.Project FindProject(int id)
+        {
+            return _projects.Find(id);
+        }
+
+        public BCModel.Projects.BidPackage FindBidPackage(int id)
+        {
+            return _bidPackages.Find(id);
         }
     }
 }

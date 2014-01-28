@@ -6,6 +6,7 @@ using BCWeb.Areas.Account.Models.Company.Repository;
 using BCWeb.Helpers;
 using System.Data.Spatial;
 using BCWeb.Models.Company;
+using BCModel.Projects;
 namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
 {
     public class CompanyProfileServiceLayer : ICompanyProfileServiceLayer
@@ -160,28 +161,263 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
             return results.AsEnumerable();
         }
 
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(BCModel.BusinessType[] types)
+        {
+            var results = from c in _repo.Query()
+                          where types.Contains(c.BusinessType)
+                          select c;
 
-        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, string city, string state, string postal, double? distance)
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, BCModel.BusinessType[] types)
+        {
+            var results = from c in _repo.Query()
+                          where types.Contains(c.BusinessType) &&
+                          (c.CompanyName.Contains(query)
+                          || c.City.Contains(query)
+                          || c.PostalCode.Contains(query))
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, string city, string state, string postal, double distance)
         {
             // call up the locator
             GeoLocator locator = new GeoLocator();
 
+            // get a search point
             DbGeography searchPoint = locator.GetFromAddress("", city, state, postal);
-            // determine how narrow our search params are
-
-
-
 
             var results = from c in _repo.Query()
                           where c.CompanyName.Contains(query)
-                          && c.GeoLocation.Distance(searchPoint) <= distance
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= distance
                           select c;
 
             return results.AsEnumerable();
         }
 
 
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, BCModel.BusinessType[] types, string city, string state, string postal, double distance, int[] scopes)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
 
-        
+            // get a search point
+            DbGeography searchPoint = locator.GetFromAddress("", city, state, postal);
+
+            var results = from c in _repo.Query()
+                          where c.CompanyName.Contains(query)
+                          && c.Scopes.Any(s => scopes.Contains(s.ScopeId))
+                          && types.Contains(c.BusinessType)
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= distance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, string city, string state, string postal, double distance, int[] scopes)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = locator.GetFromAddress("", city, state, postal);
+
+            var results = from c in _repo.Query()
+                          where c.CompanyName.Contains(query)
+                          && c.Scopes.Any(s => scopes.Contains(s.ScopeId))
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= distance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(BCModel.BusinessType[] types, string city, string state, string postal, double distance, int[] scopes)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = locator.GetFromAddress("", city, state, postal);
+
+            var results = from c in _repo.Query()
+                          where types.Contains(c.BusinessType)
+                          && c.Scopes.Any(s => scopes.Contains(s.ScopeId))
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= distance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string city, string state, string postal, double distance, int[] scopes)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = locator.GetFromAddress("", city, state, postal);
+
+            var results = from c in _repo.Query()
+                          where c.Scopes.Any(s => scopes.Contains(s.ScopeId))
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= distance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, BCModel.BusinessType[] types, string city, string state, string postal, double distance)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = locator.GetFromAddress("", city, state, postal);
+
+            var results = from c in _repo.Query()
+                          where c.CompanyName.Contains(query)
+                          && types.Contains(c.BusinessType)
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= distance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(BCModel.BusinessType[] types, string city, string state, string postal, double distance)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = locator.GetFromAddress("", city, state, postal);
+
+            var results = from c in _repo.Query()
+                          where types.Contains(c.BusinessType)
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= distance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string city, string state, string postal, double distance)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = locator.GetFromAddress("", city, state, postal);
+
+            var results = from c in _repo.Query()
+                          where (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= distance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, BCModel.BusinessType[] types, int projectIdforLocation, int bidPackageIdforScopes)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = _repo.FindProject(projectIdforLocation).GeoLocation;
+
+            int[] bpScopes = _repo.FindBidPackage(bidPackageIdforScopes).Scopes.Select(s => s.ScopeId).ToArray();
+
+            var results = from c in _repo.Query()
+                          where c.CompanyName.Contains(query)
+                          && c.Scopes.Any(s => bpScopes.Contains(s.ScopeId))
+                          && types.Contains(c.BusinessType)
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= c.OperatingDistance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, BCModel.BusinessType[] types, int projectIdforLocation)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = _repo.FindProject(projectIdforLocation).GeoLocation;
+
+            var results = from c in _repo.Query()
+                          where c.CompanyName.Contains(query)
+                          && types.Contains(c.BusinessType)
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= c.OperatingDistance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(int projectIdforLocation, int bidPackageIdforScopes)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = _repo.FindProject(projectIdforLocation).GeoLocation;
+
+            int[] bpScopes = _repo.FindBidPackage(bidPackageIdforScopes).Scopes.Select(s => s.ScopeId).ToArray();
+
+            var results = from c in _repo.Query()
+                          where c.Scopes.Any(s => bpScopes.Contains(s.ScopeId))
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= c.OperatingDistance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(int projectIdforLocation)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = _repo.FindProject(projectIdforLocation).GeoLocation;
+
+            var results = from c in _repo.Query()
+                          where (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= c.OperatingDistance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(BCModel.BusinessType[] types, int projectIdforLocation, int bidPackageIdforScopes)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = _repo.FindProject(projectIdforLocation).GeoLocation;
+
+            int[] bpScopes = _repo.FindBidPackage(bidPackageIdforScopes).Scopes.Select(s => s.ScopeId).ToArray();
+
+            var results = from c in _repo.Query()
+                          where c.Scopes.Any(s => bpScopes.Contains(s.ScopeId))
+                          && types.Contains(c.BusinessType)
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= c.OperatingDistance
+                          select c;
+
+            return results.AsEnumerable();
+        }
+
+        public IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(BCModel.BusinessType[] types, int projectIdforLocation)
+        {
+            // call up the locator
+            GeoLocator locator = new GeoLocator();
+
+            // get a search point
+            DbGeography searchPoint = _repo.FindProject(projectIdforLocation).GeoLocation;
+
+            var results = from c in _repo.Query()
+                          where types.Contains(c.BusinessType)
+                          && (c.GeoLocation.Distance(searchPoint).Value * 0.00062137) <= c.OperatingDistance
+                          select c;
+
+            return results.AsEnumerable();
+        }
     }
 }

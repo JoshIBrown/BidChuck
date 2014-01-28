@@ -1,4 +1,5 @@
 ﻿using BCModel;
+using BCModel.Projects;
 using BCModel.SocialNetwork;
 using BCWeb.Models;
 using System;
@@ -19,5 +20,9 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
 
         IQueryable<ContactRequest> QueryConnectionRequests();
         IQueryable<BlackList> QueryBlackLists();
+
+        BCModel.Projects.Project FindProject(int id);
+
+        BidPackage FindBidPackage(int id);
     }
 }

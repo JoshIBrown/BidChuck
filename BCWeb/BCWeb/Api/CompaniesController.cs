@@ -30,51 +30,83 @@ namespace BCWeb.Api
         }
 
 
-        public IEnumerable<CompanySearchResultItem> Get([FromUri]string query, [FromUri]BusinessType[] type)
+        public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]string query, [FromUri]BusinessType[] type)
         {
             CompanySearchResultItem[] result = _service.GetEnumerable(s => s.CompanyName.Contains(query)
                 && type.Contains(s.BusinessType))
                 .Select(s => new CompanySearchResultItem
                 {
-                    Id = s.Id,
-                    Text = s.CompanyName,
+                    CompanyId = s.Id,
+                    CompanyName = s.CompanyName,
                     LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = s.Id })
                 })
                 .ToArray();
 
-            return result;
+            return request.CreateResponse(HttpStatusCode.OK, result);
         }
 
-        public IEnumerable<CompanySearchResultItem> Get([FromUri]string query, [FromUri]BusinessType[] type, [FromUri]string city, [FromUri]string state, [FromUri]string postal, [FromUri]int? distance, [FromUri]int[] scopeId)
+        public HttpResponseMessage Get(
+            HttpRequestMessage request,
+            [FromUri]string query,
+            [FromUri]BusinessType[] type,
+            [FromUri]string city,
+            [FromUri]string state,
+            [FromUri]string postal,
+            [FromUri]int? distance,
+            [FromUri]int[] scopeId,
+            [FromUri]int? projectIdForLocation,
+            [FromUri]int? bidPackageIdForScopes)
         {
             CompanySearchResultItem[] result = new CompanySearchResultItem[0];
+            List<CompanyProfile> companies = new List<CompanyProfile>();
 
-            if ((city == null || city == "") && (postal == null || postal == "") && (scopeId == null || scopeId.Length == 0))
+            if (projectIdForLocation.HasValue && (city != null || city != string.Empty || state != null || state != string.Empty || postal != null || state != string.Empty || distance.HasValue))
             {
-                result = _service.SearchCompanyProfiles(query)
-                     .Select(s => new CompanySearchResultItem
-                     {
-                         Id = s.Id,
-                         Text = s.CompanyName,
-                         LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = s.Id })
-                     })
-                     .ToArray();
+                return request.CreateResponse(HttpStatusCode.BadRequest, "cannot use both project and other geo location data for search.  must pick one.  either project, or location fields (city,state,postal,distance)");
+            }
+
+            // if just filtering by query string
+            if ((query != null || query != string.Empty) &&
+                (type == null || type.Length == 0) &&
+                (city == null || city == "") &&
+                (postal == null || postal == "") &&
+                (state == null || state == "") &&
+                !distance.HasValue &&
+                (scopeId == null || scopeId.Length == 0))
+            {
+                companies = _service.SearchCompanyProfiles(query).ToList();
+
+            } // if searching by query string and company type
+            else if ((query != null || query != string.Empty) &&
+                (type != null || type.Length > 0) &&
+                (city == null || city == "") &&
+                (postal == null || postal == "") &&
+                (state == null || state == "") &&
+                !distance.HasValue &&
+                (scopeId == null || scopeId.Length == 0))
+            {
+                companies = _service.SearchCompanyProfiles(query).ToList();
+
             }
             else if (scopeId == null || scopeId.Length == 0)
             {
-
-                result = _service.SearchCompanyProfiles(query, city, state, postal, distance)
-                     .Select(s => new CompanySearchResultItem
-                     {
-                         Text = s.CompanyName,
-                         LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = s.Id })
-                     })
-                     .ToArray();
+                companies = _service.SearchCompanyProfiles(query, city, state, postal, distance.Value).ToList();
             }
-            return result;
+
+            result = companies.Select(s => new CompanySearchResultItem
+                {
+                    CompanyId = s.Id,
+                    CompanyName = s.CompanyName,
+                    LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = s.Id }),
+                    BusinessType = s.BusinessType.ToDescription(),
+                    ScopesOfWork = s.Scopes.Select(c => c.Scope).ToDictionary(x => x.Id, x => x.CsiNumber + " " + x.Description)
+                })
+                .ToArray();
+
+            return request.CreateResponse(HttpStatusCode.OK, result);
         }
 
-        public DataTablesResponse Get(
+        public DataTablesResponse Get(HttpRequestMessage request,
             [FromUri]int iDisplayStart,
             [FromUri]int iDisplayLength,
             [FromUri]int iColumns,

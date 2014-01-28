@@ -19,10 +19,25 @@ namespace BCWeb.Areas.Account.Models.Company.ServiceLayer
         UserProfile GetUserProfile(int id);
 
         IEnumerable<CompanyProfile> GetEmptyLatLongList();
-        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, string city, string state, string postal, double? distance);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, BusinessType[] types, string city, string state, string postal, double distance, int[] scopes);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, string city, string state, string postal, double distance, int[] scopes);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(BusinessType[] types, string city, string state, string postal, double distance, int[] scopes);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string city, string state, string postal, double distance, int[] scopes);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, BusinessType[] types, string city, string state, string postal, double distance);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, string city, string state, string postal, double distance);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(BusinessType[] types, string city, string state, string postal, double distance);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string city, string state, string postal, double distance);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(int projectIdforLocation, int bidPackageIdforScopes);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(int projectIdforLocation);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(BusinessType[] types, int projectIdforLocation, int bidPackageIdforScopes);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(BusinessType[] types, int projectIdforLocation);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, BusinessType[] types, int projectIdforLocation, int bidPackageIdforScopes);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, BusinessType[] types, int projectIdforLocation);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query, BusinessType[] types);
+        IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(BusinessType[] types);
         IEnumerable<BCModel.CompanyProfile> SearchCompanyProfiles(string query);
         State GetState(int id);
 
-        
+
     }
 }
