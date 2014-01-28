@@ -65,32 +65,243 @@ namespace BCWeb.Api
                 return request.CreateResponse(HttpStatusCode.BadRequest, "cannot use both project and other geo location data for search.  must pick one.  either project, or location fields (city,state,postal,distance)");
             }
 
-            // if just filtering by query string
-            if ((query != null || query != string.Empty) &&
-                (type == null || type.Length == 0) &&
-                (city == null || city == "") &&
-                (postal == null || postal == "") &&
-                (state == null || state == "") &&
-                !distance.HasValue &&
-                (scopeId == null || scopeId.Length == 0))
+            // if just filtering by QUERY string
+            if ((query != null && query != string.Empty) &&     // has query string ******
+                (type == null || type.Length == 0) &&           // no types
+                (city == null || city == string.Empty) &&       // no city
+                (postal == null || postal == string.Empty) &&   // no postal code
+                (state == null || state == string.Empty) &&     // no state
+                !distance.HasValue &&                           // no distance
+                (scopeId == null || scopeId.Length == 0) &&     // no scopes
+                !projectIdForLocation.HasValue &&               // no project
+                !bidPackageIdForScopes.HasValue)                // no bid package
             {
                 companies = _service.SearchCompanyProfiles(query).ToList();
 
-            } // if searching by query string and company type
-            else if ((query != null || query != string.Empty) &&
-                (type != null || type.Length > 0) &&
-                (city == null || city == "") &&
-                (postal == null || postal == "") &&
-                (state == null || state == "") &&
-                !distance.HasValue &&
-                (scopeId == null || scopeId.Length == 0))
+            } // if just filtering by BUSINESS TYPE
+            else if ((query == null || query == string.Empty) &&    // no query string
+                (type != null && type.Length > 0) &&                // has types *****
+                (city == null || city == string.Empty) &&           // no city
+                (postal == null || postal == string.Empty) &&       // no postal code
+                (state == null || state == string.Empty) &&         // no state
+                !distance.HasValue &&                               // no distance
+                (scopeId == null || scopeId.Length == 0) &&         // no scopes
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
             {
-                companies = _service.SearchCompanyProfiles(query).ToList();
+                companies = _service.SearchCompanyProfiles(type).ToList();
 
-            }
-            else if (scopeId == null || scopeId.Length == 0)
+            }// if just filtering by SCOPES
+            else if ((query == null || query == string.Empty) &&    // no query string
+                (type == null || type.Length == 0) &&               // no types
+                (city == null || city == string.Empty) &&           // no city
+                (postal == null || postal == string.Empty) &&       // no postal code
+                (state == null || state == string.Empty) &&         // no state
+                !distance.HasValue &&                               // no distance
+                (scopeId != null && scopeId.Length > 0) &&          // has scopes ******
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(scopeId).ToList();
+
+            }// if just filtering by BUSINESS TYPE and SCOPES
+            else if ((query == null || query == string.Empty) &&    // no query string
+                (type != null && type.Length > 0) &&                // has types *****
+                (city == null || city == string.Empty) &&           // no city
+                (postal == null || postal == string.Empty) &&       // no postal code
+                (state == null || state == string.Empty) &&         // no state
+                !distance.HasValue &&                               // no distance
+                (scopeId != null && scopeId.Length > 0) &&          // has scopes *****
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(type).ToList();
+
+            } // if just filtering by PROJECT for location
+            if ((query == null || query == string.Empty) &&     // no query string
+                (type == null || type.Length == 0) &&           // no types
+                (city == null || city == string.Empty) &&       // no city
+                (postal == null || postal == string.Empty) &&   // no postal code
+                (state == null || state == string.Empty) &&     // no state
+                !distance.HasValue &&                           // no distance
+                (scopeId == null || scopeId.Length == 0) &&     // no scopes
+                projectIdForLocation.HasValue &&                // has project ******
+                !bidPackageIdForScopes.HasValue)                // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(projectIdForLocation.Value).ToList();
+
+            }// if just filtering by PROJECT and BID PACKAGE
+            else if ((query == null || query == string.Empty) &&    // no query string
+                (type == null || type.Length == 0) &&               // no types
+                (city == null || city == string.Empty) &&           // no city
+                (postal == null || postal == string.Empty) &&       // no postal code
+                (state == null || state == string.Empty) &&         // no state
+                !distance.HasValue &&                               // no distance
+                (scopeId == null || scopeId.Length == 0) &&         // no scopes
+                projectIdForLocation.HasValue &&                    // has project *****
+                bidPackageIdForScopes.HasValue)                     // has bid package ******
+            {
+                companies = _service.SearchCompanyProfiles(projectIdForLocation.Value, bidPackageIdForScopes.Value).ToList();
+
+            }// if searching by QUERY string and BUSINESS TYPE
+            else if ((query != null && query != string.Empty) &&    // has query string *****
+                (type != null && type.Length > 0) &&                // has business types ******
+                (city == null || city == string.Empty) &&           // no city
+                (postal == null || postal == string.Empty) &&       // no postal code
+                (state == null || state == string.Empty) &&         // no state
+                !distance.HasValue &&                               // no distance
+                (scopeId == null || scopeId.Length == 0) &&         // no scopes
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(query, type).ToList();
+
+            }// if searching by QUERY string and BUSINESS TYPE and SCOPES
+            else if ((query != null && query != string.Empty) &&    // has query string *******
+                (type != null && type.Length > 0) &&                // has business types ******
+                (city == null || city == string.Empty) &&           // no city
+                (postal == null || postal == string.Empty) &&       // no postal code
+                (state == null || state == string.Empty) &&         // no state
+                !distance.HasValue &&                               // no distance
+                (scopeId != null && scopeId.Length != 0) &&         // has scopes ******
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(query, type).ToList();
+
+            }// if searching by BUSINESS TYPE and PROJECT
+            else if ((query == null || query == string.Empty) &&    // no query string
+                (type != null && type.Length > 0) &&                // has business types ******
+                (city == null || city == string.Empty) &&           // no city
+                (postal == null || postal == string.Empty) &&       // no postal code
+                (state == null || state == string.Empty) &&         // no state
+                !distance.HasValue &&                               // no distance
+                (scopeId == null || scopeId.Length == 0) &&         // no scopes
+                projectIdForLocation.HasValue &&                    // has project *****
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(type, projectIdForLocation.Value).ToList();
+
+            }// if searching by BUSINESS TYPE and PROJECT and BID PACKAGE
+            else if ((query == null || query == string.Empty) &&    // no query string
+                (type != null && type.Length > 0) &&                // has business types  ********
+                (city == null || city == string.Empty) &&           // no city
+                (postal == null || postal == string.Empty) &&       // no postal code
+                (state == null || state == string.Empty) &&         // no state
+                !distance.HasValue &&                               // no distance
+                (scopeId == null || scopeId.Length == 0) &&         // no scopes
+                projectIdForLocation.HasValue &&                    // no project *******
+                bidPackageIdForScopes.HasValue)                     // no bid package ********
+            {
+                companies = _service.SearchCompanyProfiles(type, projectIdForLocation.Value, bidPackageIdForScopes.Value).ToList();
+
+            }// if searching by ADDRESS and DISTANCE
+            else if ((query == null || query == string.Empty) &&    // no query string
+                (type == null || type.Length == 0) &&               // no business types
+                ((city != null && city != string.Empty) ||          // has city ****
+                (postal != null && postal != string.Empty) ||       // has postal code ****
+                (state != null && state != string.Empty) ||         // has state ****
+                distance.HasValue) &&                               // has distance ****
+                (scopeId == null || scopeId.Length == 0) &&         // no scopes
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(city, state, postal, distance.Value).ToList();
+
+            }// if searching by BUSINESS TYPE and ADDRESS and DISTANCE
+            else if ((query == null || query == string.Empty) &&    // no query string
+                (type != null && type.Length > 0) &&                // has business types ****
+                ((city != null && city != string.Empty) ||          // has city ****
+                (postal != null && postal != string.Empty) ||       // has postal code ****
+                (state != null && state != string.Empty) ||         // has state **** 
+                distance.HasValue) &&                               // has distance *****
+                (scopeId == null || scopeId.Length == 0) &&         // no scopes
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(city, state, postal, distance.Value).ToList();
+
+            }// if searching by QUERY and ADDRESS and DISTANCE
+            else if ((query != null && query != string.Empty) &&    // has query string *****
+                (type == null || type.Length == 0) &&               // no business types
+                ((city != null && city != string.Empty) ||          // has city ****
+                (postal != null && postal != string.Empty) ||       // has postal code ****
+                (state != null && state != string.Empty) ||         // has state
+                distance.HasValue) &&                               // has distance
+                (scopeId == null || scopeId.Length == 0) &&         // no scopes
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
             {
                 companies = _service.SearchCompanyProfiles(query, city, state, postal, distance.Value).ToList();
+
+            }// if searching by QUERY and BUSINESS TYPE and ADDRESS and DISTANCE 
+            else if ((query != null && query != string.Empty) &&    // has query string ****
+                (type != null && type.Length != 0) &&               // has business types ****
+                ((city != null && city != string.Empty) ||          // has city ****
+                (postal != null && postal != string.Empty) ||       // has postal code ****
+                (state != null && state != string.Empty) ||         // has state ****
+                distance.HasValue) &&                               // has distance ****
+                (scopeId == null || scopeId.Length == 0) &&         // no scopes
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(query, type, city, state, postal, distance.Value).ToList();
+
+            }// if searching by ADDRESS and DISTANCE and SCOPES
+            else if ((query == null || query == string.Empty) &&    // no query string 
+                (type == null || type.Length == 0) &&               // no business types
+                ((city != null && city != string.Empty) ||          // has city ****
+                (postal != null && postal != string.Empty) ||       // has postal code ****
+                (state != null && state != string.Empty) ||         // has state ****
+                distance.HasValue) &&                               // has distance ****
+                (scopeId != null && scopeId.Length > 0) &&          // has scopes *****
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(city, state, postal, distance.Value, scopeId).ToList();
+
+            }// if searching by BUSINESS TYPE and ADDRESS and DISTANCE and SCOPES
+            else if ((query == null || query == string.Empty) &&    // no query string 
+                (type != null && type.Length > 0) &&                // has business types *****
+                ((city != null && city != string.Empty) ||          // has city ****
+                (postal != null && postal != string.Empty) ||       // has postal code ****
+                (state != null && state != string.Empty) ||         // has state ****
+                distance.HasValue) &&                               // has distance ****
+                (scopeId != null && scopeId.Length > 0) &&          // has scopes *****
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(city, state, postal, distance.Value, scopeId).ToList();
+
+            }// if searching by QUERY and ADDRESS and DISTANCE and SCOPES
+            else if ((query != null && query != string.Empty) &&    // has query string *******
+                (type == null || type.Length == 0) &&               // no business types
+                ((city != null && city != string.Empty) ||          // has city ****
+                (postal != null && postal != string.Empty) ||       // has postal code ****
+                (state != null && state != string.Empty) ||         // has state
+                distance.HasValue) &&                               // has distance
+                (scopeId != null && scopeId.Length > 0) &&          // has scopes *****
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(query, city, state, postal, distance.Value).ToList();
+
+            }// if searching by QUERY and BUSINESS TYPES and ADDRESS and DISTANCE and SCOPES
+            else if ((query != null && query != string.Empty) &&    // has query string *******
+                (type != null && type.Length > 0) &&                // has business types
+                ((city != null && city != string.Empty) ||          // has city ****
+                (postal != null && postal != string.Empty) ||       // has postal code ****
+                (state != null && state != string.Empty) ||         // has state
+                distance.HasValue) &&                               // has distance
+                (scopeId != null && scopeId.Length > 0) &&          // has scopes *****
+                !projectIdForLocation.HasValue &&                   // no project
+                !bidPackageIdForScopes.HasValue)                    // no bid package
+            {
+                companies = _service.SearchCompanyProfiles(query, city, state, postal, distance.Value).ToList();
+            }
+            else
+            {
+                companies = _service.GetEnumerable().ToList();
             }
 
             result = companies.Select(s => new CompanySearchResultItem
