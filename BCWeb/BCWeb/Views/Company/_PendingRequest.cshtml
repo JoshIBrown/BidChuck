@@ -3,8 +3,8 @@
         @Html.AntiForgeryToken()
         <div class="panel">
             <div>You have pending Contact Request</div>
-            <input type="button" class="medium button" value="Accept" />
-            <input type="button" class="medium secondary button" value="Decline" />
+            <input type="button" class="medium button" value="Accept" ng-click="acceptContactRequest()" />
+            <input type="button" class="medium secondary button" value="Decline" ng-click="declineContactRequest()" />
         </div>
     </div>
 </div>

@@ -1,10 +1,7 @@
 ﻿angular.element(document).ready(function () {
+    "use strict";
 
     var profileApp = angular.module("profileApp", ['bcContactButton']);
-
-    
-
-
 
     function ProfileCtrl(scope) {
 
@@ -18,7 +15,7 @@
 
     ProfileCtrl.$inject = ['$scope'];
 
-    
+
 
     angular.bootstrap(document, ['profileApp']);
 

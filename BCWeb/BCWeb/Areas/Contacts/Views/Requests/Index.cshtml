@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/contactreq")
+}
+
+<div class="row">
+    <div class="large-6 columns">
+        <h2>Contact Requests</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="large-8 columns">
+        <div ng-controller="ContactRequestsCtrl">
+            <div ng-repeat="r in allRequests ">
+                <a href="/Company/Profile/{{r.CompanyId}}">{{r.CompanyName}}</a>
+                <div company-id="r.CompanyId" contact-button></div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Web.Attributes;
+using BCWeb.Models.Contacts.ViewModel;
 
 namespace BCWeb.Api
 {
@@ -31,16 +32,23 @@ namespace BCWeb.Api
         // /api/ConnectionRequest
         public HttpResponseMessage Get(HttpRequestMessage request)
         {
-            return request.CreateResponse(HttpStatusCode.NotImplemented);
-        }
+            List<ContactRequestItem> result = new List<ContactRequestItem>();
 
-        // GET
-        // /api/ConnectionRequest/id
-        public HttpResponseMessage Get(HttpRequestMessage request, Guid id)
-        {
-            return request.CreateResponse(HttpStatusCode.NotImplemented);
-        }
+            int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
 
+            List<ContactRequestItem> sent = _service.GetSentRequests(companyId).Select(s => new ContactRequestItem { CompanyId = s.RecipientId, CompanyName = s.Recipient.CompanyName, Type = ContactRequestType.sent }).ToList();
+
+            if (sent != null)
+                result.AddRange(sent);
+
+            List<ContactRequestItem> rcvd = _service.GetReceivedRequests(companyId).Select(s => new ContactRequestItem { CompanyId = s.SenderId, CompanyName = s.Sender.CompanyName, Type = ContactRequestType.recvd }).ToList();
+
+            if (rcvd != null)
+                result.AddRange(rcvd);
+
+
+            return request.CreateResponse(HttpStatusCode.OK, result);
+        }
 
         // PUT
         // /api/ConnectionRequest/id?accept=true/false

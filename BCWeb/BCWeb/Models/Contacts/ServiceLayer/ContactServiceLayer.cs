@@ -107,7 +107,8 @@ namespace BCWeb.Models.Contacts.ServiceLayer
         {
             try
             {
-                if (validateExistingRequest(request))
+
+                if (validateExistingRequest(_repo.FindNetworkRequest(request.Id)))
                 {
                     _repo.UpdateNetworkRequest(request);
                     _repo.SaveChanges();

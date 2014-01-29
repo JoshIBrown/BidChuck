@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace BCWeb.Api
 {
+    [Authorize]
     public class ContactsController : ApiController
     {
         private IContactServiceLayer _service;

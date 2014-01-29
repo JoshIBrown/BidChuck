@@ -91,7 +91,7 @@ function ContactButtonDirective(http, compile) {
         };
 
         // decline request
-        $scope.acceptContactRequest = function () {
+        $scope.declineContactRequest = function () {
 
             var token = angular.element('input[name=__RequestVerificationToken]').val();
 

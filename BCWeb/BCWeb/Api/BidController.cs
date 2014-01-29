@@ -10,10 +10,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
+
 
 namespace BCWeb.Api
 {
+    [Authorize]
     public class BidController : ApiController
     {
         private IBidServiceLayer _service;
@@ -46,23 +47,23 @@ namespace BCWeb.Api
         //    return null;
         //}
 
-        public IEnumerable<SelectListItem> GetBidPackagesForProject(int projectId)
-        {
-            CompanyProfile company = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).Company;
+        //public IEnumerable<SelectListItem> GetBidPackagesForProject(int projectId)
+        //{
+        //    CompanyProfile company = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).Company;
 
-            List<SelectListItem> result = new List<SelectListItem>();
-            if (company.BusinessType == BusinessType.Architect)
-            {
-                var masterBp = _service.GetMasterBidPackage(projectId);
-                result.Add(new SelectListItem { Value = masterBp.Id.ToString(), Text = "" });
+        //    List<SelectListItem> result = new List<SelectListItem>();
+        //    if (company.BusinessType == BusinessType.Architect)
+        //    {
+        //        var masterBp = _service.GetMasterBidPackage(projectId);
+        //        result.Add(new SelectListItem { Value = masterBp.Id.ToString(), Text = "" });
 
-            }
-            else
-            {
-                result = _service.GetBidPackagesCreatedByCompanyForProject(projectId, company.Id).Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Description }).ToList();
-            }
-            return result;
-        }
+        //    }
+        //    else
+        //    {
+        //        result = _service.GetBidPackagesCreatedByCompanyForProject(projectId, company.Id).Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Description }).ToList();
+        //    }
+        //    return result;
+        //}
 
         public IEnumerable<BidSheetReviewItem> GetBidsToReviewForProject(int projectId)
         {

@@ -10,6 +10,7 @@ using Web.Attributes;
 
 namespace BCWeb.Api
 {
+    [Authorize]
     public class BlackListController : ApiController
     {
         private IContactServiceLayer _service;

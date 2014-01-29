@@ -4,8 +4,9 @@
     <li>@Html.RouteLink("Search", "Default", new { controller = "Search", action = "Index" })</li>
     <li>@Html.RouteLink("Projects", "Default", new { controller = "Project", action = "Index" })</li>
     <li><a href="/Notifications">
-        <img src="@Url.Content("~/Content/images/InfoFlag_unread_32x24.png")" /></a><span id="notificationCount"></span></li>
-    
+        <img src="@Url.Content("~/Content/images/InfoFlag_unread_32x24.png")" /><span id="nNotificationCount"></span></a></li>
+    <li><a href="/Contacts/Requests">
+        <img src="@Url.Content("~/Content/images/unread_contacts_35x27.png")" /><span id="cNotificationCount"></span></a></li>
     <li class="has-dropdown"><a href="#">@User.Identity.Name</a>
         <ul class="dropdown">
             <li>@Html.RouteLink("Manage Account", "Default", new { controller = "Account", action = "Manage" })</li>

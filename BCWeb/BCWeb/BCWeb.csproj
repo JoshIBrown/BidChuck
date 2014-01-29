@@ -248,6 +248,8 @@
     <Compile Include="Areas\Admin\Models\Users\UserProfileDetailsModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
+    <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
+    <Compile Include="Areas\Contacts\Controllers\RequestsController.cs" />
     <Compile Include="Models\Contacts\Repository\IContactRepository.cs" />
     <Compile Include="Models\Contacts\Repository\ContactRepository.cs" />
     <Compile Include="Models\Contacts\ServiceLayer\IContactServiceLayer.cs" />
@@ -335,6 +337,7 @@
     <Compile Include="Models\Contacts\ConnectionStatus.cs" />
     <Compile Include="Models\Company\ViewModel\CompanyProfileViewModel.cs" />
     <Compile Include="Models\Company\ViewModel\CompanySearchResult.cs" />
+    <Compile Include="Models\Contacts\ViewModel\ContactRequestItem.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
     <Compile Include="Models\IGenericRepository.cs" />
     <Compile Include="Models\IGenericServiceLayer.cs" />
@@ -475,6 +478,7 @@
     <Content Include="Content\images\InfoFlag.png" />
     <Content Include="Content\images\InfoFlag_read_32x24.png" />
     <Content Include="Content\images\InfoFlag_unread_32x24.png" />
+    <Content Include="Content\images\unread_contacts_35x27.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\angular\angular-animate.js" />
     <Content Include="Scripts\angular\angular-animate.min.js" />
@@ -497,6 +501,7 @@
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\angular\controllers\admin\CompanyProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\admin\ProjectCtrl.js" />
+    <Content Include="Scripts\angular\controllers\ContactRequestsCtrl.js" />
     <Content Include="Scripts\angular\controllers\NotificationCtrl.js" />
     <Content Include="Scripts\angular\controllers\ProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\SearchCtrl.js" />
@@ -870,6 +875,8 @@
     <Content Include="Areas\Admin\Views\BuildingType\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\BuildingType\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BuildingType\Create.cshtml" />
+    <Content Include="Areas\Contacts\Views\Web.config" />
+    <Content Include="Areas\Contacts\Views\Requests\Index.cshtml" />
     <None Include="Content\Site.css.exclude" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\logos\logo_color_240x45.png" />
@@ -1060,6 +1067,8 @@
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Contacts\Models\" />
+    <Folder Include="Areas\Contacts\Views\Shared\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Models\Home\ViewModels\" />
     <Folder Include="Scripts\Areas\Home\" />
