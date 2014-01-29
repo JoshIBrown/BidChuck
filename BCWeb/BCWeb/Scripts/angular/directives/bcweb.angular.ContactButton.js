@@ -50,11 +50,8 @@ function ContactButtonDirective(http, compile) {
         $scope.checkConnectionStatus = function () {
             $http.get('/api/ConnectionStatus', { params: { companyId: $scope.companyId } })
                 .success(function (result) {
-
-                    var foo = result;
                     $scope.contactStatus = result.content;
                 });
-            $(document).foundation();
         }
 
         // send connection request
@@ -110,7 +107,7 @@ function ContactButtonDirective(http, compile) {
 
             var token = angular.element('input[name=__RequestVerificationToken]').val();
 
-            http({
+            $http({
                 url: '/api/Contacts',
                 method: 'DELETE',
                 params: { companyToDeleteId: $scope.companyId },
@@ -145,7 +142,7 @@ function ContactButtonDirective(http, compile) {
 
             var token = angular.element('input[name=__RequestVerificationToken]').val();
 
-            http({
+            $http({
                 url: '/api/BlackList',
                 method: 'DELETE',
                 params: { companyToBlackList: $scope.companyId },
@@ -162,7 +159,7 @@ function ContactButtonDirective(http, compile) {
 
             var token = angular.element('input[name=__RequestVerificationToken]').val();
 
-            http({
+            $http({
                 url: '/api/ContactRequest',
                 method: 'DELETE',
                 params: { recipientId: $scope.companyId },
@@ -182,12 +179,12 @@ function ContactButtonDirective(http, compile) {
         restrict: 'A',
         scope: { 'companyId': '=' },
         link: link,
-        controller: controller
+        controller: ['$scope', '$http', controller]
     };
 
     return directiveObject;
 };
 
-ContactButtonDirective.$inject = ['$http', '$compile'];
 
-contactButtonApp.directive('contactButton', ContactButtonDirective);
+
+contactButtonApp.directive('contactButton', ['$http', '$compile', ContactButtonDirective]);

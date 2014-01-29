@@ -95,7 +95,7 @@ namespace BCWeb.Api
                     {
                         case NotificationType.ConnectionAccepted:
                         case NotificationType.RequestToConnect:
-                            result = string.Format("/Company/Profile/", entityId);
+                            result = string.Format("/Company/Profile/{0}", entityId);
                             break;
                     }
                     break;

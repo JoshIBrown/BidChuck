@@ -191,6 +191,7 @@ namespace BCWeb.Models.Notifications.ServiceLayer
                         switch (notificationType)
                         {
                             case NotificationType.ConnectionAccepted:
+                                newNotice.Message = string.Format(_ConnectionAccepted, theCompany.CompanyName);
                                 break;
                         }
                     }
