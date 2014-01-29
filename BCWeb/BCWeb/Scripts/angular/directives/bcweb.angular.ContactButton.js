@@ -106,6 +106,22 @@ function ContactButtonDirective(http, compile) {
                 });
         };
 
+        $scope.removeContact = function () {
+
+            var token = angular.element('input[name=__RequestVerificationToken]').val();
+
+            http({
+                url: '/api/Contacts',
+                method: 'DELETE',
+                params: { companyToDeleteId: $scope.companyId },
+                xsrfHeaderName: "X-XSRF-Token",
+                xsrfCookieName: "__RequestVerificationToken",
+                headers: { "X-XSRF-Token": token, "X-Requested-With": "XMLHttpRequest" }
+            }).success(function (result) {
+                $scope.checkConnectionStatus();
+            });
+        };
+
 
         // blacklist company
         $scope.addToBlackList = function () {

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BCModel.SocialNetwork;
+using Web.Attributes;
 
 namespace BCWeb.Api
 {
@@ -24,10 +26,26 @@ namespace BCWeb.Api
             _notice = notice;
         }
 
-
-        public HttpResponseMessage Delete(HttpRequestMessage request, int companyId)
+        [ValidateHttpAntiForgeryToken]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int companyToDeleteId)
         {
-            return request.CreateErrorResponse(HttpStatusCode.NotImplemented, "not implemented yet");
+            int companyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
+
+            ContactConnection contact = _service.GetNetworkConnection(companyId, companyToDeleteId);
+
+            if (contact == null)
+            {
+                return request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            if (_service.RemoveNetworkConnection(contact))
+            {
+                return request.CreateResponse(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                return request.CreateResponse(HttpStatusCode.InternalServerError, _service.ValidationDic);
+            }
         }
 
 

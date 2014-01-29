@@ -199,14 +199,16 @@ namespace BCWeb.Models.Contacts.ServiceLayer
             return _repo.QueryNetworkConnections().Where(c => c.RightId == companyId || c.LeftId == companyId);
         }
 
+        // get unanswered sent requests
         public IEnumerable<BCModel.SocialNetwork.ContactRequest> GetSentRequests(int companyId)
         {
-            return _repo.QueryContactRequests().Where(r => r.SenderId == companyId);
+            return _repo.QueryContactRequests().Where(r => r.SenderId == companyId && !r.AcceptDate.HasValue && !r.DeclineDate.HasValue);
         }
 
+        // get unanswered recvd requests
         public IEnumerable<BCModel.SocialNetwork.ContactRequest> GetReceivedRequests(int companyId)
         {
-            return _repo.QueryContactRequests().Where(r => r.RecipientId == companyId);
+            return _repo.QueryContactRequests().Where(r => r.RecipientId == companyId && !r.AcceptDate.HasValue && !r.DeclineDate.HasValue);
         }
 
         public BCModel.UserProfile GetUserProfile(int id)
