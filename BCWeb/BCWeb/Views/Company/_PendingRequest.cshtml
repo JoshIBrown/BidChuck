@@ -1,9 +1,8 @@
 ﻿<div class="row">
     <div class="large-4 columns">
+        @Html.AntiForgeryToken()
         <div class="panel">
             <div>You have pending Contact Request</div>
-
-            @Html.AntiForgeryToken()
             <input type="button" class="medium button" value="Accept" />
             <input type="button" class="medium secondary button" value="Decline" />
         </div>

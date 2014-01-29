@@ -136,7 +136,9 @@ namespace BCWeb.Models.Notifications.ServiceLayer
         {
             try
             {
-                BCModel.Projects.Project theProject = _repo.GetProject(entityId);
+
+
+
                 Notification newNotice;
                 for (int i = 0; i < userId.Length; i++)
                 {
@@ -151,23 +153,51 @@ namespace BCWeb.Models.Notifications.ServiceLayer
                         Read = false
                     };
 
-                    switch (notificationType)
+
+                    // only two entity types right now. so should hopefully not puke.
+                    if (entityType == EntityType.Project)
                     {
-                        case NotificationType.BidSubmitted:
-                            newNotice.Message = string.Format(_BidSubmissionMsg, theProject.Title);
-                            break;
-                        case NotificationType.InvitationRequest:
-                            newNotice.Message = string.Format(_InvitationRequestMsg, theProject.Title);
-                            break;
-                        case NotificationType.InvitationResponse:
-                            newNotice.Message = string.Format(_ResponseToInvatiationMsg, theProject.Title);
-                            break;
-                        case NotificationType.InvitationToBid:
-                            newNotice.Message = string.Format(_InvitationToBidMsg, theProject.Title);
-                            break;
-                        case NotificationType.ProjectChange:
-                            newNotice.Message = string.Format(_ChangesToProjectMsg, theProject.Title);
-                            break;
+                        BCModel.Projects.Project theProject = _repo.GetProject(entityId);
+                        if (theProject == null)
+                        {
+                            throw new Exception("cannot find project");
+                        }
+                        switch (notificationType)
+                        {
+                            case NotificationType.BidSubmitted:
+                                newNotice.Message = string.Format(_BidSubmissionMsg, theProject.Title);
+                                break;
+                            case NotificationType.InvitationRequest:
+                                newNotice.Message = string.Format(_InvitationRequestMsg, theProject.Title);
+                                break;
+                            case NotificationType.InvitationResponse:
+                                newNotice.Message = string.Format(_ResponseToInvatiationMsg, theProject.Title);
+                                break;
+                            case NotificationType.InvitationToBid:
+                                newNotice.Message = string.Format(_InvitationToBidMsg, theProject.Title);
+                                break;
+                            case NotificationType.ProjectChange:
+                                newNotice.Message = string.Format(_ChangesToProjectMsg, theProject.Title);
+                                break;
+                        }
+                    }
+                    else if (entityType == EntityType.Company)
+                    {
+                        CompanyProfile theCompany = _repo.GetCompanyProfile(entityId);
+                        if (theCompany == null)
+                        {
+                            throw new Exception("cannot find the company");
+                        }
+                        switch (notificationType)
+                        {
+                            case NotificationType.ConnectionAccepted:
+                                break;
+                        }
+                    }
+
+                    if (newNotice.Message == null || newNotice.Message == string.Empty)
+                    {
+                        throw new Exception("message is emtpy");
                     }
 
                     _repo.Create(newNotice);

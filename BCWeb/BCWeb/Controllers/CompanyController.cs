@@ -68,29 +68,40 @@ namespace BCWeb.Controllers
             return View();
         }
 
+        [OutputCache(NoStore=true,VaryByParam="*",Duration=0)]
         public PartialViewResult Connected()
         {
             return PartialView("_Connected");
         }
 
+        [OutputCache(NoStore = true, VaryByParam = "*", Duration = 0)]
         public PartialViewResult NotConnected()
         {
             return PartialView("_NotConnected");
         }
 
+        [OutputCache(NoStore = true, VaryByParam = "*", Duration = 0)]
         public PartialViewResult RequestSent()
         {
             return PartialView("_RequestSent");
         }
 
+        [OutputCache(NoStore = true, VaryByParam = "*", Duration = 0)]
         public PartialViewResult PendingRequest()
         {
             return PartialView("_PendingRequest");
         }
 
+        [OutputCache(NoStore = true, VaryByParam = "*", Duration = 0)]
         public PartialViewResult Self()
         {
             return PartialView("_Self");
+        }
+
+        [OutputCache(NoStore = true, VaryByParam = "*", Duration = 0)]
+        public PartialViewResult BlackListed()
+        {
+            return PartialView("_BlackListed");
         }
     }
 }

@@ -1,0 +1,9 @@
+﻿<div class="row">
+    <div class="large-2 columns">
+        @Html.AntiForgeryToken()
+        <input type="button" class="medium button expand secondary" value="Blacklisted" data-dropdown="drop1" data-options="is_hover:true" />
+        <ul id="drop1" class="f-dropdown" data-dropdown-content>
+            <li><a href="#" ng-click="removeFromBlackList()">de-Blacklist</a></li>
+        </ul>
+    </div>
+</div>

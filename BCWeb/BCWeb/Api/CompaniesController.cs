@@ -55,7 +55,9 @@ namespace BCWeb.Api
             [FromUri]int? distance,
             [FromUri]int[] scopeId,
             [FromUri]int? projectIdForLocation,
-            [FromUri]int? bidPackageIdForScopes)
+            [FromUri]int? bidPackageIdForScopes,
+            [FromUri]int offset,
+            [FromUri]int records)
         {
             CompanySearchResultItem[] result = new CompanySearchResultItem[0];
             List<CompanyProfile> companies = new List<CompanyProfile>();
@@ -63,6 +65,16 @@ namespace BCWeb.Api
             if (projectIdForLocation.HasValue && (city != null || city != string.Empty || state != null || state != string.Empty || postal != null || state != string.Empty || distance.HasValue))
             {
                 return request.CreateResponse(HttpStatusCode.BadRequest, "cannot use both project and other geo location data for search.  must pick one.  either project, or location fields (city,state,postal,distance)");
+            }
+
+            if (offset == null || offset< 0)
+            {
+                return request.CreateResponse(HttpStatusCode.BadRequest, "offset must be zero or larger");
+            }
+
+            if (records == null || offset < 0)
+            {
+                return request.CreateResponse(HttpStatusCode.BadRequest, "records must be zero or greater. use 0 to return all");
             }
 
             // if just filtering by QUERY string
@@ -302,6 +314,16 @@ namespace BCWeb.Api
             else
             {
                 companies = _service.GetEnumerable().ToList();
+            }
+
+            // limit records returned
+            if (records == 0)
+            {
+                companies = companies.Skip(offset).ToList();
+            }
+            else
+            {
+                companies = companies.Skip(offset).Take(records).ToList();
             }
 
             result = companies.Select(s => new CompanySearchResultItem

@@ -510,6 +510,7 @@
     <Content Include="Scripts\angular\controllers\ProjectSubVendDetailsCtrl.js" />
     <Content Include="Scripts\angular\controllers\ReceivedBidCtrl.js" />
     <Content Include="Scripts\angular\controllers\SendInvitationCtrl.js" />
+    <Content Include="Scripts\angular\directives\bcweb.angular.ContactButton.js" />
     <Content Include="Scripts\angular\directives\bcweb.angular.DataTables.js" />
     <Content Include="Scripts\angular\directives\bcweb.angular.InputValidators.js" />
     <Content Include="Scripts\angular\directives\bcweb.angular.ResettableForm.js" />
@@ -1054,6 +1055,7 @@
     <Content Include="Views\Company\_RequestSent.cshtml" />
     <Content Include="Views\Company\_PendingRequest.cshtml" />
     <Content Include="Views\Company\_Self.cshtml" />
+    <Content Include="Views\Company\_BlackListed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />

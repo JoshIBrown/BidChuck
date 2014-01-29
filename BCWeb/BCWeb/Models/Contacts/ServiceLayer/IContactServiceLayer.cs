@@ -12,10 +12,11 @@ namespace BCWeb.Models.Contacts.ServiceLayer
     {
         bool SendNetworkRequest(ContactRequest request);
         bool UpdateNetworkRequest(ContactRequest request);
-        bool CreateNetworkConnection(ContactConnection connection);
-        bool DeleteNetworkConnection(int companyA, int companyB);
-        bool BlackListCompany(int companyId, int companyToBlockId);
-        bool UnblackListCompany(int companyId, int blockedCompanyId);
+        bool CancelNetworkRequest(ContactRequest openInvite);
+        bool AddNetworkConnection(ContactConnection connection);
+        bool RemoveNetworkConnection(ContactConnection connection);
+        bool BlackListCompany(BlackList entity);
+        bool UnblackListCompany(BlackList entity);
 
         ContactConnection GetNetworkConnection(int left, int right);
         ContactRequest GetNetworkRequest(Guid id);
@@ -32,5 +33,7 @@ namespace BCWeb.Models.Contacts.ServiceLayer
         BlackList GetBlackListItem(int companyId, int blockedCompanyId);
         IEnumerable<BlackList> GetBlackListForCompany(int companyId);
         ConnectionStatus GetConnectionStatus(int currentCompany, int queriedCompany);
+
+        
     }
 }

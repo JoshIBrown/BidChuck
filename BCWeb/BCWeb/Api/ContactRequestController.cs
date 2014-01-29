@@ -27,7 +27,7 @@ namespace BCWeb.Api
         }
 
 
-        // GET
+        // GET: return a list of connection requests
         // /api/ConnectionRequest
         public HttpResponseMessage Get(HttpRequestMessage request)
         {
@@ -92,8 +92,11 @@ namespace BCWeb.Api
                 if (_service.UpdateNetworkRequest(friendRequest))
                 {
                     // if declined to connect or accpeted connection and network connection was created succesfully
-                    if (!accept || (accept && _service.CreateNetworkConnection(new ContactConnection { LeftId = friendRequest.SenderId, RightId = friendRequest.RecipientId, CreateDate = friendRequest.AcceptDate.Value })))
+                    if (!accept || (accept && _service.AddNetworkConnection(new ContactConnection { LeftId = friendRequest.SenderId, RightId = friendRequest.RecipientId, CreateDate = friendRequest.AcceptDate.Value })))
                     {
+                        // send notification
+                        _notice.SendNotification(friendRequest.SenderId, RecipientType.company, BCModel.NotificationType.ConnectionAccepted, friendRequest.RecipientId, BCModel.EntityType.Company);
+
                         response = request.CreateResponse(HttpStatusCode.OK);
                     }
                     else
@@ -126,12 +129,11 @@ namespace BCWeb.Api
             ContactRequest existingRequest = _service.GetOpenNetworkRequest(recipientId, senderId);
             ContactConnection connection = _service.GetNetworkConnection(senderId, recipientId);
             BlackList blacklistThisSide = _service.GetBlackListItem(senderId, recipientId);
-            BlackList blackListThatSide = _service.GetBlackListItem(recipientId, senderId);
 
             // if either company has blocked the other
-            if (blacklistThisSide != null || blackListThatSide != null)
+            if (blacklistThisSide != null)
             {
-                response = request.CreateResponse(HttpStatusCode.Conflict, "blocked company");
+                response = request.CreateResponse(HttpStatusCode.Conflict, "must de-blacklist company first before sending a contact request");
                 return response;
             }
 
@@ -162,7 +164,6 @@ namespace BCWeb.Api
 
             if (_service.SendNetworkRequest(friendRequest))
             {
-                _notice.SendNotification(friendRequest.RecipientId, RecipientType.company, BCModel.NotificationType.RequestToConnect, friendRequest.RecipientId, BCModel.EntityType.Company);
                 response = request.CreateResponse(HttpStatusCode.Created, friendRequest);
             }
             else
@@ -171,6 +172,27 @@ namespace BCWeb.Api
             }
 
             return response;
+        }
+
+        [ValidateHttpAntiForgeryToken]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int recipientId)
+        {
+            int senderId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
+            ContactRequest pendingInvite = _service.GetOpenNetworkRequest(recipientId, senderId);
+
+            if (pendingInvite.AcceptDate.HasValue || pendingInvite.DeclineDate.HasValue)
+            {
+                return request.CreateResponse(HttpStatusCode.NoContent, "invite has already been responded to. cannot delete");
+            }
+
+            if (_service.CancelNetworkRequest(pendingInvite))
+            {
+                return request.CreateResponse(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                return request.CreateResponse(HttpStatusCode.InternalServerError, _service.ValidationDic);
+            }
         }
     }
 }

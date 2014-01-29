@@ -15,7 +15,14 @@
                         {
                             params: {
                                 query: scope.queryString,
-                                type: ['GeneralContractor', 'SubContractor', 'Architect', 'MaterialsVendor', 'MaterialsMfg']
+                                type: ['GeneralContractor', 'SubContractor', 'Architect', 'MaterialsVendor', 'MaterialsMfg'],
+                                city: "",
+                                state: "",
+                                postal: "",
+                                distance: "",
+                                scopeId: "",
+                                offset: 0,
+                                records: 0
                             }
                         })
                         .success(function (result) {

@@ -76,7 +76,7 @@ namespace BCWeb.Models.Contacts.Repository
 
         public void SaveChanges()
         {
-            SaveChanges();
+            _context.SaveChanges();
         }
 
 
@@ -105,6 +105,12 @@ namespace BCWeb.Models.Contacts.Repository
         public BlackList FindBlackList(params object[] key)
         {
             return _blackLists.Find(key);
+        }
+
+
+        public void DeleteContactRequest(ContactRequest openInvite)
+        {
+            _reqs.Remove(openInvite);
         }
     }
 }

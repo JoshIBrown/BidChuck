@@ -11,9 +11,10 @@ namespace BCWeb.Models.Contacts.Repository
     public interface IContactRepository
     {
         void AddNetworkConnection(ContactConnection entity);
+        void DeleteNetworkConnection(ContactConnection entity);
         void AddNetworkRequest(ContactRequest entity);
         void UpdateNetworkRequest(ContactRequest entity);
-        void DeleteNetworkConnection(ContactConnection entity);
+        void DeleteContactRequest(ContactRequest openInvite);
         void AddBlackList(BlackList entity);
         void DeleteBlackList(BlackList entity);
         ContactConnection FindNetworkConnection(params object[] key);
@@ -29,5 +30,7 @@ namespace BCWeb.Models.Contacts.Repository
 
         BlackList FindBlackList(params object[] key);
         IQueryable<BlackList> QueryBlackList();
+
+        
     }
 }

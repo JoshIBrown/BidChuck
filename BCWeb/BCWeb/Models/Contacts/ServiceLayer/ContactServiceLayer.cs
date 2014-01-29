@@ -23,10 +23,19 @@ namespace BCWeb.Models.Contacts.ServiceLayer
         }
 
 
-        private bool validateRequest(ContactRequest request)
+        private bool validateNewRequest(ContactRequest request)
         {
             bool valid = true;
             ValidationDic.Clear();
+
+            //
+            var blacklist = _repo.QueryBlackList().Where(b => b.CompanyId == request.SenderId && b.BlackListedCompanyId == request.RecipientId).FirstOrDefault();
+
+            if (blacklist != null)
+            {
+                valid = false;
+                ValidationDic.Add("Blacklist", "Company is Blacklisted");
+            }
 
             // get requests sent by company a to company b that have not been responded to yet
             int openRequests = _repo.QueryContactRequests()
@@ -60,7 +69,7 @@ namespace BCWeb.Models.Contacts.ServiceLayer
         {
             try
             {
-                if (validateRequest(request))
+                if (validateNewRequest(request))
                 {
                     _repo.AddNetworkRequest(request);
                     _repo.SaveChanges();
@@ -79,15 +88,35 @@ namespace BCWeb.Models.Contacts.ServiceLayer
             }
         }
 
+        private bool validateExistingRequest(ContactRequest request)
+        {
+            bool valid = true;
+
+            ContactRequest openReq = _repo.FindNetworkRequest(request.Id);
+
+            if (openReq.AcceptDate.HasValue || openReq.DeclineDate.HasValue)
+            {
+                valid = false;
+                ValidationDic.Add("Request", "this request has already been responded to");
+            }
+
+            return valid;
+        }
 
         public bool UpdateNetworkRequest(ContactRequest request)
         {
             try
             {
-                _repo.UpdateNetworkRequest(request);
-                _repo.SaveChanges();
-
-                return true;
+                if (validateExistingRequest(request))
+                {
+                    _repo.UpdateNetworkRequest(request);
+                    _repo.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {
@@ -113,7 +142,7 @@ namespace BCWeb.Models.Contacts.ServiceLayer
             return valid;
         }
 
-        public bool CreateNetworkConnection(BCModel.SocialNetwork.ContactConnection connection)
+        public bool AddNetworkConnection(BCModel.SocialNetwork.ContactConnection connection)
         {
             try
             {
@@ -138,27 +167,14 @@ namespace BCWeb.Models.Contacts.ServiceLayer
             }
         }
 
-        public bool DeleteNetworkConnection(int companyA, int companyB)
+        public bool RemoveNetworkConnection(ContactConnection connection)
         {
             try
             {
-                ContactConnection connection = _repo.FindNetworkConnection(companyA, companyB);
+                _repo.DeleteNetworkConnection(connection);
+                _repo.SaveChanges();
+                return true;
 
-                if (connection == null)
-                    connection = _repo.FindNetworkConnection(companyB, companyA);
-
-                if (connection == null)
-                {
-                    ValidationDic.Clear();
-                    ValidationDic.Add("Connection", "No connection to delete");
-                    return false;
-                }
-                else
-                {
-                    _repo.DeleteNetworkConnection(connection);
-                    _repo.SaveChanges();
-                    return true;
-                }
             }
             catch (Exception ex)
             {
@@ -215,33 +231,84 @@ namespace BCWeb.Models.Contacts.ServiceLayer
             private set;
         }
 
-
         public ContactRequest GetOpenNetworkRequest(int recipientId, int senderId)
         {
             return _repo.QueryContactRequests().Where(r => r.RecipientId == recipientId && r.SenderId == senderId && !r.AcceptDate.HasValue && !r.DeclineDate.HasValue).FirstOrDefault();
         }
 
-
         public BlackList GetBlackListItem(int senderId, int recipientId)
         {
-            _repo.QueryBlackList();
-            throw new NotImplementedException();
+            return _repo.QueryBlackList().Where(b => b.CompanyId == senderId && b.BlackListedCompanyId == recipientId).SingleOrDefault();
         }
 
-
-        public bool BlackListCompany(int companyId, int companyToBlockId)
+        private bool validateBlackList(BlackList entity)
         {
-            throw new NotImplementedException();
+            bool valid = true;
+            ValidationDic.Clear();
+
+
+            var results = _repo.QueryBlackList().Where(b => b.BlackListedCompanyId == entity.BlackListedCompanyId && b.CompanyId == b.CompanyId);
+
+            if (results != null && results.Count() > 0)
+            {
+                ValidationDic.Add("BlackListedCompanyId", "company is already blacklisted");
+                valid = false;
+            }
+
+            return valid;
         }
 
-        public bool UnblackListCompany(int companyId, int blockedCompanyId)
+        public bool BlackListCompany(BlackList entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (validateBlackList(entity))
+                {
+                    _repo.AddBlackList(entity);
+                    _repo.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
+        }
+
+        public bool UnblackListCompany(BlackList entity)
+        {
+            try
+            {
+                if (_repo.QueryBlackList().Contains(entity))
+                {
+                    _repo.DeleteBlackList(entity);
+                    _repo.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    ValidationDic.Clear();
+                    ValidationDic.Add("Entity", "nothing to delete");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
         }
 
         public IEnumerable<BlackList> GetBlackListForCompany(int companyId)
         {
-            throw new NotImplementedException();
+            return _repo.QueryBlackList().Where(b => b.CompanyId == companyId).AsEnumerable();
         }
 
         public ConnectionStatus GetConnectionStatus(int currentCompany, int queriedCompany)
@@ -278,6 +345,29 @@ namespace BCWeb.Models.Contacts.ServiceLayer
                 return ConnectionStatus.Self;
 
             return ConnectionStatus.NotConnected;
+        }
+
+        public bool CancelNetworkRequest(ContactRequest openInvite)
+        {
+            try
+            {
+                if (validateExistingRequest(openInvite))
+                {
+                    _repo.DeleteContactRequest(openInvite);
+                    _repo.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ValidationDic.Clear();
+                ValidationDic.Add("Exception", ex.Message);
+                return false;
+            }
         }
     }
 }

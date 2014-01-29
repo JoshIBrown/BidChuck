@@ -13,6 +13,7 @@ namespace BCWeb.Models.Notifications.Repository
         private DbSet<Notification> _notes;
         private DbSet<NotificationTemplate> _templates;
         private DbSet<UserProfile> _users;
+        private DbSet<CompanyProfile> _companies;
         private DbSet<BCModel.Projects.Project> _projects;
         private DbSet<Invitation> _invites;
         private DbSet<BidPackage> _bidPackages;
@@ -25,6 +26,7 @@ namespace BCWeb.Models.Notifications.Repository
             _projects = _context.Projects;
             _invites = _context.Invitations;
             _bidPackages = _context.BidPackages;
+            _companies = _context.Companies;
         }
 
         public void Create(BCModel.Notification entity)
@@ -89,6 +91,12 @@ namespace BCWeb.Models.Notifications.Repository
         public BidPackage FindBidPackage(int bidPackageId)
         {
             return _bidPackages.Find(bidPackageId);
+        }
+
+
+        public CompanyProfile GetCompanyProfile(int id)
+        {
+            return _companies.Find(id);
         }
     }
 }
