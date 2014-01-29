@@ -232,9 +232,9 @@ namespace BCWeb.Models.Contacts.ServiceLayer
             return _repo.QueryContactRequests().Where(r => r.RecipientId == recipientId && r.SenderId == senderId && !r.AcceptDate.HasValue && !r.DeclineDate.HasValue).FirstOrDefault();
         }
 
-        public BlackList GetBlackListItem(int senderId, int recipientId)
+        public BlackList GetBlackListItem(int companyId, int blackListedCompanyId)
         {
-            return _repo.QueryBlackList().Where(b => b.CompanyId == senderId && b.BlackListedCompanyId == recipientId).SingleOrDefault();
+            return _repo.QueryBlackList().Where(b => b.CompanyId == companyId && b.BlackListedCompanyId == blackListedCompanyId).SingleOrDefault();
         }
 
         private bool validateBlackList(BlackList entity)
@@ -281,7 +281,7 @@ namespace BCWeb.Models.Contacts.ServiceLayer
         {
             try
             {
-                if (_repo.QueryBlackList().Contains(entity))
+                if (_repo.FindBlackList(entity.CompanyId, entity.BlackListedCompanyId) != null)
                 {
                     _repo.DeleteBlackList(entity);
                     _repo.SaveChanges();

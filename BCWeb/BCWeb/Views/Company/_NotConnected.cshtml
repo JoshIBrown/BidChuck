@@ -2,8 +2,6 @@
     <div class="large-2 columns">
         @Html.AntiForgeryToken()
         <input type="button" class="medium button expand" value="Add Contact" ng-click="sendContactRequest()" />
+        <a href="#" ng-click="addToBlackList()">Blacklist</a>
     </div>
 </div>
-@section scripts{
-
-}

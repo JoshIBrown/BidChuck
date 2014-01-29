@@ -126,7 +126,7 @@ function ContactButtonDirective(http, compile) {
             var token = angular.element('input[name=__RequestVerificationToken]').val();
 
             $http.post('/api/BlackList/', null, {
-                params: { companyToBlackList: $scope.companyId },
+                params: { companyToBlackList: $scope.companyId, note: '' },
                 xsrfHeaderName: "X-XSRF-Token",
                 xsrfCookieName: "__RequestVerificationToken",
                 headers: { "X-XSRF-Token": token, "X-Requested-With": "XMLHttpRequest" }

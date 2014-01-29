@@ -30,7 +30,7 @@ namespace BCWeb.Models.Contacts.ServiceLayer
 
         ContactRequest GetOpenNetworkRequest(int recipientId, int senderId);
 
-        BlackList GetBlackListItem(int companyId, int blockedCompanyId);
+        BlackList GetBlackListItem(int companyId, int blackListedCompanyId);
         IEnumerable<BlackList> GetBlackListForCompany(int companyId);
         ConnectionStatus GetConnectionStatus(int currentCompany, int queriedCompany);
 
