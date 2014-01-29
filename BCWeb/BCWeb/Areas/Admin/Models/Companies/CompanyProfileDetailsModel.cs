@@ -19,6 +19,7 @@ namespace BCWeb.Areas.Admin.Models.Companies
         public string BusinessType { get; set; }
         public string OperatingDistance { get; set; }
         public string Published { get; set; }
+        public string Subscribed { get; set; }
         public Dictionary<int, string> Users { get; set; }
 
     }

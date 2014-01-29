@@ -412,6 +412,7 @@ namespace BCWeb.Api
                     Id = s.Id,
                     PostalCode = s.PostalCode == null ? "not set" : s.PostalCode,
                     Published = s.Published,
+                    Subscribed = s.SubscriptionStatus.ToString(),
                     State = s.State == null ? "not set" : s.State.Abbr,
                     Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Count() == 0 ? "not set" : s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
                 })
@@ -429,6 +430,7 @@ namespace BCWeb.Api
                     Id = s.Id,
                     PostalCode = s.PostalCode,
                     Published = s.Published,
+                    Subscribed = s.SubscriptionStatus.ToString(),
                     State = s.State.Abbr,
                     Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Count() == 0 ? "not set" : s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
                 })

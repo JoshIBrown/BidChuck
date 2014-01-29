@@ -57,7 +57,8 @@ namespace BCWeb.Areas.Admin.Controllers
                     PostalCode = viewModel.PostalCode,
                     Published = viewModel.Published,
                     StateId = viewModel.StateId,
-                    Website = viewModel.Website
+                    Website = viewModel.Website,
+                    SubscriptionStatus = viewModel.Subscribed ? SubscriptionStatus.Paid : SubscriptionStatus.Free
                 };
 
                 if (_service.Create(toAdd))
@@ -93,7 +94,8 @@ namespace BCWeb.Areas.Admin.Controllers
                 PostalCode = company.PostalCode,
                 Published = company.Published,
                 StateId = company.StateId.HasValue ? company.StateId.Value : 0,
-                Website = company.Website
+                Website = company.Website,
+                Subscribed = company.SubscriptionStatus == SubscriptionStatus.Free ? false : true
             };
 
             rePopViewModel(viewModel);
@@ -118,6 +120,8 @@ namespace BCWeb.Areas.Admin.Controllers
                 toUpdate.Published = viewModel.Published;
                 toUpdate.StateId = viewModel.StateId;
                 toUpdate.Website = viewModel.Website;
+                toUpdate.SubscriptionStatus = viewModel.Subscribed ? SubscriptionStatus.Paid : SubscriptionStatus.Free;
+
                 if (_service.Update(toUpdate))
                 {
                     return RedirectToAction("Index");
@@ -149,7 +153,8 @@ namespace BCWeb.Areas.Admin.Controllers
                 Published = company.Published ? "Yes" : "No",
                 State = company.StateId.HasValue ? company.State.Abbr : "N/A",
                 Website = company.Website,
-                Users = company.Users.ToDictionary(x => x.UserId, x => x.Email)
+                Users = company.Users.ToDictionary(x => x.UserId, x => x.Email),
+                Subscribed = company.SubscriptionStatus.ToString()
             };
 
             return View(viewModel);
@@ -168,7 +173,7 @@ namespace BCWeb.Areas.Admin.Controllers
         {
             GeoLocator locator = new GeoLocator();
             CompanyProfile company;
-            
+
             try
             {
                 for (int i = 0; i < companyId.Length; i++)

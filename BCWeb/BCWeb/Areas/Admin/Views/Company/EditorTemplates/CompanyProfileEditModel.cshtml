@@ -74,6 +74,14 @@
 </div>
 
 <div class="editor-label">
+    @Html.LabelFor(model => model.Subscribed)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Subscribed)
+    @Html.ValidationMessageFor(model => model.Subscribed)
+</div>
+
+<div class="editor-label">
     @Html.LabelFor(model => model.OperatingDistance)
 </div>
 <div class="editor-field">

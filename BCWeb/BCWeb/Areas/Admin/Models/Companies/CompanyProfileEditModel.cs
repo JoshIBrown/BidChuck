@@ -28,7 +28,7 @@ namespace BCWeb.Areas.Admin.Models.Companies
 
         public string Phone { get; set; }
 
-
+        public bool Subscribed { get; set; }
 
         public bool Published { get; set; }
 

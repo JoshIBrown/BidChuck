@@ -337,6 +337,7 @@
     <Compile Include="Models\Contacts\ConnectionStatus.cs" />
     <Compile Include="Models\Company\ViewModel\CompanyProfileViewModel.cs" />
     <Compile Include="Models\Company\ViewModel\CompanySearchResult.cs" />
+    <Compile Include="Models\Contacts\ViewModel\ContactItem.cs" />
     <Compile Include="Models\Contacts\ViewModel\ContactRequestItem.cs" />
     <Compile Include="Models\GenericViewModel\JQueryPostResult.cs" />
     <Compile Include="Models\IGenericRepository.cs" />

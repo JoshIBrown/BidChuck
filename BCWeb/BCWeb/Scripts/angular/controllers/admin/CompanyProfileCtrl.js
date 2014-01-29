@@ -33,7 +33,8 @@
             { "mDataProp": "Manager", "aTargets": [3] },
             { "mDataProp": "State", "aTargets": [4] },
             { "mDataProp": "PostalCode", "aTargets": [5] },
-            { "mDataProp": "Published", "aTargets": [6] }
+            { "mDataProp": "Subscribed", "aTargets": [6] },
+            { "mDataProp": "Published", "aTargets": [7] }
         ];
 
         $scope.Add = function () {

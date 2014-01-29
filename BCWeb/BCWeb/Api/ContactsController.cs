@@ -26,6 +26,14 @@ namespace BCWeb.Api
             _notice = notice;
         }
 
+
+        public HttpResponseMessage Get(HttpRequestMessage request, int companyId)
+        {
+            var contacts = _service.GetCompaniesConnections(companyId);
+
+            return request.CreateResponse(HttpStatusCode.NotImplemented);
+        }
+
         [ValidateHttpAntiForgeryToken]
         public HttpResponseMessage Delete(HttpRequestMessage request, int companyToDeleteId)
         {
