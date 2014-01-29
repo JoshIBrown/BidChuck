@@ -107,17 +107,10 @@ namespace BCWeb.Models.Contacts.ServiceLayer
         {
             try
             {
+                _repo.UpdateNetworkRequest(request);
+                _repo.SaveChanges();
+                return true;
 
-                if (validateExistingRequest(_repo.FindNetworkRequest(request.Id)))
-                {
-                    _repo.UpdateNetworkRequest(request);
-                    _repo.SaveChanges();
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
             }
             catch (Exception ex)
             {
