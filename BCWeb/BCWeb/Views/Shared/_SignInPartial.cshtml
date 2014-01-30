@@ -11,6 +11,7 @@
         <ul class="dropdown">
             <li>@Html.RouteLink("Manage Account", "Default", new { controller = "Account", action = "Manage" })</li>
             <li><a href="/Company/Profile">View Profile</a></li>
+            <li><a href="/Company/Contacts">View Contacts</a></li>
             <li class="has-form">
                 @using (Html.BeginRouteForm("Default", new { controller = "Account", action = "SignOut" }, FormMethod.Post, new { id = "SignOutForm", @class = "" }))
                 {

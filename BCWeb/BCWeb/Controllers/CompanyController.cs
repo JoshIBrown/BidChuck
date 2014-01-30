@@ -43,6 +43,9 @@ namespace BCWeb.Controllers
 
             CompanyProfile company = _service.Get(id);
 
+            if (company == null)
+                throw new HttpException(404, "company not found");
+
             CompanyProfileViewModel viewModel = new CompanyProfileViewModel
             {
                 Address1 = company.Address1,
@@ -62,13 +65,26 @@ namespace BCWeb.Controllers
 
 
 
-        public ActionResult Connections(int id)
+        public ActionResult Contacts(int? id)
         {
-            // exclude black listed companies from returned data
-            return View();
+            int currentCompanyId = _service.GetUserProfile(_security.GetUserId(User.Identity.Name)).CompanyId;
+
+            if (!id.HasValue)
+            {
+                return RedirectToAction("Contacts", new { id = currentCompanyId });
+            }
+
+            CompanyProfile company = _service.Get(id);
+
+            if (company == null)
+                throw new HttpException(404, "company not found");
+
+            CompanyContactsViewModel viewModel = new CompanyContactsViewModel { CompanyId = id.Value };
+
+            return View(viewModel);
         }
 
-        [OutputCache(NoStore=true,VaryByParam="*",Duration=0)]
+        [OutputCache(NoStore = true, VaryByParam = "*", Duration = 0)]
         public PartialViewResult Connected()
         {
             return PartialView("_Connected");

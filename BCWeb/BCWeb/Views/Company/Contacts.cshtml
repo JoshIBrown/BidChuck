@@ -1,0 +1,24 @@
+﻿@model BCWeb.Models.Company.ViewModel.CompanyContactsViewModel
+@{
+    ViewBag.Title = "Contacts";
+    Layout = "~/Views/Shared/_Foundation.cshtml";
+}
+@section scripts{
+    @Scripts.Render("~/bundles/companycontacts")
+}
+<div class="row">
+    <div class="large-4 columns">
+        <h2>Contacts</h2>
+    </div>
+</div>
+
+<div ng-controller="ContactsCtrl">
+    @Html.HiddenFor(m => m.CompanyId)
+    <div class="row">
+        <div class="large-12 columns">
+            <div ng-repeat="c in contacts">
+                <a href="/Company/Profile/{{c.CompanyId}}">{{c.CompanyName}}</a>
+            </div>
+        </div>
+    </div>
+</div>

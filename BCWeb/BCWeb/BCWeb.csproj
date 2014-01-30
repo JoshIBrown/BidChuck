@@ -250,6 +250,7 @@
     <Compile Include="Areas\Admin\Models\Users\UserProfileListItem.cs" />
     <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
     <Compile Include="Areas\Contacts\Controllers\RequestsController.cs" />
+    <Compile Include="Models\Company\ViewModel\CompanyContactsViewModel.cs" />
     <Compile Include="Models\Contacts\Repository\IContactRepository.cs" />
     <Compile Include="Models\Contacts\Repository\ContactRepository.cs" />
     <Compile Include="Models\Contacts\ServiceLayer\IContactServiceLayer.cs" />
@@ -503,6 +504,7 @@
     <Content Include="Scripts\angular\controllers\admin\CompanyProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\admin\ProjectCtrl.js" />
     <Content Include="Scripts\angular\controllers\ContactRequestsCtrl.js" />
+    <Content Include="Scripts\angular\controllers\CompanyContactsCtrl.js" />
     <Content Include="Scripts\angular\controllers\NotificationCtrl.js" />
     <Content Include="Scripts\angular\controllers\ProfileCtrl.js" />
     <Content Include="Scripts\angular\controllers\SearchCtrl.js" />
@@ -1065,6 +1067,7 @@
     <Content Include="Views\Company\_Self.cshtml" />
     <Content Include="Views\Company\_BlackListed.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
+    <Content Include="Views\Company\Contacts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />

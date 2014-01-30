@@ -199,6 +199,11 @@ namespace BCWeb
                 "~/Scripts/angular/angular.js",
                 "~/Scripts/angular/directives/bcweb.angular.ContactButton.js",
                 "~/Scripts/angular/controllers/ProfileCtrl.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/companycontacts").Include(
+                "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/controllers/CompanyContactsCtrl.js"
+                ));
             #endregion
 
             #region contact requests
