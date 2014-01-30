@@ -1064,6 +1064,7 @@
     <Content Include="Views\Company\_PendingRequest.cshtml" />
     <Content Include="Views\Company\_Self.cshtml" />
     <Content Include="Views\Company\_BlackListed.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />

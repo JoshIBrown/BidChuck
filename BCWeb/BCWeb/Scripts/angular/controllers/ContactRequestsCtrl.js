@@ -1,7 +1,7 @@
 ﻿angular.element(document).ready(function () {
     "use strict";
 
-    var crApp = angular.module('ContactRequestsApp', ['bcContactButton']);
+    var crApp = angular.module('ContactRequestsApp', []);
 
     function ContactRequestsCtrl(scope, http) {
         
