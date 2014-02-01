@@ -14,15 +14,8 @@
                     http.get('/api/Companies',
                         {
                             params: {
-                                query: scope.queryString,
-                                type: ['GeneralContractor', 'SubContractor', 'Architect', 'MaterialsVendor', 'MaterialsMfg'],
-                                city: "",
-                                state: "",
-                                postal: "",
-                                distance: "",
-                                scopeId: "",
-                                offset: 0,
-                                records: 0
+                                query: scope.queryString
+                                
                             }
                         })
                         .success(function (result) {

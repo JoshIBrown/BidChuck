@@ -19,6 +19,7 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         private DbSet<BlackList> _blackLists;
         private DbSet<BCModel.Projects.Project> _projects;
         private DbSet<BidPackage> _bidPackages;
+        private DbSet<CompanyXScope> _companyScopes;
 
         public CompanyProfileRepository()
         {
@@ -29,6 +30,7 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
             _blackLists = _context.BlackLists;
             _projects = _context.Projects;
             _bidPackages = _context.BidPackages;
+            _companyScopes = _context.CompanyScopes;
         }
 
         public void Create(BCModel.CompanyProfile entity)
@@ -59,7 +61,7 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
 
         public IQueryable<BCModel.CompanyProfile> Query()
         {
-            return _companies.Include(c => c.State).Include(c => c.Users);
+            return _companies.Include(c => c.State).Include(c => c.Users).Include(s => s.Scopes.Select(x => x.Scope));
         }
 
         public void Save()
@@ -116,6 +118,12 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         public BCModel.Projects.BidPackage FindBidPackage(int id)
         {
             return _bidPackages.Find(id);
+        }
+
+
+        public IQueryable<CompanyXScope> QueryCompanyScopes()
+        {
+            return _companyScopes.Include(s => s.Scope).Include(s => s.Company);
         }
     }
 }

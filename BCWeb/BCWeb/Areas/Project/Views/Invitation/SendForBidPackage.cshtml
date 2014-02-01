@@ -11,7 +11,7 @@
             <li>@Html.RouteLink("Projects", "Default", new { controller = "Project", action = "Index" })</li>
             <li>@Html.RouteLink(Model.ProjectName, "Default", new { controller = "Project", action = "Details", id = Model.ProjectId })</li>
             <li>@Html.RouteLink("Bid Packages", "Project_default", new { controller = "BidPackage", action = "Index", projectId = Model.ProjectId })</li>
-            <li>@Html.RouteLink(@Model.BidPackageTitle, "Project_default", new { controller = "BidPackage", action = "Index", id = Model.BidPackageId })</li>
+            <li>@Html.RouteLink(@Model.BidPackageTitle, "Project_default", new { controller = "BidPackage", action = "Details", id = Model.BidPackageId })</li>
             <li class="current"><a href="#">Send Invitations</a></li>
         </ul>
     </div>
@@ -60,7 +60,7 @@
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.BidPackageId)
                 <ul class="no-bullet">
-                    <li ng-repeat="sc in companies | scopeMatchFilter : scopeMin" class="panel">
+                    <li ng-repeat="sc in companies " class="panel">
                         <input type="checkbox" id="{{getFieldId($index)}}" name="{{getFieldName($index)}}" value="{{sc.CompanyId}}" />
                         {{sc.CompanyName}}
                     -- {{sc.BusinessType}}

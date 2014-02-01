@@ -15,7 +15,7 @@ namespace BCWeb.Areas.Account.Models.Company.Repository
         IQueryable<State> QueryStates();
         IQueryable<UserProfile> QueryUserProfiles();
         IQueryable<ContactConnection> QueryNetworkConnections();
-
+        IQueryable<CompanyXScope> QueryCompanyScopes();
         UserProfile GetUserProfile(int id);
 
         IQueryable<ContactRequest> QueryConnectionRequests();

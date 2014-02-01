@@ -9,10 +9,13 @@
         $scope.bpId = angular.element('#BidPackageId').val();
 
 
-        $http.get('/api/Invitation/GetCompaniesToInvite/?bidPackageId=' + $scope.bpId)
-                .success(function (result) {
-                    $scope.companies = result;
-                });
+        $http.get('/api/Companies/Search/BidPackageIdForScopes/' + $scope.bpId, {
+            params: {
+                type: ['SubContractor', 'MaterialsVendor', 'MaterialsMfg']
+            }
+        }).success(function (result) {
+            $scope.companies = result;
+        });
 
         $scope.getFieldName = function (i) {
             return "CompanyId[" + i + "]";
