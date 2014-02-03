@@ -11,7 +11,7 @@
             // build array of selected scope id's
             var selectedScopes = [];
 
-            angular.forEach(scope.foo, function (value, key) {
+            angular.forEach(scope.selectedScopes, function (value, key) {
                 if (value.Checked) {
                     selectedScopes.push(value.Id)
                 }
