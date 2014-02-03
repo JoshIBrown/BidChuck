@@ -7,6 +7,7 @@ namespace BCWeb
         public static void Register(HttpConfiguration config)
         {
 
+
             config.Routes.MapHttpRoute(
                          name: "CompaniesNearProject",
                          routeTemplate: "api/Companies/Search/ProjectIdForLocation/{projectIdForLocation}",

@@ -37,81 +37,11 @@ namespace BCWeb.Api
                 CompanyName = company.CompanyName,
                 LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = company.Id }),
                 BusinessType = company.BusinessType.ToDescription(),
+                Area = company.City != null ? company.City + ", " + company.State.Abbr : "",
                 ScopesOfWork = company.Scopes == null || company.Scopes.Count == 0 ? default(Dictionary<int, string>) : company.Scopes.Where(c => c.Scope.Children == null || c.Scope.Children.Count == 0).Select(s => s.Scope).ToDictionary(s => s.Id, s => s.CsiNumber + " " + s.Description)
             };
             return result;
         }
-
-        //private IEnumerable<Scope> filterByDeepestLevelScopes(IEnumerable<CompanyXScope> scopes)
-        //{
-        //    var actualScopes = scopes.Select(s => s.Scope);
-
-        //    List<Scope> result = new List<Scope>();
-
-        //    foreach (var s in scopes)
-        //    {
-        //        if (s.Scope.Children == null || s.Scope.Children.Count() == 0)
-        //            result.Add(s.Scope);
-        //    }
-
-        //    return result;
-        //}
-
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]string query)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(query).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
-
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]BusinessType[] type)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(type).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
-
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]int[] scopeId)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(scopeId).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-
-        //}
-
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]BusinessType[] type, [FromUri]int[] scopeId)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(type, scopeId).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
-
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]string query, [FromUri]BusinessType[] type)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(query, type).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
-
-        public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]string query, [FromUri]BusinessType[] type, [FromUri]int[] scopeId)
-        {
-            if ((type == null || type.Length == 0) && (scopeId == null || scopeId.Length == 0))
-            {
-                var companies = _service.SearchCompanyProfiles(query).Select(c => companySearchResultItemMapper(c)).ToArray();
-                return request.CreateResponse(HttpStatusCode.OK, companies);
-            }
-            else if (type == null || type.Length == 0)
-            {
-                var companies = _service.SearchCompanyProfiles(query, scopeId).Select(c => companySearchResultItemMapper(c)).ToArray();
-                return request.CreateResponse(HttpStatusCode.OK, companies);
-            }
-            else if (scopeId == null || scopeId.Length == 0)
-            {
-                var companies = _service.SearchCompanyProfiles(query, type).Select(c => companySearchResultItemMapper(c)).ToArray();
-                return request.CreateResponse(HttpStatusCode.OK, companies);
-            }
-            else
-            {
-                var companies = _service.SearchCompanyProfiles(query, type, scopeId).Select(c => companySearchResultItemMapper(c)).ToArray();
-                return request.CreateResponse(HttpStatusCode.OK, companies);
-            }
-        }
-
 
         public HttpResponseMessage GetForProject(HttpRequestMessage request, [FromUri]BusinessType[] type, [FromUri]int projectIdForLocation)
         {
@@ -143,347 +73,122 @@ namespace BCWeb.Api
 
         }
 
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]string city, [FromUri]string state, [FromUri]string postal, [FromUri]int distance)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(city, state, postal, distance).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
+        public HttpResponseMessage Get(
+            HttpRequestMessage request,
+            [FromUri]string query,
+            [FromUri]BusinessType[] type,
+            [FromUri]string city,
+            [FromUri]string state,
+            [FromUri]string postal,
+            [FromUri]int? distance,
+            [FromUri]int[] scopeId)
+        {
+            CompanySearchResultItem[] result = new CompanySearchResultItem[0];
+            List<CompanyProfile> companies = new List<CompanyProfile>();
 
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]BusinessType[] type, [FromUri]string city, [FromUri]string state, [FromUri]string postal, [FromUri]int distance)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(type, city, state, postal, distance).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
 
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]string query, [FromUri]string city, [FromUri]string state, [FromUri]string postal, [FromUri]int distance)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(query, city, state, postal, distance).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
+            if ((type != null && type.Length > 0) &&
+                distance.HasValue &&
+                (city != null || state != null || postal != null) &&
+                (scopeId != null && scopeId.Length > 0))
+            {
+                companies = _service.SearchCompanyProfiles(
+                    query == null ? "" : query,
+                    type,
+                    city == null ? "" : city,
+                    state == null ? "" : state,
+                    postal == null ? "" : postal,
+                    Convert.ToDouble(distance.Value),
+                    scopeId
+                    ).ToList();
+            }
+            else if ((type != null && type.Length > 0) &&
+               distance.HasValue &&
+               (city != null || state != null || postal != null) &&
+               (scopeId == null || scopeId.Length == 0))
+            {
+                companies = _service.SearchCompanyProfiles(
+                    query == null ? "" : query,
+                    type,
+                    city == null ? "" : city,
+                    state == null ? "" : state,
+                    postal == null ? "" : postal,
+                    Convert.ToDouble(distance.Value)
+                    ).ToList();
+            }
+            else if ((type == null || type.Length == 0) &&
+               distance.HasValue &&
+               (city != null || state != null || postal != null) &&
+               (scopeId != null && scopeId.Length > 0))
+            {
+                companies = _service.SearchCompanyProfiles(
+                    query == null ? "" : query,
+                    city == null ? "" : city,
+                    state == null ? "" : state,
+                    postal == null ? "" : postal,
+                    Convert.ToDouble(distance.Value),
+                    scopeId
+                    ).ToList();
+            }
+            else if ((type == null || type.Length == 0) &&
+              distance.HasValue &&
+              (city != null || state != null || postal != null) &&
+              (scopeId == null || scopeId.Length == 0))
+            {
+                companies = _service.SearchCompanyProfiles(
+                    query == null ? "" : query,
+                    city == null ? "" : city,
+                    state == null ? "" : state,
+                    postal == null ? "" : postal,
+                    Convert.ToDouble(distance.Value)
+                    ).ToList();
+            }
+            else if ((type != null && type.Length > 0) &&
+                       !distance.HasValue &&
+                       (scopeId != null && scopeId.Length > 0))
+            {
+                companies = _service.SearchCompanyProfiles(
+                    query == null ? "" : query,
+                    type,
+                    scopeId
+                    ).ToList();
+            }
+            else if ((type != null && type.Length > 0) &&
+                       !distance.HasValue &&
+                       (scopeId == null || scopeId.Length == 0))
+            {
+                companies = _service.SearchCompanyProfiles(
+                    query == null ? "" : query,
+                    type
+                    ).ToList();
+            }
+            else if ((type == null || type.Length == 0) &&
+                           !distance.HasValue &&
+                           (scopeId != null && scopeId.Length > 0))
+            {
+                companies = _service.SearchCompanyProfiles(
+                    query == null ? "" : query,
+                    scopeId
+                    ).ToList();
+            }
+            else
+            {
+                companies = _service.SearchCompanyProfiles(query == null ? "" : query).ToList();
+            }
 
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]string query, [FromUri]BusinessType[] type, [FromUri]string city, [FromUri]string state, [FromUri]string postal, [FromUri]int distance)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(query, type, city, state, postal, distance).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
 
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]string city, [FromUri]string state, [FromUri]string postal, [FromUri]int distance, [FromUri]int[] scopeId)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(city, state, postal, distance, scopeId).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
+            result = companies.Select(s => new CompanySearchResultItem
+                {
+                    CompanyId = s.Id,
+                    CompanyName = s.CompanyName,
+                    LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = s.Id }),
+                    BusinessType = s.BusinessType.ToDescription(),
+                    ScopesOfWork = s.Scopes.Select(c => c.Scope).ToDictionary(x => x.Id, x => x.CsiNumber + " " + x.Description)
+                })
+                .ToArray();
 
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]BusinessType[] type, [FromUri]string city, [FromUri]string state, [FromUri]string postal, [FromUri]int distance, [FromUri]int[] scopeId)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(type, city, state, postal, distance, scopeId).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
-
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]string query, [FromUri]string city, [FromUri]string state, [FromUri]string postal, [FromUri]int distance, [FromUri]int[] scopeId)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(query, city, state, postal, distance, scopeId).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
-
-        //public HttpResponseMessage Get(HttpRequestMessage request, [FromUri]string query, [FromUri]BusinessType[] type, [FromUri]string city, [FromUri]string state, [FromUri]string postal, [FromUri]int distance, [FromUri]int[] scopeId)
-        //{
-        //    var companies = _service.SearchCompanyProfiles(query, type, city, state, postal, distance, scopeId).Select(c => companySearchResultItemMapper(c)).ToArray();
-        //    return request.CreateResponse(HttpStatusCode.OK, companies);
-        //}
-
-        //public HttpResponseMessage Get(
-        //    HttpRequestMessage request,
-        //    [FromUri]string query,
-        //    [FromUri]BusinessType[] type,
-        //    [FromUri]string city,
-        //    [FromUri]string state,
-        //    [FromUri]string postal,
-        //    [FromUri]int? distance,
-        //    [FromUri]int[] scopeId,
-        //    [FromUri]int? projectIdForLocation,
-        //    [FromUri]int? bidPackageIdForScopes,
-        //    [FromUri]int offset,
-        //    [FromUri]int records)
-        //{
-        //    CompanySearchResultItem[] result = new CompanySearchResultItem[0];
-        //    List<CompanyProfile> companies = new List<CompanyProfile>();
-
-        //    if (projectIdForLocation.HasValue && (city != null || city != string.Empty || state != null || state != string.Empty || postal != null || state != string.Empty || distance.HasValue))
-        //    {
-        //        return request.CreateResponse(HttpStatusCode.BadRequest, "cannot use both project and other geo location data for search.  must pick one.  either project, or location fields (city,state,postal,distance)");
-        //    }
-
-        //    if (offset == null || offset < 0)
-        //    {
-        //        return request.CreateResponse(HttpStatusCode.BadRequest, "offset must be zero or larger");
-        //    }
-
-        //    if (records == null || offset < 0)
-        //    {
-        //        return request.CreateResponse(HttpStatusCode.BadRequest, "records must be zero or greater. use 0 to return all");
-        //    }
-
-        //// if just filtering by QUERY string
-        //if ((query != null && query != string.Empty) &&     // has query string ******
-        //    (type == null || type.Length == 0) &&           // no types
-        //    (city == null || city == string.Empty) &&       // no city
-        //    (postal == null || postal == string.Empty) &&   // no postal code
-        //    (state == null || state == string.Empty) &&     // no state
-        //    !distance.HasValue &&                           // no distance
-        //    (scopeId == null || scopeId.Length == 0) &&     // no scopes
-        //    !projectIdForLocation.HasValue &&               // no project
-        //    !bidPackageIdForScopes.HasValue)                // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(query).ToList();
-
-        //} // if just filtering by BUSINESS TYPE
-        //else if ((query == null || query == string.Empty) &&    // no query string
-        //    (type != null && type.Length > 0) &&                // has types *****
-        //    (city == null || city == string.Empty) &&           // no city
-        //    (postal == null || postal == string.Empty) &&       // no postal code
-        //    (state == null || state == string.Empty) &&         // no state
-        //    !distance.HasValue &&                               // no distance
-        //    (scopeId == null || scopeId.Length == 0) &&         // no scopes
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(type).ToList();
-
-        //}// if just filtering by SCOPES
-        //else if ((query == null || query == string.Empty) &&    // no query string
-        //    (type == null || type.Length == 0) &&               // no types
-        //    (city == null || city == string.Empty) &&           // no city
-        //    (postal == null || postal == string.Empty) &&       // no postal code
-        //    (state == null || state == string.Empty) &&         // no state
-        //    !distance.HasValue &&                               // no distance
-        //    (scopeId != null && scopeId.Length > 0) &&          // has scopes ******
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(scopeId).ToList();
-
-        //}// if just filtering by BUSINESS TYPE and SCOPES
-        //else if ((query == null || query == string.Empty) &&    // no query string
-        //    (type != null && type.Length > 0) &&                // has types *****
-        //    (city == null || city == string.Empty) &&           // no city
-        //    (postal == null || postal == string.Empty) &&       // no postal code
-        //    (state == null || state == string.Empty) &&         // no state
-        //    !distance.HasValue &&                               // no distance
-        //    (scopeId != null && scopeId.Length > 0) &&          // has scopes *****
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(type, scopeId).ToList();
-
-        //} // if just filtering by PROJECT for location
-        //else if ((query == null || query == string.Empty) &&     // no query string
-        //    (type == null || type.Length == 0) &&           // no types
-        //    (city == null || city == string.Empty) &&       // no city
-        //    (postal == null || postal == string.Empty) &&   // no postal code
-        //    (state == null || state == string.Empty) &&     // no state
-        //    !distance.HasValue &&                           // no distance
-        //    (scopeId == null || scopeId.Length == 0) &&     // no scopes
-        //    projectIdForLocation.HasValue &&                // has project ******
-        //    !bidPackageIdForScopes.HasValue)                // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(projectIdForLocation.Value, ProjectEntityType.project).ToList();
-
-        //}// if just filtering by BID PACKAGE (which includes project for location)
-        //else if ((query == null || query == string.Empty) &&    // no query string
-        //    (type == null || type.Length == 0) &&               // no types
-        //    (city == null || city == string.Empty) &&           // no city
-        //    (postal == null || postal == string.Empty) &&       // no postal code
-        //    (state == null || state == string.Empty) &&         // no state
-        //    !distance.HasValue &&                               // no distance
-        //    (scopeId == null || scopeId.Length == 0) &&         // no scopes
-        //    !projectIdForLocation.HasValue &&                   // no project 
-        //    bidPackageIdForScopes.HasValue)                     // has bid package ******
-        //{
-        //    companies = _service.SearchCompanyProfiles(bidPackageIdForScopes.Value, ProjectEntityType.bidPackage).ToList();
-
-        //}// if searching by QUERY string and BUSINESS TYPE
-        //else if ((query != null && query != string.Empty) &&    // has query string *****
-        //    (type != null && type.Length > 0) &&                // has business types ******
-        //    (city == null || city == string.Empty) &&           // no city
-        //    (postal == null || postal == string.Empty) &&       // no postal code
-        //    (state == null || state == string.Empty) &&         // no state
-        //    !distance.HasValue &&                               // no distance
-        //    (scopeId == null || scopeId.Length == 0) &&         // no scopes
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(query, type).ToList();
-
-        //}// if searching by QUERY string and BUSINESS TYPE and SCOPES
-        //else if ((query != null && query != string.Empty) &&    // has query string *******
-        //    (type != null && type.Length > 0) &&                // has business types ******
-        //    (city == null || city == string.Empty) &&           // no city
-        //    (postal == null || postal == string.Empty) &&       // no postal code
-        //    (state == null || state == string.Empty) &&         // no state
-        //    !distance.HasValue &&                               // no distance
-        //    (scopeId != null && scopeId.Length != 0) &&         // has scopes ******
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(query, type, scopeId).ToList();
-
-        //}// if searching by BUSINESS TYPE and PROJECT
-        //else if ((query == null || query == string.Empty) &&    // no query string
-        //    (type != null && type.Length > 0) &&                // has business types ******
-        //    (city == null || city == string.Empty) &&           // no city
-        //    (postal == null || postal == string.Empty) &&       // no postal code
-        //    (state == null || state == string.Empty) &&         // no state
-        //    !distance.HasValue &&                               // no distance
-        //    (scopeId == null || scopeId.Length == 0) &&         // no scopes
-        //    projectIdForLocation.HasValue &&                    // has project *****
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(type, projectIdForLocation.Value, ProjectEntityType.project).ToList();
-
-        //}// if searching by BUSINESS TYPE and BID PACKAGE (which includes project for location)
-        //else if ((query == null || query == string.Empty) &&    // no query string
-        //    (type != null && type.Length > 0) &&                // has business types  ********
-        //    (city == null || city == string.Empty) &&           // no city
-        //    (postal == null || postal == string.Empty) &&       // no postal code
-        //    (state == null || state == string.Empty) &&         // no state
-        //    !distance.HasValue &&                               // no distance
-        //    (scopeId == null || scopeId.Length == 0) &&         // no scopes
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    bidPackageIdForScopes.HasValue)                     // has bid package ********
-        //{
-        //    companies = _service.SearchCompanyProfiles(type, projectIdForLocation.Value, ProjectEntityType.bidPackage).ToList();
-
-        //}// if searching by ADDRESS and DISTANCE
-        //else if ((query == null || query == string.Empty) &&    // no query string
-        //    (type == null || type.Length == 0) &&               // no business types
-        //    ((city != null && city != string.Empty) ||          // has city ****
-        //    (postal != null && postal != string.Empty) ||       // has postal code ****
-        //    (state != null && state != string.Empty) ||         // has state ****
-        //    distance.HasValue) &&                               // has distance ****
-        //    (scopeId == null || scopeId.Length == 0) &&         // no scopes
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(city, state, postal, distance.Value).ToList();
-
-        //}// if searching by BUSINESS TYPE and ADDRESS and DISTANCE
-        //else if ((query == null || query == string.Empty) &&    // no query string
-        //    (type != null && type.Length > 0) &&                // has business types ****
-        //    ((city != null && city != string.Empty) ||          // has city ****
-        //    (postal != null && postal != string.Empty) ||       // has postal code ****
-        //    (state != null && state != string.Empty) ||         // has state **** 
-        //    distance.HasValue) &&                               // has distance *****
-        //    (scopeId == null || scopeId.Length == 0) &&         // no scopes
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(city, state, postal, distance.Value).ToList();
-
-        //}// if searching by QUERY and ADDRESS and DISTANCE
-        //else if ((query != null && query != string.Empty) &&    // has query string *****
-        //    (type == null || type.Length == 0) &&               // no business types
-        //    ((city != null && city != string.Empty) ||          // has city ****
-        //    (postal != null && postal != string.Empty) ||       // has postal code ****
-        //    (state != null && state != string.Empty) ||         // has state
-        //    distance.HasValue) &&                               // has distance
-        //    (scopeId == null || scopeId.Length == 0) &&         // no scopes
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(query, city, state, postal, distance.Value).ToList();
-
-        //}// if searching by QUERY and BUSINESS TYPE and ADDRESS and DISTANCE 
-        //else if ((query != null && query != string.Empty) &&    // has query string ****
-        //    (type != null && type.Length > 0) &&               // has business types ****
-        //    ((city != null && city != string.Empty) ||          // has city ****
-        //    (postal != null && postal != string.Empty) ||       // has postal code ****
-        //    (state != null && state != string.Empty) ||         // has state ****
-        //    distance.HasValue) &&                               // has distance ****
-        //    (scopeId == null || scopeId.Length == 0) &&         // no scopes
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(query, type, city, state, postal, distance.Value).ToList();
-
-        //}// if searching by ADDRESS and DISTANCE and SCOPES
-        //else if ((query == null || query == string.Empty) &&    // no query string 
-        //    (type == null || type.Length == 0) &&               // no business types
-        //    ((city != null && city != string.Empty) ||          // has city ****
-        //    (postal != null && postal != string.Empty) ||       // has postal code ****
-        //    (state != null && state != string.Empty) ||         // has state ****
-        //    distance.HasValue) &&                               // has distance ****
-        //    (scopeId != null && scopeId.Length > 0) &&          // has scopes *****
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(city, state, postal, distance.Value, scopeId).ToList();
-
-        //}// if searching by BUSINESS TYPE and ADDRESS and DISTANCE and SCOPES
-        //else if ((query == null || query == string.Empty) &&    // no query string 
-        //    (type != null && type.Length > 0) &&                // has business types *****
-        //    ((city != null && city != string.Empty) ||          // has city ****
-        //    (postal != null && postal != string.Empty) ||       // has postal code ****
-        //    (state != null && state != string.Empty) ||         // has state ****
-        //    distance.HasValue) &&                               // has distance ****
-        //    (scopeId != null && scopeId.Length > 0) &&          // has scopes *****
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(city, state, postal, distance.Value, scopeId).ToList();
-
-        //}// if searching by QUERY and ADDRESS and DISTANCE and SCOPES
-        //else if ((query != null && query != string.Empty) &&    // has query string *******
-        //    (type == null || type.Length == 0) &&               // no business types
-        //    ((city != null && city != string.Empty) ||          // has city ****
-        //    (postal != null && postal != string.Empty) ||       // has postal code ****
-        //    (state != null && state != string.Empty) ||         // has state
-        //    distance.HasValue) &&                               // has distance
-        //    (scopeId != null && scopeId.Length > 0) &&          // has scopes *****
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(query, city, state, postal, distance.Value, scopeId).ToList();
-
-        //}// if searching by QUERY and BUSINESS TYPES and ADDRESS and DISTANCE and SCOPES
-        //else if ((query != null && query != string.Empty) &&    // has query string *******
-        //    (type != null && type.Length > 0) &&                // has business types ******
-        //    ((city != null && city != string.Empty) ||          // has city ****
-        //    (postal != null && postal != string.Empty) ||       // has postal code ****
-        //    (state != null && state != string.Empty) ||         // has state *****
-        //    distance.HasValue) &&                               // has distance ******
-        //    (scopeId != null && scopeId.Length > 0) &&          // has scopes *****
-        //    !projectIdForLocation.HasValue &&                   // no project
-        //    !bidPackageIdForScopes.HasValue)                    // no bid package
-        //{
-        //    companies = _service.SearchCompanyProfiles(query, type, city, state, postal, distance.Value, scopeId).ToList();
-        //}
-        //else
-        //{
-        //    companies = _service.GetEnumerable().ToList();
-        //}
-
-        // //limit records returned
-        //    if (records == 0)
-        //    {
-        //        companies = companies.Skip(offset).ToList();
-        //    }
-        //    else
-        //    {
-        //        companies = companies.Skip(offset).Take(records).ToList();
-        //    }
-
-        //    result = companies.Select(s => new CompanySearchResultItem
-        //        {
-        //            CompanyId = s.Id,
-        //            CompanyName = s.CompanyName,
-        //            LinkPath = Url.Link("Default", new { controller = "Company", action = "Profile", id = s.Id }),
-        //            BusinessType = s.BusinessType.ToDescription(),
-        //            ScopesOfWork = s.Scopes.Select(c => c.Scope).ToDictionary(x => x.Id, x => x.CsiNumber + " " + x.Description)
-        //        })
-        //        .ToArray();
-
-        //    return request.CreateResponse(HttpStatusCode.OK, result);
-        //}
+            return request.CreateResponse(HttpStatusCode.OK, result);
+        }
 
         public DataTablesResponse Get(HttpRequestMessage request,
             [FromUri]int iDisplayStart,

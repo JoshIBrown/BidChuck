@@ -1,28 +1,47 @@
 ﻿angular.element(document).ready(function () {
-
-    var searchApp = angular.module('searchApp', []);
+    "use strict";
+    var searchApp = angular.module('searchApp', ['bcCsiScopePicker']);
 
     function SearchCtrl(scope, http) {
 
         scope.performSearch = function () {
+            // validate city or postal.  one or the other must be provided if doing geography search.
 
-            if (scope.queryString) {
-                // as long as there is something to seach for
-                // otherwise, don't send an empty search request
-                if (scope.queryString.length > 0) {
 
-                    http.get('/api/Companies',
-                        {
-                            params: {
-                                query: scope.queryString
-                                
-                            }
-                        })
-                        .success(function (result) {
-                            scope.searchResults = result;
-                        });
+            // build array of selected scope id's
+            var selectedScopes = [];
+
+            angular.forEach(scope.foo, function (value, key) {
+                if (value.Checked) {
+                    selectedScopes.push(value.Id)
                 }
-            }
+            });
+
+            // build array of business types
+            var businessTypes = [];
+
+            angular.forEach(scope.BusinessType, function (value, key) {
+                if (value)
+                    businessTypes.push(key);
+            });
+
+
+            // submit search
+            http.get('/api/Companies',
+                {
+                    params: {
+                        query: scope.searchForm.query.$viewValue ? scope.searchForm.query.$viewValue : '',
+                        city: scope.searchForm.city.$viewValue ? scope.searchForm.city.$viewValue : '',
+                        distance: scope.searchForm.distance.$viewValue ? scope.searchForm.distance.$viewValue : '',
+                        state: scope.searchForm.state.$viewValue ? scope.searchForm.state.$viewValue : '',
+                        postal: scope.searchForm.postal.$viewValue ? scope.searchForm.postal.$viewValue : '',
+                        type: businessTypes,
+                        scopeId: selectedScopes
+                    }
+                })
+                .success(function (result) {
+                    scope.searchResults = result;
+                });
         };
 
         scope.clearResults = function () {
@@ -38,6 +57,8 @@
             }
             return false
         };
+
+        scope.theServiceUrl = '/api/Scopes';
     };
 
     searchApp.controller('SearchCtrl', SearchCtrl);

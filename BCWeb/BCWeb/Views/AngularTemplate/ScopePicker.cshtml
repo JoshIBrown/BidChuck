@@ -20,7 +20,7 @@
                             <input id="check{{x.Id}}"
                                 type="checkbox"
                                 ng-model="x.Checked"
-                                ng-change="changeScopeSelection(x)"
+                                ng-change="scopeCheckBoxChange(x)"
                                 value="{{x.Id}}" />
                             <span ng-click="t1Expand(x.Id)"
                                 ng-style="x.Templated && { 'font-weight' : 'bold' }">{{x.CsiNumber | truncate: 2: ""}} {{x.Description | truncate: 30}}
@@ -45,7 +45,7 @@
                             <input id="check{{y.Id}}"
                                 type="checkbox"
                                 ng-model="y.Checked"
-                                ng-change="changeScopeSelection(y)"
+                                ng-change="scopeCheckBoxChange(y)"
                                 value="{{y.Id}}" />
                             <span ng-click="t2Expand(y.Id)"
                                 ng-style="x.Templated && { 'font-weight' : 'bold' }">{{y.CsiNumber}} {{y.Description | truncate: 26}}</span></td>
@@ -68,7 +68,7 @@
                             <input id="check{{z.Id}}"
                                 type="checkbox"
                                 ng-model="z.Checked"
-                                ng-change="changeScopeSelection(z)"
+                                ng-change="scopeCheckBoxChange(z)"
                                 value="{{z.Id}}" /><span ng-style="x.Templated && { 'font-weight' : 'bold' }">
                             {{z.CsiNumber}} {{z.Description | truncate: 31}}</span></td>
                     </tr>
@@ -78,22 +78,18 @@
         </div>
     </div>
 </fieldset>
-
-<div class="row">
-    <div class="large-6 columns">
-        <span id="pickerLegend"></span>
-    </div>
-</div>
 <div class="row">
     <div class="large-12 columns ">
-        <fieldset class="panel">
+        <fieldset>
             <legend>Selected CSI Scopes</legend>
             <ul class="inline-list">
+                <li>
+                    <input type="button" class="tiny secondary button" value="clear selection" /></li>
                 <li ng-repeat="s in selectedCsiScopes | filter:{Checked: true} | orderBy: 'Csi'">
                     <div class="alert-box radius" style="padding: 2px 25px 2px 7px;">
                         {{s.Csi}} {{s.Desc}}
                         <input type="checkbox" name="{{getFieldName($index)}}" id="{{getFieldId($index)}}" value="{{s.Id}}" ng-checked="s.Checked" style="display: none;" />
-                        <a href="#" class="close" ng-click="removeTag(s)">&times;</a>
+                        <span class="close" ng-click="removeTag(s)">&times;</span>
                     </div>
                 </li>
             </ul>

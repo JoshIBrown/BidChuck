@@ -22,6 +22,10 @@ namespace BCWeb.Models.Search.ServiceLayer
             throw new NotImplementedException();
         }
 
-        
+
+        public IEnumerable<BCModel.State> GetStates()
+        {
+            return _repo.GetStates().AsEnumerable();
+        }
     }
 }

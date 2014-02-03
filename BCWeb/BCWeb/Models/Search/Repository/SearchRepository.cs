@@ -49,5 +49,11 @@ namespace BCWeb.Models.Search.Repository
         {
             return _projects.Find(id);
         }
+
+
+        public IQueryable<State> GetStates()
+        {
+            return _context.States;
+        }
     }
 }

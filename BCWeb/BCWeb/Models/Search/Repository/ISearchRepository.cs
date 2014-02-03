@@ -15,5 +15,7 @@ namespace BCWeb.Models.Search.Repository
         UserProfile FindUserProfile(int id);
         CompanyProfile FindCompanyProfile(int id);
         BCModel.Projects.Project FindProject(int id);
+
+        IQueryable<State> GetStates();
     }
 }

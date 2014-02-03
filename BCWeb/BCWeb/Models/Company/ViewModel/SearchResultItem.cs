@@ -15,5 +15,7 @@ namespace BCWeb.Models.Company.ViewModel
         public Dictionary<int, string> ScopesOfWork { get; set; }
         public string LinkPath { get; set; }
 
+
+        public string Area { get; set; }
     }
 }

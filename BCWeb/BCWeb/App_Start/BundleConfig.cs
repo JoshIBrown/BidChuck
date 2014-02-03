@@ -182,6 +182,8 @@ namespace BCWeb
             #region Search
             bundles.Add(new ScriptBundle("~/bundles/search").Include(
                 "~/Scripts/angular/angular.js",
+                "~/Scripts/angular/bcweb.filters.angular.js",
+                "~/Scripts/angular/directives/bcweb.angular.ScopePicker.js",
                 "~/Scripts/angular/controllers/SearchCtrl.js"));
 
             #endregion

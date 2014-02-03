@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BCWeb.Models.Search.ViewModel.SearchFormViewModel
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Foundation.cshtml";
 }
@@ -23,51 +24,59 @@
             </div>
         </div>
         <div class="row">
+            <div class="large-6 columns">
+                <a href="#">Advanced</a>
+            </div>
+        </div>
+        <div class="row">
             <div class="large-7 columns">
-                <div class="row">
-                    <div class="large-6 columns">
-                        <a href="#">Advanced</a>
+                <fieldset>
+                    <legend>Geographic Area</legend>
+                    <div class="row">
+                        <div class="large-5 columns">
+                            <label>
+                                City
+                    <input type="text" name="city" id="city" ng-model="city" />
+                            </label>
+                        </div>
+                        <div class="large-2 columns">
+                            <label>
+                                State
+                    @Html.DropDownList("state", Model.States, new { ng_model = "state" })
+                            </label>
+                        </div>
+                        <div class="large-2 columns">
+                            <label>
+                                Zip
+                    <input type="text" name="postal" id="postal" ng-model="postal" />
+                            </label>
+                        </div>
+                        <div class="large-3 columns">
+                            <label>
+                                Within
+                    @Html.DropDownList("distance", Model.OperatingDistances, new { ng_model = "distance" })
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="large-5 columns">
-                        <label>
-                            City
-                    <input type="text" name="city" id="city" />
-                        </label>
-                    </div>
-                    <div class="large-2 columns">
-                        <label>
-                            State
-                    <select name="state" id="state">
-                        <option value="">WA</option>
-                    </select>
-                        </label>
-                    </div>
-                    <div class="large-2 columns">
-                        <label>
-                            Zip
-                    <input type="text" name="postal" id="postal" />
-                        </label>
-                    </div>
-                    <div class="large-3 columns">
-                        <label>
-                            Within
-                    <select name="distance" id="distance">
-                        <option value="">25 miles</option>
-                    </select>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                    </div>
-                </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-8 columns">
+                <fieldset>
+                    <legend>Business Type</legend>
+                    @for (int i = 0; i < Model.BusinessTypes.Length; i++)
+                    {
+                        <label style="display: inline-block;">
+                            <input type="checkbox" id="@string.Format("BusinessType_{0}_", i)" name="@string.Format("BusinessType[{0}]", i)" ng-model="@string.Format("BusinessType.{0}", Model.BusinessTypes[i].Item1)" ng-true-value="@Model.BusinessTypes[i].Item1" value="@Model.BusinessTypes[i].Item1"  />
+                            @Model.BusinessTypes[i].Item2</label>
+                    }
+                </fieldset>
             </div>
         </div>
         <div class="row">
             <div class="large-12 columns">
-                <csi-scope-picker></csi-scope-picker>
+                <csi-scope-picker service-url="theServiceUrl" selected-csi-scopes="selectedScopes"></csi-scope-picker>
             </div>
         </div>
     </form>
@@ -75,7 +84,7 @@
         <div class="large-10 columns">
             <h3>Results</h3>
             <ul class="no-bullet">
-                <li ng-repeat="r in searchResults"><a href="{{r.LinkPath}}">{{r.CompanyName}}</a>
+                <li ng-repeat="r in searchResults"><a href="{{r.LinkPath}}">{{r.CompanyName}}</a> {{r.BusinessType}} {{r.Area}}
                 </li>
             </ul>
         </div>
