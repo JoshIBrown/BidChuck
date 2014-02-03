@@ -14,7 +14,7 @@ namespace BCWeb.Controllers
     public class SearchController : Controller
     {
         private ISearchServiceLayer _service;
-        private int[] operatingDistance = new int[] { 25, 50, 100, 150, 200, 300, 400, 500, 9001 };
+        private int[] operatingDistance = new int[] { 25, 50, 100, 150, 200, 300, 400, 500 };
         public SearchController(ISearchServiceLayer service)
         {
             _service = service;
@@ -26,7 +26,7 @@ namespace BCWeb.Controllers
         public ActionResult Index()
         {
             SearchFormViewModel viewModel = new SearchFormViewModel();
-            viewModel.OperatingDistances = operatingDistance.Select(s => new SelectListItem { Value = (Convert.ToDouble(s)).ToString(), Text = s == 9001 ? "Any Distance" : s.ToString() + " miles" });
+            viewModel.OperatingDistances = operatingDistance.Select(s => new SelectListItem { Value = (Convert.ToDouble(s)).ToString(), Text = s.ToString() + " miles" });
             viewModel.States = _service.GetStates().Select(s => new SelectListItem { Value = s.Abbr, Text = s.Abbr });
             viewModel.BusinessTypes = (from Enum e in Enum.GetValues(typeof(BusinessType))
                                        select new Tuple<string, string>(e.ToString(), e.ToDescription())).ToArray();

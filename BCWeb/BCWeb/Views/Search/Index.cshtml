@@ -11,6 +11,14 @@
 <div ng-controller="SearchCtrl">
     <form name="searchForm" ng-submit="performSearch()">
         <div class="row">
+            <div class="large-6 columns">
+                <div class="alert-box warning" ng-show="invalidGeo">
+                    must specify a state or postal code when searching with city
+                    <span ng-click="hide" class="close">&times;</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="large-8 columns">
                 <div class="row collapse">
                     <div class="large-10 columns">
@@ -42,7 +50,7 @@
                         <div class="large-2 columns">
                             <label>
                                 State
-                    @Html.DropDownList("state", Model.States, new { ng_model = "state" })
+                    @Html.DropDownList("state", Model.States, "select", new { ng_model = "state" })
                             </label>
                         </div>
                         <div class="large-2 columns">
@@ -54,7 +62,7 @@
                         <div class="large-3 columns">
                             <label>
                                 Within
-                    @Html.DropDownList("distance", Model.OperatingDistances, new { ng_model = "distance" })
+                    @Html.DropDownList("distance", Model.OperatingDistances,"Any", new { ng_model = "distance" })
                             </label>
                         </div>
                     </div>

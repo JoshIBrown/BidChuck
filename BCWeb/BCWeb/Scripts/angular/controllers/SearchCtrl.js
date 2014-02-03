@@ -5,8 +5,21 @@
     function SearchCtrl(scope, http) {
 
         scope.performSearch = function () {
+            scope.searchResults = [];
             // validate city or postal.  one or the other must be provided if doing geography search.
+            var city = scope.searchForm.city.$viewValue;
+            var distance = scope.searchForm.distance.$viewValue;
+            var state = scope.searchForm.state.$viewValue;
+            var postal = scope.searchForm.postal.$viewValue;
 
+
+            // city and blank state and blank postal
+            if (city && !state && !postal) {
+                scope.invalidGeo = true;
+                return;
+            } else {
+                scope.invalidGeo = false;
+            }
 
             // build array of selected scope id's
             var selectedScopes = [];
