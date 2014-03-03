@@ -76,7 +76,7 @@
                     @for (int i = 0; i < Model.BusinessTypes.Length; i++)
                     {
                         <label style="display: inline-block;">
-                            <input type="checkbox" id="@string.Format("BusinessType_{0}_", i)" name="@string.Format("BusinessType[{0}]", i)" ng-model="@string.Format("BusinessType.{0}", Model.BusinessTypes[i].Item1)" ng-true-value="@Model.BusinessTypes[i].Item1" value="@Model.BusinessTypes[i].Item1"  />
+                            <input type="checkbox" id="@string.Format("BusinessType_{0}_", i)" name="@string.Format("BusinessType[{0}]", i)" ng-model="@string.Format("BusinessType.{0}", Model.BusinessTypes[i].Item1)" ng-true-value="@Model.BusinessTypes[i].Item1" value="@Model.BusinessTypes[i].Item1" />
                             @Model.BusinessTypes[i].Item2</label>
                     }
                 </fieldset>

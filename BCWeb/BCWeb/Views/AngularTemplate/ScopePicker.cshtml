@@ -88,7 +88,7 @@
                 <li ng-repeat="s in selectedCsiScopes | filter:{Checked: true} | orderBy: 'Csi'">
                     <div class="alert-box radius" style="padding: 2px 25px 2px 7px;">
                         {{s.Csi}} {{s.Desc}}
-                        <input type="checkbox" name="{{getFieldName($index)}}" id="{{getFieldId($index)}}" value="{{s.Id}}" ng-checked="s.Checked" style="display: none;" />
+                        <input type="checkbox" name="SelectedScope[{{$index}}]" id="SelectedScope_{{$index}}_" value="{{s.Id}}" ng-checked="s.Checked" style="display: none;" />
                         <span class="close" ng-click="removeTag(s)">&times;</span>
                     </div>
                 </li>

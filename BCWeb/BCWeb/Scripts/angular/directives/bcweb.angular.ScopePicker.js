@@ -117,12 +117,12 @@ function csiScopePicker() {
             changeScopeSelection(aScope);
         };
 
-        $scope.getFieldName = function (i) {
-            return "SelectedScope[" + i + "]";
-        };
-        $scope.getFieldId = function (i) {
-            return "SelectedScope_" + i + "_";
-        };
+        //$scope.getFieldName = function (i) {
+        //    return "SelectedScope[" + i + "]";
+        //};
+        //$scope.getFieldId = function (i) {
+        //    return "SelectedScope_" + i + "_";
+        //};
     };
 
 
@@ -181,9 +181,9 @@ function csiScopePicker() {
         restrict: 'E', // restrict to searching for an element
         templateUrl: '/AngularTemplate/ScopePicker',	// best solution using mvc to deliver a static page,
         scope: {
-            serviceUrl: '=serviceUrl',
-            selectedCsiScopes: '=selectedCsiScopes', // scopes that have been selected since instantiation
-            preSelectedScopes: '=preSelectedScoes' // int array
+            serviceUrl: '=',
+            selectedCsiScopes: '=?', // (optional) scopes that have been selected since instantiation 
+            preSelectedScopes: '=?' // (optional) int array
         },
         link: link,
         controller: ['$scope', '$http', controller]
