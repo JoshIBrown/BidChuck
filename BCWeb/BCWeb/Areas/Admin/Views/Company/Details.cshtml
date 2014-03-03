@@ -10,7 +10,7 @@
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
             <li>@Html.RouteLink("Company Profiles", "Admin_default", new { controller = "Company", action = "Index" })</li>
-            <li class="current">so and so</li>
+            <li class="current">@Model.CompanyName</li>
         </ul>
     </div>
 </div>

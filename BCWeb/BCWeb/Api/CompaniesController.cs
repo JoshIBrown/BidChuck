@@ -177,7 +177,7 @@ namespace BCWeb.Api
             }
 
 
-            result = companies.Select(s => new CompanySearchResultItem
+            result = companies.Where(x => x.Id != 1).Select(s => new CompanySearchResultItem
                 {
                     CompanyId = s.Id,
                     CompanyName = s.CompanyName,
@@ -256,39 +256,41 @@ namespace BCWeb.Api
             {
                 case "asc":
                     data = _service.GetEnumerable(predicate)
-                .Select(s => new CompanyProfileListItem
-                {
-                    BusinessType = s.BusinessType.ToDescription(),
-                    CompanyName = s.CompanyName,
-                    Id = s.Id,
-                    PostalCode = s.PostalCode == null ? "not set" : s.PostalCode,
-                    Published = s.Published,
-                    Subscribed = s.SubscriptionStatus.ToString(),
-                    State = s.State == null ? "not set" : s.State.Abbr,
-                    Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Count() == 0 ? "not set" : s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
-                })
-                .OrderBy(orderBy)
-                .Skip(iDisplayStart)
-                .Take(iDisplayLength)
-                .ToArray();
+                        .Where(x => x.Id != 1)
+                        .Select(s => new CompanyProfileListItem
+                        {
+                            BusinessType = s.BusinessType.ToDescription(),
+                            CompanyName = s.CompanyName,
+                            Id = s.Id,
+                            PostalCode = s.PostalCode == null ? "not set" : s.PostalCode,
+                            Published = s.Published,
+                            Subscribed = s.SubscriptionStatus.ToString(),
+                            State = s.State == null ? "not set" : s.State.Abbr,
+                            Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Count() == 0 ? "not set" : s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
+                        })
+                        .OrderBy(orderBy)
+                        .Skip(iDisplayStart)
+                        .Take(iDisplayLength)
+                        .ToArray();
                     break;
                 case "desc":
                     data = _service.GetEnumerable(predicate)
-                .Select(s => new CompanyProfileListItem
-                {
-                    BusinessType = s.BusinessType.ToDescription(),
-                    CompanyName = s.CompanyName,
-                    Id = s.Id,
-                    PostalCode = s.PostalCode,
-                    Published = s.Published,
-                    Subscribed = s.SubscriptionStatus.ToString(),
-                    State = s.State.Abbr,
-                    Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Count() == 0 ? "not set" : s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
-                })
-                .OrderByDescending(orderBy)
-                .Skip(iDisplayStart)
-                .Take(iDisplayLength)
-                .ToArray();
+                        .Where(x => x.Id != 1)
+                        .Select(s => new CompanyProfileListItem
+                        {
+                            BusinessType = s.BusinessType.ToDescription(),
+                            CompanyName = s.CompanyName,
+                            Id = s.Id,
+                            PostalCode = s.PostalCode,
+                            Published = s.Published,
+                            Subscribed = s.SubscriptionStatus.ToString(),
+                            State = s.State.Abbr,
+                            Manager = s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Count() == 0 ? "not set" : s.Users.Where(u => _security.IsUserInRole(u.Email, "Manager")).Select(u => u.LastName + ", " + u.FirstName).FirstOrDefault()
+                        })
+                        .OrderByDescending(orderBy)
+                        .Skip(iDisplayStart)
+                        .Take(iDisplayLength)
+                        .ToArray();
                     break;
                 default:
                     throw new Exception("invalid sort direction");

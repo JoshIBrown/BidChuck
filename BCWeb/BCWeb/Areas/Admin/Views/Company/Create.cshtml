@@ -4,7 +4,11 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
-
+<div class="row">
+    <div class="large-12 columns">
+        <<h2>Create new company</h2>
+    </div>
+</div>
 <div class="row">
     <div class="large-6 columns">
 
@@ -13,15 +17,13 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
-            <fieldset>
-                <legend>CompanyProfileEditItem</legend>
-
+    
                 @Html.EditorForModel()
 
                 <p>
                     <input type="submit" value="Create" />
                 </p>
-            </fieldset>
+         
         }
 
         <div>
